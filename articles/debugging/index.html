@@ -197,37 +197,40 @@ Usually (or at least if you’re lucky) the behavioural system model is codified
 
 <p>Once we cannot proceed any further through exclusion, we switch to the most interesting stage. We formulate a hypothesis “Let’s assume that the bug is caused by X” and then we use this as the basis for further investigation.</p>
 
-<p>The main difference with the previous step is that when we formulate a hypothesis, we don’t know if it is true or false, so we need to test it, whereas with the exclusion process above, we do know that our stated reason holds – or at least we have a high degree of confidence – so we don’t test it.</p>
+<p>The main difference between exclusion and formulating a hypothesis is that when we formulate a hypothesis, we don’t know if it is true or false, so we need to test it. With the exclusion process, we do know that our stated reason holds – or at least we have a high degree of confidence – so we don’t test it.</p>
 
-<p>Quite frequently our hypothesis will prove to be false, and then we can exclude that possibility. Equally frequently, when our hypothesis proves to be false, this indicates that our operational mental is incomplete. In that case we should formulate additional hypotheses to improve our mental model. I believe this is an important step that is often skipped because it seems to detract from the real task, i.e. finding the bug. But without an accurate operational model, it is much harder to find bugs, so the time spent in improving your system knowledge is always well spent.</p>
+<p>Quite frequently our hypothesis will prove to be false, and then we have one fewer possible cause for the bug. Equally frequently, when our hypothesis proves to be false, this indicates that our operational model is incomplete. In that case we should formulate additional hypotheses to improve our mental model. I believe this is an important step that is often skipped because it seems to detract from the real task, i.e. finding the bug. But without an accurate operational model, it is much harder to find bugs, so the time spent in improving your system knowledge is always well spent.</p>
 
 <h3 id="gathering-information">Gathering information</h3>
 
-<p>When we have formulated a hypothesis we need to test it, and this is only possible through emulation or observation of the system’s behaviour. This requires the structural model to tell us where to look.</p>
+<p>To test a hypothesis we can either use emulation or observation of the system behaviour. This requires the structural model to tell us where to look.</p>
 
 <ul>
-  <li>With emulation I mean that we mentally run part of a program using our operational mental model. In that case we assume that our operational model is accurate enough to produce the same result as the actual system. In general, this is a tricky approach to debugging because if our mental model is inaccurate we won’t find the bug. However, it is generally the approach taken when we have narrowed down the location of the bug sufficiently.</li>
-  <li>We can observe the system’s behaviour through compiler or interpreter warning, by using a debugger, or by making the code output additional information. This requires a good structural model to guide us to the locations that we want to inspect using the debugger or where we want to add the code to generate the debugging information.</li>
+  <li>By emulation I mean that we mentally run part of a program using our operational model. In that case we assume that our operational model is accurate enough to produce the same result as the actual system. In general, this is a tricky approach to debugging because if our mental model is inaccurate we won’t find the bug. However, it is generally the approach taken when we have narrowed down the location of the bug sufficiently.</li>
+  <li>We can observe the system behaviour through compiler or interpreter warnings, by using a debugger, or by making the code generate additional information. This requires a good structural model to guide us to the locations that we want to inspect using the debugger or where we want to add the code to generate the debugging information.</li>
   <li>Either way, the result should be some information that helps to test the hypothesis.</li>
 </ul>
 
 <h2 id="examples">Examples</h2>
 
+<!-- The example below were suggested  by Ahmed Fasih -->
+
 <h3 id="debugging-your-own-code">Debugging your own code</h3>
 
 <p>Debugging code you wrote and understand, and whose use case is intimately familiar to you, should be the easiest type of debugging. However, the problem with this kind of code is often that, precisely because it is your own code and you have a very precise behavioural model, and of course a perfect structural model, you never bothered to create an accurate operational model of the code. This may sound strange because after all, if you wrote it, you should know how it works. But the reality is that we often perform very limited mental verification, esp. of corner cases, on our own code.</p>
 
-<h3 id="debugging-a-minimal-complete-and-verifiable-example">Debugging a Minimal, Complete, and Verifiable example</h3>
+<h3 id="debugging-a-minimal-complete-and-verifiable-example">Debugging a minimal, complete, and verifiable example</h3>
 
 <p>Debugging someone else’s code is much harder because you typically lack all of the mental models.</p>
 
-<p>I often have to debug code written by my students, usually long after they have graduated. The main thing I have learned from that is that we should teach our students how to write maintainable code. Often the challenge with this kind of code is to build the structural model, i.e. making sense of how the code is structured.</p>
+<p>I often have to debug code written by my students, usually long after they have graduated. The main conclusion is that we should teach our students how to write maintainable code, i.e. code that makes it easy to understand the structural model.</p>
 
-<p>If the code is a Minimal, Complete, and Verifiable example <a href="https://stackoverflow.com/help/mcve">MCVE</a> then building your mental models is relatively easy because the code base should be small and self-contained. For such examples, the operational is usually at the level of language semantics and standard library APIs. There is a nice detailed post about debugging small programs on <a href="https://ericlippert.com/2014/03/05/how-to-debug-small-programs/">Eric Lippert’s blog</a>.</p>
+<p>If the code is a Minimal, Complete, and Verifiable example <a href="https://stackoverflow.com/help/mcve">MCVE</a> then building your mental models is relatively easy because the code base should be small and self-contained. For such examples, the operational model is usually defined at the level of language semantics and standard library APIs. There is a nice detailed post about debugging small programs on <a href="https://ericlippert.com/2014/03/05/how-to-debug-small-programs/">Eric Lippert’s blog</a>.</p>
 
 <h3 id="debugging-a-huge-codebase">Debugging a huge codebase</h3>
 
-<p>The main challenge with debugging a truly huge codebase (millions of lines of code) is gaining sufficient understanding, so again it comes down to building the mental models. Even if you are looking to debug a very specific aspect of the system’s behaviour you need to understand the overall workings.</p>
+<p>The main challenge with debugging a truly huge codebase (millions of lines of code) is gaining sufficient understanding, so again it comes down to building the mental models. Even if you are looking to debug a very specific aspect of the wimvanderbauwhede.github.io
+system behaviour you need to understand the overall workings.</p>
 
 <p>For example, some years ago I modified and debugged the Weather Research and Forecasting model. This is a numerical weather simulator with a codebase of about two million lines of Fortran 90. It is very well architected and there is reasonably good documentation. The main challenge in this system was actually to understand the build system first, because a large amount of code is generated at build time. Apart from that, I had to learn how a weather simulator works at the level of the physics, and how the code was parallelised. I modified the part of the code known as the advection kernel, to make it work on GPU. As expected, the changes were not first-time-right, and debugging GPU code is difficult because it is hard to observe what happens inside the GPU. Nevertheless, I followed essentially the approach outlined above. In this case, the “behavioural model” was the unmodified code. I got the structural model as soon as I worked out what part of the code needed to be modified. So the difficulty was as usual with the operational model, and in this case the bugs mostly originated form the fact that the GPU code is essentially C, and the host code Fortran, and they have different views on arrays and argument passing.</p>
 
