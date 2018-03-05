@@ -152,7 +152,7 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>For a long time it has been my contention that for a developer, more that programming, debugging should be treated as a core skill. A developer typically spends more time debugging code than writing code so it makes sense to try and optimize this process. I have been thinking about this for a while and this is my take on debugging. I see debugging as a generic, transferable skill that is applicable not only to coding but to any form of systems design. So in what follows I talk about debugging systems, although the main focus is on debugging code.</p>
+				<p>For a long time it has been my contention that for a developer, more than programming, debugging should be treated as a core skill. A developer typically spends more time debugging code than writing code so it makes sense to try and optimize this process. I have been thinking about this for a while and this is my take on debugging. I see debugging as a generic, transferable skill that is applicable not only to coding but to any form of systems design. So in what follows I talk about debugging systems, although the main focus is on debugging code.</p>
 
 <h2 id="the-mental-models">The mental models</h2>
 
@@ -164,14 +164,14 @@
 
 <h3 id="behavioural-system-model">Behavioural system model</h3>
 
-<p>The understanding of <em>what</em> the system does (or should do), how it should behave, is the behavioural model. A bug is observed through this model: the system behaves in a way that does not conform to the behavioural model.
+<p>The understanding of <em>what</em> the system does (or should do), how it should behave, is the <em>behavioural</em> model. A bug is observed through this model: the system behaves in a way that does not conform to the behavioural model.
 Usually (or at least if you’re lucky) the behavioural system model is codified in a specification.</p>
 
 <h3 id="operational-system-model">Operational system model</h3>
 
 <p>The <em>operational</em> system model is your understanding of <em>how</em> the system works. This model allows us to formulate hypotheses about <em>why</em> the system does not behave as expected. This is the most important mental system model, and part of the debugging process is actually improving and refining this model.</p>
 
-<p>In many cases, the operational model is actually your model of how a program in a given language is compiler/interpreted and executed on the hardware. This model starts from the syntax and semantics of the programming language, and includes a model for any API used in the code. As a trivial example, in Python, the keys in a dictionary are unordered, whereas the default in a C++ map is ordered.</p>
+<p>In many cases, the operational model is actually your model of how a program in a given language is compiled/interpreted and executed on the hardware. This model starts from the syntax and semantics of the programming language, and includes a model for any API used in the code. As a trivial example, in Python, the keys in a dictionary are unordered, whereas the default in a C++ map is ordered.</p>
 
 <p>The closer you are to the bare metal, or the more you care about performance or memory footprint, the more details your mental model will have to include about the actual hardware, to the extent that for e.g. running code on FPGAs you even need to have a detailed mental model for the memory controllers. For debugging in higher-level languages, usually the model can be much more abstract, with a basic notion of memory management and code execution.</p>
 
@@ -187,17 +187,17 @@ Usually (or at least if you’re lucky) the behavioural system model is codified
 
 <p>First, identify the bug. Is it really a bug or is your behavioural model incorrect, not specific enough or ambiguous? If necessary, adapt the model and re-iterate.</p>
 
-<p>Then there are essentially three stages in the process of finding the bug:</p>
+<p>Then there are essentially three stages in the process of finding the bug.</p>
 
 <h3 id="narrowing-down-through-exclusion">Narrowing down through exclusion</h3>
 
-<p>The first is narrowing down through a process of exclusion: “This bug can’t be caused by X because of reason Y”. This relies mostly on the operational system model, but sometimes also on the structural model. This is especially the case when you are not 100% certain: “it is unlikely that the bug is in module X because of reason Y”, e.g. if it is a standard library, compiler or interpreter. The chances that the bug is in your own code is much higher, so that possibility should be explored first.</p>
+<p>We start by narrowing down through a process of exclusion: “This bug can’t be caused by X because of reason Y”. This process relies mostly on the operational system model, but sometimes also on the structural model, especially if you’re not 100% certain: “it is unlikely that the bug is in module X because of reason Y”. For example, it is unlikely that the cause of the bug is located in a standard library, compiler or interpreter. The chances that the bug is in your own code is much higher, so that possibility should be explored first.</p>
 
 <h3 id="formulating-hypotheses">Formulating hypotheses</h3>
 
-<p>Once we cannot proceed any further through exclusion, we change to the most interesting stage: formulating hypotheses. A hypothesis is a hypothetical statement: “Let’s assume that the bug is caused by X” and then we use this as the basis for further investigation.</p>
+<p>Once we cannot proceed any further through exclusion, we switch to the most interesting stage. We formulate a hypothesis “Let’s assume that the bug is caused by X” and then we use this as the basis for further investigation.</p>
 
-<p>The main difference with the previous step is that when we formulate a hypothesis, we don’t know if it is true or false, whereas with the exclusion process above, we do know that our stated reason holds – or at least we have a high degree of confidence.</p>
+<p>The main difference with the previous step is that when we formulate a hypothesis, we don’t know if it is true or false, so we need to test it, whereas with the exclusion process above, we do know that our stated reason holds – or at least we have a high degree of confidence – so we don’t test it.</p>
 
 <p>Quite frequently our hypothesis will prove to be false, and then we can exclude that possibility. Equally frequently, when our hypothesis proves to be false, this indicates that our operational mental is incomplete. In that case we should formulate additional hypotheses to improve our mental model. I believe this is an important step that is often skipped because it seems to detract from the real task, i.e. finding the bug. But without an accurate operational model, it is much harder to find bugs, so the time spent in improving your system knowledge is always well spent.</p>
 
