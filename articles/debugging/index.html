@@ -213,8 +213,6 @@ Usually (or at least if you’re lucky) the behavioural system model is codified
 
 <h2 id="example-scenarios">Example scenarios</h2>
 
-<!-- The example below were suggested  by Ahmed Fasih -->
-
 <h3 id="debugging-your-own-code">Debugging your own code</h3>
 
 <p>Debugging code you wrote and understand, and whose use case is intimately familiar to you, should be the easiest type of debugging. However, the problem with this kind of code is often that, precisely because it is your own code and you have a very precise behavioural model, and of course a perfect structural model, you never bothered to create an accurate operational model of the code. This may sound strange because after all, if you wrote it, you should know how it works. But the reality is that we often perform very limited mental verification, esp. of corner cases, on our own code.</p>
@@ -235,30 +233,10 @@ Usually (or at least if you’re lucky) the behavioural system model is codified
 In this case, the original, unmodified code provided the reference behavioural model. I built the structural model through the process of working out which part of the code needed to be modified.  So the difficulty was as usual with the operational model, and in this case the bugs mostly originated from the fact that the GPU code is essentially C, and the host code Fortran, and they have different views on arrays and argument passing.</p>
 
 <h2 id="conclusion">Conclusion</h2>
+
 <p>Debugging is difficult and time consuming but a strategy based on behavioural, operational and structural mental models can make the process more efficient in a variety of scenarios.</p>
 
-<p>I would like to thank Ahmed Fasih for motivating me to write this article and suggesting the example scenarios.</p>
-
-<!--
-Debugging is a very important skill, and we probably do not spend enough time training/teaching people in how to do it well. What I have explained above is my own view on debugging, with a strong focus on the importance of three different mental models (behavioural, operational and structural) and the processes of formulating and testing hypotheses. I hope you may find this useful when thinking about the debugging process.
--->
-
-<!--
-Ahmed FASIH @22
-@wim_v12e I recognize that all of these are skills that are (indirectly) cultivated through years of coding, I'm wondering which subset are more basic than others, and how to go about designing both (1) interview questions and (2) training regimens from these.
-
-2d
-Ahmed FASIH @22
-@wim_v12e Aha, the perfect person to ask questions of! Aren't there big differences between
-
-- debugging code you wrote and understand, and whose use-case is intimately familiar to you (either big or small),
-
-- debugging someone else's MCVE (https://stackoverflow.com/help/mcve), like on StackOverflow,
-
-- debugging why something's broken on a huge codebase like Firefox?
-
-- And then those cases where you realize, shoot, you need to make a big architectural change to really properly fix a problem.
--->
+<p><em>I would like to thank Ahmed Fasih for motivating me to write this article and suggesting the example scenarios.</em></p>
 
 				<hr />
 				<footer class="page-footer">
