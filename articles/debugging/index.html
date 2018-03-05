@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Debugging is a core skill • Wim Vanderbauwhede</title>
+    <title>A strategy for debugging • Wim Vanderbauwhede</title>
     <meta name="description" content="For a long time it has been my contention that for a developer, more that programming, debugging should be treated as a core skill.">
     <meta name="keywords" content="coding, hacking, programming, debugging">
     
     	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="Debugging is a core skill">
+	<meta name="twitter:title" content="A strategy for debugging">
 	<meta name="twitter:description" content="For a long time it has been my contention that for a developer, more that programming, debugging should be treated as a core skill.">
 	<meta name="twitter:site" content="@wim_v12e">
 	<meta name="twitter:creator" content="@wim_v12e">
@@ -20,7 +20,7 @@
 	<meta property="og:type" content="article">
 	<meta property="og:site_name" content="Wim Vanderbauwhede">
 	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/debugging/#">
-	<meta property="og:title" content="Debugging is a core skill">
+	<meta property="og:title" content="A strategy for debugging">
 	<meta property="og:description" content="For a long time it has been my contention that for a developer, more that programming, debugging should be treated as a core skill.">
 	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/debugging_1600x600.jpg" />
 
@@ -138,7 +138,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/debugging_1600x600.jpg" class="page-feature-image" alt="Debugging is a core skill" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/debugging_1600x600.jpg" class="page-feature-image" alt="A strategy for debugging" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -147,12 +147,12 @@
   <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
 </nav><!-- /.breadcrumbs -->
 		<div class="page-title">
-			<h1>Debugging is a core skill</h1>
+			<h1>A strategy for debugging</h1>
 		</div>
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>For a long time it has been my contention that for a developer, more than programming, debugging should be treated as a core skill. A developer typically spends more time debugging code than writing code so it makes sense to try and optimize this process. I have been thinking about this for a while and this is my take on debugging. I see debugging as a generic, transferable skill that is applicable not only to coding but to any form of systems design. So in what follows I talk about debugging systems, although the main focus is on debugging code.</p>
+				<p>For a long time it has been my contention that for a developer, more than programming, debugging should be treated as a core skill. A developer typically spends more time debugging code than writing code so it makes sense to try and optimize this process. Over the years I have developed a strategy for debugging. I see debugging as a generic, transferable skill that is applicable not only to coding but to any form of systems design.</p>
 
 <h2 id="the-mental-models">The mental models</h2>
 
@@ -211,7 +211,7 @@ Usually (or at least if you’re lucky) the behavioural system model is codified
   <li>Either way, the result should be some information that helps to test the hypothesis.</li>
 </ul>
 
-<h2 id="examples">Examples</h2>
+<h2 id="example-scenarios">Example scenarios</h2>
 
 <!-- The example below were suggested  by Ahmed Fasih -->
 
@@ -229,31 +229,41 @@ Usually (or at least if you’re lucky) the behavioural system model is codified
 
 <h3 id="debugging-a-huge-codebase">Debugging a huge codebase</h3>
 
-<p>The main challenge with debugging a truly huge codebase (millions of lines of code) is gaining sufficient understanding, so again it comes down to building the mental models. Even if you are looking to debug a very specific aspect of the wimvanderbauwhede.github.io
-system behaviour you need to understand the overall workings.</p>
+<p>The main challenge with debugging a truly huge codebase (millions of lines of code) is that you need to build mental models that cover the overall system, even if you are looking to debug a very specific aspect of the system behaviour.</p>
 
-<p>For example, some years ago I modified and debugged the Weather Research and Forecasting model. This is a numerical weather simulator with a codebase of about two million lines of Fortran 90. It is very well architected and there is reasonably good documentation. The main challenge in this system was actually to understand the build system first, because a large amount of code is generated at build time. Apart from that, I had to learn how a weather simulator works at the level of the physics, and how the code was parallelised. I modified the part of the code known as the advection kernel, to make it work on GPU. As expected, the changes were not first-time-right, and debugging GPU code is difficult because it is hard to observe what happens inside the GPU. Nevertheless, I followed essentially the approach outlined above. In this case, the “behavioural model” was the unmodified code. I got the structural model as soon as I worked out what part of the code needed to be modified. So the difficulty was as usual with the operational model, and in this case the bugs mostly originated form the fact that the GPU code is essentially C, and the host code Fortran, and they have different views on arrays and argument passing.</p>
+<p>For example, some years ago I modified the Weather Research and Forecasting model to run on GPUs, and debugged the changes. This is a numerical weather simulator with a codebase of about two million lines of Fortran 90. It is very well architected and there is reasonably good documentation. The main challenge in this system was actually to understand the build system first, because a large amount of code is generated at build time. Apart from that, I had to learn how a weather simulator works at the level of the physics, and how the code was parallelised. I modified the part of the code known as the advection kernel, to make it work on GPUs. As expected, the changes were not first-time-right, and debugging GPU code is difficult because it is hard to observe what happens inside the GPU. Nevertheless, I followed essentially the approach outlined above.
+In this case, the original, unmodified code provided the reference behavioural model. I built the structural model through the process of working out which part of the code needed to be modified.  So the difficulty was as usual with the operational model, and in this case the bugs mostly originated from the fact that the GPU code is essentially C, and the host code Fortran, and they have different views on arrays and argument passing.</p>
 
 <h2 id="conclusion">Conclusion</h2>
+<p>Debugging is difficult and time consuming but a strategy based on behavioural, operational and structural mental models can make the process more efficient in a variety of scenarios.</p>
 
-<p>Debugging is a very important skill, and we probably do not spend enough time training/teaching people in how to do it well. What I have explained above is my own view on debugging, with a strong focuse on the importance of three different mental models (behavioural, operational and structural) and the processes of formulating and testing hypotheses. I hope you may find this useful when thinking about the debugging process.</p>
-
+<p>I would like to thank Ahmed Fasih for motivating me to write this article and suggesting the example scenarios.
 <!--
-Ahmed FASIH @22
-@wim_v12e I recognize that all of these are skills that are (indirectly) cultivated through years of coding, I'm wondering which subset are more basic than others, and how to go about designing both (1) interview questions and (2) training regimens from these.
-
-2d
-Ahmed FASIH @22
-@wim_v12e Aha, the perfect person to ask questions of! Aren't there big differences between
-
-- debugging code you wrote and understand, and whose use-case is intimately familiar to you (either big or small),
-
-- debugging someone else's MCVE (https://stackoverflow.com/help/mcve), like on StackOverflow,
-
-- debugging why something's broken on a huge codebase like Firefox?
-
-- And then those cases where you realize, shoot, you need to make a big architectural change to really properly fix a problem.
+Debugging is a very important skill, and we probably do not spend enough time training/teaching people in how to do it well. What I have explained above is my own view on debugging, with a strong focus on the importance of three different mental models (behavioural, operational and structural) and the processes of formulating and testing hypotheses. I hope you may find this useful when thinking about the debugging process.
 -->
+&lt;!–
+Ahmed FASIH @22
+@wim_v12e I recognize that all of these are skills that are (indirectly) cultivated through years of coding, I’m wondering which subset are more basic than others, and how to go about designing both (1) interview questions and (2) training regimens from these.</p>
+
+<p>2d
+Ahmed FASIH @22
+@wim_v12e Aha, the perfect person to ask questions of! Aren’t there big differences between</p>
+
+<ul>
+  <li>
+    <p>debugging code you wrote and understand, and whose use-case is intimately familiar to you (either big or small),</p>
+  </li>
+  <li>
+    <p>debugging someone else’s MCVE (https://stackoverflow.com/help/mcve), like on StackOverflow,</p>
+  </li>
+  <li>
+    <p>debugging why something’s broken on a huge codebase like Firefox?</p>
+  </li>
+  <li>
+    <p>And then those cases where you realize, shoot, you need to make a big architectural change to really properly fix a problem.
+–&gt;</p>
+  </li>
+</ul>
 
 				<hr />
 				<footer class="page-footer">
