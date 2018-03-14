@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A little maths puzzle in two parts • Wim Vanderbauwhede</title>
+    <meta name="description" content="Of which the outcome is a way to construct a regular pentagon using compass and ruler.">
+    <meta name="keywords" content="maths, trigonometry, algebra">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="A little maths puzzle in two parts">
+	<meta name="twitter:description" content="Of which the outcome is a way to construct a regular pentagon using compass and ruler.">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/constructing-a-pentagon_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/constructing-a-pentagon/#">
+	<meta property="og:title" content="A little maths puzzle in two parts">
+	<meta property="og:description" content="Of which the outcome is a way to construct a regular pentagon using compass and ruler.">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/constructing-a-pentagon_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/constructing-a-pentagon/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+    
+      <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\(', '\)'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        
+  </head>
+
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/constructing-a-pentagon_1600x600.jpg" class="page-feature-image" alt="A little maths puzzle in two parts" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>A little maths puzzle in two parts</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>I like solving little maths puzzles, deriving known results using nothing more complicated than secondary school level trigonometry, algebra and maybe a little calculus. The one below is actually two puzzles, but both have to do with regular polygons.</p>
+
+<h2 id="part-1-approximating-pi-by-the-perimeter-of-a-regular-polygon">Part 1 Approximating π by the perimeter of a regular polygon</h2>
+
+<p>Can one approximate $\pi$ by the perimeter of regular polygon with
+increasing numbers of sides inscribed in a unit circle, so starting with
+a triangle, then a hexagon, a dodecagon,… ? You may say that is obvious: the more sides, the closer the polygon approximates a circle. But I still wanted to work out the proof.</p>
+
+<figure>
+<img src="https://wimvanderbauwhede.github.io/images/polygons-to-pi.png" width="80%" alt="Relationship between length of the side of a polygon and the
+angle" id="fig:Relationship-between-lenght" />
+<figcaption>Figure 1. Relationship between length of the side of a polygon and the
+angle</figcaption></figure>
+
+<p>From  <a href="#fig:Relationship-between-lenght">Figure 1</a>, clearly</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+b=2\,sin\frac{\alpha}{2}\label{eq:1}
+\end{equation}</script>
+
+<p>For a polygon with <em>n</em> sides, we have</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+\alpha=\frac{2\pi}{n}\label{eq:2}
+\end{equation}</script>
+
+<p>So we can express the lenght of the side of a polygon as a function of
+the number of sides as</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+b(n)=2\,sin\frac{\pi}{n}\label{eq:3}
+\end{equation}</script>
+
+<p>The perimeter of a regular polygon is obviously</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+n.b(n) & = & 2n\,sin\frac{\pi}{n}\label{eq:4}\\
+ & = & 2\pi\frac{sin\frac{\pi}{n}}{\frac{\pi}{n}}\nonumber \end{align} %]]></script>
+
+<p>We know that</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+\underset{x\rightarrow0}{lim}\frac{sin\,x}{x}=1\label{eq:5}
+\end{equation}</script>
+
+<p>(This is easily proven using <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">de l’Hôpital’s
+rule</a> )</p>
+
+<p>Using $x=\frac{\pi}{n}$ it follows indeed that</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+\underset{n\rightarrow\infty}{lim}n.b(n)=2\pi\label{eq:6}
+\end{equation}</script>
+
+<p>In other words the perimeter of successive polygons inscribed in a unit
+circle does approach $2\pi$ – which of course comes hardly as a surprise.</p>
+
+<p>The following code implements this starting from a polygon with a given number of sides $n$ . The argument $h$ is half of the length of side, and $n_{max}$ is the number of iterations. What the algorithm does is recursively creating polygons with $n, 2n, 4n, 8n, … $ sides. The example starts from a triangle so $n=3$ and $h=\sqrt(3)/2$.</p>
+
+<pre><code>-- n: # sides of the polygon
+-- h: half of the length of a side
+
+approx_pi n h n_max
+  | n == n_max = n*h
+  | otherwise =
+      approx_pi (2*n) (sqrt ((1 - sqrt (1-h*h) )/2)) n_max
+-- e.g starting from a triangle.          
+main = print $ approx_pi 3 ((sqrt 3)/2) (3*2**14)
+</code></pre>
+
+<p>What I find interesting is that every prime polygon produces a different series but they all converge towards $\pi$.</p>
+
+<h2 id="part-2-how-to-construct-a-pentagon-using-a-compass-and-a-ruler">Part 2 How to construct a pentagon using a compass and a ruler</h2>
+
+<p>People have worked out <a href="https://en.wikipedia.org/wiki/Pentagon">how to construct a pentagon using only a compass
+and a ruler</a> long ago. Nevertheless, I wanted to derive the construction
+from first principles.</p>
+
+<figure>
+<img src="https://wimvanderbauwhede.github.io/images/pentagon-relationships.png" width="80%" alt="Relationships in a pentagon" id="fig:Relationships-in-a" />
+<figcaption>Figure 2. Relationships in a pentagon</figcaption>
+</figure>
+
+<h3 id="the-length-of-a-side-of-a-pentagon">The length of a side of a pentagon</h3>
+
+<p>From <a href="#fig:Relationships-in-a">Figure 2</a> we can write down some
+straightforward relationships between the length of a side of a pentagon
+(<em>b</em> from the previous part) and the angle of the arc, $\frac{2\pi}{5}$.</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+x=\frac{b}{2}=sin\frac{\pi}{5}\label{eq:2.1}
+\end{equation}</script>
+
+<script type="math/tex; mode=display">\begin{equation}
+y=cos\frac{\pi}{5}\label{eq:2.2}
+\end{equation}</script>
+
+<script type="math/tex; mode=display">\begin{equation}
+x^{2}+y^{2}=1\label{eq:2.3}
+\end{equation}</script>
+
+<script type="math/tex; mode=display">\begin{equation}
+q = 2sin\frac{2\pi}{5}=4sin\frac{\pi}{5}cos\frac{\pi}{5}\label{eq:2.4}\end{equation}</script>
+
+<p>Substitution of Eqs. $\ref{eq:2.1}$ and $\ref{eq:2.2}$ gives</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+q = 4xy\label{eq:2.5}\end{equation}</script>
+
+<p>Now we consider the right triangle with hypothenuse <em>q</em>:</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+q^{2} = x^{2}+(1+y)^{2}\label{eq:2.6}\end{equation}</script>
+
+<p>Substitution of Eq. $\ref{eq:2.3}$ in the RHS of Eq. $\ref{eq:2.6}$ and refactoring gives:</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+q^{2} = 2+2y\label{eq:2.7}\end{equation}</script>
+
+<p>Substitution of Eq. $\ref{eq:2.3}$ and Eq. $\ref{eq:2.5}$ in the LHS of Eq. $\ref{eq:2.7}$ and refactoring gives:</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+(4-(2y)^{2})(2y)^{2} = 2+2y\label{eq:2.8}\end{equation}</script>
+
+<p>Now we define $z=2y$ and rewrite Eq. $\ref{eq:2.8}$ as:</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+(4-z^{2}).z^{2}=2+z\label{eq:2.9}
+\end{equation}</script>
+
+<p>Which after more refactoring finally gives</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+z^{2}(2-z)-1=0\label{eq:2.10}
+\end{equation}</script>
+
+<p>This is a third-order equation but fortunately there is an obvious root
+for $z=1$. After some factorization we obtain the remaining second-order
+equation:</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+z^{2}-z-1=0\label{eq:2.11}
+\end{equation}</script>
+
+<p>The roots of this equation are:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+z & = & \frac{1\pm\sqrt{(-1)^{2}-4.1.(-1)}}{2.1}\label{eq:2.12}\\
+ & = & \frac{1\pm\sqrt{5}}{2}\nonumber \end{align} %]]></script>
+
+<p>This is actually a very famous equation and its positive root is known as the <a href="https://en.wikipedia.org/wiki/Golden_ratio">Golden ratio</a>.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\phi & = & \frac{1}{a} & = & \frac{a}{1-a}\label{eq:goldenratio}
+\end{align} %]]></script>
+
+<p>Clearly <em>y</em> as defined is positive so $y=\frac{z}{2}=\frac{\phi}{2}$ or</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+y=\frac{1+\sqrt{5}}{4}\label{eq:2.13}
+\end{equation}</script>
+
+<p>From Eq. $\ref{eq:2.13}$ we can express <em>b</em> in terms of <em>y</em> using Eqns
+$\ref{eq:2.1}$, $\ref{eq:2.2}$ and $\ref{eq:2.3}$:</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+b=2\sqrt{1-y^{2}}\label{eq:2.14}
+\end{equation}</script>
+
+<p>And so we obtain the expression for the length of the side of a pentagon
+as</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+b=\sqrt{\frac{5-\sqrt{5}}{2}}\label{eq:2.15}
+\end{equation}</script>
+
+<h3 id="construction-of-the-pentagon">Construction of the pentagon</h3>
+
+<p>The remaining question is then, how do we construct a line of length <em>b</em>
+using a rules and compass?</p>
+
+<p>We do this indirectly, by constructing a line
+of length <em>y</em> as shown in <a href="#fig:Construction-of-a">Figure 3</a>. First, we
+construct a line of length 1/2. Then the hypothenuse of the right
+triangle with sides 1/2 and 1 has a lenght of $\frac{\sqrt{5}}{2}$. We
+add this to the 1/2 by drawing an arc of radius $\frac{\sqrt{5}}{2}$
+using the compass. This way we get a line of length
+$\phi = \frac{1+\sqrt{5}}{2}$. Dividing this into two gives <em>y</em> and through the
+way we constructed this, we immediately get <em>b</em> as well and so we can
+construct the pentagon using arcs of radius <em>b</em>.</p>
+
+<figure>
+<img src="https://wimvanderbauwhede.github.io/images/pentagon-construction.png" alt="Construction of a regular pentagon using ruler and compass" id="fig:Construction-of-a" />
+<figcaption>Figure 3. Construction of a regular pentagon using ruler and compass</figcaption>
+</figure>
+
+<h3 id="a-hidden-triangle">A hidden triangle</h3>
+
+<p>The equation we solved to obtain <em>y</em> (<a href="#eq:2.11">Eq. $\ref{eq:2.10}$</a>) is a third order equation, and
+its other positive root is $z=1$. This shows in a way the danger of transforming a geometry problem into algebra:
+only one of these roots, $z=\phi$, corresponds to a solution of our geometric problem.</p>
+
+<p>But there is also a geometric interpretation for the root $z=1$. Substitution of $y=1/2$ in the equations for  results in $q=\sqrt{3}$ and $b=\sqrt{3}$,
+in other words a regular triangle inscribed in the unit circle.</p>
+
+<figure>
+<img src="https://wimvanderbauwhede.github.io/images/triangle-relationships.png" width="70%" alt="Relationships in a triangle" id="fig:Relationships-in-a" />
+<figcaption>Figure 4. Relationships in a triangle</figcaption>
+</figure>
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+					<div class="inline-btn">
+	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
+	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
+	<a href="https://www.facebook.com/quickandtasyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
+	&nbsp;
+<div class="fb-like" data-href="https://www.facebook.com/quickandtasyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+</div><!-- /.follow-us -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2018-03-13T00:00:00Z" itemprop="dateModified">March 13, 2018</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2018 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
