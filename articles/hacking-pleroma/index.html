@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hacking the Pleroma: Elixir, Phoenix and a bit of ActivityPub • Wim Vanderbauwhede</title>
+    <meta name="description" content="A brief guide into hacking Pleroma, a federated microblogging server software.">
+    <meta name="keywords" content="coding, hacking, programming, elixir, pleroma">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Hacking the Pleroma: Elixir, Phoenix and a bit of ActivityPub">
+	<meta name="twitter:description" content="A brief guide into hacking Pleroma, a federated microblogging server software.">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/hacking-pleroma_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/hacking-pleroma/#">
+	<meta property="og:title" content="Hacking the Pleroma: Elixir, Phoenix and a bit of ActivityPub">
+	<meta property="og:description" content="A brief guide into hacking Pleroma, a federated microblogging server software.">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/hacking-pleroma_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/hacking-pleroma/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/hacking-pleroma_1600x600.jpg" class="page-feature-image" alt="Hacking the Pleroma: Elixir, Phoenix and a bit of ActivityPub" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Hacking the Pleroma: Elixir, Phoenix and a bit of ActivityPub</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p><a href="https://pleroma.social/">Pleroma</a> “is a microblogging server software that can federate (= exchange messages with) other servers that support the same federation standards (OStatus and ActivityPub). What that means is that you can host a server for yourself or your friends and stay in control of your online identity, but still exchange messages with people on larger servers. Pleroma will federate with all servers that implement either OStatus or ActivityPub, like GNU Social, Friendica, Hubzilla and Mastodon.” <a href="https://blog.soykaf.com/post/what-is-pleroma/">(stolen from Lain’s blog post)</a>.</p>
+
+<p>Recently I modified my Pleroma instance to support bot services: parse a posted message, take an action, post the result. To get there I had to learn <a href="https://elixir-lang.org/">Elixir</a>, the language in which Pleroma is written, as well as <a href="https://hexdocs.pm/phoenix/overview.html">Phoenix</a>, the web framework Elixir uses, and a little bit about ActivityPub, the protocol for exchanging messages. What I want to explain here in particular is the architecture of Pleroma, so that you can hack it more easily, for fun or if you want to participate in the development.</p>
+
+<h2 id="elixir">Elixir</h2>
+
+<p>As Pleroma is written in <a href="https://elixir-lang.org/">Elixir</a> you’ll need to learn that language to some extent. If you are familiar with Ruby (or Perl, for that matter) and with the idea of functional programming (everything is a function), then it is quite easy to learn and understand. The <a href="https://hexdocs.pm/elixir/">documentation</a> and <a href="https://elixir-lang.org/getting-started/introduction.html">guides</a> are very good.</p>
+
+<p>If you’ve never hear of functional programming, the main difference with e.g. Ruby or Java is that Elixir does not use an object-oriented programming model. Instead, there are functions that manipulate data structures and other functions. A particular consequence of the functional model is that there are no for- or while-loops. Instead, there are what is called higher-order functions which e.g. apply another function to a list. Elixir programs also make a lot more use of recursion.</p>
+
+<p>Another point about Elixir as a web programming language is that it is built on a system where processes communicate by passing messages to one another, and it is  built in such a way that if a process dies it will normally be restarted automatically. This approach makes it very easy to offload work to separate worker processes etc.</p>
+
+<p>All this comes courtesy of <a href="https://www.erlang.org/">Erlang</a>, the language on which Elixir is built, with its powerfull OTP framework for building applications and its BEAM virtual machine, which manages the processes.</p>
+
+<h2 id="phoenix">Phoenix</h2>
+
+<p>A lot of the groundwork of Pleroma is done by <a href="https://hexdocs.pm/phoenix/overview.html">Phoenix</a>, a very easy-to-use web server framework. Essentially, what happens is that the end user accesses the application using a specific url, typically via a web browser, and based on this url the application performs a number of actions, which in the end result in a change in the state of the application and usually in what is shown in the browser window.</p>
+
+<p>In Phoenix, there are five stages or components  between the connection and the resulting action by the application:</p>
+
+<h3 id="endpoint">Endpoint</h3>
+
+<p>The <a href="https://hexdocs.pm/phoenix/Phoenix.Endpoint.html">endpoint</a> is the boundary where all requests to your web application start. It is also the interface your application provides to the underlying web servers.</p>
+
+<p>Pleroma’s endpoint is <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/endpoint.ex"><code>web/endpoint.ex</code></a>. If you look at the source you see several occurrences of <code>plug(Plug...)</code>. <a href="https://hexdocs.pm/phoenix/plug.html">Plug</a> is a specification for composable modules in between web applications, and it is very heavily used in Pleroma.  For example, to serve only specific static files/folders from <code>priv/static</code>:</p>
+
+<pre><code class="language-elixir">plug(
+  Plug.Static,
+  at: "/",
+  from: :pleroma,
+  only: ~w(index.html static finmoji emoji packs sounds images instance sw.js)
+)
+</code></pre>
+
+<p>Another very nice feature of Phoenis is that you can edit your code while your server is running. It gets automatically recompiled and the affected processes are automatically restarted, courtesy of the <a href="https://hexdocs.pm/phoenix/Phoenix.CodeReloader.html">Phoenix.CodeReloader</a>:</p>
+
+<pre><code class="language-elixir">  # Code reloading can be explicitly enabled under the
+  # :code_reloader configuration of your endpoint.
+  if code_reloading? do
+    plug(Phoenix.CodeReloader)
+  end
+</code></pre>
+
+<h3 id="router">Router</h3>
+
+<p><a href="https://hexdocs.pm/phoenix/Phoenix.Router.html">Routers</a> are the main hubs of Phoenix applications. They match HTTP requests to controller actions, wire up real-time channel handlers, and define a series of pipeline transformations for scoping middleware to sets of routes.</p>
+
+<p>Pleroma’s router is <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/router.ex"><code>web/router.ex</code></a>. The key function in the router is the <code>pipeline</code> which lets you create pipelines of plugs. Other functions are <code>scope</code>, <code>get</code>, <code>post</code>, <code>pipe_through</code>, all of these let you match on the url and whether you are dealing with a get or post request, and define appropriate pipelines of actions. For example, federated ActivityPub requests handled as follows:</p>
+
+<pre><code class="language-elixir">scope "/", Pleroma.Web.ActivityPub do
+  pipe_through(:activitypub)
+  post("/users/:nickname/inbox", ActivityPubController, :inbox)
+  post("/inbox", ActivityPubController, :inbox)
+end
+</code></pre>
+<p>where the <code>pipe_through(:activitypub)</code> call is used to insert a custom pipeline:</p>
+
+<pre><code class="language-elixir">pipeline :activitypub do
+  plug(:accepts, ["activity+json"])
+  plug(Pleroma.Web.Plugs.HTTPSignaturePlug)
+end
+</code></pre>
+
+<h3 id="controllers">Controllers</h3>
+
+<p><a href="https://hexdocs.pm/phoenix/Phoenix.Controller.htm">Controllers</a> are used to group common functionality in the same (pluggable) module.</p>
+
+<p>Pleroma makes heavy use of controllers: almost every request is handled by a specific controller for any given protocol, e.g. <code>MastodonAPIController</code> or <code>ActivityPubController</code>. This makes it easy to identify the files to work on if you need to make a change to the code for a given protocol. For example, the ActivityPub post requests in the Router are handled by <code>inbox</code> function in the <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/activity_pub_controller.ex">ActivityPubController</a>:</p>
+
+<pre><code class="language-elixir">def inbox(%{assigns: %{valid_signature: true}} = conn, params) do
+  Federator.enqueue(:incoming_ap_doc, params)
+  json(conn, "ok")
+end
+</code></pre>
+
+<h3 id="views">Views</h3>
+
+<p><a href="https://hexdocs.pm/phoenix/Phoenix.View.html">Views</a> are used to control the rendering of templates. You create a view module, a template and a set of assigns, which are basically key-value pairs.</p>
+
+<p>Pleroma uses views for “rendering” JSON objects. For example in <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/activity_pub_controller.ex"><code>web/activity_pub/activity_pub_controller.ex</code></a> there are lines like</p>
+
+<pre><code class="language-elixir">json(UserView.render("user.json", %{user: user}))
+</code></pre>
+<p>Here, <code>UserView.render</code> is defined in <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/views/user_view.ex"><code>web/activity_pub/views/user_view.ex</code></a> for a number of different “*.json” strings. These are not really templates, they are simply used to pattern match on the function definitions.</p>
+
+<p>The more conventional usage to create HTML is also used, e.g. the template <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/templates/mastodon_api/mastodon/index.html.eex"><code>web/templates/mastodon_api/mastodon/index.html.eex</code></a>
+is used in <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/mastodon_api/mastodon_api_controller.ex"><code>web/mastodon_api/mastodon_api_controller.ex</code></a> via the view
+<a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/mastodon_api/views/mastodon_view.ex"><code>web/mastodon_api/views/mastodon_view.ex</code></a>:</p>
+
+<pre><code class="language-elixir">render(MastodonView, "index.html", %{initial_state: initial_state})
+</code></pre>
+<p>### Templates</p>
+
+<p><a href="https://hexdocs.pm/phoenix/Phoenix.Template.html">Templates</a> are text files (typically html pages) with Elixir code to generate the specific values based on the assigns, included in <code>&lt;%= ... %&gt;</code>.</p>
+
+<p>For example, in Pleroma, the Mastodon front-end uses a template for the <code>index.html</code> file which has the code</p>
+
+<pre><code class="language-elixir">&lt;%= Application.get_env(:pleroma, :instance)[:name] %&gt;
+</code></pre>
+<p>to show the name of the instance.</p>
+
+<h2 id="ecto">Ecto</h2>
+
+<p><a href="https://hexdocs.pm/ecto/Ecto.html">Ecto</a> is not a part of Phoenix, but it is an integral part of most web applications: Ecto is Elixir’s main library for working with databases. It provides the tools to interact with databases under a common API.</p>
+
+<p>Ecto is split into 4 main components:</p>
+
+<p>Ecto.Repo - repositories are wrappers around the data store. Via the repository, we can create, update, destroy and query existing entries. A repository needs an adapter and credentials to communicate to the database</p>
+
+<p>Pleroma uses the PostgresQL database.</p>
+
+<p>Ecto.Schema - schemas are used mainly to map tables into Elixir data (there are other use cases too).</p>
+
+<p>Ecto.Changeset - changesets provide a way for developers to filter and cast external parameters, as well as a mechanism to track and validate changes before they are applied to your data</p>
+
+<p>Ecto.Query - written in Elixir syntax, queries are used to retrieve information from the database.</p>
+
+<h2 id="genserver">GenServer</h2>
+
+<p>Because Elixir, like Erlang, uses a processes-with-message-passing paradigm, client-server relationships are so common that they have been abstracted as a <em>behaviour</em>, which in Elixir is a specification for composable modules which have to implement specified public functions (a bit like an interface in Java or typeclass in Haskell).</p>
+
+<p>If we look at the <code>Federator.enqueue</code> function, its implementation actually reduces to a single line:</p>
+
+<pre><code class="language-elixir">GenServer.cast(__MODULE__, {:enqueue, type, payload, priority})
+</code></pre>
+<p><a href="https://hexdocs.pm/elixir/GenServer.html">GenServer</a> is an Elixir behaviour module for implementing the server of a client-server relation. The <code>cast</code> call sends an asynchronous request to the server (synchronous requests use <code>call</code>). The server behaviour is implemented using the <code>handle_cast</code> callback, which handles <code>cast</code> calls.</p>
+
+<p>In <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/federator/federator.ex"><code>Pleroma.Federator</code></a>, these are implemented in the same module as the <code>enqueue</code> function, hence the use of <code>__MODULE__</code> rather than the hardcoded module name.</p>
+
+<h2 id="applications-workers-and-supervisors">Applications, Workers and Supervisors</h2>
+
+<p>Elixir borrows the concept of a “supervision tree” from Erlang/OTP. AN application consists of a tree of processes than can either be <em>supervisors</em> or <em>workers</em>. The task of a supervisors is to ensure that the worker processes do their work, including distributing the work and restarting the worker processes when they die. Supervisors can supervise either worker or other supervisors, so you can build a <em>supervision tree</em>.</p>
+
+<p>Elixir provides an <a href="http://elixir-lang.org/docs/stable/elixir/Application.html">Application</a> behaviour module and a <a href="https://hexdocs.pm/elixir/Supervisor.html">Supervisor</a> module to make this easy. The Application module requires a <code>start()</code> function as entry point. Typical code to create a supervision tree is</p>
+
+<pre><code class="language-elixir">Supervisor.start_link(children, opts)
+</code></pre>
+
+<p>where <code>start_link()</code> spawns the top process of the tree, and it spawns all the child processes in the list <code>children</code>.</p>
+
+<p>Pleroma uses a convenient but deprecated module called <a href="https://hexdocs.pm/elixir/Supervisor.Spec.html">Supervisor.Spec</a> which provides <code>worker()</code> and <code>supervisor()</code> functions, for example:</p>
+
+<pre><code class="language-elixir">children = [
+  supervisor(Pleroma.Repo, []),
+  supervisor(Pleroma.Web.Endpoint, []),
+  # ...
+  worker(Pleroma.Web.Federator, []),
+  # ...
+]  
+</code></pre>
+
+<p>Every worker has this own <code>start_link</code> function,  e.g.  in <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/federator/federator.ex"><code>web/federator/federator.ex</code></a> we find:</p>
+
+<pre><code class="language-elixir">def start_link do
+  # ...
+  GenServer.start_link(__MODULE__, ...)
+end
+</code></pre>
+
+<p>This means that the Federator module borrows the <code>start_link</code> from the GenServer module. This is a very common way to create a worker.</p>
+
+<h2 id="mix">Mix</h2>
+
+<p><a href="https://hexdocs.pm/mix/Mix.html">Mix</a> is the build tool for Elixir, and its main advantage is that the build scripts are also written in Elixir. Some key <code>mix</code> actions are provided by Phoenix, for example to build and run the final Pleroma application the action is <code>mix phx.server</code>.</p>
+
+<h2 id="hacking-pleroma">Hacking Pleroma</h2>
+
+<p>After this brief tour of Elixir and Phoenix I want to give an example of adding simple bot functionality to Pleroma. See <a href="https://git.pleroma.social/andarna/pleroma">my fork of Pleroma</a> for the code.</p>
+
+<p>My bot parses incoming messages for <code>@pixelbot</code>, extracts a list of pixel from the message, modifies a canvas with the new pixels and creates a PNG image of the result. It then posts a link to the PNG image.</p>
+
+<h3 id="adding-a-worker">Adding a worker</h3>
+
+<p>Because updating the canvas and creating the PNG image could be time-consuming, especially if the canvas were large, I put this functionality in a separate server module, and added this to the list of workers for the <a href="https://git.pleroma.social/andarna/pleroma/tree/develop/lib/pleroma/application.ex">main Pleroma application</a>:</p>
+
+<pre><code class="language-elixir">    children = [
+      ...
+    ] ++ if !bot_enabled(), do: [], else: [
+      worker(Pleroma.Bots.PixelBot, [ get_canvas_size()  ],id: PixelBot),
+    ]
+</code></pre>
+
+<p>The bot takes the size of the canvas from my <a href="https://git.pleroma.social/andarna/pleroma/blob/develop/config/config.exs"><code>config.exs</code></a> using the helper function <code>get_canvas_size()</code>. The <code>id: PixelBot</code> allows to access the worker by name.</p>
+
+<p>When the application starts, it launches the PixelBot worker (<a href="https://git.pleroma.social/andarna/pleroma/tree/develop/lib/pleroma/bots/pixelbot.ex"><code>bots/pixelbot.ex</code></a>). The worker calls its <code>init()</code> function (part of the GenServer behaviour) which loads the last canvas from a file.</p>
+
+<h3 id="a-bit-of-activitypub">A bit of ActivityPub</h3>
+
+<p>One of the protocols used for federation is <a href="https://www.w3.org/TR/activitypub/">ActivityPub</a>. The specification is long and not so easy to read. However, for the purpose of hacking Pleroma it mainly
+helps to understand the structure of an ActivityPub <em>action</em> (in this case a post):</p>
+
+<pre><code class="language-elixir">activity = %{
+ actor: user_url&lt;&gt;,
+ data: %{"actor" =&gt; user_url,
+   "cc" =&gt; [user_url&lt;&gt;"/followers"],
+   "context" =&gt; instance_url&lt;&gt;"/contexts/" &lt;&gt; context_id,
+   "id" =&gt; instance_url&lt;&gt;"/activities/" &lt;&gt; activity_id,
+   "object" =&gt; %{"actor" =&gt; user_url&lt;&gt;,
+     "attachment" =&gt; [%{"name" =&gt; image_file_name, "type" =&gt; "Image",
+       "url" =&gt; [
+           "href" =&gt; instance_url&lt;&gt;"/media/"&lt;&gt;uuid&lt;&gt;"/"&lt;&gt;image_file_name,
+           "mediaType" =&gt; "image/png", "type" =&gt; "Link"
+         }
+       ],
+       "uuid" =&gt; uuid}
+     ],
+     "cc" =&gt; [user_url&lt;&gt;"/followers"],
+     "content" =&gt; content_str,
+     "context" =&gt; instance_url&lt;&gt;"/contexts/"&lt;&gt;context_id,
+     "emoji" =&gt; %{},
+     "id" =&gt; instance_url&lt;&gt;"/objects/"&lt;&gt;object_id, 
+     "published" =&gt; now, "summary" =&gt; "", "tag" =&gt; [],
+     "to" =&gt; ["https://www.w3.org/ns/activitystreams#Public"],
+     "type" =&gt; "Note"
+   }, "published" =&gt; now,
+   "to" =&gt; ["https://www.w3.org/ns/activitystreams#Public"],
+   "type" =&gt; "Create"
+ }, id: id, inserted_at: ndt,
+ local: true,
+ recipients: ["https://www.w3.org/ns/activitystreams#Public", user_url&lt;&gt;"/followers"],
+ updated_at: ndt
+}
+</code></pre>
+
+<p>In my case,</p>
+
+<pre><code class="language-elixir">instance_url="https://pynq.limited.systems"
+user_url = user_url&lt;&gt;"/users/pixelbot"`
+image_file_name = "canvas.png"
+content_str = "Canvas:&lt;br&gt;&lt;a href=\""
+  &lt;&gt;instance_url
+  &lt;&gt;"/media/"&lt;&gt;uuid&lt;&gt;"/"&lt;&gt;image_file_name
+  &lt;&gt;"\" class='attachment'&gt;"
+  &lt;&gt;image_file_name
+  &lt;&gt;"&lt;/a&gt;"
+</code></pre>
+
+<p>In Pleroma this activity is linked to the Ecto repository Pleroma.Repo (<a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/repo.ex"><code>repo.ex</code></a>) in the module Pleroma.Activity (<a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/activity.ex"><code>activity.ex</code></a>), which defines a schema.</p>
+
+<h3 id="getting-the-messages">Getting the messages</h3>
+
+<p>The bot only supports ActivityPub. As we have seen above, in Pleroma incoming messages are handled by <code>inbox</code> function in the ActivityPubController (in <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/activity_pub_controller.ex"><code>web/activity_pub/activity_pub_controller.ex</code></a>), so I put in a little hook there to detect if a message is for <code>@pixelbot</code> and has an actual message body (<code>content</code>):</p>
+
+<pre><code class="language-elixir">def inbox(%{assigns: %{valid_signature: true}} = conn, params) do
+  headers = Enum.into(conn.req_headers, %{})
+  if is_map(params) and Map.has_key?(params,"nickname") and Map.has_key?(params,"object") do
+    if params["nickname"] == "pixelbot" and is_map(params["object"]) and Map.has_key?(params["object"],"content") do
+        content =  params["object"]["content"]
+        GenServer.cast(Pleroma.Bots.PixelBot,content)
+        :ok
+    else
+      :nok
+    end
+  else
+    :nok
+  end
+</code></pre>
+
+<p>As you can see, the content of a message for <code>@pixelbot</code> is passed on to the PixelBot worker for processing using the <code>GenServer.cast(Pleroma.Bots.PixelBot,content)</code> call.</p>
+
+<h3 id="processing-the-messages">Processing the messages</h3>
+
+<p>The PixelBot worker parses the message to extract any pixels from it (<a href="https://git.pleroma.social/andarna/pleroma/tree/develop/lib/pleroma/bots/pixelbot/parse_messages.ex"><code>bots/pixelbot/parse_messages.ex</code></a>). If there are any, it updates the canvas (which is just a list of lists). It and writes the content to a file, and calls an external program to create the final image.</p>
+
+<h3 id="posting-a-reply">Posting a reply</h3>
+
+<p>Finally, the bot posts a status to the public timeline (<a href="https://git.pleroma.social/andarna/pleroma/tree/develop/lib/pleroma/bots/pixelbot/pixelbot_post_status.ex"><code>bots/pixelbot/pixelbot_post_status.ex</code></a>). The status contains the current time and a link to the latest canvas.  The function <code>pixelbot_post_status()</code> creates the status and wraps it in the correct structure required by ActivityPub.</p>
+
+<p>It also gets the user object based on the nickname via <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/user.ex"><code>Pleroma.User.get_cached_by_nickname(nickname)</code></a>. Like the activity, this user object is defined via a schema and linked to the Ecto repository (in <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/user.ex"><code>user.ex</code></a>). So <code>user</code> in the code below is a complicated object, not a url or nickname.</p>
+
+<p>Finally, the function calls <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/activity_pub.ex"><code>ActivityPub.create()</code></a> which creates the activity, and in this case that means it posts a status.</p>
+
+<pre><code class="language-elixir">  def pixelbot_post_status() do
+    now = DateTime.to_string(DateTime.utc_now())
+    nickname="pixelbot"
+    user = Pleroma.User.get_cached_by_nickname(nickname)
+    visibility = "public" #get_visibility(data)
+
+    instance_url="https://pynq.limited.systems"
+    user_url = user_url&lt;&gt;"/users/pixelbot"`
+    image_file_name = "canvas_512x512.png"
+
+
+    to =  ["https://www.w3.org/ns/activitystreams#Public"]
+    cc =  [user_url &lt;&gt; "/followers"]
+
+    context = instance_url &lt;&gt;"/contexts/pixelbot-dummy-context"
+    object = %{"actor" =&gt; user_url,
+            "attachment" =&gt; [%{"name" =&gt; image_file_name, "type" =&gt; "Image",
+              "url" =&gt; [%{"href" =&gt; instance_url&lt;&gt; "/pixelbot/"&lt;&gt;image_file_name,
+                "mediaType" =&gt; "image/png", "type" =&gt; "Link"}],
+              "uuid" =&gt; "pixelbot-dummy-uuid"
+            }],
+            "cc" =&gt; [user_url&lt;&gt;"/followers"],
+            "content" =&gt; "Canvas at "&lt;&gt;now&lt;&gt;"&lt;br&gt;&lt;a href=\""&lt;&gt;instance_url&lt;&gt;"/pixelbot/"&lt;&gt;image_file_name&lt;&gt;"\" class='attachment'&gt;"&lt;&gt;image_file_name&lt;&gt;"&lt;/a&gt;",
+            "context" =&gt; context,
+            "emoji" =&gt; %{}, "summary" =&gt; nil, "tag" =&gt; [],
+            "to" =&gt; ["https://www.w3.org/ns/activitystreams#Public"], "type" =&gt; "Note"
+          }
+
+    res =
+            Pleroma.Web.ActivityPub.ActivityPub.create(%{
+              to: to,
+              actor: user,
+              context: context,
+              object: object,
+              additional: %{"cc" =&gt; cc}
+            })
+    Pleroma.User.increase_note_count(user)
+    res
+  end
+
+</code></pre>
+
+<h2 id="pleroma-source-tree">Pleroma source tree</h2>
+
+<p>This is only a part of the <a href="https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/">Pleroma source tree</a>, it shows on the files mentioned above.</p>
+
+<pre><code>/lib/pleroma/
+├── activity.ex
+├── application.ex
+├── notification.ex
+├── object.ex
+├── plugs
+│   ├── authentication_plug.ex
+│   ├── http_signature.ex
+│   └── oauth_plug.ex
+├── repo.ex
+├── user.ex
+└── web
+    ├── activity_pub
+    │   ├── activity_pub.ex
+    │   ├── activity_pub_controller.ex
+    │   ├── transmogrifier.ex
+    │   ├── utils.ex
+    │   └── views
+    │       ├── object_view.ex
+    │       └── user_view.ex
+    ├── common_api
+    │   ├── common_api.ex
+    │   └── utils.ex
+    ├── endpoint.ex
+    ├── federator
+    │   └── federator.ex
+    ├── mastodon_api
+    │   ├── mastodon_api.ex
+    │   ├── mastodon_api_controller.ex
+    │   ├── mastodon_socket.ex
+    │   └── views
+    │       ├── mastodon_view.ex
+    ├── router.ex
+    ├── templates
+    │   ├── mastodon_api
+    │   │   └── mastodon
+    │   │       ├── index.html.eex
+    ├── web.ex
+    ├── web_finger
+    │   ├── web_finger.ex
+    │   └── web_finger_controller.ex
+</code></pre>
+
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2018-04-19T00:00:00Z" itemprop="dateModified">April 19, 2018</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2018 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
