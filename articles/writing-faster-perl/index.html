@@ -156,7 +156,7 @@
 
 <h2 id="perl-performance-as-we-know-it">Perl performance as we know it</h2>
 
-<p>An often-made argument is that if you want performance, you should not write your code in Perl. And it is of course true that compiled code will almost always be faster. However, often rewriting in a compiled language is not an option, so it is important to know how to get the best possible performance in pure Perl. The Perl documentation has <a href="https://perldoc.perl.org/perlperf.html">perlperf</a> which offers good advice and <a href="http://makepp.sourceforge.net/2.0/perl_performance.html">these tips</a> provide some more detail. But for my needs I did not find the answers there, nor anywhere else. So I created some simple test cases to find out. I used Perl version <code>5.28</code>, the most recent one, but the results should be quite similar for earlier versions.</p>
+<p>An often-made argument is that if you want performance, you should not write your code in Perl. And it is of course true that compiled code will almost always be faster. However, often rewriting in a compiled language is not an option, so it is important to know how to get the best possible performance in pure Perl. The Perl documentation has <a href="https://perldoc.perl.org/perlperf.html">perlperf</a> which offers good advice and <a href="http://makepp.sourceforge.net/2.0/perl_performance.html">these tips</a> provide some more detail. But for my needs I did not find the answers there, nor anywhere else. So I created some simple test cases to find out. I used Perl version <code class="highlighter-rouge">5.28</code>, the most recent one, but the results should be quite similar for earlier versions.</p>
 
 <h2 id="testing-some-hunches">Testing some hunches</h2>
 
@@ -164,113 +164,118 @@
 
 <h3 id="hash-key-testing-is-faster-than-regexp-matching">Hash key testing is faster than regexp matching</h3>
 
-<p>Fortran code essentially consists of a list of statements which can contain expressions, and the parser labels each of the statements once using a hashmap, ever the workhorse data structure in Perl. Every parsed line of code is stored as a pair with this hashmap (which I call <code>$info</code>):</p>
+<p>Fortran code essentially consists of a list of statements which can contain expressions, and the parser labels each of the statements once using a hashmap, ever the workhorse data structure in Perl. Every parsed line of code is stored as a pair with this hashmap (which I call <code class="highlighter-rouge">$info</code>):</p>
 
-<pre><code class="language-perl">my $parsed_line = [ $src_line, $info ];
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">my</span> <span class="nv">$parsed_line</span> <span class="o">=</span> <span class="p">[</span> <span class="nv">$src_line</span><span class="p">,</span> <span class="nv">$info</span> <span class="p">];</span>
 </code></pre>
+</div>
 
-<p>This means than in principle I can choose to match a pattern in $line using a regex or use one of the lables in <code>$info</code>. So I tested the performance of hash key testing versus regexp matching, using some genuine FORTRAN 77 code:</p>
+<p>This means than in principle I can choose to match a pattern in $line using a regex or use one of the lables in <code class="highlighter-rouge">$info</code>. So I tested the performance of hash key testing versus regexp matching, using some genuine FORTRAN 77 code:</p>
 
-<pre><code class="language-perl">my $str = lc('READ( 1, 2, ERR=8, END=9, IOSTAT=N ) X');
-my $info={};
-if ($str=~/read/) {
-    $info-&gt;{'ReadCall'}=1;
-}
-my $count=0;
-for my $i (1..100_000_000) {
-    if ($str=~/read/) {
-        $count++;
-    }
-for my $i (1..100_000_000) {
-    if (exists $info-&gt;{'ReadCall'}) {
-        $count+=$i;
-    }
-}
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">my</span> <span class="nv">$str</span> <span class="o">=</span> <span class="nb">lc</span><span class="p">(</span><span class="s">'READ( 1, 2, ERR=8, END=9, IOSTAT=N ) X'</span><span class="p">);</span>
+<span class="k">my</span> <span class="nv">$info</span><span class="o">=</span><span class="p">{};</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$str</span><span class="o">=~</span><span class="sr">/read/</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$info</span><span class="o">-&gt;</span><span class="p">{</span><span class="s">'ReadCall'</span><span class="p">}</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">my</span> <span class="nv">$count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="k">my</span> <span class="nv">$i</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">100_000_000</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$str</span><span class="o">=~</span><span class="sr">/read/</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">for</span> <span class="k">my</span> <span class="nv">$i</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">100_000_000</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">exists</span> <span class="nv">$info</span><span class="o">-&gt;</span><span class="p">{</span><span class="s">'ReadCall'</span><span class="p">})</span> <span class="p">{</span>
+        <span class="nv">$count</span><span class="o">+=</span><span class="nv">$i</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
+</div>
 
-<p>Without the <code>if</code>-condidion, the loop takes 3.1 s on my laptop. The loop with the regexp match condition takes 10.1 s; with the hash key existence test it takes 5.6 s. So the actual condition evaluation takes 7 s for regexp and 2.5 s for hash key existence check. So testing hash keys is alsmost three times faster than simple regexp matching.</p>
+<p>Without the <code class="highlighter-rouge">if</code>-condidion, the loop takes 3.1 s on my laptop. The loop with the regexp match condition takes 10.1 s; with the hash key existence test it takes 5.6 s. So the actual condition evaluation takes 7 s for regexp and 2.5 s for hash key existence check. So testing hash keys is alsmost three times faster than simple regexp matching.</p>
 
 <h3 id="custom-tree-traversals-are-faster">Custom tree traversals are faster</h3>
 
 <p>I tested the cost of using higher-order functions for tree traversal. Basically, this is the choice between a generic traversal which takes an arbitrary function that operates on the tree nodes:</p>
 
-<pre><code class="language-perl">sub _traverse_ast_with_action { (my $ast, my $acc, my $f) = @_;
-  if ( &lt;cond&gt; ) { 
-		$acc=$f-&gt;($ast,$acc);
-  } else { 
-     $acc=$f-&gt;($ast,$acc);
-	for my $idx (1 .. scalar @{$ast}-1) {
-		(my $entry, $acc) = 
-            _traverse_ast_with_action($ast-&gt;[$idx],$acc, $f);
-		$ast-&gt;[$idx] = $entry;
-	}
-  }
-  return ($ast, $acc);
-} 
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">sub </span><span class="nf">_traverse_ast_with_action</span> <span class="p">{</span> <span class="p">(</span><span class="k">my</span> <span class="nv">$ast</span><span class="p">,</span> <span class="k">my</span> <span class="nv">$acc</span><span class="p">,</span> <span class="k">my</span> <span class="nv">$f</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="sr">&lt;cond&gt;</span> <span class="p">)</span> <span class="p">{</span> 
+		<span class="nv">$acc</span><span class="o">=</span><span class="nv">$f</span><span class="o">-&gt;</span><span class="p">(</span><span class="nv">$ast</span><span class="p">,</span><span class="nv">$acc</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> 
+     <span class="nv">$acc</span><span class="o">=</span><span class="nv">$f</span><span class="o">-&gt;</span><span class="p">(</span><span class="nv">$ast</span><span class="p">,</span><span class="nv">$acc</span><span class="p">);</span>
+	<span class="k">for</span> <span class="k">my</span> <span class="nv">$idx</span> <span class="p">(</span><span class="mi">1</span> <span class="o">..</span> <span class="nb">scalar</span> <span class="nv">@</span><span class="p">{</span><span class="nv">$ast</span><span class="p">}</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+		<span class="p">(</span><span class="k">my</span> <span class="nv">$entry</span><span class="p">,</span> <span class="nv">$acc</span><span class="p">)</span> <span class="o">=</span> 
+            <span class="nv">_traverse_ast_with_action</span><span class="p">(</span><span class="nv">$ast</span><span class="o">-&gt;</span><span class="p">[</span><span class="nv">$idx</span><span class="p">],</span><span class="nv">$acc</span><span class="p">,</span> <span class="nv">$f</span><span class="p">);</span>
+		<span class="nv">$ast</span><span class="o">-&gt;</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$entry</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span><span class="nv">$ast</span><span class="p">,</span> <span class="nv">$acc</span><span class="p">);</span>
+<span class="p">}</span> 
 </code></pre>
+</div>
 
 <p>or a custom traversal:</p>
 
-<pre><code class="language-perl">sub _traverse_ast_custom { (my $ast, my $acc) = @_;
-  if ( &lt;cond&gt; ) { 
-		$acc=&lt; custom code acting on $ast and $acc&gt;;
-  } else { 
-    $acc=&lt; custom code acting on $ast and $acc&gt;;
-	for my $idx (1 .. scalar @{$ast}-1) {
-		(my $entry, $acc) = 
-            _traverse_ast_custom($ast-&gt;[$idx],$acc);
-		$ast-&gt;[$idx] = $entry;
-	}
-  }
-  return ($ast, $acc);
-} 
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">sub </span><span class="nf">_traverse_ast_custom</span> <span class="p">{</span> <span class="p">(</span><span class="k">my</span> <span class="nv">$ast</span><span class="p">,</span> <span class="k">my</span> <span class="nv">$acc</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="sr">&lt;cond&gt;</span> <span class="p">)</span> <span class="p">{</span> 
+		<span class="nv">$acc</span><span class="o">=&lt;</span> <span class="nv">custom</span> <span class="nv">code</span> <span class="nv">acting</span> <span class="nv">on</span> <span class="nv">$ast</span> <span class="ow">and</span> <span class="nv">$acc</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> 
+    <span class="nv">$acc</span><span class="o">=&lt;</span> <span class="nv">custom</span> <span class="nv">code</span> <span class="nv">acting</span> <span class="nv">on</span> <span class="nv">$ast</span> <span class="ow">and</span> <span class="nv">$acc</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="k">for</span> <span class="k">my</span> <span class="nv">$idx</span> <span class="p">(</span><span class="mi">1</span> <span class="o">..</span> <span class="nb">scalar</span> <span class="nv">@</span><span class="p">{</span><span class="nv">$ast</span><span class="p">}</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+		<span class="p">(</span><span class="k">my</span> <span class="nv">$entry</span><span class="p">,</span> <span class="nv">$acc</span><span class="p">)</span> <span class="o">=</span> 
+            <span class="nv">_traverse_ast_custom</span><span class="p">(</span><span class="nv">$ast</span><span class="o">-&gt;</span><span class="p">[</span><span class="nv">$idx</span><span class="p">],</span><span class="nv">$acc</span><span class="p">);</span>
+		<span class="nv">$ast</span><span class="o">-&gt;</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$entry</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span><span class="nv">$ast</span><span class="p">,</span> <span class="nv">$acc</span><span class="p">);</span>
+<span class="p">}</span> 
 
 </code></pre>
+</div>
 
 <p>For the case of the tree data structures in my compiler, the higher-order implementation takes twice as long as the custom traversal, so for performance this is not a good choice. Therefore I don’t use higher-order functions in the parser, but I do use them in the later refactoring passes.</p>
 
 <h3 id="maps-are-slower-than-for-loops-but-not-much">Maps are slower than for-loops, but not much</h3>
 
-<p>Finally I tested the cost of using <code>map</code> instead of a <code>foreach</code>-loop:</p>
+<p>Finally I tested the cost of using <code class="highlighter-rouge">map</code> instead of a <code class="highlighter-rouge">foreach</code>-loop:</p>
 
-<pre><code class="language-perl"># map, so much more concise!
-my @src = map {$_} (1 .. 10_000_000);
-my @res = map {2*$_+1} @src;
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="c1"># map, so much more concise!</span>
+<span class="k">my</span> <span class="nv">@src</span> <span class="o">=</span> <span class="nb">map</span> <span class="p">{</span><span class="nv">$_</span><span class="p">}</span> <span class="p">(</span><span class="mi">1</span> <span class="o">..</span> <span class="mi">10_000_000</span><span class="p">);</span>
+<span class="k">my</span> <span class="nv">@res</span> <span class="o">=</span> <span class="nb">map</span> <span class="p">{</span><span class="mi">2</span><span class="o">*</span><span class="nv">$_</span><span class="o">+</span><span class="mi">1</span><span class="p">}</span> <span class="nv">@src</span><span class="p">;</span>
 
-# declarations for all for-loops
-my @res=();
-my @src=();
+<span class="c1"># declarations for all for-loops</span>
+<span class="k">my</span> <span class="nv">@res</span><span class="o">=</span><span class="p">();</span>
+<span class="k">my</span> <span class="nv">@src</span><span class="o">=</span><span class="p">();</span>
 
-# foreach-loop
-for my $elt  (1..10_000_000) {
-    push @src, $elt;
-}
-for my $elt  (@src) {
-    push @res, 2*$elt+1;
-}
+<span class="c1"># foreach-loop</span>
+<span class="k">for</span> <span class="k">my</span> <span class="nv">$elt</span>  <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10_000_000</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">push</span> <span class="nv">@src</span><span class="p">,</span> <span class="nv">$elt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="k">my</span> <span class="nv">$elt</span>  <span class="p">(</span><span class="nv">@src</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">push</span> <span class="nv">@res</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nv">$elt</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
 
-# index-based for-loop
-for my $idx  (0..10_000_000-1) {
-    my $elt=$idx+1;
-    $src[$idx] = $elt;
-}
-for my $idx  (0..10_000_000-1) {
-    my $elt=$src[$idx];
-    $res[$idx] = 2*$elt+1;
-}
+<span class="c1"># index-based for-loop</span>
+<span class="k">for</span> <span class="k">my</span> <span class="nv">$idx</span>  <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">10_000_000</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">my</span> <span class="nv">$elt</span><span class="o">=</span><span class="nv">$idx</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="nv">$src</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$elt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="k">my</span> <span class="nv">$idx</span>  <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">10_000_000</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">my</span> <span class="nv">$elt</span><span class="o">=</span><span class="nv">$src</span><span class="p">[</span><span class="nv">$idx</span><span class="p">];</span>
+    <span class="nv">$res</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="nv">$elt</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
 
-# C-style for-loop
-for (my $idx=0;$idx&lt;10_000_000;++$idx) {
-    my $elt=$idx+1;
-    $src[$idx] = $elt;
-}
-for (my $idx=0;$idx&lt;10_000_000;++$idx) {
-    my $elt=$src[$idx];
-    $res[$idx] = 2*$elt+1;
-}
+<span class="c1"># C-style for-loop</span>
+<span class="k">for</span> <span class="p">(</span><span class="k">my</span> <span class="nv">$idx</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nv">$idx</span><span class="o">&lt;</span><span class="mi">10_000_000</span><span class="p">;</span><span class="o">++</span><span class="nv">$idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">my</span> <span class="nv">$elt</span><span class="o">=</span><span class="nv">$idx</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="nv">$src</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$elt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="p">(</span><span class="k">my</span> <span class="nv">$idx</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nv">$idx</span><span class="o">&lt;</span><span class="mi">10_000_000</span><span class="p">;</span><span class="o">++</span><span class="nv">$idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">my</span> <span class="nv">$elt</span><span class="o">=</span><span class="nv">$src</span><span class="p">[</span><span class="nv">$idx</span><span class="p">];</span>
+    <span class="nv">$res</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="nv">$elt</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre>
+</div>
 
-<p>The <code>foreach</code>-loop version takes 2.6 s, the <code>map</code> version 3.3 s, so the map is 25% slower. For reference, the index-based <code>for</code>-loop version takes 3.8 s and the C-style <code>for</code>-loop version 4.4 s — don’t do that!</p>
+<p>The <code class="highlighter-rouge">foreach</code>-loop version takes 2.6 s, the <code class="highlighter-rouge">map</code> version 3.3 s, so the map is 25% slower. For reference, the index-based <code class="highlighter-rouge">for</code>-loop version takes 3.8 s and the C-style <code class="highlighter-rouge">for</code>-loop version 4.4 s — don’t do that!</p>
 
 <p>Because the map is slower, again I did not use it in the parser, and I implemented my own higher-order functions which use foreach-loops internally for the refactoring passes.</p>
 
@@ -278,53 +283,56 @@ for (my $idx=0;$idx&lt;10_000_000;++$idx) {
 
 <p>As the compiler grew in capabilities, it became noticeably slower. Perl has a great profiling tool, <a href="https://metacpan.org/pod/Devel::NYTProf">Devel::NYTProf</a>, and I used it to identify the bottleneck. As you can see from the flame graph in the banner image, it turned out to be the expression parser. This part of the code was based on <a href="https://metacpan.org/pod/Math::Expression::Evaluator">Math::Expression::Evaluator</a> because it was convenient to reuse. But it was not built for performance, and also not to parse Fortran. So I finally bit the bullet and wrote my own.</p>
 
-<p>What I loosely call an expression parser is actually a combination of a lexer and a parser: it turns a string of source code into a tree-like datastructure which expresses the structure of the expression and the purpose of its constituents. For example if the expression is <code>2*v+1</code>, the result of the expression parser will be a data structure which identifies the top-level expression as a sum of a multplication with  the integer constant <code>1</code>, and the multiplication of an integer constant <code>2</code> with a variable <code>v</code>. So how do we build a fast expression parser? It is not my intention to go into the computing science details, but instead to discuss the choices to be considered.</p>
+<p>What I loosely call an expression parser is actually a combination of a lexer and a parser: it turns a string of source code into a tree-like datastructure which expresses the structure of the expression and the purpose of its constituents. For example if the expression is <code class="highlighter-rouge">2*v+1</code>, the result of the expression parser will be a data structure which identifies the top-level expression as a sum of a multplication with  the integer constant <code class="highlighter-rouge">1</code>, and the multiplication of an integer constant <code class="highlighter-rouge">2</code> with a variable <code class="highlighter-rouge">v</code>. So how do we build a fast expression parser? It is not my intention to go into the computing science details, but instead to discuss the choices to be considered.</p>
 
 <h2 id="testing-some-more-hunches">Testing some more hunches</h2>
 
-<p>First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to either an object or a list. But objects in Perl are slow, so I use a nested list. As it happens, <code>Math::Expression</code> already uses nested lists. Using the parser from <code>Math::Expression</code>, the above expression would be turned into:</p>
+<p>First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to either an object or a list. But objects in Perl are slow, so I use a nested list. As it happens, <code class="highlighter-rouge">Math::Expression</code> already uses nested lists. Using the parser from <code class="highlighter-rouge">Math::Expression</code>, the above expression would be turned into:</p>
 
-<pre><code class="language-perl">['+'
-    ['*',
-        2,
-        ['$','v']
-    ],
-    1
-]
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="s">'+'</span>
+    <span class="p">[</span><span class="s">'*'</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span>
+        <span class="p">[</span><span class="s">'$'</span><span class="p">,</span><span class="s">'v'</span><span class="p">]</span>
+    <span class="p">],</span>
+    <span class="mi">1</span>
+<span class="p">]</span>
 </code></pre>
+</div>
 
 <h3 id="integer-comparison-is-faster-than-string-comparison">Integer comparison is faster than string comparison</h3>
 
 <p>This is fine if you don’t need to do a lot of work on the parsed datastructure. However, because every node is labeled with a string, testing against the node type is a string comparison. I did a quick test:</p>
 
-<pre><code class="language-perl">my $count=0;
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">my</span> <span class="nv">$count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 
-my $str = '*';
-for my $i (1..100_000_000) {
-    if ($str eq '*') {
-        $count+=$i;
-    }
-}
-my $c=42;
-for my $i (1..100_000_000) {
-    if ($c == 42) {
-        $count+=$i;
-    }
-}
+<span class="k">my</span> <span class="nv">$str</span> <span class="o">=</span> <span class="s">'*'</span><span class="p">;</span>
+<span class="k">for</span> <span class="k">my</span> <span class="nv">$i</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">100_000_000</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$str</span> <span class="ow">eq</span> <span class="s">'*'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$count</span><span class="o">+=</span><span class="nv">$i</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">my</span> <span class="nv">$c</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
+<span class="k">for</span> <span class="k">my</span> <span class="nv">$i</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">100_000_000</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$c</span> <span class="o">==</span> <span class="mi">42</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$count</span><span class="o">+=</span><span class="nv">$i</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
+</div>
 
-<p>On my laptop, the version with string comparison takes 5.3 s, the integer comparison 4.6 s. Without the <code>if</code>-statement, the code takes 3.1 s. In other words, the actual <code>if</code> with string comparison takes 2.2 s, with integer comparison 1.5 s. So doing string comparisons is 50% slower than doing integer comparisons. Therefore my data structure uses integer labels. Also, I label the constants so that I can have different labels for string, integer and real constants, and because in this way all nodes are arrays. This avoids having to test if a node is an array or a scalar, which is a slow operation.</p>
+<p>On my laptop, the version with string comparison takes 5.3 s, the integer comparison 4.6 s. Without the <code class="highlighter-rouge">if</code>-statement, the code takes 3.1 s. In other words, the actual <code class="highlighter-rouge">if</code> with string comparison takes 2.2 s, with integer comparison 1.5 s. So doing string comparisons is 50% slower than doing integer comparisons. Therefore my data structure uses integer labels. Also, I label the constants so that I can have different labels for string, integer and real constants, and because in this way all nodes are arrays. This avoids having to test if a node is an array or a scalar, which is a slow operation.</p>
 
 <p>So the example becomes :</p>
 
-<pre><code class="language-perl">[ 3,
-  [ 5,
-    [ 29, '2' ],
-    [ 2, 'v' ]
-  ],
-  [ 29, '1' ]
-]
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="p">[</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="p">[</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="p">[</span> <span class="mi">29</span><span class="p">,</span> <span class="s">'2'</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'v'</span> <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="p">[</span> <span class="mi">29</span><span class="p">,</span> <span class="s">'1'</span> <span class="p">]</span>
+<span class="p">]</span>
 </code></pre>
+</div>
 
 <p>Less readable, but faster and easier to extend.</p>
 
@@ -332,77 +340,79 @@ for my $i (1..100_000_000) {
 
 <p>Then we have to decide how to parse the expression string. The traditional way to build an expression parser is using a Finite State Machine, consuming one character at a time (if needed with one or more characters look-ahead) and keeping track of the identified portion of the string. This is very fast in a language such as C but in Perl I was not too sure, because in Perl a character is actually a string of length one, so every test against a character is a string comparison. On the other hand, Perl has a famously efficient regular expression engine. So I created a little testbench to see which approach was faster:</p>
 
-<pre><code class="language-perl">my @words=();
-my $str='This means we need a stack per type of operation and run until the end of the expression';
-my @chrs = split('',$str);
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">my</span> <span class="nv">@words</span><span class="o">=</span><span class="p">();</span>
+<span class="k">my</span> <span class="nv">$str</span><span class="o">=</span><span class="s">'This means we need a stack per type of operation and run until the end of the expression'</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">@chrs</span> <span class="o">=</span> <span class="nb">split</span><span class="p">(</span><span class="s">''</span><span class="p">,</span><span class="nv">$str</span><span class="p">);</span>
 
-for (1..10_000_000) {
-        my $word='';
-        while (@chrs) {
-            my $chr = shift @chrs;
-            if ($chr ne ' ') {
-                $word.=$chr;
-            } else {
-                push @words, $word;
-                $word='';
-            }
-        }
-            push @words, $word;
-}
-for (1..10_000_000) {
-        while(length( $str ) &gt; 0) {
-             if(   $str=~s/^(\w+)//) {
-                push @words, $1;
-            }
-            else {
-                $str=~s/^\s+//;
-            } 
-        }
-    }
-}
+<span class="k">for</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10_000_000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">my</span> <span class="nv">$word</span><span class="o">=</span><span class="s">''</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nv">@chrs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">my</span> <span class="nv">$chr</span> <span class="o">=</span> <span class="nb">shift</span> <span class="nv">@chrs</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$chr</span> <span class="ow">ne</span> <span class="s">' '</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$word</span><span class="o">.=</span><span class="nv">$chr</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nb">push</span> <span class="nv">@words</span><span class="p">,</span> <span class="nv">$word</span><span class="p">;</span>
+                <span class="nv">$word</span><span class="o">=</span><span class="s">''</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+            <span class="nb">push</span> <span class="nv">@words</span><span class="p">,</span> <span class="nv">$word</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10_000_000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span> <span class="nv">$str</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+             <span class="k">if</span><span class="p">(</span>   <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^(\w+)//</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nb">push</span> <span class="nv">@words</span><span class="p">,</span> <span class="nv">$1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^\s+//</span><span class="p">;</span>
+            <span class="p">}</span> 
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
+</div>
 <p>On my laptop, the FSM version takes 3.75 s, the regex version 1.85 s (mean over 5 runs), so the regexp version is twice as fast — the choice is clear.</p>
 
 <h2 id="a-faster-expression-parser">A faster expression parser</h2>
 
 <p>With the choices of string parsing and data structure made, I focused on the structure of the overall algorithm. The basic approach is to loop trough a number of states and in every state perform a specific action. This is very simple because we use regular expressions to identify tokens, so most of the state transitions are implicit:</p>
 
-<pre><code class="language-perl">my $prev_lev=0;
-my $lev=0;
-my @ast=();
-my $op;
-my $state=0;
-while (length($str)&gt;0) {
-     # Match unary prefix operations
-     # Match terms
-     # Add prefix operations if matched
-     # Match binary operators
-     # Append to the AST
-}
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">my</span> <span class="nv">$prev_lev</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">$lev</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">@ast</span><span class="o">=</span><span class="p">();</span>
+<span class="k">my</span> <span class="nv">$op</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">$state</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1"># Match unary prefix operations</span>
+     <span class="c1"># Match terms</span>
+     <span class="c1"># Add prefix operations if matched</span>
+     <span class="c1"># Match binary operators</span>
+     <span class="c1"># Append to the AST</span>
+<span class="p">}</span>
 </code></pre>
-<p>The matching rules and operations are very simple (I use <code>&lt;pattern&gt;</code> and <code>&lt;integer&gt;</code> as placeholders for the actual values):</p>
+</div>
+<p>The matching rules and operations are very simple (I use <code class="highlighter-rouge">&lt;pattern&gt;</code> and <code class="highlighter-rouge">&lt;integer&gt;</code> as placeholders for the actual values):</p>
 
 <ul>
   <li>prefix operations:
-<code>perl
+<code class="highlighter-rouge">perl
 if ( $str=~s/^&lt;pattern&gt;// ) { $state=&lt;integer&gt;; } 
 </code></li>
   <li>terms:
-<code>perl
+<code class="highlighter-rouge">perl
 if ( $str=~s/^(&lt;pattern&gt;)// ) { $expr_ast=[&lt;integer&gt;,$1]; }
 </code></li>
   <li>operators:
-<code>perl
+<code class="highlighter-rouge">perl
 $prev_lev=$lev;
 if ( $str=~s/^&lt;pattern&gt;// ) { $lev=&lt;integer&gt;; $op=&lt;integer&gt;; }
 </code></li>
 </ul>
 
-<p>Operators have precedence and associativity, and Fortran requires twelve precedence levels. In the “Append to AST” state, the parser uses <code>$lev</code> and <code>$prev_lev</code> to work out how the previously matched <code>$expr_ast</code> and <code>$op</code> should be appended to the <code>@ast</code> array. The prefix operations are handled by setting a state which is checked after term matching. The actual code is a bit more complicated because we need to parse array index expressions and function calls as well. This is done recursively during term matching; if a function call has multiple arguments, the parser is put into a new <code>$state</code>.</p>
+<p>Operators have precedence and associativity, and Fortran requires twelve precedence levels. In the “Append to AST” state, the parser uses <code class="highlighter-rouge">$lev</code> and <code class="highlighter-rouge">$prev_lev</code> to work out how the previously matched <code class="highlighter-rouge">$expr_ast</code> and <code class="highlighter-rouge">$op</code> should be appended to the <code class="highlighter-rouge">@ast</code> array. The prefix operations are handled by setting a state which is checked after term matching. The actual code is a bit more complicated because we need to parse array index expressions and function calls as well. This is done recursively during term matching; if a function call has multiple arguments, the parser is put into a new <code class="highlighter-rouge">$state</code>.</p>
 
 <p>So the end result is a minimally recursive parser, i.e. it only uses recursion when it is really necessary. This is because Perl is not efficient in doing recursive function calls (nor in fact for non-recursive ones).</p>
 
-<p>There is a lot of repetition of the patterns for matching terms and operators because if I would instead abstract the <code>&lt;pattern&gt;</code> and <code>&lt;integer&gt;</code> values by e.g. storing them in an array, the array accesses would considerably reduce the performance. I do store the precedence levels in an array because there are so many of them that the logic for appending terms to the AST would otherwise become very hard to read and update.</p>
+<p>There is a lot of repetition of the patterns for matching terms and operators because if I would instead abstract the <code class="highlighter-rouge">&lt;pattern&gt;</code> and <code class="highlighter-rouge">&lt;integer&gt;</code> values by e.g. storing them in an array, the array accesses would considerably reduce the performance. I do store the precedence levels in an array because there are so many of them that the logic for appending terms to the AST would otherwise become very hard to read and update.</p>
 
 <h2 id="expression-parser-performance">Expression parser performance</h2>
 
@@ -412,7 +422,7 @@ if ( $str=~s/^&lt;pattern&gt;// ) { $lev=&lt;integer&gt;; $op=&lt;integer&gt;; }
 
 <h2 id="summary">Summary</h2>
 
-<p>Here is a summary of all optimisations I tested. The tests were run using Perl v5.28 on a MacBook Pro (late 2013), timings are averages over 5 runs and measured using <code>time</code>.</p>
+<p>Here is a summary of all optimisations I tested. The tests were run using Perl v5.28 on a MacBook Pro (late 2013), timings are averages over 5 runs and measured using <code class="highlighter-rouge">time</code>.</p>
 
 <table>
   <thead>
@@ -431,15 +441,15 @@ if ( $str=~s/^&lt;pattern&gt;// ) { $lev=&lt;integer&gt;; $op=&lt;integer&gt;; }
       <td>2×</td>
     </tr>
     <tr>
-      <td><code>foreach</code> is faster than <code>map</code></td>
+      <td><code class="highlighter-rouge">foreach</code> is faster than <code class="highlighter-rouge">map</code></td>
       <td>1.3×</td>
     </tr>
     <tr>
-      <td><code>foreach</code> is faster than indexed <code>for</code></td>
+      <td><code class="highlighter-rouge">foreach</code> is faster than indexed <code class="highlighter-rouge">for</code></td>
       <td>1.4×</td>
     </tr>
     <tr>
-      <td><code>foreach</code> is faster than C-style <code>for</code></td>
+      <td><code class="highlighter-rouge">foreach</code> is faster than C-style <code class="highlighter-rouge">for</code></td>
       <td>1.7×</td>
     </tr>
     <tr>

@@ -232,7 +232,7 @@ circle does approach $2\pi$ – which of course comes hardly as a surprise.</p>
 
 <p>The following code implements this starting from a polygon with a given number of sides $n$ . The argument $h$ is half of the length of side, and $n_{max}$ is the number of iterations. What the algorithm does is recursively creating polygons with $n, 2n, 4n, 8n, … $ sides. The example starts from a triangle so $n=3$ and $h=\sqrt(3)/2$.</p>
 
-<pre><code>-- n: # sides of the polygon
+<div class="highlighter-rouge"><pre class="highlight"><code>-- n: # sides of the polygon
 -- h: half of the length of a side
 
 approx_pi n h n_max
@@ -242,6 +242,7 @@ approx_pi n h n_max
 -- e.g starting from a triangle.          
 main = print $ approx_pi 3 ((sqrt 3)/2) (3*2**14)
 </code></pre>
+</div>
 
 <p>What I find interesting is that every prime polygon produces a different series but they all converge towards $\pi$.</p>
 
