@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Writing faster Perl code • Wim Vanderbauwhede</title>
+    <meta name="description" content="Sometimes your pure Perl code needs to be as fast as possible. What does it take?">
+    <meta name="keywords" content="coding, hacking, programming, perl">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Writing faster Perl code">
+	<meta name="twitter:description" content="Sometimes your pure Perl code needs to be as fast as possible. What does it take?">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/writing-faster-perl_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/writing-faster-perl/#">
+	<meta property="og:title" content="Writing faster Perl code">
+	<meta property="og:description" content="Sometimes your pure Perl code needs to be as fast as possible. What does it take?">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/writing-faster-perl_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/writing-faster-perl/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/writing-faster-perl_1600x600.jpg" class="page-feature-image" alt="Writing faster Perl code" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Writing faster Perl code</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>As part of my research I have been developing a <a href="https://github.com/wimvanderbauwhede/RefactorF4Acc">Fortran source-to-source compiler</a> — in <a href="https://www.perl.org/">Perl</a>. The compiler transforms legacy FORTRAN 77 scientific code into more modern Fortran 95. For the reasons to target FORTRAN 77, please read <a href="https://www.sciencedirect.com/science/article/pii/S0045793018302950">my paper</a>. The compiler is written in Perl because it is available on any Linux-like system and can be executed without the need for a build toolchain. The compiler has no external dependencies at all, so that it is very simply to install and run. This is crucial because my target users are weather and climate scientists, not programmers or computer scientists. Python would have been a viable alternative but I personally prefer Perl.</p>
+
+<h2 id="perl-performance-as-we-know-it">Perl performance as we know it</h2>
+
+<p>An often-made argument is that if you want performance, you should not write your code in Perl. And it is of course true that compiled code will almost always be faster. However, often rewriting in a compiled language is not an option, so it is important to know how to get the best possible performance in pure Perl. The Perl documentation has <a href="https://perldoc.perl.org/perlperf.html">perlperf</a> which offers good advice and <a href="http://makepp.sourceforge.net/2.0/perl_performance.html">these tips</a> provide some more detail. But for my needs I did not find the answers there, nor anywhere else. So I created some simple test cases to find out. I used Perl version <code>5.28</code>, the most recent one, but the results should be quite similar for earlier versions.</p>
+
+<h2 id="testing-some-hunches">Testing some hunches</h2>
+
+<p>Before going into the details on the performance bottleneck in my compiler, here are some results of performance comparisons that influenced design decisions for the compiler. The compiler is written in a functional style — I am after all a Haskell programmer — but performance matters more than functional purity.</p>
+
+<h3 id="hash-key-testing-is-faster-than-regexp-matching">Hash key testing is faster than regexp matching</h3>
+
+<p>Fortran code essentially consists of a list of statements which can contain expressions, and the parser labels each of the statements once using a hashmap, ever the workhorse data structure in Perl. Every parsed line of code is stored as a pair with this hashmap (which I call <code>$info</code>):</p>
+
+<pre><code class="language-perl">my $parsed_line = [ $src_line, $info ];
+</code></pre>
+
+<p>This means than in principle I can choose to match a pattern in $line using a regex or use one of the lables in <code>$info</code>. So I tested the performance of hash key testing versus regexp matching, using some genuine FORTRAN 77 code:</p>
+
+<pre><code class="language-perl">my $str = lc('READ( 1, 2, ERR=8, END=9, IOSTAT=N ) X');
+my $info={};
+if ($str=~/read/) {
+    $info-&gt;{'ReadCall'}=1;
+}
+my $count=0;
+for my $i (1..100_000_000) {
+    if ($str=~/read/) {
+        $count++;
+    }
+for my $i (1..100_000_000) {
+    if (exists $info-&gt;{'ReadCall'}) {
+        $count+=$i;
+    }
+}
+</code></pre>
+
+<p>Without the <code>if</code>-condidion, the loop takes 3.1 s on my laptop. The loop with the regexp match condition takes 10.1 s; with the hash key existence test it takes 5.6 s. So the actual condition evaluation takes 7 s for regexp and 2.5 s for hash key existence check. So testing hash keys is alsmost three times faster than simple regexp matching.</p>
+
+<h3 id="custom-tree-traversals-are-faster">Custom tree traversals are faster</h3>
+
+<p>I tested the cost of using higher-order functions for tree traversal. Basically, this is the choice between a generic traversal which takes an arbitrary function that operates on the tree nodes:</p>
+
+<pre><code class="language-perl">sub _traverse_ast_with_action { (my $ast, my $acc, my $f) = @_;
+  if ( &lt;cond&gt; ) { 
+		$acc=$f-&gt;($ast,$acc);
+  } else { 
+     $acc=$f-&gt;($ast,$acc);
+	for my $idx (1 .. scalar @{$ast}-1) {
+		(my $entry, $acc) = 
+            _traverse_ast_with_action($ast-&gt;[$idx],$acc, $f);
+		$ast-&gt;[$idx] = $entry;
+	}
+  }
+  return ($ast, $acc);
+} 
+</code></pre>
+
+<p>or a custom traversal:</p>
+
+<pre><code class="language-perl">sub _traverse_ast_custom { (my $ast, my $acc) = @_;
+  if ( &lt;cond&gt; ) { 
+		$acc=&lt; custom code acting on $ast and $acc&gt;;
+  } else { 
+    $acc=&lt; custom code acting on $ast and $acc&gt;;
+	for my $idx (1 .. scalar @{$ast}-1) {
+		(my $entry, $acc) = 
+            _traverse_ast_custom($ast-&gt;[$idx],$acc);
+		$ast-&gt;[$idx] = $entry;
+	}
+  }
+  return ($ast, $acc);
+} 
+
+</code></pre>
+
+<p>For the case of the tree data structures in my compiler, the higher-order implementation takes twice as long as the custom traversal, so for performance this is not a good choice. Therefore I don’t use higher-order functions in the parser, but I do use them in the later refactoring passes.</p>
+
+<h3 id="maps-are-slower-than-for-loops-but-not-much">Maps are slower than for-loops, but not much</h3>
+
+<p>Finally I tested the cost of using <code>map</code> instead of a <code>foreach</code>-loop:</p>
+
+<pre><code class="language-perl"># map, so much more concise!
+my @src = map {$_} (1 .. 10_000_000);
+my @res = map {2*$_+1} @src;
+
+# declarations for all for-loops
+my @res=();
+my @src=();
+
+# foreach-loop
+for my $elt  (1..10_000_000) {
+    push @src, $elt;
+}
+for my $elt  (@src) {
+    push @res, 2*$elt+1;
+}
+
+# index-based for-loop
+for my $idx  (0..10_000_000-1) {
+    my $elt=$idx+1;
+    $src[$idx] = $elt;
+}
+for my $idx  (0..10_000_000-1) {
+    my $elt=$src[$idx];
+    $res[$idx] = 2*$elt+1;
+}
+
+# C-style for-loop
+for (my $idx=0;$idx&lt;10_000_000;++$idx) {
+    my $elt=$idx+1;
+    $src[$idx] = $elt;
+}
+for (my $idx=0;$idx&lt;10_000_000;++$idx) {
+    my $elt=$src[$idx];
+    $res[$idx] = 2*$elt+1;
+}
+</code></pre>
+
+<p>The <code>foreach</code>-loop version takes 2.6 s, the <code>map</code> version 3.3 s, so the map is 25% slower. For reference, the index-based <code>for</code>-loop version takes 3.8 s and the C-style <code>for</code>-loop version 4.4 s — don’t do that!</p>
+
+<p>Because the map is slower, again I did not use it in the parser, and I implemented my own higher-order functions which use foreach-loops internally for the refactoring passes.</p>
+
+<h2 id="compiler-bottleneck-expression-parsing">Compiler bottleneck: expression parsing</h2>
+
+<p>As the compiler grew in capabilities, it became noticeably slower. Perl has a great profiling tool, <a href="https://metacpan.org/pod/Devel::NYTProf">Devel::NYTProf</a>, and I used it to identify the bottleneck. As you can see from the flame graph in the banner image, it turned out to be the expression parser. This part of the code was based on <a href="https://metacpan.org/pod/Math::Expression::Evaluator">Math::Expression::Evaluator</a> because it was convenient to reuse. But it was not built for performance, and also not to parse Fortran. So I finally bit the bullet and wrote my own.</p>
+
+<p>What I loosely call an expression parser is actually a combination of a lexer and a parser: it turns a string of source code into a tree-like datastructure which expresses the structure of the expression and the purpose of its constituents. For example if the expression is <code>2*v+1</code>, the result of the expression parser will be a data structure which identifies the top-level expression as a sum of a multplication with  the integer constant <code>1</code>, and the multiplication of an integer constant <code>2</code> with a variable <code>v</code>. So how do we build a fast expression parser? It is not my intention to go into the computing science details, but instead to discuss the choices to be considered.</p>
+
+<h2 id="testing-some-more-hunches">Testing some more hunches</h2>
+
+<p>First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to either an object or a list. But objects in Perl are slow, so I use a nested list. As it happens, <code>Math::Expression</code> already uses nested lists. Using the parser from <code>Math::Expression</code>, the above expression would be turned into:</p>
+
+<pre><code class="language-perl">['+'
+    ['*',
+        2,
+        ['$','v']
+    ],
+    1
+]
+</code></pre>
+
+<h3 id="integer-comparison-is-faster-than-string-comparison">Integer comparison is faster than string comparison</h3>
+
+<p>This is fine if you don’t need to do a lot of work on the parsed datastructure. However, because every node is labeled with a string, testing against the node type is a string comparison. I did a quick test:</p>
+
+<pre><code class="language-perl">my $count=0;
+
+my $str = '*';
+for my $i (1..100_000_000) {
+    if ($str eq '*') {
+        $count+=$i;
+    }
+}
+my $c=42;
+for my $i (1..100_000_000) {
+    if ($c == 42) {
+        $count+=$i;
+    }
+}
+</code></pre>
+
+<p>On my laptop, the version with string comparison takes 5.3 s, the integer comparison 4.6 s. Without the <code>if</code>-statement, the code takes 3.1 s. In other words, the actual <code>if</code> with string comparison takes 2.2 s, with integer comparison 1.5 s. So doing string comparisons is 50% slower than doing integer comparisons. Therefore my data structure uses integer labels. Also, I label the constants so that I can have different labels for string, integer and real constants, and because in this way all nodes are arrays. This avoids having to test if a node is an array or a scalar, which is a slow operation.</p>
+
+<p>So the example becomes :</p>
+
+<pre><code class="language-perl">[ 3,
+  [ 5,
+    [ 29, '2' ],
+    [ 2, 'v' ]
+  ],
+  [ 29, '1' ]
+]
+</code></pre>
+
+<p>Less readable, but faster and easier to extend.</p>
+
+<h3 id="regexes-are-faster-than-string-comparisons">Regexes are faster than string comparisons</h3>
+
+<p>Then we have to decide how to parse the expression string. The traditional way to build an expression parser is using a Finite State Machine, consuming one character at a time (if needed with one or more characters look-ahead) and keeping track of the identified portion of the string. This is very fast in a language such as C but in Perl I was not too sure, because in Perl a character is actually a string of length one, so every test against a character is a string comparison. On the other hand, Perl has a famously efficient regular expression engine. So I created a little testbench to see which approach was faster:</p>
+
+<pre><code class="language-perl">my @words=();
+my $str='This means we need a stack per type of operation and run until the end of the expression';
+my @chrs = split('',$str);
+
+for (1..10_000_000) {
+        my $word='';
+        while (@chrs) {
+            my $chr = shift @chrs;
+            if ($chr ne ' ') {
+                $word.=$chr;
+            } else {
+                push @words, $word;
+                $word='';
+            }
+        }
+            push @words, $word;
+}
+for (1..10_000_000) {
+        while(length( $str ) &gt; 0) {
+             if(   $str=~s/^(\w+)//) {
+                push @words, $1;
+            }
+            else {
+                $str=~s/^\s+//;
+            } 
+        }
+    }
+}
+</code></pre>
+<p>On my laptop, the FSM version takes 3.75 s, the regex version 1.85 s (mean over 5 runs), so the regexp version is twice as fast — the choice is clear.</p>
+
+<h2 id="a-faster-expression-parser">A faster expression parser</h2>
+
+<p>With the choices of string parsing and data structure made, I focused on the structure of the overall algorithm. The basic approach is to loop trough a number of states and in every state perform a specific action. This is very simple because we use regular expressions to identify tokens, so most of the state transitions are implicit:</p>
+
+<pre><code class="language-perl">my $prev_lev=0;
+my $lev=0;
+my @ast=();
+my $op;
+my $state=0;
+while (length($str)&gt;0) {
+     # Match unary prefix operations
+     # Match terms
+     # Add prefix operations if matched
+     # Match binary operators
+     # Append to the AST
+}
+</code></pre>
+<p>The matching rules and operations are very simple (I use <code>&lt;pattern&gt;</code> and <code>&lt;integer&gt;</code> as placeholders for the actual values):</p>
+
+<ul>
+  <li>prefix operations:
+<code>perl
+if ( $str=~s/^&lt;pattern&gt;// ) { $state=&lt;integer&gt;; } 
+</code></li>
+  <li>terms:
+<code>perl
+if ( $str=~s/^(&lt;pattern&gt;)// ) { $expr_ast=[&lt;integer&gt;,$1]; }
+</code></li>
+  <li>operators:
+<code>perl
+$prev_lev=$lev;
+if ( $str=~s/^&lt;pattern&gt;// ) { $lev=&lt;integer&gt;; $op=&lt;integer&gt;; }
+</code></li>
+</ul>
+
+<p>Operators have precedence and associativity, and Fortran requires twelve precedence levels. In the “Append to AST” state, the parser uses <code>$lev</code> and <code>$prev_lev</code> to work out how the previously matched <code>$expr_ast</code> and <code>$op</code> should be appended to the <code>@ast</code> array. The prefix operations are handled by setting a state which is checked after term matching. The actual code is a bit more complicated because we need to parse array index expressions and function calls as well. This is done recursively during term matching; if a function call has multiple arguments, the parser is put into a new <code>$state</code>.</p>
+
+<p>So the end result is a minimally recursive parser, i.e. it only uses recursion when it is really necessary. This is because Perl is not efficient in doing recursive function calls (nor in fact for non-recursive ones).</p>
+
+<p>There is a lot of repetition of the patterns for matching terms and operators because if I would instead abstract the <code>&lt;pattern&gt;</code> and <code>&lt;integer&gt;</code> values by e.g. storing them in an array, the array accesses would considerably reduce the performance. I do store the precedence levels in an array because there are so many of them that the logic for appending terms to the AST would otherwise become very hard to read and update.</p>
+
+<h2 id="expression-parser-performance">Expression parser performance</h2>
+
+<p>I tested the new expression parser on a set of 50 different expressions taken from a weather simulation code. The old expression parser takes 45 s to run this test a thousand times; the new expression parser takes only 2 s. In other words, the new parser is <em>more than twenty times faster</em> than the old one.</p>
+
+<p>It is also quite easy to maintain and adapt despite its minimal use of abstractions, and because it is Fortran-specific, the rest of the code has become a lot cleaner too. You can find the code in <a href="https://github.com/wimvanderbauwhede/RefactorF4Acc/blob/devel/RefactorF4Acc/Parser/Expressions.pm">my GitHub repo</a>.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Here is a summary of all optimisations I tested. The tests were run using Perl v5.28 on a MacBook Pro (late 2013), timings are averages over 5 runs and measured using <code>time</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Optimisation</th>
+      <th>Speed-up</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Hash key testing is faster than regexp matching</td>
+      <td>3×</td>
+    </tr>
+    <tr>
+      <td>Custom tree traversals are faster than generic ones</td>
+      <td>2×</td>
+    </tr>
+    <tr>
+      <td><code>foreach</code> is faster than <code>map</code></td>
+      <td>1.3×</td>
+    </tr>
+    <tr>
+      <td><code>foreach</code> is faster than indexed <code>for</code></td>
+      <td>1.4×</td>
+    </tr>
+    <tr>
+      <td><code>foreach</code> is faster than C-style <code>for</code></td>
+      <td>1.7×</td>
+    </tr>
+    <tr>
+      <td>Integer comparison is faster than string comparison</td>
+      <td>1.5×</td>
+    </tr>
+    <tr>
+      <td>Regexp matching is faster than successive string comparisons</td>
+      <td>2×</td>
+    </tr>
+  </tbody>
+</table>
+
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2019-04-27T00:00:00Z" itemprop="dateModified">April 27, 2019</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2019 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
