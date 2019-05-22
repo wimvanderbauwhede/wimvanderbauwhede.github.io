@@ -340,11 +340,11 @@
 
 <p>Then we have to decide how to parse the expression string. The traditional way to build an expression parser is using a Finite State Machine, consuming one character at a time (if needed with one or more characters look-ahead) and keeping track of the identified portion of the string. This is very fast in a language such as C but in Perl I was not too sure, because in Perl a character is actually a string of length one, so every test against a character is a string comparison. On the other hand, Perl has a famously efficient regular expression engine. So I created a little testbench to see which approach was faster:</p>
 
-<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">my</span> <span class="nv">@words</span><span class="o">=</span><span class="p">();</span>
-<span class="k">my</span> <span class="nv">$str</span><span class="o">=</span><span class="s">'This means we need a stack per type of operation and run until the end of the expression'</span><span class="p">;</span>
+<div class="language-perl highlighter-rouge"><pre class="highlight"><code><span class="k">my</span> <span class="nv">$str</span><span class="o">=</span><span class="s">'This means we need a stack per type of operation and run until the end of the expression'</span><span class="p">;</span>
 <span class="k">my</span> <span class="nv">@chrs</span> <span class="o">=</span> <span class="nb">split</span><span class="p">(</span><span class="s">''</span><span class="p">,</span><span class="nv">$str</span><span class="p">);</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10_000_000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">my</span> <span class="nv">@words</span><span class="o">=</span><span class="p">();</span>
         <span class="k">my</span> <span class="nv">$word</span><span class="o">=</span><span class="s">''</span><span class="p">;</span>
         <span class="k">while</span> <span class="p">(</span><span class="nv">@chrs</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">my</span> <span class="nv">$chr</span> <span class="o">=</span> <span class="nb">shift</span> <span class="nv">@chrs</span><span class="p">;</span>
@@ -358,6 +358,7 @@
             <span class="nb">push</span> <span class="nv">@words</span><span class="p">,</span> <span class="nv">$word</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="k">for</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10_000_000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">my</span> <span class="nv">@words</span><span class="o">=</span><span class="p">();</span>
         <span class="k">while</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span> <span class="nv">$str</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
              <span class="k">if</span><span class="p">(</span>   <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^(\w+)//</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nb">push</span> <span class="nv">@words</span><span class="p">,</span> <span class="nv">$1</span><span class="p">;</span>
@@ -370,7 +371,7 @@
 <span class="p">}</span>
 </code></pre>
 </div>
-<p>On my laptop, the FSM version takes 3.75 s, the regex version 1.85 s (mean over 5 runs), so the regexp version is twice as fast — the choice is clear.</p>
+<p>On my laptop, the FSM version takes 3.25 s, the regex version 1.45 s (mean over 10 runs), so the regexp version is twice as fast — the choice is clear.</p>
 
 <h2 id="a-faster-expression-parser">A faster expression parser</h2>
 
@@ -458,7 +459,7 @@ if ( $str=~s/^&lt;pattern&gt;// ) { $lev=&lt;integer&gt;; $op=&lt;integer&gt;; }
     </tr>
     <tr>
       <td>Regexp matching is faster than successive string comparisons</td>
-      <td>2×</td>
+      <td>2.2×</td>
     </tr>
   </tbody>
 </table>
