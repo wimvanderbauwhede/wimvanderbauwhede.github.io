@@ -1,0 +1,3 @@
+perl set_mod_date.pl
+cp _config.yml.stage _config.yml
+bundle exec jekyll build --watch -d ~/Sites/wv-blog/

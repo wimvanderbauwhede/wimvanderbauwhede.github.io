@@ -1,0 +1,35 @@
+# Site wide configuration
+
+title: Wim Vanderbauwhede
+description: "Wim Vanderbauwhede"
+#logo: W_160px.jpg
+#teaser: lino.jpg
+locale: en_GB
+url: https://wimvanderbauwhede.github.io
+
+
+# Jekyll configuration
+safe: true
+sass:
+  sass_dir: _sass
+  style: compressed
+permalink: /:categories/:title/
+markdown: kramdown
+#highlighter: pygments
+highlighter: rouge
+gems:
+  - jekyll-sitemap
+
+
+# Site owner
+owner:
+  name: Wim Vanderbauwhede
+  web: http://www.dcs.gla.ac.uk/~wim
+#  email: wimvanderbauwhede@yahoo.co.uk
+  twitter: wim_v12e
+#  bio: ""
+#  avatar: lino_100px.jpg # 160x160 px image for author byline
+#  bio: "Fuss-free food"
+#  avatar: W_160px.jpg # 160x160 px image for author byline
+
+exclude: ["lib", "config.rb", ".sass-cache", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "*.sublime-project", "*.sublime-workspace", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "node_modules", "Gruntfile.js", "package.json"]

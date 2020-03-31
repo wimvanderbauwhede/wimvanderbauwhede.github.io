@@ -1,0 +1,9 @@
+<article class="tile" itemscope itemtype="http://schema.org/Article">
+  <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}" class="post-teaser">{% if post.image.teaser %}<img src="{{ site.url }}/images/{{ post.image.teaser }}" alt="{{ post.title }}" itemprop="image">
+    {% else %}<img src="{{ site.url }}/images/{{ site.teaser }}" alt="{{ post.title }}" itemprop="image">{% endif %}</a>
+  {% if post.date %}<p class="entry-date date published"><time datetime="{{ post.date | date: "%Y-%m-%d" }}" itemprop="datePublished">{{ post.date | date: "%B %d, %Y" }}</time></p>{% endif %}
+  <h2 class="post-title" itemprop="name"><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h2>
+  <p class="post-excerpt" itemprop="description">{% if post.preptime %}<span class="badge info">{{ post.preptime }}</span>{% endif %}
+  <img title="{{ post.calorierange}} kcals/person" src="{{ site.url }}/images/battery_lvl_{{post.calorielevel}}.png" style="height:1.0em;"><br>
+  {{ post.excerpt | strip_html | truncate: 160 }}</p>
+</article><!-- /.tile -->
