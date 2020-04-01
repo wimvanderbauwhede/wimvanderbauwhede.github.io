@@ -1,13 +1,12 @@
 # Skinny Bones Gemfile
 source "https://rubygems.org"
 
-gem "maruku"
-gem "pygments.rb"
-gem "redcarpet"
-gem "github-pages"
+#gem "github-pages"
+gem "jekyll"
 gem "jekyll-sitemap"
+gem "jekyll-gist"
+gem "jekyll-feed"
 gem "sass"
 gem "bourbon"
 gem "neat"
 gem 'octopress'
-#, '~> 3.0.0.rc.30'
