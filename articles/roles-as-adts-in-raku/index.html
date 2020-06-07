@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Roles as Algebraic Data Types in Raku • Wim Vanderbauwhede</title>
+    <meta name="description" content="Algebraic data types are great for building complex data structures, and easy to implement in Raku using roles.">
+    <meta name="keywords" content="coding, hacking, programming, raku">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Roles as Algebraic Data Types in Raku">
+	<meta name="twitter:description" content="Algebraic data types are great for building complex data structures, and easy to implement in Raku using roles.">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/roles-as-adts-in-raku_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/#">
+	<meta property="og:title" content="Roles as Algebraic Data Types in Raku">
+	<meta property="og:description" content="Algebraic data types are great for building complex data structures, and easy to implement in Raku using roles.">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/roles-as-adts-in-raku_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/roles-as-adts-in-raku_1600x600.jpg" class="page-feature-image" alt="Roles as Algebraic Data Types in Raku" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Roles as Algebraic Data Types in Raku</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>I have been a <a href="https://andrewshitov.com/2015/05/05/interview-with-audrey-tang/">lambdacamel</a>, one of those who like <a href="https://www.perl.org/">Perl</a> and functional programming, especially in <a href="https://www.haskell.org/">Haskell</a>, for a long time. I still write most of my code in either of these languages.</p>
+
+<p>I’ve also been a fan of <a href="https://raku.org/">Raku</a> from long before it was called Raku, but I’d never used it much in real life. Recently though, I’ve been moving increasingly to Raku for code that I don’t have to share with other people. It’s a lovely language, and its functional heritage is very strong. It was therefore only natural to me to explore the limits of Raku’s type system.</p>
+
+<h2 id="is-this-article-for-you">Is this article for you?</h2>
+
+<p>In this article I will introduce <a href="https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf">algebraic data types</a>, a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using <em>roles</em>. You don’t need to know Haskell at all and I only assume a slight familiarity with Raku, but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming.</p>
+
+<h2 id="algebraic-data-types">Algebraic Data Types</h2>
+
+<p>Datatypes (types for short) are just labels or containers for values in a program. Algebraic data types are composite types, they are formed by combining other types.
+They are called algebraic because they consist of alternatives (sums, also called disjoint unions) and record (products) of types. For more details see <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">[1]</a> or <a href="https://gist.github.com/gregberns/5e9da0c95a9a8d2b6338afe69310b945">[2]</a>.</p>
+
+<p>To give a rough intuition for the terms “sum type” and “product type”: in Raku,  with booleans <code class="highlighter-rouge">$a</code>, <code class="highlighter-rouge">$b</code> and <code class="highlighter-rouge">$c</code>, you can write <code class="highlighter-rouge">$a or $b or $c</code> but you could also write `  $a + $b + $c<code class="highlighter-rouge"> and evaluate it as </code>True<code class="highlighter-rouge"> or </code>False<code class="highlighter-rouge">. Similarly, </code>$a and $b and $c<code class="highlighter-rouge"> can be written as </code>$a * $b * $c<code class="highlighter-rouge">. In other words, </code>and<code class="highlighter-rouge"> and </code>or<code class="highlighter-rouge"> behave in the same way as </code>+<code class="highlighter-rouge"> and </code>*`. In a generalised way, the types in algebraic data type system can be composed using similar rules.</p>
+
+<h3 id="a-few-examples">A few examples.</h3>
+
+<p>Let’s first give a few examples of algebraic data types. In this section I am not using a specific programming language syntax. Instead I use a minimal notation to illustrate the concepts. I use the <code class="highlighter-rouge">datatype</code> keyword to indicate that what follows is a declaration for an algebraic data type; for a sum type, I’ll separate the alternatives with ‘|’; for a product type, I separate the components with a space. To declare a variable to be of some type, I will write the type name in front of it.</p>
+
+<p>We can define a boolean value purely as a type:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="n">datatype</span> <span class="kt">Bool</span> <span class="o">=</span>  <span class="kt">True</span> <span class="o">|</span> <span class="kt">False</span>
+</code></pre>
+</div>
+
+<p>And we can use this as</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="kt">Bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="kt">True</span>
+</code></pre>
+</div>
+
+<p>This means that <code class="highlighter-rouge">ok</code> is a variable of type <code class="highlighter-rouge">Bool</code> with a value of <code class="highlighter-rouge">True</code>. In an algebraic data type, the labels are called ‘constructors’. So <code class="highlighter-rouge">True</code> is a constructor that takes no arguments.</p>
+
+<p>For a product type, we could for example create a type for an RGB colour triplet:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="n">datatype</span> <span class="kt">RGBColour</span> <span class="o">=</span> <span class="kt">RGB</span> <span class="kt">Int</span> <span class="kt">Int</span> <span class="kt">Int</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">RGB</code> label on the right-hand side is the constructor of the type. It takes three arguments of type <code class="highlighter-rouge">Int</code>:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="kt">RGBColour</span> <span class="n">aquamarine</span> <span class="o">=</span> <span class="kt">RGB</span> <span class="mi">127</span> <span class="mi">255</span> <span class="mi">212</span>
+</code></pre>
+</div>
+
+<p>So <code class="highlighter-rouge">aquamarine</code> is a variable of type <code class="highlighter-rouge">RGBColour</code> with a value of <code class="highlighter-rouge">RGB 127 255 212</code>.</p>
+
+<p>The constructor identifies the type. Suppose we also have an HSL colour type</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="n">datatype</span> <span class="kt">HSLColour</span> <span class="o">=</span> <span class="kt">HSL</span> <span class="kt">Int</span> <span class="kt">Int</span> <span class="kt">Int</span>
+</code></pre>
+</div>
+
+<p>with a variable <code class="highlighter-rouge">chocolate</code> of that type:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="kt">HSLColour</span> <span class="n">chocolate</span> <span class="o">=</span> <span class="kt">HSL</span> <span class="mi">25</span> <span class="mi">75</span> <span class="mi">47</span>
+</code></pre>
+</div>
+
+<p>then both <code class="highlighter-rouge">RGB</code> and <code class="highlighter-rouge">HSL</code> are triplets of <code class="highlighter-rouge">Int</code> but because of the different type constructors they are not the same type.</p>
+
+<p>Let’s say we create an RGB Pixel type:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="n">datatype</span> <span class="kt">XYCoord</span> <span class="o">=</span> <span class="kt">XY</span> <span class="kt">Int</span> <span class="kt">Int</span>
+	<span class="n">datatype</span> <span class="kt">RGBPixel</span>  <span class="o">=</span> <span class="kt">Pixel</span> <span class="kt">RGBColour</span> <span class="kt">XYCoord</span>
+</code></pre>
+</div>
+
+<p>then</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="kt">RGBPixel</span> <span class="n">p</span> <span class="o">=</span> <span class="kt">Pixel</span> <span class="n">aquamarine</span> <span class="p">(</span><span class="kt">XY</span> <span class="mi">42</span> <span class="mi">24</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>is fine but</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="kt">RGBPixel</span> <span class="n">p</span> <span class="o">=</span> <span class="kt">Pixel</span> <span class="n">chocolate</span> <span class="p">(</span><span class="kt">XY</span> <span class="mi">42</span> <span class="mi">24</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>will be a type error because <code class="highlighter-rouge">chocolate</code> is of type <code class="highlighter-rouge">HSLColour</code>, not <code class="highlighter-rouge">RGBColour</code>.</p>
+
+<p>We could support both RGB and HSL using a sum type:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="n">datatype</span> <span class="kt">Colour</span> <span class="o">=</span> <span class="kt">HSL</span> <span class="kt">HSLColour</span> <span class="o">|</span> <span class="kt">RGB</span> <span class="kt">RGBColour</span>
+</code></pre>
+</div>
+
+<p>and change make a Pixel type definition:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="n">datatype</span> <span class="kt">Pixel</span> <span class="o">=</span> <span class="kt">Pixel</span> <span class="kt">Colour</span> <span class="kt">XYCoord</span>
+</code></pre>
+</div>
+
+<p>And now we can say</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>	<span class="kt">Pixel</span> <span class="n">p_rgb</span> <span class="o">=</span> <span class="kt">Pixel</span> <span class="p">(</span><span class="kt">RGB</span> <span class="n">aquamarine</span><span class="p">)</span> <span class="p">(</span><span class="kt">XY</span> <span class="mi">42</span> <span class="mi">24</span><span class="p">)</span>
+	<span class="kt">Pixel</span> <span class="n">p_hsl</span> <span class="o">=</span> <span class="kt">Pixel</span> <span class="p">(</span><span class="kt">HSL</span> <span class="n">chocolate</span><span class="p">)</span> <span class="p">(</span><span class="kt">XY</span> <span class="mi">42</span> <span class="mi">24</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h3 id="integers-and-strings-recursion-and-polymorphism">Integers and strings, recursion and polymorphism</h3>
+
+<p>I can hear you say: but what about <code class="highlighter-rouge">Int</code>, it doesn’t have constructors? And what about a string, how can that be an algebraic data type? These are interesting questions as they allow me to introduce two more concepts: <em>recursive</em> and <em>polymorphic</em> types.</p>
+
+<h4 id="the-type-of-an-integer-and-recursive-types">The type of an integer and recursive types</h4>
+
+<p>From a type perspective, you can look at an integer in two ways: if it is a fixed-size integer then the <code class="highlighter-rouge">Int</code> type can be seen as a sum type. For example, the type for an 8-bit unsigned integer could be</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="n">datatype</span> <span class="kt">UInt8</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="mi">255</span>
+</code></pre>
+</div>
+
+<p>In other words, every number is actually the name of a type constructor, as a generalisation of the <code class="highlighter-rouge">Bool</code> type.</p>
+
+<p>However, in the mathematical sense, integers are not finite. If we consider the case of the natural numbers, we can construct a type for them as follows:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="n">datatype</span> <span class="kt">Nat</span> <span class="o">=</span> <span class="kt">Z</span> <span class="o">|</span> <span class="kt">S</span> <span class="kt">Nat</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">Z</code> stands for “zero”, the <code class="highlighter-rouge">S</code> for “successor of”. This is a <em>recursive</em> type, because the <code class="highlighter-rouge">S</code> constructor takes a <code class="highlighter-rouge">Nat</code> as argument. With this type, we can now create any natural number:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="kt">Nat</span> <span class="mi">0</span> <span class="o">=</span> <span class="kt">Z</span>
+    <span class="kt">Nat</span> <span class="mi">1</span> <span class="o">=</span> <span class="kt">S</span> <span class="kt">Z</span>
+    <span class="kt">Nat</span> <span class="mi">2</span> <span class="o">=</span> <span class="kt">S</span> <span class="p">(</span><span class="kt">S</span> <span class="kt">Z</span><span class="p">)</span>
+    <span class="kt">Nat</span> <span class="mi">3</span> <span class="o">=</span> <span class="kt">S</span> <span class="p">(</span><span class="kt">S</span> <span class="p">(</span><span class="kt">S</span> <span class="kt">Z</span><span class="p">))</span>
+    <span class="o">...</span>
+</code></pre>
+</div>
+
+<p>This way of constructing the natural numbers is called <a href="https://www.britannica.com/science/Peano-axioms">Peano numbers</a>.</p>
+
+<h4 id="the-type-of-a-string-and-polymorphic-types">The type of a string and polymorphic types</h4>
+
+<p>Now, what about strings? Enumerating all possible strings of any length is not practical. But from a type perspective, a string is a list of characters. So the question is then: what is the type of a list? For one thing, a list must be able to contain values of any type. (In the context of algebraic datatypes, all values must be the same, so our list is more like a typed array in Raku.) But that means we need types that can be parameterised by other types. This is called <em>parametric polymorphism</em>. So a list type must look something like</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="n">datatype</span> <span class="kt">List</span> <span class="n">a</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre>
+</div>
+
+<p>where <code class="highlighter-rouge">a</code> is a type variable, i.e. it can be replaced by an arbitrary type. For example, assuming we define the <code class="highlighter-rouge">Char</code> type simply by enumerating all characters in the alphabet (because of course, at machine level, every character is represented by an integer number):</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="n">datatype</span> <span class="kt">Char</span> <span class="o">=</span> <span class="sc">'a'</span> <span class="o">|</span> <span class="sc">'b'</span> <span class="o">|</span> <span class="sc">'c'</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="sc">'z'</span>
+</code></pre>
+</div>
+
+<p>Then we can type our string as:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="kt">List</span> <span class="kt">Char</span> <span class="n">str</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre>
+</div>
+
+<p>But what about <code class="highlighter-rouge">List</code>? We use a similar approach as for <code class="highlighter-rouge">Nat</code> above, using a recursive sum type:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="n">datatype</span> <span class="kt">List</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">EmptyList</span> <span class="o">|</span> <span class="kt">Cons</span> <span class="n">a</span> <span class="p">(</span><span class="kt">List</span> <span class="n">a</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Now we can create a list of any length:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="kt">List</span> <span class="kt">Char</span> <span class="n">str</span> <span class="o">=</span> 
+         <span class="kt">Cons</span> <span class="sc">'h'</span> 
+        <span class="p">(</span><span class="kt">Cons</span> <span class="sc">'e'</span> 
+        <span class="p">(</span><span class="kt">Cons</span> <span class="sc">'l'</span> 
+        <span class="p">(</span><span class="kt">Cons</span> <span class="sc">'l'</span> 
+        <span class="p">(</span><span class="kt">Cons</span> <span class="sc">'o'</span> 
+        <span class="kt">EmptyList</span><span class="p">))))</span>
+</code></pre>
+</div>
+
+<p>Using the typical syntactic sugar for lists, we can write this as</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="kt">List</span> <span class="kt">Char</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span> <span class="sc">'h'</span><span class="p">,</span> <span class="sc">'e'</span><span class="p">,</span> <span class="sc">'l'</span><span class="p">,</span> <span class="sc">'l'</span><span class="p">,</span> <span class="sc">'o'</span> <span class="p">]</span>
+</code></pre>
+</div>
+
+<p>If I now invent an alias <code class="highlighter-rouge">Str</code> for <code class="highlighter-rouge">List Char</code>, and use double quotes instead of list notation, I can write</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code>    <span class="kt">Str</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"hello"</span>
+</code></pre>
+</div>
+
+<p>So integers and strings can be expressed as algebraic data types, and now we have introduced recursive and parameterised types. Time to move on to Raku!</p>
+
+<h3 id="what-are-algebraic-data-types-good-for">What are algebraic data types good for?</h3>
+
+<p>These may seem like rather contrived examples, after all a language like Raku already has an Int and a Str type that work very well. So what is the use of these  algebraic data types? Of course the purpose of static types is to provide type safety and make debugging easier. But using algebraic data types also makes a different, more functional style of programming possible.<br />
+One common use case is a list where you want to store values of different types: you can create a sum type that has an alternative for each of these types. Another common case is a recursive type, such as a tree. Finally, the polymorphism provides a convenient way to create custom containers. I will give examples of each of these in the next section.</p>
+
+<h2 id="algebraic-data-types-in-raku">Algebraic data types in Raku</h2>
+
+<p>Raku has <a href="https://raku.guide/">gradual typing</a>: it allows both static and dynamic typing. That’s a good start because we need static typing to support algebraic data types. It also has <a href="https://docs.raku.org/language/variables">immutable variables</a> and <a href="https://raku.guide/#_anonymous_functions">anonymous functions</a>, and even <a href="https://docs.raku.org/language/list#index-entry-laziness_in_Iterable_objects">(limited) laziness</a>. And of course <a href="https://raku.guide/#_functional_programming">functions are first-class citizens</a>, so we have everything we need for pure, statically-typed functional programming. But what about the algebraic data types?</p>
+
+<p>In Raku, <code class="highlighter-rouge">enum</code>s are sum types:</p>
+
+<pre><code class="language-perl6">    enum Bool &lt;False True&gt;
+</code></pre>
+
+<p>However, they are limited to type constructors that don’t take any arguments.</p>
+
+<p>Classes can be seen as product types:</p>
+
+<pre><code class="language-perl6">    class BoolAndInt {
+        has Bool $.bool;
+        has Int $.int;
+    }
+</code></pre>
+
+<p>However, classes do not support parametric polymorphism.</p>
+
+<p>This is where <em>roles</em> come in. According to the <a href="https://docs.raku.org/language/objects#Roles">Raku documentation</a>:</p>
+
+<blockquote>
+Roles are a collection of attributes and methods; however, unlike classes, roles are meant for describing only parts of an object's behavior; this is why, in general, roles are intended to be mixed in classes and objects. In general, classes are meant for managing objects and roles are meant for managing behavior and code reuse within objects.
+</blockquote>
+
+<p>Roles use the keyword <code class="highlighter-rouge">role</code> preceding the name of the role that is declared. Roles are mixed in using the <code class="highlighter-rouge">does</code> keyword preceding the name of the role that is mixed in.</p>
+
+<p>In particular, roles can be mixed into other roles, and that is one of the key features I will exploit. Furthermore, role constructors can take arguments <em>and</em> they are parametric. So we have everything we need to create proper algebraic data types. Let’s look at a few examples.</p>
+
+<h3 id="a-multi-type-array">A multi-type array</h3>
+
+<p>For the first example, I want to store values of different types in a typed array. They elements can be strings, labeled lists of strings, or undefined. I call this type <code class="highlighter-rouge">Matches</code>. Using the notation from above, it would be</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">Matches</span> <span class="o">=</span> 
+      <span class="kt">Match</span> <span class="kt">Str</span> 
+    <span class="o">|</span> <span class="kt">TaggedMatches</span> <span class="kt">Str</span> <span class="p">(</span><span class="kt">List</span> <span class="kt">Matches</span><span class="p">)</span> 
+    <span class="o">|</span> <span class="kt">UndefinedMatch</span>
+</code></pre>
+</div>
+
+<p>In Raku, it is defined as follows:</p>
+
+<pre><code class="language-perl6">    role Matches {}
+    role UndefinedMatch does Matches {}
+    role Match[Str $str] does Matches {
+        has Str $.match=$str;
+    } 
+    role TaggedMatches[Str $tag, Matches @ms] does Matches {
+        has Str $.tag = $tag;
+        has Matches @.matches = @ms;
+    } 
+</code></pre>
+
+<p>The first line declares the type as an empty role, this corresponds to the data type name on the left-hand side. The next lines define the alternatives, each alternative uses <code class="highlighter-rouge">does Matches</code> to tie it to the <code class="highlighter-rouge">Matches</code> role. We use the role as a container to hold the values. This type uses type constructors with 0 (<code class="highlighter-rouge">UndefinedMatch</code>), 1 (<code class="highlighter-rouge">Match</code>) and 2 (<code class="highlighter-rouge">TaggedMatches</code>) arguments, and the latter is a recursive type: the second argument is a list of <code class="highlighter-rouge">Matches</code>. With this definition, we can create an array of matches like this:</p>
+
+<pre><code class="language-perl6">    my Matches @ms = Array[Matches].new(
+        Match["hello"].new,
+        TaggedMatches[
+            "Adjectives",
+            Array[Matches].new(
+                Match["brave"].new,
+                Match["new"].new) 
+                ].new,
+        Match["world"].new
+        );
+</code></pre>
+
+<p>As you can see, the typed values are actually constructed by calling <code class="highlighter-rouge">.new</code>. It is a bit nicer to create constructor functions, and once Raku has a more developped macro system, we might be able to generate these automatically.</p>
+
+<pre><code class="language-perl6">    my Matches @ms = mkMatches(
+        mkMatch "hello",
+        mkTaggedMatches(
+            "Adjectives",
+            mkMatches(
+                mkMatch "brave",
+                mkMatch "new" 
+                )
+        ),
+        mkMatch "world)
+        );
+</code></pre>
+
+<h3 id="a-generic-tuple">A generic tuple</h3>
+
+<p>For the next example, I want to define a type called <code class="highlighter-rouge">Either</code>. This is a parametric sum type with two parameters, so a kind of generic tuple:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">Either</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span> <span class="kt">Left</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Right</span> <span class="n">b</span>
+</code></pre>
+</div>
+
+<p>In Raku, this can be done through the use of type variables as parameters for the role:</p>
+
+<pre><code class="language-perl6">    role Either[::a,::b] { }
+    role Left[::a \l,::b] does Either[a,b] { 
+        has a $.left = l;
+    }
+    role Right[::a,::b \r] does Either[a,b] { 
+        has b $.right = r;
+    }
+</code></pre>
+
+<p>Because Raku expects both type variables to be declared in each constructor, it is a little bit less nice than my more abstract notation.</p>
+
+<p>Sum types can be used in combination with Raku’s <code class="highlighter-rouge">multi sub</code> feature: Raku lets you provide several definitions for a function, with the same name but different signatures. With multi subs we can do what is known as pattern matching on types:</p>
+
+<pre><code class="language-perl6">multi sub test (Left[Int,Str] $v) { say 'Left: '~$v.left }
+multi sub test (Right[Int,Str] $v) {say 'Right: '~$v.right }
+</code></pre>
+
+<p>So we can write</p>
+
+<pre><code class="language-perl6">my Either[Int,Str] \iv = Left[42,Str].new;
+my Either[Int,Str] \sv = Right[Int,'forty-two'].new;
+
+test(iv); # prints 'Left: 42'
+test(sv); # prints 'Right: forty-two'
+</code></pre>
+
+<h3 id="a-parameterised-binary-tree">A parameterised binary tree</h3>
+
+<p>As a final example, here is a simple binary tree. First, let’s look at an example implementation using a role from the <a href="https://docs.raku.org/language/objects#index-entry-Parameterized_Roles">Raku documentation</a>:</p>
+
+<pre><code class="language-perl6">role BinaryTree[::Type] {
+    has BinaryTree[Type] $.left;
+    has BinaryTree[Type] $.right;
+    has Type $.node;
+
+    method visit-preorder(&amp;cb) {
+        cb $.node;
+        for $.left, $.right -&gt; $branch {
+            $branch.visit-preorder(&amp;cb) if defined $branch;
+        }
+    }
+    method visit-postorder(&amp;cb) {
+        for $.left, $.right -&gt; $branch {
+            $branch.visit-postorder(&amp;cb) if defined $branch;
+        }
+        cb $.node;
+    }
+    method new-from-list(::?CLASS:U: *@el) {
+        my $middle-index = @el.elems div 2;
+        my @left         = @el[0 .. $middle-index - 1];
+        my $middle       = @el[$middle-index];
+        my @right        = @el[$middle-index + 1 .. *];
+        self.new(
+            node    =&gt; $middle,
+            left    =&gt; @left  ?? self.new-from-list(@left)  !! self,
+            right   =&gt; @right ?? self.new-from-list(@right) !! self,
+        );
+    }
+}
+ 
+my $t = BinaryTree[Int].new-from-list(4, 5, 6);
+$t.visit-preorder(&amp;say);    # OUTPUT: «5␤4␤6␤» 
+$t.visit-postorder(&amp;say);   # OUTPUT: «4␤6␤5␤» 
+</code></pre>
+
+<p>This example is written in Raku’s object-oriented style, with methods acting on the attributes of the role. Let’s see how we can write this in a functional style.</p>
+
+<p>The algebraic data type for this binary tree is:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">BinaryTree</span> <span class="n">a</span> <span class="o">=</span> 
+      <span class="kt">Node</span> <span class="p">(</span><span class="kt">BinaryTree</span> <span class="n">a</span><span class="p">)</span> <span class="p">(</span><span class="kt">BinaryTree</span> <span class="n">a</span><span class="p">)</span> <span class="n">a</span> 
+    <span class="o">|</span> <span class="kt">Tip</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">Tip</code> alternative is for the empty leaf nodes of the tree, which in the above example are left undefined. In Raku, we can implement this type as:</p>
+
+<pre><code class="language-perl6">role BinaryTree[::Type] { }
+role Node[::Type,  \l,  \r, \n] does BinaryTree[Type] { 
+    has BinaryTree[Type] $.left = l;
+    has BinaryTree[Type] $.right = r;
+    has Type $.node = n;
+}
+role Tip[::Type] does BinaryTree[Type] { }
+</code></pre>
+
+<p>Instead of the methods we use functions, implemented as <code class="highlighter-rouge">multi sub</code>s. Most of the code is of course identical, but there is no need for conditionals to check if a leaf node has been reached. I have also used sigil-less immutable variables.</p>
+
+<pre><code class="language-perl6">multi sub visit-preorder(Node \n,&amp;cb) {
+    cb n.node;
+    for n.left, n.right -&gt; \branch {
+        visit-preorder(branch,&amp;cb)
+    }
+}
+multi sub visit-preorder(Tip,&amp;cb) { }
+
+multi sub visit-postorder(Node \n,&amp;cb) {    
+    for n.left, n.right -&gt; \branch {
+        visit-postorder(branch,&amp;cb)
+    }
+    cb n.node;
+}
+multi sub visit-postorder(Tip,&amp;cb) { }
+
+multi sub new-from-list(::T,[]) {
+    Tip[Int].new    
+}
+multi sub new-from-list(::T,\el) {
+    my \middle-index = el.elems div 2;
+    my \left         = el[0 .. middle-index - 1];
+    my \middle       = el[middle-index];
+    my \right        = el[middle-index + 1 .. *];    
+    Node[T,
+        new-from-list(T,left),
+        new-from-list(T,right),
+        middle            
+    ].new;
+}
+
+my BinaryTree[Int] \t = new-from-list(Int,[4, 5, 6]);
+visit-preorder(t,&amp;say);    # OUTPUT: «5␤4␤6␤» 
+visit-postorder(t,&amp;say);   # OUTPUT: «4␤6␤5␤» 
+</code></pre>
+
+<p>One thing to note is that in the <code class="highlighter-rouge">multi sub</code>s we don’t have to match against the full type, for example in <code class="highlighter-rouge">visit-preorder</code> we match against <code class="highlighter-rouge">Tip</code> and <code class="highlighter-rouge">Node</code> rather than the full <code class="highlighter-rouge">Tip[a]</code> and <code class="highlighter-rouge">Node[::a,BinaryTree[a],BinaryTree[a],a]</code>.</p>
+
+<h2 id="wrap-up">Wrap-up</h2>
+
+<p>Creating algebraic data types with Raku’s roles is very straightforward. Any product type is simply a role with a number of typed attributes. The key idea for the sum type is to create an empty role and mix it in with other roles that become the type constructors for your alternatives. Because roles accept type parameters, we can have parametric polymorphism. And because a role can have attributes of its own type, we have recursive types as well. Combined with Raku’s other functional programming features, this makes writing pure, statically typed functional code in Raku great fun.</p>
+
+<h3 id="references">References</h3>
+
+<p>[1] <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">“The algebra (and calculus!) of algebraic data types”, by Joel Burget</a>
+<br />
+[2] <a href="https://gist.github.com/gregberns/5e9da0c95a9a8d2b6338afe69310b945">“The Algebra of Algebraic Data Types, Part 1”, by Chris Taylor</a></p>
+
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2020-06-05T00:00:00Z" itemprop="dateModified">June 05, 2020</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2020 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
