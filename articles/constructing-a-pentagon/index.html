@@ -175,13 +175,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>I like solving little maths puzzles, deriving known results using nothing more complicated than secondary school level trigonometry, algebra and maybe a little calculus. The one below is actually two puzzles, but both have to do with regular polygons.</p>
+				<p>I like solving little maths puzzles, deriving known results using nothing more complicated than secondary school level trigonometry, algebra and maybe a little calculus. The one below is actually two puzzles, but both have to do with regular polygons. </p>
 
-<h2 id="part-1-approximating-pi-by-the-perimeter-of-a-regular-polygon">Part 1 Approximating π by the perimeter of a regular polygon</h2>
+<h2>Part 1 Approximating &pi; by the perimeter of a regular polygon</h2>
 
 <p>Can one approximate $\pi$ by the perimeter of regular polygon with
 increasing numbers of sides inscribed in a unit circle, so starting with
-a triangle, then a hexagon, a dodecagon,… ? You may say that is obvious: the more sides, the closer the polygon approximates a circle. But I still wanted to work out the proof.</p>
+a triangle, then a hexagon, a dodecagon,... ? You may say that is obvious: the more sides, the closer the polygon approximates a circle. But I still wanted to work out the proof.</p>
 
 <figure>
 <img src="https://wimvanderbauwhede.github.io/images/polygons-to-pi.png" width="80%" alt="Relationship between length of the side of a polygon and the
@@ -189,173 +189,171 @@ angle" id="fig:Relationship-between-lenght" />
 <figcaption>Figure 1. Relationship between length of the side of a polygon and the
 angle</figcaption></figure>
 
-<p>From  <a href="#fig:Relationship-between-lenght">Figure 1</a>, clearly</p>
+From  <a href="#fig:Relationship-between-lenght">Figure 1</a>, clearly
 
-<script type="math/tex; mode=display">\begin{equation}
+$$\begin{equation}
 b=2\,sin\frac{\alpha}{2}\label{eq:1}
-\end{equation}</script>
+\end{equation}$$
 
-<p>For a polygon with <em>n</em> sides, we have</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+For a polygon with *n* sides, we have
+
+$$\begin{equation}
 \alpha=\frac{2\pi}{n}\label{eq:2}
-\end{equation}</script>
+\end{equation}$$
 
-<p>So we can express the lenght of the side of a polygon as a function of
-the number of sides as</p>
+So we can express the lenght of the side of a polygon as a function of
+the number of sides as
 
-<script type="math/tex; mode=display">\begin{equation}
+$$\begin{equation}
 b(n)=2\,sin\frac{\pi}{n}\label{eq:3}
-\end{equation}</script>
+\end{equation}$$
 
-<p>The perimeter of a regular polygon is obviously</p>
+The perimeter of a regular polygon is obviously
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
+$$\begin{align}
 n.b(n) & = & 2n\,sin\frac{\pi}{n}\label{eq:4}\\
- & = & 2\pi\frac{sin\frac{\pi}{n}}{\frac{\pi}{n}}\nonumber \end{align} %]]></script>
+ & = & 2\pi\frac{sin\frac{\pi}{n}}{\frac{\pi}{n}}\nonumber \end{align}$$
 
-<p>We know that</p>
+We know that
 
-<script type="math/tex; mode=display">\begin{equation}
+$$\begin{equation}
 \underset{x\rightarrow0}{lim}\frac{sin\,x}{x}=1\label{eq:5}
-\end{equation}</script>
+\end{equation}$$
 
-<p>(This is easily proven using <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">de l’Hôpital’s
-rule</a> )</p>
+(This is easily proven using [de l’Hôpital’s
+rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule) )
 
-<p>Using $x=\frac{\pi}{n}$ it follows indeed that</p>
+Using $x=\frac{\pi}{n}$ it follows indeed that
 
-<script type="math/tex; mode=display">\begin{equation}
+$$\begin{equation}
 \underset{n\rightarrow\infty}{lim}n.b(n)=2\pi\label{eq:6}
-\end{equation}</script>
+\end{equation}$$
 
-<p>In other words the perimeter of successive polygons inscribed in a unit
-circle does approach $2\pi$ – which of course comes hardly as a surprise.</p>
+In other words the perimeter of successive polygons inscribed in a unit
+circle does approach $2\pi$ -- which of course comes hardly as a surprise.
 
-<p>The following code implements this starting from a polygon with a given number of sides $n$ . The argument $h$ is half of the length of side, and $n_{max}$ is the number of iterations. What the algorithm does is recursively creating polygons with $n, 2n, 4n, 8n, … $ sides. The example starts from a triangle so $n=3$ and $h=\sqrt(3)/2$.</p>
+The following code implements this starting from a polygon with a given number of sides $n$ . The argument $h$ is half of the length of side, and $n_{max}$ is the number of iterations. What the algorithm does is recursively creating polygons with $n, 2n, 4n, 8n, ... $ sides. The example starts from a triangle so $n=3$ and $h=\sqrt(3)/2$.
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-- n: # sides of the polygon
--- h: half of the length of a side
+    -- n: # sides of the polygon
+    -- h: half of the length of a side
 
-approx_pi n h n_max
-  | n == n_max = n*h
-  | otherwise =
-      approx_pi (2*n) (sqrt ((1 - sqrt (1-h*h) )/2)) n_max
--- e.g starting from a triangle.          
-main = print $ approx_pi 3 ((sqrt 3)/2) (3*2**14)
-</code></pre>
-</div>
+    approx_pi n h n_max
+      | n == n_max = n*h
+      | otherwise =
+          approx_pi (2*n) (sqrt ((1 - sqrt (1-h*h) )/2)) n_max
+    -- e.g starting from a triangle.          
+    main = print $ approx_pi 3 ((sqrt 3)/2) (3*2**14)
 
-<p>What I find interesting is that every prime polygon produces a different series but they all converge towards $\pi$.</p>
+What I find interesting is that every prime polygon produces a different series but they all converge towards $\pi$.
 
-<h2 id="part-2-how-to-construct-a-pentagon-using-a-compass-and-a-ruler">Part 2 How to construct a pentagon using a compass and a ruler</h2>
 
-<p>People have worked out <a href="https://en.wikipedia.org/wiki/Pentagon">how to construct a pentagon using only a compass
-and a ruler</a> long ago. Nevertheless, I wanted to derive the construction
-from first principles.</p>
+## Part 2 How to construct a pentagon using a compass and a ruler
+
+People have worked out [how to construct a pentagon using only a compass
+and a ruler](https://en.wikipedia.org/wiki/Pentagon) long ago. Nevertheless, I wanted to derive the construction
+from first principles.
+
 
 <figure>
-<img src="https://wimvanderbauwhede.github.io/images/pentagon-relationships.png" width="80%" alt="Relationships in a pentagon" id="fig:Relationships-in-a" />
+<img src="https://wimvanderbauwhede.github.io/images/pentagon-relationships.png" width="80%"  alt="Relationships in a pentagon" id="fig:Relationships-in-a" />
 <figcaption>Figure 2. Relationships in a pentagon</figcaption>
 </figure>
 
-<h3 id="the-length-of-a-side-of-a-pentagon">The length of a side of a pentagon</h3>
+<h3>The length of a side of a pentagon</h3>
 
 <p>From <a href="#fig:Relationships-in-a">Figure 2</a> we can write down some
 straightforward relationships between the length of a side of a pentagon
 (<em>b</em> from the previous part) and the angle of the arc, $\frac{2\pi}{5}$.</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 x=\frac{b}{2}=sin\frac{\pi}{5}\label{eq:2.1}
-\end{equation}</script>
+\end{equation}$$</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 y=cos\frac{\pi}{5}\label{eq:2.2}
-\end{equation}</script>
+\end{equation}$$</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 x^{2}+y^{2}=1\label{eq:2.3}
-\end{equation}</script>
+\end{equation}$$</p>
 
-<script type="math/tex; mode=display">\begin{equation}
-q = 2sin\frac{2\pi}{5}=4sin\frac{\pi}{5}cos\frac{\pi}{5}\label{eq:2.4}\end{equation}</script>
+<p>$$\begin{equation}
+q = 2sin\frac{2\pi}{5}=4sin\frac{\pi}{5}cos\frac{\pi}{5}\label{eq:2.4}\end{equation}$$</p>
 
 <p>Substitution of Eqs. $\ref{eq:2.1}$ and $\ref{eq:2.2}$ gives</p>
 
-<script type="math/tex; mode=display">\begin{equation}
-q = 4xy\label{eq:2.5}\end{equation}</script>
+<p>$$\begin{equation}
+q = 4xy\label{eq:2.5}\end{equation}$$</p>
 
 <p>Now we consider the right triangle with hypothenuse <em>q</em>:</p>
 
-<script type="math/tex; mode=display">\begin{equation}
-q^{2} = x^{2}+(1+y)^{2}\label{eq:2.6}\end{equation}</script>
+<p>$$\begin{equation}
+q^{2} = x^{2}+(1+y)^{2}\label{eq:2.6}\end{equation}$$</p>
 
 <p>Substitution of Eq. $\ref{eq:2.3}$ in the RHS of Eq. $\ref{eq:2.6}$ and refactoring gives:</p>
 
-<script type="math/tex; mode=display">\begin{equation}
-q^{2} = 2+2y\label{eq:2.7}\end{equation}</script>
+<p>$$\begin{equation}
+q^{2} = 2+2y\label{eq:2.7}\end{equation}$$</p>
 
 <p>Substitution of Eq. $\ref{eq:2.3}$ and Eq. $\ref{eq:2.5}$ in the LHS of Eq. $\ref{eq:2.7}$ and refactoring gives:</p>
 
-<script type="math/tex; mode=display">\begin{equation}
-(4-(2y)^{2})(2y)^{2} = 2+2y\label{eq:2.8}\end{equation}</script>
+<p>$$\begin{equation}
+(4-(2y)^{2})(2y)^{2} = 2+2y\label{eq:2.8}\end{equation}$$</p>
 
 <p>Now we define $z=2y$ and rewrite Eq. $\ref{eq:2.8}$ as:</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 (4-z^{2}).z^{2}=2+z\label{eq:2.9}
-\end{equation}</script>
+\end{equation}$$</p>
 
 <p>Which after more refactoring finally gives</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 z^{2}(2-z)-1=0\label{eq:2.10}
-\end{equation}</script>
+\end{equation}$$</p>
 
 <p>This is a third-order equation but fortunately there is an obvious root
 for $z=1$. After some factorization we obtain the remaining second-order
 equation:</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 z^{2}-z-1=0\label{eq:2.11}
-\end{equation}</script>
+\end{equation}$$</p>
 
 <p>The roots of this equation are:</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-z & = & \frac{1\pm\sqrt{(-1)^{2}-4.1.(-1)}}{2.1}\label{eq:2.12}\\
- & = & \frac{1\pm\sqrt{5}}{2}\nonumber \end{align} %]]></script>
+<p>$$\begin{align}
+z &amp; = &amp; \frac{1\pm\sqrt{(-1)^{2}-4.1.(-1)}}{2.1}\label{eq:2.12}\
+ &amp; = &amp; \frac{1\pm\sqrt{5}}{2}\nonumber \end{align}$$</p>
 
 <p>This is actually a very famous equation and its positive root is known as the <a href="https://en.wikipedia.org/wiki/Golden_ratio">Golden ratio</a>.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\phi & = & \frac{1}{a} & = & \frac{a}{1-a}\label{eq:goldenratio}
-\end{align} %]]></script>
+<p>$$\begin{align}
+\phi &amp; = &amp; \frac{1}{a} &amp; = &amp; \frac{a}{1-a}\label{eq:goldenratio}
+\end{align}$$</p>
 
 <p>Clearly <em>y</em> as defined is positive so $y=\frac{z}{2}=\frac{\phi}{2}$ or</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 y=\frac{1+\sqrt{5}}{4}\label{eq:2.13}
-\end{equation}</script>
+\end{equation}$$</p>
 
 <p>From Eq. $\ref{eq:2.13}$ we can express <em>b</em> in terms of <em>y</em> using Eqns
 $\ref{eq:2.1}$, $\ref{eq:2.2}$ and $\ref{eq:2.3}$:</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 b=2\sqrt{1-y^{2}}\label{eq:2.14}
-\end{equation}</script>
+\end{equation}$$</p>
 
 <p>And so we obtain the expression for the length of the side of a pentagon
 as</p>
 
-<script type="math/tex; mode=display">\begin{equation}
+<p>$$\begin{equation}
 b=\sqrt{\frac{5-\sqrt{5}}{2}}\label{eq:2.15}
-\end{equation}</script>
+\end{equation}$$</p>
 
-<h3 id="construction-of-the-pentagon">Construction of the pentagon</h3>
+<h3>Construction of the pentagon</h3>
 
 <p>The remaining question is then, how do we construct a line of length <em>b</em>
 using a rules and compass?</p>
@@ -375,7 +373,7 @@ construct the pentagon using arcs of radius <em>b</em>.</p>
 <figcaption>Figure 3. Construction of a regular pentagon using ruler and compass</figcaption>
 </figure>
 
-<h3 id="a-hidden-triangle">A hidden triangle</h3>
+<h3>A hidden triangle</h3>
 
 <p>The equation we solved to obtain <em>y</em> (<a href="#eq:2.11">Eq. $\ref{eq:2.10}$</a>) is a third order equation, and
 its other positive root is $z=1$. This shows in a way the danger of transforming a geometry problem into algebra:
