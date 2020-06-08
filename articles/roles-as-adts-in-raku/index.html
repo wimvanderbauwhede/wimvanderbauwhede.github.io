@@ -347,6 +347,8 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
         <span class="n">mkMatch</span> &quot;<span class="n">world</span>)
         );
 </code></pre></div>
+<p><a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/roles_as_types.raku">Code for this example</a></p>
+
 <h3>A generic tuple</h3>
 
 <p>For the next example, I want to define a type called <code>Either</code>. This is a parametric sum type with two parameters, so a kind of generic tuple:</p>
@@ -374,6 +376,8 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 <span class="n">test</span>(<span class="n">iv</span>); <span class="c1"># prints &#39;Left: 42&#39;</span>
 <span class="n">test</span>(<span class="n">sv</span>); <span class="c1"># prints &#39;Right: forty-two&#39;</span>
 </code></pre></div>
+<p><a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/either.raku">Code for this example</a></p>
+
 <h3>A parameterised binary tree</h3>
 
 <p>As a final example, here is a simple binary tree. First, let&#39;s look at an example implementation using a role from the <a href="https://docs.raku.org/language/objects#index-entry-Parameterized_Roles">Raku documentation</a>:</p>
@@ -464,6 +468,8 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 <span class="n">visit-postorder</span>(<span class="n">t</span>,<span class="nv">&amp;say</span>);   <span class="c1"># OUTPUT: «4␤6␤5␤» </span>
 </code></pre></div>
 <p>One thing to note is that in the <code>multi sub</code>s we don&#39;t have to match against the full type, for example in <code>visit-preorder</code> we match against <code>Tip</code> and <code>Node</code> rather than the full <code>Tip[a]</code> and <code>Node[::a,BinaryTree[a],BinaryTree[a],a]</code>.  </p>
+
+<p><a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/binary_tree_2.p6">Code for this example</a></p>
 
 <h2>Wrap-up</h2>
 
