@@ -397,7 +397,7 @@ As in the product type, we use the role as a container to hold the values. The <
 <p>This is of course only a minor issue, resulting only in some redundancy.</p>
 
 <ul>
-<li>A more serious issue is that the type of <code>lst</code> must be <code>List</code> (or <code>List[]</code>) instead of <code>List[a]</code>. That is actually a problem, as it weakens the type checking. So it must be a bug in the current version of raku (2020.01). If I provide List[a] I get the following error:</li>
+<li>A more serious issue is that the type of <code>lst</code> must be <code>List</code> (or <code>List[]</code>) instead of <code>List[a]</code>. That is actually a problem, as it weakens the type checking. So it must be a bug in the current version of <code>raku</code> (2020.01). When I provide <code>List[a]</code> I get the following error:</li>
 </ul>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>    Could not instantiate role &#39;Cons&#39;:
     Internal error: inconsistent bind result
