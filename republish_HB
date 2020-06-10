@@ -1,4 +1,3 @@
-#/Users/wim/.rbenv/bin/rbenv "shell 2.3.1"
 perl set_mod_date.pl
 perl create_index.pl
 perl generate_sitemap.pl > sitemap.xml

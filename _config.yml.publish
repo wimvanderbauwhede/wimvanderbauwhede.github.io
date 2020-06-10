@@ -13,9 +13,11 @@ sass:
   sass_dir: _sass
   style: compressed
 permalink: /:categories/:title/
-markdown: kramdown
-highlighter: rouge
-plugins:
+#markdown: kramdown
+markdown: redcarpet
+#highlighter: rouge
+highlighter: pygments
+plugins_dir:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
@@ -26,22 +28,4 @@ owner:
   name: Wim Vanderbauwhede
   web: http://www.dcs.gla.ac.uk/~wim
   twitter: wim_v12e
-
-
-# Jekyll configuration
-# For plugins
-safe: true
-sass:
-  sass_dir: _sass
-  style: compressed
-permalink: /:categories/:title/
-markdown: kramdown
-#kramdown:
-#  toc_levels: 1..2
-highlighter: rouge
-#highlighter: pygments
-plugins:
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
 

@@ -10,3 +10,5 @@ gem "sass"
 gem "bourbon"
 gem "neat"
 gem 'octopress'
+gem "redcarpet"
+gem "pygments.rb"
