@@ -303,7 +303,110 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 
 <p>In particular, roles can be mixed into other roles, and that is one of the key features I will exploit. Furthermore, role constructors can take arguments <em>and</em> they are parametric. So we have everything we need to create proper algebraic data types. Let&#39;s look at a few examples.</p>
 
-<h3>A multi-type array</h3>
+<h3>A few simple examples</h3>
+
+<h4>An opinionated boolean</h4>
+
+<p>This is the example of a sum type for a boolean as above, but implemented with roles. The first line declares the type as an empty role, this corresponds to the data type name on the left-hand side. The next lines define the alternatives, each alternative uses <code>does OpinionatedBool</code> to tie it to the <code>OpinionatedBool</code> role which functions purely as the type name.  </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">OpinionatedBool</span> {}
+<span class="k">role</span> <span class="n">AbsolutelyTrue</span> <span class="nb">does</span> <span class="n">OpinionatedBool</span> {}
+<span class="k">role</span> <span class="n">TotallyFalse</span> <span class="nb">does</span> <span class="n">OpinionatedBool</span> {}
+</code></pre></div>
+<p>In Raku, types are values; and for a role with an empty body, you don&#39;t need the <code>.new</code> constructor call:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">OpinionatedBool</span> \<span class="n">bt</span> = <span class="n">AbsolutelyTrue</span>;
+</code></pre></div>
+<p>Sum types can be used in combination with Raku&#39;s <code>multi sub</code> feature: Raku lets you provide several definitions for a function, with the same name but different signatures. With multi subs we can do what is known as pattern matching on types:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">multi</span> <span class="k">sub</span> <span class="n">p</span>(<span class="n">AbsolutelyTrue</span> <span class="nv">$b</span>) {
+    <span class="nb">say</span> <span class="s">&#39;True&#39;</span>;
+}
+<span class="k">multi</span> <span class="k">sub</span> <span class="n">p</span>(<span class="n">TotallyFalse</span> <span class="nv">$b</span>) {
+    <span class="nb">say</span> <span class="s">&#39;False&#39;</span>;
+}
+
+<span class="c1"># Trying it out:</span>
+<span class="n">p</span>(<span class="n">bt</span>); <span class="c1"># prints True</span>
+<span class="n">p</span>(<span class="n">bi</span>); <span class="c1"># also prints True</span>
+</code></pre></div>
+<p>Because we use a type as a value, to test if a value is <code>AbsolutelyTrue</code> or <code>TotallyFalse</code>, we can use either the smart match <code>~~</code>, the container identity <code>=:=</code> or the value identity <code>===</code>! If we would create an instance like <code>AbsolutelyTrue.new</code> See the <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/roles_types_and_instances.raku">code example</a> for more details.</p>
+
+<h4>The Colour, XYCoord and Pixel types</h4>
+
+<p>Here is the implementation of the <code>Colour</code>, <code>XYCoord</code> and <code>Pixel</code> types from above. The <code>RGBColour</code> type is an example of a product type. There are two differences with my notation from above:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">datatype</span> <span class="kt">RGBColour</span> <span class="ow">=</span> <span class="kt">RGB</span> <span class="kt">Int</span> <span class="kt">Int</span> <span class="kt">Int</span>
+</code></pre></div>
+<ol>
+<li>Because the role serves both as the type (<code>RGBColour</code>) and the instance constructor (<code>RGB</code>), they must have the same name. I only named them differently to make it easier to distinguish them so this is not an issue.</li>
+<li>The types that make up each field must be named with unique names in the role&#39;s argument list, and need to have a corresponding attributes declared. That is again not really a limitation, because acessors for record type fields are handy. So it looks like:</li>
+</ol>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">RGBColour</span>[<span class="nb">Int</span> \<span class="n">r</span>, <span class="nb">Int</span> \<span class="n">g</span>, <span class="nb">Int</span> \<span class="n">b</span>] {
+    <span class="k">has</span> <span class="nb">Int</span> <span class="nv">$.r</span> = <span class="n">r</span>;
+    <span class="k">has</span> <span class="nb">Int</span> <span class="nv">$.g</span> = <span class="n">g</span>;
+    <span class="k">has</span> <span class="nb">Int</span> <span class="nv">$.b</span> = <span class="n">b</span>; 
+}
+</code></pre></div>
+<p>And we create <code>aquamarine</code> like this:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">RGBColour</span> \<span class="n">aquamarine</span> = <span class="n">RGBColour</span>[ <span class="mi">127</span>, <span class="mi">255</span>, <span class="mi">212</span>].<span class="nb">new</span>;
+</code></pre></div>
+<p>The definitions of <code>HSLColour</code> and <code>XYCoord</code> are analogous, you can find them in the <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/role_as_adt_colour_example.raku">code example</a>. Let&#39;s look at the sum type to combine the RGB and HSL colour types:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Colour</span> {}
+<span class="k">role</span> <span class="n">HSL</span>[ <span class="n">HSLColour</span> \<span class="n">hsl</span>] <span class="nb">does</span> <span class="n">Colour</span> {
+    <span class="k">has</span> <span class="n">HSLColour</span> <span class="nv">$.hsl</span> = <span class="n">hsl</span>;
+};
+<span class="k">role</span> <span class="n">RGB</span>[ <span class="n">RGBColour</span> \<span class="n">rgb</span>] <span class="nb">does</span> <span class="n">Colour</span> {
+    <span class="k">has</span> <span class="n">RGBColour</span> <span class="nv">$.rgb</span> = <span class="n">rgb</span>;
+};
+</code></pre></div>
+<p>This is essentially the same approach as for the opinionated boolean, but we don&#39;t have empty roles: the <code>HSL</code> alternative takes an argument of type <code>HSLColour</code>, and the <code>RGB</code> alternative takes an argument of type <code>RGBColour</code>.
+As in the product type, we use the role as a container to hold the values. The <code>Pixel</code> type from above looks like: </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Pixel</span>[ <span class="n">Colour</span> \<span class="n">c</span>, <span class="n">XYCoord</span> \<span class="n">xy</span> ] {
+    <span class="k">has</span> <span class="n">Colour</span> <span class="nv">$.c</span> = <span class="n">c</span>;
+    <span class="k">has</span> <span class="n">XYCoord</span> <span class="nv">$.xy</span> = <span class="n">xy</span>;
+}
+</code></pre></div>
+<p>And now we can create pixels with RGB and HSL colours:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">Pixel</span> \<span class="n">p_rgb</span> = <span class="n">Pixel</span>[ <span class="n">RGB</span>[ <span class="n">aquamarine</span>].<span class="nb">new</span> , <span class="n">XYCoord</span>[ <span class="mi">42</span>, <span class="mi">24</span>].<span class="nb">new</span> ].<span class="nb">new</span>;
+<span class="k">my</span> <span class="n">Pixel</span> \<span class="n">p_hsl</span> = <span class="n">Pixel</span>[ <span class="n">HSL</span>[ <span class="n">chocolate</span> ].<span class="nb">new</span> , <span class="n">XYCoord</span>[ <span class="mi">42</span>, <span class="mi">24</span>].<span class="nb">new</span> ].<span class="nb">new</span>;
+</code></pre></div>
+<h4>Recursion and polymorphism</h4>
+
+<p>Above, I showed the Peano number type to illustrate type-level recursion. This works just fine with roles in Raku too:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Nat</span>{}    
+<span class="k">role</span> <span class="o">Z</span> <span class="nb">does</span> <span class="n">Nat</span> {}
+<span class="k">role</span> <span class="n">S</span>[<span class="n">Nat</span> <span class="nv">$n</span>] <span class="nb">does</span> <span class="n">Nat</span> {}  
+</code></pre></div>
+<p>And we can combine this with type parameters as in the list example:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="nb">List</span>[::<span class="n">a</span>] {}
+<span class="k">role</span> <span class="n">EmptyList</span>[::<span class="n">a</span>] <span class="nb">does</span> <span class="nb">List</span>[<span class="n">a</span>] {}
+<span class="k">role</span> <span class="n">Cons</span>[ ::<span class="n">a</span> \<span class="n">elt</span>, <span class="nb">List</span> \<span class="n">lst</span> ] <span class="nb">does</span> <span class="nb">List</span>[<span class="n">a</span>] {
+    <span class="k">has</span> <span class="nv">$.elt</span> = <span class="n">elt</span>;
+    <span class="k">has</span> <span class="nv">$.lst</span> = <span class="n">lst</span>;
+}
+</code></pre></div>
+<h5>Issues with current raku</h5>
+
+<p>There are some issues here: </p>
+
+<ul>
+<li>The <code>EmptyList</code> alternative must either be declared as above, with a type parameter, or as</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">EmptyList</span> <span class="nb">does</span> <span class="nb">List</span> {}
+</code></pre></div>
+<p>where the type also doesn&#39;t take a type variable. We can&#39;t write</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">EmptyList</span> <span class="nb">does</span> <span class="nb">List</span>[::<span class="n">a</span>] {}
+</code></pre></div>
+<p>This is of course only a minor issue, resulting only in some redundancy.</p>
+
+<ul>
+<li>A more serious issue is that the type of <code>lst</code> must be <code>List</code> (or <code>List[]</code>) instead of <code>List[a]</code>. That is actually a problem, as it weakens the type checking. So it must be a bug in the current version of raku (2020.01). If I provide List[a] I get the following error:</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>    Could not instantiate role &#39;Cons&#39;:
+    Internal error: inconsistent bind result
+    in any protect at gen/moar/stage2/NQPCORE.setting line 1216
+    in block &lt;unit&gt; at list-adt.raku line 12
+</code></pre></div>
+<h3>A few more useful examples</h3>
+
+<h4>A multi-type array</h4>
 
 <p>For the first example, I want to store values of different types in a typed array. They elements can be strings, labeled lists of strings, or undefined. I call this type <code>Matches</code>. Using the notation from above, it would be</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">datatype</span> <span class="kt">Matches</span> <span class="ow">=</span> 
@@ -322,7 +425,7 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
         <span class="k">has</span> <span class="n">Matches</span> <span class="nv">@.matches</span> = <span class="nv">@ms</span>;
     } 
 </code></pre></div>
-<p>The first line declares the type as an empty role, this corresponds to the data type name on the left-hand side. The next lines define the alternatives, each alternative uses <code>does Matches</code> to tie it to the <code>Matches</code> role. We use the role as a container to hold the values. This type uses type constructors with 0 (<code>UndefinedMatch</code>), 1 (<code>Match</code>) and 2 (<code>TaggedMatches</code>) arguments, and the latter is a recursive type: the second argument is a list of <code>Matches</code>. With this definition, we can create an array of matches like this:</p>
+<p>This type uses type constructors with 0 (<code>UndefinedMatch</code>), 1 (<code>Match</code>) and 2 (<code>TaggedMatches</code>) arguments, and the latter is a recursive type: the second argument is a list of <code>Matches</code>. With this definition, we can create an array of matches like this:</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span>    <span class="k">my</span> <span class="n">Matches</span> <span class="nv">@ms</span> = <span class="nb">Array</span>[<span class="n">Matches</span>].<span class="nb">new</span>(
         <span class="nb">Match</span>[<span class="s">&quot;hello&quot;</span>].<span class="nb">new</span>,
         <span class="n">TaggedMatches</span>[
@@ -349,7 +452,7 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 </code></pre></div>
 <p><a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/roles_as_types.raku">Code for this example</a></p>
 
-<h3>A generic tuple</h3>
+<h4>A generic tuple</h4>
 
 <p>For the next example, I want to define a type called <code>Either</code>. This is a parametric sum type with two parameters, so a kind of generic tuple:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">datatype</span> <span class="kt">Either</span> <span class="n">a</span> <span class="n">b</span> <span class="ow">=</span> <span class="kt">Left</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Right</span> <span class="n">b</span>
@@ -363,9 +466,7 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
         <span class="k">has</span> <span class="n">b</span> <span class="nv">$.right</span> = <span class="n">r</span>;
     }
 </code></pre></div>
-<p>Because Raku expects both type variables to be declared in each constructor, it is a little bit less nice than my more abstract notation. </p>
-
-<p>Sum types can be used in combination with Raku&#39;s <code>multi sub</code> feature: Raku lets you provide several definitions for a function, with the same name but different signatures. With multi subs we can do what is known as pattern matching on types:</p>
+<p>Because Raku expects both type variables to be declared in each constructor, it is a little bit less nice than my more abstract notation. We can pattern match on this type with a <code>multi sub</code>: </p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">multi</span> <span class="k">sub</span> <span class="n">test</span> (<span class="n">Left</span>[<span class="nb">Int</span>,<span class="nb">Str</span>] <span class="nv">$v</span>) { <span class="nb">say</span> <span class="s">&#39;Left: &#39;</span>~<span class="nv">$v</span>.<span class="n">left</span> }
 <span class="k">multi</span> <span class="k">sub</span> <span class="n">test</span> (<span class="n">Right</span>[<span class="nb">Int</span>,<span class="nb">Str</span>] <span class="nv">$v</span>) {<span class="nb">say</span> <span class="s">&#39;Right: &#39;</span>~<span class="nv">$v</span>.<span class="n">right</span> }
 </code></pre></div>
@@ -378,7 +479,7 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 </code></pre></div>
 <p><a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/either.raku">Code for this example</a></p>
 
-<h3>A parameterised binary tree</h3>
+<h4>A parameterised binary tree</h4>
 
 <p>As a final example, here is a simple binary tree. First, let&#39;s look at an example implementation using a role from the <a href="https://docs.raku.org/language/objects#index-entry-Parameterized_Roles">Raku documentation</a>:</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">BinaryTree</span>[::<span class="n">Type</span>] {
@@ -467,7 +568,7 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 <span class="n">visit-preorder</span>(<span class="n">t</span>,<span class="nv">&amp;say</span>);    <span class="c1"># OUTPUT: «5␤4␤6␤» </span>
 <span class="n">visit-postorder</span>(<span class="n">t</span>,<span class="nv">&amp;say</span>);   <span class="c1"># OUTPUT: «4␤6␤5␤» </span>
 </code></pre></div>
-<p>One thing to note is that in the <code>multi sub</code>s we don&#39;t have to match against the full type, for example in <code>visit-preorder</code> we match against <code>Tip</code> and <code>Node</code> rather than the full <code>Tip[a]</code> and <code>Node[::a,BinaryTree[a],BinaryTree[a],a]</code>.  </p>
+<p>One thing to note is that in the <code>multi sub</code>s we don&#39;t have to match against the full type, for example in <code>visit-preorder</code> we match against <code>Tip</code> and <code>Node</code> rather than the full <code>Tip[a]</code> and <code>Node[::a,BinaryTree[a],BinaryTree[a],a]</code>. </p>
 
 <p><a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/binary_tree_2.p6">Code for this example</a></p>
 
