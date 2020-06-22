@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>List-based parser combinators in Haskell and Raku • Wim Vanderbauwhede</title>
+    <meta name="description" content="This is a follow-on of my article on algebraic data types, with list-based parser combinators as a practical application.">
+    <meta name="keywords" content="coding, hacking, programming, raku">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="List-based parser combinators in Haskell and Raku">
+	<meta name="twitter:description" content="This is a follow-on of my article on algebraic data types, with list-based parser combinators as a practical application.">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/list-based-parser-combinators_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/#">
+	<meta property="og:title" content="List-based parser combinators in Haskell and Raku">
+	<meta property="og:description" content="This is a follow-on of my article on algebraic data types, with list-based parser combinators as a practical application.">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/list-based-parser-combinators_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/list-based-parser-combinators_1600x600.jpg" class="page-feature-image" alt="List-based parser combinators in Haskell and Raku" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>List-based parser combinators in Haskell and Raku</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>This is a follow-on from my article <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">introducing algebraic data types and explaining how to implement them in Raku</a>. 
+If you are not familiar with algebraic data types, I suggest you read that article first. In this article I use algebraic data types to create a statically typed version of a list-based parser combinators library which I originally created for dynamic languages. The article introduces list-based parser combinators are and how to implement them in Raku and Haskell using algebraic data types.</p>
+
+<h2>Perl, Haskell and Raku: a quick introduction</h2>
+
+<p>The code examples in this article are written in <a href="https://www.perl.org/">Perl</a>, <a href="https://www.haskell.org/">Haskell</a> and <a href="https://raku.org/">Raku</a>. If you are familiar with these languages, you can skip this section. The code is written in a functional style and is not very idiomatic so you should be able to understand it easily if you know another programming language.</p>
+
+<p>Perl and Raku are syntactically similar to C/C++, Java and JavaScript: block-based, with statements separated by semicolons, blocks demarkated by braces, and argument lists in parenthese and separated by commas. The main feature that sets Perl and Raku apart is the use of sigils (&#39;funny characters&#39;) which identify the type of a variable: <code>$</code> for a scalar, <code>@</code> for an array, <code>%</code> for a hash (map) and <code>&amp;</code> for a subroutine. Variables also have keywords to identify their scope, I will only use <code>my</code> which marks the variable as lexically scoped. A subroutine is declared with the <code>sub</code> keyword, and subroutines can be named or anonymous:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">square</span> (<span class="nv">$x</span>) {
+    <span class="nv">$x</span>*<span class="nv">$x</span>;
+}
+<span class="c1"># anonymous subroutine </span>
+<span class="k">my</span> <span class="nv">$anon_square</span> = <span class="k">sub</span> (<span class="nv">$x</span>) {
+    <span class="nv">$x</span>*<span class="nv">$x</span>;
+}
+</code></pre></div>
+<p>Haskell is whitespace-sensitive like Python, but has a markedly different syntax. Because everything is a function, there is no keyword to mark a function; because there is only lexical scope, there is no need for any special scope identifiers. Function arguments are separated by spaces; anonymous functions have a special syntax to identify them: </p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="c1">-- named function</span>
+<span class="nf">square</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+<span class="c1">-- lambda function bound to a named variable</span>
+<span class="nf">anon_square</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span>  <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</code></pre></div>
+<p>Several of the examples use the  <code>let ... in ...</code>  construct, which behaves as a lexically scoped block:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">let_square</span> <span class="n">x</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="ow">=</span> <span class="kr">let</span>
+    <span class="n">x2</span> <span class="ow">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">x1</span> <span class="ow">=</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">x0</span> <span class="ow">=</span> <span class="n">c</span>
+  <span class="kr">in</span>
+    <span class="n">x2</span><span class="o">+</span><span class="n">x1</span><span class="o">+</span><span class="n">x0</span>
+</code></pre></div>
+<p><code>x0</code>, <code>x1</code> and <code>x2</code> are in scope only in the expression after the <code>in</code> keyword.</p>
+
+<p>Haskell is statically typed, and the type of a function or variable is written in a separate annotation, for example:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">isEmpty</span> <span class="ow">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+<span class="nf">isEmpty</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></div>
+<p>The <code>isEmpty</code> function has a type signature, identified by <code>::</code>, that reads &quot;<code>isEmpty</code> is a function from a list of anything to a boolean&quot;. Types must be written with an initial capital. The <code>a</code> is a <em>type variable</em> which can take on any type, as explained in <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">my previous post</a>.</p>
+
+<p>Raku has optional typing: you can add type information as part of the declarations, for example:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">isOfSz</span>(<span class="nv">@lst</span>, <span class="nb">Int</span> <span class="nv">$sz</span> --&gt; <span class="nb">Bool</span>) {
+    <span class="nv">@lst</span>.<span class="nb">elems</span> == <span class="nv">$sz</span>;
+}
+</code></pre></div>
+<p>This function takes array of any type and an integer and returns a boolean. </p>
+
+<p>Other specific bits of syntax or functionality will be explained for the particular examples. </p>
+
+<h2>Parsers and parser combinators</h2>
+
+<p>What I call a parser here is technically a combination of a lexer or tokeniser and a parser. The lexical analysis (splitting a sequence of characters into a sequence of tokens, strings with an identified meaning) meaning and parsing (syntactic analysis, analysing the sequence of tokens in terms of a formal grammar) are not separate stages.</p>
+
+<p>Parser combinators are building blocks to create parsers by combining small parsers into very complex ones. In Haskell they became popular because of the <a href="http://book.realworldhaskell.org/read/using-parsec.html">Parsec</a> library. This library provides <a href="http://jakewheat.github.io/intro_to_parsing/">monadic parser combinators</a>. My parser combinator library implements a subset of Parsec&#39;s functionality. I am not going to explain what monads are because the point of creating list-based parser combinators is precisely that they do not require monads. There is a connection however, and you can read about it in <a href="https://dl.acm.org/doi/pdf/10.1145/2617548.2617551">my paper</a> if you&#39;re interested. </p>
+
+<p>I created the original version of the list-based parser combinators library for dynamically typed languages: there are versions in <a href="https://metacpan.org/pod/Parser::Combinators">Perl</a>, <a href="https://gitlab.com/wim_v12e/parser-combinators-py">Python</a> and <a href="https://github.com/wimvanderbauwhede/parser-combinators-ls">LiveScript</a>, <a href="http://livescript.net/">a Haskell-like language which compiles to JavaScript</a>. </p>
+
+<p>Because I like Raku and it has gradual typing, I was interested in what <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/ListBasedCombinators.pm6">a statically typed Raku version</a> would look like. As a little detour I first implemented them in Haskell, just for fun really. </p>
+
+<p>Raku has <a href="https://docs.raku.org/language/grammars">Grammars</a>, which also let you build powerful parsers. If you are familiar with them it will be interesting to compare the parser combinator approach to the inheritance mechanism used to compose Grammars.</p>
+
+<h2>List-based parser combinators</h2>
+
+<p>So what are list-based parser combinators? Let&#39;s say I want to parse a string containing this very simple bit of code:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">assignStr</span> <span class="ow">=</span> <span class="s">&quot;   answer = 42&quot;</span>
+</code></pre></div>
+<p>We have an identifier, an assignment operator and a natural number, maybe preceded by whitespace, and with some whitespace that doesn&#39;t matter between these tokens. I am assuming that the string which we want to parse is code written in a language which is whitespace-insensitive. 
+What I would like is that I can write a parser for as close as possible to the following:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">assignParser</span> <span class="ow">=</span> <span class="p">[</span>
+    <span class="n">maybe</span> <span class="n">whiteSpace</span><span class="p">,</span> 
+    <span class="n">identifier</span><span class="p">,</span> 
+    <span class="n">symbol</span> <span class="s">&quot;=&quot;</span><span class="p">,</span> 
+    <span class="n">natural</span><span class="p">]</span>
+</code></pre></div>
+<p>And when I apply <code>assignParser</code> to <code>assignStr</code>, it should return the parsed tokens, a status, and the remainder of the string, if any. So each parser takes a string and returns this triplet of values (I&#39;ll call it a tuple instead of a triplet). We&#39;ll define this more formally in the next sections.</p>
+
+<p>What we have here is that the list acts as the sequencing combinator for the specific parsers. The <code>maybe</code> is a combinator to make the token optional. We can provide more combinators, such as <code>choice</code>, (to try several parsers), <code>many</code> (to repeatedly apply a parser), etc. And because every parser is a function, complex parsers can easily be composed of smaller parsers expressed in terms of the building blocks. For example, if we had many assignments, we could have something like</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">assignsParser</span> <span class="ow">=</span> <span class="n">many</span> <span class="n">assignParser</span>
+</code></pre></div>
+<p>Now suppose that we want to extend our parser to include declarations, something like</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="s">&quot;    int answer&quot;</span>
+</code></pre></div>
+<p>which we parse as</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">declParser</span> <span class="ow">=</span> <span class="p">[</span><span class="n">maybe</span> <span class="n">whiteSpace</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">identifier</span><span class="p">]</span>
+</code></pre></div>
+<p>then we need to add get the following parser:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">statementsParser</span> <span class="ow">=</span> <span class="n">many</span> <span class="p">(</span><span class="n">choice</span> <span class="p">[</span><span class="n">assignParser</span><span class="p">,</span><span class="n">declParser</span><span class="p">])</span>
+</code></pre></div>
+<p>It is also essential that we can label tokens or groups of tokens, so that we can easily extract the relevant information from a parse tree, as the intermediate step in transforming the parse tree into an abstract syntax tree. In the above example, we are only interested in the variable name and the value. The whitespace and equal sign are not important. So we could label the relevant tokens, for example:</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="n">assignParser</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">whiteSpace</span><span class="p">,</span> 
+    <span class="p">{</span><span class="s">&quot;var&quot;</span>  <span class="o">=&gt;</span> <span class="n">identifier</span><span class="p">},</span> 
+    <span class="n">symbol</span> <span class="s">&quot;=&quot;</span><span class="p">,</span>  
+    <span class="p">{</span><span class="s">&quot;val&quot;</span> <span class="o">=&gt;</span> <span class="n">natural</span><span class="p">}</span>
+    <span class="p">]</span>
+</code></pre></div>
+<h2>Implementation in a dynamically typed language</h2>
+
+<p>How do we implement the above mechanism in a dynamically typed language? A parser like <code>identifier</code> is simply a function which takes a string and returns a tuple. In Perl, the code looks like this:</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">sub</span> <span class="nf">identifier</span> <span class="p">( $str ) {</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nv">$str</span> <span class="o">=~</span><span class="sr"> /^([a-z_]\w*)/</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">my</span> <span class="nv">$matches</span> <span class="o">=</span> <span class="nv">$1</span><span class="p">;</span>
+            <span class="nv">$str</span> <span class="o">=~</span> <span class="sr">s/^$matches\s*//</span><span class="p">;</span>
+            <span class="k">return</span> <span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$str</span><span class="p">,</span> <span class="nv">$matches</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$str</span><span class="p">,</span> <span class="nb">undef</span> <span class="p">);</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>(In Perl, <code>=~ /.../</code> is the regular expression matching syntax, and <code>s/.../.../</code> is regular expression substitution.)</p>
+
+<p>But what about a parser like <code>symbol</code>? It takes the string representing the symbol as an argument, so in the example, <code>symbol( &quot;=&quot; )</code> should be the actual parser. What we need is that a call to <code>symbol</code> will return a function to do the parsing, like this:</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">sub</span> <span class="nf">symbol</span> <span class="p">( $lit_str ) {</span>
+    <span class="k">my</span> <span class="nv">$gen</span> <span class="o">=</span> <span class="k">sub</span> <span class="p">( $str ) {</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nv">$str</span> <span class="o">=~</span><span class="sr"> /^\s*$lit_str\s*/</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">my</span> <span class="nv">$matches</span> <span class="o">=</span> <span class="nv">$lit_str</span><span class="p">;</span>
+            <span class="nv">$str</span> <span class="o">=~</span> <span class="sr">s/^\s*$lit_str\s*//</span><span class="p">;</span>
+            <span class="k">return</span> <span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$str</span><span class="p">,</span> <span class="nv">$matches</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$str</span><span class="p">,</span> <span class="nb">undef</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="nv">$gen</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This is of course not limited to string arguments, any argument of the outer function can be used inside the inner function. In particular, if a parser combinator takes parsers as arguments, like <code>choice</code> and <code>maybe</code>, then these parsers can be passed on to the inner function. </p>
+
+<p>This is fine as far as it goes, but what about the labelled parsers? and what about the lists of parsers? Neither of these can be directly applied to a string, but neither is a function that can generate a function either. So to apply them to a string, we will need to get the parsers out of label-parser pair and the list. We do that using a helper function which I call <code>apply</code>, and which in Perl looks like</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">sub</span> <span class="nf">apply</span> <span class="p">( $p, $str ) {</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nb">ref</span><span class="p">(</span><span class="nv">$p</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&#39;CODE&#39;</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$p</span><span class="o">-&gt;</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">elsif</span> <span class="p">(</span> <span class="nb">ref</span><span class="p">(</span><span class="nv">$p</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&#39;ARRAY&#39;</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">sequence</span><span class="p">(</span><span class="nv">$p</span><span class="p">)</span><span class="o">-&gt;</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">elsif</span> <span class="p">(</span> <span class="nb">ref</span><span class="p">(</span><span class="nv">$p</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&#39;HASH&#39;</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">retag</span><span class="p">(</span><span class="nv">$p</span><span class="p">,</span><span class="nv">$str</span><span class="p">);</span>
+    <span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></div>
+<p>(The syntax <code>$p-&gt;($str)</code> applies the anonymous function referenced by <code>$p</code> to its arguments.)</p>
+
+<p>This function checks the type of <code>$p</code> using the <code>ref</code> built-in: it can either be code (i.e. a subroutine), an array or a hash. If it&#39;s subroutine it&#39;s applied directly to the string, otherwise it calls <code>sequence</code> or <code>retag</code>.</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">sub</span> <span class="nf">sequence</span> <span class="p">( $plst ) {</span>
+    <span class="k">my</span> <span class="nv">$gen</span> <span class="o">=</span> <span class="k">sub</span> <span class="p">( $str ) {</span>
+        <span class="k">my</span> <span class="nv">$f</span> <span class="o">=</span> <span class="k">sub</span> <span class="p">{</span>
+            <span class="k">my</span> <span class="p">(</span> <span class="nv">$acc</span><span class="p">,</span> <span class="nv">$p</span> <span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+            <span class="k">my</span> <span class="p">(</span> <span class="nv">$st1</span><span class="p">,</span> <span class="nv">$str1</span><span class="p">,</span> <span class="nv">$matches</span> <span class="p">)</span> <span class="o">=</span> <span class="nv">@</span><span class="p">{</span><span class="nv">$acc</span><span class="p">};</span>
+            <span class="k">my</span> <span class="p">(</span> <span class="nv">$st2</span><span class="p">,</span> <span class="nv">$str2</span><span class="p">,</span> <span class="nv">$ms</span> <span class="p">)</span>      <span class="o">=</span> <span class="k">do</span> <span class="p">{</span>
+                <span class="n">apply</span><span class="p">(</span><span class="nv">$p</span><span class="p">,</span><span class="nv">$str1</span><span class="p">);</span>
+            <span class="p">};</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="nv">$st2</span> <span class="o">*</span> <span class="nv">$st1</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$str1</span><span class="p">,</span> <span class="o">[]</span> <span class="p">];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$str2</span><span class="p">,</span> <span class="p">[</span> <span class="nv">@</span><span class="p">{</span><span class="nv">$matches</span><span class="p">},</span> <span class="nv">$ms</span> <span class="p">]</span> <span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+        <span class="k">my</span> <span class="p">(</span><span class="nv">$status</span><span class="p">,</span> <span class="nv">$str</span><span class="p">,</span> <span class="nv">$matches</span> <span class="p">)</span> <span class="o">=</span> <span class="nv">@</span><span class="p">{</span> 
+            <span class="n">foldl</span><span class="p">(</span> <span class="nv">$f</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$str</span><span class="p">,</span> <span class="o">[]</span> <span class="p">],</span> <span class="nv">$plst</span> <span class="p">)</span> 
+            <span class="p">};</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nv">$status</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$str</span><span class="p">,</span> <span class="o">[]</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$str</span><span class="p">,</span> <span class="nv">$matches</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="nv">$gen</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The <code>foldl</code> function is my Perl version of the left-to-right reduction in Haskell or <code>reduce</code> in Raku.</p>
+
+<p>What <code>retag</code> does is taking the parser from the label pair (which is a single-element hash), apply it to the string, and label the resulting matches with the label of the parser:</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">sub</span> <span class="nf">retag</span> <span class="p">($p, $str) {</span>
+        <span class="k">my</span> <span class="nv">%hp</span> <span class="o">=</span> <span class="nv">%</span><span class="p">{</span><span class="nv">$p</span><span class="p">};</span>
+        <span class="k">my</span> <span class="p">(</span> <span class="nv">$k</span><span class="p">,</span> <span class="nv">$pp</span> <span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">%hp</span><span class="p">;</span>
+        <span class="k">my</span> <span class="p">(</span> <span class="nv">$status</span><span class="p">,</span> <span class="nv">$str2</span><span class="p">,</span> <span class="nv">$mms</span> <span class="p">)</span> <span class="o">=</span> <span class="nv">$pp</span><span class="o">-&gt;</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+        <span class="k">my</span> <span class="nv">$matches</span> <span class="o">=</span> <span class="p">{</span> <span class="nv">$k</span> <span class="o">=&gt;</span> <span class="nv">$mms</span> <span class="p">};</span>
+        <span class="k">return</span> <span class="p">(</span> <span class="nv">$status</span><span class="p">,</span> <span class="nv">$str2</span><span class="p">,</span> <span class="nv">$matches</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>(The syntax <code>%{$p}</code> is dereferencing, a bit like the <code>*</code> prefix in C.)</p>
+
+<p>Here is a simple example of how to use the list-based parser combinators. </p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">my</span> <span class="nv">$str</span> <span class="o">=</span> <span class="s">&quot;    Hello, brave new world!&quot;</span><span class="p">;</span>
+
+<span class="k">my</span> <span class="nv">$str_parser</span> <span class="o">=</span> <span class="n">sequence</span> <span class="p">[</span>
+    <span class="n">whiteSpace</span><span class="p">,</span>
+    <span class="n">word</span><span class="p">,</span>
+    <span class="n">comma</span><span class="p">,</span>
+    <span class="p">{</span><span class="n">Adjectives</span> <span class="o">=&gt;</span> <span class="n">word</span><span class="p">},</span>
+    <span class="p">{</span><span class="n">Adword</span><span class="p">,</span>
+    <span class="p">{</span><span class="n">Noun</span> <span class="o">=&gt;</span> <span class="n">word</span><span class="p">},</span>
+    <span class="n">symbol</span> <span class="s">&quot;!&quot;</span>
+    <span class="p">];</span>
+
+<span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">apply</span><span class="p">(</span> <span class="nv">$str_parser</span><span class="p">,</span> <span class="nv">$str</span><span class="p">);</span>
+</code></pre></div>
+<h2>Implementation in a language with algebraic data types</h2>
+
+<p>All of the above is fine in a dynamically typed language, but in a statically typed language, the list can&#39;t contain a function and a hash and another list, as they all have different types. Also, only testing if an entry of the list is code, hash or list is rather weak, as it does not guarantee that the code is an actual parser. So let&#39;s see what it looks like in Haskell and Raku.
+list-based parser combinators 
+In Haskell, we start (of course) by defining a few types:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="c1">-- The list-based combinator</span>
+<span class="kr">data</span> <span class="kt">LComb</span> <span class="ow">=</span> 
+      <span class="kt">Seq</span> <span class="p">[</span><span class="kt">LComb</span><span class="p">]</span> 
+    <span class="o">|</span> <span class="kt">Comb</span> <span class="p">(</span><span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">MTup</span> <span class="kt">String</span><span class="p">)</span> 
+    <span class="o">|</span> <span class="kt">Tag</span> <span class="kt">String</span> <span class="kt">LComb</span>
+<span class="c1">-- The match, i.e. the bit of the string the parser matches</span>
+<span class="kr">data</span> <span class="kt">Match</span> <span class="ow">=</span> 
+      <span class="kt">Match</span> <span class="kt">String</span> 
+    <span class="o">|</span> <span class="kt">TaggedMatches</span> <span class="kt">String</span> <span class="p">[</span><span class="kt">Match</span><span class="p">]</span> 
+    <span class="o">|</span> <span class="kt">UndefinedMatch</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span><span class="kt">Show</span><span class="p">)</span>
+<span class="c1">-- The tuple returned by the parser  </span>
+<span class="kr">newtype</span> <span class="kt">MTup</span> <span class="n">s</span> <span class="ow">=</span> <span class="kt">MTup</span> <span class="p">(</span><span class="kt">Status</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="kt">Matches</span><span class="p">)</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>
+<span class="c1">-- some aliases</span>
+<span class="kr">type</span> <span class="kt">Matches</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Match</span><span class="p">]</span>
+<span class="kr">type</span> <span class="kt">Status</span> <span class="ow">=</span> <span class="kt">Integer</span>
+</code></pre></div>
+<p>(In Haskell, <code>data</code> and <code>newtype</code> define a new algebraic datatype; <code>type</code> defines an alias for an existing type.)</p>
+
+<p>So our list of parsers will be a list of <code>LComb</code>, and this can be a parser, sequence of parsers or tagged pair. Because the tag eventually is used to label the matched string, the <code>Match</code> type also has a tagged variant. In principle, the return type of the parser could just be a tuple, but I define the <code>MTup</code> polymorphic type so I can make it an instance of a type class later on, e.g. to make it a monad.</p>
+
+<p>With these types we can define our parser combinators and the <code>apply</code> and <code>sequence</code> functions. Here is the <code>symbol</code> parser. Many of the parsers in the library are implemented using <a href="http://pcre.org/">Perl-Compatible Regular Expressions</a> (<a href="https://hackage.haskell.org/package/regex-pcre"><code>Text.Regex.PCRE</code></a>), because what else can you expect of a <a href="https://andrewshitov.com/2015/05/05/interview-with-audrey-tang/">lamdacamel</a>.</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">symbol</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">LComb</span>
+<span class="nf">symbol</span> <span class="n">lit_str</span> <span class="ow">=</span> 
+    <span class="kt">Comb</span> <span class="o">$</span>  <span class="nf">\</span><span class="n">str</span> <span class="ow">-&gt;</span> <span class="kr">let</span>
+        <span class="n">status</span><span class="ow">=</span><span class="mi">0</span>
+        <span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">str&#39;</span><span class="p">)</span>  <span class="ow">=</span> 
+            <span class="n">str</span> <span class="o">=~</span> <span class="p">(</span><span class="s">&quot;^</span><span class="se">\\</span><span class="s">s*&quot;</span><span class="o">++</span><span class="n">lit_str</span><span class="o">++</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">s*&quot;</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span><span class="kt">String</span><span class="p">,</span><span class="kt">String</span><span class="p">)</span>
+      <span class="kr">in</span>
+        <span class="kr">if</span> <span class="n">m</span><span class="o">/=</span><span class="s">&quot;&quot;</span>
+            <span class="kr">then</span>
+                <span class="kt">MTup</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">str&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kt">Match</span> <span class="n">lit_str</span><span class="p">])</span>
+            <span class="kr">else</span>
+                <span class="kt">MTup</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">str</span><span class="p">,</span> <span class="p">[</span><span class="kt">UndefinedMatch</span><span class="p">])</span>
+</code></pre></div>
+<p>(The <code>$</code> behaves like an opening parenthesis that does not need a closing parenthesis; <code>++</code> is the list concatenation operator, in Haskell strings are lists of characters.)</p>
+
+<p>The <code>apply</code> function pattern matches against the type alternatives for <code>LComb</code>. Because of the pattern matching there is not need for an <code>untag</code> function. It is clear from this implementation that we can write a sequence of parsers both as <code>Seq [...]</code> or <code>sequence [...]</code>.</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">apply</span> <span class="ow">::</span> <span class="kt">LComb</span> <span class="ow">-&gt;</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">MTup</span> <span class="kt">String</span>
+<span class="nf">apply</span> <span class="n">p</span> <span class="n">str</span> <span class="ow">=</span> <span class="kr">case</span> <span class="n">p</span> <span class="kr">of</span>
+    <span class="kt">Comb</span> <span class="n">p&#39;</span> <span class="ow">-&gt;</span> <span class="n">p&#39;</span> <span class="n">str</span>
+    <span class="kt">Seq</span> <span class="n">p&#39;</span> <span class="ow">-&gt;</span> <span class="kr">let</span>
+            <span class="kt">Comb</span> <span class="n">p&#39;&#39;</span> <span class="ow">=</span> <span class="n">sequence</span> <span class="n">p&#39;</span>
+        <span class="kr">in</span>
+            <span class="n">p&#39;&#39;</span> <span class="n">str</span>
+    <span class="kt">Tag</span> <span class="n">k</span> <span class="n">pp</span> <span class="ow">-&gt;</span> <span class="kr">let</span>
+                <span class="kt">MTup</span> <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">str2</span><span class="p">,</span> <span class="n">mms</span><span class="p">)</span> <span class="ow">=</span> <span class="n">apply</span> <span class="n">pp</span> <span class="n">str</span>
+                <span class="n">matches</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">TaggedMatches</span> <span class="n">k</span> <span class="n">mms</span><span class="p">]</span> 
+            <span class="kr">in</span>
+                <span class="kt">MTup</span> <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">str2</span><span class="p">,</span> <span class="n">matches</span><span class="p">)</span>
+</code></pre></div>
+<p>Apart from the static typing, the <code>sequence</code> function is very close to the Perl version. That is of course because I wrote the Perl code in a functional style. </p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">sequence</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">LComb</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">LComb</span>
+<span class="nf">sequence</span> <span class="n">pseq</span> <span class="ow">=</span> 
+    <span class="kt">Comb</span> <span class="o">$</span> <span class="nf">\</span><span class="n">str</span> <span class="ow">-&gt;</span> <span class="kr">let</span>
+                <span class="n">f</span> <span class="n">acc</span> <span class="n">p</span> <span class="ow">=</span> <span class="kr">let</span>
+                    <span class="kt">MTup</span> <span class="p">(</span><span class="n">status1</span><span class="p">,</span><span class="n">str1</span><span class="p">,</span><span class="n">matches</span><span class="p">)</span> <span class="ow">=</span> <span class="n">acc</span>
+                    <span class="kt">MTup</span> <span class="p">(</span><span class="n">status2</span><span class="p">,</span><span class="n">str2</span><span class="p">,</span><span class="n">ms</span><span class="p">)</span> <span class="ow">=</span> <span class="n">apply</span> <span class="n">p</span> <span class="n">str1</span>
+                    <span class="kr">in</span>
+                        <span class="kr">if</span> <span class="p">(</span><span class="n">status2</span><span class="o">*</span><span class="n">status1</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> 
+                            <span class="kr">then</span>
+                                <span class="kt">MTup</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">str1</span><span class="p">,</span><span class="n">emptyMatches</span><span class="p">)</span>
+                            <span class="kr">else</span>
+                                <span class="kt">MTup</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">str2</span><span class="p">,(</span><span class="n">matches</span><span class="o">++</span><span class="n">ms</span><span class="p">))</span>
+                <span class="kt">MTup</span> <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">str&#39;</span><span class="p">,</span> <span class="n">matches&#39;</span><span class="p">)</span> <span class="ow">=</span> 
+                    <span class="n">foldl</span> <span class="n">f</span> <span class="p">(</span><span class="kt">MTup</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">str</span><span class="p">,</span><span class="n">emptyMatches</span><span class="p">))</span> <span class="n">pseq</span>
+            <span class="kr">in</span>
+                <span class="kr">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span>
+                    <span class="kt">MTup</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">str&#39;</span><span class="p">,</span><span class="n">emptyMatches</span><span class="p">)</span>
+                <span class="kr">else</span>
+                    <span class="kt">MTup</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">str&#39;</span><span class="p">,</span><span class="n">matches&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>In Raku, I use roles as algebraic datatypes as explained in <a href="">my previous post</a>. Essentially, each alternative of a sum types mixes in an empty role which is only used to name the type; product types are just roles with some attributes that are declared in the role&#39;s parameter list.</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># The list-based combinator type</span>
+<span class="k">role</span> <span class="n">LComb</span> {}
+<span class="k">role</span> <span class="nb">Seq</span>[<span class="n">LComb</span> <span class="nv">@combs</span>] <span class="nb">does</span> <span class="n">LComb</span> {
+    <span class="k">has</span> <span class="n">LComb</span> <span class="nv">@.combs</span> = <span class="nv">@combs</span>;
+}
+<span class="k">role</span> <span class="n">Comb</span>[<span class="nb">Sub</span> <span class="nv">$comb</span>] <span class="nb">does</span> <span class="n">LComb</span> {
+    <span class="k">has</span> <span class="nb">Sub</span> <span class="nv">$.comb</span> = <span class="nv">$comb</span>;
+}
+<span class="k">role</span> <span class="n">Tag</span>[<span class="nb">Str</span> <span class="nv">$tag</span>, <span class="n">LComb</span> <span class="nv">$comb</span>] <span class="nb">does</span> <span class="n">LComb</span> {
+    <span class="k">has</span> <span class="nb">Str</span> <span class="nv">$.tag</span> = <span class="nv">$tag</span>;
+    <span class="k">has</span> <span class="n">LComb</span> <span class="nv">$.comb</span> = <span class="nv">$comb</span>; 
+} 
+
+<span class="c1"># The matches</span>
+<span class="k">role</span> <span class="n">Matches</span> {}
+<span class="k">role</span> <span class="nb">Match</span>[<span class="nb">Str</span> <span class="nv">$str</span>] <span class="nb">does</span> <span class="n">Matches</span> {
+    <span class="k">has</span> <span class="nb">Str</span> <span class="nv">$.match</span>=<span class="nv">$str</span>;
+} 
+<span class="k">role</span> <span class="n">TaggedMatch</span>[<span class="nb">Str</span> <span class="nv">$tag</span>, <span class="n">Matches</span> <span class="nv">@ms</span>] <span class="nb">does</span> <span class="n">Matches</span> {
+    <span class="k">has</span> <span class="nb">Str</span> <span class="nv">$.tag</span> = <span class="nv">$tag</span>;
+    <span class="k">has</span> <span class="n">Matches</span> <span class="nv">@.matches</span> = <span class="nv">@ms</span>;
+} 
+<span class="k">role</span> <span class="n">UndefinedMatch</span> <span class="nb">does</span> <span class="n">Matches</span> {}
+
+<span class="c1"># The tuple returned by the parser</span>
+<span class="k">role</span> <span class="n">MTup</span>[<span class="nb">Int</span> <span class="nv">$st</span>, <span class="nb">Str</span> <span class="nv">$rest</span>, <span class="n">Matches</span> <span class="nv">@ms</span>] {
+    <span class="k">has</span> <span class="nb">Int</span> <span class="nv">$.status</span> = <span class="nv">$st</span>;
+    <span class="k">has</span> <span class="nb">Str</span> <span class="nv">$.rest</span> = <span class="nv">$rest</span>;
+    <span class="k">has</span> <span class="n">Matches</span> <span class="nv">@.matches</span> = <span class="nv">@ms</span>;
+}
+</code></pre></div>
+<p>The way the Raku regular expressions are used in this implementation of <code>symbol</code> is closer to the Haskell version than the Perl 5 version. But the main difference with the Perl 5 version is that the combinator and the return tuple are statically typed. The function <code>undef-match</code> is a convenience to return an array with an undefined match. </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">symbol</span> (<span class="nb">Str</span> <span class="nv">$lit_str</span> --&gt; <span class="n">LComb</span>) {
+    <span class="k">my</span> <span class="nv">$lit_str_</span> = <span class="nv">$lit_str</span>;
+    <span class="n">Comb</span>[ <span class="k">sub</span> (<span class="nb">Str</span> <span class="nv">$str</span> --&gt; <span class="n">MTup</span>) {
+        <span class="k">if</span> (
+                <span class="nv">$str</span> ~~ <span class="sr">m/^\s*$lit_str_\s* $&lt;r&gt; = [.*]/</span> 
+          ) {
+            <span class="k">my</span> <span class="nv">$matches</span>=<span class="nb">Array</span>[<span class="n">Matches</span>](<span class="nb">Match</span>[<span class="nv">$lit_str_</span>].<span class="nb">new</span>);
+            <span class="k">my</span> <span class="nv">$str_</span> = ~<span class="nv">$&lt;r&gt;</span>; 
+            <span class="n">MTup</span>[<span class="mi">1</span>, <span class="nv">$str_</span>, <span class="nv">$matches</span>].<span class="nb">new</span>;
+        } <span class="k">else</span> {
+            <span class="n">MTup</span>[<span class="mi">0</span>, <span class="nv">$str</span>, <span class="n">undef-match</span>].<span class="nb">new</span>; 
+        }
+    }
+    ].<span class="nb">new</span>;
+}
+</code></pre></div>
+<p>As explained in <a href="">my previous post</a>, we use Raku&#39;s <code>multi sub</code>s for pattern matching on the types. In Haskell this is also possible, and the definition of <code>apply</code> can be rewritten as:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">apply</span> <span class="p">(</span><span class="kt">Comb</span> <span class="n">p&#39;</span><span class="p">)</span> <span class="n">str</span> <span class="ow">=</span> <span class="n">p&#39;</span> <span class="n">str</span>
+<span class="nf">apply</span> <span class="p">(</span><span class="kt">Seq</span> <span class="n">p&#39;</span><span class="p">)</span> <span class="n">str</span> <span class="ow">=</span> <span class="n">apply</span> <span class="p">(</span><span class="n">sequence</span> <span class="n">p&#39;</span><span class="p">)</span> <span class="n">str</span> 
+<span class="nf">apply</span> <span class="p">(</span><span class="kt">Tag</span> <span class="n">k</span> <span class="n">pp</span><span class="p">)</span> <span class="n">str</span> <span class="ow">=</span> <span class="kr">let</span>
+                <span class="kt">MTup</span> <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">str2</span><span class="p">,</span> <span class="n">mms</span><span class="p">)</span> <span class="ow">=</span> <span class="n">apply</span> <span class="n">pp</span> <span class="n">str</span>
+                <span class="n">matches</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">TaggedMatches</span> <span class="n">k</span> <span class="n">mms</span><span class="p">]</span> 
+            <span class="kr">in</span>
+                <span class="kt">MTup</span> <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">str2</span><span class="p">,</span> <span class="n">matches</span><span class="p">)</span>
+</code></pre></div>
+<p>The Raku version of <code>apply</code> is quite close to this Haskell version. For convenience, I use a function <code>unmtup</code> to unpack the <code>MTup</code>. </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">multi</span> <span class="k">sub</span> <span class="n">apply</span>(<span class="n">Comb</span>[ <span class="nb">Sub</span> ] <span class="nv">$p</span>, <span class="nb">Str</span> <span class="nv">$str</span> --&gt; <span class="n">MTup</span>) {
+    (<span class="nv">$p</span>.<span class="nb">comb</span>)(<span class="nv">$str</span>);
+}
+<span class="k">multi</span> <span class="k">sub</span> <span class="n">apply</span>(<span class="nb">Seq</span>[ <span class="nb">Array</span> ] <span class="nv">$ps</span>, <span class="nb">Str</span> <span class="nv">$str</span> --&gt; <span class="n">MTup</span>) {
+    <span class="n">apply</span>( <span class="n">sequence</span>( <span class="nv">$ps</span>.<span class="n">combs</span>), <span class="nv">$str</span>);
+}
+<span class="k">multi</span> <span class="k">sub</span> <span class="n">apply</span>(<span class="n">Tag</span>[ <span class="nb">Str</span>, <span class="n">LComb</span> ] <span class="nv">$t</span>, <span class="nb">Str</span> <span class="nv">$str</span> --&gt; <span class="n">MTup</span>) {
+    <span class="k">my</span> <span class="n">MTup</span> <span class="nv">$res</span> = <span class="n">apply</span>(<span class="nv">$t</span>.<span class="nb">comb</span>,<span class="nv">$str</span>);
+        <span class="k">my</span> (<span class="nv">$status</span>,  <span class="nv">$str2</span>, <span class="nv">@mms</span>) = <span class="n">unmtup</span>(<span class="nv">$res</span>);
+    <span class="k">my</span> <span class="n">Matches</span> <span class="nv">@matches</span> = ( <span class="n">TaggedMatch</span>[<span class="nv">$t</span>.<span class="n">tag</span>, <span class="nv">@mms</span>].<span class="nb">new</span> );
+    <span class="n">MTup</span>[<span class="nv">$status</span>, <span class="nv">$str2</span>, <span class="nv">@matches</span>].<span class="nb">new</span>;
+}
+</code></pre></div>
+<p>Finally, the <code>sequence</code> code in Raku. It follows closely the structure of the Perl 5 and Haskell versions. Raku&#39;s <code>reduce</code> is equivalent to Haskell&#39;s <code>foldl</code>.</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">sequence</span> (<span class="n">LComb</span> <span class="nv">@combs</span> --&gt; <span class="n">LComb</span>) {
+    <span class="n">Comb</span>[
+        <span class="k">sub</span> (<span class="nb">Str</span> <span class="nv">$str</span> --&gt; <span class="n">MTup</span>) {
+            <span class="k">my</span> <span class="nb">Sub</span> <span class="nv">$f</span> = <span class="k">sub</span> ( <span class="n">MTup</span> <span class="nv">$acc</span>, <span class="n">LComb</span> <span class="nv">$p</span> --&gt; <span class="n">MTup</span>) {
+                <span class="k">my</span> (<span class="nv">$st1</span>, <span class="nv">$str1</span>, <span class="nv">$ms1</span>) = <span class="n">unmtup</span>(<span class="nv">$acc</span>);
+                <span class="k">my</span> <span class="n">MTup</span> <span class="nv">$res</span> = <span class="n">apply</span>(<span class="nv">$p</span>,<span class="nv">$str1</span>);
+                <span class="k">my</span> (<span class="nv">$st2</span>, <span class="nv">$str2</span>, <span class="nv">$ms2</span>) = <span class="n">unmtup</span>(<span class="nv">$res</span>);
+                <span class="k">if</span> (<span class="nv">$st2</span>*<span class="nv">$st1</span><span class="o">==</span><span class="mi">0</span>) {
+                    <span class="k">return</span> <span class="n">MTup</span>[<span class="mi">0</span>,<span class="nv">$str1</span>,<span class="n">empty-match</span>].<span class="nb">new</span>;
+                } <span class="k">else</span> {
+                    <span class="k">return</span> <span class="n">MTup</span>[<span class="mi">1</span>,<span class="nv">$str2</span>,  
+                        <span class="nb">Array</span>[<span class="n">Matches</span>].<span class="nb">new</span>(|<span class="nv">$ms1</span>,|<span class="nv">$ms2</span>) ].<span class="nb">new</span>;
+                }
+            }
+            <span class="k">my</span> <span class="n">MTup</span> <span class="nv">$res</span> = 
+                <span class="nb">reduce</span> <span class="nv">$f</span>, <span class="n">MTup</span>[<span class="mi">1</span>,<span class="nv">$str</span>,<span class="n">empty-match</span>].<span class="nb">new</span>,|<span class="nv">@combs</span>;
+            <span class="k">my</span> (<span class="nv">$status</span>, <span class="nv">$rest</span>, <span class="nv">$matches</span>) = <span class="n">unmtup</span>(<span class="nv">$res</span>);
+            <span class="k">if</span> (<span class="nv">$status</span> == <span class="mi">0</span>) {
+                <span class="n">MTup</span>[<span class="mi">0</span>,<span class="nv">$rest</span>,<span class="n">empty-match</span>].<span class="nb">new</span>;
+            } <span class="k">else</span> {
+                <span class="n">MTup</span>[<span class="mi">1</span>,<span class="nv">$rest</span>,<span class="nv">$matches</span>].<span class="nb">new</span>;
+            }
+        }
+    ].<span class="nb">new</span>;
+}
+</code></pre></div>
+<p>There is still a minor issue with this definition of <code>sequence</code>: Because of the signature, we can&#39;t write </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="n">sequence</span>(<span class="n">p1</span>, <span class="n">p2</span>, ...)
+</code></pre></div>
+<p>Instead, we would have to write</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="n">sequence</span>(<span class="nb">Array</span>[<span class="n">LComb</span>].<span class="nb">new</span>(<span class="n">p1</span>, <span class="n">p2</span>, ...))
+</code></pre></div>
+<p>which is a bit tedious. So I rename <code>sequence</code> to <code>sequence_</code> and wrap it in a new function <code>sequence</code> which has a &#39;slurpy&#39; argument (i.e. it is variadic) like this:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">sequence</span> (*<span class="nv">@ps</span>) <span class="k">is</span> <span class="k">export</span> {
+    <span class="n">sequence_</span>( <span class="nb">Array</span>[<span class="n">LComb</span>](<span class="nv">@ps</span>) ); 
+}
+</code></pre></div>
+<p>I do the same for all combinators that take a list of combinators as argument. If you wanted to type check the arguments of the wrapper function, you could do this with a <code>where</code> clause:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">choice</span> (*<span class="nv">@ps</span> <span class="k">where</span> { .<span class="nb">all</span> ~~ <span class="n">LComb</span>} ) <span class="k">is</span> <span class="k">export</span> {
+    <span class="n">choice_</span>( <span class="nb">Array</span>[<span class="n">LComb</span>](<span class="nv">@ps</span>));
+} 
+</code></pre></div>
+<p>The type constructor based tagging (<code>Tag label parser</code>) is nice in Haskell but in Raku it would look like <code>Tag[label, parser].new</code> which I don&#39;t like. Therefore, I wrap the constructor in a <code>tag</code> function<code>so I can write</code>tag(label, parser)`. </p>
+
+<h2>An example of typical usage</h2>
+
+<p>As an example, we can construct the following parser for a part of a Fortran 90-style variable declaration, apply it to the given string and get the parse tree:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">type_parser</span> =     
+    <span class="n">sequence</span>(
+        <span class="n">tag</span>( <span class="s">&quot;Type&quot;</span>, <span class="n">word</span>),
+        <span class="k">maybe</span>( <span class="n">parens</span>( 
+            <span class="n">choice</span>( 
+                <span class="n">tag</span>( <span class="s">&quot;Kind&quot;</span> ,<span class="n">natural</span>),
+                <span class="n">sequence</span>(
+                    <span class="n">symbol</span>( <span class="s">&quot;kind&quot;</span>),
+                    <span class="n">symbol</span>( <span class="s">&quot;=&quot;</span>),
+                    <span class="n">tag</span>( <span class="s">&quot;Kind&quot;</span>, <span class="n">natural</span>)
+                )
+            )
+        ))
+      ); 
+
+<span class="k">my</span> \<span class="n">type_str</span> = <span class="s">&quot;integer(kind=8), &quot;</span>;
+
+<span class="k">my</span> (\<span class="n">tpst</span>, \<span class="n">tpstr</span>, \<span class="n">tpms</span>) = <span class="n">unmtup</span> <span class="n">apply</span>( <span class="n">type_parser</span>, <span class="n">type_str</span>);   
+<span class="nb">say</span> <span class="n">getParseTree</span>(<span class="n">tpms</span>); 
+</code></pre></div>
+<p>(In Raku, the sigils are optional for immutable variables, declared with a <code>\</code>)</p>
+
+<p>For reference, here is the Haskell code:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">type_parser</span> <span class="ow">=</span>     
+    <span class="n">sequence</span> <span class="p">[</span>
+        <span class="kt">Tag</span> <span class="s">&quot;Type&quot;</span> <span class="n">word</span><span class="p">,</span>
+        <span class="n">maybe</span> <span class="o">$</span> <span class="n">parens</span> <span class="o">$</span> 
+            <span class="n">choice</span> <span class="p">[</span>
+                <span class="kt">Tag</span> <span class="s">&quot;Kind&quot;</span> <span class="n">natural</span><span class="p">,</span>
+                <span class="n">sequence</span> <span class="p">[</span>
+                    <span class="n">symbol</span> <span class="s">&quot;kind&quot;</span><span class="p">,</span>
+                    <span class="n">symbol</span> <span class="s">&quot;=&quot;</span><span class="p">,</span>
+                    <span class="p">(</span><span class="kt">Tag</span> <span class="s">&quot;Kind&quot;</span> <span class="n">natural</span><span class="p">)</span>
+                <span class="p">]</span> 
+            <span class="p">]</span>
+        <span class="p">]</span>
+
+<span class="nf">type_str</span> <span class="ow">=</span> <span class="s">&quot;integer(kind=8), &quot;</span>
+
+<span class="nf">main</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+    <span class="kr">let</span>
+        <span class="kt">MTup</span> <span class="p">(</span><span class="n">tpst</span><span class="p">,</span><span class="n">tpstr</span><span class="p">,</span><span class="n">tpms</span><span class="p">)</span> <span class="ow">=</span> <span class="n">apply</span> <span class="n">type_parser</span> <span class="n">type_str</span>    
+    <span class="n">print</span> <span class="o">$</span> <span class="n">getParseTree</span> <span class="n">tpms</span>
+</code></pre></div>
+<p>(If you wonder about the strange signature of <code>main</code>, the <code>do</code> keyword or the <code>let</code> without an <code>in</code>, the answers are <a href="http://learnyouahaskell.com/">here</a>. Or you could take <a href="https://www.futurelearn.com/courses/functional-programming-haskell">my free online course</a>.)</p>
+
+<p>As is clear from this example, in both languages, list-based parser combinators provide a clean and highly composable way of constructing powerful and complex parsers. It is also quite easy to extend the library with additional parsers. I think this is a nice practical application of algebraic data types in particular and functional programming in general. You can find both the <a href="https://github.com/wimvanderbauwhede/list-based-combinators-hs">Haskell code</a> and the <a href="https://github.com/wimvanderbauwhede/list-based-combinators-raku">Raku code</a> in my repo. </p>
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2020-06-22T00:00:00Z" itemprop="dateModified">June 22, 2020</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2020 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
