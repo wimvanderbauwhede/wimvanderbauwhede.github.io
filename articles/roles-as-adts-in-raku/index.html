@@ -298,21 +298,6 @@ One common use case is a list where you want to store values of different types:
 <span class="k">my</span> <span class="nv">$y</span> = <span class="mi">43</span>;
 <span class="nb">say</span> <span class="o">x</span> + <span class="nv">$y</span>; 
 </code></pre></div>
-<p>As we will use Raku&#39;s <em>roles</em> to implement algebraic data types, it&#39;s worth introducing them as well. Roles are what in Python and Ruby is called <em>mixins</em>. They are basically classes that you can use to add behaviours to other classes without using inheritance. Raku uses the <code>does</code> keyword for this. Here is a stripped-down example take from the <a href="https://docs.raku.org/language/objects#Roles">Raku documentation</a> (<code>has</code> declares an attribute, <code>method</code> a method)</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Notable</span> {
-    <span class="k">has</span> <span class="nv">$.notes</span> <span class="k">is</span> <span class="k">rw</span>;
-
-    <span class="k">method</span> <span class="n">notes</span>() { ... }; 
-}
-
-<span class="k">class</span> <span class="n">Journey</span> <span class="nb">does</span> <span class="n">Notable</span> {
-    <span class="k">has</span> <span class="nv">$.origin</span>;
-    <span class="k">has</span> <span class="nv">$.destination</span>;
-    <span class="k">has</span> <span class="nv">@.travelers</span>;
-
-    <span class="k">method</span> { ... <span class="s">&lt;implemented using notes()&gt;</span> ... };
-}
-</code></pre></div>
 <p>Raku has <a href="https://raku.guide/">gradual typing</a>: it allows both static and dynamic typing. That&#39;s a good start because we need static typing to support algebraic data types. It also has <a href="https://docs.raku.org/language/variables">immutable variables</a> and <a href="https://raku.guide/#_anonymous_functions">anonymous functions</a>, and even <a href="https://docs.raku.org/language/list#index-entry-laziness_in_Iterable_objects">(limited) laziness</a>. And of course <a href="https://raku.guide/#_functional_programming">functions are first-class citizens</a>, so we have everything we need for pure, statically-typed functional programming. But what about the algebraic data types?</p>
 
 <p>In Raku, <code>enum</code>s are sum types:</p>
@@ -334,8 +319,23 @@ One common use case is a list where you want to store values of different types:
 Roles are a collection of attributes and methods; however, unlike classes, roles are meant for describing only parts of an object's behavior; this is why, in general, roles are intended to be mixed in classes and objects. In general, classes are meant for managing objects and roles are meant for managing behavior and code reuse within objects.
 </blockquote>
 
-<p>Roles use the keyword <code>role</code> preceding the name of the role that is declared. Roles are mixed in using the <code>does</code> keyword preceding the name of the role that is mixed in. </p>
+<p>Roles use the keyword <code>role</code> preceding the name of the role that is declared. Roles are mixed in using the <code>does</code> keyword preceding the name of the role that is mixed in.  Roles are what in Python and Ruby is called <em>mixins</em>.</p>
 
+<p>So roles are basically classes that you can use to add behaviours to other classes without using inheritance. Here is a stripped-down example take from the <a href="https://docs.raku.org/language/objects#Roles">Raku documentation</a> (<code>has</code> declares an attribute, <code>method</code> a method)</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Notable</span> {
+    <span class="k">has</span> <span class="nv">$.notes</span> <span class="k">is</span> <span class="k">rw</span>;
+
+    <span class="k">method</span> <span class="n">notes</span>() { ... }; 
+}
+
+<span class="k">class</span> <span class="n">Journey</span> <span class="nb">does</span> <span class="n">Notable</span> {
+    <span class="k">has</span> <span class="nv">$.origin</span>;
+    <span class="k">has</span> <span class="nv">$.destination</span>;
+    <span class="k">has</span> <span class="nv">@.travelers</span>;
+
+    <span class="k">method</span> { ... <span class="s">&lt;implemented using notes()&gt;</span> ... };
+}
+</code></pre></div>
 <p>In particular, roles can be mixed into other roles, and that is one of the key features I will exploit. Furthermore, role constructors can take arguments <em>and</em> they are parametric. So we have everything we need to create proper algebraic data types. Let&#39;s look at a few examples.</p>
 
 <h3>A few simple examples</h3>
