@@ -347,7 +347,7 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 <span class="k">role</span> <span class="n">AbsolutelyTrue</span> <span class="nb">does</span> <span class="n">OpinionatedBool</span> {}
 <span class="k">role</span> <span class="n">TotallyFalse</span> <span class="nb">does</span> <span class="n">OpinionatedBool</span> {}
 </code></pre></div>
-<p>In Raku, types are values; and for a role with an empty body, you don&#39;t need the <code>.new</code> constructor call:</p>
+<p>In Raku, types are values; and for a role with an empty body, you don&#39;t need the <code>.new</code> constructor call. In a sum type, the alternatives usually are labelled containers for values, but they can be empty containers as well. When that is the case, there is no need to create separate instances of them because there is only one way to have an empty container.</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">OpinionatedBool</span> \<span class="n">bt</span> = <span class="n">AbsolutelyTrue</span>;
 </code></pre></div>
 <p>Sum types can be used in combination with Raku&#39;s <code>multi sub</code> feature: Raku lets you provide several definitions for a function, with the same name but different signatures. With multi subs we can do what is known as pattern matching on types:</p>
