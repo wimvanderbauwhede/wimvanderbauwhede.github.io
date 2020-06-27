@@ -553,14 +553,17 @@ As in the product type, we use the role as a container to hold the values. The <
 <span class="nv">$t</span>.<span class="n">visit-preorder</span>(<span class="nv">&amp;say</span>);    <span class="c1"># OUTPUT: «5␤4␤6␤» </span>
 <span class="nv">$t</span>.<span class="n">visit-postorder</span>(<span class="nv">&amp;say</span>);   <span class="c1"># OUTPUT: «4␤6␤5␤» </span>
 </code></pre></div>
-<p>This example contains quite a bit of Raku syntax:
-- Raku allows dashes in names;
-- the <code>-&gt;</code> syntax is a foreach loop, iterating over all elements of the preceding list;
-- The <code>..</code> is array slicing;
-- <code>::?CLASS</code> is a compile-time type variable populated with the class you&#39;re in and <code>:U</code> is a type constraint which specifies that it should be interpreted as a type object. Finally, the <code>:</code> marks the argument to its left as the invocant. In other words, it allows us to write <code>BinaryTree[Int].new-from-list(4, 5, 6)</code> where <code>BinaryTree[Int] is the value of</code>::?CLASS<code>. This is the Raku way to create custom constructors.   
-- The</code>*<code>in front of the</code>@el<code>argument of</code>new-from-list<code>makes this a variadic function where</code>@el<code>contains all arguments;
-- The</code>=&gt;<code>syntax allows to assign arguments by name rather than by position;
--</code>?? ... !! ...<code>is Raku&#39;s syntax for C&#39;s ternary</code> ? ... : ... `;</p>
+<p>This example contains quite a bit of Raku syntax:</p>
+
+<ul>
+<li>Raku allows dashes in names;</li>
+<li>the <code>-&gt;</code> syntax is a foreach loop, iterating over all elements of the preceding list;</li>
+<li>The <code>..</code> is array slicing;</li>
+<li><code>::?CLASS</code> is a compile-time type variable populated with the class you&#39;re in and <code>:U</code> is a type constraint which specifies that it should be interpreted as a type object. Finally, the <code>:</code> marks the argument to its left as the invocant. In other words, it allows us to write <code>BinaryTree[Int].new-from-list(4, 5, 6)</code> where <code>BinaryTree[Int] is the value of</code>::?CLASS`. This is the Raku way to create custom constructors.<br></li>
+<li>The <code>*</code> in front of the <code>@el</code> argument of <code>new-from-list</code> makes this a variadic function where <code>@el</code> contains all arguments;</li>
+<li>The <code>=&gt;</code> syntax allows to assign arguments by name rather than by position;</li>
+<li><code>?? ... !! ...</code> is Raku&#39;s syntax for C&#39;s ternary <code>? ... : ...</code>;</li>
+</ul>
 
 <p>This example is written in Raku&#39;s object-oriented style, with methods acting on the attributes of the role. Let&#39;s see how we can write this in a functional style.</p>
 
