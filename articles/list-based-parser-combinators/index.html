@@ -159,7 +159,7 @@ If you are not familiar with algebraic data types, I suggest you read that artic
 
 <p>The code examples in this article are written in <a href="https://www.perl.org/">Perl</a>, <a href="https://www.haskell.org/">Haskell</a> and <a href="https://raku.org/">Raku</a>. If you are familiar with these languages, you can skip this section. The code is written in a functional style and is not very idiomatic so you should be able to understand it easily if you know another programming language.</p>
 
-<p>Perl and Raku are syntactically similar to C/C++, Java and JavaScript: block-based, with statements separated by semicolons, blocks demarkated by braces, and argument lists in parenthese and separated by commas. The main feature that sets Perl and Raku apart is the use of sigils (&#39;funny characters&#39;) which identify the type of a variable: <code>$</code> for a scalar, <code>@</code> for an array, <code>%</code> for a hash (map) and <code>&amp;</code> for a subroutine. Variables also have keywords to identify their scope, I will only use <code>my</code> which marks the variable as lexically scoped. A subroutine is declared with the <code>sub</code> keyword, and subroutines can be named or anonymous:</p>
+<p>Perl and Raku are syntactically similar to C/C++, Java and JavaScript: block-based, with statements separated by semicolons, blocks demarcated by braces, and argument lists in parentheses and separated by commas. The main feature that sets Perl and Raku apart is the use of sigils (&#39;funny characters&#39;) which identify the type of a variable: <code>$</code> for a scalar, <code>@</code> for an array, <code>%</code> for a hash (map) and <code>&amp;</code> for a subroutine. Variables also have keywords to identify their scope, I will only use <code>my</code> which marks the variable as lexically scoped. A subroutine is declared with the <code>sub</code> keyword, and subroutines can be named or anonymous:</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">square</span> (<span class="nv">$x</span>) {
     <span class="nv">$x</span>*<span class="nv">$x</span>;
 }
@@ -561,7 +561,7 @@ In Haskell, we start (of course) by defining a few types:</p>
 <span class="k">my</span> (\<span class="n">tpst</span>, \<span class="n">tpstr</span>, \<span class="n">tpms</span>) = <span class="n">unmtup</span> <span class="n">apply</span>( <span class="n">type_parser</span>, <span class="n">type_str</span>);   
 <span class="nb">say</span> <span class="n">getParseTree</span>(<span class="n">tpms</span>); 
 </code></pre></div>
-<p>(In Raku, the sigils are optional for immutable variables, declared with a <code>\</code>)</p>
+<p>(In Raku, variables declared with a <code>\</code> are sigil-less )</p>
 
 <p>For reference, here is the Haskell code:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">type_parser</span> <span class="ow">=</span>     

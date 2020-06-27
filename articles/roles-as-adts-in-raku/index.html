@@ -158,7 +158,7 @@
 
 <h2>Is this article for you?</h2>
 
-<p>In this article I will introduce <a href="https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf">algebraic data types</a>, a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using <em>roles</em>. You don&#39;t need to know Haskell at all and I only assume a slight familiarity with Raku, but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming. </p>
+<p>In this article I will introduce <a href="https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf">algebraic data types</a>, a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using <em>roles</em>. You don&#39;t need to know Haskell at all and I only assume a slight familiarity with Raku (I&#39;ve added a quick introduction), but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming. </p>
 
 <h2>Algebraic Data Types</h2>
 
@@ -278,6 +278,41 @@ One common use case is a list where you want to store values of different types:
 
 <h2>Algebraic data types in Raku</h2>
 
+<h3>A quick introduction to Raku</h3>
+
+<p>Before Raku went its own way, it was meant to be the next iteration of Perl (hence the original name Perl 6). It is therefore more similar to Perl than to any other language.</p>
+
+<p>Raku is syntactically similar to C/C++, Java and JavaScript: block-based, with statements separated by semicolons, blocks demarcated by braces, and argument lists in parentheses and separated by commas. The main feature it shares with Perl is the use of sigils (&#39;funny characters&#39;) which identify the type of a variable: <code>$</code> for a scalar, <code>@</code> for an array, <code>%</code> for a hash (map) and <code>&amp;</code> for a subroutine. Variables also have keywords to identify their scope, I will only use <code>my</code> which marks the variable as lexically scoped. A subroutine is declared with the <code>sub</code> keyword, and subroutines can be named or anonymous:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">square</span> (<span class="nv">$x</span>) {
+    <span class="nv">$x</span>*<span class="nv">$x</span>;
+}
+<span class="c1"># anonymous subroutine </span>
+<span class="k">my</span> <span class="nv">$anon_square</span> = <span class="k">sub</span> (<span class="nv">$x</span>) {
+    <span class="nv">$x</span>*<span class="nv">$x</span>;
+}
+</code></pre></div>
+<p>Raku also has <a href="https://docs.raku.org/language/variables#index-entry-Twigil">twigils</a>, secondary sigils that influence the scoping of a variable. For this article, the only twigil used in the code is <code>.</code> which is used to declare a role or class attribute with automatically generated accessors (like <code>$.notes</code> in the example below).</p>
+
+<p>Raku supports sigil-less variables, and uses the <code>\</code> syntax to declare them. For more on the difference between ordinary and sigil-less variables, see <a href="https://docs.raku.org/language/variables#Sigilless_variables">the Raku documentation</a>. For example (<code>say</code> prints its argument followed by a newline):</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="o">x</span> = <span class="mi">42</span>;
+<span class="k">my</span> <span class="nv">$y</span> = <span class="mi">43</span>;
+<span class="nb">say</span> <span class="o">x</span> + <span class="nv">$y</span>; 
+</code></pre></div>
+<p>As we will use Raku&#39;s <em>roles</em> to implement algebraic data types, it&#39;s worth introducing them as well. Roles are what in Python and Ruby is called <em>mixins</em>. They are basically classes that you can use to add behaviours to other classes without using inheritance. Raku uses the <code>does</code> keyword for this. Here is a stripped-down example take from the <a href="https://docs.raku.org/language/objects#Roles">Raku documentation</a> (<code>has</code> declares an attribute, <code>method</code> a method)</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Notable</span> {
+    <span class="k">has</span> <span class="nv">$.notes</span> <span class="k">is</span> <span class="k">rw</span>;
+
+    <span class="k">method</span> <span class="n">notes</span>() { ... }; 
+}
+
+<span class="k">class</span> <span class="n">Journey</span> <span class="nb">does</span> <span class="n">Notable</span> {
+    <span class="k">has</span> <span class="nv">$.origin</span>;
+    <span class="k">has</span> <span class="nv">$.destination</span>;
+    <span class="k">has</span> <span class="nv">@.travelers</span>;
+
+    <span class="k">method</span> { ... <span class="s">&lt;implemented using notes()&gt;</span> ... };
+}
+</code></pre></div>
 <p>Raku has <a href="https://raku.guide/">gradual typing</a>: it allows both static and dynamic typing. That&#39;s a good start because we need static typing to support algebraic data types. It also has <a href="https://docs.raku.org/language/variables">immutable variables</a> and <a href="https://raku.guide/#_anonymous_functions">anonymous functions</a>, and even <a href="https://docs.raku.org/language/list#index-entry-laziness_in_Iterable_objects">(limited) laziness</a>. And of course <a href="https://raku.guide/#_functional_programming">functions are first-class citizens</a>, so we have everything we need for pure, statically-typed functional programming. But what about the algebraic data types?</p>
 
 <p>In Raku, <code>enum</code>s are sum types:</p>
@@ -325,9 +360,8 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 
 <span class="c1"># Trying it out:</span>
 <span class="n">p</span>(<span class="n">bt</span>); <span class="c1"># prints True</span>
-<span class="n">p</span>(<span class="n">bi</span>); <span class="c1"># also prints True</span>
 </code></pre></div>
-<p>Because we use a type as a value, to test if a value is <code>AbsolutelyTrue</code> or <code>TotallyFalse</code>, we can use either the smart match <code>~~</code>, the container identity <code>=:=</code> or the value identity <code>===</code>! If we would create an instance like <code>AbsolutelyTrue.new</code> See the <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/roles_types_and_instances.raku">code example</a> for more details.</p>
+<p>Because we use a type as a value, to test if a value is <code>AbsolutelyTrue</code> or <code>TotallyFalse</code>, we can use either the smart match <code>~~</code>, the container (type) identity <code>=:=</code> or the value (instance) identity <code>===</code> to test this (the smart match operator behaves like <code>=:=</code> if the right-hand side is a type and as <code>===</code> if it is an object instance). If we would create an instance like <code>AbsolutelyTrue.new</code>, this would not be the case. See the <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/roles_types_and_instances.raku">code example</a> for more details.</p>
 
 <h4>The Colour, XYCoord and Pixel types</h4>
 
@@ -336,7 +370,7 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
 </code></pre></div>
 <ol>
 <li>Because the role serves both as the type (<code>RGBColour</code>) and the instance constructor (<code>RGB</code>), they must have the same name. I only named them differently to make it easier to distinguish them so this is not an issue.</li>
-<li>The types that make up each field must be named with unique names in the role&#39;s argument list, and need to have a corresponding attributes declared. That is again not really a limitation, because acessors for record type fields are handy. So it looks like:</li>
+<li>The types that make up each field must be named with unique names in the role&#39;s argument list, and need to have a corresponding attributes declared. That is again not really a limitation, because accessors for record type fields are handy. So it looks like:</li>
 </ol>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">RGBColour</span>[<span class="nb">Int</span> \<span class="n">r</span>, <span class="nb">Int</span> \<span class="n">g</span>, <span class="nb">Int</span> \<span class="n">b</span>] {
     <span class="k">has</span> <span class="nb">Int</span> <span class="nv">$.r</span> = <span class="n">r</span>;
@@ -344,6 +378,8 @@ Roles are a collection of attributes and methods; however, unlike classes, roles
     <span class="k">has</span> <span class="nb">Int</span> <span class="nv">$.b</span> = <span class="n">b</span>; 
 }
 </code></pre></div>
+<p>(the role&#39;s parameters are in square brackets)</p>
+
 <p>And we create <code>aquamarine</code> like this:</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">RGBColour</span> \<span class="n">aquamarine</span> = <span class="n">RGBColour</span>[ <span class="mi">127</span>, <span class="mi">255</span>, <span class="mi">212</span>].<span class="nb">new</span>;
 </code></pre></div>
@@ -382,6 +418,8 @@ As in the product type, we use the role as a container to hold the values. The <
     <span class="k">has</span> <span class="nv">$.lst</span> = <span class="n">lst</span>;
 }
 </code></pre></div>
+<p>(The prefix <code>::</code> is the Raku syntax to declare type variables)</p>
+
 <h5>Issues with current raku</h5>
 
 <p>There are some issues here: </p>
@@ -509,13 +547,21 @@ As in the product type, we use the role as a container to hold the values. The <
             <span class="n">left</span>    =&gt; <span class="nv">@left</span>  ?? <span class="k">self</span>.<span class="n">new-from-list</span>(<span class="nv">@left</span>)  !! <span class="k">self</span>,
             <span class="n">right</span>   =&gt; <span class="nv">@right</span> ?? <span class="k">self</span>.<span class="n">new-from-list</span>(<span class="nv">@right</span>) !! <span class="k">self</span>,
         );
-    }
 }
 
 <span class="k">my</span> <span class="nv">$t</span> = <span class="n">BinaryTree</span>[<span class="nb">Int</span>].<span class="n">new-from-list</span>(<span class="mi">4</span>, <span class="mi">5</span>, <span class="mi">6</span>);
 <span class="nv">$t</span>.<span class="n">visit-preorder</span>(<span class="nv">&amp;say</span>);    <span class="c1"># OUTPUT: «5␤4␤6␤» </span>
 <span class="nv">$t</span>.<span class="n">visit-postorder</span>(<span class="nv">&amp;say</span>);   <span class="c1"># OUTPUT: «4␤6␤5␤» </span>
 </code></pre></div>
+<p>This example contains quite a bit of Raku syntax:
+- Raku allows dashes in names;
+- the <code>-&gt;</code> syntax is a foreach loop, iterating over all elements of the preceding list;
+- The <code>..</code> is array slicing;
+- <code>::?CLASS</code> is a compile-time type variable populated with the class you&#39;re in and <code>:U</code> is a type constraint which specifies that it should be interpreted as a type object. Finally, the <code>:</code> marks the argument to its left as the invocant. In other words, it allows us to write <code>BinaryTree[Int].new-from-list(4, 5, 6)</code> where <code>BinaryTree[Int] is the value of</code>::?CLASS<code>. This is the Raku way to create custom constructors.   
+- The</code>*<code>in front of the</code>@el<code>argument of</code>new-from-list<code>makes this a variadic function where</code>@el<code>contains all arguments;
+- The</code>=&gt;<code>syntax allows to assign arguments by name rather than by position;
+-</code>?? ... !! ...<code>is Raku&#39;s syntax for C&#39;s ternary</code> ? ... : ... `;</p>
+
 <p>This example is written in Raku&#39;s object-oriented style, with methods acting on the attributes of the role. Let&#39;s see how we can write this in a functional style.</p>
 
 <p>The algebraic data type for this binary tree is:</p>
