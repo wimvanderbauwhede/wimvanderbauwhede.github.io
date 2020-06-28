@@ -269,14 +269,17 @@ They are called algebraic because they consist of alternatives (sums, also calle
 <p>If I now invent an alias <code>Str</code> for <code>List Char</code>, and use double quotes instead of list notation, I can write    </p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="kt">Str</span> <span class="n">str</span> <span class="ow">=</span> <span class="s">&quot;hello&quot;</span>
 </code></pre></div>
-<p>So integers and strings can be expressed as algebraic data types, and now we have introduced recursive and parameterised types. Time to move on to Raku!</p>
+<p>So integers and strings can be expressed as algebraic data types, and now we have introduced recursive and parameterised types.</p>
 
 <h3>What are algebraic data types good for?</h3>
 
-<p>These may seem like rather contrived examples, after all a language like Raku already has an Int and a Str type that work very well. So what is the use of these  algebraic data types? Of course the purpose of static types is to provide type safety and make debugging easier. But using algebraic data types also makes a different, more functional style of programming possible.<br>
-One common use case is a list where you want to store values of different types: you can create a sum type that has an alternative for each of these types. Another common case is a recursive type, such as a tree. Finally, the polymorphism provides a convenient way to create custom containers. I will give examples of each of these in the next section.</p>
+<p>These may seem like rather contrived examples, after all a language like Raku already has an <code>Int</code> and a <code>Str</code> type that work very well. So what is the use of these  algebraic data types? Of course the purpose of static types is to provide type safety and make debugging easier. But using algebraic data types also makes a different, more functional style of programming possible.</p>
+
+<p>One common use case is a list where you want to store values of different types: you can create a sum type that has an alternative for each of these types. Another common case is a recursive type, such as a tree. Finally, the polymorphism provides a convenient way to create custom containers. I will give examples of each of these in the next section. Time to move on to Raku!</p>
 
 <h2>Algebraic data types in Raku</h2>
+
+<p>As Raku is not a very well-known language (yet), here is a quick introduction of the features you&#39;ll need to follow the discussion below. </p>
 
 <h3>A quick introduction to Raku</h3>
 
