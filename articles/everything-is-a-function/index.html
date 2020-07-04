@@ -224,7 +224,7 @@
 
 <h3>Tuples</h3>
 
-<p>Haskell has <em>tuples</em>, also called record types or product types, ordered collections of expressions of potentially differnt types:</p>
+<p>Haskell has <em>tuples</em>, also called record types or product types, ordered collections of expressions of potentially different types:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">tp</span> <span class="ow">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;2&quot;</span><span class="p">,[</span><span class="mi">3</span><span class="p">])</span>
 </code></pre></div>
 <p>The tuple notation is syntactic sugar for a function application:</p>
@@ -233,7 +233,7 @@
 <p>The tuple construction function can again be defined purely using lambdas:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>          <span class="n">mkTup</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">t</span> <span class="ow">-&gt;</span> <span class="n">t</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
 </code></pre></div>
-<p>What we do here is to use the elements of the tuple as the arguments of a lambda function. So what <code>mkTup</code> returns is also a lambda function, in other words <code>mkTup</code> is a higher-order function. Now we rewrite the <code>mkTup</code> named function as lamda function as well:</p>
+<p>What we do here is to use the elements of the tuple as the arguments of a lambda function. So what <code>mkTup</code> returns is also a lambda function, in other words <code>mkTup</code> is a higher-order function. Now we rewrite the <code>mkTup</code> named function as lambda function as well:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>          <span class="n">mkTup</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">-&gt;</span> <span class="nf">\</span><span class="n">t</span> <span class="ow">-&gt;</span> <span class="n">t</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
 </code></pre></div>
 <p>So our tuples are now also encoded purely as lambda functions.</p>
@@ -283,10 +283,10 @@
 <p>This is a lambda function which always returns <code>true</code>, regardless of its argument. The definitions for <code>true</code> and <code>false</code> are given below under Booleans.  With this definition we can check if a list is empty or not:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">isEmpty</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">lst</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="ow">-&gt;</span> <span class="n">false</span><span class="p">)</span>
 </code></pre></div>
-<p>Let&#39;s see how this works. A non-emptylist is always defined as:</p>
+<p>Let&#39;s see how this works. A non-empty list is always defined as:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">lst</span> <span class="ow">=</span> <span class="n">x</span><span class="kt">:</span><span class="n">xs</span>
 </code></pre></div>
-<p>which with our defintion of <code>(:)</code> (i.e. <code>cons</code>) is:</p>
+<p>which with our definition of <code>(:)</code> (i.e. <code>cons</code>) is:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">lst</span> <span class="ow">=</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="ow">-&gt;</span> <span class="nf">\</span><span class="n">c</span> <span class="ow">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="n">x</span> <span class="n">xs</span>
     <span class="ow">=</span> <span class="nf">\</span><span class="n">c</span> <span class="ow">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span>
 </code></pre></div>
@@ -334,7 +334,7 @@
 </code></pre></div>
 <h4> The length of a list</h4>
 
-<p>To compute the length of a list we need integers, they are defined below. We increment the lenght counter for every element of the list consumed by the fold.</p>
+<p>To compute the length of a list we need integers, they are defined below. We increment the lent counter for every element of the list consumed by the fold.</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">length</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">calc_length</span> <span class="mi">0</span> <span class="n">lst</span>
       <span class="kr">where</span>
         <span class="n">calc_length</span> <span class="kr">_</span> <span class="n">len</span> <span class="ow">=</span> <span class="n">inc</span> <span class="n">len</span>
