@@ -192,14 +192,14 @@ If you are not familiar with algebraic data types, I suggest you read that artic
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">isEmpty</span> <span class="ow">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
 <span class="nf">isEmpty</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">==</span> <span class="mi">0</span>
 </code></pre></div>
-<p>The <code>isEmpty</code> function has a type signature, identified by <code>::</code>, that reads &quot;<code>isEmpty</code> is a function from a list of anything to a boolean&quot;. Types must be written with an initial capital. The <code>a</code> is a <em>type variable</em> which can take on any type, as explained in <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">my previous post</a>.</p>
+<p>The <code>isEmpty</code> function has a type signature, identified by <code>::</code>, that reads &quot;<code>isEmpty</code> is a function from a list of anything to a Boolean&quot;. Types must be written with an initial capital. The <code>a</code> is a <em>type variable</em> which can take on any type, as explained in <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">my previous post</a>.</p>
 
 <p>Raku has optional typing: you can add type information as part of the declarations, for example:</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">isOfSz</span>(<span class="nv">@lst</span>, <span class="nb">Int</span> <span class="nv">$sz</span> --&gt; <span class="nb">Bool</span>) {
     <span class="nv">@lst</span>.<span class="nb">elems</span> == <span class="nv">$sz</span>;
 }
 </code></pre></div>
-<p>This function takes array of any type and an integer and returns a boolean. </p>
+<p>This function takes array of any type and an integer and returns a Boolean. </p>
 
 <p>Other specific bits of syntax or functionality will be explained for the particular examples. </p>
 

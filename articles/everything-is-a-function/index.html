@@ -160,7 +160,7 @@
 
 <h2>In a functional language, there are only functions</h2>
 
-<p>Although it might seem that a language like Haskell has a lot of different objects and constructs, they can all be reduced to functions. We will demonstrate how variables, tuples, lists, conditionals, booleans and numbers can all be constructed from lambda functions. The article assumes some familiarity with Haskell, but here is a quick introduction.</p>
+<p>Although it might seem that a language like Haskell has a lot of different objects and constructs, they can all be reduced to functions. We will demonstrate how variables, tuples, lists, conditionals, Booleans and numbers can all be constructed from lambda functions. The article assumes some familiarity with Haskell, but here is a quick introduction.</p>
 
 <h3>Haskell: a quick introduction</h3>
 
@@ -184,7 +184,7 @@
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">isEmpty</span> <span class="ow">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
 <span class="nf">isEmpty</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">==</span> <span class="mi">0</span>
 </code></pre></div>
-<p>The <code>isEmpty</code> function has a type signature, identified by <code>::</code>, that reads &quot;<code>isEmpty</code> is a function from a list of anything to a boolean&quot;. Types must be written with an initial capital. The <code>a</code> is a <em>type variable</em> which can take on any type, as explained in <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">my post on algebraic data types</a>. Most of the time, you don&#39;t need to write type declarations as Haskell works them out automatically. In the rest of the article, I&#39;m not focusing on the types so I have omitted them.</p>
+<p>The <code>isEmpty</code> function has a type signature, identified by <code>::</code>, that reads &quot;<code>isEmpty</code> is a function from a list of anything to a Boolean&quot;. Types must be written with an initial capital. The <code>a</code> is a <em>type variable</em> which can take on any type, as explained in <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">my post on algebraic data types</a>. Most of the time, you don&#39;t need to write type declarations as Haskell works them out automatically. In the rest of the article, I&#39;m not focusing on the types so I have omitted them.</p>
 
 <h3>Variables and <code>let</code></h3>
 
@@ -355,11 +355,11 @@
 </code></pre></div>
 <h3>Booleans</h3>
 
-<p>To evaluate the condition we need to define booleans as lambda functions:</p>
+<p>To evaluate the condition we need to define Booleans as lambda functions:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">true</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">x</span>
     <span class="n">false</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">y</span>
 </code></pre></div>
-<p>The boolean is a function selecting the expression corresponding to true or false. With this definition, the if-then-else becomes simply:</p>
+<p>The Boolean is a function selecting the expression corresponding to true or false. With this definition, the if-then-else becomes simply:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">ifthenelse</span> <span class="n">cond</span> <span class="n">if_true_exp</span> <span class="n">if_false_exp</span> <span class="ow">=</span> 
       <span class="n">cond</span> <span class="n">if_true_exp</span> <span class="n">if_false_exp</span>
 </code></pre></div>
@@ -380,7 +380,7 @@
 </code></pre></div>
 <h3>Signed Integers</h3>
 
-<p>The common way to define integers in the lambda calculus is as <a href="https://en.wikipedia.org/wiki/Church_encoding">Church numerals</a>. Here we take a different approach, but it is of course equivalent. We define an integer as a list of booleans, using <a href="https://en.wikipedia.org/wiki/Unary_coding">thermometer code</a>, and with the following definitions:</p>
+<p>The common way to define integers in the lambda calculus is as <a href="https://en.wikipedia.org/wiki/Church_encoding">Church numerals</a>. Here we take a different approach, but it is of course equivalent. We define an integer as a list of Booleans, using <a href="https://en.wikipedia.org/wiki/Unary_coding">thermometer code</a>, and with the following definitions:</p>
 
 <p>We define unsigned <code>0</code> as a 1-element list containing <code>false</code>. To get signed integers we simply define the first bit of the list as the sign bit. We define unsigned and signed versions of <code>0</code>:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">u0</span> <span class="ow">=</span> <span class="n">false</span><span class="kt">:[]</span>
