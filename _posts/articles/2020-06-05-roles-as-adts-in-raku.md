@@ -22,20 +22,20 @@ I've also been a fan of [Raku](https://raku.org/) from long before it was called
 
 ## Is this article for you?
 
-In this article I will introduce [algebraic data types](https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf), a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using _roles_. You don't need to know Haskell at all and I only assume a slight familiarity with Raku, but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming. 
+In this article I will introduce [algebraic data types](https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf), a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using _roles_. You don't need to know Haskell at all and I only assume a slight familiarity with Raku (I've added a quick introduction), but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming. 
 
 ## Algebraic Data Types
  
 Datatypes (types for short) are just labels or containers for values in a program. Algebraic data types are composite types, they are formed by combining other types.
 They are called algebraic because they consist of alternatives (sums, also called disjoint unions) and record (products) of types. For more details see [[1]](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types) or [[2]](https://gist.github.com/gregberns/5e9da0c95a9a8d2b6338afe69310b945). 
 
-To give a rough intuition for the terms "sum type" and "product type": in Raku,  with booleans `$a`, `$b` and `$c`, you can write `$a or $b or $c` but you could also write `  $a + $b + $c` and evaluate it as `True` or `False`. Similarly, `$a and $b and $c` can be written as `$a * $b * $c`. In other words, `and` and `or` behave in the same way as `+` and `*`. In a generalised way, the types in algebraic data type system can be composed using similar rules.
+To give a rough intuition for the terms "sum type" and "product type": in Raku,  with Booleans `$a`, `$b` and `$c`, you can write `$a or $b or $c` but you could also write `  $a + $b + $c` and evaluate it as `True` or `False`. Similarly, `$a and $b and $c` can be written as `$a * $b * $c`. In other words, `and` and `or` behave in the same way as `+` and `*`. In a generalised way, the types in algebraic data type system can be composed using similar rules.
 
 ### A few examples.
 
 Let's first give a few examples of algebraic data types. In this section I am not using a specific programming language syntax. Instead I use a minimal notation to illustrate the concepts. I use the `datatype` keyword to indicate that what follows is a declaration for an algebraic data type; for a sum type, I'll separate the alternatives with '\|'; for a product type, I separate the components with a space. To declare a variable to be of some type, I will write the type name in front of it.
 
-We can define a boolean value purely as a type:
+We can define a Boolean value purely as a type:
 
 ```haskell
 	datatype Bool =  True | False
@@ -199,14 +199,44 @@ If I now invent an alias `Str` for `List Char`, and use double quotes instead of
     Str str = "hello"
 ```
 
-So integers and strings can be expressed as algebraic data types, and now we have introduced recursive and parameterised types. Time to move on to Raku!
+So integers and strings can be expressed as algebraic data types, and now we have introduced recursive and parameterised types.
 
 ### What are algebraic data types good for?  
 
-These may seem like rather contrived examples, after all a language like Raku already has an Int and a Str type that work very well. So what is the use of these  algebraic data types? Of course the purpose of static types is to provide type safety and make debugging easier. But using algebraic data types also makes a different, more functional style of programming possible.  
-One common use case is a list where you want to store values of different types: you can create a sum type that has an alternative for each of these types. Another common case is a recursive type, such as a tree. Finally, the polymorphism provides a convenient way to create custom containers. I will give examples of each of these in the next section.
+These may seem like rather contrived examples, after all a language like Raku already has an `Int` and a `Str` type that work very well. So what is the use of these  algebraic data types? Of course the purpose of static types is to provide type safety and make debugging easier. But using algebraic data types also makes a different, more functional style of programming possible.
+
+One common use case is a list where you want to store values of different types: you can create a sum type that has an alternative for each of these types. Another common case is a recursive type, such as a tree. Finally, the polymorphism provides a convenient way to create custom containers. I will give examples of each of these in the next section. Time to move on to Raku!
 
 ## Algebraic data types in Raku
+
+As Raku is not a very well-known language (yet), here is a quick introduction of the features you'll need to follow the discussion below. 
+
+### A quick introduction to Raku
+
+Before Raku went its own way, it was meant to be the next iteration of Perl (hence the original name Perl 6). It is therefore more similar to Perl than to any other language.
+
+Raku is syntactically similar to C/C++, Java and JavaScript: block-based, with statements separated by semicolons, blocks demarcated by braces, and argument lists in parentheses and separated by commas. The main feature it shares with Perl is the use of sigils ('funny characters') which identify the type of a variable: `$` for a scalar, `@` for an array, `%` for a hash (map) and `&` for a subroutine. Variables also have keywords to identify their scope, I will only use `my` which marks the variable as lexically scoped. A subroutine is declared with the `sub` keyword, and subroutines can be named or anonymous:
+
+```perl6
+sub square ($x) {
+    $x*$x;
+}
+# anonymous subroutine 
+my $anon_square = sub ($x) {
+    $x*$x;
+}
+```
+
+Raku also has [twigils](https://docs.raku.org/language/variables#index-entry-Twigil), secondary sigils that influence the scoping of a variable. For this article, the only twigil used in the code is `.` which is used to declare a role or class attribute with automatically generated accessors (like `$.notes` in the example below).
+
+Raku supports sigil-less variables, and uses the `\` syntax to declare them. For more on the difference between ordinary and sigil-less variables, see [the Raku documentation](https://docs.raku.org/language/variables#Sigilless_variables). For example (`say` prints its argument followed by a newline):
+
+```perl6
+my \x = 42;
+my $y = 43;
+say x + $y; 
+```
+ 
 
 Raku has [gradual typing](https://raku.guide/): it allows both static and dynamic typing. That's a good start because we need static typing to support algebraic data types. It also has [immutable variables](https://docs.raku.org/language/variables) and [anonymous functions](https://raku.guide/#_anonymous_functions), and even [(limited) laziness](https://docs.raku.org/language/list#index-entry-laziness_in_Iterable_objects). And of course [functions are first-class citizens](https://raku.guide/#_functional_programming), so we have everything we need for pure, statically-typed functional programming. But what about the algebraic data types?
 
@@ -235,15 +265,34 @@ This is where *roles* come in. According to the [Raku documentation](https://doc
 Roles are a collection of attributes and methods; however, unlike classes, roles are meant for describing only parts of an object's behavior; this is why, in general, roles are intended to be mixed in classes and objects. In general, classes are meant for managing objects and roles are meant for managing behavior and code reuse within objects.
 </blockquote>
 
-Roles use the keyword `role` preceding the name of the role that is declared. Roles are mixed in using the `does` keyword preceding the name of the role that is mixed in. 
+Roles use the keyword `role` preceding the name of the role that is declared. Roles are mixed in using the `does` keyword preceding the name of the role that is mixed in.  Roles are what in Python and Ruby is called _mixins_.
+
+So roles are basically classes that you can use to add behaviours to other classes without using inheritance. Here is a stripped-down example take from the [Raku documentation](https://docs.raku.org/language/objects#Roles) (`has` declares an attribute, `method` a method)
+
+```perl6
+role Notable {
+    has $.notes is rw;
+
+    method notes() { ... }; 
+}
+ 
+class Journey does Notable {
+    has $.origin;
+    has $.destination;
+    has @.travelers;
+ 
+    method { ... <implemented using notes()> ... };
+}
+
+```
 
 In particular, roles can be mixed into other roles, and that is one of the key features I will exploit. Furthermore, role constructors can take arguments _and_ they are parametric. So we have everything we need to create proper algebraic data types. Let's look at a few examples.
 
 ### A few simple examples
 
-#### An opinionated boolean
+#### An opinionated Boolean
 
-This is the example of a sum type for a boolean as above, but implemented with roles. The first line declares the type as an empty role, this corresponds to the data type name on the left-hand side. The next lines define the alternatives, each alternative uses `does OpinionatedBool` to tie it to the `OpinionatedBool` role which functions purely as the type name.  
+This is the example of a sum type for a Boolean as above, but implemented with roles. The first line declares the type as an empty role, this corresponds to the data type name on the left-hand side. The next lines define the alternatives, each alternative uses `does OpinionatedBool` to tie it to the `OpinionatedBool` role which functions purely as the type name.  
 
 ```perl6
 role OpinionatedBool {}
@@ -251,7 +300,7 @@ role AbsolutelyTrue does OpinionatedBool {}
 role TotallyFalse does OpinionatedBool {}
 ```
 
-In Raku, types are values; and for a role with an empty body, you don't need the `.new` constructor call:
+In Raku, types are values; and for a role with an empty body, you don't need the `.new` constructor call. In a sum type, the alternatives usually are labelled containers for values, but they can be empty containers as well. When that is the case, there is no need to create separate instances of them because there is only one way to have an empty container.
 
 ```perl6
 my OpinionatedBool \bt = AbsolutelyTrue;
@@ -269,10 +318,10 @@ multi sub p(TotallyFalse $b) {
 
 # Trying it out:
 p(bt); # prints True
-p(bi); # also prints True
 ```
 
-Because we use a type as a value, to test if a value is `AbsolutelyTrue` or `TotallyFalse`, we can use either the smart match `~~`, the container identity `=:=` or the value identity `===`! If we would create an instance like `AbsolutelyTrue.new` See the [code example](https://github.com/wimvanderbauwhede/raku-examples/blob/master/roles_types_and_instances.raku) for more details.
+Because we use a type as a value, to test if a value is `AbsolutelyTrue` or `TotallyFalse`, we can use either the smart match `~~`, the container (type) identity `=:=` or the value (instance) identity `===` to test this (the smart match operator behaves like `=:=` if the right-hand side is a type and as `===` if it is an object instance). If we would create an instance like `AbsolutelyTrue.new`, this would not be the case. See the [code example](https://github.com/wimvanderbauwhede/raku-examples/blob/master/roles_types_and_instances.raku) for more details.
+
 
 #### The Colour, XYCoord and Pixel types
 
@@ -283,7 +332,7 @@ datatype RGBColour = RGB Int Int Int
 ```
 
 1. Because the role serves both as the type (`RGBColour`) and the instance constructor (`RGB`), they must have the same name. I only named them differently to make it easier to distinguish them so this is not an issue.
-2. The types that make up each field must be named with unique names in the role's argument list, and need to have a corresponding attributes declared. That is again not really a limitation, because acessors for record type fields are handy. So it looks like:
+2. The types that make up each field must be named with unique names in the role's argument list, and need to have a corresponding attributes declared. That is again not really a limitation, because accessors for record type fields are handy. So it looks like:
 
 ```perl6
 role RGBColour[Int \r, Int \g, Int \b] {
@@ -292,6 +341,8 @@ role RGBColour[Int \r, Int \g, Int \b] {
     has Int $.b = b; 
 }
 ```
+(the role's parameters are in square brackets)
+
 And we create `aquamarine` like this:
 
 ```perl6
@@ -310,7 +361,7 @@ role RGB[ RGBColour \rgb] does Colour {
 };
 ```
 
-This is essentially the same approach as for the opinionated boolean, but we don't have empty roles: the `HSL` alternative takes an argument of type `HSLColour`, and the `RGB` alternative takes an argument of type `RGBColour`.
+This is essentially the same approach as for the opinionated Boolean, but we don't have empty roles: the `HSL` alternative takes an argument of type `HSLColour`, and the `RGB` alternative takes an argument of type `RGBColour`.
 As in the product type, we use the role as a container to hold the values. The `Pixel` type from above looks like: 
 
 ```perl6
@@ -347,6 +398,7 @@ role Cons[ ::a \elt, List \lst ] does List[a] {
     has $.lst = lst;
 }
 ```
+ (The prefix `::` is the Raku syntax to declare type variables)
 
 ##### Issues with current raku
 
@@ -506,13 +558,22 @@ role BinaryTree[::Type] {
             left    => @left  ?? self.new-from-list(@left)  !! self,
             right   => @right ?? self.new-from-list(@right) !! self,
         );
-    }
 }
  
 my $t = BinaryTree[Int].new-from-list(4, 5, 6);
 $t.visit-preorder(&say);    # OUTPUT: «5␤4␤6␤» 
 $t.visit-postorder(&say);   # OUTPUT: «4␤6␤5␤» 
 ```
+
+This example contains quite a bit of Raku syntax:
+
+- Raku allows dashes in names;
+- the `->` syntax is a foreach loop, iterating over all elements of the preceding list;
+- The `..` is array slicing;
+- `::?CLASS` is a compile-time type variable populated with the class you're in and `:U` is a type constraint which specifies that it should be interpreted as a type object. Finally, the `:` marks the argument to its left as the invocant. In other words, it allows us to write `BinaryTree[Int].new-from-list(4, 5, 6)` where `BinaryTree[Int] is the value of `::?CLASS`. This is the Raku way to create custom constructors.   
+- The `*` in front of the `@el` argument of `new-from-list` makes this a variadic function where `@el` contains all arguments;
+- The `=>` syntax allows to assign arguments by name rather than by position;
+- `?? ... !! ...` is Raku's syntax for C's ternary ` ? ... : ... `;
 
 This example is written in Raku's object-oriented style, with methods acting on the attributes of the role. Let's see how we can write this in a functional style.
 
