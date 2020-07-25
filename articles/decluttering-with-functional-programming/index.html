@@ -199,7 +199,7 @@
 <span class="k">my</span> <span class="nv">@array3</span> = <span class="mi">1</span> .. <span class="mi">10</span>; <span class="c1">#=&gt; an array from a range, because of the &#39;@&#39; sigil</span>
 
 <span class="k">my</span> \<span class="n">list1</span> = <span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span>; <span class="c1">#=&gt; a list</span>
-<span class="k">my</span> <span class="nv">$list2</span> = <span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span>; <span class="c1">#=&gt; also a list</span>
+<span class="k">my</span> <span class="nv">$list2</span> = (<span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span>); <span class="c1">#=&gt; also a list</span>
 <span class="k">my</span> \<span class="n">list3</span> = |(<span class="mi">1</span> .. <span class="mi">10</span>);  <span class="c1">#=&gt; an array from a range because of the &#39;|&#39; flattening operation</span>
 </code></pre></div>
 <p>The equivalent Python code would be</p>
@@ -245,7 +245,7 @@ Typically, we think of a function as something that operates on some input value
 <span class="k">my</span> \<span class="n">tstr</span> = <span class="s">&quot;True!&quot;</span>;
 <span class="k">my</span> \<span class="n">fstr</span> = <span class="s">&quot;False!&quot;</span>;
 
-<span class="k">my</span> \<span class="n">res_str</span> = <span class="n">choose</span>(<span class="n">tstr</span>, <span class="n">fstr</span>, <span class="nb">True</span>)
+<span class="k">my</span> \<span class="n">res_str</span> = <span class="n">choose</span>(<span class="n">tstr</span>, <span class="n">fstr</span>, <span class="nb">True</span>);
 
 <span class="nb">say</span> <span class="n">res_str</span>; <span class="c1">#=&gt; says &quot;True!&quot;</span>
 </code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
@@ -263,7 +263,7 @@ Typically, we think of a function as something that operates on some input value
 
 <span class="k">my</span> <span class="nv">&amp;res_f</span> = <span class="n">choose</span>(<span class="nv">&amp;tt</span>, <span class="nv">&amp;ff</span>, <span class="nb">False</span>);
 
-<span class="nb">say</span> <span class="n">res_f</span>; <span class="c1">#=&gt; says &amp;ff</span>
+<span class="nb">say</span> <span class="nv">&amp;res_f</span>; <span class="c1">#=&gt; says &amp;ff</span>
 <span class="n">res_f</span>(<span class="s">&quot;rumour&quot;</span>); <span class="c1">#=&gt; says &quot;False rumour!&quot;</span>
 </code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
 <span class="k">def</span> <span class="nf">tt</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
@@ -301,10 +301,7 @@ Typically, we think of a function as something that operates on some input value
 <p>When we print out the variable to which the function is bound, Raku returns <code>sub { }</code> to indicate that the variable contains a function.</p>
 
 <p>In Python:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="n">tt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;True &quot;</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="s2">&quot;!&quot;</span> <span class="p">)</span>
-<span class="n">ff</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;False &quot;</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="s2">&quot;!&quot;</span> <span class="p">)</span>
-
-<span class="n">res_f</span> <span class="o">=</span> <span class="n">choose</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="n">ff</span><span class="p">,</span> <span class="bp">True</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="n">res_f</span> <span class="o">=</span> <span class="n">choose</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="n">ff</span><span class="p">,</span> <span class="bp">True</span><span class="p">);</span>
 
 <span class="k">print</span><span class="p">(</span> <span class="n">res_f</span><span class="p">)</span> <span class="c1">#=&gt; says &lt;function &lt;lambda&gt; at 0x7f829b298b80&gt;</span>
 <span class="n">res_f</span><span class="p">(</span><span class="s2">&quot;story&quot;</span><span class="p">)</span> <span class="c1">#=&gt; says &quot;True story!&quot;</span>
@@ -408,7 +405,7 @@ Typically, we think of a function as something that operates on some input value
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
 <span class="k">sub</span> <span class="n">foldll</span> (<span class="nv">&amp;f</span>, \<span class="n">iacc</span>, \<span class="n">lst</span>) { 
   <span class="k">my</span> <span class="nv">$acc</span> = <span class="n">iacc</span>; 
-  <span class="k">for</span> <span class="n">lst</span> -&gt; <span class="n">elt</span> {
+  <span class="k">for</span> <span class="n">lst</span> -&gt; \<span class="n">elt</span> {
     <span class="nv">$acc</span> = <span class="n">f</span>(<span class="nv">$acc</span>,<span class="n">elt</span>);
   }
   <span class="nv">$acc</span>;
@@ -453,7 +450,7 @@ The second variant takes an element <code>elt</code> from the list (see <a href=
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
 <span class="k">sub</span> <span class="n">foldrl</span> (<span class="nv">&amp;f</span>, \<span class="n">acc</span>, \<span class="n">lst</span>) { 
   <span class="k">my</span> <span class="nv">$res</span> = <span class="n">acc</span>;
-  <span class="k">for</span>  <span class="n">lst</span>.<span class="nb">reverse</span> -&gt; <span class="n">elt</span> {
+  <span class="k">for</span>  <span class="n">lst</span>.<span class="nb">reverse</span> -&gt; \<span class="n">elt</span> {
     <span class="nv">$res</span> = <span class="n">f</span>(<span class="nv">$res</span>,<span class="n">elt</span>);
   }
   <span class="nv">$res</span>;
@@ -557,13 +554,14 @@ The second variant takes an element <code>elt</code> from the list (see <a href=
 
 <span class="nb">say</span> <span class="n">add</span>[<span class="mi">0</span>].(<span class="mi">4</span>); <span class="c1">#=&gt; says 5</span>
 </code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">my</span> <span class="n">add</span> <span class="o">=</span> <span class="p">(</span>
-<span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
-<span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span>
-<span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span>
-<span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">4</span><span class="p">,</span>
-<span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">5</span>
+<span class="n">add</span> <span class="o">=</span> <span class="p">(</span>
+<span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+<span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span>
+<span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span>
+<span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">4</span><span class="p">,</span>
+<span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">5</span>
 <span class="p">)</span>
+
 <span class="k">print</span><span class="p">(</span> <span class="n">add</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#=&gt; says 5</span>
 </code></pre></div>
 <p>We could do better and use a loop to fill an array with anonymous functions:</p>
@@ -575,7 +573,7 @@ The second variant takes an element <code>elt</code> from the list (see <a href=
 
 <span class="nb">say</span> <span class="n">add</span>[<span class="mi">1</span>].(<span class="mi">4</span>); <span class="c1">#=&gt; says 5</span>
 </code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">my</span> <span class="n">add</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">add</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
   <span class="n">add</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div>
@@ -585,7 +583,7 @@ The second variant takes an element <code>elt</code> from the list (see <a href=
   <span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="n">n</span>}
 }
 
-<span class="k">my</span> \<span class="n">add</span> = <span class="nb">map</span> <span class="nv">&amp;gen_add</span>, <span class="mi">0</span><span class="o">..</span><span class="mi">5</span>
+<span class="k">my</span> \<span class="n">add</span> = <span class="nb">map</span> <span class="nv">&amp;gen_add</span>, <span class="mi">0</span><span class="o">..</span><span class="mi">5</span>;
 
 <span class="nb">say</span> <span class="n">add</span>[<span class="mi">1</span>].(<span class="mi">4</span>); <span class="c1">#=&gt; says 5</span>
 </code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
@@ -594,7 +592,7 @@ The second variant takes an element <code>elt</code> from the list (see <a href=
 
 <span class="n">add</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span> <span class="n">gen_add</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)))</span>
 
-<span class="n">say</span> <span class="n">add</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="mi">4</span><span class="p">);</span> <span class="c1">#=&gt; says 5</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">add</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#=&gt; says 5</span>
 </code></pre></div>
 <h3>Laziness</h3>
 
@@ -613,15 +611,15 @@ Note that this will not work with the for-loop, because to use the for-loop we n
 
 <p>We saw above that you can chain calls to <code>map</code> and <code>grep</code> together. Often you only need to chain <code>map</code> calls together, for example</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="nb">map</span> -&gt; \<span class="o">x</span> { <span class="o">x</span> + <span class="mi">5</span> }, <span class="nb">map</span> -&gt; \<span class="o">x</span> {<span class="o">x*x</span>}, <span class="mi">1</span><span class="o">..</span><span class="mi">30</span>
+<span class="nb">map</span> -&gt; \<span class="o">x</span> { <span class="o">x</span> + <span class="mi">5</span> }, <span class="nb">map</span> -&gt; \<span class="o">x</span> {<span class="o">x*x</span>}, <span class="mi">1</span><span class="o">..</span><span class="mi">30</span>;
 </code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
 <span class="nb">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)))</span>
 </code></pre></div>
 <p>In that case, we can do this a little bit more efficient: rather than creating a list and then calling map on that list, we can do both computations at once by composing the functions. Raku provides a special operator for this:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">map</span> -&gt; \<span class="o">x</span> { <span class="o">x</span> + <span class="mi">5</span> } ∘ -&gt; \<span class="o">x</span> { <span class="o">x</span> * <span class="o">x</span> }, <span class="mi">1</span><span class="o">..</span><span class="mi">30</span>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">map</span> -&gt; \<span class="o">x</span> { <span class="o">x</span> + <span class="mi">5</span> } ∘ -&gt; \<span class="o">x</span> { <span class="o">x</span> * <span class="o">x</span> }, <span class="mi">1</span><span class="o">..</span><span class="mi">30</span>;
 </code></pre></div>
 <p>The operator <code>∘</code> (the &quot;ring operator&quot;, unicode 2218, but you can also use a plain <code>o</code>) is the function composition operator, and it&#39;s pronounced &quot;after&quot;, so <code>f ∘ g</code> is &quot;f after g&quot;. What it does is create a new function by combining two existing functions:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">&amp;h</span> = <span class="nv">&amp;f</span> ∘ <span class="nv">&amp;g</span>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">&amp;h</span> = <span class="nv">&amp;f</span> ∘ <span class="nv">&amp;g</span>;
 </code></pre></div>
 <p>is the same as</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">h</span> (\<span class="o">x</span>) {
