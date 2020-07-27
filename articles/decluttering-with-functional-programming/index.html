@@ -417,7 +417,7 @@ Typically, we think of a function as something that operates on some input value
     <span class="n">acc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">)</span>  
   <span class="k">return</span> <span class="n">acc</span>
 </code></pre></div>
-<p>If we want to use immutable variables only, we can use recursion. Raku makes this easy because it allows multiple signatures for a subroutine (<code>multi sub</code>s), and it will call the variant that matches the signature. </p>
+<p>If we want to use immutable variables only, we can use recursion. Raku makes this easy because it allows multiple signatures for a subroutine (<code>multi sub</code>s), and it will call the variant that matches the signature. In Python, there is the module <a href="https://pypi.org/project/multipledispatch/">multipledispatch</a> that lets you do something similar to multi subs.</p>
 
 <p>Our <code>foldl</code> will consume the input list <code>lst</code> and use <code>f</code> combine its elements into the accumulator <code>acc</code>. When the list has been consumed, the computation is finished and we can return <code>acc</code> as the result. So our first variant says that if the input list is empty, we should return <code>acc</code>.
 The second variant takes an element <code>elt</code> from the list (see <a href="https://docs.raku.org/type/Range">the Raku documentation</a> for details on the <code>*</code>) and combines it with <code>acc</code> into <code>f(acc,elt)</code>. It then calls <code>foldl</code> again with this new accumulator and the remainder of the list, <code>rest</code>.</p>
@@ -596,16 +596,24 @@ The second variant takes an element <code>elt</code> from the list (see <a href=
 </code></pre></div>
 <h3>Laziness</h3>
 
-<p>In Raku, using an (immutable) range has an additional benefit: we can set the end of the range to infinity, which in Raku can be written as <code>∞</code> (unicode 221E), <code>*</code> or <code>Inf</code>. </p>
+<p>In Raku, using a range has an additional benefit: we can set the end of the range to infinity, which in Raku can be written as <code>∞</code> (unicode 221E), <code>*</code> or <code>Inf</code>. </p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
 <span class="k">my</span> \<span class="n">add</span> = <span class="nb">map</span> <span class="nv">&amp;gen_add</span>, <span class="mi">0</span> .. ∞;  
 
 <span class="nb">say</span> <span class="n">add</span>[<span class="mi">244</span>].(<span class="mi">7124</span>); <span class="c1">#=&gt; says 7368</span>
 </code></pre></div>
 <p>This is an example of what is called &quot;lazy evaluation&quot;, or laziness for short: Raku is not going to try (and fail) to process this infinite list. Instead, it will do the processing when we actually use an element of that list. The evaluation of the expression is delayed until the result is needed, so when we call <code>add[244]</code>, what happens is that <code>gen_add(244)</code> is called to generate that function. 
-Note that this will not work with the for-loop, because to use the for-loop we need a mutable data structure, and the lazy lists have to be immutable. So this is a nice example of how the functional programming style allows you to benefit from laziness. </p>
+Note that this will not work with the for-loop, because to use the for-loop we need a mutable data structure, and the lazy lists have to be immutable. So this is a nice example of how the functional programming style allows you to benefit from laziness. For the full story of laziness in Raku, please see <a href="https://docs.raku.org/language/list#index-entry-laziness_in_Iterable_objects">the documentation</a>. </p>
 
-<p>This is also why we implemented <code>foldl</code> recursively, and then used it to implement our own <code>map</code> and <code>grep</code>: the recursion-based versions don&#39;t need to update any variables, so they can work with the immutable lazy data structures. </p>
+<p>Python does not have lazy lists but is have a different form of laziness: the call to <code>map</code> (or <code>filter</code>) does not return the sequence of results but instead it returns a <em>generator</em>:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Pythom</span>
+<span class="n">map_gen</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span> <span class="n">gen_add</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6666</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">map_gen</span><span class="p">)</span> <span class="c1">#=&gt; says &lt;map object at 0x7f344caefdc0&gt;</span>
+</code></pre></div>
+<p>It is only when we wrap the generator in a sequence constructor such as <code>tuple()</code> that the results are actually generated. </p>
+
+<!-- This is also why we implemented `foldl` recursively, and then used it to implement our own `map` and `grep`: the recursion-based versions don't need to update any variables, so they can work with the immutable data structures.  -->
 
 <h2>Function composition</h2>
 
