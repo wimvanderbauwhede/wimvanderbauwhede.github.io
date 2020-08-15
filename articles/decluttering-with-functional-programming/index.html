@@ -613,8 +613,6 @@ Note that this will not work with the for-loop, because to use the for-loop we n
 </code></pre></div>
 <p>It is only when we wrap the generator in a sequence constructor such as <code>tuple()</code> that the results are actually generated. </p>
 
-<!-- This is also why we implemented `foldl` recursively, and then used it to implement our own `map` and `grep`: the recursion-based versions don't need to update any variables, so they can work with the immutable data structures.  -->
-
 <h2>Function composition</h2>
 
 <p>We saw above that you can chain calls to <code>map</code> and <code>grep</code> together. Often you only need to chain <code>map</code> calls together, for example</p>

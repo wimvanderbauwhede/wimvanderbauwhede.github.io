@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Function types • Wim Vanderbauwhede</title>
+    <meta name="description" content="A brief introduction into function types, with a way to implement them in Raku and examples in many languages.">
+    <meta name="keywords" content="coding, hacking, programming, raku">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Function types">
+	<meta name="twitter:description" content="A brief introduction into function types, with a way to implement them in Raku and examples in many languages.">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/function-types_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/function-types/#">
+	<meta property="og:title" content="Function types">
+	<meta property="og:description" content="A brief introduction into function types, with a way to implement them in Raku and examples in many languages.">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/function-types_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/function-types/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<!-- WV: NO!
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+	  <!-- WV: NO!
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    -->
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/function-types_1600x600.jpg" class="page-feature-image" alt="Function types" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Function types</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>This article builds on my earlier articles on <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">algebraic data types</a> in on <a href="https://raku.org/">Raku</a> and their use in the practical example of <a href="https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/">list-based parser combinators</a>. </p>
+
+<p>In this article I want to look at function types in some detail, and show a way to create well typed functions in Raku. If you are not familiar with functional programming (or with <a href="https://raku.org/">Raku</a>), I suggest you read my introduction <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/">&quot;Cleaner code with functional programming&quot;</a>. If you are not familiar with algebraic data types, you might want to read the other two articles as well. For most of the article, I provide examples in Raku, Python, Rust and Haskell. There is also some C and even some Fortran. </p>
+
+<h2>Type signatures</h2>
+
+<p>A function&#39;s type signature consists of the types of each of its arguments and the return type. In most typed languages, the type is part of the function signature. </p>
+
+<p>For example in C</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">int</span> <span class="nf">sqsum</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">sqsum</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>or in Fortran</p>
+<div class="highlight"><pre><code class="language-fortran" data-lang="fortran"><span></span><span class="kt">integer </span><span class="k">function </span><span class="n">sqsum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+    <span class="n">sqsum</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>
+<span class="k">end function</span>
+</code></pre></div>
+<p>or in Rust</p>
+<div class="highlight"><pre><code class="language-rust" data-lang="rust"><span></span><span class="k">fn</span> <span class="nf">sqsum</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>: <span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">i32</span><span class="p">))</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="kd">let</span><span class="w"> </span><span class="n">sqsum</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">|</span><span class="n">x</span><span class="w"> </span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kt">i32</span><span class="o">|</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">};</span><span class="w"></span>
+</code></pre></div>
+<p>or in Raku</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">sqsum</span>(<span class="nb">Int</span>, <span class="nb">Int</span> --&gt; <span class="nb">Int</span>) {...}
+<span class="k">sub</span> <span class="n">sqsum</span>(<span class="nb">Int</span> \<span class="o">x</span>, <span class="nb">Int</span> \<span class="n">y</span> --&gt; <span class="nb">Int</span>) { <span class="o">x*x+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span> }
+
+<span class="k">my</span> <span class="nv">&amp;sqsum</span> = <span class="k">sub</span> (<span class="nb">Int</span> \<span class="o">x</span>, <span class="nb">Int</span> \<span class="n">y</span> --&gt; <span class="nb">Int</span>) { <span class="o">x*x+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span> };
+</code></pre></div>
+<p>or in Python, using the <code>typing</code> module:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+
+<span class="k">def</span> <span class="nf">sqsum_</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>  
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>
+
+<span class="n">sqsum</span> <span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>
+</code></pre></div>
+<h2>The type of a function of functions</h2>
+
+<p>But what happens if we want to provide a function argument that is itself a function, or return a function (so-called <em>higher-order functions</em>)?</p>
+
+<p>This is possible in most languages, but what I am interested in is the type information: what is the type signature of such a function of functions?</p>
+
+<p>C supports functions-of-functions indirectly through function pointers, by creating a function type through a <code>typedef</code>. </p>
+<div class="highlight"><pre><code class="language-C" data-lang="C"><span></span><span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">Fun</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">ten_times</span> <span class="p">(</span><span class="n">Fun</span> <span class="n">f</span><span class="p">)</span> <span class="p">{...};</span>
+</code></pre></div>
+<p>Maybe surprisingly, venerable old Fortran does support passing functions and subroutines as arguments. Functions are typed by their return type; subroutines are not typed. </p>
+<div class="highlight"><pre><code class="language-fortran" data-lang="fortran"><span></span><span class="k">program </span><span class="n">fof</span> 
+    <span class="k">external</span> <span class="kd">::</span> <span class="n">sqsum</span>
+    <span class="k">call </span><span class="n">ten_times</span><span class="p">(</span><span class="n">sqsum</span><span class="p">)</span>
+<span class="k">end program </span><span class="n">fof</span>
+
+<span class="k">subroutine </span><span class="n">ten_times</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">f</span>
+    <span class="c">! ...</span>
+<span class="k">end subroutine </span><span class="n">ten_times</span>
+</code></pre></div>
+<p>In Rust you can provide the complete type of a function-as-argument: </p>
+<div class="highlight"><pre><code class="language-rust" data-lang="rust"><span></span><span class="k">fn</span> <span class="nf">ten_times</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span>: <span class="nc">F</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">F</span>: <span class="nb">Fn</span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{</span><span class="w"></span>
+<span class="c1">// ...</span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">ten_times</span><span class="p">(</span><span class="n">sqsum</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>In Python we can use <code>Callable</code>, which also allow for the complete type to be expressed.</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+
+<span class="k">def</span> <span class="nf">ten_times</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+<span class="c1"># ...</span>
+</code></pre></div>
+<p>The same example in Raku becomes</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">ten_times</span> (<span class="nb">Sub</span> \<span class="n">f</span>) {
+<span class="c1">#...</span>
+}
+
+<span class="n">ten_times</span>(<span class="n">sqsum</span>);
+</code></pre></div>
+<p>Here the only type information is that we are passing a subroutine. An equivalent way to write this is using the <code>&amp;</code> sigil <a href="https://docs.raku.org/language/variables#index-entry-sigil_&">which imposes the <code>Callable</code> type constraint</a>:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">ten_times</span> (<span class="nv">&amp;f</span>) {
+<span class="c1">#...</span>
+}
+</code></pre></div>
+<p>We will see further how we can create function types for Raku that keep the type signatures of the functions passed as arguments. </p>
+
+<!--
+
+
+--------
+fn main() {
+ 
+    let sqsum  = |x : i32, y: i32| -> i32 {x*x+y*y};
+    let res = sqsum(4,3);
+ 
+    fn ten_times<F>(f: F  ) -> i3 where F: Fn(i32,i32) -> i32 {
+        for index in 0..10 {
+            let res = f(index,index+1);
+            println!("{}",res);
+        }
+    }    
+    ten_times(sqsum);
+}
+
+--------
+
+from typing import Callable
+
+sqsum : Callable[[int,int], int]  = lambda x,y : x*x+y*y
+def sqsum_(x: int, y: int) -> int:  
+    return x*x+y*y
+res : int = sqsum(4,3)
+
+def ten_times(f: Callable[[int, int],int]) -> int:
+    for index in range(0,11):
+        res = f(index,index+1)
+        print(res)
+    
+ten_times(sqsum)
+
+--------
+-->
+
+<h2>Introducing the arrow</h2>
+
+<p>All of the above ways to express function type signatures are perfectly adequate in their respective languages. However, they all share the problem that these function-of-function type signatures don&#39;t compose very well: what if we want to write a function-of-function-of-function type? This is less far-fetched than it may seem.
+I would like to introduce a notation used in type theory. It is at the same time simple and powerful. If you are familiar with functional languages like Haskell, Idris or Agda, you already know it.</p>
+
+<p>Instead of mixing the type with the function declaration, it is written separately. The name of the function is followed by a colon and the list types of the arguments and the return value. Each argument is separated by an arrow. The above example of a function of two integer arguments returning an integer would be:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">sqsum</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="err">⟶</span> <span class="kt">Int</span> <span class="err">⟶</span> <span class="kt">Int</span> 
+</code></pre></div>
+<p>The function-of-a-function introduced above has as type:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">ten_times</span> <span class="kt">:</span> <span class="p">(</span><span class="kt">Int</span> <span class="err">⟶</span> <span class="kt">Int</span> <span class="err">⟶</span> <span class="kt">Int</span><span class="p">)</span> <span class="err">⟶</span>  <span class="kt">Int</span>
+</code></pre></div>
+<p>The parentheses group the type of the function that is the only argument of <code>ten_times</code>.</p>
+
+<p>In this notation, the arrow can be interpreted as an operator which creates a function type from the two types that are its arguments. The important property of this operator is that it is right associative. What this means is that for example </p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">f</span> <span class="kt">:</span> <span class="n">t1</span> <span class="err">⟶</span> <span class="n">t2</span> <span class="err">⟶</span> <span class="n">t3</span> <span class="err">⟶</span> <span class="n">t4</span>
+</code></pre></div>
+<p>is the same as</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">f</span> <span class="kt">:</span> <span class="n">t1</span> <span class="err">⟶</span> <span class="n">t2</span> <span class="err">⟶</span> <span class="p">(</span><span class="n">t3</span> <span class="err">⟶</span> <span class="n">t4</span><span class="p">)</span>
+</code></pre></div>
+<p>and as</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">f</span> <span class="kt">:</span> <span class="n">t1</span> <span class="err">⟶</span> <span class="p">(</span><span class="n">t2</span> <span class="err">⟶</span> <span class="n">t3</span> <span class="err">⟶</span> <span class="n">t4</span><span class="p">)</span>
+</code></pre></div>
+<p>and for completeness</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">f</span> <span class="kt">:</span> <span class="n">t1</span> <span class="err">⟶</span> <span class="p">(</span><span class="n">t2</span> <span class="err">⟶</span> <span class="p">(</span><span class="n">t3</span> <span class="err">⟶</span> <span class="n">t4</span><span class="p">))</span>
+</code></pre></div>
+<h2>A detour into partial application</h2>
+
+<p>The above groupings imply that our function <code>f</code> can be interpreted in three ways, as a function of:</p>
+
+<ul>
+<li>3 arguments of types <code>t1</code>,<code>t2</code>,<code>t3</code>, returning a result of type <code>t4</code>;</li>
+<li>2 arguments of types <code>t1</code>,<code>t2</code>, returning a result of type <code>t3 -&gt; t4</code>; </li>
+<li>1 argument of types <code>t1</code>, returning a result of type <code>t2-&gt;t3-&gt;t4</code>.</li>
+</ul>
+
+<p>Let&#39;s say we have values <code>v1</code>,<code>v2</code>,<code>v3</code> for the arguments and <code>v4</code> as the result:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">v4</span> <span class="kt">:</span> <span class="n">t4</span>
+<span class="nf">v4</span> <span class="ow">=</span> <span class="n">f</span> <span class="n">v1</span> <span class="n">v2</span> <span class="n">v3</span>
+</code></pre></div>
+<p>But suppose we only apply <code>v1</code> and <code>v2</code>:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>pf1 : t3 ⟶ t4
+pf1 = f v1 v2
+</code></pre></div>
+<p>We get a new function <code>pf1</code> which takes a single argument <code>v3</code>: </p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">v4</span> <span class="ow">=</span> <span class="n">pf1</span> <span class="n">v3</span>
+</code></pre></div>
+<p>And in the same way we can create <code>pf2</code> and <code>pf3</code>:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">pf2</span> <span class="kt">:</span> <span class="n">t2</span> <span class="err">⟶</span> <span class="n">t3</span> <span class="err">⟶</span><span class="n">t4</span>
+<span class="nf">pf2</span> <span class="ow">=</span> <span class="n">f</span> <span class="n">v1</span>
+
+<span class="nf">pf3</span> <span class="kt">:</span> <span class="n">t3</span> <span class="err">⟶</span> <span class="n">t4</span>
+<span class="nf">pf3</span> <span class="ow">=</span> <span class="n">pf2</span> <span class="n">v2</span>
+
+<span class="nf">v4</span> <span class="ow">=</span> <span class="n">pf3</span> <span class="n">v3</span>
+</code></pre></div>
+<p>Because <code>pf1</code>, <code>pf2</code> and <code>pf3</code> are functions and the above is true for all values of <code>v1</code>, <code>v2</code>, <code>v3</code> and <code>v4</code>, it follows that</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">pf3</span> <span class="o">==</span> <span class="n">pf1</span>
+</code></pre></div>
+<p>For completeness, we can also apply <code>pf2</code> directly to two arguments:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">v4</span> <span class="ow">=</span> <span class="n">pf2</span> <span class="n">v2</span> <span class="n">v3</span>
+</code></pre></div>
+<p>This concept of creating a new function by not providing values for some of the arguments is called <em>partial application</em>, and many languages support it. Here are examples in Haskell, Raku, Python and Rust.</p>
+
+<h3>Haskell</h3>
+
+<p>In case you are not familiar with Haskell, this is what you need to know: it is whitespace-sensitive like Python, but has a markedly different syntax. Because everything is a function, there is no keyword to mark a function. Because there is only lexical scope, there is no need for any special scope identifiers. Function arguments are separated by spaces. Lambda functions (anonymous functions) start with a <code>\</code>,  chosen because it looks a bit like the Greek letter lambda, λ. </p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="c1">-- named function of 2 arguments</span>
+<span class="nf">sqsum</span> <span class="n">x</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>
+<span class="c1">-- lambda function bound to a named variable</span>
+<span class="nf">sqsum</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>
+</code></pre></div>
+<p>The type of <code>sqsum</code> is 
+<code>haskell
+sqsum :: Int -&gt; Int -&gt; Int
+</code>
+(Haskell uses <code>::</code> rather than <code>:</code> for the type signature)</p>
+
+<p>In Haskell, partial application works exactly as in the examples above. So our function <code>sqsum</code> can be partially applied like this: </p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">sqsum4</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+<span class="nf">sqsum4</span> <span class="ow">=</span> <span class="n">sqsum</span> <span class="mi">4</span>
+</code></pre></div>
+<p>We can apply <code>sqsum4</code> to the remaining argument:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">sqsum4</span> <span class="mi">3</span> <span class="c1">-- returns 25</span>
+</code></pre></div>
+<p>This is very neat. But suppose you want to apply the second argument, rather than the first one? The Haskell Prelude library provides the function <a href="https://hackage.haskell.org/package/base-4.14.0.0/docs/Prelude.html#v:flip">flip</a>, which simply flips the arguments:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">flip</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">c</span> 
+<span class="nf">flip</span> <span class="n">f</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">y</span> <span class="n">x</span>
+</code></pre></div>
+<p>That is fine as far as it goes, but let&#39;s do a somewhat contrived example. Let&#39;s say we have a function of four arguments:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">g</span> <span class="ow">::</span> <span class="n">t1</span> <span class="ow">-&gt;</span> <span class="n">t2</span> <span class="ow">-&gt;</span><span class="n">t3</span> <span class="ow">-&gt;</span><span class="n">t4</span> <span class="ow">-&gt;</span><span class="n">tr</span>
+<span class="nf">g</span> <span class="n">x1</span> <span class="n">x2</span> <span class="n">x3</span> <span class="n">x4</span> <span class="ow">=</span> <span class="n">x1</span><span class="o">*</span><span class="n">x3</span><span class="o">-</span><span class="n">x2</span><span class="o">*</span><span class="n">x4</span>
+</code></pre></div>
+<p>and we want to apply the 1st and 4th argument but not the others, something like <code>g v1 _ _ v4</code>.</p>
+
+<p>One way to do this is to create yet another function (of course!):</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">apply14</span> <span class="ow">::</span> <span class="p">(</span><span class="n">t1</span> <span class="ow">-&gt;</span> <span class="n">t2</span> <span class="ow">-&gt;</span> <span class="n">t3</span> <span class="ow">-&gt;</span> <span class="n">t4</span> <span class="ow">-&gt;</span> <span class="n">tr</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">t1</span> <span class="ow">-&gt;</span> <span class="n">t4</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">t2</span> <span class="ow">-&gt;</span> <span class="n">t3</span> <span class="ow">-&gt;</span> <span class="n">tr</span><span class="p">)</span>
+<span class="nf">apply14</span> <span class="n">f</span> <span class="n">x1</span> <span class="n">x4</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x2</span> <span class="n">x3</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">x1</span> <span class="n">x2</span> <span class="n">x3</span> <span class="n">x4</span>
+</code></pre></div>
+<p>And with this function we can partially apply the 1st and 4th argument of <code>g</code>:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">g14</span> <span class="ow">=</span> <span class="n">apply14</span> <span class="n">g</span> <span class="n">v1</span> <span class="n">v4</span>
+</code></pre></div>
+<p>This example mainly serves to illustrate the power of the arrow-based function type notation: it lays out the type of <code>apply14</code> clearly and concisely. </p>
+
+<h3>Raku</h3>
+
+<p>Raku provides the method <a href="https://docs.raku.org/routine/assuming">assuming</a>, which acts as a generalised version of our <code>apply14</code>:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">&amp;g14</span> = <span class="nv">&amp;g</span>.<span class="nb">assuming</span>( <span class="n">v1</span>, *, *, <span class="n">v4</span>);
+
+<span class="n">g14</span>(<span class="n">v2</span>,<span class="n">v3</span>); 
+</code></pre></div>
+<p>The return type of <code>assuming</code> is a <code>Callable</code>. This is a role for objects which support calling them. Thus, <code>g14</code> can be called as if it was a regular function.</p>
+
+<h3>Python</h3>
+
+<p>Python&#39;s <a href="https://docs.python.org/2/library/functools.html">functools</a> provide the <code>partial</code> function:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="n">g14</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span><span class="n">x4</span><span class="o">=</span><span class="n">v4</span><span class="p">)</span>
+
+<span class="n">g14</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="n">v3</span><span class="p">)</span>
+</code></pre></div>
+<p>The return type of <code>partial</code> is a <code>partial</code> object, which has an attribute <code>partial.func</code>, a callable object or function. Calls to the partial object will be forwarded to func with new arguments and keywords, so you can say <code>g14(v2,v3)</code> instead of <code>g14.func(v2,v3)</code>.</p>
+
+<h3>Rust</h3>
+
+<p>Rust provides the <code>partial!</code> macro via its <a href="https://docs.rs/partial_application/0.2.1/partial_application/">partial_application</a> crate. Its behaviour is very similar to our <code>apply14</code>: &quot;<code>partial!(some_fn =&gt; arg0, _, arg2, _)</code> returns the closure <code>|x1, x3| some_fn(arg0, x1, arg2, x3)</code>&quot;. </p>
+<div class="highlight"><pre><code class="language-rust" data-lang="rust"><span></span><span class="cp">#[macro_use]</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="k">crate</span><span class="w"> </span><span class="n">partial_application</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">g</span><span class="p">(</span><span class="n">x1</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">x4</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">x1</span><span class="o">*</span><span class="n">x3</span><span class="o">-</span><span class="n">x2</span><span class="o">*</span><span class="n">x4</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">v1</span><span class="o">=</span><span class="p">...;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">v2</span><span class="o">=</span><span class="p">...;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">v3</span><span class="o">=</span><span class="p">...;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">v4</span><span class="o">=</span><span class="p">...;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">g14</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">partial</span><span class="o">!</span><span class="p">(</span><span class="n">g</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">v4</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">g14</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="n">v3</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h2>Back to the function types</h2>
+
+<p>Suppose we want a type like the one we defined in C using a <code>typedef</code>, which encapsulates the function type:</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">Fun</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>
+</code></pre></div>
+<p>In Haskell, that would be</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">newtype</span> <span class="kt">Fun</span> <span class="ow">=</span> <span class="kt">Fun</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+</code></pre></div>
+<p>and we can generalise this to be a generic function of two arguments by using type variables instead of concrete types:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">newtype</span> <span class="kt">Fun2Args</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Fun2Args</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span>
+</code></pre></div>
+<p>So how would we use this? Let&#39;s create an instance</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">ft</span> <span class="ow">::</span> <span class="kt">Fun2Args</span> <span class="n">a</span>
+<span class="nf">ft</span> <span class="ow">=</span> <span class="kt">Fun2Args</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+<p>This is fine, but to apply the function we first must unwrap the type constructor:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="p">((</span><span class="nf">\</span><span class="p">(</span><span class="kt">Fun2Args</span> <span class="n">f</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">f</span><span class="p">)</span> <span class="n">ft</span> <span class="p">)</span> <span class="mi">3</span> <span class="mi">4</span>
+</code></pre></div>
+<p>That is not very handy. A better way is to use the record type syntax which gives us an accessor function:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">newtype</span> <span class="kt">Fun2Args</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Fun2Args</span> <span class="p">{</span> <span class="n">unF</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span><span class="p">}</span>
+<span class="nf">ft</span> <span class="ow">=</span> <span class="kt">Fun2Args</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">(</span><span class="n">unF</span> <span class="n">ft</span><span class="p">)</span> <span class="mi">3</span> <span class="mi">4</span>
+</code></pre></div>
+<p>Now I have applied this to integer, but the type of the function is <code>Num a =&gt; a -&gt; a -&gt; a</code>, so this works for any type in the <code>Num</code> typeclass.</p>
+
+<h2>Proper function types for Raku</h2>
+
+<p>In Raku, we can follow a similar approach of wrapping a function signature in a type, and it is actually simpler than in Haskell. We create a parametric role which takes the function as a parameter, and has a method with the signature of the function:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Fun2NumArgs</span>[<span class="nv">&amp;b</span>] {
+    <span class="k">method</span> <span class="n">unF</span>( <span class="n">Numeric</span> \<span class="o">x</span>,  <span class="n">Numeric</span> \<span class="n">y</span> --&gt; <span class="n">Numeric</span>) {
+        <span class="nv">&amp;b</span>(<span class="o">x</span>,<span class="n">y</span>);
+    }
+}
+
+<span class="k">my</span> \<span class="n">ft</span> = <span class="n">Fun2NumArgs</span>[ -&gt;\<span class="o">x</span>,\<span class="n">y</span> {<span class="o">x*x+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>} ].<span class="nb">new</span>;
+
+<span class="nb">say</span> <span class="n">ft</span>.<span class="n">unF</span>(<span class="mi">3</span>,<span class="mi">4</span>); 
+</code></pre></div>
+<p>But what is the benefit of doing this? Surely we could just have done</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">&amp;f</span> =  -&gt; <span class="n">Numeric</span> \<span class="o">x</span>, <span class="n">Numeric</span> \<span class="n">y</span> --&gt; <span class="n">Numeric</span> {<span class="o">x*x+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>};
+
+<span class="nb">say</span> <span class="n">f</span>(<span class="mi">3</span>,<span class="mi">4</span>);
+</code></pre></div>
+<p>For this simple example, that would indeed be enough as we don&#39;t have functions of functions. But what we gain is that we can now create a function with arguments of type <code>Fun2NumArgs</code>:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">fof</span> (<span class="n">Fun2NumArgs</span> \<span class="n">f1</span>,<span class="n">Fun2NumArgs</span> \<span class="n">f2</span> --&gt; <span class="n">Fun2NumArgs</span>) {
+...
+}
+</code></pre></div>
+<p>In other words, we can now have explicitly typed function signatures in Raku. Recall that without this approach, the type of a function would be <code>Code</code> or any dependant in <a href="https://docs.raku.org/type/Code#Type_Graph">the Code type graph</a>. With the role-based type, the function must have the type of the method <code>unF</code>. Furthermore, these function types can be nested. Let&#39;s create another type, for a function with two arguments of any type: </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Fun2Args</span>[<span class="nv">&amp;b</span>] {
+    <span class="k">method</span> <span class="n">unF</span>( <span class="nb">Any</span> \<span class="o">x</span>, <span class="nb">Any</span> \<span class="n">y</span> --&gt; <span class="nb">Any</span>) {
+        <span class="nv">&amp;b</span>(<span class="o">x</span>,<span class="n">y</span>);
+    }
+}
+</code></pre></div>
+<p>We create two instances of <code>Fun2NumArgs</code>:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">ft</span> = <span class="n">Fun2NumArgs</span>[ -&gt;\<span class="o">x</span>,\<span class="n">y</span> {<span class="o">x*x+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>} ].<span class="nb">new</span>;
+<span class="k">my</span> \<span class="n">ft2</span> = <span class="n">Fun2NumArgs</span>[ -&gt;\<span class="o">x</span>,\<span class="n">y</span> {<span class="o">x*</span><span class="n">y</span><span class="o">+</span><span class="n">y</span><span class="o">+x</span>} ].<span class="nb">new</span>;
+</code></pre></div>
+<p>And a function of these two functions using <code>Fun2Args</code>:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">fof2</span> = <span class="n">Fun2Args</span>[ 
+        <span class="k">sub</span> (<span class="n">Fun2NumArgs</span> \<span class="n">f1</span>,<span class="n">Fun2NumArgs</span> \<span class="n">f2</span> --&gt; <span class="n">Fun2NumArgs</span>) {
+            <span class="c1"># returns another function of 2 Numeric arguments</span>
+        } 
+    ].<span class="nb">new</span>;
+</code></pre></div>
+<p>We can now call the returned function like this:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span> <span class="n">fof2</span>.<span class="n">unF</span>(<span class="n">ft</span>,<span class="n">ft2</span>).<span class="n">unF</span>(<span class="mi">3</span>,<span class="mi">4</span>);
+</code></pre></div>
+<p>Having to call the <code>unF</code> method is not optimal. A better way is to can make the object itself callable instead, by defining <a href="https://docs.raku.org/routine/CALL-ME">the submethod <code>CALL-ME</code></a> instead of the method <code>unF</code>:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Fun2Args</span>[<span class="nv">&amp;b</span>] {
+    <span class="k">submethod</span> <span class="n">CALL-ME</span>( \<span class="o">x</span>,  \<span class="n">y</span> --&gt; <span class="nb">Any</span>) {
+        <span class="nv">&amp;b</span>(<span class="o">x</span>,<span class="n">y</span>);
+    }
+}
+
+<span class="c1"># And similar for Fun2NumArgs</span>
+</code></pre></div>
+<p>In this way, we can do:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span> <span class="n">fof2</span>.(<span class="n">ft</span>,<span class="n">ft2</span>)(<span class="mi">3</span>,<span class="mi">4</span>);
+</code></pre></div>
+<p>This is almost what we want. But we can remove the <code>.</code> as well, by making <code>fof2</code> of type <code>Callable</code>. We can indicate this with the <code>&amp;</code> sigil. But with the current definition of <code>Fun2Args</code>, this will result in a type error because <code>Fun2Args</code> is not callable. However, <code>Callable</code> is a role so all we need to do is mix it in:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Fun2ArgsC</span>[<span class="nv">&amp;b</span>] <span class="nb">does</span> <span class="nb">Callable</span> {
+    <span class="k">submethod</span> <span class="n">CALL-ME</span>( \<span class="o">x</span>,  \<span class="n">y</span> --&gt; <span class="nb">Any</span>) {
+        <span class="nv">&amp;b</span>(<span class="o">x</span>,<span class="n">y</span>);
+    }
+}
+</code></pre></div>
+<p>In this way we have created something very similar to a <a href="https://en.wikipedia.org/wiki/Function_object">function object</a>, but using a role rather than a class. And now we can write:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">&amp;fof3</span> = <span class="n">Fun2ArgsC</span>[ 
+        <span class="k">sub</span> (<span class="n">Fun2NumArgs</span> \<span class="n">f1</span>,<span class="n">Fun2NumArgs</span> \<span class="n">f2</span> --&gt; <span class="n">Fun2NumArgs</span>) {
+            ...
+        } 
+    ].<span class="nb">new</span>;
+
+<span class="nb">say</span> <span class="n">fof3</span>(<span class="n">ft</span>,<span class="n">ft2</span>)(<span class="mi">3</span>,<span class="mi">4</span>);
+</code></pre></div>
+<p>To summarize, we create a parametric callable role where the parameter is the function to be called, and the signature of the CALL-ME submethod provides the type constraint to that function. Passing a function with a different signature will give a type error. </p>
+
+<p>I think this is a nice way to have more type safety in your functional Raku code.</p>
+
+<h2>Bonus Tracks</h2>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=StKVS0eI85I">&quot;Call Me&quot; by Blondie</a></li>
+<li><a href="https://www.youtube.com/watch?v=_04CojexsYw">&quot;CALL ME&quot; (「コール・ミー」) by Drop&#39;s</a></li>
+</ul>
+
+<!--
+But we can also have    
+
+```haskell
+newtype Fun2Args = Fun2Args forall a . a -> a -> a
+```
+
+
+Prelude> newtype Fun2Args = Fun2Args { unF::forall a . Num a => a -> a -> a}
+Prelude> ft = Fun2Args (\x y -> x+y)
+Prelude> :t ft
+ft :: Fun2Args
+Prelude> :t unF ft
+unF ft :: Num a => a -> a -> a
+Prelude> :t unF ft
+unF ft :: Num a => a -> a -> a
+Prelude> (unF ft) 3 4
+7
+Prelude> (unF ft) 3.4 4.5
+7.9
+Prelude> 
+--
+-->
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2020-08-07T00:00:00Z" itemprop="dateModified">August 07, 2020</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2020 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
