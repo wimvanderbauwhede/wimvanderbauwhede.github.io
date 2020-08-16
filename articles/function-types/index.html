@@ -232,18 +232,18 @@
 <span class="c1"># ...</span>
 </code></pre></div>
 <p>The same example in Raku becomes</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">ten_times</span> (<span class="nb">Sub</span> \<span class="n">f</span>) {
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">ten_times</span> (<span class="nb">Sub</span> \<span class="n">f:</span>(<span class="nb">Int</span>,<span class="nb">Int</span> --&gt; <span class="nb">Int</span>)) {
 <span class="c1">#...</span>
 }
 
 <span class="n">ten_times</span>(<span class="n">sqsum</span>);
 </code></pre></div>
-<p>Here the only type information is that we are passing a subroutine. An equivalent way to write this is using the <code>&amp;</code> sigil <a href="https://docs.raku.org/language/variables#index-entry-sigil_&">which imposes the <code>Callable</code> type constraint</a>:</p>
+<p>So we can also pass the complete type. An equivalent way to write this is using the <code>&amp;</code> sigil <a href="https://docs.raku.org/language/variables#index-entry-sigil_&">which imposes the <code>Callable</code> type constraint</a>:</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">ten_times</span> (<span class="nv">&amp;f</span>) {
 <span class="c1">#...</span>
 }
 </code></pre></div>
-<p>We will see further how we can create function types for Raku that keep the type signatures of the functions passed as arguments. </p>
+<p>The types can be nested too, e.g. <code>((Int, Int --&gt; Int), (Int, Int --&gt; Int) --&gt; Int))</code> is a valid type signature.</p>
 
 <!--
 
@@ -284,8 +284,8 @@ ten_times(sqsum)
 
 <h2>Introducing the arrow</h2>
 
-<p>All of the above ways to express function type signatures are perfectly adequate in their respective languages. However, they all share the problem that these function-of-function type signatures don&#39;t compose very well: what if we want to write a function-of-function-of-function type? This is less far-fetched than it may seem.
-I would like to introduce a notation used in type theory. It is at the same time simple and powerful. If you are familiar with functional languages like Haskell, Idris or Agda, you already know it.</p>
+<p>All of the above ways to express function type signatures are perfectly adequate in their respective languages. However, with the exception of Raku, they all share the problem that these function-of-function type signatures don&#39;t compose very well: what if we want to write a function-of-function-of-function type? This is less far-fetched than it may seem.
+I would like to introduce a notation used in type theory. It is at the same time simple and powerful. If you are familiar with functional languages like Haskell, Idris or Agda, you already know it. </p>
 
 <p>Instead of mixing the type with the function declaration, it is written separately. The name of the function is followed by a colon and the list types of the arguments and the return value. Each argument is separated by an arrow. The above example of a function of two integer arguments returning an integer would be:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">sqsum</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="err">⟶</span> <span class="kt">Int</span> <span class="err">⟶</span> <span class="kt">Int</span> 
@@ -449,7 +449,7 @@ sqsum :: Int -&gt; Int -&gt; Int
 </code></pre></div>
 <p>Now I have applied this to integer, but the type of the function is <code>Num a =&gt; a -&gt; a -&gt; a</code>, so this works for any type in the <code>Num</code> typeclass.</p>
 
-<h2>Proper function types for Raku</h2>
+<h2>Named function types for Raku</h2>
 
 <p>In Raku, we can follow a similar approach of wrapping a function signature in a type, and it is actually simpler than in Haskell. We create a parametric role which takes the function as a parameter, and has a method with the signature of the function:</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Fun2NumArgs</span>[<span class="nv">&amp;b</span>] {
@@ -523,7 +523,7 @@ sqsum :: Int -&gt; Int -&gt; Int
 </code></pre></div>
 <p>To summarize, we create a parametric callable role where the parameter is the function to be called, and the signature of the CALL-ME submethod provides the type constraint to that function. Passing a function with a different signature will give a type error. </p>
 
-<p>I think this is a nice way to have more type safety in your functional Raku code.</p>
+<p>I think this is a nice way to have some additional type safety in your functional Raku code.</p>
 
 <h2>Bonus Tracks</h2>
 
