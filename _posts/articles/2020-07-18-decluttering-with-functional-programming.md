@@ -16,13 +16,12 @@ image:
   thumb: decluttering-with-functional-programming_400x150.jpg
 ---
 
-To a functional programmer like me, every programming language is a functional language. Functional programming is a style of programming and most modern languages support this style to a greater or lesser extent. In this article I want to explain how programming in a functional style provides you with powerful abstractions to make your code cleaner. I will illustrate this with examples in Raku and Python.
-
-
+<!-- To a functional programmer like me, every programming language is a functional language. --> 
+Functional programming is a style of programming and modern languages support this style to a greater or lesser extent. In this article I want to explain how programming in a functional style provides you with powerful abstractions to make your code cleaner. I will illustrate this with examples in Raku and Python, which as we will see are both excellent languages for functional programming.
 
 ## Raku: a quick introduction
 
-The code examples in this article are written in [Python](https://www.python.org/) and [Raku](https://raku.org/). I assume most people are familiar with Python, but Raku is less well known, so I will explain the basics first. The code in this article is written in a functional style and is not very idiomatic so you should be able to understand it easily if you know another programming language.
+The code examples in this article are written in [Python](https://www.python.org/) and [Raku](https://raku.org/). I assume most people are familiar with Python, but Raku is less well known, so I will explain the basics first. The code in this article is not very idiomatic so you should be able to understand it easily if you know another programming language.
 
 Raku is most similar to [Perl](https://www.perl.org). Both languages are syntactically similar to C/C++, Java and JavaScript: block-based, with statements separated by semicolons, blocks demarcated by braces, and argument lists in parentheses and separated by commas. The main feature that sets Perl and Raku apart from other languages is the use of sigils ('funny characters') which identify the type of a variable: `$` for a scalar, `@` for an array, `%` for a hash (map) and `&` for a subroutine. Variables also have keywords to identify their scope, I will only use `my` which marks the variable as lexically scoped. A subroutine is declared with the `sub` keyword, and subroutines can be named or anonymous:
 
@@ -36,7 +35,7 @@ my $anon_square = sub ($x) {
 }
 ```
 
-In Python this would be
+In Python this would be:
 
 ```python
 def square(x):
@@ -59,9 +58,9 @@ say x + $y;
 
 In the code in this article, I will use the sigil-less variables whenever possible.
 
-Raku has several types of sequence data structures. In the code below I will use [lists and arrays](https://docs.raku.org/language/list) and [ranges](https://docs.raku.org/type/Range). The main difference between a list and an array in Raku is that a list is immutable, which means that once created, it can't be modified. So it is a read-only data structure. Arrays are mutable, so we can update the elements, extend them, shrink them etc. 
+Raku has several types of sequence data structures. In the code below I will use [lists and arrays](https://docs.raku.org/language/list) and [ranges](https://docs.raku.org/type/Range). The main difference between a list and an array in Raku is that a list is immutable, which means that once created, it can't be modified. So it is a read-only data structure. To 'update' an immutable data structure, you need to create an updated copy. Arrays on the other hand are mutable, so we can update their elements, extend them, shrink them etc. All updates happen in place on the original. 
 
-Raku's arrays are similar to Python's lists and Raku's lists are (mostly) similar to Python's tuples, which are also immutable. Apart from the syntax, ranges in Raku are similar to ranges in Python, and both are immutable.
+Raku's arrays are similar to Python's lists and Raku's lists are similar to Python's tuples, which are also immutable. Apart from the syntax, ranges in Raku are similar to ranges in Python, and both are immutable.
 
 ```perl6
 my @array1 = 1,2,3; #=> an array because of the '@' sigil
@@ -71,7 +70,7 @@ my \range1 = 1 .. 10; #=> a range 1 .. 10
 my @array3 = 1 .. 10; #=> an array from a range, because of the '@' sigil
 
 my \list1 = 1,2,3; #=> a list
-my $list2 = 1,2,3; #=> also a list
+my $list2 = (1,2,3); #=> also a list
 my \list3 = |(1 .. 10);  #=> an array from a range because of the '|' flattening operation
 ```
 
@@ -91,10 +90,7 @@ tuple3 = tuple(range(1,11)) #=> creates a tuple from a range
 
 Other specific bits of syntax or functionality will be explained for the particular examples. 
 
-You may wonder why I introduce these immutable data structures. As we will see further, functional programming works really well with immutable data structures. And they have one big advantage: you never have to worry if you have accidentally modified your data, or whether you should make a copy to be sure. So using immutable data structures make code less error-prone and easier to debug. They also have potential performance benefits.  
-
-
-## A function, by any other name &mdash; functions as values
+## _A function, by any other name_ &mdash; functions as values
 
 Functions are the essence of functional programming. As I explained in my article ["Everything is a function"]({{ site.url }}/articles/everything-is-a-function), in a proper functional language, all constructs are built from functions. 
 
@@ -118,7 +114,7 @@ sub choose (\t, \f, \d) {
 ```python
 # Python
 def choose (t, f, d):
-	if d:
+  if d:
     return t 
   else:
     return f
@@ -131,7 +127,7 @@ First let's call `choose` with strings as values for the first two arguments:
 my \tstr = "True!";
 my \fstr = "False!";
 
-my \res_str = choose(tstr, fstr, True)
+my \res_str = choose(tstr, fstr, True);
 
 say res_str; #=> says "True!"
 ```
@@ -154,7 +150,7 @@ sub ff (\s) { say "False {s}!" }
 
 my &res_f = choose(&tt, &ff, False);
 
-say res_f; #=> says &ff
+say &res_f; #=> says &ff
 res_f("rumour"); #=> says "False rumour!"
 ```
 
@@ -210,9 +206,6 @@ When we print out the variable to which the function is bound, Raku returns `sub
 In Python:
 
 ```python
-tt = lambda s: print( "True "+s+"!" )
-ff = lambda s: print( "False "+s+"!" )
-
 res_f = choose(tt, ff, True);
 
 print( res_f) #=> says <function <lambda> at 0x7f829b298b80>
@@ -297,7 +290,7 @@ grep -> \x { x % 5 == 0 }, map -> \x {x*x}, 1..30
 ```
 ```python
 # Python
-res = tuple(filter( lambda x : x % 5 == 0 ,map( lambda x : x*x ,tuple(range(1,31)))))
+res = tuple(filter( lambda x : x % 5 == 0 ,map( lambda x : x*x ,range(1,31))))
 ```
 
 This is because `map` and `grep` take a list and return a list, so as long as you need to operate on a list, you can do this by chaining the calls.
@@ -365,7 +358,7 @@ A straightforward way to implement a left fold (so the same as `reduce`) is to u
 # Raku
 sub foldll (&f, \iacc, \lst) { 
   my $acc = iacc; 
-  for lst -> elt {
+  for lst -> \elt {
     $acc = f($acc,elt);
   }
   $acc;
@@ -381,7 +374,7 @@ def foldll (f, iacc, lst):
   return acc
 ```
 
-If we want to use immutable variables only, we can use recursion. Raku makes this easy because it allows multiple signatures for a subroutine (`multi sub`s), and it will call the variant that matches the signature. 
+If we want to use immutable variables only, we can use recursion. Raku makes this easy because it allows multiple signatures for a subroutine (`multi sub`s), and it will call the variant that matches the signature. In Python, there is the module [multipledispatch](https://pypi.org/project/multipledispatch/) that lets you do something similar to multi subs.
 
 Our `foldl` will consume the input list `lst` and use `f` combine its elements into the accumulator `acc`. When the list has been consumed, the computation is finished and we can return `acc` as the result. So our first variant says that if the input list is empty, we should return `acc`.
 The second variant takes an element `elt` from the list (see [the Raku documentation](https://docs.raku.org/type/Range) for details on the `*`) and combines it with `acc` into `f(acc,elt)`. It then calls `foldl` again with this new accumulator and the remainder of the list, `rest`.
@@ -422,7 +415,7 @@ The right fold is quite similar to the left fold. For the loop-based version, al
 # Raku
 sub foldrl (&f, \acc, \lst) { 
   my $res = acc;
-  for  lst.reverse -> elt {
+  for  lst.reverse -> \elt {
     $res = f($res,elt);
   }
   $res;
@@ -511,11 +504,15 @@ def filter (f,lst):
 
 Just like in the `map` implementation, we call `foldl` with an anonymous function. In this function we test if `f(elt)` is true for every `elt` in `lst`. If it is true we create a new list from `acc` and `elt`, otherwise we just return `acc`. Because `map` and `grep` operate on each element of the list separately, we could implement them using the right fold as well. 
 
-With these examples I hope that both the concept of a function working on functions and the possible ways of implementing them has become more clear. The advantage of the recursive implementation is that it allows us to use immutable data structures. As we'll see next, in Raku that leads to another advantage.
+With these examples I hope that both the concept of a function working on functions and the possible ways of implementing them has become more clear. The advantage of the recursive implementation is that it allows us to use immutable data structures. 
+
+### Why immutable data structures?
+
+You may wonder why I focus on these immutable data structures. As we will have seen, functional programming works really well with immutable data structures. And they have one big advantage: you never have to worry if you have accidentally modified your data, or whether you should make a copy to be sure. So using immutable data structures make code less error-prone and easier to debug. They also have potential performance benefits. And as we'll see next, in Raku there is yet another advantage.
 
 ## Functions returning functions
 
-We can also create functions that return functions. This is in particular useful if we want to have a parametrisable function. As a trivial example, suppose we want a series of functions that increments a number with a fixed value: `add1`, `add2` etc. We could of course write each of them separately:
+Functions can also return functions. This is in particular useful if we want to have a parametrisable function. As a trivial example, suppose we want a series of functions that increments a number with a fixed value: `add1`, `add2` etc. We could of course write each of them separately:
 
 ```perl6
 # Raku
@@ -556,13 +553,14 @@ say add[0].(4); #=> says 5
 
 ```python
 # Python
-my add = (
-lambda (x) : x+1,
-lambda (x) : x+2,
-lambda (x) : x+3,
-lambda (x) : x+4,
-lambda (x) : x+5
+add = (
+lambda x : x+1,
+lambda x : x+2,
+lambda x : x+3,
+lambda x : x+4,
+lambda x : x+5
 )
+
 print( add[0](4)) #=> says 5
 ```
 
@@ -580,7 +578,7 @@ say add[1].(4); #=> says 5
 
 ```python
 # Python
-my add = []
+add = []
 for n in range(0,6):
   add.append(lambda x: x+n)
 ```
@@ -593,7 +591,7 @@ sub gen_add(\n) {
   sub (\x) {x+n}
 }
 
-my \add = map &gen_add, 0..5
+my \add = map &gen_add, 0..5;
 
 say add[1].(4); #=> says 5
 ```
@@ -605,12 +603,12 @@ def gen_add(n):
 
 add = tuple(map( gen_add, range(0,6)))
 
-say add[1](4); #=> says 5
+print( add[1](4)) #=> says 5
 ```
 
-## Laziness
+### Laziness
 
-In Raku, using an (immutable) range has an additional benefit: we can set the end of the range to infinity, which in Raku can be written as `∞` (unicode 221E), `*` or `Inf`. 
+In Raku, using a range has an additional benefit: we can set the end of the range to infinity, which in Raku can be written as `∞` (unicode 221E), `*` or `Inf`. 
 
 ```perl6
 # Raku
@@ -620,9 +618,20 @@ say add[244].(7124); #=> says 7368
 ```
 
 This is an example of what is called "lazy evaluation", or laziness for short: Raku is not going to try (and fail) to process this infinite list. Instead, it will do the processing when we actually use an element of that list. The evaluation of the expression is delayed until the result is needed, so when we call `add[244]`, what happens is that `gen_add(244)` is called to generate that function. 
-Note that this will not work with the for-loop, because to use the for-loop we need a mutable data structure, and the lazy lists have to be immutable. So this is a nice example of how the functional programming style allows you to benefit from laziness. 
+Note that this will not work with the for-loop, because to use the for-loop we need a mutable data structure, and the lazy lists have to be immutable. So this is a nice example of how the functional programming style allows you to benefit from laziness. For the full story of laziness in Raku, please see [the documentation](https://docs.raku.org/language/list#index-entry-laziness_in_Iterable_objects). 
 
-This is also why we implemented `foldl` recursively, and then used it to implement our own `map` and `grep`: the recursion-based versions don't need to update any variables, so they can work with the immutable lazy data structures. 
+Python does not have lazy lists but is have a different form of laziness: the call to `map` (or `filter`) does not return the sequence of results but instead it returns a _generator_:
+
+```python
+# Pythom
+map_gen = map( gen_add, range(0,6666))
+
+print(map_gen) #=> says <map object at 0x7f344caefdc0>
+```
+
+It is only when we wrap the generator in a sequence constructor such as `tuple()` that the results are actually generated. 
+
+
 
 ## Function composition
 
@@ -630,7 +639,7 @@ We saw above that you can chain calls to `map` and `grep` together. Often you on
 
 ```perl6
 # Raku
-map -> \x { x + 5 }, map -> \x {x*x}, 1..30
+map -> \x { x + 5 }, map -> \x {x*x}, 1..30;
 ```
 
 ```python
@@ -641,13 +650,13 @@ map( lambda x : x + 5, map( lambda x : x*x, range(1,31)))
 In that case, we can do this a little bit more efficient: rather than creating a list and then calling map on that list, we can do both computations at once by composing the functions. Raku provides a special operator for this:
 
 ```perl6
-map -> \x { x + 5 } ∘ -> \x { x * x }, 1..30
+map -> \x { x + 5 } ∘ -> \x { x * x }, 1..30;
 ```
 
 The operator `∘` (the "ring operator", unicode 2218, but you can also use a plain `o`) is the function composition operator, and it's pronounced "after", so `f ∘ g` is "f after g". What it does is create a new function by combining two existing functions:
 
 ```perl6
-my &h = &f ∘ &g
+my &h = &f ∘ &g;
 ```
 is the same as
 
@@ -676,7 +685,7 @@ def compose(f,g):
 
 ## Conclusion
 
-In this article I have used Raku and Python examples to introduce three key functional programming techniques: functions that operate on functions, functions that return functions and function composition. I have shown how you to use the functions _map_, _reduce_ (_fold_) and _grep_ (_filter_) to operate on immutable lists. I have explained how you can implement such functions with and without recursion, and what the advantage is of the recursive implementation. 
+In this article I have used Raku and Python examples to introduce three key functional programming techniques: functions that operate on functions, functions that return functions and function composition. I have shown how you to use the functions _map_, _reduce_ (_fold_) and _grep_ (_filter_) to operate on immutable lists. I have explained how yo(u can implement such functions with and without recursion, and what the advantage is of the recursive implementation. Here is the code from the article, [Raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/decluttering-with-functional-programming.raku) and [Python](https://github.com/wimvanderbauwhede/raku-examples/blob/master/decluttering-with-functional-programming.py). 
 
 There is of course a lot more to functional programming and I have written [a few articles on more advanced topics]({{ site.url}}/articles/). The concepts introduced in this article should provide a good basis for understanding those more advanced topics. If you want to learn more about functional programming, you might consider [my free online course](https://www.futurelearn.com/courses/functional-programming-haskell).
 
