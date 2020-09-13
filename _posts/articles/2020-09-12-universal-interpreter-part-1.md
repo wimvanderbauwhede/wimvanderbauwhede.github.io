@@ -1,10 +1,11 @@
 ---
 layout: article
-title: "A Universal Interpreter (Part 1)"
+#title: "A Universal Interpreter (Part 1)"
+title: "Encoding types as functions in Raku"
 date: 2020-09-12
 modified: 2020-09-12
 tags: [ coding, hacking, programming, raku ]
-excerpt: ""
+excerpt: "The Böhm-Berarducci encoding is a way to express an algebraic data type as a function type. We show how to do this in Raku using roles."
 current: ""
 current_image: universal-interpreter-part-1_1600x600.jpg
 comments: false
@@ -17,27 +18,27 @@ image:
 ---
 
 
-This is the first part of the final article in a series about functional programming and in particular algebraic data types and function types in [Raku](https://raku.org/). It builds on my earlier articles on [algebraic data types]({{site.url}}/articles/roles-as-adts-in-raku/) in on [Raku](https://raku.org/) and their use in the practical example of [list-based parser combinators]({{site.url}}/articles/list-based-parser-combinators/). It also makes heavily use of [function types]({{site.url}}/articles/function-types).
+This is the first part of an article in my series about functional programming and in particular algebraic data types and function types in [Raku](https://raku.org/). It builds on my earlier articles on [algebraic data types in Raku]({{site.url}}/articles/roles-as-adts-in-raku/) and their use in the practical example of [list-based parser combinators]({{site.url}}/articles/list-based-parser-combinators/). It also makes heavily use of [function types]({{site.url}}/articles/function-types).
 
-If you are not familiar with functional programming (or with [Raku](https://raku.org/)), I suggest you read my introduction ["Cleaner code with functional programming"]({{site.url}}/articles/decluttering-with-functional-programming/). If you are not familiar with algebraic data types or function types, you might want to read the other articles as well. 
+If you are not familiar with functional programming or with Raku, I suggest you read my introduction ["Cleaner code with functional programming"]({{site.url}}/articles/decluttering-with-functional-programming/). If you are not familiar with algebraic data types or function types, you might want to read the other articles as well. 
 
-In this article, I want to explain a technique called [Böhm-Berarducci encoding](http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html) of algebraic data types. The link above is to Oleg Kiselyov's explanation, which makes interesting reading but is not required for what follows. Oleg says:
+In this article, I want to explain a technique called [Böhm-Berarducci encoding](http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html) of algebraic data types. The link above is to Oleg Kiselyov's explanation, which makes for interesting reading but is not required for what follows. Oleg says:
 
 _"Boehm-Berarducci's paper has many great insights. Alas, the generality of the presentation makes the paper very hard to understand. It has a Zen-like quality: it is incomprehensible unless you already know its results."_
 
-For the purpose of this article, it is sufficient to say that the Böhm-Berarducci encoding is a way to encode an algebraic data type as a function type. This means that the data itself is also encoded as a function. As a result, the function encoding the data type becomes a "universal interpreter". This makes it is easy to create various interpreters for algebraic data types. 
+Fortunately, to follow the explanation in this article, you don't need to read either Böhm and Berarducci's  original paper or Oleg's explanation. For the purpose of this article, it is sufficient to say that the Böhm-Berarducci encoding is a way to encode an algebraic data type as a function type. This means that the data itself is also encoded as a function. As a result, the function encoding the data type becomes a "universal interpreter". This makes it is easy to create various interpreters for algebraic data types. 
 
-In this first part, I will explain a way to use Böhm-Berarducci (BB) encoding in Raku with basic examples. In [the second part]() I will use BB encoding to construct a 'universal interpreter' which makes it very easy to create specific interpreters. 
+In this first part, I will explain a way to implement Böhm-Berarducci (BB) encoding using roles in Raku, with basic examples. In [the second part]({{site.url}}/articles/universal-interpreter-part-2) I will show how to use BB encoding to construct a 'universal interpreter' which makes it very easy to create specific interpreters for complex data structures. 
 
 ## The basic idea behind the Böhm-Berarducci encoding
 
 The basic idea behind the Böhm-Berarducci (BB) encoding is to create a type which represents a function with an argument for every alternative in a sum type.
-Every argument is itself a function which takes as arguments the arguments of each alternative, and returns a type. However, the return type is polymorphic, so we decide what it will be when we use the BB type. 
+Every argument is itself a function which takes as arguments the arguments of each alternative product type, and returns a polymorphic type. Because the return type is polymorphic, we decide what it will be when we use the BB type. In this way a BB-encoded data structure is a generator for whatever type we like, in other words it is a universal interpreter. 
 
 For example, if we define a sum type `S` with three alternatives `A1`, `A2` and `A3`: 
 
 ```haskell
-    data S = A1 Int | A2 String | A3
+    data S = A1 Int | A2 String Bool | A3
 ```
 
 then the corresponding BB type will be
@@ -46,7 +47,7 @@ then the corresponding BB type will be
     -- A1 Int
     (Int ⟶ a) ⟶ 
     -- A2 String
-    (String ⟶ a) ⟶ 
+    (String ⟶ Bool ⟶ a) ⟶ 
     -- A3
     (a) ⟶ 
     -- The return type
@@ -54,13 +55,13 @@ then the corresponding BB type will be
 ```
 
 I have put parentheses to show which part of the type is the function type corresponding to each alterative. 
-Because the constructor for `A3` takes no arguments, the corresponding function signature in the BB encoding is simply `a`: a function wich takes no arguments and returns something of type `a`. The final `a` is the return value of the top-level function: every type alternative is an argument to the function. When applying the function, it must return a value of a given type. This type is `a` because `a` is the return type of every function representing an alternative. 
+Because the constructor for `A3` takes no arguments, the corresponding function signature in the BB encoding is simply `a`: a function which takes no arguments and returns something of type `a`. The final `a` is the return value of the top-level function: every type alternative is an argument to the function. When applying the function, it must return a value of a given type. This type is `a` because `a` is the return type of every function representing an alternative. 
 
 ## Some simple examples
 
 Let's look at a few examples to see how this works in practice.
 
-### OpinionatedBool 
+### OpinionatedBool: an enum-style sum type
 
 In a [previous post]({{site.url}}/articles/roles-as-adts-in-raku/) I showed how you can use Raku's _role_ feature to implement algebraic data types. I gave the example of 
 `OpinionatedBool`:
@@ -92,8 +93,7 @@ In Haskell, the type declaration of the BB type lists the types of all the argum
 
 The `newtype` keyword in Haskell is used instead of `data` for types with only a single constructor. What we have here is a record type with a single field, and this field has the accessor function `unBoolBB`, which is a convenience to allow easy access to the function encoded in the type. The `forall a` allows us to introduce a type parameter that is only in scope in the expression on the right-hand side. 
 
-Raku's type system is powerful enough to implement the BB type.
-We could implement it minimally a role with a single accessor:
+In Raku, we could implement this  BB type minimally as a parametric role with a single accessor:
 
 ```perl6
     role BoolBB[\b] {
@@ -101,7 +101,7 @@ We could implement it minimally a role with a single accessor:
     }
 ```
 
-Note that this is so general that _any_ BB type would have this representation, so there is no type safety. It also is hard to read because it is not clear how many arguments the function takes.
+However, this is so general that _any_ BB type would have this representation, so there is no type safety and it also is hard to read because it is not clear how many arguments the function takes.
 
 We can be more explicit by using a method with a typed signature:
 
@@ -118,7 +118,7 @@ This tells us a lot more:
 - the parameter to the role has an `&` sigil so it of type `Callable` (i.e. it is a function)
 - the method's type tells us that there are two arguments of type `Any`. The method itself also returns a value of type `Any`, i.e. there is no constraint on the type of the return value. 
 
-With this implementation, the type safety is not as strong as in Haskell, where we guarantee that all these return values will be of the same type. The main purpose for using the types here is to make it provide documentation. We will enforce the type safety at a different point.
+With this implementation, the type safety is not quite as strong as in Haskell, where we guarantee that all these return values will be of the same type. The main purpose for using the types here is to make it provide documentation. We will enforce the type safety at a different point.
 
 Now, the whole idea is that this role `BoolBB` will serve the same purpose as an ordinary Boolean. So instead of saying
 
@@ -151,23 +151,24 @@ my BoolBB \BBTrue = bbb true;
 my BoolBB \BBFalse = bbb false;
 ```
 
-So what are the functions `true` and `false`? We know they are of type `a -> a -> a`; an obvious choice is:
+The question is then: what are the functions `true` and `false`? We know they are of type `a ⟶ a ⟶ a`; an obvious choice is:
 
 ```perl6
 my \true  = -> Any \t, Any \f --> Any { t }
 my \false = sub (Any \t,Any \f --> Any ) { f }
 ```
 
-This is the same choice we made in [the article "Everything is a function"]({{site.url}}/articles/everything-is-a-function/). In fact, these are simply _selector_ functions which select the first or second argument.
+This is the same choice we made in [the article "Everything is a function"]({{site.url}}/articles/everything-is-a-function/). In fact, these are simply _selector_ functions which select the first or second argument. 
 
 In practice, we often want to convert between BB types and their algebraic counterparts.
-To turn a Bool into a BoolBB:
+
+- To turn a Bool into a BoolBB:
 
 ```perl6
 sub boolBB (Bool \tf --> BoolBB){ tf ?? BBTrue !! BBFalse }
 ```
 
-To turn the BB Boolean into an actual Boolean:
+- To turn the BB Boolean into an actual Boolean:
 
 ```perl6
 sub bool(BoolBB \b --> Bool) { 
@@ -208,7 +209,7 @@ say  boolBB( bool BBFalse).bool; # => False
 
 and I'm sure those dots will make some people happy.
 
-Note that we do not really need the `bool` method though: we can simply compare the types:
+Note however that we do not really need the `bool` method, instead we can simply compare the types:
 
 ```perl6
 say  trueBB ~~ BBTrue; # => True
@@ -233,9 +234,11 @@ my \green = \r,\g,\b { g }
 my \blue = \r,\g,\b { b }
 ```
 
-However, the main reason for using BB types is to make it easier to perform computations on the data structure encoded in the type. The [second part]({{site.url}}/articles/universal-interpreter-part-2) of the article presents a worked example. But first, let's look at a few more simple examples explain more features of the BB approach.
+However, the main reason for using BB types is to make it easier to perform computations on the data structure encoded in the type. Constant sum types like `Bool` and `RGB` don't store data to compute on, except in the most trivial way, and are therefore not the main target of this encoding. I presented them only because they are the easiest ones to explain.
 
-## The `Maybe` type
+The [second part]({{site.url}}/articles/universal-interpreter-part-2) of the article presents a worked example. But first, let's look at a few more simple examples explaining more features of the BB approach.
+
+### The `Maybe` type: a sum type with a polymorphic argument
 
 The Boolean type above had two constructors without arguments. A simple algebraic data type where  one of the constructors has an argument is the `Maybe` type:
 
@@ -255,7 +258,9 @@ sub safeLookup(%v,$k --> Maybe) {
 }
 ```
 
-The BB type becomes in Haskell:
+The `Maybe` type is polymorphic, so we have instances of `Maybe` for any type we like. 
+
+The BB type comes in Haskell is:
 
 ```haskell
     newtype MayBB b = MayBB {
@@ -283,7 +288,7 @@ We use a `Callable` for the `Just` variant but a (sigil-less) scalar for the `No
 
 As before for the BB Boolean, we create some helper functions. 
 
-First we have what I call _selectors_, functions that select a field from the BB type.
+- First we have the _selectors_:
 
 ```perl6
 # selectors
@@ -291,7 +296,7 @@ sub bbj( \x ) { -> &j:(Any --> Any), Any \n --> Any { &j(x)} }
 sub bbn { -> &j:(Any --> Any),Any \n --> Any {n} }
 ```
 
-Then we have a wrapper to make role construction nicer:
+- Then we have a wrapper to make role construction nicer:
 
 ```perl6
 sub mbb (&jm --> MayBB) {
@@ -299,7 +304,7 @@ sub mbb (&jm --> MayBB) {
 }
 ```
 
-With these we can easily write the final BB type constructors:
+- With these we can easily write the final BB type constructors:
 
 ```perl6
 sub Just(\v) {mbb( bbj( v) )}
@@ -319,18 +324,18 @@ Let's make a simple printer for this type:
 
 ```perl6
 sub printMayBB(MayBB \mb --> Str) {
-    mb.unMayBB( sub (Any \x --> Any) { "{x}" }, 'NaN' );
+    mb.unMayBB( sub (Any \x --> Str) { "{x}" }, 'NaN' );
 }
 
 say printMayBB mbb; # => 42
 say printMayBB mbbn; # => NaN
 ```
 
-As before, this function could be made a method of the `MayBB` role if desired.
+As before, this function could be made a method of the `MayBB` role if desired. The point to note however is that to create this printer, all we had to do was provide the right arguments to `unMayBB`. We chose the concrete type `Str` for the type parameter in the BB type. Recall that to turn the BB Boolean into an actual Boolean, all we had to do was to provide arguments of type `Bool` to `unBoolBB`. These are simple examples that already illustrate some of the power of the BB encoding.
 
 ### A pair, the simplest product type
 
-The two previous examples were for sum types. Let's look at a simple product type, a pair of two values also known as a tuple. Assuming the tuple has type parameters `t1` and `t2`, the BB type in Haskell is:
+The two previous examples were for sum types. Let's look at a simple product type, a pair of two values also known as a tuple. Assuming the tuple is polymorphic with type parameters `t1` and `t2`, the BB type in Haskell is: 
 
 ```haskell
 newtype PairBB t1 t2 = PairBB {
@@ -348,7 +353,7 @@ role PairBB[ &p ] {
 }
 ```
 
-The selectors (we reuse the `true` and `false` functions used for the `BoolBB`):
+The selectors (for convenience we reuse the `true` and `false` functions used for the `BoolBB`):
 
 ```perl6
 # To get the elements out of the pair
@@ -399,8 +404,18 @@ An important point is that the BB-encoded data structures are immutable, so you 
 my PairBB \pbb2 = Pair fst(pbb) + 1, 'forty-three';
 ```
 
-## Summary of Part 1
+Now, let's assume for a moment that our `PairBB` represents a complex number and we want to convert it from (Real, Imaginary) into polar form (Modulus, Phase). Again we can use the same approach:
 
-What we have learned in this article is how to create sum (alternative) and product (record) types using a formalism called Böhm-Berarducci encoding. We use Raku's roles to implement types this way, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values.   
+```perl6
+sub toPolar(PairBB \mb --> PairBB) {
+    mb.unPairBB( sub (Any \x,Any \y --> PairBB) {
+        Pair sqrt(x*x+y*y),atan2(x,y);
+    } );
+}
+```
+
+## Summary
+
+What we have learned so far is how to create sum (alternative) and product (record) types in Raku using a formalism called Böhm-Berarducci (BB) encoding, which uses functions to create data structures. We use Raku's roles to implement BB types, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values.   
 
 In [the next part]({{site.url}}/articles/universal-interpreter-part-2), we will see how BB types make it easy to create interpreters for complex data structures.
