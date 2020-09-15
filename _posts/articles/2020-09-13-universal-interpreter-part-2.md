@@ -1,10 +1,10 @@
 ---
 layout: article
-title: "A Universal Interpreter (Part 2)"
+title: "A universal interpreter"
 date: 2020-09-13
 modified: 2020-09-13
 tags: [ coding, hacking, programming, raku ]
-excerpt: ""
+excerpt: "The Böhm-Berarducci encoding of a type can be considered as a universal interpreter. We illustrate this in Raku with an evaluator and pretty printer."
 current: ""
 current_image: universal-interpreter-part-2_1600x600.jpg
 comments: false
@@ -16,15 +16,14 @@ image:
   thumb: universal-interpreter-part-2_400x150.jpg
 ---
 
+In [the previous article]({{site.url}}/articles/universal-interpreter-part-1) I explained the basic idea behind a technique called [Böhm-Berarducci encoding](http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html) of algebraic data types, and showed a way to implement this technique in [Raku](https://raku.org/). Unless you are already familiar with this formalism, I recommend you read that article first. 
+
+In this article I want to illustrate how the Böhm-Berarducci (BB) encoding of a type can be considered as a universal interpreter. As an example, I will demonstrate how to create  an evaluator and pretty printer for a parsed polynomial expression.
 
 
-## An interpreter and pretty printer for a polynomial expression
+## A parse tree algebraic data type 
 
-Now that we have seen how simple sum and product types are BB-encoded, let's try something more complex: a parser and interpreter for expressions of the form `a*x^2+b*x+c`. 
-
-### Parse tree algebraic data type 
-
-The algebraic data type for the parse tree for expressions like this in Haskell:
+Consider expressions of the form `a*x^2+b*x+c` or `x^3+1` or `x*y^2-x^2*y`. Let's assume we have a parser for such an expression, for example built using [parser combinators]({{site.url}}/articles/). Let's also assume that this parser returns the parsed data as an algebraic data type, defined in Haskell as:
 
 ```haskell
 data Term = 
@@ -60,7 +59,9 @@ role Mult [Array[Term] \ts] does Term {
 }
 ```
 
-We can write a pretty-printer for this type using `multi sub`s. The routine is recursive because the `Pow`, `Add` and `Mult` constructors take arguments of type  `Term`, i.e. the algebraic data type itself is recursive. 
+The additional complexity compared to the types discussed in [the previous article]({{site.url}}/articles/universal-interpreter-part-1) is that this type is recursive. 
+
+We can write a pretty-printer for this type using `multi sub`s. The routine is recursive because the `Pow`, `Add` and `Mult` constructors are recursive. 
 
 ```perl6
 # Pretty-print a Term 
@@ -96,9 +97,9 @@ multi sub evalTerm(%vars,  %pars,Mult \t){
 }
 ```
 
-### Parse tree BB encoding 
+## BB encoding of the parse tree type  
 
-The BB encoding of `Term` in Raku is pleasingly compact:
+The BB encoding of the `Term` algebraic data type in Raku is pleasingly compact:
 
 ```perl6
 role TermBB[&f] {
@@ -116,40 +117,40 @@ role TermBB[&f] {
 }
 ```
 
-We could of course use this type directly, but let's look at how we can convert between `Term` and `TermBB`
+We could of course use this type directly, but let's first look at how we can convert between `Term` and `TermBB`
 
-As before, we create our little helpers. Each of the functions below generates the `TermBB` instance for the corresponding alternative in the `Term` algebraic data type. 
+As before, we create our little helpers. Each of the functions below is a constructor wich generates the `TermBB` instance for the corresponding alternative in the `Term` algebraic data type. 
 When Raku's macro language is more developed, we will be able to generate these automatically.
 
 ```perl6
-sub _var(Str \s --> TermBB) { 
+sub VarBB(Str \s --> TermBB) { 
     TermBB[ 
         sub (\v, \c, \n, \p, \a, \m) { v.(s) }
     ].new;
     }
-sub _par(Str \s --> TermBB) { 
+sub ParBB(Str \s --> TermBB) { 
     TermBB[ 
         sub (\v, \c, \n, \p, \a, \m) { c.(s) }
     ].new;
     }
-sub _cons(Int \i --> TermBB) { 
+sub ConstBB(Int \i --> TermBB) { 
     TermBB[ 
         sub (\v, \c, \n, \p, \a, \m) { n.(i) }
     ].new;
     }    
-sub _pow( TermBB \t, Int \i --> TermBB) {
+sub PowBB( TermBB \t, Int \i --> TermBB) {
     TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
         p.( t.unTermBB( v, c, n, p, a, m ), i);
     }
     ].new;
 }
-sub _add( @ts --> TermBB) { # Note about why @ and not Array[TermBB] \ ?? Or better, do this right and use typed-map after all!
+sub AddB( Array[TermBB] \ts --> TermBB) { # Note about why @ and not Array[TermBB] \ ?? Or better, do this right and use typed-map after all!
     TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
         a.( map {$_.unTermBB( v, c, n, p, a, m )}, @ts )
     }
     ].new;
 }
-sub _mult(  @ts --> TermBB) { 
+sub MultBB(  Array[TermBB] \ts --> TermBB) { 
     TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
         m.( map {$_.unTermBB( v, c, n, p, a, m )}, @ts )
     }
@@ -157,22 +158,27 @@ sub _mult(  @ts --> TermBB) {
 }
 ```
 
-The interesting generators are `_pow`, `_add` and `_mult` because they are recursive. In `_pow`, the function passed as parameter to the TermBB role constructor calls `p` which has a signature of `:(Any,Int --> Any)`, but actually requires an argument of the same type as the return value. Using Haskell notation, we need `a -> Int -> a`. The argument `t`  is of type `TermBB` which is a wrapper around a function which, when applied, will return the right type. In the Raku implementation, this function is the method `unTermBB`. So we need to call `t.unTermBB( ... )`.
-In `_add` and `_mult`, we have an `Array[TermBB]` so we need to call `unTermBB` on every element, hence the `map` call.
+The interesting generators are `PowBB`, `AddBB` and `MultBB` because they are recursive. In `PowBB`, the function passed as parameter to the TermBB role constructor calls `p` which has a signature of `:(Any,Int --> Any)`, but actually requires an argument of the same type as the return value. Using Haskell notation, we need `a -> Int -> a`. The argument `t`  is of type `TermBB` which is a wrapper around a function which, when applied, will return the right type. In the Raku implementation, this function is the method `unTermBB`. So we need to call `t.unTermBB( ... )`.
+In `AddBB` and `MultBB`, we have an `Array[TermBB]` so we need to call `unTermBB` on every element, hence the `map` call.
+
 
 Using these generators we can write a single function to convert the algebraic data type into its BB encoding. Unsurprisingly, it is very similar to the pretty-printer and evaluator we wrote for `Term` instances:
 
 ```perl6
 # Turn a Term into a BB Term
-multi sub termToBB(Var \t) { _var(t.var)}
-multi sub termToBB(Par \c) { _par( c.par)}
-multi sub termToBB(Const \n) {_cons(n.const)}
-multi sub termToBB(Pow \pw){ _pow( termToBB(pw.term), pw.exp)}
-multi sub termToBB(Add \t) { _add( map {termToBB($_)}, |t.terms)}
-multi sub termToBB(Mult \t){ _mult(map {termToBB($_)}, |t.terms)}
+multi sub termToBB(Var \t) { VarBB(t.var)}
+multi sub termToBB(Par \c) { ParBB( c.par)}
+multi sub termToBB(Const \n) {ConstBB(n.const)}
+multi sub termToBB(Pow \pw){ PowBB( termToBB(pw.term), pw.exp)}
+multi sub termToBB(Add \t){ AddBB( typed-map( TermBB, t.terms, &termToBB ))}
+multi sub termToBB(Mult \t){ MultBB( typed-map( TermBB, t.terms, &termToBB ))}
+
+sub typed-map (\T,\lst,&f) {
+    Array[T].new(map {f($_) }, |lst )
+}
 ```
 
-Because `_pow`, `_add` and `_mult` require a `TermBB`, we need to call `termToBB` on the `Term` fields. And because  `_add` and `_mult` take an array of `Term`,  we need a `map`.
+Because `PowBB`, `AddBB` and `MultBB` require a `TermBB`, we need to call `termToBB` on the `Term` fields. And because  `AddBB` and `MultBB` take an array of `Term`,  we need a `map`. However, Raku's `map` returns values of type `Seq`, so we need an explicit conversion into `Array`.
 
 
 ### Example parse trees 

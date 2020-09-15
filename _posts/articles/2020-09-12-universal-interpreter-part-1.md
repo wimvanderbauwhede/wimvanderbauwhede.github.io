@@ -35,15 +35,16 @@ In this first part, I will explain a way to implement Böhm-Berarducci (BB) enco
 The basic idea behind the Böhm-Berarducci (BB) encoding is to create a type which represents a function with an argument for every alternative in a sum type.
 Every argument is itself a function which takes as arguments the arguments of each alternative product type, and returns a polymorphic type. Because the return type is polymorphic, we decide what it will be when we use the BB type. In this way a BB-encoded data structure is a generator for whatever type we like, in other words it is a universal interpreter. 
 
-For example, if we define a sum type `S` with three alternatives `A1`, `A2` and `A3`: 
+For example, if we define a sum type `S` with three alternatives `A1`, `A2` and `A3`, using the same notation as in the article on [algebraic data types in Raku]({{site.url}}/articles/roles-as-adts-in-raku/):
 
 ```haskell
-    data S = A1 Int | A2 String Bool | A3
+datatype S = A1 Int | A2 String Bool | A3
 ```
 
 then the corresponding BB type will be
 
 ```haskell
+datatype S = S ( ∀ a .
     -- A1 Int
     (Int ⟶ a) ⟶ 
     -- A2 String
@@ -52,10 +53,11 @@ then the corresponding BB type will be
     (a) ⟶ 
     -- The return type
     a
+    )
 ```
 
 I have put parentheses to show which part of the type is the function type corresponding to each alterative. 
-Because the constructor for `A3` takes no arguments, the corresponding function signature in the BB encoding is simply `a`: a function which takes no arguments and returns something of type `a`. The final `a` is the return value of the top-level function: every type alternative is an argument to the function. When applying the function, it must return a value of a given type. This type is `a` because `a` is the return type of every function representing an alternative. 
+Because the constructor for `A3` takes no arguments, the corresponding function signature in the BB encoding is simply `a`: a function which takes no arguments and returns something of type `a`. The final `a` is the return value of the top-level function: every type alternative is an argument to the function. When applying the function, it must return a value of a given type. This type is `a` because `a` is the return type of every function representing an alternative. I will explain the `∀ a .` later.
 
 ## Some simple examples
 
@@ -67,7 +69,7 @@ In a [previous post]({{site.url}}/articles/roles-as-adts-in-raku/) I showed how 
 `OpinionatedBool`:
 
 ```haskell
-data OpinionatedBool = AbsolutelyTrue | TotallyFalse
+datatype OpinionatedBool = AbsolutelyTrue | TotallyFalse
 ```
 
 which in Raku becomes
@@ -80,25 +82,37 @@ role TotallyFalse does OpinionatedBool {}
 
 This is a sum type with two alternatives. 
 
-In Haskell, the type declaration of the BB type lists the types of all the arguments representing the alternatives. As in this case the constructors for the alternatives take no arguments, the corresponding functions also take no arguments:
+The type declaration of the BB type lists the types of all the arguments representing the alternatives. As in this case the constructors for the alternatives take no arguments, the corresponding functions also take no arguments:
 
 ```haskell
-    newtype OpinionatedBoolBB = OpinionatedBoolBB {
-        unBoolBB :: forall a . 
-           a -- AbsolutelyTrue
-        -> a -- TotallyFalse
-        -> a
-    }
+datatype OpinionatedBoolBB = OpinionatedBoolBB (
+    ∀ a . 
+      a -- AbsolutelyTrue
+    ⟶ a -- TotallyFalse
+    ⟶ a
+)
 ```
 
-The `newtype` keyword in Haskell is used instead of `data` for types with only a single constructor. What we have here is a record type with a single field, and this field has the accessor function `unBoolBB`, which is a convenience to allow easy access to the function encoded in the type. The `forall a` allows us to introduce a type parameter that is only in scope in the expression on the right-hand side. 
+In [Haskell](https://haskell.org), we would implement this type as follows:
+
+```haskell
+newtype OpinionatedBoolBB = OpinionatedBoolBB {
+    unBoolBB :: forall a . 
+       a -- AbsolutelyTrue
+    -> a -- TotallyFalse
+    -> a
+}
+```
+
+You don't need to know any Haskell for what follows, but as the Raku implementation is closely modeled on the Haskell one, it is worth explaining a bit.
+The `newtype` keyword in Haskell is used to declare types with a single constructor. What we have here is a record type with a single field, and this field has the accessor function `unBoolBB`, which is a convenience to allow easy access to the function encoded in the type. The `∀ a`  or `forall a` allows us to introduce a type parameter that is only in scope in the expression on the right-hand side. Because the Haskell notation is so close to the formal notation, I will from now on use the Haskell notation.
 
 In Raku, we could implement this  BB type minimally as a parametric role with a single accessor:
 
 ```perl6
-    role BoolBB[\b] {
-        has $.unBoolBB = b;
-    }
+role BoolBB[\b] {
+    has $.unBoolBB = b;
+}
 ```
 
 However, this is so general that _any_ BB type would have this representation, so there is no type safety and it also is hard to read because it is not clear how many arguments the function takes.
@@ -106,11 +120,11 @@ However, this is so general that _any_ BB type would have this representation, s
 We can be more explicit by using a method with a typed signature:
 
 ```perl6    
-    role BoolBB[&b] {
-        method unBoolBB(Any \t, Any \f --> Any) {
-            b(t,f);
-        }
+role BoolBB[&b] {
+    method unBoolBB(Any \t, Any \f --> Any) {
+        b(t,f);
     }
+}
 ```    
 
 This tells us a lot more:
@@ -147,10 +161,18 @@ sub bbb(\tf --> BoolBB) { BoolBB[ tf ].new };
 In this way we can write
 
 ```perl6
-my BoolBB \BBTrue = bbb true;
-my BoolBB \BBFalse = bbb false;
+sub BBTrue { bbb true } 
+sub BBFalse { bbb false }
 ```
 
+In this particular case, because none of the constructors takes any arguments, we can also write this as
+
+```perl6
+my BoolBB \BBTrue = bbb true;
+my BoolBB \BBFalse = bbb false;
+``` 
+
+<!-- ∀ -->
 The question is then: what are the functions `true` and `false`? We know they are of type `a ⟶ a ⟶ a`; an obvious choice is:
 
 ```perl6
@@ -185,18 +207,20 @@ say bool boolBB( bool BBTrue); # => True
 say bool boolBB( bool BBFalse); # => False
 ```
 
+(Note that this works with either way of defining `BBTrue` and `BBFalse` because calling a function without arguments in Raku does not require parentheses.)
+
 We can do this more OO-like by making `bool` a method of `BoolBB`:
 
 ```perl6    
-    role BoolBB[&b] {
-        method unBoolBB(Any \t, Any \f --> Any) {
-            b(t,f);
-        }
-
-        method bool() { 
-            self.unBoolBB( True, False) 
-        }
+role BoolBB[&b] {
+    method unBoolBB(Any \t, Any \f --> Any) {
+        b(t,f);
     }
+
+    method bool() { 
+        self.unBoolBB( True, False) 
+    }
+}
 ```    
 Then we can say
 
@@ -230,8 +254,8 @@ with selector functions
 
 ```perl6
 my \red  = -> \r,\g,\b { r }
-my \green = \r,\g,\b { g }
-my \blue = \r,\g,\b { b }
+my \green = -> \r,\g,\b { g }
+my \blue = -> \r,\g,\b { b }
 ```
 
 However, the main reason for using BB types is to make it easier to perform computations on the data structure encoded in the type. Constant sum types like `Bool` and `RGB` don't store data to compute on, except in the most trivial way, and are therefore not the main target of this encoding. I presented them only because they are the easiest ones to explain.
@@ -258,16 +282,14 @@ sub safeLookup(%v,$k --> Maybe) {
 }
 ```
 
-The `Maybe` type is polymorphic, so we have instances of `Maybe` for any type we like. 
-
-The BB type comes in Haskell is:
+The `Maybe` type is polymorphic, so we have instances of `Maybe` for any type we like.  In Haskell:
 
 ```haskell
-    newtype MayBB b = MayBB {
-    unMayBB :: forall a .  
-    (b -> a) -- Just b 
-    -> a -- Nothing 
-    -> a
+newtype MayBB b = MayBB {
+unMayBB :: forall a .  
+(b -> a) -- Just b 
+-> a -- Nothing 
+-> a
 ```
 
 and in Raku:
@@ -307,8 +329,8 @@ sub mbb (&jm --> MayBB) {
 - With these we can easily write the final BB type constructors:
 
 ```perl6
-sub Just(\v) {mbb( bbj( v) )}
-sub Nothing {mbb( bbn )}
+sub Just(\v) { mbb bbj(v) }
+sub Nothing { mbb bbn }
 ```
 
 Now we can create values of our `MayBB` type, e.g.
@@ -335,7 +357,7 @@ As before, this function could be made a method of the `MayBB` role if desired. 
 
 ### A pair, the simplest product type
 
-The two previous examples were for sum types. Let's look at a simple product type, a pair of two values also known as a tuple. Assuming the tuple is polymorphic with type parameters `t1` and `t2`, the BB type in Haskell is: 
+The two previous examples were for sum types. Let's look at a simple product type, a pair of two values also known as a tuple. Assuming the tuple is polymorphic with type parameters `t1` and `t2`, the BB type is in Haskell:
 
 ```haskell
 newtype PairBB t1 t2 = PairBB {
