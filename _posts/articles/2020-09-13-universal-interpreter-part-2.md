@@ -215,13 +215,13 @@ multi sub termToBB(Pow \pw ) { PowBB( termToBB(pw.term), pw.exp)}
 multi sub termToBB(Add \t  ) { AddBB( typed-map( TermBB, t.terms, &termToBB ))}
 multi sub termToBB(Mult \t ) { MultBB( typed-map( TermBB, t.terms, &termToBB ))}
 
+# map &f and return in an Array of type T
 sub typed-map (\T,\lst,&f) {
     Array[T].new(map {f($_) }, |lst )
 }
 ```
 
 Because `PowBB`, `AddBB` and `MultBB` require a `TermBB`, we need to call `termToBB` on the `Term` fields. And because  `AddBB` and `MultBB` take an array of `Term`,  we need a `map`. However, Raku's `map` returns values of type `Seq`, so we need an explicit conversion into `Array`.
-
 
 We can now convert any data structure of type `Term` into its BB encoding:
 
@@ -302,7 +302,7 @@ sub evalTerm(%vars,  %pars, Term \t) {
 }
 ```
 
-### Interpreter 3: Pretty-printer and evaluator combined
+<!-- ### Interpreter 3: Pretty-printer and evaluator combined
 
 Now we can do one better and combine these two interpreters.
 
@@ -331,11 +331,12 @@ say evalTermBB(
 say evalAndppTermBB(
     {"x" => 2}, {"a" =>2,"b"=>3,"c"=>4},  qtermbb
 );
-```
+``` -->
 
-### Interpreter 4: Converting `TermBB` to `Term`
 
-Because a converter from `TermBB` to `Term` is yet another type of interpreter, we can follow exactly the same approach as before. 
+### Interpreter 3: Converting `TermBB` to `Term`
+
+Finally, let's look at converting `TermBB` to `Term`. This is yet another type of interpreter so we can follow exactly the same approach as before: 
 
 ```perl6
 sub toTerm(TermBB \t --> Term){ 
@@ -355,25 +356,33 @@ say toTerm(qtermbb).raku;
 
 ### Bonus: parsing the expression
 
-
+In the article []() I presented a parser combinator library which uses the role-based algebraic data types.  The parser returns the following type:
 
 ```perl6
-# This is for parsing into AST, the link between Term and the TaggedEntry
 role TaggedEntry {}
+# A string value
 role Val[Str @v] does TaggedEntry {
 	has Str @.val=@v;
 } 
-# valmap :: [(String,TaggedEntry)]
-role ValMap [  @vm] does TaggedEntry { #String \k, TaggedEntry \te,
+# A list of TaggedEntry values tagged with a string label
+role ValMap [  @vm] does TaggedEntry {
 	has @.valmap = @vm; 
 }
+```
 
+It is quite straightforward to transform a data structure of this type into our `Term` type:
+
+```perl6
 multi sub taggedEntryToTerm (Var ,\val_strs) { Var[ val_strs.val.head].new }
 multi sub taggedEntryToTerm (Par ,\par_strs) { Par[par_strs.val.head].new }
 multi sub taggedEntryToTerm (Const ,\const_strs) {Const[ Int(const_strs.val.head)].new } 
 # multi sub taggedEntryToTerm (Pow , ValMap [t1,(_,Val [v2])]) { Pow[ taggedEntryToTerm(...,....), Int(...)].new}        
 # multi sub taggedEntryToTerm (Add , ValMap hmap) = Add $ map taggedEntryToTerm hmap
 # multi sub taggedEntryToTerm (Mult , ValMap hmap) = Mult $ map taggedEntryToTerm hmap
+```
+
+
+```perl6
 my Str @val_strs = "42";
 my \v = taggedEntryToTerm(Const, Val[@val_strs].new);
 say v.raku; 
