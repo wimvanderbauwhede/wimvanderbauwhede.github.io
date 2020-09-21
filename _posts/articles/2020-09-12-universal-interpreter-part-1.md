@@ -18,7 +18,7 @@ image:
 ---
 
 
-This is the first part of an article in my series about functional programming and in particular algebraic data types and function types in [Raku](https://raku.org/). It builds on my earlier articles on [algebraic data types in Raku]({{site.url}}/articles/roles-as-adts-in-raku/) and their use in the practical example of [list-based parser combinators]({{site.url}}/articles/list-based-parser-combinators/). It also makes heavily use of [function types]({{site.url}}/articles/function-types).
+This is the first part of an article in my series about functional programming in general and algebraic data types and function types in particular in [Raku](https://raku.org/). It builds on my earlier articles on [algebraic data types in Raku]({{site.url}}/articles/roles-as-adts-in-raku/) and their use in the practical example of [list-based parser combinators]({{site.url}}/articles/list-based-parser-combinators/). It also makes heavily use of [function types]({{site.url}}/articles/function-types).
 
 If you are not familiar with functional programming or with Raku, I suggest you read my introduction ["Cleaner code with functional programming"]({{site.url}}/articles/decluttering-with-functional-programming/). If you are not familiar with algebraic data types or function types, you might want to read the other articles as well. 
 
@@ -107,17 +107,7 @@ newtype OpinionatedBoolBB = OpinionatedBoolBB {
 You don't need to know any Haskell for what follows, but as the Raku implementation is closely modeled on the Haskell one, it is worth explaining a bit.
 The `newtype` keyword in Haskell is used to declare types with a single constructor. What we have here is a record type with a single field, and this field has the accessor function `unBoolBB`, which is a convenience to allow easy access to the function encoded in the type. The `∀ a`  or `forall a` allows us to introduce a type parameter that is only in scope in the expression on the right-hand side. Because the Haskell notation is so close to the formal notation, I will from now on use the Haskell notation.
 
-In Raku, we could implement this  BB type minimally as a parametric role with a single accessor:
-
-```perl6
-role BoolBB[\b] {
-    has $.unBoolBB = b;
-}
-```
-
-However, this is so general that _any_ BB type would have this representation, so there is no type safety and it also is hard to read because it is not clear how many arguments the function takes.
-
-We can be more explicit by using a method with a typed signature:
+In Raku, we can implement this  BB type minimally as a parametric role with a method with a typed signature:
 
 ```perl6    
 role BoolBB[&b] {
@@ -127,14 +117,14 @@ role BoolBB[&b] {
 }
 ```    
 
-This tells us a lot more:
+This tells us a lot:
 
 - the parameter to the role has an `&` sigil so it of type `Callable` (i.e. it is a function)
 - the method's type tells us that there are two arguments of type `Any`. The method itself also returns a value of type `Any`, i.e. there is no constraint on the type of the return value. 
 
-With this implementation, the type safety is not quite as strong as in Haskell, where we guarantee that all these return values will be of the same type. The main purpose for using the types here is to make it provide documentation. We will enforce the type safety at a different point.
+With this implementation, the type safety is not quite as strong as in Haskell, where we guarantee that all these return values will be of the same type. The main purpose for using the types here is to make it provide documentation. We can enforce the type safety at a different point if desired.
 
-Now, the whole idea is that this role `BoolBB` will serve the same purpose as an ordinary Boolean. So instead of saying
+Now, the whole idea is that this role `BoolBB` will serve the same purpose as my `OpinionatedBool`. So instead of saying
 
 ```perl6
 my OpinionatedBool \trueOB = AbsolutelyTrue;
@@ -264,7 +254,7 @@ The [second part]({{site.url}}/articles/universal-interpreter-part-2) of the art
 
 ### The `Maybe` type: a sum type with a polymorphic argument
 
-The Boolean type above had two constructors without arguments. A simple algebraic data type where  one of the constructors has an argument is the `Maybe` type:
+The Boolean type above had two constructors without arguments. A simple algebraic data type where one of the constructors has an argument is the `Maybe` type:
 
 ```haskell
 data Maybe b = Just b | Nothing
@@ -306,7 +296,7 @@ role MayBB[ &mb ] {
 }
 ```
 
-We use a `Callable` for the `Just` variant but a (sigil-less) scalar for the `Nothing` as it is a constant.
+We use a `Callable` (`&j`) for the `Just` variant but a (sigil-less) scalar (`\n`) for the `Nothing` as it is a constant.
 
 As before for the BB Boolean, we create some helper functions. 
 
@@ -438,6 +428,8 @@ sub toPolar(PairBB \mb --> PairBB) {
 
 ## Summary
 
-What we have learned so far is how to create sum (alternative) and product (record) types in Raku using a formalism called Böhm-Berarducci (BB) encoding, which uses functions to create data structures. We use Raku's roles to implement BB types, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values.   
+What we have learned so far is how to create sum (alternative) and product (record) types in Raku using a formalism called Böhm-Berarducci (BB) encoding, which uses functions to create data structures. We use Raku's roles to implement BB types, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values. 
 
-In [the next part]({{site.url}}/articles/universal-interpreter-part-2), we will see how BB types make it easy to create interpreters for complex data structures.
+In [the next part]({{site.url}}/articles/universal--part-2), we will see how BB types make it easy tointerpreter create interpreters for complex data structures.
+
+The complete code for both articles is in [universal-interpreter.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/universal-interpreter.raku).

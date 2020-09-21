@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "About"
-date: 2020-09-16
+date: 2020-09-21
 tags: []
 excerpt: ""
 comments: false

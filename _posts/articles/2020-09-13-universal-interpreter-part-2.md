@@ -59,16 +59,18 @@ role Mult [Array[Term] \ts] does Term {
 }
 ```
 
-The additional complexity compared to the types discussed in [the previous article]({{site.url}}/articles/universal-interpreter-part-1) is that this type is recursive. 
+The additional complexity compared to the types discussed in [the previous article]({{site.url}}/articles/universal-interpreter-part-1) is that this type is recursive: the `Pow`, `Add` and `Mult` roles take parameters of type `Term`. 
 
-Before we look at the BB encoding, let's first write a pretty-printer for this type, using `multi sub`s. The routine is recursive because the `Pow`, `Add` and `Mult` constructors are recursive. 
+Before we look at the BB encoding, let's first write a pretty-printer for this type, using recursive `multi sub`s. 
 
 ```perl6
 # Pretty-print a Term 
 multi sub ppTerm(Var \t) { t.var }
 multi sub ppTerm(Par \c) { c.par }
 multi sub ppTerm(Const \n) { "{n.const}" }
-multi sub ppTerm(Pow \pw){ ppTerm(pw.term) ~ '^' ~ "{pw.exp}" }
+multi sub ppTerm(Pow \pw){ 
+    ppTerm(pw.term) ~ '^' ~ "{pw.exp}" 
+}
 multi sub ppTerm(Add \t) { 
     my @pts = map {ppTerm($_)}, |t.terms;
     "("~join( " + ", @pts)~")"
@@ -86,7 +88,9 @@ In the same way we can write an evaluator for this type:
 multi sub evalTerm(%vars,  %pars, Var \t) { %vars{t.var} }
 multi sub evalTerm(%vars,  %pars,Par \c) { %pars{c.par} }
 multi sub evalTerm(%vars,  %pars,Const \n) { n.const }
-multi sub evalTerm(%vars,  %pars,Pow \pw){ evalTerm(%vars,  %pars,pw.term) ** pw.exp }
+multi sub evalTerm(%vars,  %pars,Pow \pw){ 
+    evalTerm(%vars,  %pars,pw.term) ** pw.exp 
+}
 multi sub evalTerm(%vars,  %pars,Add \t) { 
     my @pts = map {evalTerm(%vars,  %pars,$_)}, |t.terms;
     [+] @pts
@@ -105,10 +109,14 @@ As an example, let's create the parse tree for a few expressions using the `Term
 # a*x^2 + b*x + x
 my \qterm1 = Add[ 
     Array[Term].new(
-    Mult[ Array[Term].new(Par[ "a"].new, Pow[ Var[ "x"].new, 2].new) 
+    Mult[ Array[Term].new(
+        Par[ "a"].new, 
+        Pow[ Var[ "x"].new, 2].new) 
         ].new,
     Mult[
-        Array[Term].new(Par[ "b"].new, Var[ "x"].new) 
+        Array[Term].new(
+            Par[ "b"].new, 
+            Var[ "x"].new) 
         ].new,
     Par[ "c"].new
     )
@@ -117,8 +125,8 @@ my \qterm1 = Add[
 #   x^3 + 1    
 my \qterm2 = Add[ 
     Array[Term].new(
-    Pow[ Var[ "x"].new, 3].new, 
-    Const[ 1].new
+        Pow[ Var[ "x"].new, 3].new, 
+        Const[ 1].new
     )
     ].new;
 
@@ -151,8 +159,8 @@ role TermBB[&f] {
         &par:(Str --> Any),
         &const:(Int --> Any),
         &pow:(Any,Int --> Any),
-        &add:([Array[Any] --> Any),
-        &mult:([Array[Any] --> Any) 
+        &add:(Array[Any] --> Any),
+        &mult:(Array[Any] --> Any) 
         --> Any
     ) {
         f(&var,&par,&const,&pow,&add,&mult);
@@ -160,10 +168,11 @@ role TermBB[&f] {
 }
 ```
 
+It would of course be even more compact without the signatures, but then we'd have no information about the encoded type.
+
 We could of course use this type directly, but instead I want to look at how we can convert between `Term` and `TermBB`. 
 
-As before, we create our little helpers. Each of the functions below is a constructor wich generates the `TermBB` instance for the corresponding alternative in the `Term` algebraic data type. 
-When Raku's macro language is more developed, we will be able to generate these automatically.
+As before, we create our little helpers. Each of the functions below is a constructor which generates the `TermBB` instance for the corresponding alternative in the `Term` algebraic data type. (When Raku's macro language is more developed, we will be able to generate these automatically.)
 
 ```perl6
 sub VarBB(Str \s --> TermBB) { 
@@ -211,9 +220,15 @@ Using these generators we can write a single function to convert the algebraic d
 multi sub termToBB(Var \t  ) { VarBB(t.var)}
 multi sub termToBB(Par \c  ) { ParBB( c.par)}
 multi sub termToBB(Const \n) {ConstBB(n.const)}
-multi sub termToBB(Pow \pw ) { PowBB( termToBB(pw.term), pw.exp)}
-multi sub termToBB(Add \t  ) { AddBB( typed-map( TermBB, t.terms, &termToBB ))}
-multi sub termToBB(Mult \t ) { MultBB( typed-map( TermBB, t.terms, &termToBB ))}
+multi sub termToBB(Pow \pw ) { 
+    PowBB( termToBB(pw.term), pw.exp)
+}
+multi sub termToBB(Add \t  ) { 
+    AddBB( typed-map( TermBB, t.terms, &termToBB ))
+}
+multi sub termToBB(Mult \t ) { 
+    MultBB( typed-map( TermBB, t.terms, &termToBB ))
+}
 
 # map &f and return in an Array of type T
 sub typed-map (\T,\lst,&f) {
@@ -253,7 +268,9 @@ sub ppTermBB(TermBB \t --> Str){
 multi sub ppTerm(Var \t --> Str) { t.var }
 multi sub ppTerm(Par \c --> Str) { c.par }
 multi sub ppTerm(Const \n --> Str) { "{n.const}" }
-multi sub ppTerm(Pow \pw --> Str){ ppTerm(pw.term) ~ '^' ~ "{pw.exp}" }
+multi sub ppTerm(Pow \pw --> Str){ 
+    ppTerm(pw.term) ~ '^' ~ "{pw.exp}" 
+}
 multi sub ppTerm(Add \t --> Str) { 
     my @pts = map {ppTerm($_)}, |t.terms;
     "("~join( " + ", @pts)~")"
@@ -291,11 +308,15 @@ sub evalTerm(%vars,  %pars, Term \t) {
         when Const { t.const }
         when Pow { evalTerm(%vars,  %pars,t.term) ** t.exp }
         when Add {
-            my @pts = map {evalTerm(%vars,  %pars,$_)}, |t.terms;
+            my @pts = map {
+                evalTerm(%vars,  %pars,$_)
+                }, |t.terms;
             [+] @pts
         }
         when Mult { 
-            my @pts = map {evalTerm(%vars,  %pars,$_)}, |t.terms;
+            my @pts = map {
+                evalTerm(%vars,  %pars,$_)
+                }, |t.terms;
             [*] @pts
         }
     }
@@ -352,7 +373,56 @@ sub toTerm(TermBB \t --> Term){
 say toTerm(qtermbb).raku;
 ```
 
+## Using the BB type directly
 
+In the examples above I have created the data structures using the `Term` type and converted the result to a `TermBB` type. We can of course also directly use the BB type. If we don't use strict typing and make the argument of `Add` and `Mult` slurpy, we get a nice and clean representation:
+
+```perl6
+# a*x^2 + b*x + x
+my \qtermbb1 = AddBB(
+    MultBB( 
+        ParBB( "a"), 
+        PowBB( VarBB( "x"), 2) 
+        ),
+    MultBB(
+        ParBB( "b"), 
+        VarBB( "x") 
+        ),
+    ParBB( "c")
+);
+
+#   x^3 + 1    
+my \qtermbb2 = AddBB( 
+    PowBB( VarBB( "x"), 3), 
+    ConstBB(1)
+);
+
+#   qterm1 * qterm2    
+my \qtermbb3 = MultBB( 
+    qterm1, qterm2
+);
+    
+```
+
+This is structurally very similar to the examples using the `Term` type. We can obtain exactly the same representation by using a slurpy helper function to wrap the role constructors for `Term`. See the code in [no-b-timing.raku`](https://github.com/wimvanderbauwhede/raku-examples/blob/master/no-bb-timing.raku) and [ubb-timing.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/ubb-timing.raku) for details. 
+
+The code as presented above is not entirely correct: I have not always typed everything explicitly, but the explicit signatures in the role definition will cause type errors unless everything is explicitly typed. See the code in [tbb-timing.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/tbb-timing.raku) for details.
+
+The code in `no-bb-timing` and `ubb-timing` is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the 'ordinary' implementation. However, the fully-typed version 300% (3x) slower. This shows that types in Raku are not zero-cost abstractions. I tried to profile this to see where the bottleneck was, but unfortunately it ran out of memory with 16GB RAM. For info, here are the profiling reports for [no-bb-timing]({{site.url}}/articles/no-bb-timing.html) and [ubb-timing]({{site.url}}/articles/ubb-timing.html).
+
+On the other hand, somewhat paradoxically, we don't really need this explicit typing. It is useful to write down the function types for the BB encoding, and I think it helps with the explanations, but the actual type safety comes from the algebraic data types that we created. 
+
+## Conclusion
+
+In this article and [the previous one]({{site.url}}/articles/universal-interpreter-part-1) I have shown another way to implement algebraic data types in Raku. As with the approach discussed in ['Roles as Algebraic Data Types in Raku']({{site.url}}/articles/roles-as-adts-in-raku/), I use a role to create the type. However, in this approach the entire data structure is encoded as a function using the [Böhm-Berarducci encoding](http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html). From a type theoretical perspective, both approaches are precisely equivalent. In terms of coding effort and performance, both approaches are comparable. 
+
+The advantage of the BB approach is that because the data is encoded as a function, it becomes easier to create interpreters for the data type, and I have illustrated this with a pretty-printer and evaluator for a parsed expression. All interpreters for BB types have the same structure, which is why I call it a universal interpreter. The key feature is that these interpreters do not require any explicit recursion. 
+
+The complete code for both articles is in [universal-interpreter.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/universal-interpreter.raku)
+
+
+
+<!-- 
 
 ### Bonus: parsing the expression
 
@@ -373,8 +443,8 @@ role ValMap [  @vm] does TaggedEntry {
 It is quite straightforward to transform a data structure of this type into our `Term` type:
 
 ```perl6
-multi sub taggedEntryToTerm (Var ,\val_strs) { Var[ val_strs.val.head].new }
-multi sub taggedEntryToTerm (Par ,\par_strs) { Par[par_strs.val.head].new }
+multi sub taggedEntryToTerm (Var , Val \val_strs) { Var[ val_strs.val.head].new }
+multi sub taggedEntryToTerm (Par , Val \par_strs) { Par[ par_strs.val.head].new }
 multi sub taggedEntryToTerm (Const ,\const_strs) {Const[ Int(const_strs.val.head)].new } 
 # multi sub taggedEntryToTerm (Pow , ValMap [t1,(_,Val [v2])]) { Pow[ taggedEntryToTerm(...,....), Int(...)].new}        
 # multi sub taggedEntryToTerm (Add , ValMap hmap) = Add $ map taggedEntryToTerm hmap
@@ -387,3 +457,5 @@ my Str @val_strs = "42";
 my \v = taggedEntryToTerm(Const, Val[@val_strs].new);
 say v.raku; 
 ```
+
+ -->
