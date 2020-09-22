@@ -400,16 +400,55 @@ if ( $str=~s/^&lt;pattern&gt;// ) { $lev=&lt;integer&gt;; $op=&lt;integer&gt;; }
 
 <p>Here is a summary of all optimisations I tested. The tests were run using Perl v5.28 on a MacBook Pro (late 2013), timings are averages over 5 runs and measured using <code>time</code>.</p>
 
-<p>| --- | --- | 
+<!-- | --- | --- | 
 | Optimisation | Speed-up |
 | --- | --- | 
 | Hash key testing is faster than regexp matching | 3&times; |
 | Custom tree traversals are faster than generic ones | 2&times; |
-| <code>foreach</code> is faster than <code>map</code> | 1.3&times; |
-| <code>foreach</code> is faster than indexed <code>for</code> | 1.4&times; |
-| <code>foreach</code> is faster than C-style <code>for</code> | 1.7&times; | 
+| `foreach` is faster than `map` | 1.3&times; |
+| `foreach` is faster than indexed `for` | 1.4&times; |
+| `foreach` is faster than C-style `for` | 1.7&times; | 
 | Integer comparison is faster than string comparison | 1.5&times; |
-| Regexp matching is faster than successive string comparisons | 2.2&times; |</p>
+| Regexp matching is faster than successive string comparisons | 2.2&times; |
+ -->
+
+<p><table>
+  <thead>
+<tr>
+<th>
+Optimisation
+</th>
+<th>
+Speed-up
+</th></p>
+
+<p></tr>
+  </thead>
+   <tbody>
+<tr>
+<td> Hash key testing is faster than regexp matching </td><td> 3&times; </td>
+</tr>
+<tr>
+<td> Custom tree traversals are faster than generic ones </td><td> 2&times; </td>
+</tr>
+<tr>
+<td> <code>foreach</code> is faster than <code>map</code> </td><td> 1.3&times; </td>
+</tr>
+<tr>
+<td> <code>foreach</code> is faster than indexed <code>for</code> </td><td> 1.4&times; </td>
+</tr>
+<tr>
+<td> <code>foreach</code> is faster than C-style <code>for</code> </td><td> 1.7&times; </td>
+</tr>
+<tr>
+<td> Integer comparison is faster than string comparison </td><td> 1.5&times; </td>
+</tr>
+<tr>
+<td> Regexp matching is faster than successive string comparisons </td><td> 2.2&times; </td>
+</tr></p>
+
+<p></tbody>
+<table></p>
 
 				<hr />
 				<footer class="page-footer">
