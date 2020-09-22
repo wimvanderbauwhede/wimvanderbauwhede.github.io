@@ -498,7 +498,9 @@ say evalAndppTermBB(
 
 <p>The code as presented above is not entirely correct: I have not always typed everything explicitly, but the explicit signatures in the role definition will cause type errors unless everything is explicitly typed. See the code in <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/tbb-timing.raku">tbb-timing.raku</a> for details.</p>
 
-<p>The code in <code>no-bb-timing</code> and <code>ubb-timing</code> is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the &#39;ordinary&#39; implementation. However, the fully-typed version 300% (3x) slower. This shows that types in Raku are not zero-cost abstractions. I tried to profile this to see where the bottleneck was, but unfortunately it ran out of memory with 16GB RAM. For info, here are the profiling reports for <a href="https://wimvanderbauwhede.github.io/articles/no-bb-timing.html">no-bb-timing</a> and <a href="https://wimvanderbauwhede.github.io/articles/ubb-timing.html">ubb-timing</a>.</p>
+<p>The code in <code>no-bb-timing</code> and <code>ubb-timing</code> is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the &#39;ordinary&#39; implementation. However, the fully-typed version <code>tbb-timing</code> is three times slower. Types in Raku are clearly not zero-cost abstractions. </p>
+
+<p>For info, here are the profiling reports (<code>raku --profile</code>) for <a href="https://wimvanderbauwhede.github.io/articles/no-bb-timing.html">no-bb-timing</a> and <a href="https://wimvanderbauwhede.github.io/articles/ubb-timing.html">ubb-timing</a>. Profiling <code>tbb-timing</code> proved infeasible.</p>
 
 <p>On the other hand, somewhat paradoxically, we don&#39;t really need this explicit typing. It is useful to write down the function types for the BB encoding, and I think it helps with the explanations, but the actual type safety comes from the algebraic data types that we created. </p>
 
