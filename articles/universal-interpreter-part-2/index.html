@@ -293,7 +293,7 @@
 
 <p>As before, we create our little helpers. Each of the functions below is a constructor which generates the <code>TermBB</code> instance for the corresponding alternative in the <code>Term</code> algebraic data type. (When Raku&#39;s macro language is more developed, we will be able to generate these automatically.)</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">VarBB</span>(<span class="nb">Str</span> \<span class="o">s</span> --&gt; <span class="n">TermBB</span>) { 
-    <span class="n">mkTermBB</span>[ 
+    <span class="n">TermBB</span>[ 
         <span class="k">sub</span> (\<span class="n">v</span>, \<span class="n">c</span>, \<span class="n">n</span>, \<span class="n">p</span>, \<span class="n">a</span>, \<span class="sr">m) { v.(s)</span> }
     ].<span class="nb">new</span>;
     }
