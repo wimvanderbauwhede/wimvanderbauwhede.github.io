@@ -369,21 +369,21 @@
 <p>The matching rules and operations are very simple (I use <code>&lt;pattern&gt;</code> and <code>&lt;integer&gt;</code> as placeholders for the actual values):</p>
 
 <ul>
-<li>prefix operations:
-<code>perl
-if ( $str=~s/^&lt;pattern&gt;// ) { $state=&lt;integer&gt;; } 
-</code></li>
-<li>terms:
-<code>perl
-if ( $str=~s/^(&lt;pattern&gt;)// ) { $expr_ast=[&lt;integer&gt;,$1]; }
-</code><br></li>
-<li>operators:
-<code>perl
-$prev_lev=$lev;
-if ( $str=~s/^&lt;pattern&gt;// ) { $lev=&lt;integer&gt;; $op=&lt;integer&gt;; }
-</code><br></li>
+<li>prefix operations:</li>
 </ul>
-
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">if</span> <span class="p">(</span> <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^&lt;pattern&gt;//</span> <span class="p">)</span> <span class="p">{</span> <span class="nv">$state</span><span class="o">=</span><span class="sr">&lt;integer&gt;</span><span class="p">;</span> <span class="p">}</span> 
+</code></pre></div>
+<ul>
+<li>terms:</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">if</span> <span class="p">(</span> <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^(&lt;pattern&gt;)//</span> <span class="p">)</span> <span class="p">{</span> <span class="nv">$expr_ast</span><span class="o">=</span><span class="p">[</span><span class="sr">&lt;integer&gt;</span><span class="p">,</span><span class="nv">$1</span><span class="p">];</span> <span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>operators:</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="nv">$prev_lev</span><span class="o">=</span><span class="nv">$lev</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^&lt;pattern&gt;//</span> <span class="p">)</span> <span class="p">{</span> <span class="nv">$lev</span><span class="o">=</span><span class="sr">&lt;integer&gt;</span><span class="p">;</span> <span class="nv">$op</span><span class="o">=</span><span class="sr">&lt;integer&gt;</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div>
 <p>Operators have precedence and associativity, and Fortran requires twelve precedence levels. In the &quot;Append to AST&quot; state, the parser uses <code>$lev</code> and <code>$prev_lev</code> to work out how the previously matched <code>$expr_ast</code> and <code>$op</code> should be appended to the <code>@ast</code> array. The prefix operations are handled by setting a state which is checked after term matching. The actual code is a bit more complicated because we need to parse array index expressions and function calls as well. This is done recursively during term matching; if a function call has multiple arguments, the parser is put into a new <code>$state</code>. </p>
 
 <p>So the end result is a minimally recursive parser, i.e. it only uses recursion when it is really necessary. This is because Perl is not efficient in doing recursive function calls (nor in fact for non-recursive ones).</p>
