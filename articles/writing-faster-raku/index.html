@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Writing faster Raku code • Wim Vanderbauwhede</title>
+    <meta name="description" content="Sometimes you want your Raku code to be faster. What does it take?">
+    <meta name="keywords" content="coding, hacking, programming, raku, perl">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Writing faster Raku code">
+	<meta name="twitter:description" content="Sometimes you want your Raku code to be faster. What does it take?">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/writing-faster-raku_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/writing-faster-raku/#">
+	<meta property="og:title" content="Writing faster Raku code">
+	<meta property="og:description" content="Sometimes you want your Raku code to be faster. What does it take?">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/writing-faster-raku_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/writing-faster-raku/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<!-- WV: NO!
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+	  <!-- WV: NO!
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    -->
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/writing-faster-raku_1600x600.jpg" class="page-feature-image" alt="Writing faster Raku code" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Writing faster Raku code</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>In <a href="https://wimvanderbauwhede.github.io/writing-faster-perl">an earlier article</a>, I discussed the result of my attempts to optimize the performance of an expression parser written in <a href="https://www.perl.org/">Perl</a>. I have recently been writing quite a bit of <a href="https://raku.org/">Raku</a> code but so far I had not looked at its performance. Out of curiosity I decided to write and optimise my Fortran expression parser in Raku.</p>
+
+<h2>Raku performance as we know it</h2>
+
+<p>In the current stage of its development, Raku prioritises functionality over performance. So an easily-made argument is that if you want performance, you should not write your code in Raku. And it is of course true that compiled code will almost always be faster. However, often, rewriting in a compiled language is not an option, so it is important to know how to get the best possible performance in Raku. </p>
+
+<p>The Raku documentation has <a href="https://docs.raku.org/language/performance">a page on performance</a> which offers good advice in general terms. But for my needs I did not find the answers there, nor anywhere else. So I created some simple test cases to find out more. I used Raku version  <code>2020.09</code> built on MoarVM version <code>2020.09</code>, the most recent one when I ran the tests, but the results should be quite similar for slightly earlier and later versions.</p>
+
+<h2>Testing some hunches</h2>
+
+<p>Before going into the details on the expression parser, here are some results of performance comparisons that influenced design decisions for the compiler. I was curious to see if they would turn out different in Raku.</p>
+
+<h3>Hash key testing is faster than regexp matching</h3>
+
+<p>Fortran code essentially consists of a list of statements which can contain expressions, and the parser labels each of the statements once using a hashmap, ever the workhorse data structure in Perl. Every parsed line of code is stored as a pair with this hashmap (which I call <code>$info</code>):</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">my</span> <span class="nv">$parsed_line</span> <span class="o">=</span> <span class="p">[</span> <span class="nv">$src_line</span><span class="p">,</span> <span class="nv">$info</span> <span class="p">];</span>
+</code></pre></div>
+<p>This means than in principle I can choose to match a pattern in $line using a regex or use one of the labels in <code>$info</code>. So I tested the performance of hash key testing versus regexp matching, using some genuine FORTRAN 77 code:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">$str</span> = <span class="nb">lc</span>(<span class="s">&#39;READ( 1, 2, ERR=8, END=9, IOSTAT=N ) X&#39;</span>);
+<span class="k">my</span> <span class="nv">%info</span> =();   
+<span class="k">if</span> (<span class="nv">$str</span>~~<span class="sr">/read/</span>) {
+    <span class="nv">%info&lt;ReadCall&gt;</span> = <span class="mi">1</span>;
+}
+<span class="k">my</span> <span class="nv">$count</span>=<span class="mi">0</span>;
+
+<span class="k">constant</span> <span class="n">NITERS</span> = <span class="mi">10_000_000</span>;
+<span class="k">if</span> <span class="n">VER</span><span class="o">==</span><span class="mi">1</span> {
+    <span class="k">for</span> <span class="mi">1</span><span class="o">..</span><span class="n">NITERS</span> -&gt; <span class="nv">$i</span> {
+        <span class="k">if</span> (<span class="nv">$str</span>~~<span class="sr">/read/</span>) { 
+            <span class="nv">$count</span>+=<span class="nv">$i</span>;
+        }
+}
+} <span class="k">elsif</span> <span class="n">VER</span><span class="o">==</span><span class="mi">2</span> {
+    <span class="k">for</span> <span class="mi">1</span><span class="o">..</span><span class="n">NITERS</span> -&gt; <span class="nv">$i</span> {
+            <span class="k">if</span> (<span class="nv">%info&lt;ReadCall&gt;</span>:<span class="n">exists</span>) {
+                <span class="nv">$count</span>+=<span class="nv">$i</span>;
+            }
+    }   
+} <span class="k">else</span> {
+    <span class="k">for</span> <span class="mi">1</span><span class="o">..</span><span class="n">NITERS</span> -&gt; <span class="nv">$i</span> {
+                <span class="nv">$count</span>+=<span class="nv">$i</span>;
+    }    
+}
+</code></pre></div>
+<p>Without the <code>if</code>-condition, the loop takes 3 s on my laptop. The loop with with the hash key existence test takes 5 s; the regexp match condition takes 53 s. So the actual condition evaluation takes 2 s for hash key existence check and 50 s for regexp match. So testing hash keys is 25 times faster than simple regexp matching. </p>
+
+<h3>Custom tree traversals are faster</h3>
+
+<p>I tested the cost of using higher-order functions for tree traversal. Basically, this is the choice between a generic traversal which takes an arbitrary function that operates on the tree nodes: </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">_traverse_ast_with_action</span>(<span class="nv">$ast_</span>, <span class="nv">$acc_</span>, <span class="nv">&amp;f</span>) {
+    <span class="k">my</span> <span class="nv">$ast</span>=<span class="nv">$ast_</span>; <span class="k">my</span> <span class="nv">$acc</span>=<span class="nv">$acc_</span>;
+    <span class="k">if</span> <span class="s">&lt;cond&gt;</span> { 
+        <span class="nv">$acc</span>=<span class="nv">&amp;f</span>(<span class="nv">$ast</span>,<span class="nv">$acc</span>);
+    } <span class="k">else</span> { 
+        <span class="nv">$acc</span>=<span class="nv">&amp;f</span>(<span class="nv">$ast</span>,<span class="nv">$acc</span>);
+        <span class="k">for</span>  <span class="mi">1</span> .. <span class="nv">$ast</span>.<span class="nb">elems</span> - <span class="mi">1</span>  -&gt; <span class="nv">$idx</span> {
+            (<span class="k">my</span> <span class="nv">$entry</span>, <span class="nv">$acc</span>) = 
+                <span class="n">_traverse_ast_with_action</span>(<span class="nv">$ast</span>[<span class="nv">$idx</span>],<span class="nv">$acc</span>, <span class="nv">&amp;f</span>);
+            <span class="nv">$ast</span>[<span class="nv">$idx</span>] = <span class="nv">$entry</span>;
+        }
+    }
+    <span class="k">return</span> (<span class="nv">$ast</span>, <span class="nv">$acc</span>);
+} 
+</code></pre></div>
+<p>or a custom traversal:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">_traverse_ast_custom</span>(<span class="nv">$ast_</span>, <span class="nv">$acc_</span>) {
+    <span class="k">my</span> <span class="nv">$ast</span>=<span class="nv">$ast_</span>; <span class="k">my</span> <span class="nv">$acc</span>=<span class="nv">$acc_</span>;
+    <span class="k">if</span> <span class="s">&lt;cond&gt;</span> { 
+        <span class="nv">$acc</span>=&lt; <span class="n">custom</span> <span class="n">code</span> <span class="n">acting</span> <span class="n">on</span> <span class="nv">$ast</span> <span class="o">and</span> <span class="nv">$acc</span>&gt;;
+    } <span class="k">else</span> { 
+    <span class="nv">$acc</span>=&lt; <span class="n">custom</span> <span class="n">code</span> <span class="n">acting</span> <span class="n">on</span> <span class="nv">$ast</span> <span class="o">and</span> <span class="nv">$acc</span>&gt;;
+        <span class="k">for</span> <span class="mi">1</span> .. <span class="nv">$ast</span>.<span class="nb">elems</span> - <span class="mi">1</span>  -&gt; <span class="nv">$idx</span> {
+            (<span class="k">my</span> <span class="nv">$entry</span>, <span class="nv">$acc</span>) = 
+                <span class="n">_traverse_ast_custom</span>(<span class="nv">$ast</span>[<span class="nv">$idx</span>],<span class="nv">$acc</span>);
+            <span class="nv">$ast</span>[<span class="nv">$idx</span>] = <span class="nv">$entry</span>;
+        }
+    }
+    <span class="k">return</span> (<span class="nv">$ast</span>, <span class="nv">$acc</span>);
+} 
+</code></pre></div>
+<p>For the case of the tree data structures in my compiler, the higher-order implementation takes more than twice as long as the custom traversal, so for performance this is not a good choice. Therefore I don&#39;t use higher-order functions in the parser, but I do use them in the later refactoring passes.</p>
+
+<h3>The fastest way to process a list</h3>
+
+<p>Raku has several ways to iterate through a list. I tested six of them, as follows: </p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="n">constant</span> <span class="n">NITERS</span> <span class="o">=</span> <span class="mi">2_000_000</span><span class="p">;</span>
+<span class="k">if</span> <span class="n">CASE</span><span class="o">==</span><span class="mi">0</span> <span class="p">{</span> <span class="c1"># 6.2 s</span>
+    <span class="k">my</span> <span class="nv">@src</span> <span class="o">=</span> <span class="nb">map</span> <span class="p">{</span><span class="nv">$_</span><span class="p">},</span> <span class="mi">1</span> <span class="o">..</span> <span class="n">NITERS</span><span class="p">;</span>
+    <span class="k">my</span> <span class="nv">@res</span> <span class="o">=</span> <span class="nb">map</span> <span class="p">{</span><span class="mi">2</span><span class="o">*</span><span class="nv">$_</span><span class="o">+</span><span class="mi">1</span><span class="p">},</span> <span class="nv">@src</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">elsif</span> <span class="n">CASE</span><span class="o">==</span><span class="mi">1</span> <span class="p">{</span> <span class="c1"># 7.9 s</span>
+    <span class="k">my</span> <span class="nv">@res</span><span class="o">=</span><span class="p">();</span>
+    <span class="k">my</span> <span class="nv">@src</span><span class="o">=</span><span class="p">();</span>
+    <span class="k">for</span> <span class="mi">1</span><span class="o">..</span><span class="nn">NITERS</span> <span class="o">-&gt;</span> <span class="nv">$elt</span> <span class="p">{</span>
+        <span class="nb">push</span> <span class="nv">@src</span><span class="p">,</span> <span class="nv">$elt</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="nv">@src</span> <span class="o">-&gt;</span> <span class="nv">$elt</span> <span class="p">{</span>
+        <span class="nb">push</span> <span class="nv">@res</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nv">$elt</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">elsif</span> <span class="n">CASE</span><span class="o">==</span><span class="mi">2</span> <span class="p">{</span> <span class="c1"># 6.2 s</span>
+    <span class="k">my</span> <span class="nv">@res</span><span class="o">=</span><span class="p">();</span>
+    <span class="k">my</span> <span class="nv">@src</span><span class="o">=</span><span class="p">();</span>
+    <span class="k">for</span> <span class="mi">0</span><span class="o">..</span><span class="n">NITERS</span><span class="o">-</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="nv">$idx</span> <span class="p">{</span>
+        <span class="k">my</span> <span class="nv">$elt</span><span class="o">=</span><span class="nv">$idx</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="nv">@src</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$elt</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="mi">0</span><span class="o">..</span><span class="n">NITERS</span><span class="o">-</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="nv">$idx</span> <span class="p">{</span>
+        <span class="k">my</span> <span class="nv">$elt</span><span class="o">=</span><span class="nv">@src</span><span class="p">[</span><span class="nv">$idx</span><span class="p">];</span>
+        <span class="nv">@res</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="nv">$elt</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">elsif</span> <span class="n">CASE</span><span class="o">==</span><span class="mi">3</span> <span class="p">{</span> <span class="c1"># 11.0</span>
+    <span class="k">my</span> <span class="nv">@res</span><span class="o">=</span><span class="p">();</span>
+    <span class="k">my</span> <span class="nv">@src</span><span class="o">=</span><span class="p">();</span>
+    <span class="n">loop</span> <span class="p">(</span><span class="k">my</span> <span class="nv">$idx</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nv">$idx</span> <span class="o">&lt;</span> <span class="n">NITERS</span><span class="p">;</span><span class="o">++</span><span class="nv">$idx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">my</span> <span class="nv">$elt</span><span class="o">=</span><span class="nv">$idx</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="nv">@src</span><span class="p">[</span><span class="nv">$idx</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$elt</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">loop</span> <span class="p">(</span><span class="k">my</span> <span class="nv">$idx2</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nv">$idx2</span> <span class="o">&lt;</span> <span class="n">NITERS</span><span class="p">;</span><span class="o">++</span><span class="nv">$idx2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">my</span> <span class="nv">$elt</span><span class="o">=</span><span class="nv">@src</span><span class="p">[</span><span class="nv">$idx2</span><span class="p">];</span>
+        <span class="nv">@res</span><span class="p">[</span><span class="nv">$idx2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="nv">$elt</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">elsif</span> <span class="n">CASE</span><span class="o">==</span><span class="mi">4</span> <span class="p">{</span> <span class="c1"># 3.7 s</span>
+    <span class="k">my</span> <span class="nv">@src</span> <span class="o">=</span> <span class="p">();</span>
+    <span class="k">my</span> <span class="nv">@res</span><span class="o">=</span><span class="p">();</span>
+    <span class="nb">push</span> <span class="nv">@src</span><span class="p">,</span> <span class="nv">$_</span> <span class="k">for</span> <span class="mi">1</span> <span class="o">..</span> <span class="n">NITERS</span><span class="p">;</span>
+    <span class="nb">push</span> <span class="nv">@res</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nv">$_</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="nv">@src</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">elsif</span> <span class="n">CASE</span><span class="o">==</span><span class="mi">5</span> <span class="p">{</span> <span class="c1"># 3.5 s</span>
+    <span class="k">my</span> <span class="nv">@src</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$_</span> <span class="k">for</span> <span class="mi">1</span> <span class="o">..</span> <span class="n">NITERS</span><span class="p">);</span>
+    <span class="k">my</span> <span class="nv">@res</span><span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nv">$_</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="nv">@src</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The fastest way is to use list comprehension (case 5, 3.5 s), very closely followed by the suffix-style <code>for</code> (case 4, 3.7 s). The C-style <code>loop</code> construct (case 3) is the slowest (11 s). The <code>map</code> version performs the same as the index-based <code>for</code> loop (both 6.2 s). It is a bit odd that the list-based for loop, probably the most common loop construct, is slower than these two (7.9 s).</p>
+
+<h2>Expression parsing</h2>
+
+<p>What I loosely call an expression parser is actually a combination of a lexer and a parser: it turns a string of source code into a tree-like data structure which expresses the structure of the expression and the purpose of its constituents. For example if the expression is <code>2*v+1</code>, the result of the expression parser will be a data structure which identifies the top-level expression as a sum of a multiplication with  the integer constant <code>1</code>, and the multiplication of an integer constant <code>2</code> with a variable <code>v</code>. So how do we build a fast expression parser? It is not my intention to go into the computing science details, but instead to discuss the choices to be considered.</p>
+
+<h3>A fast data structure</h3>
+
+<p>First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to either an object or a list. But objects in are slow, so I use a nested list.</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span>[<span class="s">&#39;+&#39;</span>
+    [<span class="s">&#39;*&#39;</span>,
+        <span class="mi">2</span>,
+        [<span class="s">&#39;$&#39;</span>,<span class="s">&#39;v&#39;</span>]
+    ],
+    <span class="mi">1</span>
+]
+</code></pre></div>
+<h3>Integer comparison is faster than string comparison</h3>
+
+<p>This data structure is fine if you don&#39;t need to do a lot of work on it. However, because every node is labelled with a string, testing against the node type is a string comparison. I tested this as follows: </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">if</span> <span class="n">VER</span><span class="o">==</span><span class="mi">1</span> { <span class="c1"># 7.3 - 5.3 = 2 s net</span>
+    <span class="k">for</span> <span class="mi">1</span> .. <span class="n">NITERS</span> -&gt; <span class="nv">$i</span> {
+        <span class="k">my</span> <span class="nv">$str</span> = <span class="nb">chr</span>(<span class="nv">$i</span> % <span class="mi">43</span>);
+        <span class="k">if</span> <span class="nv">$str</span> <span class="o">eq</span> <span class="s">&#39;*&#39;</span> {
+            <span class="nv">$count</span>+=<span class="nv">$i</span>;
+        }
+    }
+} 
+<span class="k">elsif</span> <span class="n">VER</span><span class="o">==</span><span class="mi">2</span> { <span class="c1"># 3.3 - 3.1 = 0.3</span>
+    <span class="k">for</span> <span class="mi">1</span><span class="o">..</span><span class="n">NITERS</span> -&gt; <span class="nv">$i</span> {
+        <span class="k">my</span> <span class="nv">$c</span> = <span class="nv">$i</span> % <span class="mi">43</span>;
+        <span class="k">if</span> <span class="nv">$c</span> == <span class="mi">42</span> {
+            <span class="nv">$count</span>+=<span class="nv">$i</span>;
+        }
+    }
+} <span class="k">elsif</span> <span class="n">VER</span><span class="o">==</span><span class="mi">3</span> { <span class="c1"># 5.3</span>
+    <span class="k">for</span> <span class="mi">1</span><span class="o">..</span><span class="n">NITERS</span> -&gt; <span class="nv">$i</span> {
+        <span class="k">my</span> <span class="nv">$str</span> = <span class="nb">chr</span>(<span class="nv">$i</span> % <span class="mi">43</span>);
+    }
+} <span class="k">elsif</span> <span class="n">VER</span><span class="o">==</span><span class="mi">4</span> { <span class="c1"># 3.1</span>
+    <span class="k">for</span> <span class="mi">1</span><span class="o">..</span><span class="n">NITERS</span> -&gt; <span class="nv">$i</span> {
+        <span class="k">my</span> <span class="nv">$c</span> = <span class="nv">$i</span> % <span class="mi">43</span>;
+    }
+}
+</code></pre></div>
+<p>I populate the string or integer based on the loop iterator and then perform a comparison to a constant string or integer. By subtracting the time talken for the assignment I obtain the actual time for the comparison.</p>
+
+<p>On my laptop, the version with string comparison takes 2 s net, the integer comparison 0.3 s. So doing string comparisons is at least 5 times slower than doing integer comparisons. Therefore my data structure uses integer labels. Also, I label the constants so that I can have different labels for string, integer and real constants, and because in this way all nodes are arrays. This avoids having to test if a node is an array or a scalar, which is a slow operation.</p>
+
+<p>So the example becomes :</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="p">[</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="p">[</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="p">[</span> <span class="mi">29</span><span class="p">,</span> <span class="s">&#39;2&#39;</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;v&#39;</span> <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="p">[</span> <span class="mi">29</span><span class="p">,</span> <span class="s">&#39;1&#39;</span> <span class="p">]</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Less readable, but faster and easier to extend.</p>
+
+<h3>Parsing: regular expressions, string comparisons or list operations?</h3>
+
+<p>Then we have to decide how to parse the expression string. The traditional way to build an expression parser is using a Finite State Machine, consuming one character at a time (if needed with one or more characters look-ahead) and keeping track of the identified portion of the string. This is very fast in a language such as C but in Raku I was not too sure, because in Raku a character is actually a string of length one, so every test against a character is a string comparison. On the other hand, Raku has a sophisticated regular expression engine. Yet another way is to turn the string into an array, and parse using list operations. I created a test bench to see which approach was faster:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">constant</span> <span class="n">NITERS</span> = <span class="mi">100_000</span>;
+<span class="k">my</span> <span class="nv">$str</span>=<span class="s">&#39;This means we need a stack per type of operation and run until the end of the expression&#39;</span>;
+<span class="k">my</span> <span class="nv">@chrs</span> =  <span class="nv">$str</span>.<span class="nb">comb</span>;
+<span class="k">if</span> (<span class="n">VER</span><span class="o">==</span><span class="mi">0</span>) { <span class="c1"># 5.8 s</span>
+    <span class="k">for</span> <span class="mi">1</span> .. <span class="n">NITERS</span> -&gt; <span class="nv">$ct</span> {
+        <span class="k">my</span> <span class="nv">@words</span>=();
+        <span class="k">my</span> <span class="nv">$word</span>=<span class="s">&#39;&#39;</span>;
+        <span class="nb">map</span>(-&gt; \<span class="n">c</span> { 
+            <span class="k">if</span> (<span class="n">c</span> <span class="o">ne</span> <span class="s">&#39; &#39;</span>) {
+                <span class="nv">$word</span> ~= <span class="n">c</span>;
+            } <span class="k">else</span> {
+                <span class="nb">push</span> <span class="nv">@words</span>, <span class="nv">$word</span>;
+                <span class="nv">$word</span>=<span class="s">&#39;&#39;</span>;
+            }
+        }, <span class="nv">@chrs</span>);
+        <span class="nb">push</span> <span class="nv">@words</span>, <span class="nv">$word</span>;
+    }
+} <span class="k">elsif</span> <span class="n">VER</span><span class="o">==</span><span class="mi">1</span> { <span class="c1"># 2.7 s    </span>
+     <span class="k">for</span> <span class="mi">1</span> .. <span class="n">NITERS</span> -&gt; <span class="nv">$ct</span> {
+        <span class="k">my</span> <span class="nv">@words</span>=();
+        <span class="k">my</span> <span class="nv">$str</span>=<span class="s">&#39;This means we need a stack per type of operation and run until the end of the expression&#39;</span>;
+        <span class="k">while</span> <span class="k">my</span> <span class="nv">$idx</span>=<span class="nv">$str</span>.<span class="nb">index</span>( <span class="s">&#39; &#39;</span> ) {
+            <span class="nb">push</span> <span class="nv">@words</span>, <span class="nv">$str</span>.<span class="nb">substr</span>(<span class="mi">0</span>,<span class="nv">$idx</span>);
+            <span class="nv">$str</span> .= <span class="nb">substr</span>(<span class="nv">$idx</span><span class="o">+</span><span class="mi">1</span>);
+        }
+        <span class="nb">push</span> <span class="nv">@words</span>, <span class="nv">$str</span>;
+    }         
+} <span class="k">elsif</span> <span class="n">VER</span><span class="o">==</span><span class="mi">2</span> {  <span class="c1"># 11.7 s</span>
+    <span class="k">for</span> <span class="mi">1</span> .. <span class="n">NITERS</span> -&gt; <span class="nv">$ct</span> {
+        <span class="k">my</span> <span class="nv">@words</span>=();
+        <span class="k">my</span> <span class="nv">@chrs_</span> = <span class="nv">@chrs</span>; 
+        <span class="k">my</span> <span class="nv">$word</span>=<span class="s">&#39;&#39;</span>;      
+        <span class="k">while</span> <span class="nv">@chrs_</span> {
+            <span class="k">my</span> <span class="nv">$chr</span> = <span class="nb">shift</span> <span class="nv">@chrs_</span>;
+            <span class="k">if</span> (<span class="nv">$chr</span> <span class="o">ne</span> <span class="s">&#39; &#39;</span>) {
+                <span class="nv">$word</span>~=<span class="nv">$chr</span>;
+            } <span class="k">else</span> {
+                <span class="nb">push</span> <span class="nv">@words</span>, <span class="nv">$word</span>;
+                <span class="nv">$word</span>=<span class="s">&#39;&#39;</span>;
+            }
+        }
+        <span class="nb">push</span> <span class="nv">@words</span>, <span class="nv">$word</span>;
+    }
+} <span class="k">elsif</span> <span class="n">VER</span><span class="o">==</span><span class="mi">3</span> { <span class="c1"># 101 s</span>
+    <span class="k">for</span> <span class="mi">1</span> .. <span class="n">NITERS</span> -&gt; <span class="nv">$ct</span> {
+        <span class="k">my</span> <span class="nv">@words</span>=();
+        <span class="k">my</span> <span class="nv">$str</span>=<span class="s">&#39;This means we need a stack per type of operation and run until the end of the expression&#39;</span>;
+        <span class="k">while</span> <span class="nv">$str</span>.<span class="nb">Bool</span> {
+            <span class="nv">$str</span> ~~ <span class="sr">s/^$&lt;w&gt; = [ \w+ ]//</span>;
+            <span class="k">if</span> (<span class="nv">$&lt;w&gt;</span>.<span class="nb">Bool</span>) {
+                <span class="nb">push</span> <span class="nv">@words</span>, <span class="nv">$&lt;w&gt;</span>.<span class="nb">Str</span>;
+            }
+            <span class="k">else</span> {
+                <span class="nv">$str</span> ~~ <span class="sr">s/^\s+//</span>;
+            } 
+        }
+    }   
+} <span class="k">elsif</span> <span class="n">VER</span><span class="o">==</span><span class="mi">4</span> { <span class="c1"># 64 s</span>
+    <span class="k">for</span> <span class="mi">1</span> .. <span class="n">NITERS</span> -&gt; <span class="nv">$ct</span> {
+        <span class="k">my</span> \<span class="n">res</span> = <span class="nb">reduce</span>(
+        -&gt; \<span class="n">acc</span>, \<span class="n">c</span> { 
+            <span class="k">if</span> (<span class="n">c</span> <span class="o">ne</span> <span class="s">&#39; &#39;</span>) {
+                <span class="n">acc</span>[<span class="mi">0</span>],<span class="n">acc</span>[<span class="mi">1</span>] ~ <span class="n">c</span>;
+            } <span class="k">else</span> {
+                ( |<span class="n">acc</span>[<span class="mi">0</span>], <span class="n">acc</span>[<span class="mi">1</span>] ),<span class="s">&#39;&#39;</span>;
+            }
+        }, ((),<span class="s">&#39;&#39;</span>), |<span class="nv">@chrs</span>);
+        <span class="k">my</span> <span class="nv">@words</span> = |<span class="n">res</span>[<span class="mi">0</span>],<span class="n">res</span>[<span class="mi">1</span>];
+}
+</code></pre></div>
+<p>For the list-based version, the overhead is 1.6 s; for the string-based versions, 0.8s.</p>
+
+<p>The results are rather striking. Clearly the regexp version is by far the slowest. This was a surprise because in my Perl implementation, the regexp version was twice as fast as next best choice. From the other implementations, the string-based FSM which uses the <code>index</code> and <code>substr</code> methods is by far the fastest, without the overhead it takes 1.9s s, which is more that 50 times faster than the regexp version. The <code>map</code> based version comes second but is nearly twice as slow. What is surprising, and actually a bit disappointing, is that the <code>reduce</code> based version, which works the same as the <code>map</code> based one but works on immutable data, is also very slow, 64 s. </p>
+
+<p>In any case, the choice is clear. It is possible to make the fastest version  marginally faster (1.6 s instead of 1.9 s) by not reducing the string but instead moving the index through the string. However, for the full parser I want to have the convenience of the <code>trim-leading</code> and <code>starts-with</code> methods, so I choose to consume the string.</p>
+
+<h2>A faster expression parser</h2>
+
+<p>With the choices of string parsing and data structure made, I focused on the structure of the overall algorithm. The basic approach is to loop trough a number of states and in every state perform a specific action. In the Perl version this was very simple because we use regular expressions to identify tokens, so most of the state transitions are implicit. I wanted to keep this structure so I emulate the regexp <code>s///</code> operation with comparisons, indexing and substring operations.</p>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">my</span> <span class="nv">$prev_lev</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">$lev</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">@ast</span><span class="o">=</span><span class="p">();</span>
+<span class="k">my</span> <span class="nv">$op</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">$state</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1"># Match unary prefix operations</span>
+     <span class="c1"># Match terms</span>
+     <span class="c1"># Add prefix operations if matched</span>
+     <span class="c1"># Match binary operators</span>
+     <span class="c1"># Append to the AST</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The matching rules and operations are very simple (I use <code>&lt;pattern&gt;</code> and <code>&lt;integer&gt;</code> as placeholders for the actual values). Here is the Perl version for reference:</p>
+
+<ul>
+<li>prefix operations:</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">if</span> <span class="p">(</span> <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^&lt;pattern&gt;//</span> <span class="p">)</span> <span class="p">{</span> <span class="nv">$state</span><span class="o">=</span><span class="sr">&lt;integer&gt;</span><span class="p">;</span> <span class="p">}</span> 
+</code></pre></div>
+<ul>
+<li>terms:</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">if</span> <span class="p">(</span> <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^(&lt;pattern&gt;)//</span> <span class="p">)</span> <span class="p">{</span> <span class="nv">$expr_ast</span><span class="o">=</span><span class="p">[</span><span class="sr">&lt;integer&gt;</span><span class="p">,</span><span class="nv">$1</span><span class="p">];</span> <span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>operators:</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="nv">$prev_lev</span><span class="o">=</span><span class="nv">$lev</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="nv">$str</span><span class="o">=~</span><span class="sr">s/^&lt;pattern&gt;//</span> <span class="p">)</span> <span class="p">{</span> <span class="nv">$lev</span><span class="o">=</span><span class="sr">&lt;integer&gt;</span><span class="p">;</span> <span class="nv">$op</span><span class="o">=</span><span class="sr">&lt;integer&gt;</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div>
+<p>In the Raku version I used the <code>given</code>/<code>when</code> construct, which is as fast as an <code>if</code> statement but a bit neater.</p>
+
+<ul>
+<li>prefix operations:</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">given</span> <span class="nv">$str</span> {
+    <span class="k">when</span> .<span class="n">starts-with</span>(<span class="s">&lt;token&gt;</span>) { 
+        .=<span class="nb">substr</span>(<span class="s">&lt;length of token&gt;</span>); 
+        <span class="nv">$state&lt;integer&gt;</span>; }
+</code></pre></div>
+<ul>
+<li>terms:</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">given</span> <span class="nv">$str</span>
+    <span class="k">when</span> .<span class="n">starts-with</span>(<span class="s">&lt;token start&gt;</span>) { 
+        <span class="nv">$expr_ast</span>=[<span class="s">&lt;integer&gt;</span>,<span class="nv">$term</span>]; }
+</code></pre></div>
+<ul>
+<li>operators:</li>
+</ul>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">given</span> <span class="nv">$str</span> {
+    <span class="k">when</span> .<span class="n">starts-with</span>(<span class="s">&lt;token&gt;</span>) { 
+        .=<span class="nb">substr</span>(<span class="s">&lt;length of token&gt;</span>); 
+        <span class="nv">$lev</span>=<span class="s">&lt;integer&gt;</span>; 
+        <span class="nv">$op</span>=<span class="s">&lt;integer&gt;</span>; 
+    }
+</code></pre></div>
+<p>One of the more complex patterns to match is the case of an identifier followed by an opening parenthesis with optional whitespace. Using regular expressions this pattern would be:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">if</span>  <span class="nv">$str</span> ~~ <span class="sr">s:i/^ $&lt;token&gt; = [ [a .. z] \w*] \s* \( //</span> { 
+    <span class="k">my</span> <span class="nv">$var</span>=<span class="nv">$&lt;token&gt;</span>.<span class="nb">Str</span>;
+    ... 
+}
+</code></pre></div>
+<p>Without regular expressions, we first check for a character between &#39;a&#39; and &#39;z&#39; using <code>&#39;a&#39; le .substr(0,1).lc le &#39;z&#39;</code>. If that matches, we remove it from <code>$str</code> and add it to <code>$var</code>. Then we go in a <code>while</code> loop for as long as there are characters that are alphanumeric or &#39;_&#39;. Then we strip any whitespace and test for &#39;(&#39;. </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">when</span> <span class="s">&#39;a&#39;</span> <span class="o">le</span> (<span class="k">my</span> <span class="nv">$var</span> = .<span class="nb">substr</span>(<span class="mi">0</span>,<span class="mi">1</span>)).<span class="nb">lc</span> <span class="o">le</span> <span class="s">&#39;z&#39;</span> {
+    <span class="k">my</span> <span class="nv">$idx</span>=<span class="mi">1</span>;
+    <span class="k">my</span> <span class="nv">$c</span> = .<span class="nb">substr</span>(<span class="nv">$idx</span>,<span class="mi">1</span>);
+    <span class="k">while</span> <span class="s">&#39;a&#39;</span> <span class="o">le</span> <span class="nv">$c</span>.<span class="nb">lc</span> <span class="o">le</span> <span class="s">&#39;z&#39;</span> <span class="o">or</span> <span class="nv">$c</span> <span class="o">eq</span> <span class="s">&#39;_&#39;</span> 
+        <span class="o">or</span> <span class="s">&#39;0&#39;</span> <span class="o">le</span> <span class="nv">$c</span> <span class="o">le</span> <span class="s">&#39;9&#39;</span> {
+        <span class="nv">$var</span>~=<span class="nv">$c</span>;
+        <span class="nv">$c</span> = .<span class="nb">substr</span>(++<span class="nv">$idx</span>,<span class="mi">1</span>);
+    }
+    .=<span class="nb">substr</span>(<span class="nv">$idx</span>);
+    .=<span class="n">trim-leading</span>;
+    <span class="k">if</span> .<span class="n">starts-with</span>(<span class="s">&#39;(&#39;</span>) {
+        ...
+    }
+}
+</code></pre></div>
+<p>Another complex pattern is that for a floating point number. In Fortran, the pattern is more complicated because the sub-pattern <code>.e</code> can be part of a floating-point constant but could also be the part of the equality operator <code>.eq.</code>. Furthermore, the separator between the mantissa and the exponent can be not just <code>e</code> but also <code>d</code> or <code>q</code>. So the regular expression is rather involved:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">if</span> (                        
+    (
+        !(<span class="nv">$str</span><span class="o">~~</span><span class="sr">rx:i/^\d+\.eq/</span>) <span class="o">and</span>
+        <span class="nv">$str</span><span class="o">~~</span><span class="sr">s:i/^([\d*\.\d*][[e|d|q][\-|\+]?\d+]?)//</span>        
+    )           
+    <span class="o">or</span> 
+    <span class="nv">$str</span><span class="o">~~</span><span class="sr">s:i/^(\d*[e|d|q][\-|\+]?\d+)//</span>
+) {
+    <span class="nv">$real_const_str</span>=<span class="vg">$/</span>.<span class="nb">Str</span>;
+} 
+</code></pre></div>
+<p>Without regular expression, the implementation is as follows. We first detect a character between 0 and 9 or a dot. Then we try to match the mantissa, separator, sign and exponent. The latter three are optional; if they are not present and the mantissa does not contain a dot, we have matched an integer. </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">when</span> <span class="s">&#39;0&#39;</span> <span class="o">le</span> .<span class="nb">substr</span>(<span class="mi">0</span>,<span class="mi">1</span>) <span class="o">le</span> <span class="s">&#39;9&#39;</span> <span class="o">or</span> .<span class="nb">substr</span>(<span class="mi">0</span>,<span class="mi">1</span>) <span class="o">eq</span> <span class="s">&#39;.&#39;</span> { 
+    <span class="k">my</span> <span class="nv">$sep</span>=<span class="s">&#39;&#39;</span>;
+    <span class="k">my</span> <span class="nv">$sgn</span>=<span class="s">&#39;&#39;</span>;
+    <span class="k">my</span> <span class="nv">$exp</span>=<span class="s">&#39;&#39;</span>;
+    <span class="k">my</span> <span class="nv">$real_const_str</span>=<span class="s">&#39;&#39;</span>;
+
+    <span class="c1"># first char of mantissa</span>
+    <span class="k">my</span> <span class="nv">$mant</span> = .<span class="nb">substr</span>(<span class="mi">0</span>,<span class="mi">1</span>);
+    <span class="c1"># try and match more chars of mantissa</span>
+    <span class="k">my</span> <span class="nv">$idx</span>=<span class="mi">1</span>;
+    <span class="nv">$h</span> = .<span class="nb">substr</span>(<span class="nv">$idx</span>,<span class="mi">1</span>);
+    <span class="k">while</span> <span class="s">&#39;0&#39;</span> <span class="o">le</span> <span class="nv">$h</span> <span class="o">le</span> <span class="s">&#39;9&#39;</span> <span class="o">or</span> <span class="nv">$h</span> <span class="o">eq</span> <span class="s">&#39;.&#39;</span> {
+        <span class="nv">$mant</span> ~=<span class="nv">$h</span>;
+        <span class="nv">$h</span> = .<span class="nb">substr</span>(++<span class="nv">$idx</span>,<span class="mi">1</span>);
+    }
+    <span class="nv">$str</span> .= <span class="nb">substr</span>(<span class="nv">$idx</span>);
+
+    <span class="c1"># reject .eq.</span>
+    <span class="k">if</span> <span class="nb">not</span> (<span class="nv">$mant</span>.<span class="n">ends-with</span>(<span class="s">&#39;.&#39;</span>) <span class="o">and</span> .<span class="n">starts-with</span>(<span class="s">&#39;eq&#39;</span>,:<span class="n">i</span>)) { 
+        <span class="k">if</span> <span class="nv">$h</span>.<span class="nb">lc</span> <span class="o">eq</span> <span class="s">&#39;e&#39;</span> | <span class="s">&#39;d&#39;</span> | <span class="s">&#39;q&#39;</span> {
+            <span class="c1"># we found a valid separator</span>
+            <span class="nv">$sep</span> = <span class="nv">$h</span>;            
+            <span class="k">my</span> <span class="nv">$idx</span>=<span class="mi">1</span>;
+            <span class="nv">$h</span> =.<span class="nb">substr</span>(<span class="mi">1</span>,<span class="mi">1</span>);
+            <span class="c1"># now check if there is a sign</span>
+            <span class="k">if</span> <span class="nv">$h</span> <span class="o">eq</span> <span class="s">&#39;-&#39;</span> <span class="o">or</span> <span class="nv">$h</span> <span class="o">eq</span> <span class="s">&#39;+&#39;</span> {
+                ++<span class="nv">$idx</span>;
+                <span class="nv">$sgn</span> = <span class="nv">$h</span>;
+                <span class="nv">$h</span> =.<span class="nb">substr</span>(<span class="nv">$idx</span>,<span class="mi">1</span>);
+            }
+            <span class="c1"># now check if there is an exponent            </span>
+            <span class="k">while</span> <span class="s">&#39;0&#39;</span> <span class="o">le</span> <span class="nv">$h</span> <span class="o">le</span> <span class="s">&#39;9&#39;</span> {
+                ++<span class="nv">$idx</span>;
+                <span class="nv">$exp</span>~=<span class="nv">$h</span>;
+                <span class="nv">$h</span> =.<span class="nb">substr</span>(<span class="nv">$idx</span>,<span class="mi">1</span>);
+            }
+            <span class="nv">$str</span> .= <span class="nb">substr</span>(<span class="nv">$idx</span>);
+            <span class="k">if</span> <span class="nv">$exp</span> <span class="o">ne</span> <span class="s">&#39;&#39;</span> {
+            <span class="nv">$real_const_str</span>=<span class="s">&quot;$mant$sep$sgn$exp&quot;</span>;
+            <span class="nv">$expr_ast</span>=[<span class="mi">30</span>,<span class="nv">$real_const_str</span>];
+            } <span class="k">else</span> {
+                <span class="c1"># parse error</span>
+            }
+        } <span class="k">elsif</span> <span class="nb">index</span>(<span class="nv">$mant</span>,<span class="s">&#39;.&#39;</span>).<span class="nb">Bool</span> {
+            <span class="c1"># a mantissa-only real number</span>
+            <span class="nv">$real_const_str</span>=<span class="nv">$mant</span>;
+            <span class="nv">$expr_ast</span>=[<span class="mi">30</span>,<span class="nv">$real_const_str</span>];
+        }
+        <span class="k">else</span> { <span class="c1"># no dot and no sep, so an integer</span>
+            <span class="nv">$expr_ast</span>=[<span class="mi">29</span>,<span class="nv">$mant</span>];   
+        }
+    } <span class="k">else</span> { <span class="c1"># .eq., backtrack and carry on</span>
+        <span class="nv">$str</span> =<span class="s">&quot;$mant$str&quot;</span>;        
+        <span class="n">proceed</span>;
+    }            
+}
+</code></pre></div>
+<p>A final example of how to handle patterns is the case of whitespace in comparison and logical operators. Fortran has operators of the form <code>&lt;dot word dot&gt;</code>, for example <code>.lt.</code> and <code>.xor.</code>. But annoyingly, it allows whitespace between the dot and the word, e.g. <code>. not .</code>. Using regular expressions, this is of course easy to handle, for example:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">if</span> <span class="nv">$str</span><span class="o">~~</span><span class="sr">s/^\.\s*ge\s*\.//</span>) {
+    <span class="nv">$lev</span>=<span class="mi">6</span>;
+    <span class="nv">$op</span>=<span class="mi">20</span>;
+} 
+</code></pre></div>
+<p>I check for a pattern starting with a dot and which contains a space before the next dot. Then I remove all spaces from that substring using <code>trans</code> and replace this original string with this trimmed version. </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">when</span> .<span class="n">starts-with</span>(<span class="s">&#39;.&#39;</span>) <span class="o">and</span>  .<span class="nb">index</span>( <span class="s">&#39; &#39;</span> ) 
+    <span class="o">and</span> (.<span class="nb">index</span>( <span class="s">&#39; &#39;</span> ) &lt; (<span class="k">my</span> <span class="nv">$eidx</span> = .<span class="nb">index</span>(<span class="s">&#39;.&#39;</span>,<span class="mi">2</span> ))) {
+
+    <span class="c1"># Find the keyword with spaces</span>
+    <span class="k">my</span> <span class="nv">$match</span> = .<span class="nb">substr</span>(<span class="mi">0</span>, <span class="nv">$eidx</span><span class="o">+</span><span class="mi">1</span>);
+    <span class="c1"># remove the spaces</span>
+    <span class="nv">$match</span> .= <span class="n">trans</span>( <span class="s">&#39; &#39;</span> =&gt; <span class="s">&#39;&#39;</span> );
+    <span class="c1"># update the string</span>
+    <span class="nv">$str</span> = <span class="nv">$match</span> ~ .<span class="nb">substr</span>( <span class="nv">$eidx</span><span class="o">+</span><span class="mi">1</span>);
+    <span class="n">proceed</span>;
+}
+</code></pre></div>
+<h2>Conclusion</h2>
+
+<p>Overall the optimised expression parser in Raku is still very close to the Perl version. The key difference is that the Raku version does not use regular expressions. With the above examples I wanted to illustrate how it is possible to write code with the same functionality as a regular expression <code>s///</code> operation, using some of Raku&#39;s built-in string operations:</p>
+
+<ul>
+<li><code>substr</code> : substring</li>
+<li><code>index</code> : location a a substring in a string</li>
+<li><code>trim-leading</code> : strip leading whitespace</li>
+<li><code>starts-with</code></li>
+<li><code>ends-with</code></li>
+<li><code>trans</code> : used to remove whitespace using the <code>&#39; &#39; =&gt; &#39;&#39;</code> pattern</li>
+<li><code>lc</code> : used in range tests instead of testing against both upper and lower case</li>
+<li><code>le</code>, <code>lt</code>, <code>ge</code>, <code>gt</code>: for very handy range comparisons, e.g. <code>&#39;a&#39; le $str le &#39;z&#39;</code></li>
+</ul>
+
+<p>The resulting code is of course much longer but arguably more readable than regular expressions, and currently four times faster.</p>
+
+<p>I ran a lot more tests, and compared performance against Perl and Python as well, but that is another story. All code for the tests is available in <a href="https://github.com/wimvanderbauwhede/raku-examples/tree/master/Performance-analysis">my GitHub repo</a>.</p>
+
+<!-- Operators have precedence and associativity, and Fortran requires twelve precedence levels. In the "Append to AST" state, the parser uses `$lev` and `$prev_lev` to work out how the previously matched `$expr_ast` and `$op` should be appended to the `@ast` array. The prefix operations are handled by setting a state which is checked after term matching. The actual code is a bit more complicated because we need to parse array index expressions and function calls as well. This is done recursively during term matching; if a function call has multiple arguments, the parser is put into a new `$state`. 
+
+So the end result is a minimally recursive parser, i.e. it only uses recursion when it is really necessary. 
+
+There is a lot of repetition of the patterns for matching terms and operators because if I would instead abstract the `<pattern>` and `<integer>` values by e.g. storing them in an array, the array accesses would considerably reduce the performance. I do store the precedence levels in an array because there are so many of them that the logic for appending terms to the AST would otherwise become very hard to read and update. -->
+
+<!-- ## Expression parser performance
+
+I tested the new expression parser on a set of 50 different expressions taken from a weather simulation code. The old expression parser takes 45 s to run this test a thousand times; the new expression parser takes only 2 s. In other words, the new parser is *more than twenty times faster* than the old one. 
+
+It is also quite easy to maintain and adapt despite its minimal use of abstractions, and because it is Fortran-specific, the rest of the code has become a lot cleaner too. You can find the code in [my GitHub repo](https://github.com/wimvanderbauwhede/RefactorF4Acc/blob/devel/RefactorF4Acc/Parser/Expressions.pm). -->
+
+<!-- Here is a summary of all optimisations I tested. The tests were run using Perl v5.28 on a MacBook Pro (late 2013), timings are averages over 5 runs and measured using `time`.
+
+<table>
+  <thead>
+<tr>
+<th>
+Optimisation
+</th>
+<th>
+Speed-up
+</th>
+
+</tr>
+  </thead>
+   <tbody>
+<tr>
+<td> Hash key testing is faster than regexp matching </td><td> 3&times; </td>
+</tr>
+<tr>
+<td> Custom tree traversals are faster than generic ones </td><td> 2&times; </td>
+</tr>
+<tr>
+<td> `foreach` is faster than `map` </td><td> 1.3&times; </td>
+</tr>
+<tr>
+<td> `foreach` is faster than indexed `for` </td><td> 1.4&times; </td>
+</tr>
+<tr>
+<td> `foreach` is faster than C-style `for` </td><td> 1.7&times; </td>
+</tr>
+<tr>
+<td> Integer comparison is faster than string comparison </td><td> 1.5&times; </td>
+</tr>
+<tr>
+<td> Regexp matching is faster than successive string comparisons </td><td> 2.2&times; </td>
+</tr>
+
+ </tbody>
+<table> -->
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2020-11-23T00:00:00Z" itemprop="dateModified">November 23, 2020</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2020 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
