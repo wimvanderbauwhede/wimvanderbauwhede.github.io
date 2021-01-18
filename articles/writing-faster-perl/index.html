@@ -156,7 +156,7 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>As part of my research I have been developing a <a href="https://github.com/wimvanderbauwhede/RefactorF4Acc">Fortran source-to-source compiler</a> &mdash; in <a href="https://www.perl.org/">Perl</a>. The compiler transforms legacy FORTRAN 77 scientific code into more modern Fortran 95. For the reasons to target FORTRAN 77, please read <a href="https://www.sciencedirect.com/science/article/pii/S0045793018302950">my paper</a>. The compiler is written in Perl because it is available on any Linux-like system and can be executed without the need for a build toolchain. The compiler has no external dependencies at all, so that it is very simply to install and run. This is crucial because my target users are weather and climate scientists, not programmers or computer scientists. Python would have been a viable alternative but I personally prefer Perl.</p>
+				<p>As part of my research I have been developing a <a href="https://github.com/wimvanderbauwhede/RefactorF4Acc">Fortran source-to-source compiler</a> &mdash; in <a href="https://www.perl.org/">Perl</a>. The compiler transforms legacy FORTRAN 77 scientific code into more modern Fortran 95. For the reasons to target FORTRAN 77, please read <a href="https://www.sciencedirect.com/science/article/pii/S0045793018302950">my paper</a>. The compiler is written in Perl because it is available on any Linux-like system and can be executed without the need for a build toolchain. The compiler has no external dependencies at all, so that it is very simple to install and run. This is crucial because my target users are weather and climate scientists, not programmers or computer scientists. Python would have been a viable alternative but I personally prefer Perl.</p>
 
 <h2>Perl performance as we know it</h2>
 
@@ -275,7 +275,7 @@
 
 <h2>Testing some more hunches</h2>
 
-<p>First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to either an object or a list. But objects in Perl are slow, so I use a nested list. As it happens, <code>Math::Expression</code> already uses nested lists. Using the parser from <code>Math::Expression</code>, the above expression would be turned into:</p>
+<p>First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to be either an object or a list. But objects in Perl are slow, so I use a nested list. As it happens, <code>Math::Expression</code> already uses nested lists. Using the parser from <code>Math::Expression</code>, the above expression would be turned into:</p>
 <div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="p">[</span><span class="s">&#39;+&#39;</span>
     <span class="p">[</span><span class="s">&#39;*&#39;</span><span class="p">,</span>
         <span class="mi">2</span><span class="p">,</span>
@@ -352,7 +352,7 @@
 
 <h2>A faster expression parser</h2>
 
-<p>With the choices of string parsing and data structure made, I focused on the structure of the overall algorithm. The basic approach is to loop trough a number of states and in every state perform a specific action. This is very simple because we use regular expressions to identify tokens, so most of the state transitions are implicit:</p>
+<p>With the choices of string parsing and data structure made, I focused on the structure of the overall algorithm. The basic approach is to loop through a number of states and in every state perform a specific action. This is very simple because we use regular expressions to identify tokens, so most of the state transitions are implicit:</p>
 <div class="highlight"><pre><code class="language-perl" data-lang="perl"><span></span><span class="k">my</span> <span class="nv">$prev_lev</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="k">my</span> <span class="nv">$lev</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="k">my</span> <span class="nv">@ast</span><span class="o">=</span><span class="p">();</span>
@@ -453,7 +453,7 @@ if ( $str=~s/^&lt;pattern&gt;// ) { $lev=&lt;integer&gt;; $op=&lt;integer&gt;; }
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2020 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2021 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
