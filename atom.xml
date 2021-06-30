@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2021-06-29T17:50:15+01:00</updated>
+    <updated>2021-06-30T10:58:00+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -29,6 +29,29 @@
         <content type="html">
         	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/frugal-computing_1600x600.jpg&quot;&gt;&lt;br/&gt;
         	&lt;p&gt;On the need for low carbon and sustainable computing and the path towards zero carbon computing.&lt;/p&gt;
+
+&lt;h2&gt;Key points&lt;/h2&gt;
+
+&lt;h3&gt;The problem:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The current emissions from computing are about 2% of the world total. However, this is projected to rise tenfold over the next two decades. Emissions from computing alone will be close to half of the acceptable level of emissions for 2040. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the target to limit warming to below 2&amp;deg;C.&lt;/li&gt;
+&lt;li&gt;The emissions from production of computing devices exceed the emissions from operating them, so producing more energy efficient devices will make the problem worse: we must extend the useful life of our computing devices.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;The solution:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;As a society we need to start treating computational resources as finite and precious, to be utilised only when necessary, and as sparingly as possible. We need &lt;em&gt;frugal computing&lt;/em&gt;: achieving the same results for less energy. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;The vision:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Imagine we can extend the useful life of our devices and even increase their capabilities, through better use of what we have. With every improvement, we can do more computing without any increase in energy consumption.&lt;/li&gt;
+&lt;li&gt;Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life.&lt;/li&gt;
+&lt;li&gt;Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2&gt;Computational resources are finite&lt;/h2&gt;
 
@@ -136,7 +159,7 @@ title=&quot;A graph with two bars: world emissions (55) and emissions from compu
 
 &lt;p&gt;It is clear that urgent action is needed: in less than two decades, the global use of computational resources needs to be transformed radically for the world to meet its climate targets. The carbon cost of both production and operation of the devices must be considerably reduced. &lt;/p&gt;
 
-&lt;p&gt;To use devices for longer, a change in business models as well as consumer attitudes is needed. This requires raising awareness and education but also providing incentives for behavioural change. And to support devices for a long time, an infrastructure for repair and maintenance is needed, with long-term availability of parts, open repair manuals and training. To make all this happen, economic incentives and policies will be needed (e.g. taxation, regulation).&lt;/p&gt;
+&lt;p&gt;To use devices for longer, a change in business models as well as consumer attitudes is needed. This requires raising awareness and education but also providing incentives for behavioural change. And to support devices for a long time, an infrastructure for repair and maintenance is needed, with long-term availability of parts, open repair manuals and training. To make all this happen, economic incentives and policies will be needed (e.g. taxation, regulation). Therefore we need to convince key decision makers in society, politics and business.&lt;/p&gt;
 
 &lt;p&gt;In particular from a Computing Science perspective, imagine that we can make this happen: extending the useful life of our devices and even increasing their capabilities, purely through better computing science. With every improvement, the effective computational resources will increase without any increase in energy consumption. Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life. Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.&lt;/p&gt;
 
@@ -154,6 +177,8 @@ title=&quot;A graph with four trends: emissions from production, emissions in to
 &lt;li&gt;longer life means more opportunities to find vulnerabilities, so we need better cyber security&lt;/li&gt;
 &lt;li&gt;we need to develop new approaches to reduce overall energy consumption across the entire system: firmware, middleware, operating system and application software; client, network and cloud servers.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;To address these challenges we must work together. If you want to help make frugal computing a reality, &lt;a href=&quot;https://www.gla.ac.uk/schools/computing/staff/wimvanderbauwhede/&quot;&gt;please get in touch&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2&gt;References&lt;/h2&gt;
 
