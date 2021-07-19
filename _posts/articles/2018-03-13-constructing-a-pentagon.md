@@ -63,8 +63,10 @@ $$\begin{equation}
 \underset{x\rightarrow0}{lim}\frac{sin\,x}{x}=1\label{eq:5}
 \end{equation}$$
 
-(This is easily proven using [de l’Hôpital’s
-rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule) )
+
+This is easily proven using <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">de l’Hôpital’s
+rule</a>
+<br><br>
 
 Using $x=\frac{\pi}{n}$ it follows indeed that
 
@@ -75,19 +77,29 @@ $$\begin{equation}
 In other words the perimeter of successive polygons inscribed in a unit
 circle does approach $2\pi$ -- which of course comes hardly as a surprise.
 
-The following code implements this starting from a polygon with a given number of sides $n$ . The argument $h$ is half of the length of side, and $n_{max}$ is the number of iterations. What the algorithm does is recursively creating polygons with $n, 2n, 4n, 8n, ... $ sides. The example starts from a triangle so $n=3$ and $h=\sqrt(3)/2$.
+The following code implements this starting from a polygon with a given number of sides $n$ . The argument $h$ is half of the length of the side, and $n_{max}$ is the number of iterations. What the algorithm does is recursively creating polygons with $n, 2n, 4n, 8n, ... $ sides. The example starts from a triangle so $n=3$ and $h=\sqrt(3)/2$.
+<br>
+<br>
 
-    -- n: # sides of the polygon
-    -- h: half of the length of a side
-
-    approx_pi n h n_max
-      | n == n_max = n*h
-      | otherwise =
-          approx_pi (2*n) (sqrt ((1 - sqrt (1-h*h) )/2)) n_max
-    -- e.g starting from a triangle.          
-    main = print $ approx_pi 3 ((sqrt 3)/2) (3*2**14)
+<code style="font-size:80%">
+      -- n: # sides of the polygon<br>
+      -- h: half of the length of a side<br>
+<br>
+      approx_pi n h n_max<br>
+        | n == n_max = n*h<br>
+        | otherwise =<br>
+            approx_pi (2*n) (sqrt ((1 - sqrt (1-h*h) )/2)) n_max<br>
+      -- e.g starting from a triangle.<br>
+      main = print $ approx_pi 3 ((sqrt 3)/2) (3*2**14)<br>
+<br>
+</code>
+<br>
 
 What I find interesting is that every prime polygon produces a different series but they all converge towards $\pi$.
+<br>
+
+<figure>
+</figure>
 
 
 ## Part 2 How to construct a pentagon using a compass and a ruler

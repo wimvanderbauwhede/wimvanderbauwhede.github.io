@@ -16,7 +16,7 @@ image:
   thumb: writing-faster-perl_400x150.jpg
 ---
 
-As part of my research I have been developing a [Fortran source-to-source compiler](https://github.com/wimvanderbauwhede/RefactorF4Acc) &mdash; in [Perl](https://www.perl.org/). The compiler transforms legacy FORTRAN 77 scientific code into more modern Fortran 95. For the reasons to target FORTRAN 77, please read [my paper](https://www.sciencedirect.com/science/article/pii/S0045793018302950). The compiler is written in Perl because it is available on any Linux-like system and can be executed without the need for a build toolchain. The compiler has no external dependencies at all, so that it is very simply to install and run. This is crucial because my target users are weather and climate scientists, not programmers or computer scientists. Python would have been a viable alternative but I personally prefer Perl.
+As part of my research I have been developing a [Fortran source-to-source compiler](https://github.com/wimvanderbauwhede/RefactorF4Acc) &mdash; in [Perl](https://www.perl.org/). The compiler transforms legacy FORTRAN 77 scientific code into more modern Fortran 95. For the reasons to target FORTRAN 77, please read [my paper](https://www.sciencedirect.com/science/article/pii/S0045793018302950). The compiler is written in Perl because it is available on any Linux-like system and can be executed without the need for a build toolchain. The compiler has no external dependencies at all, so that it is very simple to install and run. This is crucial because my target users are weather and climate scientists, not programmers or computer scientists. Python would have been a viable alternative but I personally prefer Perl.
 
 ## Perl performance as we know it
 
@@ -151,7 +151,7 @@ What I loosely call an expression parser is actually a combination of a lexer an
 
 ## Testing some more hunches
 
-First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to either an object or a list. But objects in Perl are slow, so I use a nested list. As it happens, `Math::Expression` already uses nested lists. Using the parser from `Math::Expression`, the above expression would be turned into:
+First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to be either an object or a list. But objects in Perl are slow, so I use a nested list. As it happens, `Math::Expression` already uses nested lists. Using the parser from `Math::Expression`, the above expression would be turned into:
 
 ```perl
 ['+'
@@ -239,7 +239,7 @@ On my laptop, the FSM version takes 3.25 s, the regex version 1.45 s (mean over 
 
 ## A faster expression parser
 
-With the choices of string parsing and data structure made, I focused on the structure of the overall algorithm. The basic approach is to loop trough a number of states and in every state perform a specific action. This is very simple because we use regular expressions to identify tokens, so most of the state transitions are implicit:
+With the choices of string parsing and data structure made, I focused on the structure of the overall algorithm. The basic approach is to loop through a number of states and in every state perform a specific action. This is very simple because we use regular expressions to identify tokens, so most of the state transitions are implicit:
 
 ```perl
 my $prev_lev=0;

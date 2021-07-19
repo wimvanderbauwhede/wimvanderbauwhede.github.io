@@ -430,6 +430,6 @@ sub toPolar(PairBB \mb --> PairBB) {
 
 What we have learned so far is how to create sum (alternative) and product (record) types in Raku using a formalism called Böhm-Berarducci (BB) encoding, which uses functions to create data structures. We use Raku's roles to implement BB types, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values. 
 
-In [the next part]({{site.url}}/articles/universal--part-2), we will see how BB types make it easy tointerpreter create interpreters for complex data structures.
+In [the next part]({{site.url}}/articles/universal-interpreter-part-2), we will see how BB types make it easy tointerpreter create interpreters for complex data structures.
 
 The complete code for both articles is in [universal-interpreter.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/universal-interpreter.raku).

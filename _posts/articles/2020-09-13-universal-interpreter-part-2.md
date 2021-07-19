@@ -176,7 +176,7 @@ As before, we create our little helpers. Each of the functions below is a constr
 
 ```perl6
 sub VarBB(Str \s --> TermBB) { 
-    mkTermBB[ 
+    TermBB[ 
         sub (\v, \c, \n, \p, \a, \m) { v.(s) }
     ].new;
     }
@@ -408,7 +408,9 @@ This is structurally very similar to the examples using the `Term` type. We can 
 
 The code as presented above is not entirely correct: I have not always typed everything explicitly, but the explicit signatures in the role definition will cause type errors unless everything is explicitly typed. See the code in [tbb-timing.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/tbb-timing.raku) for details.
 
-The code in `no-bb-timing` and `ubb-timing` is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the 'ordinary' implementation. However, the fully-typed version 300% (3x) slower. This shows that types in Raku are not zero-cost abstractions. I tried to profile this to see where the bottleneck was, but unfortunately it ran out of memory with 16GB RAM. For info, here are the profiling reports for [no-bb-timing]({{site.url}}/articles/no-bb-timing.html) and [ubb-timing]({{site.url}}/articles/ubb-timing.html).
+The code in `no-bb-timing` and `ubb-timing` is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the 'ordinary' implementation. However, the fully-typed version `tbb-timing` is three times slower. Types in Raku are clearly not zero-cost abstractions. 
+
+For info, here are the profiling reports (`raku --profile`) for [no-bb-timing]({{site.url}}/articles/no-bb-timing.html) and [ubb-timing]({{site.url}}/articles/ubb-timing.html). Profiling `tbb-timing` proved infeasible.
 
 On the other hand, somewhat paradoxically, we don't really need this explicit typing. It is useful to write down the function types for the BB encoding, and I think it helps with the explanations, but the actual type safety comes from the algebraic data types that we created. 
 
@@ -419,8 +421,6 @@ In this article and [the previous one]({{site.url}}/articles/universal-interpret
 The advantage of the BB approach is that because the data is encoded as a function, it becomes easier to create interpreters for the data type, and I have illustrated this with a pretty-printer and evaluator for a parsed expression. All interpreters for BB types have the same structure, which is why I call it a universal interpreter. The key feature is that these interpreters do not require any explicit recursion. 
 
 The complete code for both articles is in [universal-interpreter.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/universal-interpreter.raku)
-
-
 
 <!-- 
 
