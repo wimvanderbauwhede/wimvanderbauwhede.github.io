@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2021-07-23T11:11:36+01:00</updated>
+    <updated>2021-08-21T18:50:41+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -4387,31 +4387,43 @@ if ( $str=~s/^&amp;lt;pattern&amp;gt;// ) { $lev=&amp;lt;integer&amp;gt;; $op=&a
 
 &lt;h3&gt;Storms, hurricanes and typhoons&lt;/h3&gt;
 
-&lt;p&gt;The terms &amp;quot;hurricane&amp;quot; and &amp;quot;typhoon&amp;quot; refer both to powerful tropical cyclones. A hurricane[^2] occurs in the Atlantic Ocean and northeastern Pacific Ocean, and a typhoon[^3] occurs in the northwestern Pacific Ocean[^4].  The diameter of the hurricane is typically of the order of hundreds of kilometers. Last month&amp;#39;s hurricane Florence was over 600 km in diameter, and typhoon Trami about 500 km. &amp;lt;!-- , The opposite direction of circulation is due to the Coriolis effect. Tropical cyclones typically form over large bodies of relatively warm water. --&amp;gt; &amp;lt;!-- In the south Pacific or Indian Ocean, comparable storms are referred to simply as &amp;quot;tropical cyclones&amp;quot;. --&amp;gt;
-A &amp;quot;tropical storm&amp;quot; is &amp;quot;tropical cyclone&amp;quot; that is less strong than a hurricane or typhoon. &lt;/p&gt;
+&lt;p&gt;The terms &amp;quot;hurricane&amp;quot; and &amp;quot;typhoon&amp;quot; refer both to powerful tropical cyclones. A hurricane[^2] occurs in the Atlantic Ocean and northeastern Pacific Ocean, and a typhoon[^3] occurs in the northwestern Pacific Ocean[^4].  The diameter of the hurricane is typically of the order of hundreds of kilometers. Last month&amp;#39;s hurricane Florence was over 600 km in diameter, and typhoon Trami about 500 km. A &amp;quot;tropical storm&amp;quot; is &amp;quot;tropical cyclone&amp;quot; that is less strong than a hurricane or typhoon. &lt;/p&gt;
 
 &lt;h2&gt;Strength and potential damage&lt;/h2&gt;
 
 &lt;p&gt;The &lt;a href=&quot;https://www.nhc.noaa.gov/aboutsshws.php&quot;&gt;Saffir-Simpson Hurricane Wind Scale&lt;/a&gt; is a scale from 1 to 5 based on a hurricane&amp;#39;s sustained wind speed, used to estimate potential property damage. Hurricanes reaching Category 3 and higher are considered major hurricanes because of their potential for significant loss of life and damage. However, Category 1 and 2 hurricanes are still much more dangerous than ordinary tropical storms, and require preventive measures.&lt;/p&gt;
 
-&lt;p&gt;The amount of energy in a hurricane is very large. &lt;a href=&quot;http://www.aoml.noaa.gov/hrd/tcfaq/D7.html&quot;&gt;NOAA&lt;/a&gt; (US National Oceanic and Atmospheric Administration) notes that the energy released by an average hurricane &amp;quot;is equivalent to 200 times the world-wide electrical generating capacity&amp;quot;.
-&amp;lt;!--
-but converting to megatons, a hurricane releases 12,400 megatons of energy per day. For reference, the most powerful US nuclear weapon in active service is a 1.2 megaton bomb.
---&amp;gt;&lt;/p&gt;
+&lt;p&gt;The amount of energy in a hurricane is very large. &lt;a href=&quot;http://www.aoml.noaa.gov/hrd/tcfaq/D7.html&quot;&gt;NOAA&lt;/a&gt; (US National Oceanic and Atmospheric Administration) notes that the energy released by an average hurricane &amp;quot;is equivalent to 200 times the world-wide electrical generating capacity&amp;quot;.&lt;/p&gt;
 
 &lt;p&gt;The table below is adapted from &lt;a href=&quot;https://www.nhc.noaa.gov/aboutsshws.php&quot;&gt;NOAA&lt;/a&gt; page linked above.&lt;/p&gt;
 
-&lt;p&gt;|Category|Sustained wind&amp;nbsp;speed|Extent of damage|
-|--------|-------------------------|----------------|
-|1|119-153 km/h|&lt;em&gt;Very dangerous winds will produce some damage:&lt;/em&gt;&lt;br&gt;Houses could have damage to roof, shingles and gutters. Large branches of trees will snap and shallowly rooted trees may be toppled. Extensive damage to power lines and poles likely will result in power outages that could last a few to several days.|
-|--------|--------------------|--------|
-|2|154-177 km/h|&lt;em&gt;Extremely dangerous winds will cause extensive damage:&lt;/em&gt;&lt;br&gt;Houses could sustain major roof and siding damage. Many shallowly rooted trees will be snapped or uprooted and block numerous roads. Near-total power loss is expected with outages that could last from several days to weeks.|
-|--------|--------------------|--------|
-|3|178-208 km/h|&lt;em&gt;Devastating damage will occur:&lt;/em&gt;&lt;br&gt;Houses may incur major damage or removal of roof decking and gable ends. Many trees will be snapped or uprooted, blocking numerous roads. Electricity and water will be unavailable for several days to weeks after the storm passes.|
-|--------|--------------------|--------|
-|4|209-251 km/h|&lt;em&gt;Catastrophic damage will occur:&lt;/em&gt;&lt;br&gt;Houses can sustain severe damage with loss of most of the roof structure and/or some exterior walls. Most trees will be snapped or uprooted and electricity poles downed. Fallen trees and electricity poles will isolate residential areas. Power outages will last weeks to possibly months. Most of the area will be uninhabitable for weeks or months.|
-|--------|--------------------|--------|
-|5|252 km/h or higher|&lt;em&gt;Catastrophic damage will occur:&lt;/em&gt;&lt;br&gt;A high percentage of houses will be destroyed, with total roof failure and wall collapse. Fallen trees and electricity poles will isolate residential areas. Power outages will last for weeks to possibly months. Most of the area will be uninhabitable for weeks or months.|&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;
+Category&lt;/th&gt;
+&lt;th&gt;Sustained wind&amp;nbsp;speed&lt;/th&gt;
+&lt;th&gt;Extent of damage&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;/thead&gt;
+   &lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;
+1&lt;/td&gt;&lt;td&gt;119-153 km/h&lt;/td&gt;&lt;td&gt; &lt;em&gt;Very dangerous winds will produce some damage:&lt;/em&gt; &lt;br&gt;Houses could have damage to roof, shingles and gutters. Large branches of trees will snap and shallowly rooted trees may be toppled. Extensive damage to power lines and poles likely will result in power outages that could last a few to several days.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+2&lt;/td&gt;&lt;td&gt;154-177 km/h&lt;/td&gt;&lt;td&gt; &lt;em&gt;Extremely dangerous winds will cause extensive damage:&lt;/em&gt; &lt;br&gt;Houses could sustain major roof and siding damage. Many shallowly rooted trees will be snapped or uprooted and block numerous roads. Near-total power loss is expected with outages that could last from several days to weeks.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+&lt;td&gt;
+3&lt;/td&gt;&lt;td&gt;178-208 km/h&lt;/td&gt;&lt;td&gt; &lt;em&gt;Devastating damage will occur:&lt;/em&gt; &lt;br&gt;Houses may incur major damage or removal of roof decking and gable ends. Many trees will be snapped or uprooted, blocking numerous roads. Electricity and water will be unavailable for several days to weeks after the storm passes.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+4&lt;/td&gt;&lt;td&gt;209-251 km/h&lt;/td&gt;&lt;td&gt; &lt;em&gt;Catastrophic damage will occur:&lt;/em&gt;&lt;br&gt;Houses can sustain severe damage with loss of most of the roof structure and/or some exterior walls. Most trees will be snapped or uprooted and electricity poles downed. Fallen trees and electricity poles will isolate residential areas. Power outages will last weeks to possibly months. Most of the area will be uninhabitable for weeks or months.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+5&lt;/td&gt;&lt;td&gt;252 km/h or higher&lt;/td&gt;&lt;td&gt;&lt;em&gt;Catastrophic damage will occur:&lt;/em&gt;&lt;br&gt;A high percentage of houses will be destroyed, with total roof failure and wall collapse. Fallen trees and electricity poles will isolate residential areas. Power outages will last for weeks to possibly months. Most of the area will be uninhabitable for weeks or months.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;p&gt;Note that this table uses &lt;a href=&quot;http://www.aoml.noaa.gov/hrd/tcfaq/D4.html&quot;&gt;sustained wind speeds&lt;/a&gt;. The &lt;em&gt;gusts&lt;/em&gt; occuring during a tropical cyclone can be a lot stronger than this (typically about 30% stronger), and are usually what is quoted in the media.&lt;/p&gt;
 
@@ -4433,14 +4445,10 @@ but converting to megatons, a hurricane releases 12,400 megatons of energy per d
 
 &lt;p&gt;Hurricanes do not only cause damage because of the strong winds. They also lead to flash floods because of the very heavy rainfall that they cause (often 30-50 cm/h), and because of the &lt;a href=&quot;https://www.nhc.noaa.gov/surge/&quot;&gt;storm surges&lt;/a&gt; which are several meters in height (e.g. 5 m for hurricane Michael a few weeks ago). &lt;/p&gt;
 
-&lt;p&gt;To put this into perspective, &amp;lt;!--one of the worst rainfall events and floods in the UK was in 2015, when &lt;a href=&quot;https://www.metoffice.gov.uk/news/releases/2015/red-warning&quot;&gt;rainfall of 5 to 8 cm over 6 to 9 hours was enough to cause a &amp;quot;red&amp;quot; severe weather warning&lt;/a&gt; in the north of England. This event was caused by--&amp;gt; in December 2015 &lt;a href=&quot;https://en.wikipedia.org/wiki/2015%E2%80%9316_Great_Britain_and_Ireland_floods&quot;&gt;storm Desmond&lt;/a&gt; broke the United Kingdom&amp;#39;s 24-hour rainfall record with 34 cm of rainfall in 24 hours, and led to widespread flooding in the UK and Ireland.  The only storm surge on record comparable to those caused by hurricanes was the notorious &lt;a href=&quot;https://en.wikipedia.org/wiki/North_Sea_flood_of_1953&quot;&gt;Great Storm of 1953&lt;/a&gt;. In Scotland, where storms are common, this was the worst storm[^5] in 500 years.&lt;/p&gt;
-
-&lt;!-- currently in Scotland, [the highest storm surge that may occur in a 50-year period raises the sea surface by between 0.9 m and 1.8 m](http://marine.gov.scot/information/ukcp09-projections-sea-level-storm-surges-tides-and-wave-height-change-medium-emissions).--&gt;
+&lt;p&gt;To put this into perspective, in December 2015 &lt;a href=&quot;https://en.wikipedia.org/wiki/2015%E2%80%9316_Great_Britain_and_Ireland_floods&quot;&gt;storm Desmond&lt;/a&gt; broke the United Kingdom&amp;#39;s 24-hour rainfall record with 34 cm of rainfall in 24 hours, and led to widespread flooding in the UK and Ireland.  The only storm surge on record comparable to those caused by hurricanes was the notorious &lt;a href=&quot;https://en.wikipedia.org/wiki/North_Sea_flood_of_1953&quot;&gt;Great Storm of 1953&lt;/a&gt;. In Scotland, where storms are common, this was the worst storm[^5] in 500 years.&lt;/p&gt;
 
 &lt;p&gt;Better flood defenses are therefore absolutely crucial to deal with future hurricanes. As a result of the 1953 disaster, much was done in the UK, the Netherlands and Belgium to strenghten flood defenses, but these focus on the North Sea. Similar works on the coasts facing the Atlantic will be necessary. Furthermore because of the increased damage, power outages and disruption of supplies will last much longer than for the storms we have now and therefore contingency plans will have to be put in place. 
 A capability for accurate forecasting of hurricane trajectories is necessary for timely evacuation of people in the affected areas.  &lt;/p&gt;
-
-&lt;!--Because hurricanes are becoming increasingly frequent in the US and typhoons have always been common from the Philippines to Japan, --&gt;
 
 &lt;p&gt;The good news is that Europe can benefit from the extensive know-how developed for example in the US and Japan, both in predictions and in dealing with the effects of such severe weather events. &lt;/p&gt;
 
@@ -4458,10 +4466,10 @@ A capability for accurate forecasting of hurricane trajectories is necessary for
 
 &lt;p&gt;&lt;em&gt;The banner image shows typhoon Halong approaching Japan in September 2014, &amp;copy; NASA Terra/MODIS 2014&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;[^1]: It is so famous that a travel book shop in Brussels took it as its name.
-[^2]: The term &amp;quot;hurricane&amp;quot; derives from the Spanish word &lt;em&gt;huracán&lt;/em&gt;, which in turn probably derives from the Taino (an indigenous people of the Caribbean) word &lt;em&gt;hurakán&lt;/em&gt; &amp;quot;god of the storm&amp;quot;.
-[^3]: In Japan they are called 台風 (&lt;em&gt;taifuu&lt;/em&gt;) and are given numbers rather than names.
-[^4]: In the northwestern Pacific, the term &amp;quot;super typhoon&amp;quot; is used for tropical cyclones with sustained winds exceeding 240 km/h.
+&lt;p&gt;[^1]: It is so famous that a travel book shop in Brussels took it as its name.&lt;br&gt;
+[^2]: The term &amp;quot;hurricane&amp;quot; derives from the Spanish word &lt;em&gt;huracán&lt;/em&gt;, which in turn probably derives from the Taino (an indigenous people of the Caribbean) word &lt;em&gt;hurakán&lt;/em&gt; &amp;quot;god of the storm&amp;quot;.&lt;br&gt;
+[^3]: In Japan they are called 台風 (&lt;em&gt;taifuu&lt;/em&gt;) and are given numbers rather than names.&lt;br&gt;
+[^4]: In the northwestern Pacific, the term &amp;quot;super typhoon&amp;quot; is used for tropical cyclones with sustained winds exceeding 240 km/h.&lt;br&gt;
 [^5]: This was a &lt;a href=&quot;https://en.wikipedia.org/wiki/European_windstorm&quot;&gt;European windstorm&lt;/a&gt;, a type of extratropical cyclone, caused by different weather phenomena than hurricanes. There is evidence that this type of storms is also getting stronger [5].&lt;/p&gt;
 
         </content>
