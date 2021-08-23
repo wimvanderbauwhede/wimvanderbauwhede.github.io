@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2021-08-21T18:50:41+01:00</updated>
+    <updated>2021-08-23T16:16:09+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -35,7 +35,7 @@
 &lt;h3&gt;The problem:&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be close to half the emissions level acceptable to keep global warming below 2°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.&lt;/li&gt;
+&lt;li&gt;The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be close to half the emissions level acceptable to keep global warming below 1.5°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.&lt;/li&gt;
 &lt;li&gt;The emissions from production of computing devices far exceed the emissions from operating them, so even if devices are more energy efficient producing more of them will make the emissions problem worse. Therefore we must extend the useful life of our computing devices.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -81,7 +81,7 @@
 
 &lt;h3&gt;Meeting the climate targets&lt;/h3&gt;
 
-&lt;p&gt;To limit global warming to below 2&amp;deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed &lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt;. So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. According to the International Energy Agency &lt;a href=&quot;#10&quot;&gt;[10]&lt;/a&gt;, emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 &lt;a href=&quot;#15&quot;&gt;[15]&lt;/a&gt;. In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. &lt;/p&gt;
+&lt;p&gt;To limit global warming to 1.5&amp;deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed &lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt;. So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. According to the International Energy Agency &lt;a href=&quot;#10&quot;&gt;[10]&lt;/a&gt;, emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 &lt;a href=&quot;#15&quot;&gt;[15]&lt;/a&gt;. In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. &lt;/p&gt;
 
 &lt;h3&gt;Emissions from consumption of computational resources&lt;/h3&gt;
 
@@ -122,7 +122,7 @@
 &lt;p&gt;Taking into account the carbon cost of both operation and production, computing would be responsible for 10 GtCO₂e by 2040, almost half of the acceptable CO₂ emissions budget &lt;a href=&quot;#2&quot;&gt;[2,3,14]&lt;/a&gt;.&lt;/p&gt;
 
 &lt;figure&gt;
-&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/computing-emissions.png&quot; alt=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 2degC (23), and the projected emissions from computing (10)&quot;
+&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/computing-emissions.png&quot; alt=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)&quot;
 title=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 2degC (23), and the projected emissions from computing (10)&quot; /&gt;
 &lt;figcaption&gt;Actual and projected emissions from computing (production+operation), and 2040 emission target to limit warming to &amp;lt;2&amp;deg;C&lt;/figcaption&gt;
 &lt;/figure&gt;
