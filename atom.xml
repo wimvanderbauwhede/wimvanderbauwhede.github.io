@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2021-08-23T16:16:09+01:00</updated>
+    <updated>2021-08-23T16:20:28+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -123,7 +123,7 @@
 
 &lt;figure&gt;
 &lt;img src=&quot;https://wimvanderbauwhede.github.io/images/computing-emissions.png&quot; alt=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)&quot;
-title=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 2degC (23), and the projected emissions from computing (10)&quot; /&gt;
+title=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)&quot; /&gt;
 &lt;figcaption&gt;Actual and projected emissions from computing (production+operation), and 2040 emission target to limit warming to &amp;lt;2&amp;deg;C&lt;/figcaption&gt;
 &lt;/figure&gt;
 
