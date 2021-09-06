@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>De l'informatique frugale • Wim Vanderbauwhede</title>
+    <meta name="description" content="À propos du besoin d'une informatique durable et peu émettrice en gaz à effet de serre ainsi que du chemin pour atteindre une neutralité carbone.">
+    <meta name="keywords" content="computing, climate">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="De l'informatique frugale">
+	<meta name="twitter:description" content="À propos du besoin d'une informatique durable et peu émettrice en gaz à effet de serre ainsi que du chemin pour atteindre une neutralité carbone.">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/frugal-computing_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/translations/fr/#">
+	<meta property="og:title" content="De l'informatique frugale">
+	<meta property="og:description" content="À propos du besoin d'une informatique durable et peu émettrice en gaz à effet de serre ainsi que du chemin pour atteindre une neutralité carbone.">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/frugal-computing_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/translations/fr/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<!-- WV: NO!
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+	  <!-- WV: NO!
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    -->
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/frugal-computing_1600x600.jpg" class="page-feature-image" alt="De l'informatique frugale" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io//"></a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>De l'informatique frugale</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>À propos du besoin d&#39;une informatique durable et peu émettrice en gaz à effet de serre ainsi que du chemin pour atteindre une neutralité carbone.</p>
+
+<h2>Résumé</h2>
+
+<h3>Le problème :</h3>
+
+<ul>
+<li>Les émissions en gaz à effet de serre liées à l&#39;informatique représentent actuellement environ 2% des émissions globales et devraient s’accroître très fortement au cours des 20 prochaines années. D&#39;ici a 2040, les émissions liées à l&#39;informatique atteindront à elles seules la moitié du seuil acceptable pour respecter l&#39;objectif de 1,5°C maximum. Cette croissance n&#39;est pas soutenable : cela rendrait presque impossible de respecter la limite pour les émissions.</li>
+<li>Les émissions entrainées par la productions des appareils sont très largement supérieures à celles liées à leur fonctionnement. Par conséquent, même si les nouveaux appareils sont plus efficaces en terme énergétique, en produire plus ne fera qu&#39;empirer le problème des émissions. Nous devons donc étendre la durée de vie effective de nos appareils.</li>
+</ul>
+
+<h3>La solution :</h3>
+
+<ul>
+<li>Nous devons commencer à considérer, à l&#39;échelle de la société, les ressources informatiques comme finies et précieuses, à n&#39;utiliser que lorsque nécessaire et avec autant d&#39;efficacité que possible. Nous avons besoin d&#39;une informatique <em>frugale</em> : atteindre les mêmes résultats en consommant moins d&#39;énergie.</li>
+</ul>
+
+<h3>La vision :</h3>
+
+<ul>
+<li>Imaginez que nous puissions étendre la durée de vie utile de nos appareils et même leurs capacités sans augmenter leur consommation d&#39;énergie.</li>
+<li>Dans le même temps, nous développerons les technologies de la prochaine génération d&#39;appareils, conçus pour être plus efficaces énergétiquement ainsi que pour durer plus longtemps.
+
+<ul>
+<li>Tous les cycles suivants accroîtront la durée de vie des appareils vers un futur où nous disposerons d&#39;appareils qui dureront éternellement et qui ne consommeront pratiquement pas d&#39;énergie.</li>
+</ul></li>
+</ul>
+
+<h2>Ressources informatiques : une définition</h2>
+
+<p>Les ressources informatiques sont toutes les ressources en terme d&#39;énergie comme de matériel impliquées dans n&#39;importe quelle opérations impliquant de l&#39;informatique.
+Par exemple, lorsque vous faites une recherche sur le web depuis votre smartphone ou que vous participez à une visioconférence depuis votre ordinateur portable, les ressources informatiques impliquées sont celles requises par la production et le fonctionnement de votre smartphone ou de votre ordinateur portable, le réseau mobile ou le Wi-Fi auquel vous êtes connecté, le réseau fixe auquel il est connecté et finalement le data center qui exécute votre recherche ou qui gère la transmission du flux vidéo. Si vous êtes un⋅e scientifique faisant tourner une simulation sur un super ordinateur, alors les ressources sont ici celles de votre ordinateur, du réseau et du super ordinateur. Dans le cas d&#39;un contrôle des processus industriels, ce sera la production et le fonctionnement des automates industriels programmables.</p>
+
+<p><small>Note des traducteurs : L&#39;auteur utilise le terme de &quot;computing resources&quot; que nous avons traduit en &quot;ressources informatiques&quot;. L&#39;acceptation classique de &quot;ressources informatiques&quot; serait l&#39;ensemble des capacités d&#39;un appareil, l&#39;ensemble de la puissance des différent composants matériels ainsi que logiciel (autrement dit, des ressources électroniques et informatiques y comprises les matières premières pour la fabrication). Le concept ici est plutôt à rapprocher de celui de ressources puisque il en est un sous-ensemble.</small></p>
+
+<h2>Finitude des ressources informatique</h2>
+
+<p>Depuis l&#39;avènement de l&#39;informatique grand public au cours des années 70, notre société a utilisé de plus en plus de ressources informatiques.</p>
+
+<p>Pendant longtemps, l&#39;augmentation de la puissance des appareils par rapport à l&#39;énergie consommée a été exponentielle, une tendance exprimée par la <a href="https://fr.wikipedia.org/wiki/Loi_de_Moore">Loi de Moore</a>.</p>
+
+<p>Du fait de cette augmentation dans la capacité des appareils, l&#39;usage des ressources informatiques s&#39;est intensifié jusqu&#39;à devenir presque omniprésent dans notre société actuelle. Jusqu&#39;à maintenant, l&#39;énergie consommée et l&#39;empreinte carbone de l&#39;informatique a été plutôt faible par rapport au total mondial et les ressources informatiques ont donc été considérés comme infinies.</p>
+
+<p>À cause de ce postulat, le modèle économique de la conception logicielle et matérielle a été construit autour de l&#39;idée que, pour chaque génération d&#39;appareils, les performances doubleraient à coût constant. Mais cette augmentation ne peut plus se poursuivre ainsi à cause d&#39;une combinaison de limitations techniques et de l&#39;urgence climatique. Nous devons par conséquent faire plus avec moins.</p>
+
+<p>Nous avons atteint la fin de la loi de Moore avec la fin de la miniaturisation des circuits imprimés et par conséquent la performance par Watt n&#39;augmente plus de façon exponentielle. Dans le même temps, la demande en ressources informatiques est prévue pour augmenter considérablement dans les années a venir.</p>
+
+<p>La principale conséquence de cela sera que, au moins durant les prochaines décennies, l&#39;augmentation de la demande en ressources informatiques ne sera pas compensée par l&#39;augmentation de leur efficacité énergétique. Par conséquent, en continuant au rythme actuel, l&#39;énergie consommée ainsi que l&#39;empreinte carbone liée à l&#39;utilisation des ressources informatiques augmentera de façon spectaculaire jusqu&#39;à devenir un contributeur majeur au total mondial.</p>
+
+<p>De plus, les ressources nécessaires pour produire les appareils ainsi que les infrastructures sont également finies et comme nous le disions plus tôt, l&#39;énergie et l&#39;empreinte carbone de la fabrication des appareils est énorme. Sous l&#39;auspice de la loi de Moore, qui nous encourageait à doubler la performance tous les deux ans, la durée de vie effective des appareils est très courte. Ce rythme d&#39;obsolescence du matériel et des logiciels n&#39;est absolument pas viable.</p>
+
+<p>Nous devons donc, socialement, considérer les ressources informatiques comme finies et précieuses, à n&#39;utiliser que lorsque nécessaire et de façon aussi modérée que possible. En tant qu&#39;informaticiens et informaticiennes, nous devons nous assurer que les opérations informatiques consomment le moins possible d&#39;énergie et réussir cela avec les technologies dont nous disposons actuellement puisque la durée de vie de nos appareils doit être drastiquement augmentée.</p>
+
+<p>Je propose de nommer cela l&#39;«informatique frugale» : une informatique qui atteindrait les mêmes résultats en consommant moins d&#39;énergie en étant plus économe avec nos ressources informatiques.</p>
+
+<h2>L&#39;ampleur du problème</h2>
+
+<h3>Atteindre les objectifs climatiques</h3>
+
+<p>Pour limiter le réchauffement climatique en dessous de 1,5°C au cours de la prochaine décennie, une réduction globale de 55 gigatonnes d&#39;équivalent CO₂ (GteCO₂) de 32 GteCO₂ à 23 GteCO₂ par an est nécessaire <a href="#5">[5]</a>. Cela correspond à l&#39;horizon 2030 à une réduction dans les émissions globales de CO₂ de plus de 50%. Selon l&#39;Agence Internationale de l&#39;Énergie <a href="#10">[10]</a>, les émissions causées par la production d&#39;électricité représentent environ 10 GteCO₂. La proportion d&#39;énergies renouvelables qui est actuellement de 22% devrait à l&#39;avenir augmenter jusqu&#39;à un peu plus que 30% en 2040 <a href="#15">[15]</a>. En d&#39;autres termes, nous ne pouvons pas compter sur les énergies renouvelables pour éliminer à temps les émissions de CO₂ pour atteindre les objectifs climatiques. Réduire la consommation énergétique est la seule option.</p>
+
+<h3>Consommation énergétique des ressources informatiques</h3>
+
+<p>La conséquence de la fin de la loi de Moore a été exprimée dans un rapport de l&#39;association des industriels de semiconducteurs (la Semiconductor Industry Association) datant de 2015. Ce rapport nommé &quot;Rebooting the IT Revolution : a call to action&quot; (&quot;Appel pour relancer la révolution informatique&quot;) <a href="#1">[1]</a>, qui a calculé que, en se basant les prévisions d&#39;augmentation ainsi que sur leur feuille de route pour la production de puce CMOS de 2015 (IRTS 2015 for CMOS chip engineering <a href="#16">[16]</a>) :</p>
+
+<blockquote>
+<p>l&#39;informatique ne sera plus viable à partir de 2040, quand l&#39;énergie dont elle a besoin dépassera la production mondiale d&#39;énergie.</p>
+</blockquote>
+
+<p>Il convient de noter que cela ne concerne que l&#39;énergie de l&#39;appareil domestique, car, comme expliqué dans le rapport, l&#39;énergie nécessaire à des équipements comme les datacenters ou les réseaux n&#39;est pas comptabilisée.</p>
+
+<p>La SIA a également tenu un discours similaire dans leur &quot;Plan Décénal pour les Semiconducteurs&quot; (Decadal Plan for Semiconductors) de 2020 <a href="#2">[2]</a>, même si ils ont modifié leur projection en se basant sur un &quot;ajustement selon la dynamique du marché&quot; :</p>
+
+<blockquote>
+<p>Si la croissance exponentielle d&#39;énergie nécessaire à l&#39;informatique n&#39;est pas régulée, le marché limitera l&#39;augmentation de la puissance ce qui fera plafonner la courbe de consommation d&#39;énergie.</p>
+</blockquote>
+
+<p>Ils ne font ici que reconnaître que la production ne connaitra pas d&#39;augmentation significative et que par conséquent une augmentation de la demande fera augmenter les prix ce qui ralentira la croissance de la demande. Il est bien évident que l&#39;informatique ne dépassera pas la production mondiale d&#39;énergie.</p>
+
+<blockquote>
+<p>La demande toujours plus croissante d&#39;appareils informatiques comparée à la production mondiale d&#39;énergie engendre un nouveau risque. De nouveaux paradigmes informatiques offrent des solutions pour augmenter drastiquement l&#39;efficacité énergétique.</p>
+</blockquote>
+
+<p>Les pays qui consomment la plupart des ressources informatiques (les Etats-Unis et l&#39;Europe) représentent 25% des émissions mondiales de CO2  <a href="#4">[4]</a>. Selon les estimations de la SIA, l&#39;informatique représente actuellement un peu moins de 10% de l&#39;électricité produite mais devrait atteindre 30% en 2040. Ce qui voudrait dire que, au rythme actuel, l&#39;informatique serait responsable d&#39;au moins 10% des émissions mondiales de CO2 en 2040.</p>
+
+<p>L&#39;étude indépendante &quot;Evaluation de l&#39;empreinte des émissions mondiales des TIC : projections pour 2040 et recommandations&quot; (&quot;Assessing ICT global emissions footprint: Trends to 2040 &amp; recommendations&quot; <a href="#3">[3]</a>) corrobore les chiffres de la SIA : elle estime les emissions de gaz à effet de serre liés à l&#39;informatique en 2020 entre 3% et 3,5% du total, ce qui est légèrement supérieur à l&#39;estimation de la SIA (de 2,5%) puisque cette étude inclut les réseaux et les datacenters. Leurs projection pour 2040 est de 14% plutôt que 10%, ce qui voudrait dire une multiplication par 4 plutôt que par 3.</p>
+
+<p>En termes de valeurs absolues, en se basant sur les estimations ci-dessus, la consommation énergétique des appareils en 2040 sera responsable de 5 GteCO₂, quand il faudrait plutôt maintenir le total des émissions à 23 GteCO₂ pour rester dans les engagements.</p>
+
+<h3>De l&#39;énergie nécessaire à la production des appareils</h3>
+
+<p>Pour ne rien arranger, les émissions de gaz à effet de serre résultants de la production des appareils informatiques sont supérieures à celles liées à leurs opération. Ceci est un point très important, puisque que cela signifie que nous ne pouvons pas nous reposer sur la génération suivante de matériels ainsi que sur ses technologies pour économiser de l&#39;énergie. La production de cette nouvelle génération créera des des émissions que même d&#39;importantes économies d&#39;énergie lors du fonctionnement ne pourront compenser. Cela ne veut bien sûr pas dire que la recherche de nouvelles technologies plus économes devrait cesser. Seulement que les cycles de développement devraient être beaucoup plus lents. Étendre la durée de vie des technologies doit devenir notre priorité.</p>
+
+<p>Le rapport du Bureau Environnemental Européen sur le coût de l&#39;obsolescence programmée <a href="#7">[7]</a> stipule très clairement l&#39;échelle du problème. Pour les ordinateurs portables ou pour les appareils similaires, la production, la distribution et le recyclage/l&#39;élimination représente 52% de leur <a href="https://fr.wikipedia.org/wiki/Potentiel_de_r%C3%A9chauffement_global">potentiel de réchauffement global</a> (i.e. le montant d&#39;équivalent en CO₂ dans les émissions). Pour les smartphones, cela monte à 72%. Le rapport estime que la durée de vie de ces appareils devrait être d&#39;au moins 25 ans pour limiter leur potentiel de réchauffement global. Actuellement, la durée de vie des ordinateurs portables est d&#39;environ 5 ans et celle des smartphone est de 3 ans. Selon <a href="#8">[8]</a>, la durée de vie classique pour des servers dans un datacenter est également de 3 à 5 ans, ce qui une fois de plus est bien en dessous de ce qu&#39;il faudrait. Selon cet article, l&#39;impact de la production des servers est environ 20% du total, ce qui nécessiterait d&#39;étendre leur durée de vie utile jusqu&#39;à 11-18 ans.</p>
+
+<h3>Le bilan des émissions liée à l&#39;informatique</h3>
+
+<p>En prenant en compte le coût en carbone de la production comme du fonctionnement, l&#39;informatique sera responsable de 10 GteCO₂ en 2040, presque la moitié des émissions de CO2 acceptables <a href="#2">[2,3,14]</a>.</p>
+
+<figure>
+<img src="https://wimvanderbauwhede.github.io/images/computing-emissions-fr.png" alt="Un graphe composée de 2 barres imbriquées : les émissions mondiales (55) et les émissions de l'informatique (0,1) en 2020; et en 2040. Le plafond d'émissions nécessaire pour maintenir le réchauffement à 1,5 °C (23) et les émissions estimée de l'informatique (10) sont également représentées."
+title="Un graphe composée de 2 barres imbriquées : les émissions mondiales (55) et les émissions de l'informatique (0,1) en 2020; et en 2040. Le plafond d'émissions nécessaire pour maintenir le réchauffement à 1,5 °C (23) et les émissions estimée de l'informatique (10) sont également représentées." />
+<figcaption>Émissions actuelles et projetées liées à l'informatique (production et fonctionnement), et l'objectif de 2040 pour limiter le réchauffement à 1,5°C.</figcaption>
+</figure>
+
+<h3>Détails par type d&#39;appareil</h3>
+
+<p>Pour décider sur les actions a prendre pour réduire les émissions, il est important de regarder précisément aux différents chiffres pour les différents types d&#39;appareils et leur consommation énergétique. Considérons les smartphones dans une catégorie, les ordinateurs portable et de bureau dans une autre et les servers dans une dernière. La question est la suivante : combien d&#39;appareils existe-t&#39;il dans chaque catégorie et quelle est leur consommation énergétique. Le nombre absolu d&#39;appareil en service est très difficile à estimer, mais les ventes mondiales <a href="#10">[10]</a> et les estimations de consommation énergétique pour chaque catégorie <a href="#11">[11,12,13,14]</a> sont facilement accessibles depuis différentes sources. La table ci-dessous montre les ventes pour l&#39;année 2020 ainsi que une estimation de la consommation énergétique pour chaque catégorie d&#39;appareil. Une analyse plus détaillée est développée dans <a href="#14">[14]</a>.</p>
+
+<table>
+<caption>Nombre d'appareils vendus dans le monde en 2020</caption>
+<tr><th>Type d'appareil</th><th>Ventes en 2020</th></tr>
+<tr><td>Smartphones</td><td> 3000 Millions</td></tr>
+<tr><td>Servers</td><td> 13M</td></tr>
+<tr><td>Tablettes</td><td> 160M</td></tr>
+<tr><td>Ecrans</td><td> 40M</td></tr>
+<tr><td>Ordinateurs portables</td><td> 280M</td></tr>
+<tr><td>Ordinateurs de bureau</td><td> 80M</td></tr>
+<tr><td>TVs</td><td>220M</td></tr>
+<tr><td>Appareils de l'IoT (Internet des Objets)</td><td> 2000M</td></tr>
+</table>
+
+<p>La consommation énergétique des Technologies de l&#39;Information et de la Communication actuellement en service dans le monde est d&#39;environ de 3000 TWh, approx. 11% de la consommation électrique mondiale, et est projetée pour augmenter par 3 ou 4 d&#39;ici à 2040 en continuant au rythme actuel selon <a href="#2">[2]</a>. Ce sont des chiffres optimistes, l&#39;étude présentée dans <a href="#14">[14]</a> imagine un scénario dans le pire des cas avec une augmentation jusqu&#39;à 30kTWh (ce qui excèderait la consommation électrique globale actuelle) en 2030.</p>
+
+<table>
+<caption>Consommations énergétique annuelle estimées en TWh</caption>
+<tr><th>Type d'appareils</th><th>TWh</th></tr>
+<tr><td>TVs</td><td> 560</td></tr>
+<tr><td>Autres appareils grand public</td><td> 240</td></tr>
+<tr><td>Réseaux fixes (cables+WiFi)</td><td> 900 + 500</td></tr>
+<tr><td>Réseaux mobiles</td><td> 100</td></tr>
+<tr><td>Datacenters</td><td> 700</td></tr>
+<tr><td>Total</td><td> 3000</td></tr>
+</table>
+
+<p>Les données ci-dessus révèlent très distinctement les actions à mener. Le coût principal des smartphone, tablettes et de l&#39;IoT est leur production et l&#39;utilisation du réseau mobile. Nous devons étendre leur durée de vie utile de façon très importante et réduire au maximum leur utilisation du réseau. Etendre la durée de vie des datacenters et des ordinateurs de bureau, mais également réduire leur consommation énergétique est également un objectif important tout comme réduire la consommation du réseau cablé, WiFi et des réseaux mobiles.</p>
+
+<h2>Une vision vers une informatique durable et peu émittrice en carbone</h2>
+
+<p>Il est clair que des actions urgentes sont nécessaires. En moins de deux décennies, le système global de consommation des ressources informatiques doit être radicalement transformé. Sans ce changement, le monde ne pourra pas atteindre l&#39;objectif climatique, même avec des réductions significatives dans les émissions d&#39;autres secteurs. Le coût en carbone de la production et du fonctionnement des appareils doit être considérablement réduit.</p>
+
+<p>Pour utiliser les appareils plus longtemps, une modification des modèles économiques ainsi que des attitudes de consommation sera nécessaire. Cela peut passer par une prise de conscience et de l&#39;éducation comme par des incitations à un changement de comportement. Pour supporter un accroissement de la durée de vie des appareils, une infrastructure de réparation et de maintenance est nécessaire, avec une disponibilité plus longue des pièces, une ouverture des manuels de réparation ainsi que des formations. Des incitations économiques comme des taxes et des régulations seront nécessaire pour supporter ces changements. Nous devons donc également convaincre les législateurs comme  les chefs d&#39;entreprises de ces changements.</p>
+
+<p>Imaginez que nous puissions étendre la durée de vie utile de nos appareils et même améliorer leurs capacités, purement avec des améliorations techniques. Avec chaque amélioration, les capacités des appareils vont de fait augmenter sans que la consommation énergétique n&#39;augmente. Dans le même temps, nous développerons des technologies pour la prochaine génération d&#39;appareils, conçus pour l&#39;efficacité énergétique et pour durer. Tous les cycles suivants accroîtront la durée de vie des appareils jusqu&#39;au point où nous disposerons d&#39;appareils qui dureront éternellement et qui ne consommeront pratiquement pas d&#39;énergie. </p>
+
+<figure>
+<img src="https://wimvanderbauwhede.github.io/images/towards-zero-carbon-computing-fr.png" alt="Un graph avec quatre courbes, les émissions liées à la production, les émissions totales, la performance et le rapport emissions sur performance."
+title="Un graph avec quatre courbes, les émissions liées à la production, les émissions totales, la performance et le rapport emissions sur performance."/>
+<figcaption>Vers une informatique neutre en carbone : augmentation de la performance et de la durée de vie en réduisant les émissions. Illustration avec les hypothèses suivantes : chaque nouvelle génération dure deux fois plus longtemps que la précedente et coût la moitié d'énergié à produire. L'efficacité énergétique augment linéairement d'environ 5% par an.</figcaption>
+</figure>
+
+<p>Il s&#39;agit d&#39;une vision très ambitieuse, impliquant tous les aspects de l&#39;informatique. Parmi les nombreux challenges que cela soulève :</p>
+
+<ul>
+<li>Nous devons concevoir des logiciels qui puissent supporter des appareils avec des durée de vie étendue.</li>
+<li>Nous devons nous doter de stratégies en génie logiciel pour nous permettre de gérer les cycles de vie des logiciels, en particulier pour pallier à la <a href="https://fr.wikipedia.org/wiki/Dette_technique">dette technique</a>.</li>
+<li>Des durées de vie étendues signifient plus de vulnérabilités, nous devons donc améliorer la sécurité informatique.</li>
+<li>Nous devons développer de nouvelles approches pour réduire la consommation énergétique générale de l&#39;intégralité du système de production.</li>
+</ul>
+
+<p>Pour adresser tous ces défis, des changements sont nécessaires sur de nombreux fronts. Que ferez-vous pour faire advenir l&#39;informatique frugale ?</p>
+
+<p>Traducteurs : Méandres (@Meandres@hackers.town),  Xav&#39; (@XavCC@todon.eu), Loupyploop</p>
+
+<h2>Références</h2>
+
+<p><small>
+  <span id="1">[1] <a href="https://www.semiconductors.org/resources/rebooting-the-it-revolution-a-call-to-action-2/"><em>&quot;Rebooting the IT revolution: a call to action&quot;</em>, Semiconductor Industry Association/Semiconductor Research Corporation, Sept 2015</a></span><br>
+  <span id="2">[2] <a href="https://www.src.org/about/decadal-plan/decadal-plan-full-report.pdf"><em>&quot;Full Report for the Decadal Plan for Semiconductors&quot;</em>, Semiconductor Industry Association/Semiconductor Research Corporation, Jan 2021</a></span><br>
+  <span id="3">[3] <a href="https://www.sciencedirect.com/science/article/pii/S095965261733233X"><em>&quot;Assessing ICT global emissions footprint: Trends to 2040 &amp; recommendations&quot;</em>, Lotﬁ Belkhir, Ahmed Elmeligi, Journal of Cleaner Production 177 (2018) 448--463</a></span><br>
+  <span id="4">[4] <a href="https://www.epa.gov/ghgemissions/sources-greenhouse-gas-emissions"><em>&quot;Sources of Greenhouse Gas Emissions&quot;</em>, United States Environmental Protection Agency</a>, Last updated on April 14, 2021</span><br>
+  <span id="5">[5] <a href="https://www.unep.org/emissions-gap-report-2020"><em>&quot;Emissions Gap Report 2020&quot;</em>, UN Environment Programme, December 2020</a></span><br>
+  <span id="6">[6] <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/jiec.13123"><em>&quot;The link between product service lifetime and GHG emissions: A comparative study for different consumer products&quot;</em>, Simon Glöser-Chahoud, Matthias Pfaff, Frank Schultmann,  Journal of Industrial Ecology, 25 (2), pp 465-478, March 2021</a></span><br>
+  <span id="7">[7] <a href="https://eeb.org/library/coolproducts-report/"><em>&quot;Cool products don’t cost the Earth – Report&quot;</em>, European Environmental Bureau, September 2019</a></span><br>
+  <span id="8">[8] <a href="https://link.springer.com/article/10.1007/s11367-014-0838-7"><em>&quot;The life cycle assessment of a UK data centre&quot;</em>, Beth Whitehead, Deborah Andrews, Amip Shah, Graeme Maidment, Building and Environment 93 (2015) 395--405, January 2015</a></span><br>
+  <span id="9">[9] <a href="https://www.statista.com">Statista</a>,  retrieved June 2021</span><br>
+  <span id="10">[10] <a href="https://www.iea.org/reports/global-energy-CO%E2%82%82-status-report-2019/emissions"><em>&quot;Global Energy &amp; CO₂ Status Report&quot;</em>, International Energy Agency, March 2019</a></span><br>
+  <span id="11">[11] <a href="https://link.springer.com/article/10.1007/s11367-015-0909-4"><em>&quot;Redefining scope: the true environmental impact of smartphones?&quot;</em>, James Suckling, Jacquetta Lee, The International Journal of Life Cycle Assessment volume 20, pages 1181–1196 (2015)</a></span><br>
+  <span id="12">[12] <a href="https://www.racksolutions.com/news/blog/server-rack-power-consumption-calculator/"><em>&quot;Server Rack Power Consumption Calculator&quot;</em>, Rack Solutions, Inc., July 2019</a></span><br>
+  <span id="13">[13] <a href="https://www.sciencedirect.com/science/article/pii/S111001682030524X"><em>&quot;Analysis of energy consumption and potential energy savings of an institutional building in Malaysia&quot;</em>, Siti Birkha Mohd Ali,  M.Hasanuzzaman, N.A.Rahim, M.A.A.Mamun, U.H.Obaidellah,  Alexandria Engineering Journal, Volume 60, Issue 1, February 2021, Pages 805-820</a></span><br>
+  <span id="14">[14] <a href="https://doi.org/10.3390/challe6010117"><em>&quot;On Global Electricity Usage of Communication Technology: Trends to 2030&quot;</em>, Anders S. G. Andrae, Tomas Edler, Challenges 2015, 6(1), 117-157 </a></span><br>
+  <span id="15">[15] <a href="https://www.bp.com/en/global/corporate/energy-economics/energy-outlook.html"><em>&quot;BP Energy Outlook: 2020 Edition&quot;</em>,BP plc</a></span><br>
+  <span id="16">[16] <a href="https://www.semiconductors.org/resources/2015-international-technology-roadmap-for-semiconductors-itrs/"><em>&quot;2015 International Technology Roadmap for Semiconductors (ITRS)&quot;</em>, Semiconductor Industry Association, June 2015</a></span><br>
+</small></p>
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+                    <div class="inline-btn">
+    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <!--
+	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
+	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
+	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
+	&nbsp;
+<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+    -->
+</div><!-- /.follow-us -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2021-08-29T00:00:00Z" itemprop="dateModified">August 29, 2021</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2021 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
