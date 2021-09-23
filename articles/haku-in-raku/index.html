@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Haku: a Japanese programming language • Wim Vanderbauwhede</title>
+    <meta name="description" content="Haku is a natural language functional programming language based on literary Japanese and written in Raku">
+    <meta name="keywords" content="coding, hacking, programming, raku, haku">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Haku: a Japanese programming language">
+	<meta name="twitter:description" content="Haku is a natural language functional programming language based on literary Japanese and written in Raku">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/haku-in-raku_1600x600.png">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/haku-in-raku/#">
+	<meta property="og:title" content="Haku: a Japanese programming language">
+	<meta property="og:description" content="Haku is a natural language functional programming language based on literary Japanese and written in Raku">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/haku-in-raku_1600x600.png" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/haku-in-raku/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<!-- WV: NO!
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+	  <!-- WV: NO!
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    -->
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/haku-in-raku_1600x600.png" class="page-feature-image" alt="Haku: a Japanese programming language" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Haku: a Japanese programming language</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>Haku is a natural language functional programming language based on literary Japanese. This article is about the implementation of Haku in <a href="https://raku.org">Raku</a>. You don&#39;t need to know Japanese or <a href="https://codeberg.org/wimvanderbauwhede/haku">have read the Haku documentation</a>. I you are not familiar with Raku, you might want to read my <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/#raku-intro">quick introduction</a>.</p>
+
+<p>I do assume familiarity with the concepts of parsing, syntax tree and code generation. I you find you lack background for what follows, I recommend Andrew Shitov&#39;s series of posts <a href="https://andrewshitov.com/creating-a-compiler-with-raku/">Creating a Compiler with Raku
+</a> which takes a step-by-step approach.</p>
+
+<h2>Haku</h2>
+
+<p>Haku aims to be close to written Japanese, so it is written in a combination of the three Japanese writing systems <em>kanji</em> (Chinese characters), <em>hiragana</em> and <em>katakana</em>, and Japanese punctuation. There are no spaces, and Haku does not use Arabic (or even Roman) digits nor any operators. The design of the language is explained <a href="https://codeberg.org/wimvanderbauwhede/haku">in more detail in the documentation</a>. </p>
+
+<p>Here is an example of a small Haku program (for more examples see <a href="https://codeberg.org/wimvanderbauwhede/haku/src/branch/main/examples">the repo</a>):</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>本とは
+「魄から楽まで」を見せる
+の事です。
+</code></pre></div>
+<p>This translates as</p>
+
+<blockquote>
+<p>&quot;main is: to show &#39;From Haku to Raku&#39;&quot;</p>
+</blockquote>
+
+<p>And the Raku version would be</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span> <span class="s">&#39;From Haku to Raku&#39;</span>;
+</code></pre></div>
+<p>The strings &quot;本とは&quot; and &quot;の事です。&quot; indicate the start and end of the main program. &quot;「魄から楽まで」&quot; is a string constant. &quot;見せる&quot; is the print function. The &#39;を&#39; indicates that anything before it is an argument of the function. The newlines in the example code are optional and purely there for readability. A Haku program is a single string without whitespace or newlines.</p>
+
+<p>The actual generated Raku code for this example is</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">use</span> <span class="n">v6</span>;
+<span class="k">use</span> <span class="n">HakuPrelude</span>;
+
+<span class="k">sub</span> <span class="n">main</span>() {
+    <span class="n">show</span>(<span class="s">&#39;魄から楽まで&#39;</span>)
+}
+
+<span class="n">main</span>();
+</code></pre></div>
+<p>To be even closer to literary Japanese, Haku programs can be written vertically from right to left:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>の 忘 本 　 の 条 条 遠 　 の 物 忘
+事 れ と 　 こ を で い 　 こ で れ
+で か は 　 と 見 　 と 　 と 空 る
+す け 記 　 で せ 　 は 　 で 　 と
+。 て 憶 　 す る 　 　 　 す 　 は
+　 た は 　 。 　 　 　 　 。 　 　g
+　 遠 無 　 　 　 　 　 　 　 　 　
+　 い 、 　 　 　 　 　 　 　 　 　
+　 記 　 　 　 　 　 　 　 　 　 　
+　 憶 　 　 　 　 　 　 　 　 　 　
+</code></pre></div>
+<p>The generated Raku code for this Haku program is again quite simple:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">use</span> <span class="n">v6</span>;
+<span class="k">use</span> <span class="n">HakuPrelude</span>;
+
+<span class="k">sub</span> <span class="n">wasureru</span>( \<span class="n">mono</span>) {[]}
+
+<span class="k">sub</span> <span class="n">tooi</span>( \<span class="n">jou</span>) {<span class="n">show</span>(<span class="n">jou</span>)}
+
+<span class="k">sub</span> <span class="n">hon</span>() {
+    <span class="k">my</span> \<span class="n">kioku</span> = <span class="n">Nil</span>;
+    <span class="n">wasureru</span>(<span class="n">tooi</span>(<span class="n">kioku</span>))
+}
+
+<span class="n">hon</span>();
+</code></pre></div>
+<p>Haku is implemented in Raku. The Haku compiler is a source-to-source compiler (sometimes called <em>transpiler</em>) which generates Raku source from the Haku source and executes it. Raku makes writing such a compiler easy in many ways:</p>
+
+<h2>Parsing using Grammars</h2>
+
+<p>I decided to implement Haku in Raku mostly because I wanted to use Raku&#39;s <a href="https://docs.raku.org/language/grammars">Grammars</a> feature, and it did not disappoint. A grammar is like a class, but instead of methods it has rules or tokens, which are the building blocks of the parser. Any token can be used in the definition of another token by enclosing it in <code>&lt;...&gt;</code>, for example:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">token</span><span class="n"> adjective</span> {<span class="sr"></span>
+<span class="sr">    &lt;i-adjective&gt; | &lt;na-adjective&gt;</span>
+}
+</code></pre></div>
+<p>The tokens <code>i-adjective</code> and <code>na-adjective</code> have been defined separately and <code>adjective</code> matches one or the other.</p>
+
+<p>I have always liked parser combinators (like <a href="https://www.futurelearn.com/info/courses/functional-programming-haskell/0/steps/27222">Parsec</a> in Haskell) and from a certain angle, Raku&#39;s Grammar&#39;s are quite similar. They are both scannerless, i.e. there is no separate tokenisation step, and highly composable. Many of the features offered by Parsec (e.g. <code>many</code>, <code>oneOf</code>, <code>sepBy</code>) are available courtesy of Raku&#39;s regexes.</p>
+
+<p>There are several features of Raku&#39;s Grammars that helped to make the parser for Haku easy to implement. </p>
+
+<h3>Excellent Unicode support</h3>
+
+<p>I think Raku&#39;s Unicode support is really excellent. For example, thanks to the support for Unicode blocks, I can simply write</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">token</span><span class="n"> kanji</span> {<span class="sr">  </span>
+<span class="sr">    &lt;:Block(&#39;CJK Unified Ideographs&#39;)&gt;</span>
+}  
+</code></pre></div>
+<p>rather than having to enumerate them all (there are 92,865 kanji in that block!). In fact, the <code>&lt;:...&gt;</code> syntax works for any Unicode property, not just for Blocks.</p>
+
+<p>Even better: I have some kanji that are reserved as keywords:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">token</span><span class="n"> reserved-kanji</span> {<span class="sr"> &#39;本&#39; | &#39;事&#39; | ... </span>}
+</code></pre></div>
+<p>To make sure these are excluded from the valid kanji for Haku, I can simply use a set difference:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">token</span><span class="n"> kanji</span> {<span class="sr">  </span>
+<span class="sr">    &lt;:Block(&#39;CJK Unified Ideographs&#39;) - reserved-kanji &gt;</span>
+}  
+</code></pre></div>
+<p>(One detail that bit me is that the equivalent syntax for a user-defined character class requires an explicit &#39;+&#39; : <code>token set-difference { &lt; +set1 -set2&gt; }</code> )</p>
+
+<h3>Tokens and rules</h3>
+
+<p>Luckily, Raku does not assume by default that you want to parse something where whitespace can be ignored, or that you want to tokenise on whitespace. If you want to ignore whitespace, you can use a <code>rule</code>. But in Haku, extraneous whitespace is not allowed (except for newlines at certain locations). So I use <code>token</code> everywhere. (There is also <a href="https://docs.raku.org/language/grammars#index-entry-declarator_token-Named_Regexes"><code>regex</code>, which backtracks</a>. In Haku&#39;s grammar I have not needed it.)</p>
+
+<h3>Very powerful regexes</h3>
+
+<p>As a lambdacamel, I&#39;ve always been fond of Perl&#39;s regexes, the now ubiquitous <a href="https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions">PCREs</a>. Yet, <a href="https://docs.raku.org/language/regexes">Raku&#39;s regexes</a> go way beyond that in power, expressiveness and readability. </p>
+
+<p>For one thing, they are composable: you can defined a named regex with the <code>regex</code> type and use it in subsequent regexes with the <code>&lt;...&gt;</code> syntax. Also, the care with which they have been designed makes them very easy to use.  For example, a negative look-ahead assertion is simply <code>&lt;no&gt; &lt;!before &lt;koto&gt; &gt;</code>; and the availability of both a try-in-order alternation (<code>||</code>) and longest-token match alternation (<code>|</code>) is a huge boon. Another thing I like very much is the ability to make a character class non-capturing:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span>    <span class="k">token</span><span class="n"> lambda-expression</span> {<span class="sr"> </span>
+<span class="sr">        &lt;.aru&gt; &lt;variable-list&gt; &lt;.de&gt; &lt;expression&gt; </span>
+<span class="sr">    </span>}
+</code></pre></div>
+<p>Only <code>&lt;variable-list&gt;</code> and <code>&lt;expression&gt;</code> will be captured, so a lot of the concrete syntax can be removed at parse time.</p>
+
+<h3>Grammar composition via roles</h3>
+
+<p>Roles (&#39;mixins&#39; in Ruby, &#39;traits&#39; in Rust) define interfaces and/or implementation of those interfaces.<br>
+I found this a better fit for my purpose than the also-supported class inheritance. For example:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Nouns</span> <span class="nb">does</span> <span class="n">Characters</span> {
+    <span class="k">token</span><span class="n"> sa</span> {<span class="sr"> &#39;さ&#39; </span>}
+    <span class="k">token</span><span class="n"> ki</span> {<span class="sr"> &#39;き&#39; </span>}
+    <span class="c1"># 一線 is OK,  一 is not OK, 線 is OK</span>
+    <span class="k">token</span><span class="n"> noun</span> {<span class="sr"> </span>
+<span class="sr">        &lt;number-kanji&gt;? &lt;non-number-kanji&gt; &lt;kanji&gt;* </span>
+<span class="sr">        [&lt;sa&gt;|&lt;ki&gt;]?</span>
+<span class="sr">    </span>}
+}
+
+<span class="k">role</span> <span class="n">Identifiers</span> 
+<span class="nb">does</span> <span class="n">Verbs</span> 
+<span class="nb">does</span> <span class="n">Nouns</span> 
+<span class="nb">does</span> <span class="n">Adjectives</span> 
+<span class="nb">does</span> <span class="n">Variables</span> 
+{
+    <span class="k">token</span><span class="n"> nominaliser</span> {<span class="sr"></span>
+<span class="sr">        | &lt;no&gt; &lt;!before &lt;koto&gt; &gt; </span>
+<span class="sr">        | &lt;koto&gt; &lt;!before &lt;desu&gt; &gt; </span>
+<span class="sr">    </span>}
+    <span class="c1"># Identifiers are variables,</span>
+    <span class="c1"># noun-style, verb-style</span>
+    <span class="c1"># and adjective-style function names</span>
+    <span class="k">token</span><span class="n"> identifier</span> {<span class="sr"> </span>
+<span class="sr">        | &lt;variable&gt; </span>
+<span class="sr">        | &lt;verb&gt; &lt;nominaliser&gt;? </span>
+<span class="sr">        | &lt;noun&gt; &lt;.sura&gt;? </span>
+<span class="sr">        | &lt;adjective&gt; </span>}
+}
+</code></pre></div>
+<p>(Although I would like a list syntax for this, something like <code>role Identifiers does Verbs, Nouns, Adjectives, Variables {...}</code>.)</p>
+
+<p>There is a lot more to grammars and regexes. The nice Raku folks on Twitter recommended me the book <a href="https://link.springer.com/book/10.1007/978-1-4842-3228-6">&quot;Parsing with Perl 6 Regexes and Grammars&quot; by Moritz Lenz</a> and it was very useful in particular for debugging of the grammar and handling of error messages.</p>
+
+<h2>Abstract syntax tree using roles</h2>
+
+<p>I like to implement the abstract syntax tree (AST) as an algebraic data type, the way it is usually done in Haskell. In Raku, one way to do this is to use parametrised Roles <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">as I explained in an earlier post</a>. Most of the AST maps directly to the toplevel parser for each role in my grammar, for example the lambda expression:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">LambdaExpr</span>[ <span class="nv">@lambda-args</span>, <span class="nv">$expr</span>] <span class="nb">does</span> <span class="n">HakuExpr</span> {
+    <span class="k">has</span> <span class="n">Variable</span> <span class="nv">@.args</span> = <span class="nv">@lambda-args</span>;
+    <span class="k">has</span> <span class="n">HakuExpr</span> <span class="nv">$.expr</span> = <span class="nv">$expr</span>;
+} 
+</code></pre></div>
+<h2>From parse tree to abstract syntax tree</h2>
+
+<p>Raku&#39;s grammars provide a very convenient mechanism for turning the parse tree into an AST, called <a href="https://docs.raku.org/language/grammars#index-entry-Actions">Actions</a>. Essentially, you create a class with a method with the same name as the token or rule in the Grammar. Each method gets the <a href="https://docs.raku.org/type/Match">Match object</a> (<code>$/</code>) created by the token as a positional argument. </p>
+
+<p>For example, to populate the AST node for a lambda expression from the parse tree:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">method</span> <span class="n">lambda-expression</span>(<span class="vg">$/</span>) {
+        <span class="k">my</span> <span class="nv">@args</span> = <span class="nv">$&lt;variable-list&gt;</span>.<span class="n">made</span>;
+        <span class="k">my</span> <span class="nv">$expr</span> = <span class="nv">$&lt;expression&gt;</span>.<span class="n">made</span>;
+        <span class="k">make</span> <span class="n">LambdaExpr</span>[<span class="nv">@args</span>,<span class="nv">$expr</span>].<span class="nb">new</span>;
+}
+</code></pre></div>
+<p>The capturing tokens used in the <code>lambda-expression</code> token are accessible via the notation <code>$&lt;...&gt;</code> which is shorthand for <code>$/&lt;...&gt;</code>, i.e. they are named attributes of the current match object.</p>
+
+<p>In the Haku grammar, there are several tokens where the match is one from a list of alternatives, for example the <code>expression</code> token, which enumerates anything that is an expression in Haku. For such tokens I use the following code to &quot;inherit&quot; from the constituent tokens:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">method</span> <span class="n">expression</span>(<span class="vg">$/</span>) { 
+        <span class="k">make</span> <span class="vg">$/</span>.<span class="nb">values</span>[<span class="mi">0</span>].<span class="n">made</span>;
+}
+</code></pre></div>
+<p>Because every match is a map with as keys the names of the capturing tokens, and because we know that in this case there will be only one token selected, we know the first element in the corresponding <code>values</code> list will be the match for that particular token.</p>
+
+<h2>Code generation</h2>
+
+<p>The <code>haku.raku</code> main program essentially does this:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">$hon_parse</span> = 
+    <span class="n">Haku</span>.<span class="n">parse</span>(<span class="nv">$program_str</span>, :<span class="n">actions</span>(<span class="n">HakuActions</span>));
+<span class="k">my</span> <span class="nv">$hon_raku_code</span> =  
+    <span class="n">ppHakuProgram</span>(<span class="nv">$hon_parse</span>.<span class="n">made</span>);
+</code></pre></div>
+<p>The Haku program string is parsed using the Haku grammar and the methods defined in the corresponding HakuActions class are used to populate the AST. The toplevel parse tree node must be <code>$&lt;haku-program&gt;</code>, and the <code>made</code> method of this node returns the AST node <code>HakuProgram</code>.  The routine <code>ppHakuProgram</code> is the toplevel routine in the module <code>Raku</code>, which is the Raku emitter for Haku. (There is also a Scheme emitter, in the module <code>Scheme</code>.)</p>
+
+<p>So <code>ppHakuProgram($hon_parse.made)</code> pretty-prints the HakuProgram AST node and thus the entire Haku program as Raku code.</p>
+
+<p>What I like about the role-based AST is that you can pattern match against the variants of a type using <code>given/when</code>:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">ppHakuExpr</span>(\<span class="n">h</span>) {            
+    <span class="k">given</span> <span class="n">h</span> {
+        <span class="k">when</span> <span class="n">BindExpr</span> { ... }
+        <span class="k">when</span> <span class="n">FunctionApplyExpr</span> { ... }
+        <span class="k">when</span> <span class="n">ListExpr</span> { ... }
+        <span class="k">when</span> <span class="n">MapExpr</span> { ... }        
+        <span class="k">when</span>  <span class="n">IfExpr</span> { ... }   
+        <span class="k">when</span> <span class="n">LetExpr</span> { ... }
+        <span class="k">when</span> <span class="n">LambdaExpr</span> { ... }        
+        ...
+        <span class="k">default</span> {
+            <span class="k">die</span> <span class="s">&quot;TODO:&quot;</span> ~ <span class="n">h</span>.<span class="n">raku</span>;
+        }        
+    }
+} 
+</code></pre></div>
+<p>The Raku code corresponding to the Haku AST is quite straightforward, but there are a few things worth noting:</p>
+
+<ul>
+<li>Because Haku&#39;s variables are immutable, I use the <code>\</code> notation which means I don&#39;t have to build a variable table with the sigils.</li>
+<li>Because Haku is functional, <code>let</code> and <code>if</code> are expressions, so in Raku I wrap them in a <code>do {}</code> block. </li>
+<li>For partial application I use <code>.assuming()</code>. </li>
+<li>In Haku, strings are lists. In Raku they aren&#39;t. I created a small Prelude of functions, and the list manipulation functions in that Prelude use pattern matching on the type with <code>given/when</code> to see if the argument is a string or a list.</li>
+</ul>
+
+<h2>Running the generated Raku code</h2>
+
+<p>Running the generated Raku code is simple: I write the generated Raku code to a module and <code>require</code> it. The generated code ends with a call to <code>hon()</code>, the main function in a Haku program, so this automatically executes the program. </p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Write the parsed program to a module </span>
+<span class="k">my</span> <span class="nv">$fh</span> = <span class="s">&#39;Hon.rakumod&#39;</span>.<span class="nb">IO</span>.<span class="n">open:</span> :<span class="n">w</span>;
+<span class="nv">$fh</span>.<span class="n">put:</span> <span class="nv">$hon_raku_code</span>;
+<span class="nv">$fh</span>.<span class="nb">close</span>;
+
+<span class="c1"># Require the module. This will execute the program</span>
+<span class="k">require</span> <span class="n">Hon</span>;
+</code></pre></div>
+<p>Other things Haku makes really easy is to create command-line flags and document their usage:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">USAGE</span>() {
+    <span class="nb">print</span> <span class="s">Q:to/EOH/;</span>
+<span class="s">    Usage: haku &lt;Haku program, written horizontally or vertically, utf-8 text file&gt;</span>
+<span class="s">        [--tategaki, -t] : do not run the program but print it vertically.</span>
+<span class="s">        [--miseru, -m] : just print the Raku source code, don&#39;t execute.</span>
+<span class="s">        ...</span>
+<span class="s">    EOH</span>
+}
+
+<span class="n">unit</span> <span class="k">sub</span> <span class="n">MAIN</span>(
+          <span class="nb">Str</span> <span class="nv">$src_file</span>,
+          <span class="nb">Bool</span> :<span class="n">t</span>(<span class="nv">$tategaki</span>) = <span class="nb">False</span>,   
+          <span class="nb">Bool</span> :<span class="sr">m($miseru)</span> = <span class="nb">False</span>,
+          ...
+        );  
+</code></pre></div>
+<p><code>USAGE</code> is called when <code>MAIN</code> is called with the wrong (or no) arguments. Arguments of <code>MAIN</code> prefixed with <code>:</code> are flags. <code>unit sub</code> means that anything after this declaration is part of the MAIN program, so no need for <code>{...}</code>.</p>
+
+<h2>To conclude</h2>
+
+<p>This article shows the lazy programmer&#39;s way to creating your own programming language: let Raku do all the hard work. </p>
+
+<p>Or to express it with a Haku program:</p>
+
+<p>　本真とは<br>
+　コンパイラを書いて、<br>
+　プログラムを書いて、<br>
+　プログラムを走らす<br>
+　と言う事です。</p>
+
+<blockquote>
+<p>the truth:<br>
+write the compiler,<br>
+write the program,<br>
+run the program.</p>
+</blockquote>
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+                    <div class="inline-btn">
+    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <!--
+	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
+	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
+	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
+	&nbsp;
+<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+    -->
+</div><!-- /.follow-us -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2021-09-20T00:00:00Z" itemprop="dateModified">September 20, 2021</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2021 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>

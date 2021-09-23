@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2021-09-09T11:56:51+01:00</updated>
+    <updated>2021-09-23T19:47:25+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,285 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>Haku: a Japanese programming language</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/haku-in-raku/"/>
+        <updated>2021-09-20T00:00:00+01:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/haku-in-raku</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/haku-in-raku_1600x600.png&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;Haku is a natural language functional programming language based on literary Japanese. This article is about the implementation of Haku in &lt;a href=&quot;https://raku.org&quot;&gt;Raku&lt;/a&gt;. You don&amp;#39;t need to know Japanese or &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku&quot;&gt;have read the Haku documentation&lt;/a&gt;. I you are not familiar with Raku, you might want to read my &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/#raku-intro&quot;&gt;quick introduction&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I do assume familiarity with the concepts of parsing, syntax tree and code generation. I you find you lack background for what follows, I recommend Andrew Shitov&amp;#39;s series of posts &lt;a href=&quot;https://andrewshitov.com/creating-a-compiler-with-raku/&quot;&gt;Creating a Compiler with Raku
+&lt;/a&gt; which takes a step-by-step approach.&lt;/p&gt;
+
+&lt;h2&gt;Haku&lt;/h2&gt;
+
+&lt;p&gt;Haku aims to be close to written Japanese, so it is written in a combination of the three Japanese writing systems &lt;em&gt;kanji&lt;/em&gt; (Chinese characters), &lt;em&gt;hiragana&lt;/em&gt; and &lt;em&gt;katakana&lt;/em&gt;, and Japanese punctuation. There are no spaces, and Haku does not use Arabic (or even Roman) digits nor any operators. The design of the language is explained &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku&quot;&gt;in more detail in the documentation&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;Here is an example of a small Haku program (for more examples see &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku/src/branch/main/examples&quot;&gt;the repo&lt;/a&gt;):&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;本とは
+「魄から楽まで」を見せる
+の事です。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This translates as&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;main is: to show &amp;#39;From Haku to Raku&amp;#39;&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And the Raku version would be&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;From Haku to Raku&amp;#39;&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The strings &amp;quot;本とは&amp;quot; and &amp;quot;の事です。&amp;quot; indicate the start and end of the main program. &amp;quot;「魄から楽まで」&amp;quot; is a string constant. &amp;quot;見せる&amp;quot; is the print function. The &amp;#39;を&amp;#39; indicates that anything before it is an argument of the function. The newlines in the example code are optional and purely there for readability. A Haku program is a single string without whitespace or newlines.&lt;/p&gt;
+
+&lt;p&gt;The actual generated Raku code for this example is&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v6&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HakuPrelude&lt;/span&gt;;
+
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;() {
+    &lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;(&lt;span class=&quot;s&quot;&gt;&amp;#39;魄から楽まで&amp;#39;&lt;/span&gt;)
+}
+
+&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To be even closer to literary Japanese, Haku programs can be written vertically from right to left:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;の 忘 本 　 の 条 条 遠 　 の 物 忘
+事 れ と 　 こ を で い 　 こ で れ
+で か は 　 と 見 　 と 　 と 空 る
+す け 記 　 で せ 　 は 　 で 　 と
+。 て 憶 　 す る 　 　 　 す 　 は
+　 た は 　 。 　 　 　 　 。 　 　g
+　 遠 無 　 　 　 　 　 　 　 　 　
+　 い 、 　 　 　 　 　 　 　 　 　
+　 記 　 　 　 　 　 　 　 　 　 　
+　 憶 　 　 　 　 　 　 　 　 　 　
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The generated Raku code for this Haku program is again quite simple:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v6&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HakuPrelude&lt;/span&gt;;
+
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wasureru&lt;/span&gt;( \&lt;span class=&quot;n&quot;&gt;mono&lt;/span&gt;) {[]}
+
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tooi&lt;/span&gt;( \&lt;span class=&quot;n&quot;&gt;jou&lt;/span&gt;) {&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;jou&lt;/span&gt;)}
+
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hon&lt;/span&gt;() {
+    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;kioku&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;Nil&lt;/span&gt;;
+    &lt;span class=&quot;n&quot;&gt;wasureru&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;tooi&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;kioku&lt;/span&gt;))
+}
+
+&lt;span class=&quot;n&quot;&gt;hon&lt;/span&gt;();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Haku is implemented in Raku. The Haku compiler is a source-to-source compiler (sometimes called &lt;em&gt;transpiler&lt;/em&gt;) which generates Raku source from the Haku source and executes it. Raku makes writing such a compiler easy in many ways:&lt;/p&gt;
+
+&lt;h2&gt;Parsing using Grammars&lt;/h2&gt;
+
+&lt;p&gt;I decided to implement Haku in Raku mostly because I wanted to use Raku&amp;#39;s &lt;a href=&quot;https://docs.raku.org/language/grammars&quot;&gt;Grammars&lt;/a&gt; feature, and it did not disappoint. A grammar is like a class, but instead of methods it has rules or tokens, which are the building blocks of the parser. Any token can be used in the definition of another token by enclosing it in &lt;code&gt;&amp;lt;...&amp;gt;&lt;/code&gt;, for example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; adjective&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;    &amp;lt;i-adjective&amp;gt; | &amp;lt;na-adjective&amp;gt;&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The tokens &lt;code&gt;i-adjective&lt;/code&gt; and &lt;code&gt;na-adjective&lt;/code&gt; have been defined separately and &lt;code&gt;adjective&lt;/code&gt; matches one or the other.&lt;/p&gt;
+
+&lt;p&gt;I have always liked parser combinators (like &lt;a href=&quot;https://www.futurelearn.com/info/courses/functional-programming-haskell/0/steps/27222&quot;&gt;Parsec&lt;/a&gt; in Haskell) and from a certain angle, Raku&amp;#39;s Grammar&amp;#39;s are quite similar. They are both scannerless, i.e. there is no separate tokenisation step, and highly composable. Many of the features offered by Parsec (e.g. &lt;code&gt;many&lt;/code&gt;, &lt;code&gt;oneOf&lt;/code&gt;, &lt;code&gt;sepBy&lt;/code&gt;) are available courtesy of Raku&amp;#39;s regexes.&lt;/p&gt;
+
+&lt;p&gt;There are several features of Raku&amp;#39;s Grammars that helped to make the parser for Haku easy to implement. &lt;/p&gt;
+
+&lt;h3&gt;Excellent Unicode support&lt;/h3&gt;
+
+&lt;p&gt;I think Raku&amp;#39;s Unicode support is really excellent. For example, thanks to the support for Unicode blocks, I can simply write&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; kanji&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt;  &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;    &amp;lt;:Block(&amp;#39;CJK Unified Ideographs&amp;#39;)&amp;gt;&lt;/span&gt;
+}  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;rather than having to enumerate them all (there are 92,865 kanji in that block!). In fact, the &lt;code&gt;&amp;lt;:...&amp;gt;&lt;/code&gt; syntax works for any Unicode property, not just for Blocks.&lt;/p&gt;
+
+&lt;p&gt;Even better: I have some kanji that are reserved as keywords:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; reserved-kanji&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt; &amp;#39;本&amp;#39; | &amp;#39;事&amp;#39; | ... &lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To make sure these are excluded from the valid kanji for Haku, I can simply use a set difference:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; kanji&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt;  &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;    &amp;lt;:Block(&amp;#39;CJK Unified Ideographs&amp;#39;) - reserved-kanji &amp;gt;&lt;/span&gt;
+}  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;(One detail that bit me is that the equivalent syntax for a user-defined character class requires an explicit &amp;#39;+&amp;#39; : &lt;code&gt;token set-difference { &amp;lt; +set1 -set2&amp;gt; }&lt;/code&gt; )&lt;/p&gt;
+
+&lt;h3&gt;Tokens and rules&lt;/h3&gt;
+
+&lt;p&gt;Luckily, Raku does not assume by default that you want to parse something where whitespace can be ignored, or that you want to tokenise on whitespace. If you want to ignore whitespace, you can use a &lt;code&gt;rule&lt;/code&gt;. But in Haku, extraneous whitespace is not allowed (except for newlines at certain locations). So I use &lt;code&gt;token&lt;/code&gt; everywhere. (There is also &lt;a href=&quot;https://docs.raku.org/language/grammars#index-entry-declarator_token-Named_Regexes&quot;&gt;&lt;code&gt;regex&lt;/code&gt;, which backtracks&lt;/a&gt;. In Haku&amp;#39;s grammar I have not needed it.)&lt;/p&gt;
+
+&lt;h3&gt;Very powerful regexes&lt;/h3&gt;
+
+&lt;p&gt;As a lambdacamel, I&amp;#39;ve always been fond of Perl&amp;#39;s regexes, the now ubiquitous &lt;a href=&quot;https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions&quot;&gt;PCREs&lt;/a&gt;. Yet, &lt;a href=&quot;https://docs.raku.org/language/regexes&quot;&gt;Raku&amp;#39;s regexes&lt;/a&gt; go way beyond that in power, expressiveness and readability. &lt;/p&gt;
+
+&lt;p&gt;For one thing, they are composable: you can defined a named regex with the &lt;code&gt;regex&lt;/code&gt; type and use it in subsequent regexes with the &lt;code&gt;&amp;lt;...&amp;gt;&lt;/code&gt; syntax. Also, the care with which they have been designed makes them very easy to use.  For example, a negative look-ahead assertion is simply &lt;code&gt;&amp;lt;no&amp;gt; &amp;lt;!before &amp;lt;koto&amp;gt; &amp;gt;&lt;/code&gt;; and the availability of both a try-in-order alternation (&lt;code&gt;||&lt;/code&gt;) and longest-token match alternation (&lt;code&gt;|&lt;/code&gt;) is a huge boon. Another thing I like very much is the ability to make a character class non-capturing:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; lambda-expression&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        &amp;lt;.aru&amp;gt; &amp;lt;variable-list&amp;gt; &amp;lt;.de&amp;gt; &amp;lt;expression&amp;gt; &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;    &lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Only &lt;code&gt;&amp;lt;variable-list&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;expression&amp;gt;&lt;/code&gt; will be captured, so a lot of the concrete syntax can be removed at parse time.&lt;/p&gt;
+
+&lt;h3&gt;Grammar composition via roles&lt;/h3&gt;
+
+&lt;p&gt;Roles (&amp;#39;mixins&amp;#39; in Ruby, &amp;#39;traits&amp;#39; in Rust) define interfaces and/or implementation of those interfaces.&lt;br&gt;
+I found this a better fit for my purpose than the also-supported class inheritance. For example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Nouns&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Characters&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; sa&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt; &amp;#39;さ&amp;#39; &lt;/span&gt;}
+    &lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; ki&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt; &amp;#39;き&amp;#39; &lt;/span&gt;}
+    &lt;span class=&quot;c1&quot;&gt;# 一線 is OK,  一 is not OK, 線 is OK&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; noun&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        &amp;lt;number-kanji&amp;gt;? &amp;lt;non-number-kanji&amp;gt; &amp;lt;kanji&amp;gt;* &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        [&amp;lt;sa&amp;gt;|&amp;lt;ki&amp;gt;]?&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;    &lt;/span&gt;}
+}
+
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Identifiers&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Verbs&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Nouns&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Adjectives&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Variables&lt;/span&gt; 
+{
+    &lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; nominaliser&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        | &amp;lt;no&amp;gt; &amp;lt;!before &amp;lt;koto&amp;gt; &amp;gt; &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        | &amp;lt;koto&amp;gt; &amp;lt;!before &amp;lt;desu&amp;gt; &amp;gt; &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;    &lt;/span&gt;}
+    &lt;span class=&quot;c1&quot;&gt;# Identifiers are variables,&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# noun-style, verb-style&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# and adjective-style function names&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;n&quot;&gt; identifier&lt;/span&gt; {&lt;span class=&quot;sr&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        | &amp;lt;variable&amp;gt; &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        | &amp;lt;verb&amp;gt; &amp;lt;nominaliser&amp;gt;? &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        | &amp;lt;noun&amp;gt; &amp;lt;.sura&amp;gt;? &lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;        | &amp;lt;adjective&amp;gt; &lt;/span&gt;}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;(Although I would like a list syntax for this, something like &lt;code&gt;role Identifiers does Verbs, Nouns, Adjectives, Variables {...}&lt;/code&gt;.)&lt;/p&gt;
+
+&lt;p&gt;There is a lot more to grammars and regexes. The nice Raku folks on Twitter recommended me the book &lt;a href=&quot;https://link.springer.com/book/10.1007/978-1-4842-3228-6&quot;&gt;&amp;quot;Parsing with Perl 6 Regexes and Grammars&amp;quot; by Moritz Lenz&lt;/a&gt; and it was very useful in particular for debugging of the grammar and handling of error messages.&lt;/p&gt;
+
+&lt;h2&gt;Abstract syntax tree using roles&lt;/h2&gt;
+
+&lt;p&gt;I like to implement the abstract syntax tree (AST) as an algebraic data type, the way it is usually done in Haskell. In Raku, one way to do this is to use parametrised Roles &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/&quot;&gt;as I explained in an earlier post&lt;/a&gt;. Most of the AST maps directly to the toplevel parser for each role in my grammar, for example the lambda expression:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LambdaExpr&lt;/span&gt;[ &lt;span class=&quot;nv&quot;&gt;@lambda-args&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$expr&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HakuExpr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Variable&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@.args&lt;/span&gt; = &lt;span class=&quot;nv&quot;&gt;@lambda-args&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HakuExpr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.expr&lt;/span&gt; = &lt;span class=&quot;nv&quot;&gt;$expr&lt;/span&gt;;
+} 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;From parse tree to abstract syntax tree&lt;/h2&gt;
+
+&lt;p&gt;Raku&amp;#39;s grammars provide a very convenient mechanism for turning the parse tree into an AST, called &lt;a href=&quot;https://docs.raku.org/language/grammars#index-entry-Actions&quot;&gt;Actions&lt;/a&gt;. Essentially, you create a class with a method with the same name as the token or rule in the Grammar. Each method gets the &lt;a href=&quot;https://docs.raku.org/type/Match&quot;&gt;Match object&lt;/a&gt; (&lt;code&gt;$/&lt;/code&gt;) created by the token as a positional argument. &lt;/p&gt;
+
+&lt;p&gt;For example, to populate the AST node for a lambda expression from the parse tree:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lambda-expression&lt;/span&gt;(&lt;span class=&quot;vg&quot;&gt;$/&lt;/span&gt;) {
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@args&lt;/span&gt; = &lt;span class=&quot;nv&quot;&gt;$&amp;lt;variable-list&amp;gt;&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;made&lt;/span&gt;;
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$expr&lt;/span&gt; = &lt;span class=&quot;nv&quot;&gt;$&amp;lt;expression&amp;gt;&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;made&lt;/span&gt;;
+        &lt;span class=&quot;k&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LambdaExpr&lt;/span&gt;[&lt;span class=&quot;nv&quot;&gt;@args&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$expr&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The capturing tokens used in the &lt;code&gt;lambda-expression&lt;/code&gt; token are accessible via the notation &lt;code&gt;$&amp;lt;...&amp;gt;&lt;/code&gt; which is shorthand for &lt;code&gt;$/&amp;lt;...&amp;gt;&lt;/code&gt;, i.e. they are named attributes of the current match object.&lt;/p&gt;
+
+&lt;p&gt;In the Haku grammar, there are several tokens where the match is one from a list of alternatives, for example the &lt;code&gt;expression&lt;/code&gt; token, which enumerates anything that is an expression in Haku. For such tokens I use the following code to &amp;quot;inherit&amp;quot; from the constituent tokens:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expression&lt;/span&gt;(&lt;span class=&quot;vg&quot;&gt;$/&lt;/span&gt;) { 
+        &lt;span class=&quot;k&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$/&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;values&lt;/span&gt;[&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;].&lt;span class=&quot;n&quot;&gt;made&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Because every match is a map with as keys the names of the capturing tokens, and because we know that in this case there will be only one token selected, we know the first element in the corresponding &lt;code&gt;values&lt;/code&gt; list will be the match for that particular token.&lt;/p&gt;
+
+&lt;h2&gt;Code generation&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;haku.raku&lt;/code&gt; main program essentially does this:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$hon_parse&lt;/span&gt; = 
+    &lt;span class=&quot;n&quot;&gt;Haku&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$program_str&lt;/span&gt;, :&lt;span class=&quot;n&quot;&gt;actions&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;HakuActions&lt;/span&gt;));
+&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$hon_raku_code&lt;/span&gt; =  
+    &lt;span class=&quot;n&quot;&gt;ppHakuProgram&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$hon_parse&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;made&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The Haku program string is parsed using the Haku grammar and the methods defined in the corresponding HakuActions class are used to populate the AST. The toplevel parse tree node must be &lt;code&gt;$&amp;lt;haku-program&amp;gt;&lt;/code&gt;, and the &lt;code&gt;made&lt;/code&gt; method of this node returns the AST node &lt;code&gt;HakuProgram&lt;/code&gt;.  The routine &lt;code&gt;ppHakuProgram&lt;/code&gt; is the toplevel routine in the module &lt;code&gt;Raku&lt;/code&gt;, which is the Raku emitter for Haku. (There is also a Scheme emitter, in the module &lt;code&gt;Scheme&lt;/code&gt;.)&lt;/p&gt;
+
+&lt;p&gt;So &lt;code&gt;ppHakuProgram($hon_parse.made)&lt;/code&gt; pretty-prints the HakuProgram AST node and thus the entire Haku program as Raku code.&lt;/p&gt;
+
+&lt;p&gt;What I like about the role-based AST is that you can pattern match against the variants of a type using &lt;code&gt;given/when&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ppHakuExpr&lt;/span&gt;(\&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;) {            
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BindExpr&lt;/span&gt; { ... }
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FunctionApplyExpr&lt;/span&gt; { ... }
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ListExpr&lt;/span&gt; { ... }
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MapExpr&lt;/span&gt; { ... }        
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;IfExpr&lt;/span&gt; { ... }   
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LetExpr&lt;/span&gt; { ... }
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LambdaExpr&lt;/span&gt; { ... }        
+        ...
+        &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; {
+            &lt;span class=&quot;k&quot;&gt;die&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;TODO:&amp;quot;&lt;/span&gt; ~ &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;raku&lt;/span&gt;;
+        }        
+    }
+} 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The Raku code corresponding to the Haku AST is quite straightforward, but there are a few things worth noting:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Because Haku&amp;#39;s variables are immutable, I use the &lt;code&gt;\&lt;/code&gt; notation which means I don&amp;#39;t have to build a variable table with the sigils.&lt;/li&gt;
+&lt;li&gt;Because Haku is functional, &lt;code&gt;let&lt;/code&gt; and &lt;code&gt;if&lt;/code&gt; are expressions, so in Raku I wrap them in a &lt;code&gt;do {}&lt;/code&gt; block. &lt;/li&gt;
+&lt;li&gt;For partial application I use &lt;code&gt;.assuming()&lt;/code&gt;. &lt;/li&gt;
+&lt;li&gt;In Haku, strings are lists. In Raku they aren&amp;#39;t. I created a small Prelude of functions, and the list manipulation functions in that Prelude use pattern matching on the type with &lt;code&gt;given/when&lt;/code&gt; to see if the argument is a string or a list.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Running the generated Raku code&lt;/h2&gt;
+
+&lt;p&gt;Running the generated Raku code is simple: I write the generated Raku code to a module and &lt;code&gt;require&lt;/code&gt; it. The generated code ends with a call to &lt;code&gt;hon()&lt;/code&gt;, the main function in a Haku program, so this automatically executes the program. &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Write the parsed program to a module &lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt; = &lt;span class=&quot;s&quot;&gt;&amp;#39;Hon.rakumod&amp;#39;&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;IO&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;open:&lt;/span&gt; :&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;;
+&lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;put:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$hon_raku_code&lt;/span&gt;;
+&lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;close&lt;/span&gt;;
+
+&lt;span class=&quot;c1&quot;&gt;# Require the module. This will execute the program&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Hon&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Other things Haku makes really easy is to create command-line flags and document their usage:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;USAGE&lt;/span&gt;() {
+    &lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Q:to/EOH/;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;    Usage: haku &amp;lt;Haku program, written horizontally or vertically, utf-8 text file&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;        [--tategaki, -t] : do not run the program but print it vertically.&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;        [--miseru, -m] : just print the Raku source code, don&amp;#39;t execute.&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;        ...&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;    EOH&lt;/span&gt;
+}
+
+&lt;span class=&quot;n&quot;&gt;unit&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAIN&lt;/span&gt;(
+          &lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$src_file&lt;/span&gt;,
+          &lt;span class=&quot;nb&quot;&gt;Bool&lt;/span&gt; :&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$tategaki&lt;/span&gt;) = &lt;span class=&quot;nb&quot;&gt;False&lt;/span&gt;,   
+          &lt;span class=&quot;nb&quot;&gt;Bool&lt;/span&gt; :&lt;span class=&quot;sr&quot;&gt;m($miseru)&lt;/span&gt; = &lt;span class=&quot;nb&quot;&gt;False&lt;/span&gt;,
+          ...
+        );  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;USAGE&lt;/code&gt; is called when &lt;code&gt;MAIN&lt;/code&gt; is called with the wrong (or no) arguments. Arguments of &lt;code&gt;MAIN&lt;/code&gt; prefixed with &lt;code&gt;:&lt;/code&gt; are flags. &lt;code&gt;unit sub&lt;/code&gt; means that anything after this declaration is part of the MAIN program, so no need for &lt;code&gt;{...}&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;To conclude&lt;/h2&gt;
+
+&lt;p&gt;This article shows the lazy programmer&amp;#39;s way to creating your own programming language: let Raku do all the hard work. &lt;/p&gt;
+
+&lt;p&gt;Or to express it with a Haku program:&lt;/p&gt;
+
+&lt;p&gt;　本真とは&lt;br&gt;
+　コンパイラを書いて、&lt;br&gt;
+　プログラムを書いて、&lt;br&gt;
+　プログラムを走らす&lt;br&gt;
+　と言う事です。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;the truth:&lt;br&gt;
+write the compiler,&lt;br&gt;
+write the program,&lt;br&gt;
+run the program.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+        </content>
+    </entry>
     
     <entry>
         <title>Frugal computing </title>
@@ -3582,7 +3861,7 @@ In Haskell, we start (of course) by defining a few types:&lt;/p&gt;
 
 &lt;h2&gt;Is this article for you?&lt;/h2&gt;
 
-&lt;p&gt;In this article I will introduce &lt;a href=&quot;https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf&quot;&gt;algebraic data types&lt;/a&gt;, a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using &lt;em&gt;roles&lt;/em&gt;. You don&amp;#39;t need to know Haskell at all and I only assume a slight familiarity with Raku (I&amp;#39;ve added a quick introduction), but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming. &lt;/p&gt;
+&lt;p&gt;In this article I will introduce &lt;a href=&quot;https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf&quot;&gt;algebraic data types&lt;/a&gt;, a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using &lt;em&gt;roles&lt;/em&gt;. You don&amp;#39;t need to know Haskell at all and I only assume a slight familiarity with Raku (I&amp;#39;ve added &lt;a href=&quot;#raku-intro&quot;&gt;a quick introduction&lt;/a&gt;), but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming. &lt;/p&gt;
 
 &lt;h2&gt;Algebraic Data Types&lt;/h2&gt;
 
@@ -3704,6 +3983,8 @@ They are called algebraic because they consist of alternatives (sums, also calle
 &lt;h2&gt;Algebraic data types in Raku&lt;/h2&gt;
 
 &lt;p&gt;As Raku is not a very well-known language (yet), here is a quick introduction of the features you&amp;#39;ll need to follow the discussion below. &lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;raku-intro&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3&gt;A quick introduction to Raku&lt;/h3&gt;
 
