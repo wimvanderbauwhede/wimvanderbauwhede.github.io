@@ -192,17 +192,24 @@
 <span class="n">main</span>();
 </code></pre></div>
 <p>To be even closer to literary Japanese, Haku programs can be written vertically from right to left:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>の 忘 本 　 の 条 条 遠 　 の 物 忘
-事 れ と 　 こ を で い 　 こ で れ
-で か は 　 と 見 　 と 　 と 空 る
-す け 記 　 で せ 　 は 　 で 　 と
-。 て 憶 　 す る 　 　 　 す 　 は
-　 た は 　 。 　 　 　 　 。 　 　g
-　 遠 無 　 　 　 　 　 　 　 　 　
-　 い 、 　 　 　 　 　 　 　 　 　
-　 記 　 　 　 　 　 　 　 　 　 　
-　 憶 　 　 　 　 　 　 　 　 　 　
-</code></pre></div>
+
+<div  class="highlight" style="writing-mode: vertical-rl">
+<pre>
+忘れるとは
+物で空
+のことです。
+
+遠いとは
+条で条を見せる
+のことです。
+
+本とは
+記憶は無、
+忘れかけてた遠い記憶
+の事です。
+</pre>
+</div>
+
 <p>The generated Raku code for this Haku program is again quite simple:</p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">use</span> <span class="n">v6</span>;
 <span class="k">use</span> <span class="n">HakuPrelude</span>;
@@ -407,11 +414,16 @@ I found this a better fit for my purpose than the also-supported class inheritan
 
 <p>Or to express it with a Haku program:</p>
 
-<p>　本真とは<br>
-　コンパイラを書いて、<br>
-　プログラムを書いて、<br>
-　プログラムを走らす<br>
-　と言う事です。</p>
+<div style="writing-mode: vertical-rl">
+<pre>
+本真とは
+コンパイラを書いて、
+プログラムを書いて、
+プログラムを走らす
+と言う事です。
+
+</pre>
+</div>
 
 <blockquote>
 <p>the truth:<br>
