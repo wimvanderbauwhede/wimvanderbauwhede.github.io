@@ -18,10 +18,13 @@ image:
 
 On the need for low-carbon and sustainable computing and the path towards zero-carbon computing.
 
+* [Lisez en Français]({{site.url}}/translations/fr)
+* [Lea en Español]({{site.url}}/translations/es)
+
 ## Key points
 
 ### The problem: 
-  - The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be close to half the emissions level acceptable to keep global warming below 2°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.
+  - The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be close to half the emissions level acceptable to keep global warming below 1.5°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.
   - The emissions from production of computing devices far exceed the emissions from operating them, so even if devices are more energy efficient producing more of them will make the emissions problem worse. Therefore we must extend the useful life of our computing devices.
 
 ### The solution:
@@ -60,9 +63,9 @@ I would like to call this "frugal computing": achieving the same results for les
 
 ### Meeting the climate targets
 
-To limit global warming to below 2&deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed [[5]](#5). So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. According to the International Energy Agency [[10]](#10), emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 [[15]](#15). In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. 
+To limit global warming to 1.5&deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed [[5]](#5). So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. According to the International Energy Agency [[10]](#10), emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 [[15]](#15). In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. 
 
-### Energy consumption of computational resources
+### Emissions from consumption of computational resources
 
 The consequence of the end of Moore's law was expressed most dramatically in a 2015 report by the Semiconductor Industry Association (SIA) "Rebooting the IT Revolution: a call to action" [[1]](#1), which calculated that, based on projected growth rates and on the 2015 ITRS roadmap for CMOS chip engineering technologies [[16]](#16), 
 
@@ -78,13 +81,13 @@ This is merely an acknowledgement of the reality that the world's energy product
 
 > Ever-rising energy demand for computing vs. global energy production is creating new risk, and new computing paradigms offer opportunities to dramatically improve energy efficiency.
 
-In the countries where most of the computational resources are located (US and EU), electricity production accounts currently for 25% of the total emissions [[4]](#4). According to the SIA's estimates, computation accounts currently for a little less than 10% of the total electricity production but is set to rise to about 30% by 2040. This would mean that, with business as usual, computational resources would be responsible for at least 10% of all global CO₂ emissions by 2040. 
+In the countries where most of the computational resources are consumed (US and EU), electricity production accounts currently for 25% of the total emissions [[4]](#4). According to the SIA's estimates, computation accounts currently for a little less than 10% of the total electricity production but is set to rise to about 30% by 2040. This would mean that, with business as usual, computational resources would be responsible for at least 10% of all global CO₂ emissions by 2040. 
 
 The independent study "Assessing ICT global emissions footprint: Trends to 2040 & recommendations" [[3]](#3) corroborates the SIA figures: they estimate the computing greenhouse gas emissions for 2020 between 3.0% and 3.5% of the total, which is a bit higher than the SIA estimate of 2.5% because it does take into account networks and datacentres. Their projection for 2040 is 14% rather than 10%, which means a growth of 4x rather than 3x. 
 
 To put it in absolute values, based on the above estimate, by 2040 energy consumption of compute devices would be responsible for 5 GtCO₂e, whereas the target for world total emissions from all sources is 23 GtCO₂e.
 
-### Energy for production of computational resources
+### Emissions from production of computational resources
 
 To make matters worse, the carbon emissions resulting from the production of computing devices exceeds those incurred during operation. This is a crucial point, because it means that we can't rely on next-generation hardware technologies to save energy: the production of this next generation of devices will create more emissions than any operational gains can offset. It does not mean research into more efficient technologies should stop. But their deployment cycles should be much slower. Extending the useful life of compute technologies must become our priority.
 
@@ -95,8 +98,8 @@ The report about the cost of planned obsolescence by the European Environmental 
 Taking into account the carbon cost of both operation and production, computing would be responsible for 10 GtCO₂e by 2040, almost half of the acceptable CO₂ emissions budget [[2,3,14]](#2).
 
 <figure>
-<img src="{{ site.url }}/images/computing-emissions.png" alt="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 2degC (23), and the projected emissions from computing (10)"
-title="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 2degC (23), and the projected emissions from computing (10)" />
+<img src="{{ site.url }}/images/computing-emissions.png" alt="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)"
+title="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)" />
 <figcaption>Actual and projected emissions from computing (production+operation), and 2040 emission target to limit warming to &lt;2&deg;C</figcaption>
 </figure>
 
@@ -117,7 +120,7 @@ To decide on the required actions to reduce emissions, it is important to look a
 <tr><td>IoT devices</td><td> 2000M</td></tr>
 </table>
 
-The energy consumption of all communication and computation technology currently in use in the world is currently around 3,000 TWh, about 11% of the world's electricity consumption, projected to rise by 3-4 times by 2040 with business as usual according to [[2]](#2). This is a conservative estimate: the study in [[14]](#14) includes a worst-case projection of a rise to 30TWh (exceeding the current world electricity consumption) by 2030. 
+The energy consumption of all communication and computation technology currently in use in the world is currently around 3,000 TWh, about 11% of the world's electricity consumption, projected to rise by 3-4 times by 2040 with business as usual according to [[2]](#2). This is a conservative estimate: the study in [[14]](#14) includes a worst-case projection of a rise to 30,000 TWh (exceeding the current world electricity consumption) by 2030. 
 
 <table>
 <caption>Yearly energy consumption estimates in TWh</caption>

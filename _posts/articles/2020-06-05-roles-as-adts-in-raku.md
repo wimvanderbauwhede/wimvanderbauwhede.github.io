@@ -22,7 +22,7 @@ I've also been a fan of [Raku](https://raku.org/) from long before it was called
 
 ## Is this article for you?
 
-In this article I will introduce [algebraic data types](https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf), a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using _roles_. You don't need to know Haskell at all and I only assume a slight familiarity with Raku (I've added a quick introduction), but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming. 
+In this article I will introduce [algebraic data types](https://www.cs.kent.ac.uk/people/staff/dat/miranda/nancypaper.pdf), a kind of static type system used in functional languages like Haskell, and a powerful mechanism for creating complex data structures. I will show a way to implement them in Raku using _roles_. You don't need to know Haskell at all and I only assume a slight familiarity with Raku (I've added [a quick introduction](#raku-intro)), but I do assume you are familiar with basic programming. You may find this article interesting if you are curious about functional-style static typing or if your would like an alternative to object-oriented programming. 
 
 ## Algebraic Data Types
  
@@ -211,6 +211,7 @@ One common use case is a list where you want to store values of different types:
 
 As Raku is not a very well-known language (yet), here is a quick introduction of the features you'll need to follow the discussion below. 
 
+<a name="raku-intro"></a>
 ### A quick introduction to Raku
 
 Before Raku went its own way, it was meant to be the next iteration of Perl (hence the original name Perl 6). It is therefore more similar to Perl than to any other language.

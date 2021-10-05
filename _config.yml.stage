@@ -17,7 +17,7 @@ permalink: /:categories/:title/
 markdown: redcarpet
 #highlighter: rouge
 highlighter: pygments
-gems:
+plugins_dir:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
