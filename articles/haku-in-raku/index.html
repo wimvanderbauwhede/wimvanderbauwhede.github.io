@@ -382,9 +382,7 @@ I found this a better fit for my purpose than the also-supported class inheritan
 
 <p>Running the generated Raku code is simple: I write the generated Raku code to a module and <code>require</code> it. The generated code ends with a call to <code>hon()</code>, the main function in a Haku program, so this automatically executes the program. </p>
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Write the parsed program to a module </span>
-<span class="k">my</span> <span class="nv">$fh</span> = <span class="s">&#39;Hon.rakumod&#39;</span>.<span class="nb">IO</span>.<span class="n">open:</span> :<span class="n">w</span>;
-<span class="nv">$fh</span>.<span class="n">put:</span> <span class="nv">$hon_raku_code</span>;
-<span class="nv">$fh</span>.<span class="nb">close</span>;
+<span class="s">&#39;Hon.rakumod&#39;</span>.<span class="nb">IO</span>.<span class="n">spurt</span>(<span class="nv">$hon_raku_code</span>);
 
 <span class="c1"># Require the module. This will execute the program</span>
 <span class="k">require</span> <span class="n">Hon</span>;

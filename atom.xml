@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2021-09-25T12:14:56+01:00</updated>
+    <updated>2021-10-18T21:00:33+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,249 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>Why I wrote Haku</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/why-i-wrote-haku/"/>
+        <updated>2021-10-17T00:00:00+01:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/why-i-wrote-haku</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/why-i-wrote-haku_1600x600.png&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;A few weeks ago I released &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku&quot;&gt;Haku&lt;/a&gt;, a Japanese natural-language programming language. Haku is a strict functional language with implicit typing, and &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku/src/branch/main/examples/pwc131-t1.haku&quot;&gt;an example program&lt;/a&gt; looks like this:&lt;/p&gt;
+
+&lt;div style=&quot;writing-mode: vertical-rl&quot;&gt;
+&lt;pre&gt;
+裂くとはパーツとヨウソで
+若しパーツが空に等しいなら
+［［ヨウソ］］ですけど
+そうでなければ、
+一パートはパーツの頭、
+一パーツ一はパーツの尻尾、
+一マエはパートの頭、
+では
+若しマエが〈ヨウソ引く一〉に等しいなら
+［ヨウソ・パート］・パーツ一ですが
+そうでなければ
+［ヨウソ］・パーツ
+の事です。
+
+本とは
+列は壱と弐と三と四と五と七と八と十一と十三と十六と十七、
+仮一は列と空を裂くので畳み込む、
+仮二は逆な仮一、
+魄は仮二を逆で写像する、
+魄を見せる
+の事です。
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku#haku&quot;&gt;repository README&lt;/a&gt; explains the language and gives some background, as does this &lt;a href=&quot;https://www.slideshare.net/WimVanderbauwhede/haku-a-toy-functional-language-based-on-literary-japanese&quot;&gt;presentation&lt;/a&gt;. I have also written a separate post about the &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/haku-in-raku&quot;&gt;implementation of Haku in Raku&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;This article is about my motivation for creating Haku.&lt;/p&gt;
+
+&lt;p&gt;I am interested in how programming languages influence the programmer&amp;#39;s thinking (the old adage of &amp;quot;to the programmer with a hammer, everything looks like a thumb&amp;quot;). &lt;/p&gt;
+
+&lt;p&gt;From personal experience, I observe that my thinking patterns are quite different when I program in a functional language, an imperative one or an object-oriented one. There is also a marked difference between programming in a statically or dynamically typed language.&lt;/p&gt;
+
+&lt;p&gt;But what about the influence of the programmer&amp;#39;s native language? Most programming languages are based on English, and in particular function calls typically use English word order. &lt;/p&gt;
+
+&lt;h2&gt;Arithmetic in English and Flemish&lt;/h2&gt;
+
+&lt;p&gt;For example, let&amp;#39;s consider the common arithmetic operations +, -, *, /. If we use named functions rather than operators for these, and used the common parentheses-and-commas syntax for function calls, we get something like&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;A+B: add(A,B) 
+A-B: subtract(A,B)
+A*B: multiply(A,B)
+A/B: divide(A,B)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In English we would express this most commonly as an infinitive or as an imperative. For the infinitive, we have:&lt;/p&gt;
+
+&lt;!-- &lt;div class=&quot;highlight&quot; style=&quot;background-color: #eadcb2&quot;&gt;--&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;to add A and/to B
+to subtract A and/from B
+to multiply A and B
+to divide A and/by B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The pattern is &lt;code&gt;&amp;#39;to&amp;#39; &amp;lt;verb&amp;gt; A &amp;#39;and&amp;#39; B&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For the imperative, we have:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;add A and/to B
+subtract A and/from B
+multiply A and B
+divide A and/by B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The pattern is &lt;code&gt;&amp;lt;verb&amp;gt; A &amp;#39;and&amp;#39; B&lt;/code&gt;, so the same pattern apart from the &lt;code&gt;to&lt;/code&gt;. And it is easy to see how this pattern informed the typical function call syntax &lt;code&gt;&amp;lt;verb&amp;gt; &amp;#39;(&amp;#39; A &amp;#39;,&amp;#39; B &amp;#39;)&amp;#39;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, in Flemish (or Dutch), the order of the arguments is quite different. For the infinitive, we have:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;A en/bij B optellen; A optellen bij B
+A en/van B aftrekken; A aftrekken van B
+A en/met B vermenigvuldigen; A vermenigvuldigen met B
+A en/door B delen; A delen door B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first variant has the pattern &lt;code&gt;A &amp;#39;en&amp;#39; B &amp;lt;verb&amp;gt;&lt;/code&gt;; the second variant needs a different preposition for each verb but the pattern is &lt;code&gt;A &amp;lt;verb&amp;gt; &amp;lt;preposition&amp;gt; B&lt;/code&gt;. &lt;/p&gt;
+
+&lt;p&gt;For the imperative, we have:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;tel A op bij B; tel A en/bij B op
+trek A af van B; trek A en/van B af
+vermenigvuldig A en/met B
+deel A en/door B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There is not just one single general pattern but three: &lt;code&gt;&amp;lt;verb&amp;gt; A &amp;#39;en&amp;#39; B&lt;/code&gt;, 
+&lt;code&gt;&amp;lt;verb&amp;gt; A &amp;lt;preposition&amp;gt; &amp;lt;preposition&amp;gt; B&lt;/code&gt; and  &lt;code&gt;&amp;lt;verb&amp;gt; A &amp;lt;preposition&amp;gt; B &amp;lt;preposition&amp;gt;&lt;/code&gt;, depending on whether the verb has a preposition as part of it or not, and on the position we choose for that preposition. &lt;/p&gt;
+
+&lt;p&gt;So not only are word orders for infinitive and imperative quite different, there is no simple rule for the imperative word order. Which makes me wonder what programming languages would look like if their developers had not been English native speakers. &lt;/p&gt;
+
+&lt;p&gt;That question becomes even more interesting for non-Indo-European languages, because despite the example above, there are still lots of grammatical similarities between languages such as English, French and German.&lt;/p&gt;
+
+&lt;h2&gt;Japanese natural-language programming languages&lt;/h2&gt;
+
+&lt;p&gt;There is one such language that particularly interests me and that is Japanese. I have been learning it for a long time and written &lt;a href=&quot;https://quickandtastycooking.org.uk/articles/&quot;&gt;several posts on Japanese language related topics&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Besides having a very different grammar, Japanese has writing system that is a very different from the Latin alphabet as well as its own number system.&lt;/p&gt;
+
+&lt;p&gt;So I decided to create a natural-language programming language based on Japanese. &lt;/p&gt;
+
+&lt;p&gt;There are already several Japanese natural-language programming languages, all made by Japanese native speakers. &lt;a href=&quot;https://en.wikipedia.org/wiki/Non-English-based_programming_languages&quot;&gt;Wikipedia lists eight&lt;/a&gt; but there are actually only four that are still under active development: &lt;a href=&quot;https://dolittle.eplang.jp/&quot;&gt;Dolittle&lt;/a&gt;, &lt;a href=&quot;https://rdr.utopiat.net/&quot;&gt;Produire&lt;/a&gt;, &lt;a href=&quot;https://nadesi.com/top/&quot;&gt;Nadeshiko&lt;/a&gt; and &lt;a href=&quot;https://www.scripts-lab.co.jp/mind/whatsmind.html&quot;&gt;Mind&lt;/a&gt;. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Dolittle&lt;/em&gt; ドリトル is an object-oriented language specifically designed for teaching children to program and follows the &lt;a href=&quot;http://people.eecs.berkeley.edu/%7Ebh/logo.html&quot;&gt;Logo&lt;/a&gt; tradition with a turtle to draw shapes. &lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Produire&lt;/em&gt; プロデル is an imperative and object-oriented language but more general purpose. It also has a turtle library, so education is definitely one of the main design purposes.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Nadeshiko&lt;/em&gt; なでしこ (meaning &amp;quot;pink&amp;quot;, the flower) is an open source general purpose imperative language.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Mind&lt;/em&gt; is also imperative. Although it is actually a &lt;a href=&quot;https://www.forth.com/&quot;&gt;Forth&lt;/a&gt;-style stack-based language, in general structure it is similar to the other three. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All these language are complete with support for graphics, networking etc and their own IDE and/or web-based editor. They are practical programming languages, so they all support the use of Arabic numerals as well as operators for arithmetic, logic and comparison operations. &lt;/p&gt;
+
+&lt;h2&gt;Haku&lt;/h2&gt;
+
+&lt;p&gt;My motivation to create Haku was not to create a practical language. I wanted to explore what the result is of creating a programming language based on a non-English language, in terms of syntax, grammar and vocabulary. In particular, I wanted to allow the programmer to control the register of the language to some extent (informal/polite/formal). &lt;a href=&quot;https://nadesi.com/v3/doc/index.php?%E6%96%87%E6%B3%95%2F%E6%95%AC%E8%AA%9E&amp;show&quot;&gt;Nadeshiko&lt;/a&gt; and &lt;a href=&quot;https://www.scripts-lab.co.jp/mind/ver8/doc/02-Program-Hyoki.html#okurigana&quot;&gt;Mind&lt;/a&gt; allow this to some extent, but I wanted even more flexibility.&lt;/p&gt;
+
+&lt;h3&gt;Grammar&lt;/h3&gt;
+
+&lt;p&gt;My main motivation for creating Haku is the difference in grammar between Japanese and most Indo-European languages.&lt;/p&gt;
+
+&lt;p&gt;Notions such as &amp;quot;noun&amp;quot;, &amp;quot;adjective&amp;quot;, &amp;quot;adverb&amp;quot; and &amp;quot;verb&amp;quot; are not quite so clearly defined in Japanese. For example, consider the word &lt;em&gt;yasashii&lt;/em&gt;, &amp;quot;kind&amp;quot;. A person who is kind is a &lt;em&gt;yasashii hito&lt;/em&gt;. A person who is not kind is a &lt;em&gt;yasashikunai hito&lt;/em&gt;. But in its own right, &lt;em&gt;yasashiku&lt;/em&gt; is and adverb, and &lt;em&gt;~nai&lt;/em&gt; is the plain negative verb ending, e.g. &amp;quot;I don&amp;#39;t understand&amp;quot; is &lt;em&gt;wakaranai&lt;/em&gt;. And this &amp;quot;adjective&amp;quot; can get a past tense: &amp;quot;the person who was not kind&amp;quot; is &lt;em&gt;yasashikunakatta hito&lt;/em&gt;. And if we chain adjectives, e.g. &amp;quot;a kind and and clever person&amp;quot;, we get &lt;em&gt;yasashikute kashikoi hito&lt;/em&gt;. And indeed we can have &lt;em&gt;yasashihunakute　kashikonkatta hito&lt;/em&gt;, &amp;quot;the kerson who was not kind and smart&amp;quot;. It is also very easy to nominalise a verb or verbalise a noun by adding a suffix. &lt;/p&gt;
+
+&lt;p&gt;The word order in a sentence is also quite different from most Indo-European languages. The typical order is main topic, secondary topic(s), verb. The function of the topics is indicated with what is called a &amp;quot;particle&amp;quot;, a kind of suffix. For example, &amp;quot;I ate the pudding with a spoon&amp;quot; is &lt;em&gt;purin wo supuun de tabeta&lt;/em&gt;. In this example, the main topic &amp;quot;I&amp;quot; is implied. Japanese is quite a parsimonious language: whenever possible, implied topics are left out, to be inferred from the context. &lt;/p&gt;
+
+&lt;p&gt;Finally, compared to Indo-European languages, verb conjugation serves a different purpose in Japanese. For example in English, French and German, tenses are mainly uses to give precise indications of the time and duration of the action: simple past, present continuous, future perfect continuous etc. Japanese has essentially two tenses: the past and the non-past; and a form to similar to the -ing form in English to indicated an ongoing action, although that is again a loose approximation. However, there are many tenses to indicate modifiers to the verb to say e.g. that something is possible, that the speaker wants something, that a third party wants something, that the speaker has begun to do something, that someone is doing someone a favour and of course to express the level of politeness. For example, &lt;em&gt;shachou ha kiite kuremashita&lt;/em&gt; &amp;quot;the boss did me the favour of listening to me&amp;quot; (the &lt;em&gt;~mashita&lt;/em&gt; is a polite verb form), or &lt;em&gt;wasurekaketeita&lt;/em&gt; &amp;quot;I had begun to forget&amp;quot; (&lt;em&gt;~ta&lt;/em&gt; is a plain past, rather than polite).&lt;/p&gt;
+
+&lt;p&gt;Putting at least some of this grammar in the programming language seemed like an interesting challenge to me. In particular, I was interested in how programmers perceive functions calls. Some time ago I ran a poll about this, and 3/4 of respondents answered &amp;quot;imperative&amp;quot; (other options were infinitive, noun, -ing form). &lt;/p&gt;
+
+&lt;p&gt;In Japanese, the imperative (&lt;em&gt;meireikei&lt;/em&gt;, &amp;quot;command form&amp;quot;) is rarely used. Therefore in Haku you can&amp;#39;t use this form. Instead, you can use the plain form, the polite &lt;em&gt;-masu&lt;/em&gt; form or the &lt;em&gt;-te&lt;/em&gt; form (like &amp;quot;-ing&amp;quot;), including &lt;em&gt;-te kudasai&lt;/em&gt; (similar to &amp;quot;please&amp;quot;). Whether a function is perceived as a verb or a noun is up to you, and the difference is clear from the syntax. If it is a noun, you can turn it into a verb by adding &lt;em&gt;suru&lt;/em&gt;, and if it is a verb, you can add the &lt;em&gt;no&lt;/em&gt; or &lt;em&gt;koto&lt;/em&gt; nominalisers. And you can conjugate the verb forms in many different ways, although in practice the verb ending has no semantic function in the Haku language.&lt;/p&gt;
+
+&lt;h3&gt;Naming and giving meaning&lt;/h3&gt;
+
+&lt;p&gt;In principle, a programming language does not need to be based on natural language at all. The notorious example is APL, which uses symbols for everything. Agda programmers also tends to use lots of mathematical symbols. It works because they are very familiar with those symbols. An interesting question is if an experienced programmer who does not know Japanese could understand a Haku program; or if not, what the minimal changes would be to make it understandable. &lt;/p&gt;
+
+&lt;p&gt;To allow to investigate that question, the Scheme and Raku emitters for Haku support (limited) transliteration to Romaji. I have the intention (but maybe not the time) to create a Romaji version of Haku as well as a version that does not use any Japanese but keeps the word order.&lt;/p&gt;
+
+&lt;h3&gt;Syntax and parsing&lt;/h3&gt;
+
+&lt;p&gt;I also wanted the language to be closer, at lease visually, to literary Japanese. Therefore Haku does not use Roman letters, Arabic digits or common arithmetic, logical and comparison operators. It also supports top-to-bottom, right-to-left writing.  &lt;/p&gt;
+
+&lt;p&gt;Literary Japanese does not use spaces. So another question of interest to was how to tokenise a string of Japanese. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;There are three writing systems: &lt;em&gt;katakana&lt;/em&gt; (angular), &lt;em&gt;hiragana&lt;/em&gt; (squigly) and &lt;em&gt;kanji&lt;/em&gt; (complicated). &lt;/li&gt;
+&lt;li&gt;&lt;em&gt;katakana&lt;/em&gt; is used in a similar way as italics, and also for loanwords and names of plants and animals.&lt;/li&gt;
+&lt;li&gt;Nouns, verb, adjectives and adverbs normally start with a &lt;em&gt;kanji&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;hiragana&lt;/em&gt; is used for verb/adjective/adverb endings and &amp;quot;particles&amp;quot;, small words or suffixes that help identify the words in a sentence. &lt;/li&gt;
+&lt;li&gt;A verb/adjective/adverb can&amp;#39;t end with a &lt;em&gt;hiragana&lt;/em&gt; character that represents a particle. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So we have some simple tokenisation rules:
+- a sequence of &lt;em&gt;katakana&lt;/em&gt;
+- a &lt;em&gt;kanji&lt;/em&gt; followed by more &lt;em&gt;kanji&lt;/em&gt; or &lt;em&gt;hiragana&lt;/em&gt; that do not represent particles
+- &lt;em&gt;hiragana&lt;/em&gt; that represent particles&lt;/p&gt;
+
+&lt;p&gt;This is in fact a formalisation of the rules a human uses when reading Japanese. &lt;/p&gt;
+
+&lt;p&gt;Where that fails, we can introduce parentheses. A human reader uses context, and a considerable amount of look-ahead parsing and backtracking, but that would make the parser very complex and slow.&lt;/p&gt;
+
+&lt;p&gt;In practice, only specific adverbs and adjectives are used in Haku. For example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;ラムダ|は|或|エクス|で|エクス|掛ける|エクス|です
+
+ラムダ: katakana word
+は: particle
+或: pre-noun adjective
+エクス: katakana word
+で: particle
+エクス: katakana word
+掛ける: verb
+エクス: katakana word　
+です: verb (copula)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Number system&lt;/h3&gt;
+
+&lt;p&gt;For large numbers, Japanese uses a number system based on multiples of ten thousand (called &lt;em&gt;myriads&lt;/em&gt;) rather than a thousand. A peculiar feature of this system is that there are &lt;em&gt;kanji&lt;/em&gt; for all powers of 10,000 up to 10&lt;sup&gt;48&lt;/sup&gt;. For more background on this, please read &lt;a href=&quot;https://quickandtastycooking.org.uk/articles/japanese-large-numbers/&quot;&gt;my article on this topic&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;The consequence is that a number such as &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;1,234,567,890 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;is composed as &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;  (10 + 2) * 100,000,000 
++ (3 * 1000 + 4 * 100 + 5 * 10 + 6) * 10,000
++  7 * 1000 + 8 * 100 + 9 * 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;which can is written in &lt;em&gt;kanji&lt;/em&gt; as &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;十二億三千四百五十六万七千八百九十
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There are also &lt;em&gt;kanji&lt;/em&gt; for numbers smaller than one. They go down to 10&lt;sup&gt;-12&lt;/sup&gt; in powers of 10 and rational numbers are indicated with the &lt;em&gt;kanji&lt;/em&gt; 点 (&lt;em&gt;ten&lt;/em&gt;, &amp;quot;dot&amp;quot;). So &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;3.14159
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;can be written as    &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt; 三点一分四厘一毛五糸九忽 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Apart from this format, the decimal format is also used, and is indeed more common for rational numbers and also for years (and dates in general), e.g. 2021 is written 二〇二一 instead of 二千二十一. Haku supports all these formats.&lt;/p&gt;
+
+&lt;h2&gt;Poetry&lt;/h2&gt;
+
+&lt;p&gt;The expressiveness of Haku as a programming language is on purpose rather spartan. It is after all a &amp;quot;toy language&amp;quot;, an experimental rather than general-purpose language. &lt;/p&gt;
+
+&lt;p&gt;I am more interested in the natural-language expressiveness of Haku, and for that my criterion  is: Can the programmer write poetry in it? Several of Haku&amp;#39;s features such as adjectives and verb conjugation (&lt;em&gt;okurigana&lt;/em&gt;) are there entirely to make Haku programs sufficiently expressive on the natural-language level to support this idea. For that reason, my &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku/src/branch/main/examples/yuki.haku&quot;&gt;favourite Haku program&lt;/a&gt; is one that demonstrates this ability:&lt;/p&gt;
+
+&lt;div style=&quot;writing-mode: vertical-rl&quot;&gt;
+&lt;pre&gt;
+忘れるとは件で空のことです。
+
+遠いとは物で物を見せるのことです。
+
+本とは
+記憶は「忘れられないあの冬の the new fallen snow」、
+忘れかけてた遠い記憶
+の事です
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;When run, this program prints out the string 「忘れられないあの冬の the new fallen snow」. The line that causes this string to be printed is &lt;/p&gt;
+
+&lt;p&gt;忘れかけてた遠い記憶&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Wasurekaketeta tooi kioku&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This is on the one hand an example of some of the Japanese grammar features that Haku supports:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;adjectives as functions: &lt;em&gt;tooi&lt;/em&gt; is a so-called &amp;quot;i-adjective&amp;quot;;&lt;/li&gt;
+&lt;li&gt;adjectival verbs: &lt;em&gt;wasurekaketeta&lt;/em&gt; is a verb used as an adjective;&lt;/li&gt;
+&lt;li&gt;complex verb conjucations: the plain form, used to define the function, is &lt;em&gt;wasureru&lt;/em&gt;. The form &lt;em&gt;~kakeru&lt;/em&gt; means &amp;quot;starting to&amp;quot; and the final ending &lt;em&gt;~ta&lt;/em&gt; is a plain past. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But on the other hand, it is also poetry.&lt;/p&gt;
+
+&lt;h2&gt;Why &lt;em&gt;haku&lt;/em&gt;?&lt;/h2&gt;
+
+&lt;p&gt;I decided to call my language &lt;em&gt;haku&lt;/em&gt; because I like the sound of it, and also because that word can be written in many ways and mean many things in Japanese (in my dictionary there are 89 &lt;em&gt;kanji&lt;/em&gt; that have &lt;em&gt;haku&lt;/em&gt; as one of their possible pronunciations). I was definitely thinking about the character Haku from the &lt;a href=&quot;https://ghiblicollection.com/product/spirited-away-collector-s-edition?product_id=7231&quot;&gt;Studio Ghibli movie &amp;quot;Spirited Away&amp;quot;&lt;/a&gt;. Also, I like the resemblance with &lt;a href=&quot;https://raku.org&quot;&gt;Raku&lt;/a&gt;, the implementation language. &lt;/p&gt;
+
+&lt;p&gt;If I had to pick a &lt;em&gt;kanji&lt;/em&gt;, I would write it 珀 (amber) or 魄 (soul, spirit).&lt;/p&gt;
+
+        </content>
+    </entry>
     
     <entry>
         <title>Haku: a Japanese programming language</title>
@@ -254,9 +497,7 @@ I found this a better fit for my purpose than the also-supported class inheritan
 
 &lt;p&gt;Running the generated Raku code is simple: I write the generated Raku code to a module and &lt;code&gt;require&lt;/code&gt; it. The generated code ends with a call to &lt;code&gt;hon()&lt;/code&gt;, the main function in a Haku program, so this automatically executes the program. &lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Write the parsed program to a module &lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt; = &lt;span class=&quot;s&quot;&gt;&amp;#39;Hon.rakumod&amp;#39;&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;IO&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;open:&lt;/span&gt; :&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;;
-&lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;put:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$hon_raku_code&lt;/span&gt;;
-&lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;close&lt;/span&gt;;
+&lt;span class=&quot;s&quot;&gt;&amp;#39;Hon.rakumod&amp;#39;&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;IO&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;spurt&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$hon_raku_code&lt;/span&gt;);
 
 &lt;span class=&quot;c1&quot;&gt;# Require the module. This will execute the program&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Hon&lt;/span&gt;;
