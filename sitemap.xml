@@ -3,30 +3,16 @@
 
   <url>
     <loc>https://wimvanderbauwhede.github.io/about/</loc>
-    <lastmod>2016-10-19T14:42:00+00:00</lastmod>
+    <lastmod>2016-11-30T14:42:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://wimvanderbauwhede.github.io/articles/</loc>
-    <lastmod>2016-10-19T14:42:00+00:00</lastmod>
+    <lastmod>2016-11-30T14:42:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
-  </url>
-
-  <url>
-    <loc>https://wimvanderbauwhede.github.io/articles/no-bb-timing.html/</loc>
-    <lastmod>2016-10-19T14:42:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://wimvanderbauwhede.github.io/articles/ubb-timing.html/</loc>
-    <lastmod>2016-10-19T14:42:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
 
 </urlset>
