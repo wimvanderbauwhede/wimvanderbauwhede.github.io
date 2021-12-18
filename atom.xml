@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2021-12-09T11:30:18+00:00</updated>
+    <updated>2021-12-18T15:21:12+00:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -17,83 +17,334 @@
 
     
     <entry>
-        <title>Frugal computing: developer perspective</title>
-        <link href="https://wimvanderbauwhede.github.io/articles/frugal-computing-developer/"/>
-        <updated>2021-11-20T00:00:00+00:00</updated>
-        <id>https://wimvanderbauwhede.github.io/articles/frugal-computing-developer</id>
+        <title>Generic datastructure traversals with roles and introspection</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/generic-traversals-in-raku/"/>
+        <updated>2021-12-13T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/generic-traversals-in-raku</id>
         <author>
 					<name>Wim Vanderbauwhede</name>
 					<uri>https://wimvanderbauwhede.github.io/</uri>
 					
 				</author>
         <content type="html">
-        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/frugal-computing-developer_1600x600.jpg&quot;&gt;&lt;br/&gt;
-        	&lt;p&gt;On the need for low-carbon and sustainable computing and what developers can do about it.&lt;/p&gt;
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/generic-traversals-in-raku_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;I am a &lt;a href=&quot;https://andrewshitov.com/2015/05/05/interview-with-audrey-tang/&quot;&gt;lambdacamel&lt;/a&gt; and therefore I like to adapt concepts and techniques from functional programming, and in particular from the &lt;a href=&quot;https://www.haskell.org/&quot;&gt;Haskell&lt;/a&gt; language, to Raku. One of the techniques that I use a lot is &lt;em&gt;generic traversals&lt;/em&gt;, also known as &amp;quot;Scrap Your Boilerplate&amp;quot; after the title of &lt;a href=&quot;https://archive.alvb.in/msc/02_infogp/papers/SYB1.pdf&quot;&gt;the paper by Simon Peyton Jones and Ralf Lämmel&lt;/a&gt; that introduced this approach. In their words: &lt;/p&gt;
 
-&lt;p&gt;This is a follow-up on my &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/frugal-computing&quot;&gt;article about Frugal Computing&lt;/a&gt;, focusing on the what developers can do to help reduce the carbon emissions from computing. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Many programs traverse data structures built from rich mutually-recursive data types. Such programs often have a great deal of “boilerplate” code that simply walks the structure, hiding a small amount of “real” code that constitutes the reason for the traversal. ”Generic programming” is the umbrella term to describe a wide variety of programming technology directed at this problem. &lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2&gt;Key points&lt;/h2&gt;
+&lt;p&gt;So to save you having to write your own custom traversal, this approach gives you generic functions that do traversals on arbitrary data strucures. In this article, I will explain how you can easily implement such generics in Raku for arbitrary role-based datastructures. There is no Haskell in this article.&lt;/p&gt;
 
-&lt;h3&gt;The problem:&lt;/h3&gt;
+&lt;h2&gt;Roles as datatypes by example&lt;/h2&gt;
+
+&lt;p&gt;I implemented of these generics for use with role-based datatypes. Raku&amp;#39;s &lt;a href=&quot;https://docs.raku.org/language/objects#index-entry-Parameterized_Roles&quot;&gt;parameterised roles&lt;/a&gt; make creating complex datastructures very easy. I use the roles purely as datatypes, so they have no associated methods. &lt;/p&gt;
+
+&lt;p&gt;For example, here is an example code snippet in a little language that I use in my research. &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;map (f1 . f2) (map g (zipt (v1,map h v2)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The primitives are &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;.&lt;/code&gt; (function composition), &lt;code&gt;zipt&lt;/code&gt; and the tuple &lt;code&gt;(...)&lt;/code&gt;, and the names of functions and vectord. The datatype for the abstract syntax of this little language is called &lt;code&gt;Expr&lt;/code&gt; and looks as follows:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Any expression in the language&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {}
+&lt;span class=&quot;c1&quot;&gt;# map f v&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;v_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.f&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.v&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;v_&lt;/span&gt;;
+}
+&lt;span class=&quot;c1&quot;&gt;# function composition f . g&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comp&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt;, &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;g_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.f&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.g&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;g_&lt;/span&gt;;
+}
+&lt;span class=&quot;c1&quot;&gt;# zipt t turns a tuple of vectors into a vector of tuples&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZipT&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;t_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.t&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;t_&lt;/span&gt;
+}
+&lt;span class=&quot;c1&quot;&gt;# tuples are just arrays of Expr&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tuple&lt;/span&gt;[&lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt;] \&lt;span class=&quot;n&quot;&gt;e_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt;] &lt;span class=&quot;nv&quot;&gt;$.e&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;e_&lt;/span&gt;
+}
+&lt;span class=&quot;c1&quot;&gt;# names of functions and vectors are just string constants&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;n_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.n&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;n_&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;Expr&lt;/code&gt; role is the toplevel datatype. It is empty because it is implemented entirely in terms of the other roles, which thanks to the &lt;code&gt;does&lt;/code&gt; are all of type &lt;code&gt;Expr&lt;/code&gt;. And most of the roles have attributes that are also of type &lt;code&gt;Expr&lt;/code&gt;. So we have a recursive datatype, a tree with the &lt;code&gt;Name&lt;/code&gt; node as leaves. &lt;/p&gt;
+
+&lt;p&gt;We can now write the abstract syntax tree (AST) of the example code using this &lt;code&gt;Expr&lt;/code&gt; datatype:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;ast&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt;[ 
+    &lt;span class=&quot;n&quot;&gt;Comp&lt;/span&gt;[
+        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;f1&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;f2&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+    ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+    &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt;[
+        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;g&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+        &lt;span class=&quot;n&quot;&gt;ZipT&lt;/span&gt;[
+            &lt;span class=&quot;n&quot;&gt;Tuple&lt;/span&gt;[
+                &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;(
+                    &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;v1&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+                    &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt;[
+                        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;h&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+                        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;v2&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+                    ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+                )
+            ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+        ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+    ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The typical way to work with such a datastructure is using a &lt;code&gt;given/when&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt; {...}
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comp&lt;/span&gt; {...}
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZipT&lt;/span&gt; {...}
+        ...        
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Alternatively, you can use a multi sub:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;multi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Mapv&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {...}
+&lt;span class=&quot;k&quot;&gt;multi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Comp&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {...}
+&lt;span class=&quot;k&quot;&gt;multi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;ZipT&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {...}
+...        
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In both cases, we use the roles as the types to match against for the actions we want to take.&lt;/p&gt;
+
+&lt;p&gt;(For more details about algebraic datatypes see my earlier article &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/&quot;&gt;Roles as Algebraic Data Types in Raku&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;h2&gt;Generics&lt;/h2&gt;
+
+&lt;p&gt;If I want to traverse the AST above, what I would normally do is write a worker as above, where for every node except the leaf nodes, I would call the worker recursively, for example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt; {
+            \&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;);
+            \&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;);
+            ...
+        }
+        ...        
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But wouldn&amp;#39;t it be nice if I did not have to write that code at all? Enter generics.&lt;/p&gt;
+
+&lt;p&gt;I base my naming and function arguments on that of the &lt;a href=&quot;https://hackage.haskell.org/package/syb-0.7.2.1/docs/Data-Generics.html&quot;&gt;Haskell library &lt;code&gt;Data.Generics&lt;/code&gt;&lt;/a&gt;. It provides many schemes for traversals, but the most important ones are &lt;code&gt;everything&lt;/code&gt; and &lt;code&gt;everywhere&lt;/code&gt;. &lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be more than half the emissions level acceptable to keep global warming below 1.5°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.&lt;/li&gt;
-&lt;li&gt;The emissions from production of computing devices far exceed the emissions from their electricity usage, so even if devices are more energy efficient producing more of them will make the emissions problem worse.&lt;/li&gt;
-&lt;li&gt;The CO₂ emissions from the internet infrastructure resulting from individual internet usage are also very large and growing steeply because of the increased use of higher-resolution video and VR/AR. &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;everything&lt;/code&gt; is a function which takes a datastructure, a matching function, an accumulator and an update function for the accumulator. The matching function defines what you are looking for in the datastructure. The result is put into the accumulator using the update function.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(
+    &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;datastructure&lt;/span&gt;, 
+    &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;accumulator&lt;/span&gt;, 
+    &lt;span class=&quot;nv&quot;&gt;&amp;amp;joiner&lt;/span&gt;, 
+    &lt;span class=&quot;nv&quot;&gt;&amp;amp;matcher&lt;/span&gt; 
+    --&amp;gt; &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;){...}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;everywhere&lt;/code&gt; is a function which takes a datastructure and a modifier function. The modifier function defines which parts of the datastructure you want to modify. The result of the traversal is a modified version of the datastructure.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt;(
+    &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;datastructure&lt;/span&gt;, 
+    &lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt; 
+    --&amp;gt; &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;){...}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;The solution:&lt;/h3&gt;
+&lt;p&gt;The most common case for the accumulator is to use a list, so the updated function appends lists to the accumulator:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;(\&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;, \&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; (|&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;, |&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As an example of a matching function, let&amp;#39;s for example find all the function and vector names in our AST above:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matcher&lt;/span&gt;(\&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; {
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; [&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;]
+        } 
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; []
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So if we find a &lt;code&gt;Name&lt;/code&gt; node, we return its &lt;code&gt;n&lt;/code&gt; attribute as a single-element list; otherwise we return an empty list.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;ast&lt;/span&gt;,[],&lt;span class=&quot;nv&quot;&gt;&amp;amp;append&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;matcher&lt;/span&gt;); 
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; returns (f1 f2 g h v1 v2)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or let&amp;#39;s say we want to change the names in this AST:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modifier&lt;/span&gt;(\&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; {
+            &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;~&lt;span class=&quot;s&quot;&gt;&amp;#39;_updated&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt; 
+        }
+        &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; {&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;}
+    }
+}
+
+&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;ast_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;ast&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modfier&lt;/span&gt;); 
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; returns the AST with all names appended with &amp;quot;_updated&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Implementing Generics&lt;/h2&gt;
+
+&lt;p&gt;So how do we implement these magic &lt;code&gt;everything&lt;/code&gt; and &lt;code&gt;everywhere&lt;/code&gt; functions? The problem to solve is that we want to iterate through the attributes of every role without having to name it. The solution for this is to use Raku&amp;#39;s &lt;a href=&quot;https://docs.raku.org/language/mop&quot;&gt;Metaobject protocol (MOP)&lt;/a&gt; for introspection. In practice, we use the Rakudo-specific &lt;a href=&quot;https://docs.raku.org/type/Metamodel::ClassHOW&quot;&gt;&lt;code&gt;Metamodel&lt;/code&gt;&lt;/a&gt;. We need only three methods: &lt;code&gt;attribute&lt;/code&gt;, &lt;code&gt;get_value&lt;/code&gt; and &lt;code&gt;set_value&lt;/code&gt;. With these, we can iterate through the attributes and visit them recursively.&lt;/p&gt;
+
+&lt;p&gt;Attributes can be &lt;code&gt;$&lt;/code&gt;, &lt;code&gt;@&lt;/code&gt; or &lt;code&gt;%&lt;/code&gt; (and even &lt;code&gt;&amp;amp;&lt;/code&gt; but I will skip this). What this means in terms of Raku&amp;#39;s type system is that they can be scalar, Iterable or Associative, and we need to distinguish these cases. With that, we can write &lt;code&gt;everything&lt;/code&gt; as follows:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt; (\&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;, \&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;update&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;match&lt;/span&gt;) {
+    &lt;span class=&quot;c1&quot;&gt;# Arguments a immutable, so copy to $acc_&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;;
+    &lt;span class=&quot;c1&quot;&gt;# Match and update $acc_&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; =&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;));
+    &lt;span class=&quot;c1&quot;&gt;# Test the attribute type&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; ~~ &lt;span class=&quot;nb&quot;&gt;Associative&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# Iterate over the values&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;values&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;  {
+            &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;update&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;match&lt;/span&gt;)
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;; 
+    }     
+    &lt;span class=&quot;k&quot;&gt;elsif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; ~~ &lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# Iterate&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; |&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;  {
+            &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;update&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;match&lt;/span&gt;)
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;; 
+    }
+
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; { 
+        &lt;span class=&quot;c1&quot;&gt;# Go through all attributes&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.^&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt; {
+            &lt;span class=&quot;c1&quot;&gt;# Not everyting return by ^attributes &lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# is of type Attribute&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt; ~~ &lt;span class=&quot;n&quot;&gt;Attribute&lt;/span&gt; {
+                &lt;span class=&quot;c1&quot;&gt;# Get the attribute value&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; = &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;get_value&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;);
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; ~~ &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;  { &lt;span class=&quot;c1&quot;&gt;# for ContainerDescriptor::Untyped&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;;
+                }
+                &lt;span class=&quot;c1&quot;&gt;# Descend into this expression&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;update&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;&amp;amp;match&lt;/span&gt;);
+            }
+        }
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So what we do here essentially is:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;As a society we need to start treating computational resources as finite and precious, to be utilised only when necessary, and as effectively as possible. We need &lt;em&gt;frugal computing&lt;/em&gt;: achieving the same results for less energy. &lt;/li&gt;
+&lt;li&gt;for &lt;code&gt;@&lt;/code&gt; and &lt;code&gt;%&lt;/code&gt; we iterate through the values &lt;/li&gt;
+&lt;li&gt;iterate through the attributes using &lt;code&gt;^attributes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;for each attribute, get the expression using &lt;code&gt;get_value&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;call &lt;code&gt;everything&lt;/code&gt; on that expression&lt;/li&gt;
+&lt;li&gt;the first thing &lt;code&gt;everything&lt;/code&gt; does is update the accumulator&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;Developer actions:&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;everywhere&lt;/code&gt; is similar:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt; (\&lt;span class=&quot;n&quot;&gt;t_&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;) {
+    &lt;span class=&quot;c1&quot;&gt;# Modify the node&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;modifier&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t_&lt;/span&gt;);
+    &lt;span class=&quot;c1&quot;&gt;# Test the type for Iterable or Associative&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; ~~ &lt;span class=&quot;nb&quot;&gt;Associative&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# Build the updated map&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%t_&lt;/span&gt;;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;keys&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;t_k&lt;/span&gt;  {
+            &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;t_v&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;{&lt;span class=&quot;n&quot;&gt;t_k&lt;/span&gt;};
+            &lt;span class=&quot;nv&quot;&gt;%t_&lt;/span&gt;{&lt;span class=&quot;n&quot;&gt;t_k&lt;/span&gt;} = &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt; (&lt;span class=&quot;n&quot;&gt;t_v&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;);
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%t_&lt;/span&gt;; 
+    }     
+    &lt;span class=&quot;k&quot;&gt;elsif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; ~~ &lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# Build the updated list&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@t_&lt;/span&gt;=[];
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; |&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;  {
+            &lt;span class=&quot;nv&quot;&gt;@t_&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt;( &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;) );
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@t_&lt;/span&gt;; 
+    }
+
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# t is immutable so copyto $t_&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$t_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.^&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt; {            
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt; ~~ &lt;span class=&quot;n&quot;&gt;Attribute&lt;/span&gt; {
+                &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; = &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;get_value&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;);
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; ~~ &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;  { &lt;span class=&quot;c1&quot;&gt;# for ContainerDescriptor::Untyped&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$t_&lt;/span&gt;;
+                }
+                &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;);                
+                &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;set_value&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$t_&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;expr_&lt;/span&gt;);
+            }
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$t_&lt;/span&gt;;
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So what we do here essentially is:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Make software that works on older devices, the older the better.&lt;/li&gt;
-&lt;li&gt;Make software that will keep on working for a very long time.&lt;/li&gt;
-&lt;li&gt;Make software that uses the least amount of total energy to achieve its results.&lt;/li&gt;
-&lt;li&gt;Make software that also uses the least amount of network data transfer, memory and storage.&lt;/li&gt;
-&lt;li&gt;Make software that encourages the user to use it in a frugal way.&lt;/li&gt;
+&lt;li&gt;for &lt;code&gt;@&lt;/code&gt; and &lt;code&gt;%&lt;/code&gt; we iterate through the values&lt;/li&gt;
+&lt;li&gt;iterate through the attributes using &lt;code&gt;^attributes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;for each attribute, get the expression using &lt;code&gt;get_value&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;call &lt;code&gt;everywhere&lt;/code&gt; on that expression&lt;/li&gt;
+&lt;li&gt;update the attribute using &lt;code&gt;set_value&lt;/code&gt; &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Extending the useful life of computing devices is key&lt;/h2&gt;
+&lt;h2&gt;This works without roles too&lt;/h2&gt;
 
-&lt;p&gt;End-user computing devices (phones, laptops, desktops) create more emissions during their manufacturing than during their useful life, and this is not likely to change significantly in the next two decades [REF]. Therefore, we must extend the useful life of our computing devices. This is the top priority.&lt;/p&gt;
+&lt;p&gt;First of all, the above works for classes too, because the Metamodel methods are not specific to roles. Furthermore, because we test for &lt;code&gt;@&lt;/code&gt; and &lt;code&gt;%&lt;/code&gt;, the generics above work just fine for data structures without roles, built from hashes and arrays:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;lst&lt;/span&gt; = [&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;,[&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;,[&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;]],[&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;,[&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;,[&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;]]]];
 
-&lt;h3&gt;Make software that works on older devices, the older the better&lt;/h3&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matcher&lt;/span&gt; (\&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; {
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;[&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;] % &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; == &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; {                
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; [&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;]                
+            }            
+        }
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; []
+}
 
-&lt;p&gt;One of the main reason why users upgrade their devices is that the device is no longer capable of supporting the needs of new software. This can be because the new software requires
-  - more resources than the device has (memory, CPU speed, network bandwidth, screen resolution);
-  - a more recent version of other software than device can support, including the operating system.&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;lst&lt;/span&gt;,[],&lt;span class=&quot;nv&quot;&gt;&amp;amp;append&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;matcher&lt;/span&gt;);
+&lt;span class=&quot;nb&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;;
+&lt;span class=&quot;c1&quot;&gt;# ([2 3 4 [5 6 7]] [8 9 [10 11 [12]]] [10 11 [12]] [12])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or for hashes:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%hsh&lt;/span&gt; = 
+    &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; =&amp;gt; {
+        &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; =&amp;gt; {
+            &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; =&amp;gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;,
+            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; =&amp;gt; {
+                &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; =&amp;gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;=&amp;gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+            } 
+        },
+        &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; =&amp;gt; {
+            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; =&amp;gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+        }
+    },
+    &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; =&amp;gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;,
+    &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; =&amp;gt; {&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;=&amp;gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;nb&quot;&gt;e&lt;/span&gt;=&amp;gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;}
+;
 
-&lt;p&gt;This is why when developing software, you should make it work on older devices by design. That way, users with older devices can use your software without having to upgrade. That also means your software should use the least amount of resources (CPU, memory, storage etc) possible to achieve its results, as older devices have fewer resources&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hmatcher&lt;/span&gt; (\&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; (&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; {
+            &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;=[];
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;keys&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; {                
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;eq&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;a&amp;#39;&lt;/span&gt; {
+                    &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;{&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;})
+                }
+            }
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;;
+        }
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; []
+}
 
-&lt;h3&gt;Make software that will keep on working for a very long time&lt;/h3&gt;
+&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;hres&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;%hsh&lt;/span&gt;,[],&lt;span class=&quot;nv&quot;&gt;&amp;amp;append&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;hmatcher&lt;/span&gt;);
+&lt;span class=&quot;nb&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hres&lt;/span&gt;;
+&lt;span class=&quot;c1&quot;&gt;# ({b =&amp;gt; {a =&amp;gt; {b =&amp;gt; 1, c =&amp;gt; 2}, c =&amp;gt; 1}, c =&amp;gt; {a =&amp;gt; 3}} {b =&amp;gt; 1, c =&amp;gt; 2} 3)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;It is also important that the software you write will keep on working for as long as possible, ideally forever. One reason why your software might stop working is that its resource utilisation grows over time. This can for example be the case if it needs increasingly more memory or disk space the longer it gets used. Another reason is that bugs and vulnerabilities that are discovered only after a long time might not get fixed. &lt;/p&gt;
-
-&lt;p&gt;The software needs to be supported for as long the device lasts. So frugal software requires a long-term commitment in terms of updates for security and bugfixing.&lt;/p&gt;
-
-&lt;h2&gt;Being frugal with resources&lt;/h2&gt;
-
-&lt;p&gt;Whereas for mobile phones the emissions from usage are much lower than the emissions from manufacturing, for laptops and desktop computers, emissions from usage are still significant. &lt;/p&gt;
-
-&lt;h3&gt;Make software that uses the least amount of total energy to achieve its results&lt;/h3&gt;
-
-&lt;p&gt;Not only do older devices have fewer resources, resource consumption eventually means emissions, because all resources on a device consume energy. In practice, the main source of emissions in an end user device is the network activity, because generating and transfering the data (e.g. video) consumes a lot of energy. However, on laptops, desktops and servers, CPU and GPU power consumption is also a significant factor. &lt;/p&gt;
-
-&lt;p&gt;The consequence is that as a developer, you need to be aware of all factors that contribute to the total enery consumption of a task performed by your software. XXX some links here XXX
-XXX Think primarily of web site devs and app devs XXX&lt;/p&gt;
-
-&lt;h3&gt;Make software that encourages the user to use it in a frugal way&lt;/h3&gt;
-
-&lt;p&gt;XXX I&amp;#39;m not sure about this, maybe goes too far? XXX&lt;/p&gt;
-
-&lt;p&gt;For some applications, the behaviour of the user can have a major effect on the resources it uses. If you are developing such an application, consider if you can encourage or nudge the user to use fewer resources.&lt;/p&gt;
-
-&lt;p&gt;For example, web browsers need resources depending on the number of sites the user is accessing concurrently as well as on the design of the sites. For video based applications, energy consumption depends on the resolution of the video; &lt;/p&gt;
+&lt;p&gt;Generic datastructure traversals are a great way to reduce boilerplate code and focus on the actual purpose of the traversals. And now you can have them in Raku too. I have shown the implementation for the two main schemes &lt;code&gt;everything&lt;/code&gt; and &lt;code&gt;everywhere&lt;/code&gt; and shown that they work for role based datastructures as well as traditional hash- or array-based datastructures.&lt;/p&gt;
 
         </content>
     </entry>
