@@ -247,8 +247,8 @@
 <div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">worker</span>(<span class="n">Expr</span> \<span class="n">expr</span>) {
     <span class="k">given</span> <span class="n">expr</span> {
         <span class="k">when</span> <span class="n">MapV</span> {
-            \<span class="k">my</span> <span class="n">f_</span> = <span class="n">worker</span>(<span class="n">expr</span>.<span class="n">f</span>);
-            \<span class="k">my</span> <span class="n">v_</span> = <span class="n">worker</span>(<span class="n">expr</span>.<span class="n">v</span>);
+            <span class="k">my</span> \<span class="n">f_</span> = <span class="n">worker</span>(<span class="n">expr</span>.<span class="n">f</span>);
+            <span class="k">my</span> \<span class="n">v_</span> = <span class="n">worker</span>(<span class="n">expr</span>.<span class="n">v</span>);
             ...
         }
         ...        
@@ -305,7 +305,7 @@
     }
 }
 
-<span class="k">my</span> \<span class="n">ast_</span> = <span class="n">everywhere</span>(<span class="n">ast</span>,<span class="nv">&amp;modfier</span>); 
+<span class="k">my</span> \<span class="n">ast_</span> = <span class="n">everywhere</span>(<span class="n">ast</span>,<span class="nv">&amp;modifier</span>); 
 <span class="c1"># =&gt; returns the AST with all names appended with &quot;_updated&quot;</span>
 </code></pre></div>
 <h2>Implementing Generics</h2>
