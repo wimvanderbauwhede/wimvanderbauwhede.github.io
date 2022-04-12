@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Why I wrote Haku • Wim Vanderbauwhede</title>
+    <meta name="description" content="Haku is a natural language functional programming language based on literary Japanese. This article is about my motivation for creating Haku.">
+    <meta name="keywords" content="coding, hacking, programming, raku, haku">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Why I wrote Haku">
+	<meta name="twitter:description" content="Haku is a natural language functional programming language based on literary Japanese. This article is about my motivation for creating Haku.">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/why-i-wrote-haku_1600x600.png">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/why-i-wrote-haku/#">
+	<meta property="og:title" content="Why I wrote Haku">
+	<meta property="og:description" content="Haku is a natural language functional programming language based on literary Japanese. This article is about my motivation for creating Haku.">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/why-i-wrote-haku_1600x600.png" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/why-i-wrote-haku/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<!-- WV: NO!
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+	  <!-- WV: NO!
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    -->
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/why-i-wrote-haku_1600x600.png" class="page-feature-image" alt="Why I wrote Haku" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Why I wrote Haku</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>A few weeks ago I released <a href="https://codeberg.org/wimvanderbauwhede/haku">Haku</a>, a Japanese natural-language programming language. Haku is a strict functional language with implicit typing, and <a href="https://codeberg.org/wimvanderbauwhede/haku/src/branch/main/examples/pwc131-t1.haku">an example program</a> looks like this:</p>
+
+<div style="writing-mode: vertical-rl">
+<pre>
+裂くとはパーツとヨウソで
+若しパーツが空に等しいなら
+［［ヨウソ］］ですけど
+そうでなければ、
+一パートはパーツの頭、
+一パーツ一はパーツの尻尾、
+一マエはパートの頭、
+では
+若しマエが〈ヨウソ引く一〉に等しいなら
+［ヨウソ・パート］・パーツ一ですが
+そうでなければ
+［ヨウソ］・パーツ
+の事です。
+
+本とは
+列は壱と弐と三と四と五と七と八と十一と十三と十六と十七、
+仮一は列と空を裂くので畳み込む、
+仮二は逆な仮一、
+魄は仮二を逆で写像する、
+魄を見せる
+の事です。
+</pre>
+</div>
+
+<p>The <a href="https://codeberg.org/wimvanderbauwhede/haku#haku">repository README</a> explains the language and gives some background, as does this <a href="https://www.slideshare.net/WimVanderbauwhede/haku-a-toy-functional-language-based-on-literary-japanese">presentation</a>. I have also written a separate post about the <a href="https://wimvanderbauwhede.github.io/articles/haku-in-raku">implementation of Haku in Raku</a>. </p>
+
+<p>This article is about my motivation for creating Haku.</p>
+
+<p>I am interested in how programming languages influence the programmer&#39;s thinking (the old adage of &quot;to the programmer with a hammer, everything looks like a thumb&quot;). </p>
+
+<p>From personal experience, I observe that my thinking patterns are quite different when I program in a functional language, an imperative one or an object-oriented one. There is also a marked difference between programming in a statically or dynamically typed language.</p>
+
+<p>But what about the influence of the programmer&#39;s native language? Most programming languages are based on English, and in particular function calls typically use English word order. </p>
+
+<h2>Arithmetic in English and Flemish</h2>
+
+<p>For example, let&#39;s consider the common arithmetic operations +, -, *, /. If we use named functions rather than operators for these, and used the common parentheses-and-commas syntax for function calls, we get something like</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>A+B: add(A,B) 
+A-B: subtract(A,B)
+A*B: multiply(A,B)
+A/B: divide(A,B)
+</code></pre></div>
+<p>In English we would express this most commonly as an infinitive or as an imperative. For the infinitive, we have:</p>
+
+<!-- <div class="highlight" style="background-color: #eadcb2">-->
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>to add A and/to B
+to subtract A and/from B
+to multiply A and B
+to divide A and/by B
+</code></pre></div>
+<p>The pattern is <code>&#39;to&#39; &lt;verb&gt; A &#39;and&#39; B</code>.</p>
+
+<p>For the imperative, we have:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>add A and/to B
+subtract A and/from B
+multiply A and B
+divide A and/by B
+</code></pre></div>
+<p>The pattern is <code>&lt;verb&gt; A &#39;and&#39; B</code>, so the same pattern apart from the <code>to</code>. And it is easy to see how this pattern informed the typical function call syntax <code>&lt;verb&gt; &#39;(&#39; A &#39;,&#39; B &#39;)&#39;</code>.</p>
+
+<p>However, in Flemish (or Dutch), the order of the arguments is quite different. For the infinitive, we have:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>A en/bij B optellen; A optellen bij B
+A en/van B aftrekken; A aftrekken van B
+A en/met B vermenigvuldigen; A vermenigvuldigen met B
+A en/door B delen; A delen door B
+</code></pre></div>
+<p>The first variant has the pattern <code>A &#39;en&#39; B &lt;verb&gt;</code>; the second variant needs a different preposition for each verb but the pattern is <code>A &lt;verb&gt; &lt;preposition&gt; B</code>. </p>
+
+<p>For the imperative, we have:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>tel A op bij B; tel A en/bij B op
+trek A af van B; trek A en/van B af
+vermenigvuldig A en/met B
+deel A en/door B
+</code></pre></div>
+<p>There is not just one single general pattern but three: <code>&lt;verb&gt; A &#39;en&#39; B</code>, 
+<code>&lt;verb&gt; A &lt;preposition&gt; &lt;preposition&gt; B</code> and  <code>&lt;verb&gt; A &lt;preposition&gt; B &lt;preposition&gt;</code>, depending on whether the verb has a preposition as part of it or not, and on the position we choose for that preposition. </p>
+
+<p>So not only are word orders for infinitive and imperative quite different, there is no simple rule for the imperative word order. Which makes me wonder what programming languages would look like if their developers had not been English native speakers. </p>
+
+<p>That question becomes even more interesting for non-Indo-European languages, because despite the example above, there are still lots of grammatical similarities between languages such as English, French and German.</p>
+
+<h2>Japanese natural-language programming languages</h2>
+
+<p>There is one such language that particularly interests me and that is Japanese. I have been learning it for a long time and written <a href="https://quickandtastycooking.org.uk/articles/">several posts on Japanese language related topics</a>.</p>
+
+<p>Besides having a very different grammar, Japanese has writing system that is a very different from the Latin alphabet as well as its own number system.</p>
+
+<p>So I decided to create a natural-language programming language based on Japanese. </p>
+
+<p>There are already several Japanese natural-language programming languages, all made by Japanese native speakers. <a href="https://en.wikipedia.org/wiki/Non-English-based_programming_languages">Wikipedia lists eight</a> but there are actually only four that are still under active development: <a href="https://dolittle.eplang.jp/">Dolittle</a>, <a href="https://rdr.utopiat.net/">Produire</a>, <a href="https://nadesi.com/top/">Nadeshiko</a> and <a href="https://www.scripts-lab.co.jp/mind/whatsmind.html">Mind</a>. </p>
+
+<ul>
+<li><em>Dolittle</em> ドリトル is an object-oriented language specifically designed for teaching children to program and follows the <a href="http://people.eecs.berkeley.edu/%7Ebh/logo.html">Logo</a> tradition with a turtle to draw shapes. </li>
+<li><em>Produire</em> プロデル is an imperative and object-oriented language but more general purpose. It also has a turtle library, so education is definitely one of the main design purposes.</li>
+<li><em>Nadeshiko</em> なでしこ (meaning &quot;pink&quot;, the flower) is an open source general purpose imperative language.</li>
+<li><em>Mind</em> is also imperative. Although it is actually a <a href="https://www.forth.com/">Forth</a>-style stack-based language, in general structure it is similar to the other three. </li>
+</ul>
+
+<p>All these language are complete with support for graphics, networking etc and their own IDE and/or web-based editor. They are practical programming languages, so they all support the use of Arabic numerals as well as operators for arithmetic, logic and comparison operations. </p>
+
+<h2>Haku</h2>
+
+<p>My motivation to create Haku was not to create a practical language. I wanted to explore what the result is of creating a programming language based on a non-English language, in terms of syntax, grammar and vocabulary. In particular, I wanted to allow the programmer to control the register of the language to some extent (informal/polite/formal). <a href="https://nadesi.com/v3/doc/index.php?%E6%96%87%E6%B3%95%2F%E6%95%AC%E8%AA%9E&show">Nadeshiko</a> and <a href="https://www.scripts-lab.co.jp/mind/ver8/doc/02-Program-Hyoki.html#okurigana">Mind</a> allow this to some extent, but I wanted even more flexibility.</p>
+
+<h3>Grammar</h3>
+
+<p>My main motivation for creating Haku is the difference in grammar between Japanese and most Indo-European languages.</p>
+
+<p>Notions such as &quot;noun&quot;, &quot;adjective&quot;, &quot;adverb&quot; and &quot;verb&quot; are not quite so clearly defined in Japanese. For example, consider the word <em>yasashii</em>, &quot;kind&quot;. A person who is kind is a <em>yasashii hito</em>. A person who is not kind is a <em>yasashikunai hito</em>. But in its own right, <em>yasashiku</em> is and adverb, and <em>~nai</em> is the plain negative verb ending, e.g. &quot;I don&#39;t understand&quot; is <em>wakaranai</em>. And this &quot;adjective&quot; can get a past tense: &quot;the person who was not kind&quot; is <em>yasashikunakatta hito</em>. And if we chain adjectives, e.g. &quot;a kind and and clever person&quot;, we get <em>yasashikute kashikoi hito</em>. And indeed we can have <em>yasashihunakute　kashikonkatta hito</em>, &quot;the kerson who was not kind and smart&quot;. It is also very easy to nominalise a verb or verbalise a noun by adding a suffix. </p>
+
+<p>The word order in a sentence is also quite different from most Indo-European languages. The typical order is main topic, secondary topic(s), verb. The function of the topics is indicated with what is called a &quot;particle&quot;, a kind of suffix. For example, &quot;I ate the pudding with a spoon&quot; is <em>purin wo supuun de tabeta</em>. In this example, the main topic &quot;I&quot; is implied. Japanese is quite a parsimonious language: whenever possible, implied topics are left out, to be inferred from the context. </p>
+
+<p>Finally, compared to Indo-European languages, verb conjugation serves a different purpose in Japanese. For example in English, French and German, tenses are mainly uses to give precise indications of the time and duration of the action: simple past, present continuous, future perfect continuous etc. Japanese has essentially two tenses: the past and the non-past; and a form to similar to the -ing form in English to indicated an ongoing action, although that is again a loose approximation. However, there are many tenses to indicate modifiers to the verb to say e.g. that something is possible, that the speaker wants something, that a third party wants something, that the speaker has begun to do something, that someone is doing someone a favour and of course to express the level of politeness. For example, <em>shachou ha kiite kuremashita</em> &quot;the boss did me the favour of listening to me&quot; (the <em>~mashita</em> is a polite verb form), or <em>wasurekaketeita</em> &quot;I had begun to forget&quot; (<em>~ta</em> is a plain past, rather than polite).</p>
+
+<p>Putting at least some of this grammar in the programming language seemed like an interesting challenge to me. In particular, I was interested in how programmers perceive functions calls. Some time ago I ran a poll about this, and 3/4 of respondents answered &quot;imperative&quot; (other options were infinitive, noun, -ing form). </p>
+
+<p>In Japanese, the imperative (<em>meireikei</em>, &quot;command form&quot;) is rarely used. Therefore in Haku you can&#39;t use this form. Instead, you can use the plain form, the polite <em>-masu</em> form or the <em>-te</em> form (like &quot;-ing&quot;), including <em>-te kudasai</em> (similar to &quot;please&quot;). Whether a function is perceived as a verb or a noun is up to you, and the difference is clear from the syntax. If it is a noun, you can turn it into a verb by adding <em>suru</em>, and if it is a verb, you can add the <em>no</em> or <em>koto</em> nominalisers. And you can conjugate the verb forms in many different ways, although in practice the verb ending has no semantic function in the Haku language.</p>
+
+<h3>Naming and giving meaning</h3>
+
+<p>In principle, a programming language does not need to be based on natural language at all. The notorious example is APL, which uses symbols for everything. Agda programmers also tends to use lots of mathematical symbols. It works because they are very familiar with those symbols. An interesting question is if an experienced programmer who does not know Japanese could understand a Haku program; or if not, what the minimal changes would be to make it understandable. </p>
+
+<p>To allow to investigate that question, the Scheme and Raku emitters for Haku support (limited) transliteration to Romaji. I have the intention (but maybe not the time) to create a Romaji version of Haku as well as a version that does not use any Japanese but keeps the word order.</p>
+
+<h3>Syntax and parsing</h3>
+
+<p>I also wanted the language to be closer, at lease visually, to literary Japanese. Therefore Haku does not use Roman letters, Arabic digits or common arithmetic, logical and comparison operators. It also supports top-to-bottom, right-to-left writing.  </p>
+
+<p>Literary Japanese does not use spaces. So another question of interest to was how to tokenise a string of Japanese. </p>
+
+<ul>
+<li>There are three writing systems: <em>katakana</em> (angular), <em>hiragana</em> (squigly) and <em>kanji</em> (complicated). </li>
+<li><em>katakana</em> is used in a similar way as italics, and also for loanwords and names of plants and animals.</li>
+<li>Nouns, verb, adjectives and adverbs normally start with a <em>kanji</em></li>
+<li><em>hiragana</em> is used for verb/adjective/adverb endings and &quot;particles&quot;, small words or suffixes that help identify the words in a sentence. </li>
+<li>A verb/adjective/adverb can&#39;t end with a <em>hiragana</em> character that represents a particle. </li>
+</ul>
+
+<p>So we have some simple tokenisation rules:
+- a sequence of <em>katakana</em>
+- a <em>kanji</em> followed by more <em>kanji</em> or <em>hiragana</em> that do not represent particles
+- <em>hiragana</em> that represent particles</p>
+
+<p>This is in fact a formalisation of the rules a human uses when reading Japanese. </p>
+
+<p>Where that fails, we can introduce parentheses. A human reader uses context, and a considerable amount of look-ahead parsing and backtracking, but that would make the parser very complex and slow.</p>
+
+<p>In practice, only specific adverbs and adjectives are used in Haku. For example:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>ラムダ|は|或|エクス|で|エクス|掛ける|エクス|です
+
+ラムダ: katakana word
+は: particle
+或: pre-noun adjective
+エクス: katakana word
+で: particle
+エクス: katakana word
+掛ける: verb
+エクス: katakana word　
+です: verb (copula)
+</code></pre></div>
+<h3>Number system</h3>
+
+<p>For large numbers, Japanese uses a number system based on multiples of ten thousand (called <em>myriads</em>) rather than a thousand. A peculiar feature of this system is that there are <em>kanji</em> for all powers of 10,000 up to 10<sup>48</sup>. For more background on this, please read <a href="https://quickandtastycooking.org.uk/articles/japanese-large-numbers/">my article on this topic</a>. </p>
+
+<p>The consequence is that a number such as </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>1,234,567,890 
+</code></pre></div>
+<p>is composed as </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>  (10 + 2) * 100,000,000 
++ (3 * 1000 + 4 * 100 + 5 * 10 + 6) * 10,000
++  7 * 1000 + 8 * 100 + 9 * 10
+</code></pre></div>
+<p>which can is written in <em>kanji</em> as </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>十二億三千四百五十六万七千八百九十
+</code></pre></div>
+<p>There are also <em>kanji</em> for numbers smaller than one. They go down to 10<sup>-12</sup> in powers of 10 and rational numbers are indicated with the <em>kanji</em> 点 (<em>ten</em>, &quot;dot&quot;). So </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>3.14159
+</code></pre></div>
+<p>can be written as    </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span> 三点一分四厘一毛五糸九忽 
+</code></pre></div>
+<p>Apart from this format, the decimal format is also used, and is indeed more common for rational numbers and also for years (and dates in general), e.g. 2021 is written 二〇二一 instead of 二千二十一. Haku supports all these formats.</p>
+
+<h2>Poetry</h2>
+
+<p>The expressiveness of Haku as a programming language is on purpose rather spartan. It is after all a &quot;toy language&quot;, an experimental rather than general-purpose language. </p>
+
+<p>I am more interested in the natural-language expressiveness of Haku, and for that my criterion  is: Can the programmer write poetry in it? Several of Haku&#39;s features such as adjectives and verb conjugation (<em>okurigana</em>) are there entirely to make Haku programs sufficiently expressive on the natural-language level to support this idea. For that reason, my <a href="https://codeberg.org/wimvanderbauwhede/haku/src/branch/main/examples/yuki.haku">favourite Haku program</a> is one that demonstrates this ability:</p>
+
+<div style="writing-mode: vertical-rl">
+<pre>
+忘れるとは件で空のことです。
+
+遠いとは物で物を見せるのことです。
+
+本とは
+記憶は「忘れられないあの冬の the new fallen snow」、
+忘れかけてた遠い記憶
+の事です
+</pre>
+</div>
+
+<p>When run, this program prints out the string 「忘れられないあの冬の the new fallen snow」. The line that causes this string to be printed is </p>
+
+<p>忘れかけてた遠い記憶</p>
+
+<p><em>Wasurekaketeta tooi kioku</em></p>
+
+<p>This is on the one hand an example of some of the Japanese grammar features that Haku supports:</p>
+
+<ul>
+<li>adjectives as functions: <em>tooi</em> is a so-called &quot;i-adjective&quot;;</li>
+<li>adjectival verbs: <em>wasurekaketeta</em> is a verb used as an adjective;</li>
+<li>complex verb conjucations: the plain form, used to define the function, is <em>wasureru</em>. The form <em>~kakeru</em> means &quot;starting to&quot; and the final ending <em>~ta</em> is a plain past. </li>
+</ul>
+
+<p>But on the other hand, it is also poetry.</p>
+
+<h2>Why <em>haku</em>?</h2>
+
+<p>I decided to call my language <em>haku</em> because I like the sound of it, and also because that word can be written in many ways and mean many things in Japanese (in my dictionary there are 89 <em>kanji</em> that have <em>haku</em> as one of their possible pronunciations). I was definitely thinking about the character Haku from the <a href="https://ghiblicollection.com/product/spirited-away-collector-s-edition?product_id=7231">Studio Ghibli movie &quot;Spirited Away&quot;</a>. Also, I like the resemblance with <a href="https://raku.org">Raku</a>, the implementation language. </p>
+
+<p>If I had to pick a <em>kanji</em>, I would write it 珀 (amber) or 魄 (soul, spirit).</p>
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+                    <div class="inline-btn">
+    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <!--
+	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
+	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
+	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
+	&nbsp;
+<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+    -->
+</div><!-- /.follow-us -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2021-10-17T00:00:00Z" itemprop="dateModified">October 17, 2021</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2021 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
