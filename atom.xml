@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2022-04-12T11:07:28+01:00</updated>
+    <updated>2022-04-12T18:56:39+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,739 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>Frugal computing: developer perspective</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/frugal-computing-developer/"/>
+        <updated>2021-12-20T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/frugal-computing-developer</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/frugal-computing-developer_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;On the need for low-carbon and sustainable computing and what developers can do about it.&lt;/p&gt;
+
+&lt;p&gt;This is a follow-up on my &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/frugal-computing&quot;&gt;article about Frugal Computing&lt;/a&gt;, focusing on the what developers can do to help reduce the carbon emissions from computing. &lt;/p&gt;
+
+&lt;h2&gt;Key points&lt;/h2&gt;
+
+&lt;h3&gt;The problem:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be more than half the emissions level acceptable to keep global warming below 1.5°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.&lt;/li&gt;
+&lt;li&gt;The emissions from production of computing devices far exceed the emissions from their electricity usage, so even if devices are more energy efficient producing more of them will make the emissions problem worse.&lt;/li&gt;
+&lt;li&gt;The CO₂ emissions from the internet infrastructure resulting from individual internet usage are also very large and growing steeply because of the increased use of higher-resolution video and VR/AR. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;The solution:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;As a society we need to start treating computational resources as finite and precious, to be utilised only when necessary, and as effectively as possible. We need &lt;em&gt;frugal computing&lt;/em&gt;: achieving the same results for less energy. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Developer actions:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make software that works on older devices, the older the better.&lt;/li&gt;
+&lt;li&gt;Make software that will keep on working for a very long time.&lt;/li&gt;
+&lt;li&gt;Make software that uses the least amount of total energy to achieve its results.&lt;/li&gt;
+&lt;li&gt;Make software that also uses the least amount of network data transfer, memory and storage.&lt;/li&gt;
+&lt;li&gt;Make software that encourages the user to use it in a frugal way.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Extending the useful life of computing devices is key&lt;/h2&gt;
+
+&lt;p&gt;End-user computing devices (phones, laptops, desktops) &lt;a href=&quot;https://reboxed.co/blogs/outsidethebox/the-carbon-footprint-of-your-phone-and-how-you-can-reduce-it&quot;&gt;create more emissions during their manufacturing than during their useful life, and this is not likely to change significantly in the next two decades&lt;/a&gt;. Therefore, we must extend the useful life of our computing devices. This is the top priority.&lt;/p&gt;
+
+&lt;h3&gt;Make software that works on older devices, the older the better&lt;/h3&gt;
+
+&lt;p&gt;One of the main reason why users upgrade their devices is that the device is no longer capable of supporting the needs of new software. This can be because the new software requires
+  - more resources than the device has (memory, CPU speed, network bandwidth, screen resolution);
+  - a more recent version of other software than device can support, including the operating system.&lt;/p&gt;
+
+&lt;p&gt;This is why when developing software, you should make it work on older devices by design. That way, users with older devices can use your software without having to upgrade. That also means your software should use the least amount of resources (CPU, memory, storage etc) possible to achieve its results, as older devices have fewer resources.&lt;/p&gt;
+
+&lt;h3&gt;Make software that will keep on working for a very long time&lt;/h3&gt;
+
+&lt;p&gt;It is also important that the software you write will keep on working for as long as possible, ideally forever. One reason why your software might stop working is that its resource utilisation grows over time. This can for example be the case if it needs increasingly more memory or disk space the longer it gets used. Another reason is that bugs and vulnerabilities that are discovered only after a long time might not get fixed. &lt;/p&gt;
+
+&lt;p&gt;The software needs to be supported for as long the device lasts. So frugal software requires a long-term commitment in terms of updates for security and bugfixing.&lt;/p&gt;
+
+&lt;h2&gt;Being frugal with resources&lt;/h2&gt;
+
+&lt;p&gt;Whereas for mobile phones the emissions from usage are much lower than the emissions from manufacturing, for laptops and desktop computers, emissions from usage are still significant. &lt;/p&gt;
+
+&lt;h3&gt;Make software that uses the least amount of total energy to achieve its results&lt;/h3&gt;
+
+&lt;p&gt;Not only do older devices have fewer resources, resource consumption eventually means emissions, because all resources on a device consume energy. In practice, the main source of emissions in an end user device is the network activity, because generating and transfering the data (e.g. video) consumes a lot of energy. However, on laptops, desktops and servers, CPU and GPU power consumption is also a significant factor. &lt;/p&gt;
+
+&lt;p&gt;The consequence is that as a developer, you need to be aware of all factors that contribute to the total enery consumption of a task performed by your software. For apps and web sites, the dominant sources of emissions are &lt;a href=&quot;https://www.sciencedirect.com/science/article/abs/pii/S0921344920307072&quot;&gt;the network and the data centres&lt;/a&gt;. For &lt;a href=&quot;https://www.researchgate.net/publication/336909520_Toward_Greener_Gaming_Estimating_National_Energy_Use_and_Energy_Efficiency_Potential&quot;&gt;non-networked games, the power consumption of the CPU and GPU&lt;/a&gt; is the main source of emissions. &lt;/p&gt;
+
+&lt;h3&gt;Make software that encourages the user to be frugal&lt;/h3&gt;
+
+&lt;p&gt;For some applications, the behaviour of the user can have a major effect on the resources it uses. If you are developing such an application, consider if you can encourage or nudge the user to use fewer resources.&lt;/p&gt;
+
+&lt;p&gt;For example: &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Web browsers need resources depending on the number of sites the user is accessing concurrently as well as on the design of the sites;&lt;/li&gt;
+&lt;li&gt;for video based applications, energy consumption depends on the resolution of the video; &lt;/li&gt;
+&lt;li&gt;if the user experiences the app as sluggish or erratic, they might be more inclined to upgrade their device.&lt;/li&gt;
+&lt;/ul&gt;
+
+        </content>
+    </entry>
+    
+    <entry>
+        <title>Generic datastructure traversals with roles and introspection</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/generic-traversals-in-raku/"/>
+        <updated>2021-12-13T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/generic-traversals-in-raku</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/generic-traversals-in-raku_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;I am a &lt;a href=&quot;https://andrewshitov.com/2015/05/05/interview-with-audrey-tang/&quot;&gt;lambdacamel&lt;/a&gt; and therefore I like to adapt concepts and techniques from functional programming, and in particular from the &lt;a href=&quot;https://www.haskell.org/&quot;&gt;Haskell&lt;/a&gt; language, to Raku. One of the techniques that I use a lot is &lt;em&gt;generic traversals&lt;/em&gt;, also known as &amp;quot;Scrap Your Boilerplate&amp;quot; after the title of &lt;a href=&quot;https://archive.alvb.in/msc/02_infogp/papers/SYB1.pdf&quot;&gt;the paper by Simon Peyton Jones and Ralf Lämmel&lt;/a&gt; that introduced this approach. In their words: &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Many programs traverse data structures built from rich mutually-recursive data types. Such programs often have a great deal of “boilerplate” code that simply walks the structure, hiding a small amount of “real” code that constitutes the reason for the traversal. ”Generic programming” is the umbrella term to describe a wide variety of programming technology directed at this problem. &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So to save you having to write your own custom traversal, this approach gives you generic functions that do traversals on arbitrary data strucures. In this article, I will explain how you can easily implement such generics in Raku for arbitrary role-based datastructures. There is no Haskell in this article.&lt;/p&gt;
+
+&lt;h2&gt;Roles as datatypes by example&lt;/h2&gt;
+
+&lt;p&gt;I implemented of these generics for use with role-based datatypes. Raku&amp;#39;s &lt;a href=&quot;https://docs.raku.org/language/objects#index-entry-Parameterized_Roles&quot;&gt;parameterised roles&lt;/a&gt; make creating complex datastructures very easy. I use the roles purely as datatypes, so they have no associated methods. &lt;/p&gt;
+
+&lt;p&gt;For example, here is an example code snippet in a little language that I use in my research. &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;map (f1 . f2) (map g (zipt (v1,map h v2)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The primitives are &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;.&lt;/code&gt; (function composition), &lt;code&gt;zipt&lt;/code&gt; and the tuple &lt;code&gt;(...)&lt;/code&gt;, and the names of functions and vectord. The datatype for the abstract syntax of this little language is called &lt;code&gt;Expr&lt;/code&gt; and looks as follows:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Any expression in the language&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {}
+&lt;span class=&quot;c1&quot;&gt;# map f v&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;v_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.f&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.v&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;v_&lt;/span&gt;;
+}
+&lt;span class=&quot;c1&quot;&gt;# function composition f . g&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comp&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt;, &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;g_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.f&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.g&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;g_&lt;/span&gt;;
+}
+&lt;span class=&quot;c1&quot;&gt;# zipt t turns a tuple of vectors into a vector of tuples&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZipT&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;t_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.t&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;t_&lt;/span&gt;
+}
+&lt;span class=&quot;c1&quot;&gt;# tuples are just arrays of Expr&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tuple&lt;/span&gt;[&lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt;] \&lt;span class=&quot;n&quot;&gt;e_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt;] &lt;span class=&quot;nv&quot;&gt;$.e&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;e_&lt;/span&gt;
+}
+&lt;span class=&quot;c1&quot;&gt;# names of functions and vectors are just string constants&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;n_&lt;/span&gt;] &lt;span class=&quot;nb&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.n&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;n_&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;Expr&lt;/code&gt; role is the toplevel datatype. It is empty because it is implemented entirely in terms of the other roles, which thanks to the &lt;code&gt;does&lt;/code&gt; are all of type &lt;code&gt;Expr&lt;/code&gt;. And most of the roles have attributes that are also of type &lt;code&gt;Expr&lt;/code&gt;. So we have a recursive datatype, a tree with the &lt;code&gt;Name&lt;/code&gt; node as leaves. &lt;/p&gt;
+
+&lt;p&gt;We can now write the abstract syntax tree (AST) of the example code using this &lt;code&gt;Expr&lt;/code&gt; datatype:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;ast&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt;[ 
+    &lt;span class=&quot;n&quot;&gt;Comp&lt;/span&gt;[
+        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;f1&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;f2&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+    ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+    &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt;[
+        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;g&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+        &lt;span class=&quot;n&quot;&gt;ZipT&lt;/span&gt;[
+            &lt;span class=&quot;n&quot;&gt;Tuple&lt;/span&gt;[
+                &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;(
+                    &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;v1&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+                    &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt;[
+                        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;h&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+                        &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;s&quot;&gt;&amp;#39;v2&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+                    ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+                )
+            ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+        ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+    ].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The typical way to work with such a datastructure is using a &lt;code&gt;given/when&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt; {...}
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comp&lt;/span&gt; {...}
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZipT&lt;/span&gt; {...}
+        ...        
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Alternatively, you can use a multi sub:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;multi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Mapv&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {...}
+&lt;span class=&quot;k&quot;&gt;multi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Comp&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {...}
+&lt;span class=&quot;k&quot;&gt;multi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;ZipT&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {...}
+...        
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In both cases, we use the roles as the types to match against for the actions we want to take.&lt;/p&gt;
+
+&lt;p&gt;(For more details about algebraic datatypes see my earlier article &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/&quot;&gt;Roles as Algebraic Data Types in Raku&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;h2&gt;Generics&lt;/h2&gt;
+
+&lt;p&gt;If I want to traverse the AST above, what I would normally do is write a worker as above, where for every node except the leaf nodes, I would call the worker recursively, for example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Expr&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MapV&lt;/span&gt; {
+            &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;f_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;);
+            &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;v_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;);
+            ...
+        }
+        ...        
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But wouldn&amp;#39;t it be nice if I did not have to write that code at all? Enter generics.&lt;/p&gt;
+
+&lt;p&gt;I base my naming and function arguments on that of the &lt;a href=&quot;https://hackage.haskell.org/package/syb-0.7.2.1/docs/Data-Generics.html&quot;&gt;Haskell library &lt;code&gt;Data.Generics&lt;/code&gt;&lt;/a&gt;. It provides many schemes for traversals, but the most important ones are &lt;code&gt;everything&lt;/code&gt; and &lt;code&gt;everywhere&lt;/code&gt;. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;everything&lt;/code&gt; is a function which takes a datastructure, a matching function, an accumulator and an update function for the accumulator. The matching function defines what you are looking for in the datastructure. The result is put into the accumulator using the update function.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(
+    &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;datastructure&lt;/span&gt;, 
+    &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;accumulator&lt;/span&gt;, 
+    &lt;span class=&quot;nv&quot;&gt;&amp;amp;joiner&lt;/span&gt;, 
+    &lt;span class=&quot;nv&quot;&gt;&amp;amp;matcher&lt;/span&gt; 
+    --&amp;gt; &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;){...}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;everywhere&lt;/code&gt; is a function which takes a datastructure and a modifier function. The modifier function defines which parts of the datastructure you want to modify. The result of the traversal is a modified version of the datastructure.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt;(
+    &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;datastructure&lt;/span&gt;, 
+    &lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt; 
+    --&amp;gt; &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;){...}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The most common case for the accumulator is to use a list, so the updated function appends lists to the accumulator:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;(\&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;, \&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; (|&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;, |&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As an example of a matching function, let&amp;#39;s for example find all the function and vector names in our AST above:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matcher&lt;/span&gt;(\&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; {
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; [&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;]
+        } 
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; []
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So if we find a &lt;code&gt;Name&lt;/code&gt; node, we return its &lt;code&gt;n&lt;/code&gt; attribute as a single-element list; otherwise we return an empty list.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;ast&lt;/span&gt;,[],&lt;span class=&quot;nv&quot;&gt;&amp;amp;append&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;matcher&lt;/span&gt;); 
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; returns (f1 f2 g h v1 v2)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or let&amp;#39;s say we want to change the names in this AST:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modifier&lt;/span&gt;(\&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; {
+            &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;[&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;~&lt;span class=&quot;s&quot;&gt;&amp;#39;_updated&amp;#39;&lt;/span&gt;].&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt; 
+        }
+        &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; {&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;}
+    }
+}
+
+&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;ast_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;ast&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;); 
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; returns the AST with all names appended with &amp;quot;_updated&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Implementing Generics&lt;/h2&gt;
+
+&lt;p&gt;So how do we implement these magic &lt;code&gt;everything&lt;/code&gt; and &lt;code&gt;everywhere&lt;/code&gt; functions? The problem to solve is that we want to iterate through the attributes of every role without having to name it. The solution for this is to use Raku&amp;#39;s &lt;a href=&quot;https://docs.raku.org/language/mop&quot;&gt;Metaobject protocol (MOP)&lt;/a&gt; for introspection. In practice, we use the Rakudo-specific &lt;a href=&quot;https://docs.raku.org/type/Metamodel::ClassHOW&quot;&gt;&lt;code&gt;Metamodel&lt;/code&gt;&lt;/a&gt;. We need only three methods: &lt;code&gt;attribute&lt;/code&gt;, &lt;code&gt;get_value&lt;/code&gt; and &lt;code&gt;set_value&lt;/code&gt;. With these, we can iterate through the attributes and visit them recursively.&lt;/p&gt;
+
+&lt;p&gt;Attributes can be &lt;code&gt;$&lt;/code&gt;, &lt;code&gt;@&lt;/code&gt; or &lt;code&gt;%&lt;/code&gt; (and even &lt;code&gt;&amp;amp;&lt;/code&gt; but I will skip this). What this means in terms of Raku&amp;#39;s type system is that they can be scalar, Iterable or Associative, and we need to distinguish these cases. With that, we can write &lt;code&gt;everything&lt;/code&gt; as follows:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt; (\&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;, \&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;update&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;match&lt;/span&gt;) {
+    &lt;span class=&quot;c1&quot;&gt;# Arguments a immutable, so copy to $acc_&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;;
+    &lt;span class=&quot;c1&quot;&gt;# Match and update $acc_&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; =&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;));
+    &lt;span class=&quot;c1&quot;&gt;# Test the attribute type&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; ~~ &lt;span class=&quot;nb&quot;&gt;Associative&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# Iterate over the values&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;values&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;  {
+            &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;update&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;match&lt;/span&gt;)
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;; 
+    }     
+    &lt;span class=&quot;k&quot;&gt;elsif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; ~~ &lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# Iterate&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; |&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;  {
+            &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;update&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;match&lt;/span&gt;)
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;; 
+    }
+
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; { 
+        &lt;span class=&quot;c1&quot;&gt;# Go through all attributes&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.^&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt; {
+            &lt;span class=&quot;c1&quot;&gt;# Not everyting return by ^attributes &lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# is of type Attribute&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt; ~~ &lt;span class=&quot;n&quot;&gt;Attribute&lt;/span&gt; {
+                &lt;span class=&quot;c1&quot;&gt;# Get the attribute value&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; = &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;get_value&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;);
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; ~~ &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;  { &lt;span class=&quot;c1&quot;&gt;# for ContainerDescriptor::Untyped&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;;
+                }
+                &lt;span class=&quot;c1&quot;&gt;# Descend into this expression&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;update&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;&amp;amp;match&lt;/span&gt;);
+            }
+        }
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc_&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So what we do here essentially is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;for &lt;code&gt;@&lt;/code&gt; and &lt;code&gt;%&lt;/code&gt; we iterate through the values &lt;/li&gt;
+&lt;li&gt;iterate through the attributes using &lt;code&gt;^attributes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;for each attribute, get the expression using &lt;code&gt;get_value&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;call &lt;code&gt;everything&lt;/code&gt; on that expression&lt;/li&gt;
+&lt;li&gt;the first thing &lt;code&gt;everything&lt;/code&gt; does is update the accumulator&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;everywhere&lt;/code&gt; is similar:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt; (\&lt;span class=&quot;n&quot;&gt;t_&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;) {
+    &lt;span class=&quot;c1&quot;&gt;# Modify the node&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;modifier&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t_&lt;/span&gt;);
+    &lt;span class=&quot;c1&quot;&gt;# Test the type for Iterable or Associative&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; ~~ &lt;span class=&quot;nb&quot;&gt;Associative&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# Build the updated map&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%t_&lt;/span&gt;;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;keys&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;t_k&lt;/span&gt;  {
+            &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;t_v&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;{&lt;span class=&quot;n&quot;&gt;t_k&lt;/span&gt;};
+            &lt;span class=&quot;nv&quot;&gt;%t_&lt;/span&gt;{&lt;span class=&quot;n&quot;&gt;t_k&lt;/span&gt;} = &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt; (&lt;span class=&quot;n&quot;&gt;t_v&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;);
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%t_&lt;/span&gt;; 
+    }     
+    &lt;span class=&quot;k&quot;&gt;elsif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; ~~ &lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# Build the updated list&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@t_&lt;/span&gt;=[];
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; |&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;  {
+            &lt;span class=&quot;nv&quot;&gt;@t_&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt;( &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t_elt&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;) );
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@t_&lt;/span&gt;; 
+    }
+
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; {
+        &lt;span class=&quot;c1&quot;&gt;# t is immutable so copyto $t_&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$t_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;.^&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt; {            
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt; ~~ &lt;span class=&quot;n&quot;&gt;Attribute&lt;/span&gt; {
+                &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; = &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;get_value&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;);
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; ~~ &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;  { &lt;span class=&quot;c1&quot;&gt;# for ContainerDescriptor::Untyped&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$t_&lt;/span&gt;;
+                }
+                &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;expr_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everywhere&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;modifier&lt;/span&gt;);                
+                &lt;span class=&quot;nb&quot;&gt;attr&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;set_value&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$t_&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;expr_&lt;/span&gt;);
+            }
+        }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$t_&lt;/span&gt;;
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So what we do here essentially is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;for &lt;code&gt;@&lt;/code&gt; and &lt;code&gt;%&lt;/code&gt; we iterate through the values&lt;/li&gt;
+&lt;li&gt;iterate through the attributes using &lt;code&gt;^attributes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;for each attribute, get the expression using &lt;code&gt;get_value&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;call &lt;code&gt;everywhere&lt;/code&gt; on that expression&lt;/li&gt;
+&lt;li&gt;update the attribute using &lt;code&gt;set_value&lt;/code&gt; &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;This works without roles too&lt;/h2&gt;
+
+&lt;p&gt;First of all, the above works for classes too, because the Metamodel methods are not specific to roles. Furthermore, because we test for &lt;code&gt;@&lt;/code&gt; and &lt;code&gt;%&lt;/code&gt;, the generics above work just fine for data structures without roles, built from hashes and arrays:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;lst&lt;/span&gt; = [&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;,[&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;,[&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;]],[&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;,[&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;,&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;,[&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;]]]];
+
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matcher&lt;/span&gt; (\&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; {
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;[&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;] % &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; == &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; {                
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; [&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;]                
+            }            
+        }
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; []
+}
+
+&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;lst&lt;/span&gt;,[],&lt;span class=&quot;nv&quot;&gt;&amp;amp;append&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;matcher&lt;/span&gt;);
+&lt;span class=&quot;nb&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;;
+&lt;span class=&quot;c1&quot;&gt;# ([2 3 4 [5 6 7]] [8 9 [10 11 [12]]] [10 11 [12]] [12])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or for hashes:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%hsh&lt;/span&gt; = 
+    &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; =&amp;gt; {
+        &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; =&amp;gt; {
+            &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; =&amp;gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;,
+            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; =&amp;gt; {
+                &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; =&amp;gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;=&amp;gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+            } 
+        },
+        &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; =&amp;gt; {
+            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; =&amp;gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+        }
+    },
+    &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; =&amp;gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;,
+    &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; =&amp;gt; {&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;=&amp;gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;nb&quot;&gt;e&lt;/span&gt;=&amp;gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;}
+;
+
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hmatcher&lt;/span&gt; (\&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+    &lt;span class=&quot;k&quot;&gt;given&lt;/span&gt; (&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;) {
+        &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; {
+            &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;=[];
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;keys&lt;/span&gt; -&amp;gt; \&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; {                
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;eq&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;a&amp;#39;&lt;/span&gt; {
+                    &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;{&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;})
+                }
+            }
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;;
+        }
+    }
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; []
+}
+
+&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;hres&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;everything&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;%hsh&lt;/span&gt;,[],&lt;span class=&quot;nv&quot;&gt;&amp;amp;append&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;&amp;amp;hmatcher&lt;/span&gt;);
+&lt;span class=&quot;nb&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hres&lt;/span&gt;;
+&lt;span class=&quot;c1&quot;&gt;# ({b =&amp;gt; {a =&amp;gt; {b =&amp;gt; 1, c =&amp;gt; 2}, c =&amp;gt; 1}, c =&amp;gt; {a =&amp;gt; 3}} {b =&amp;gt; 1, c =&amp;gt; 2} 3)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Generic datastructure traversals are a great way to reduce boilerplate code and focus on the actual purpose of the traversals. And now you can have them in Raku too. I have shown the implementation for the two main schemes &lt;code&gt;everything&lt;/code&gt; and &lt;code&gt;everywhere&lt;/code&gt; and shown that they work for role based datastructures as well as traditional hash- or array-based datastructures.&lt;/p&gt;
+
+        </content>
+    </entry>
+    
+    <entry>
+        <title>How to reduce the carbon footprint of your digital lifestyle</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/frugal-computing-consumer/"/>
+        <updated>2021-11-19T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/frugal-computing-consumer</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/frugal-computing-consumer_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;The CO₂ emissions from &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/frugal-computing&quot;&gt;manufacturing and use of digital devices (laptops, phones, tablets, TVs, ...) are huge and rising steeply&lt;/a&gt;. Here is what you as a consumer can do to help reduce your digital carbon footprint.&lt;/p&gt;
+
+&lt;h2&gt;Key points&lt;/h2&gt;
+
+&lt;h3&gt;The problem:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The current CO₂ emissions from the internet and digital devices form about 2% of the world CO₂ emissions but are expected to rise steeply over the next two decades. By 2040 this &amp;quot;digital carbon footprint&amp;quot; alone will make up more than half of the acceptable global carbon footprint to keep global warming below 1.5°C. So the growth in digital carbon footprint is unsustainable: it would make it virtually impossible to keep global warming below the safe limit.&lt;/li&gt;
+&lt;li&gt;What is little known is that the CO₂ emissions from production of digital devices exceed the emissions from the electricity they use over their lifetime. So even if newer devices are more energy efficient, producing more of them will make the emissions problem worse. &lt;/li&gt;
+&lt;li&gt;Apart from the carbon footprint of production and energy consumption of our digital devices, their main purpose &amp;mdash; accessing the internet &amp;mdash; also causes increasing amounts of CO₂ emissions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;The solution &amp;mdash; what you as a consumer can do:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Buy fewer new devices (laptop/desktop/phone/tablet/TV):
+
+&lt;ul&gt;
+&lt;li&gt;Keep using your existing devices for as long as possible.&lt;/li&gt;
+&lt;li&gt;Have your devices repaired rather than replacing them.&lt;/li&gt;
+&lt;li&gt;Only buy devices you really need.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;When you use your devices, use them as little as possible and in the most energy-efficient manner:
+
+&lt;ul&gt;
+&lt;li&gt;Reduce your internet usage.&lt;/li&gt;
+&lt;li&gt;Reduce your resolution when watching streaming video.&lt;/li&gt;
+&lt;li&gt;Turn off your camera in online meetings.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Buy fewer new devices&lt;/h2&gt;
+
+&lt;p&gt;The CO₂ emissions from production of digital devices far exceeds the emissions from the electricity they use. Therefore the best possible action from a consumer perspective is not to buy new devices.&lt;/p&gt;
+
+&lt;p&gt;For digital devices such as mobile phones, tablets, laptops, desktop computers and televisions, the carbon footprint from manufacturing is so large that no amount of energy efficiency savings during use can compensate for it. So buying a new device effectively results in more emissions, even if it is a more energy-efficient model. It is better to keep using an older device for longer, even if it less energy-efficient. For the same reason it is better to have your devices repaired than to replace them.&lt;/p&gt;
+
+&lt;p&gt;Companies are starting to realise that increasing numbers of consumers want to use their devices for longer. Apple has recently introduced &lt;a href=&quot;https://www.apple.com/newsroom/2021/11/apple-announces-self-service-repair/&quot;&gt;a repair self-service&lt;/a&gt; and several brands of Android phones have started to offer up to &lt;a href=&quot;https://www.techadvisor.com/buying-advice/google-android/best-brands-for-android-updates-3798154/&quot;&gt;four years of support&lt;/a&gt; on some models. &lt;/p&gt;
+
+&lt;h2&gt;When you use your devices, use them frugally&lt;/h2&gt;
+
+&lt;p&gt;Using your devices to access the internet also cause large amounts of CO₂ emissions. This is the &amp;quot;invisible&amp;quot; carbon footprint of the physical infrastructure required to serve, store and transfer video, voice and data. In particular streaming video (Zoom, Skype, YouTube, Netflix, etc) has a large carbon footprint. The footprint is proportional to the duration and resolution of your video stream or call. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For video calls, the most effective action is to switch off your camera whenever possible. This immediately &lt;a href=&quot;https://www.sciencedaily.com/releases/2021/01/210114134033.htm&quot;&gt;saves more than 90% of the emissions&lt;/a&gt;. To get a better idea of the carbon footprint of your online meetings, you can use &lt;a href=&quot;https://www.utilitybidder.co.uk/business-electricity/zoom-emissions/&quot;&gt;this online emissions calculator&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;For watching streaming video (including TV), reducing the resolution has a huge effect. &lt;a href=&quot;https://www.androidauthority.com/how-much-data-does-youtube-use-964560/&quot;&gt;For example&lt;/a&gt;, if you watch at a resolution of 4K, your carbon footprint is 150x higher than if you watch at a resolution of 360p.&lt;/li&gt;
+&lt;li&gt;When you &lt;a href=&quot;https://qz.com/1267709/every-google-search-results-in-co2-emissions-this-real-time-dataviz-shows-how-much/&quot;&gt;use a search engine&lt;/a&gt; or browse the web you also increase your footprint. Many web sites transfer very large amounts of data to your browser. You can &lt;a href=&quot;https://www.websitecarbon.com/&quot;&gt;test the carbon footprint of your favourite sites with this online calculator&lt;/a&gt; and &lt;a href=&quot;https://qz.com/1267709/every-google-search-results-in-co2-emissions-this-real-time-dataviz-shows-how-much/&quot;&gt;see the climate impact of Google searches with this real-time data visualisation&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In a nutshell, the key actions you can take to reduce your digital carbon footprint are to buy fewer new devices, keep using your existing devices for as long as possible and only buy devices you really need: this reduces the carbon footprint of manufacturing. And when using your device, the most effective action is to be frugal: reduce your internet usage, reduce the resolution when watching streaming video and turn off your camera in video calls.&lt;/p&gt;
+
+&lt;h3&gt;Postscript: video calls are still better than cars, even electric ones&lt;/h3&gt;
+
+&lt;p&gt;Even with your camera on, it is still better to have a video conference than to drive to a face-to-face meeting. Assuming average estimates for the emissions from internet usage and car journeys, driving just 0.1 mile causes the same emissions as a video call of one hour. And it might come as a surprise that even if you drive a new electric car, that distance only increases to 0.2 mile.&lt;/p&gt;
+
+        </content>
+    </entry>
+    
+    <entry>
+        <title>Why I wrote Haku</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/why-i-wrote-haku/"/>
+        <updated>2021-10-17T00:00:00+01:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/why-i-wrote-haku</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/why-i-wrote-haku_1600x600.png&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;A few weeks ago I released &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku&quot;&gt;Haku&lt;/a&gt;, a Japanese natural-language programming language. Haku is a strict functional language with implicit typing, and &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku/src/branch/main/examples/pwc131-t1.haku&quot;&gt;an example program&lt;/a&gt; looks like this:&lt;/p&gt;
+
+&lt;div style=&quot;writing-mode: vertical-rl&quot;&gt;
+&lt;pre&gt;
+裂くとはパーツとヨウソで
+若しパーツが空に等しいなら
+［［ヨウソ］］ですけど
+そうでなければ、
+一パートはパーツの頭、
+一パーツ一はパーツの尻尾、
+一マエはパートの頭、
+では
+若しマエが〈ヨウソ引く一〉に等しいなら
+［ヨウソ・パート］・パーツ一ですが
+そうでなければ
+［ヨウソ］・パーツ
+の事です。
+
+本とは
+列は壱と弐と三と四と五と七と八と十一と十三と十六と十七、
+仮一は列と空を裂くので畳み込む、
+仮二は逆な仮一、
+魄は仮二を逆で写像する、
+魄を見せる
+の事です。
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku#haku&quot;&gt;repository README&lt;/a&gt; explains the language and gives some background, as does this &lt;a href=&quot;https://www.slideshare.net/WimVanderbauwhede/haku-a-toy-functional-language-based-on-literary-japanese&quot;&gt;presentation&lt;/a&gt;. I have also written a separate post about the &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/haku-in-raku&quot;&gt;implementation of Haku in Raku&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;This article is about my motivation for creating Haku.&lt;/p&gt;
+
+&lt;p&gt;I am interested in how programming languages influence the programmer&amp;#39;s thinking (the old adage of &amp;quot;to the programmer with a hammer, everything looks like a thumb&amp;quot;). &lt;/p&gt;
+
+&lt;p&gt;From personal experience, I observe that my thinking patterns are quite different when I program in a functional language, an imperative one or an object-oriented one. There is also a marked difference between programming in a statically or dynamically typed language.&lt;/p&gt;
+
+&lt;p&gt;But what about the influence of the programmer&amp;#39;s native language? Most programming languages are based on English, and in particular function calls typically use English word order. &lt;/p&gt;
+
+&lt;h2&gt;Arithmetic in English and Flemish&lt;/h2&gt;
+
+&lt;p&gt;For example, let&amp;#39;s consider the common arithmetic operations +, -, *, /. If we use named functions rather than operators for these, and used the common parentheses-and-commas syntax for function calls, we get something like&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;A+B: add(A,B) 
+A-B: subtract(A,B)
+A*B: multiply(A,B)
+A/B: divide(A,B)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In English we would express this most commonly as an infinitive or as an imperative. For the infinitive, we have:&lt;/p&gt;
+
+&lt;!-- &lt;div class=&quot;highlight&quot; style=&quot;background-color: #eadcb2&quot;&gt;--&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;to add A and/to B
+to subtract A and/from B
+to multiply A and B
+to divide A and/by B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The pattern is &lt;code&gt;&amp;#39;to&amp;#39; &amp;lt;verb&amp;gt; A &amp;#39;and&amp;#39; B&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For the imperative, we have:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;add A and/to B
+subtract A and/from B
+multiply A and B
+divide A and/by B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The pattern is &lt;code&gt;&amp;lt;verb&amp;gt; A &amp;#39;and&amp;#39; B&lt;/code&gt;, so the same pattern apart from the &lt;code&gt;to&lt;/code&gt;. And it is easy to see how this pattern informed the typical function call syntax &lt;code&gt;&amp;lt;verb&amp;gt; &amp;#39;(&amp;#39; A &amp;#39;,&amp;#39; B &amp;#39;)&amp;#39;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, in Flemish (or Dutch), the order of the arguments is quite different. For the infinitive, we have:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;A en/bij B optellen; A optellen bij B
+A en/van B aftrekken; A aftrekken van B
+A en/met B vermenigvuldigen; A vermenigvuldigen met B
+A en/door B delen; A delen door B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first variant has the pattern &lt;code&gt;A &amp;#39;en&amp;#39; B &amp;lt;verb&amp;gt;&lt;/code&gt;; the second variant needs a different preposition for each verb but the pattern is &lt;code&gt;A &amp;lt;verb&amp;gt; &amp;lt;preposition&amp;gt; B&lt;/code&gt;. &lt;/p&gt;
+
+&lt;p&gt;For the imperative, we have:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;tel A op bij B; tel A en/bij B op
+trek A af van B; trek A en/van B af
+vermenigvuldig A en/met B
+deel A en/door B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There is not just one single general pattern but three: &lt;code&gt;&amp;lt;verb&amp;gt; A &amp;#39;en&amp;#39; B&lt;/code&gt;, 
+&lt;code&gt;&amp;lt;verb&amp;gt; A &amp;lt;preposition&amp;gt; &amp;lt;preposition&amp;gt; B&lt;/code&gt; and  &lt;code&gt;&amp;lt;verb&amp;gt; A &amp;lt;preposition&amp;gt; B &amp;lt;preposition&amp;gt;&lt;/code&gt;, depending on whether the verb has a preposition as part of it or not, and on the position we choose for that preposition. &lt;/p&gt;
+
+&lt;p&gt;So not only are word orders for infinitive and imperative quite different, there is no simple rule for the imperative word order. Which makes me wonder what programming languages would look like if their developers had not been English native speakers. &lt;/p&gt;
+
+&lt;p&gt;That question becomes even more interesting for non-Indo-European languages, because despite the example above, there are still lots of grammatical similarities between languages such as English, French and German.&lt;/p&gt;
+
+&lt;h2&gt;Japanese natural-language programming languages&lt;/h2&gt;
+
+&lt;p&gt;There is one such language that particularly interests me and that is Japanese. I have been learning it for a long time and written &lt;a href=&quot;https://quickandtastycooking.org.uk/articles/&quot;&gt;several posts on Japanese language related topics&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Besides having a very different grammar, Japanese has writing system that is a very different from the Latin alphabet as well as its own number system.&lt;/p&gt;
+
+&lt;p&gt;So I decided to create a natural-language programming language based on Japanese. &lt;/p&gt;
+
+&lt;p&gt;There are already several Japanese natural-language programming languages, all made by Japanese native speakers. &lt;a href=&quot;https://en.wikipedia.org/wiki/Non-English-based_programming_languages&quot;&gt;Wikipedia lists eight&lt;/a&gt; but there are actually only four that are still under active development: &lt;a href=&quot;https://dolittle.eplang.jp/&quot;&gt;Dolittle&lt;/a&gt;, &lt;a href=&quot;https://rdr.utopiat.net/&quot;&gt;Produire&lt;/a&gt;, &lt;a href=&quot;https://nadesi.com/top/&quot;&gt;Nadeshiko&lt;/a&gt; and &lt;a href=&quot;https://www.scripts-lab.co.jp/mind/whatsmind.html&quot;&gt;Mind&lt;/a&gt;. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Dolittle&lt;/em&gt; ドリトル is an object-oriented language specifically designed for teaching children to program and follows the &lt;a href=&quot;http://people.eecs.berkeley.edu/%7Ebh/logo.html&quot;&gt;Logo&lt;/a&gt; tradition with a turtle to draw shapes. &lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Produire&lt;/em&gt; プロデル is an imperative and object-oriented language but more general purpose. It also has a turtle library, so education is definitely one of the main design purposes.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Nadeshiko&lt;/em&gt; なでしこ (meaning &amp;quot;pink&amp;quot;, the flower) is an open source general purpose imperative language.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Mind&lt;/em&gt; is also imperative. Although it is actually a &lt;a href=&quot;https://www.forth.com/&quot;&gt;Forth&lt;/a&gt;-style stack-based language, in general structure it is similar to the other three. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All these language are complete with support for graphics, networking etc and their own IDE and/or web-based editor. They are practical programming languages, so they all support the use of Arabic numerals as well as operators for arithmetic, logic and comparison operations. &lt;/p&gt;
+
+&lt;h2&gt;Haku&lt;/h2&gt;
+
+&lt;p&gt;My motivation to create Haku was not to create a practical language. I wanted to explore what the result is of creating a programming language based on a non-English language, in terms of syntax, grammar and vocabulary. In particular, I wanted to allow the programmer to control the register of the language to some extent (informal/polite/formal). &lt;a href=&quot;https://nadesi.com/v3/doc/index.php?%E6%96%87%E6%B3%95%2F%E6%95%AC%E8%AA%9E&amp;show&quot;&gt;Nadeshiko&lt;/a&gt; and &lt;a href=&quot;https://www.scripts-lab.co.jp/mind/ver8/doc/02-Program-Hyoki.html#okurigana&quot;&gt;Mind&lt;/a&gt; allow this to some extent, but I wanted even more flexibility.&lt;/p&gt;
+
+&lt;h3&gt;Grammar&lt;/h3&gt;
+
+&lt;p&gt;My main motivation for creating Haku is the difference in grammar between Japanese and most Indo-European languages.&lt;/p&gt;
+
+&lt;p&gt;Notions such as &amp;quot;noun&amp;quot;, &amp;quot;adjective&amp;quot;, &amp;quot;adverb&amp;quot; and &amp;quot;verb&amp;quot; are not quite so clearly defined in Japanese. For example, consider the word &lt;em&gt;yasashii&lt;/em&gt;, &amp;quot;kind&amp;quot;. A person who is kind is a &lt;em&gt;yasashii hito&lt;/em&gt;. A person who is not kind is a &lt;em&gt;yasashikunai hito&lt;/em&gt;. But in its own right, &lt;em&gt;yasashiku&lt;/em&gt; is and adverb, and &lt;em&gt;~nai&lt;/em&gt; is the plain negative verb ending, e.g. &amp;quot;I don&amp;#39;t understand&amp;quot; is &lt;em&gt;wakaranai&lt;/em&gt;. And this &amp;quot;adjective&amp;quot; can get a past tense: &amp;quot;the person who was not kind&amp;quot; is &lt;em&gt;yasashikunakatta hito&lt;/em&gt;. And if we chain adjectives, e.g. &amp;quot;a kind and and clever person&amp;quot;, we get &lt;em&gt;yasashikute kashikoi hito&lt;/em&gt;. And indeed we can have &lt;em&gt;yasashihunakute　kashikonkatta hito&lt;/em&gt;, &amp;quot;the kerson who was not kind and smart&amp;quot;. It is also very easy to nominalise a verb or verbalise a noun by adding a suffix. &lt;/p&gt;
+
+&lt;p&gt;The word order in a sentence is also quite different from most Indo-European languages. The typical order is main topic, secondary topic(s), verb. The function of the topics is indicated with what is called a &amp;quot;particle&amp;quot;, a kind of suffix. For example, &amp;quot;I ate the pudding with a spoon&amp;quot; is &lt;em&gt;purin wo supuun de tabeta&lt;/em&gt;. In this example, the main topic &amp;quot;I&amp;quot; is implied. Japanese is quite a parsimonious language: whenever possible, implied topics are left out, to be inferred from the context. &lt;/p&gt;
+
+&lt;p&gt;Finally, compared to Indo-European languages, verb conjugation serves a different purpose in Japanese. For example in English, French and German, tenses are mainly uses to give precise indications of the time and duration of the action: simple past, present continuous, future perfect continuous etc. Japanese has essentially two tenses: the past and the non-past; and a form to similar to the -ing form in English to indicated an ongoing action, although that is again a loose approximation. However, there are many tenses to indicate modifiers to the verb to say e.g. that something is possible, that the speaker wants something, that a third party wants something, that the speaker has begun to do something, that someone is doing someone a favour and of course to express the level of politeness. For example, &lt;em&gt;shachou ha kiite kuremashita&lt;/em&gt; &amp;quot;the boss did me the favour of listening to me&amp;quot; (the &lt;em&gt;~mashita&lt;/em&gt; is a polite verb form), or &lt;em&gt;wasurekaketeita&lt;/em&gt; &amp;quot;I had begun to forget&amp;quot; (&lt;em&gt;~ta&lt;/em&gt; is a plain past, rather than polite).&lt;/p&gt;
+
+&lt;p&gt;Putting at least some of this grammar in the programming language seemed like an interesting challenge to me. In particular, I was interested in how programmers perceive functions calls. Some time ago I ran a poll about this, and 3/4 of respondents answered &amp;quot;imperative&amp;quot; (other options were infinitive, noun, -ing form). &lt;/p&gt;
+
+&lt;p&gt;In Japanese, the imperative (&lt;em&gt;meireikei&lt;/em&gt;, &amp;quot;command form&amp;quot;) is rarely used. Therefore in Haku you can&amp;#39;t use this form. Instead, you can use the plain form, the polite &lt;em&gt;-masu&lt;/em&gt; form or the &lt;em&gt;-te&lt;/em&gt; form (like &amp;quot;-ing&amp;quot;), including &lt;em&gt;-te kudasai&lt;/em&gt; (similar to &amp;quot;please&amp;quot;). Whether a function is perceived as a verb or a noun is up to you, and the difference is clear from the syntax. If it is a noun, you can turn it into a verb by adding &lt;em&gt;suru&lt;/em&gt;, and if it is a verb, you can add the &lt;em&gt;no&lt;/em&gt; or &lt;em&gt;koto&lt;/em&gt; nominalisers. And you can conjugate the verb forms in many different ways, although in practice the verb ending has no semantic function in the Haku language.&lt;/p&gt;
+
+&lt;h3&gt;Naming and giving meaning&lt;/h3&gt;
+
+&lt;p&gt;In principle, a programming language does not need to be based on natural language at all. The notorious example is APL, which uses symbols for everything. Agda programmers also tends to use lots of mathematical symbols. It works because they are very familiar with those symbols. An interesting question is if an experienced programmer who does not know Japanese could understand a Haku program; or if not, what the minimal changes would be to make it understandable. &lt;/p&gt;
+
+&lt;p&gt;To allow to investigate that question, the Scheme and Raku emitters for Haku support (limited) transliteration to Romaji. I have the intention (but maybe not the time) to create a Romaji version of Haku as well as a version that does not use any Japanese but keeps the word order.&lt;/p&gt;
+
+&lt;h3&gt;Syntax and parsing&lt;/h3&gt;
+
+&lt;p&gt;I also wanted the language to be closer, at lease visually, to literary Japanese. Therefore Haku does not use Roman letters, Arabic digits or common arithmetic, logical and comparison operators. It also supports top-to-bottom, right-to-left writing.  &lt;/p&gt;
+
+&lt;p&gt;Literary Japanese does not use spaces. So another question of interest to was how to tokenise a string of Japanese. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;There are three writing systems: &lt;em&gt;katakana&lt;/em&gt; (angular), &lt;em&gt;hiragana&lt;/em&gt; (squigly) and &lt;em&gt;kanji&lt;/em&gt; (complicated). &lt;/li&gt;
+&lt;li&gt;&lt;em&gt;katakana&lt;/em&gt; is used in a similar way as italics, and also for loanwords and names of plants and animals.&lt;/li&gt;
+&lt;li&gt;Nouns, verb, adjectives and adverbs normally start with a &lt;em&gt;kanji&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;hiragana&lt;/em&gt; is used for verb/adjective/adverb endings and &amp;quot;particles&amp;quot;, small words or suffixes that help identify the words in a sentence. &lt;/li&gt;
+&lt;li&gt;A verb/adjective/adverb can&amp;#39;t end with a &lt;em&gt;hiragana&lt;/em&gt; character that represents a particle. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So we have some simple tokenisation rules:
+- a sequence of &lt;em&gt;katakana&lt;/em&gt;
+- a &lt;em&gt;kanji&lt;/em&gt; followed by more &lt;em&gt;kanji&lt;/em&gt; or &lt;em&gt;hiragana&lt;/em&gt; that do not represent particles
+- &lt;em&gt;hiragana&lt;/em&gt; that represent particles&lt;/p&gt;
+
+&lt;p&gt;This is in fact a formalisation of the rules a human uses when reading Japanese. &lt;/p&gt;
+
+&lt;p&gt;Where that fails, we can introduce parentheses. A human reader uses context, and a considerable amount of look-ahead parsing and backtracking, but that would make the parser very complex and slow.&lt;/p&gt;
+
+&lt;p&gt;In practice, only specific adverbs and adjectives are used in Haku. For example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;ラムダ|は|或|エクス|で|エクス|掛ける|エクス|です
+
+ラムダ: katakana word
+は: particle
+或: pre-noun adjective
+エクス: katakana word
+で: particle
+エクス: katakana word
+掛ける: verb
+エクス: katakana word　
+です: verb (copula)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Number system&lt;/h3&gt;
+
+&lt;p&gt;For large numbers, Japanese uses a number system based on multiples of ten thousand (called &lt;em&gt;myriads&lt;/em&gt;) rather than a thousand. A peculiar feature of this system is that there are &lt;em&gt;kanji&lt;/em&gt; for all powers of 10,000 up to 10&lt;sup&gt;48&lt;/sup&gt;. For more background on this, please read &lt;a href=&quot;https://quickandtastycooking.org.uk/articles/japanese-large-numbers/&quot;&gt;my article on this topic&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;The consequence is that a number such as &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;1,234,567,890 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;is composed as &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;  (10 + 2) * 100,000,000 
++ (3 * 1000 + 4 * 100 + 5 * 10 + 6) * 10,000
++  7 * 1000 + 8 * 100 + 9 * 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;which can is written in &lt;em&gt;kanji&lt;/em&gt; as &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;十二億三千四百五十六万七千八百九十
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There are also &lt;em&gt;kanji&lt;/em&gt; for numbers smaller than one. They go down to 10&lt;sup&gt;-12&lt;/sup&gt; in powers of 10 and rational numbers are indicated with the &lt;em&gt;kanji&lt;/em&gt; 点 (&lt;em&gt;ten&lt;/em&gt;, &amp;quot;dot&amp;quot;). So &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;3.14159
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;can be written as    &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt; 三点一分四厘一毛五糸九忽 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Apart from this format, the decimal format is also used, and is indeed more common for rational numbers and also for years (and dates in general), e.g. 2021 is written 二〇二一 instead of 二千二十一. Haku supports all these formats.&lt;/p&gt;
+
+&lt;h2&gt;Poetry&lt;/h2&gt;
+
+&lt;p&gt;The expressiveness of Haku as a programming language is on purpose rather spartan. It is after all a &amp;quot;toy language&amp;quot;, an experimental rather than general-purpose language. &lt;/p&gt;
+
+&lt;p&gt;I am more interested in the natural-language expressiveness of Haku, and for that my criterion  is: Can the programmer write poetry in it? Several of Haku&amp;#39;s features such as adjectives and verb conjugation (&lt;em&gt;okurigana&lt;/em&gt;) are there entirely to make Haku programs sufficiently expressive on the natural-language level to support this idea. For that reason, my &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/haku/src/branch/main/examples/yuki.haku&quot;&gt;favourite Haku program&lt;/a&gt; is one that demonstrates this ability:&lt;/p&gt;
+
+&lt;div style=&quot;writing-mode: vertical-rl&quot;&gt;
+&lt;pre&gt;
+忘れるとは件で空のことです。
+
+遠いとは物で物を見せるのことです。
+
+本とは
+記憶は「忘れられないあの冬の the new fallen snow」、
+忘れかけてた遠い記憶
+の事です
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;When run, this program prints out the string 「忘れられないあの冬の the new fallen snow」. The line that causes this string to be printed is &lt;/p&gt;
+
+&lt;p&gt;忘れかけてた遠い記憶&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Wasurekaketeta tooi kioku&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This is on the one hand an example of some of the Japanese grammar features that Haku supports:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;adjectives as functions: &lt;em&gt;tooi&lt;/em&gt; is a so-called &amp;quot;i-adjective&amp;quot;;&lt;/li&gt;
+&lt;li&gt;adjectival verbs: &lt;em&gt;wasurekaketeta&lt;/em&gt; is a verb used as an adjective;&lt;/li&gt;
+&lt;li&gt;complex verb conjucations: the plain form, used to define the function, is &lt;em&gt;wasureru&lt;/em&gt;. The form &lt;em&gt;~kakeru&lt;/em&gt; means &amp;quot;starting to&amp;quot; and the final ending &lt;em&gt;~ta&lt;/em&gt; is a plain past. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But on the other hand, it is also poetry.&lt;/p&gt;
+
+&lt;h2&gt;Why &lt;em&gt;haku&lt;/em&gt;?&lt;/h2&gt;
+
+&lt;p&gt;I decided to call my language &lt;em&gt;haku&lt;/em&gt; because I like the sound of it, and also because that word can be written in many ways and mean many things in Japanese (in my dictionary there are 89 &lt;em&gt;kanji&lt;/em&gt; that have &lt;em&gt;haku&lt;/em&gt; as one of their possible pronunciations). I was definitely thinking about the character Haku from the &lt;a href=&quot;https://ghiblicollection.com/product/spirited-away-collector-s-edition?product_id=7231&quot;&gt;Studio Ghibli movie &amp;quot;Spirited Away&amp;quot;&lt;/a&gt;. Also, I like the resemblance with &lt;a href=&quot;https://raku.org&quot;&gt;Raku&lt;/a&gt;, the implementation language. &lt;/p&gt;
+
+&lt;p&gt;If I had to pick a &lt;em&gt;kanji&lt;/em&gt;, I would write it 珀 (amber) or 魄 (soul, spirit).&lt;/p&gt;
+
+        </content>
+    </entry>
     
     <entry>
         <title>Haku: a Japanese programming language</title>
@@ -329,7 +1062,7 @@ run the program.&lt;/p&gt;
 &lt;h3&gt;The problem:&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be close to half the emissions level acceptable to keep global warming below 1.5°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.&lt;/li&gt;
+&lt;li&gt;The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be more than of half the emissions level acceptable to keep global warming below 1.5°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.&lt;/li&gt;
 &lt;li&gt;The emissions from production of computing devices far exceed the emissions from operating them, so even if devices are more energy efficient producing more of them will make the emissions problem worse. Therefore we must extend the useful life of our computing devices.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -375,7 +1108,7 @@ run the program.&lt;/p&gt;
 
 &lt;h3&gt;Meeting the climate targets&lt;/h3&gt;
 
-&lt;p&gt;To limit global warming to 1.5&amp;deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed &lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt;. So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. According to the International Energy Agency &lt;a href=&quot;#10&quot;&gt;[10]&lt;/a&gt;, emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 &lt;a href=&quot;#15&quot;&gt;[15]&lt;/a&gt;. In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. &lt;/p&gt;
+&lt;p&gt;To limit global warming to 1.5&amp;deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed &lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt;. So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. By 2040, a further reduction to 13 GtCO₂e per year is necessary. According to the International Energy Agency &lt;a href=&quot;#10&quot;&gt;[10]&lt;/a&gt;, emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 &lt;a href=&quot;#15&quot;&gt;[15]&lt;/a&gt;. In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. &lt;/p&gt;
 
 &lt;h3&gt;Emissions from consumption of computational resources&lt;/h3&gt;
 
@@ -403,7 +1136,7 @@ run the program.&lt;/p&gt;
 
 &lt;p&gt;The independent study &amp;quot;Assessing ICT global emissions footprint: Trends to 2040 &amp;amp; recommendations&amp;quot; &lt;a href=&quot;#3&quot;&gt;[3]&lt;/a&gt; corroborates the SIA figures: they estimate the computing greenhouse gas emissions for 2020 between 3.0% and 3.5% of the total, which is a bit higher than the SIA estimate of 2.5% because it does take into account networks and datacentres. Their projection for 2040 is 14% rather than 10%, which means a growth of 4x rather than 3x. &lt;/p&gt;
 
-&lt;p&gt;To put it in absolute values, based on the above estimate, by 2040 energy consumption of compute devices would be responsible for 5 GtCO₂e, whereas the target for world total emissions from all sources is 23 GtCO₂e.&lt;/p&gt;
+&lt;p&gt;To put it in absolute values, based on the above estimate, by 2040 energy consumption of compute devices would be responsible for 5 GtCO₂e, whereas the target for world total emissions from all sources is 13 GtCO₂e.&lt;/p&gt;
 
 &lt;h3&gt;Emissions from production of computational resources&lt;/h3&gt;
 
@@ -413,12 +1146,12 @@ run the program.&lt;/p&gt;
 
 &lt;h3&gt;The total emissions cost from computing&lt;/h3&gt;
 
-&lt;p&gt;Taking into account the carbon cost of both operation and production, computing would be responsible for 10 GtCO₂e by 2040, almost half of the acceptable CO₂ emissions budget &lt;a href=&quot;#2&quot;&gt;[2,3,14]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Taking into account the carbon cost of both operation and production, computing would be responsible for 10 GtCO₂e by 2040, almost 80% of the acceptable CO₂ emissions budget &lt;a href=&quot;#2&quot;&gt;[2,3,14]&lt;/a&gt;.&lt;/p&gt;
 
 &lt;figure&gt;
-&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/computing-emissions.png&quot; alt=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)&quot;
-title=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)&quot; /&gt;
-&lt;figcaption&gt;Actual and projected emissions from computing (production+operation), and 2040 emission target to limit warming to &amp;lt;2&amp;deg;C&lt;/figcaption&gt;
+&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/computing-emissions.png&quot; alt=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (13), and the projected emissions from computing (10)&quot;
+title=&quot;A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (13), and the projected emissions from computing (10)&quot; /&gt;
+&lt;figcaption&gt;Actual and projected emissions from computing (production+operation), and 2040 emission target to limit warming to &amp;lt;1.5&amp;deg;C&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;h3&gt;A breakdown per device type&lt;/h3&gt;
