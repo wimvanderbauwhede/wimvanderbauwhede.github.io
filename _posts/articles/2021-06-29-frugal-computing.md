@@ -24,7 +24,7 @@ On the need for low-carbon and sustainable computing and the path towards zero-c
 ## Key points
 
 ### The problem: 
-  - The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be close to half the emissions level acceptable to keep global warming below 1.5°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.
+  - The current emissions from computing are about 2% of the world total but are projected to rise steeply over the next two decades. By 2040 emissions from computing alone will be more than of half the emissions level acceptable to keep global warming below 1.5°C. This growth in computing emissions is unsustainable: it would make it virtually impossible to meet the emissions warming limit.
   - The emissions from production of computing devices far exceed the emissions from operating them, so even if devices are more energy efficient producing more of them will make the emissions problem worse. Therefore we must extend the useful life of our computing devices.
 
 ### The solution:
@@ -63,7 +63,7 @@ I would like to call this "frugal computing": achieving the same results for les
 
 ### Meeting the climate targets
 
-To limit global warming to 1.5&deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed [[5]](#5). So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. According to the International Energy Agency [[10]](#10), emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 [[15]](#15). In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. 
+To limit global warming to 1.5&deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed [[5]](#5). So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. By 2040, a further reduction to 13 GtCO₂e per year is necessary. According to the International Energy Agency [[10]](#10), emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 [[15]](#15). In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. 
 
 ### Emissions from consumption of computational resources
 
@@ -85,7 +85,7 @@ In the countries where most of the computational resources are consumed (US and 
 
 The independent study "Assessing ICT global emissions footprint: Trends to 2040 & recommendations" [[3]](#3) corroborates the SIA figures: they estimate the computing greenhouse gas emissions for 2020 between 3.0% and 3.5% of the total, which is a bit higher than the SIA estimate of 2.5% because it does take into account networks and datacentres. Their projection for 2040 is 14% rather than 10%, which means a growth of 4x rather than 3x. 
 
-To put it in absolute values, based on the above estimate, by 2040 energy consumption of compute devices would be responsible for 5 GtCO₂e, whereas the target for world total emissions from all sources is 23 GtCO₂e.
+To put it in absolute values, based on the above estimate, by 2040 energy consumption of compute devices would be responsible for 5 GtCO₂e, whereas the target for world total emissions from all sources is 13 GtCO₂e.
 
 ### Emissions from production of computational resources
 
@@ -95,12 +95,12 @@ The report about the cost of planned obsolescence by the European Environmental 
 
 ### The total emissions cost from computing
 
-Taking into account the carbon cost of both operation and production, computing would be responsible for 10 GtCO₂e by 2040, almost half of the acceptable CO₂ emissions budget [[2,3,14]](#2).
+Taking into account the carbon cost of both operation and production, computing would be responsible for 10 GtCO₂e by 2040, almost 80% of the acceptable CO₂ emissions budget [[2,3,14]](#2).
 
 <figure>
-<img src="{{ site.url }}/images/computing-emissions.png" alt="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)"
-title="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (23), and the projected emissions from computing (10)" />
-<figcaption>Actual and projected emissions from computing (production+operation), and 2040 emission target to limit warming to &lt;2&deg;C</figcaption>
+<img src="{{ site.url }}/images/computing-emissions.png" alt="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (13), and the projected emissions from computing (10)"
+title="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (13), and the projected emissions from computing (10)" />
+<figcaption>Actual and projected emissions from computing (production+operation), and 2040 emission target to limit warming to &lt;1.5&deg;C</figcaption>
 </figure>
 
 ### A breakdown per device type
