@@ -1,5 +1,5 @@
 perl set_mod_date.pl
-perl create_index.pl
+#perl create_index.pl
 perl generate_sitemap.pl > sitemap.xml
 cp _config.yml.publish _config.yml
 bundle exec jekyll build -d ~/Git/wimvanderbauwhede.github.io/
