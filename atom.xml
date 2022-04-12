@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2021-09-25T12:14:56+01:00</updated>
+    <updated>2022-04-12T10:59:47+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -254,9 +254,7 @@ I found this a better fit for my purpose than the also-supported class inheritan
 
 &lt;p&gt;Running the generated Raku code is simple: I write the generated Raku code to a module and &lt;code&gt;require&lt;/code&gt; it. The generated code ends with a call to &lt;code&gt;hon()&lt;/code&gt;, the main function in a Haku program, so this automatically executes the program. &lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Write the parsed program to a module &lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt; = &lt;span class=&quot;s&quot;&gt;&amp;#39;Hon.rakumod&amp;#39;&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;IO&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;open:&lt;/span&gt; :&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;;
-&lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;put:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$hon_raku_code&lt;/span&gt;;
-&lt;span class=&quot;nv&quot;&gt;$fh&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;close&lt;/span&gt;;
+&lt;span class=&quot;s&quot;&gt;&amp;#39;Hon.rakumod&amp;#39;&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;IO&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;spurt&lt;/span&gt;(&lt;span class=&quot;nv&quot;&gt;$hon_raku_code&lt;/span&gt;);
 
 &lt;span class=&quot;c1&quot;&gt;# Require the module. This will execute the program&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Hon&lt;/span&gt;;
