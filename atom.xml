@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2022-04-12T18:56:39+01:00</updated>
+    <updated>2022-05-23T15:57:18+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,81 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>The politics of writing compilers</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/politics-of-compiler-writing/"/>
+        <updated>2021-12-20T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/politics-of-compiler-writing</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/politics-of-compiler-writing_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;Compilers are pieces of software that convert program code from one format into another. Typically, they convert source code into a binary format for execution on specific hardware. Compilers can also target virtual machines instead of physical hardware, or they can convert source code into different source code. &lt;/p&gt;
+
+&lt;p&gt;(Some programming languages are not compiled but interpreted, which means they require another piece of software, an interpreter, to run them. An interpreter is effectively a compiler and virtual machine combined, because it transforms the source code into some internal representation that it can execute. In this article, I focus on compilers but the same issues apply to interpreters.)&lt;/p&gt;
+
+&lt;p&gt;Most end users never deal with compilers because they simply run the compiled applications. Some users have the need, know-how and skills to compile code written by others; fewer again have the need, know-how and skills to write their own code and compile it. And quite few people have the know-how and skills to write a compiler. And yet, compilers are crucially important, as without a compiler, programs can&amp;#39;t run. &lt;/p&gt;
+
+&lt;p&gt;This automatically takes me to the question of politics. Whoever controls the compiler has some power over the users (both the programmers and the end users), and therefore compilers are political objects. &lt;/p&gt;
+
+&lt;p&gt;But what about compiler research, the field of computing science which investigates new theories, formalisms and techniques to advance the knowledge on compilers? Generally speaking, compiler researchers will not consider their work political. A compiler is a tool that can be used regardless of political convictions, and research into better compilers just leads to better tools. Compiler writers can make a similar argument: we just make them. &lt;/p&gt;
+
+&lt;p&gt;There are many different aspects to this. As a compiler researcher or compiler writer, you could ask yourself the following questions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What are the reasons for doing this work? 
+
+&lt;ul&gt;
+&lt;li&gt;Why are you writing this compiler? Or what is the target compiler for your research?&lt;/li&gt;
+&lt;li&gt;Who is going to benefit from your work? You? Your employer? The community? What community?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;What are your assumptions?
+
+&lt;ul&gt;
+&lt;li&gt;Assumptions on the programmer: 
+
+&lt;ul&gt;
+&lt;li&gt;What do they need to know?&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;What education level do they need? &lt;/li&gt;
+&lt;li&gt;How wealthy do they need to be?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Assumptions on the user: 
+
+&lt;ul&gt;
+&lt;li&gt;Who is the user of your compiler? &lt;/li&gt;
+&lt;li&gt;What are their required skills and background? &lt;/li&gt;
+&lt;li&gt;How usable and accessible is your compiler? &lt;/li&gt;
+&lt;li&gt;Which users can afford to use your compiler?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Assumptions on the computer: 
+
+&lt;ul&gt;
+&lt;li&gt;Does your compiler need the latest hardware and/or latest operating system to run? &lt;/li&gt;
+&lt;li&gt;How much memory and disk space does it need?&lt;/li&gt;
+&lt;li&gt;Does it need internet access?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Assumptions on the availability: 
+
+&lt;ul&gt;
+&lt;li&gt;Is it available free of charge? &lt;/li&gt;
+&lt;li&gt;Does it work on many operating systems?&lt;/li&gt;
+&lt;li&gt;Is it available in a readily-useable form?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Inevitably, the answers to these questions are inherently political. &lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The banner picture shows activists of the Communist Party of Japan.&lt;/em&gt; &lt;/p&gt;
+
+        </content>
+    </entry>
     
     <entry>
         <title>Frugal computing: developer perspective</title>

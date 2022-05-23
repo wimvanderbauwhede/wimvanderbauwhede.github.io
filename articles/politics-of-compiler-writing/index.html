@@ -2,31 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>About • Wim Vanderbauwhede</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <title>The politics of writing compilers • Wim Vanderbauwhede</title>
+    <meta name="description" content="Is compiler research apolitical?">
+    <meta name="keywords" content="computing, climate">
     
     	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="About">
-	<meta name="twitter:description" content="">
+	<meta name="twitter:title" content="The politics of writing compilers">
+	<meta name="twitter:description" content="Is compiler research apolitical?">
 	<meta name="twitter:site" content="@wim_v12e">
 	<meta name="twitter:creator" content="@wim_v12e">
 	
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/banner_1500x500.jpg">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/politics-of-compiler-writing_1600x600.jpg">
 	
 	<!-- Open Graph -->
 	<meta property="og:locale" content="en_GB">
 	<meta property="og:type" content="article">
 	<meta property="og:site_name" content="Wim Vanderbauwhede">
-	<meta property="og:url" content="https://wimvanderbauwhede.github.io/about/#">
-	<meta property="og:title" content="About">
-	<meta property="og:description" content="">
-	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/banner_1500x500.jpg" />
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/politics-of-compiler-writing/#">
+	<meta property="og:title" content="The politics of writing compilers">
+	<meta property="og:description" content="Is compiler research apolitical?">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/politics-of-compiler-writing_1600x600.jpg" />
 
     
 
-    <link rel="canonical" href="https://wimvanderbauwhede.github.io/about/">
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/politics-of-compiler-writing/">
 
     <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
     <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
@@ -142,31 +142,95 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/banner_1500x500.jpg" class="page-feature-image" alt="About" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/politics-of-compiler-writing_1600x600.jpg" class="page-feature-image" alt="The politics of writing compilers" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
 		
-		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
 		<div class="page-title">
-			<h1>About</h1>
+			<h1>The politics of writing compilers</h1>
 		</div>
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>I am Wim Vanderbauwhede, a Professor in Computing Science at the University of Glasgow, where I lead the <a href="https://www.gla.ac.uk/schools/computing/research/researchthemes/lowcarbon/">Low Carbon and Sustainable Computing</a> activity.</p>
+				<p>Compilers are pieces of software that convert program code from one format into another. Typically, they convert source code into a binary format for execution on specific hardware. Compilers can also target virtual machines instead of physical hardware, or they can convert source code into different source code. </p>
 
-<p>My research is primarily about improving energy efficiency of computation, in particular scientific computing. I research languages, compilers and runtime systems for heterogeneous architectures, novel hardware that has the potential to be more energy efficient if it is programmed well. I am particularly interested in FPGAs and acceleration of climate and weather simulations.</p>
+<p>(Some programming languages are not compiled but interpreted, which means they require another piece of software, an interpreter, to run them. An interpreter is effectively a compiler and virtual machine combined, because it transforms the source code into some internal representation that it can execute. In this article, I focus on compilers but the same issues apply to interpreters.)</p>
+
+<p>Most end users never deal with compilers because they simply run the compiled applications. Some users have the need, know-how and skills to compile code written by others; fewer again have the need, know-how and skills to write their own code and compile it. And quite few people have the know-how and skills to write a compiler. And yet, compilers are crucially important, as without a compiler, programs can&#39;t run. </p>
+
+<p>This automatically takes me to the question of politics. Whoever controls the compiler has some power over the users (both the programmers and the end users), and therefore compilers are political objects. </p>
+
+<p>But what about compiler research, the field of computing science which investigates new theories, formalisms and techniques to advance the knowledge on compilers? Generally speaking, compiler researchers will not consider their work political. A compiler is a tool that can be used regardless of political convictions, and research into better compilers just leads to better tools. Compiler writers can make a similar argument: we just make them. </p>
+
+<p>There are many different aspects to this. As a compiler researcher or compiler writer, you could ask yourself the following questions:</p>
 
 <ul>
-<li><a href="https://www.gla.ac.uk/schools/computing/staff/wimvanderbauwhede/#/biography">My staff page at the University of Glasgow</a></li>
-<li><a href="http://www.dcs.gla.ac.uk/%7Ewim/">My personal site at the School of Computing Science</a></li>
-<li><a href="https://www.slideshare.net/WimVanderbauwhede/why-i-do-computing-science-research">Why I do Computing Science research</a></li>
+<li>What are the reasons for doing this work? 
+
+<ul>
+<li>Why are you writing this compiler? Or what is the target compiler for your research?</li>
+<li>Who is going to benefit from your work? You? Your employer? The community? What community?</li>
+</ul></li>
+<li>What are your assumptions?
+
+<ul>
+<li>Assumptions on the programmer: 
+
+<ul>
+<li>What do they need to know?<br></li>
+<li>What education level do they need? </li>
+<li>How wealthy do they need to be?</li>
+</ul></li>
+<li>Assumptions on the user: 
+
+<ul>
+<li>Who is the user of your compiler? </li>
+<li>What are their required skills and background? </li>
+<li>How usable and accessible is your compiler? </li>
+<li>Which users can afford to use your compiler?</li>
+</ul></li>
+<li>Assumptions on the computer: 
+
+<ul>
+<li>Does your compiler need the latest hardware and/or latest operating system to run? </li>
+<li>How much memory and disk space does it need?</li>
+<li>Does it need internet access?</li>
+</ul></li>
+<li>Assumptions on the availability: 
+
+<ul>
+<li>Is it available free of charge? </li>
+<li>Does it work on many operating systems?</li>
+<li>Is it available in a readily-useable form?</li>
+</ul></li>
+</ul></li>
 </ul>
+
+<p>Inevitably, the answers to these questions are inherently political. </p>
+
+<p><br></p>
+
+<p><em>The banner picture shows activists of the Communist Party of Japan.</em> </p>
 
 				<hr />
 				<footer class="page-footer">
 					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
                     <div class="inline-btn">
     <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
     <!--
@@ -180,7 +244,7 @@
 
 					
 					<div class="page-meta">
-	<p>Updated <time datetime="2022-05-23T00:00:00Z" itemprop="datePublished">May 23, 2022</time></p>
+	<p>Updated <time datetime="2021-12-20T00:00:00Z" itemprop="dateModified">December 20, 2021</time>
 </div><!-- /.page-meta -->
 				</footer><!-- /.footer -->
 				<aside>
