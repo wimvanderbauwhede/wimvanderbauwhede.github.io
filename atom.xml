@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2022-05-23T15:59:31+01:00</updated>
+    <updated>2022-05-23T17:16:31+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -65,9 +65,10 @@
 &lt;li&gt;How usable and accessible is your compiler? &lt;/li&gt;
 &lt;li&gt;Which users can afford to use your compiler?&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Assumptions on the computer: 
+&lt;li&gt;Assumptions on the computer:
 
 &lt;ul&gt;
+&lt;li&gt;If your compiler targets a specific hardware architecture, who has access to this hardware?&lt;/li&gt;
 &lt;li&gt;Does your compiler need the latest hardware and/or latest operating system to run? &lt;/li&gt;
 &lt;li&gt;How much memory and disk space does it need?&lt;/li&gt;
 &lt;li&gt;Does it need internet access?&lt;/li&gt;
