@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2022-10-09T12:43:05+01:00</updated>
+    <updated>2022-10-09T12:45:33+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -366,7 +366,7 @@ l tail tail tail null  ( #01 )
 
 &lt;h2&gt;Code&lt;/h2&gt;
 
-&lt;p&gt;The code implementing the constructs described in this article is available &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/hyakuwa/src/branch/main/quoting-lambdas&quot;&gt;on Codeberg&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;The code implementing the constructs described in this article is available &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/hyakuwa/src/branch/main/quoting-lambdas&quot;&gt;in my &lt;code&gt;hyakuwa&lt;/code&gt; repo on Codeberg&lt;/a&gt;. &lt;/p&gt;
 
 &lt;h3&gt;8-bit vs 16-bit&lt;/h3&gt;
 
