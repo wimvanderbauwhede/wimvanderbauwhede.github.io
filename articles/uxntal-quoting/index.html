@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Functional programming in stack-based assembly • Wim Vanderbauwhede</title>
+    <meta name="description" content="What does it take to bring functional programming to a stack-based assembly language?">
+    <meta name="keywords" content="programming">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Functional programming in stack-based assembly">
+	<meta name="twitter:description" content="What does it take to bring functional programming to a stack-based assembly language?">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/uxntal-quoting_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/uxntal-quoting/#">
+	<meta property="og:title" content="Functional programming in stack-based assembly">
+	<meta property="og:description" content="What does it take to bring functional programming to a stack-based assembly language?">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/uxntal-quoting_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/uxntal-quoting/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<!-- WV: NO!
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+	  <!-- WV: NO!
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    -->
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/uxntal-quoting_1600x600.jpg" class="page-feature-image" alt="Functional programming in stack-based assembly" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Functional programming in stack-based assembly</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<h2>Quoting in Uxntal: lambda functions, tuples and lists for free</h2>
+
+<p>What does it take to bring functional programming to a stack-based assembly language? <em>tl;dr</em>: not all that much. Uxntal has everything it takes to build a basic mechanism (&quot;quoting&quot;) that lets us create lambda functions, tuples, cons lists and more.</p>
+
+<h2>Uxntal and Uxn</h2>
+
+<p><a href="https://wiki.xxiivv.com/site/uxntal.html"><code>Uxntal</code></a> is the programming language for the <a href="https://wiki.xxiivv.com/site/uxn.html"><code>Uxn</code></a> virtual machine. As Uxn is a stack machine, Uxntal is a stack language, similar to e.g. <a href="https://forth-standard.org/">Forth</a> or <a href="https://dev.to/palm86/church-encoding-in-the-concatenative-language-joy-3nd8">Joy</a> in that it uses reverse Polish notation (postfix). It is an assembly language with opcodes for 8-bit and 16-bit operations on the stack and memory. To get the most out of this article, it is best if you have basic knowledge of Uxntal, either from the above resources or for example <a href="https://compudanzas.net/uxn_tutorial.html">the great tutorial at Compudanzas</a>.</p>
+
+<p>Concepts such as lambda functions, quoting, partial application and closures are common in functional programming languages, but if you are not familiar with these you should still be able to follow most of the explanation. My article <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/">&quot;Cleaner code with functional programming&quot;</a>, explains the basics of functional programming.</p>
+
+<p>Although Uxn is a stack machine and Uxntal a stack language, it is quite easy to do register based programming by using labels as variables: the purely stack based </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+#06 #07 MUL
+</code></pre></div>
+<p>can be written as</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0000
+@r1 $1 @r2 $1 @r3 $1
+|0100
+#06 .r1 STZ
+#07 .r2 STZ
+.r1 LDZ .r2 LDZ MUL .r3 STZ
+</code></pre></div>
+<p>where we store the values in memory and load them when needed. My implementation of lambda functions makes use of this approach.</p>
+
+<p>Uxntal also has a simple but powerful macro mechanism which just creates short names for groups of tokens. I make heavy use of macros in what follows.</p>
+
+<p>Because of the conciseness of its syntax, I use the venerable functional language <a href="https://haskell.org/">Haskell</a> for some of the examples below. A short primer on Haskell is my article <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">&quot;Everything is a function&quot;</a>.</p>
+
+<h2>Anonymous functions</h2>
+
+<p>Uxntal supports variables and named function calls through labels. And as the program is stored in writeable memory, it can me overwritten or modified in place. </p>
+
+<p>I wanted to see if I could implement or emulate the behaviour of anonymous functions (called &quot;lambda functions&quot; in functional programming). For example, I&#39;d like to be able to write something similar to the following Haskell code:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="p">)</span> <span class="n">lst</span>
+</code></pre></div>
+<p>or equivalent in Python:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span>    <span class="nb">map</span><span class="p">(</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">lst</span><span class="p">)</span>
+</code></pre></div>
+<p>which would square all elements in the list <code>lst</code>. And I would like to be able to use lambda functions as arguments and as return values:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="nf">\</span><span class="n">f</span> <span class="ow">-&gt;</span> <span class="n">f</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="mi">3</span>
+</code></pre></div>
+<p>and</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="nf">\</span><span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">))</span> <span class="mi">2</span> <span class="mi">3</span>
+</code></pre></div>
+<p>I also want to be able to combine lambdas and named functions:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">sum</span><span class="o">-</span><span class="n">sq</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="p">)</span> <span class="mi">3</span>
+</code></pre></div>
+<p>The reason I want to do this is mostly curiosity, but there are some practical advantages because the lambda functions can be generated dynamically based on runtime values. Also, the &quot;quoting&quot; mechanism used to build lambdas is more general and allows for &quot;lazy&quot; or delayed evaluation.</p>
+
+<p>From the above examples, the clear feature of a lambda function is that it identifies by name the variables used as its arguments. I want to reflect this closely in Uxntal. The other key feature is that the lambda functions are values, and we need to apply them to an argument to get a computation. That is very similar to calling a function in Uxntal. Suppose we have</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+#0003 #0004 ;f JSR2 
+BRK
+@f
+    .x STZ2
+    .y STZ2
+    .x LDZ2 .x LDZ2 MUL2 .y LDZ2 .y LDZ2 MUL2 ADD2
+    .x LDZ2 .y LDZ2 MUL2 #0002 MUL2 ADD2
+    JMP2r
+</code></pre></div>
+<p>Using some macros I have defined for convenience, I can write this as</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+3 4 ;f call 
+BRK
+@f
+    -&gt;x
+    -&gt;y
+    x x * y y * +
+    x y * 2 * + 
+    return
+</code></pre></div>
+<p>With a lambda notation, this would become</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+3 4  [&#39; \x. \y. 
+        x&#39; x&#39; *&#39; y&#39; y&#39; *&#39; +&#39; 
+        x&#39; y&#39; *&#39; 2&#39; *&#39; +&#39; 
+    ]&#39; apply
+BRK
+</code></pre></div>
+<p>The nested example <code>(\x -&gt; (\y -&gt; x+y)) 2 3</code> would be with named functions:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+3 2 ;f call
+BRK
+@f
+    -&gt;x
+    ;g call
+    return
+@g
+    -&gt;y
+    x y +
+    return
+</code></pre></div>
+<p>and with lambdas</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+3 2 [&#39; \x. 
+        [&#39; \y. 
+            x&#39; y&#39; +&#39; 
+        ]&#39; 
+    ]&#39; apply 
+    apply
+BRK
+</code></pre></div>
+<p>In other words, the function is defined inside the quoted brackets and called using <code>apply</code> rather than <code>call</code>.</p>
+
+<h2>Implementation</h2>
+
+<p>So how do we do this? There are several components than need to be brought together to have named variables, nesting, and functions as values.</p>
+
+<h3>Uxntal quoting and unquoting</h3>
+
+<h4>Quoting</h4>
+
+<p>First of all, we need some mechanism to defer evaluation of an operation, which I call &quot;quoting&quot; for short. 
+Luckily, Uxntal has the essential feature: it is possible to quote an operation and unquote it later. For example:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#06 #07 ADD 
+</code></pre></div>
+<p>would immediately compute 6*7; but if we write</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#06 #07 LIT ADD 
+</code></pre></div>
+<p>then we have the ADD operation as a symbol on the stack. This is what I call &quot;quoting&quot; for opcodes. </p>
+
+<h4>Unquoting through self-modification</h4>
+
+<p>To unquote the symbol and so evaluate the expression, we can do</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#00 STR $1 
+</code></pre></div>
+<p>which is a bit of Uxn magic: it is a relative store with a relative address of 0, and effectively it takes the symbol from the stack and puts it as the next instruction to be executed. The <code>$1</code> is just a placeholder on the stack to create the space for the store. So the following would calculate <code>6*7</code> and print out <code>*</code>.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+    #06 #07 LIT ADD 
+    #00 STR $1
+    #18 DEO ( prints the character to stdout )
+BRK
+</code></pre></div>
+<p>There isn&#39;t really anything magical going on here: an equivalent program would be </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+    #06 #07 LIT ADD 
+    ;eval STA @eval $1
+    #18 DEO ( prints the character to stdout )
+BRK    
+</code></pre></div>
+<p>or even</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
+    #06 #07 LIT ADD
+    ;eval STA ;eval JSR2
+    #18 DEO ( prints the character to stdout )
+BRK
+
+@eval $1
+JMP2r
+</code></pre></div>
+<p>The key mechanism is that Uxntal allows to overwrite the program code, so the <code>$1</code> placeholder can at runtim be replaced by any byte, and all bytes are valid instructions.</p>
+
+<h4>Unquoting without self-modification</h4>
+
+<p>Even if Uxntal did not have modifiable code, we could still quote and unquote. After all, e.g. <code>LIT MUL</code> is exactly the same as <code>LIT 1a</code> or <code>#1a</code> so we can always put opcodes on the stack, they are just bytes. And to unquote them, we could use conditional jumps, for example:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#06 #07 LIT MUL
+( opcode on the stack )
+#1a EQU ,&amp;eval-mul JCN
+...
+&amp;eval-mul
+MUL
+...
+</code></pre></div>
+<p>So the self-modification is purely a more efficient way of unquoting.</p>
+
+<h3>Kinds of symbols</h3>
+
+<p>Apart from the opcodes, there are several other types of symbols we need to be able to quote and unquote: variables, constants and function calls. </p>
+
+<p>For the variables, we need to handle declaration and use: the declaration results in the argument being stored at the location referenced by the variable, and the use results in the value stored at the referenced location being read. I store the variables in the zero-page memory:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>@x $2 @y $2 @z $2
+</code></pre></div>
+<p>The declaration macro <code>\x.</code> should when unquoted result in</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>.x STZ2
+</code></pre></div>
+<p>Using a variable macro <code>x&#39;</code> should when unquoted result in</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>.x LDZ2
+</code></pre></div>
+<p>Unquoting a constant simply means putting it on the stack.</p>
+
+<p>Finally, named function call should when unquoted result in</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>;f JSR2
+</code></pre></div>
+<h3>Grouping symbols</h3>
+
+<p>As we want to be able to nest lambdas, we need some delimiters to group the quoted symbols. That is what the <code>[&#39;</code> and <code>]&#39;</code> bracket macros do.  A quoted sequence returns its address onto the working stack. In this way we can pass lambdas around as values.</p>
+
+<h3>Building the lambda</h3>
+
+<p>To build the lambda function, I need to store the quoted symbols. Crucially, I need to be able to identify the kind of each symbol. I encode each symbol using three bytes, the third byte is a label to identify the kind of symbol. The opening and closing brackets are also labelled and stored in this way. The opening bracket symbol contains the size of the lambda; the closing bracket is only there as a jump target. For example, </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; \x. x&#39; 1&#39; +&#39; ;f call&#39; ]&#39;
+</code></pre></div>
+<p>is encoded as</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>Value   Label
+------  ------
+00 07   LAMBDA
+.x __  BIND
+.x __  ARG
+00 01   CONST
+ADD __  OPCODE
+;f      CALL
+__ __   END 
+</code></pre></div>
+<p>The <code>__</code> are unused slots because for simplicity I have currently made all symbols the same size (this will probably change as I don&#39;t like inefficiency). For an 8-bit version, it would be possible to encode everything in two bytes.</p>
+
+<p>Each quoting operation is implemented as a function and those functions keep track of where to write the symbols in memory. The memory for the lambdas starts from <code>|0100</code>, so I effectively overwrite the program. This is OK because the lambda definition in the program takes up more space than the encoding of the lambda, so there is no risk of overwriting named functions.</p>
+
+<h3>The lambda stack</h3>
+
+<p>Because I want to be able to nest lambdas, I need a stack. I could abuse the return stack for this purpose, but I don&#39;t think using either of the Uxn stacks for persistent state is a good idea. So I build a stack in the second half of the zero-page memory. This stack stores tuples of the starting address and the size (in 3-byte words) of each lambda. Each quoting operation manipulates that stack to create the memory encoding for each lambda. </p>
+
+<h3>Applying the lambda</h3>
+
+<p>The unquoting operation (the <code>apply</code> call) uses the same lambda stack. It takes the address of the lambda as argument, and loops over all symbols in the stored representation. The interesting case is that of nested lambdas: when the symbol represents an opening bracket, the evaluator puts the address of the nested lambda on the stack and jumps to the closing bracket, which acts as a no-op. For non-nested lambdas, the closing bracket returns the lambda&#39;s address. In this way I can evaluate nested lambdas as part of an <code>apply</code> call, and I can also return lambdas. </p>
+
+<h2>More uses of quoting</h2>
+
+<p>The quoting mechanism can be used for other purposes than creating lambda functions. Or to look at it another way, lambda functions that take no arguments (&quot;blocks&quot;) are valid:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ;f call&#39; ]&#39; 
+</code></pre></div>
+<p>This gives us an option to have deferred calls. </p>
+
+<h3>A lazy <code>if</code></h3>
+
+<p>Lazy means here that we will only evaluate the true or false branch after evaluating the condition, instead of evaluating both and returning the result based on the condition. We can create a <code>lazy-if</code> function using quoting as follows:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; &lt;false-expr&gt;&#39; ]&#39; [&#39; &lt;true-expr&gt;&#39; ]&#39; &lt;cond&gt;  ;lazy-if call
+</code></pre></div>
+<p>The <code>lazy-if</code> function is quite simple:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>@lazy-if
+    ,&amp;if-true JCN
+    ( if-false )
+    POP2 apply-tc    
+    &amp;if-true
+    NIP2 apply-tc
+</code></pre></div>
+<p>Here, <code>apply-tc</code> is a tail call version of <code>apply</code>, so equivalent to <code>apply return</code>. We could of course create a <code>case</code> expression in this way too.  </p>
+
+<h3>Tuples</h3>
+
+<p>The quoting mechanism can also be used to create immutable lists, or actually tuples (a tuple is a generalisation of a pair, can have any number of values of any type but can&#39;t be modified):</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; 2 4 + \&#39; 3 5 + \&#39; ]&#39; ( a tuple (6,8) )
+[&#39; 1 2 + \&#39; 4 \&#39; ]&#39;  ( a tuple (3,4) )
+SWP2
+apply * apply * / ( 4 )
+</code></pre></div>
+<p>In this example, <code>[&#39; ... ]&#39;</code> first creates two tuples and stores it somewhere; 
+then <code>apply</code> puts the values on the stack. It would be quite easy to write an indexing function to access element by index. </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; 2 4 + \&#39; 3 5 + \&#39; ]&#39;  ( creates (6,8) )
+[&#39; 1 2 + \&#39; 4 2 /  2&#39; ]&#39;  ( creates (3,2,2) )
+SWP2 
+apply * ( 6*8 ) 
+SWP2 
+apply [ * * ]  ( 3*2*2 )
+/ ( 48/12 )
+</code></pre></div>
+<p>Another example to illustrate the functions to work on tuples: </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; [ 1 2 + ] \&#39; [ 3 4 * ] \&#39; 5&#39; ]&#39; -&gt;l ( store the tuple in l )
+l fst  print16-nl ( first element )
+l snd print16-nl ( second element )
+l 2 at print16-nl ( at takes the index (base 0) and returns the element )
+[  + + ] POP2
+l empty print8-nl ( test if the tuple is empty, returns #00 here )
+[&#39; ]&#39; empty print8-nl ( test if the tuple is empty, returns #01 here )
+l size print16-nl ( returns the number of elements in the tuple, i.e. 3 )
+</code></pre></div>
+<p>Because Uxntal is not statically typed, there is no difference between immutable lists and tuples.</p>
+
+<h3>Cons lists</h3>
+
+<p>What I call a &quot;cons list&quot; is a list constructed starting from an empty list by adding a single element. The function to construct such a list is typically called <code>cons</code> in functional programming languages, and in Haskell it has a corresponding operator <code>:</code>. So the list</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[ 1 2 3 4 ]
+</code></pre></div>
+<p>is really syntactic sugar for</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>1:2:3:4:()
+</code></pre></div>
+<p>which is a shorter notation for</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>(cons 1 (cons 2 (cons 3 (cons 4 ()))))
+</code></pre></div>
+<p>We can use the tuples in combination with a <code>cons</code> function in Uxntal to create cons lists:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons ( [ 5 6 7 ] ) 
+</code></pre></div>
+<p>There are a few functions to manipulate such lists, the most common ones are <code>head</code> which returns the first element and <code>tail</code> which returns the rest of the list (<code>car</code> and <code>cdr</code> in Scheme).</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons -&gt;l ( (5:6:(7:[])) ) 
+l tail tail head ( )
+l tail head
+* 
+</code></pre></div>
+<p>There is of course also a <code>length</code> function, and a function <code>null</code> to check if the list is empty:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons -&gt;l ( (5:6:(7:[])) ) 
+l 4 cons length ( 4 )
+l tail tail tail null  ( #01 )
+</code></pre></div>
+<h3>Partial application and closures</h3>
+
+<p>The nested lambdas allow partial application:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 [&#39; \x.  [&#39; \y. x&#39; y&#39; +&#39; ]&#39;  ]&#39; lambda-call 
+</code></pre></div>
+<p>This means that we don&#39;t have to provide values for all arguments, and what we return is a function that has been specialised with the arguments that have been provided. In the example, we will effective obtain a function that will calculate <code>y+5</code>. This is a technique that can be used to generate specialised functions from a template. </p>
+
+<p>This looks a lot like a proper <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">closure</a> but while it seems to work, the value is not really captured. We simply store 5 in <code>@x</code>; if I modify <code>x</code> between the lambda calls, it will use the modified value. With a proper closure, once it has been created, it does not matter that the original value gets modified. This is not the case in my approach because x and y are globals, not locals. It is possible to address this but it would be very expensive:</p>
+
+<ul>
+<li>In <code>\x.</code>, we store the address of <code>.x</code> somewhere;</li>
+<li>Then we check the entire downstream lambda definition for occurrences of that address;</li>
+<li>We need to take into account that any further occurrence of <code>\x.</code> resets this;</li>
+<li>Then we could replace <code>.x LIT LDZ2 OPCODE&#39;</code> with <code>.x LDZ2 CONST&#39;</code>, so the value would become embedded in the lambda.</li>
+</ul>
+
+<p>If you want to address this issue, please let me know.</p>
+
+<h3>Desugaring</h3>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 \[ \x. x&#39; x&#39; *&#39; \[ \y. y&#39; 1&#39; +&#39; \] lambda-call&#39; \] lambda-call ( returns #001a )
+</code></pre></div>
+<p>The <code>\[</code> ... <code>\]</code> brackets indicate the start and end of a quoting region. Within a quoting region, all quote symbols make up the anonymous function. I use macros to make it a bit nicer. Desugaring the example one layer, we get the following:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#0033 
+[&#39; 
+    .x bind&#39;
+    .x arg&#39;
+    .x arg&#39;
+    LIT MUL2 opcode&#39;
+    [&#39;
+        .y bind&#39;
+        .y arg&#39;
+        #0001 const&#39;
+        LIT ADD2 opcode&#39;
+    ]&#39;
+    ;lambda-call call&#39;
+]&#39; 
+;lambda-call call
+</code></pre></div>
+<h2>Conclusion</h2>
+
+<p>Although it may seem at first sight that a stack-based assembly language is quite far removed from a high-level functional language, in Uxntal we can implement many fundamental functional programming concepts such as lambdas, lazy conditionals, tuples and lists and concepts such as partial application and closures, simply by introducing the concept of quoting and unquoting symbols. Uxntal&#39;s simple macro mechanism provides sufficient abstraction to create readable functional programs. </p>
+
+<h2>Code</h2>
+
+<p>The code implementing the constructs described in this article is available <a href="https://codeberg.org/wimvanderbauwhede/hyakuwa/src/branch/main/quoting-lambdas">on Codeberg</a>. </p>
+
+<h3>8-bit vs 16-bit</h3>
+
+<p>By default, my implementation uses 16-bit words as values. It is possible to use 8-bit constants, arguments and operations. The macro files  <code>quote-lambda_macros_8bit.tal</code> and <code>lambda_decls_8bit.tal</code> have the appropriate definitions, or with less sugar you can use <code>bind8&#39;</code>,<code>arg8&#39;</code> and <code>const8&#39;</code>.</p>
+
+<h2>What&#39;s next?</h2>
+
+<p>As is the nature of such projects, there is always a lot more that could be done. There are two main drawbacks to the current approach: the macro mechanism is not expressive enough and the computational overhead is very high. </p>
+
+<p>To address the former we could create a custom assembler, which effectively means we have a new functional language that assembles into Uxntal, either source or rom. If we did that, we could write </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 \[ \x. x&#39; x&#39; *&#39; \[ \y. y&#39; 1&#39; +&#39; \] lambda-call&#39; \] lambda-call
+</code></pre></div>
+<p>as, for example,</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 (\x -&gt; x x * (\y -&gt; y 1 +))
+</code></pre></div>
+<p>This would be a lot more readable and it would also allow to tailor the memory allocation for variables.     </p>
+
+<p>We can&#39;t fundamentally address the computational overhead. It can definitely be reduced as the current implementation is not optimised. But effectively, the quoting mechanism is a kind of interpreter, so it always incurs the read-eval-write overhead. What we could do instead is compile the Uxntal code itself, rather than emulating it. But that will be the topic of another article.</p>
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+                    <div class="inline-btn">
+    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <!--
+	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
+	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
+	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
+	&nbsp;
+<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+    -->
+</div><!-- /.follow-us -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2022-10-09T00:00:00Z" itemprop="dateModified">October 09, 2022</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2022 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>

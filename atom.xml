@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2022-08-09T14:24:52+01:00</updated>
+    <updated>2022-10-09T12:43:05+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,379 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>Functional programming in stack-based assembly</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/uxntal-quoting/"/>
+        <updated>2022-10-09T00:00:00+01:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/uxntal-quoting</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/uxntal-quoting_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;h2&gt;Quoting in Uxntal: lambda functions, tuples and lists for free&lt;/h2&gt;
+
+&lt;p&gt;What does it take to bring functional programming to a stack-based assembly language? &lt;em&gt;tl;dr&lt;/em&gt;: not all that much. Uxntal has everything it takes to build a basic mechanism (&amp;quot;quoting&amp;quot;) that lets us create lambda functions, tuples, cons lists and more.&lt;/p&gt;
+
+&lt;h2&gt;Uxntal and Uxn&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wiki.xxiivv.com/site/uxntal.html&quot;&gt;&lt;code&gt;Uxntal&lt;/code&gt;&lt;/a&gt; is the programming language for the &lt;a href=&quot;https://wiki.xxiivv.com/site/uxn.html&quot;&gt;&lt;code&gt;Uxn&lt;/code&gt;&lt;/a&gt; virtual machine. As Uxn is a stack machine, Uxntal is a stack language, similar to e.g. &lt;a href=&quot;https://forth-standard.org/&quot;&gt;Forth&lt;/a&gt; or &lt;a href=&quot;https://dev.to/palm86/church-encoding-in-the-concatenative-language-joy-3nd8&quot;&gt;Joy&lt;/a&gt; in that it uses reverse Polish notation (postfix). It is an assembly language with opcodes for 8-bit and 16-bit operations on the stack and memory. To get the most out of this article, it is best if you have basic knowledge of Uxntal, either from the above resources or for example &lt;a href=&quot;https://compudanzas.net/uxn_tutorial.html&quot;&gt;the great tutorial at Compudanzas&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Concepts such as lambda functions, quoting, partial application and closures are common in functional programming languages, but if you are not familiar with these you should still be able to follow most of the explanation. My article &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/&quot;&gt;&amp;quot;Cleaner code with functional programming&amp;quot;&lt;/a&gt;, explains the basics of functional programming.&lt;/p&gt;
+
+&lt;p&gt;Although Uxn is a stack machine and Uxntal a stack language, it is quite easy to do register based programming by using labels as variables: the purely stack based &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+#06 #07 MUL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;can be written as&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0000
+@r1 $1 @r2 $1 @r3 $1
+|0100
+#06 .r1 STZ
+#07 .r2 STZ
+.r1 LDZ .r2 LDZ MUL .r3 STZ
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;where we store the values in memory and load them when needed. My implementation of lambda functions makes use of this approach.&lt;/p&gt;
+
+&lt;p&gt;Uxntal also has a simple but powerful macro mechanism which just creates short names for groups of tokens. I make heavy use of macros in what follows.&lt;/p&gt;
+
+&lt;p&gt;Because of the conciseness of its syntax, I use the venerable functional language &lt;a href=&quot;https://haskell.org/&quot;&gt;Haskell&lt;/a&gt; for some of the examples below. A short primer on Haskell is my article &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/everything-is-a-function/&quot;&gt;&amp;quot;Everything is a function&amp;quot;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Anonymous functions&lt;/h2&gt;
+
+&lt;p&gt;Uxntal supports variables and named function calls through labels. And as the program is stored in writeable memory, it can me overwritten or modified in place. &lt;/p&gt;
+
+&lt;p&gt;I wanted to see if I could implement or emulate the behaviour of anonymous functions (called &amp;quot;lambda functions&amp;quot; in functional programming). For example, I&amp;#39;d like to be able to write something similar to the following Haskell code:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lst&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or equivalent in Python:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;which would square all elements in the list &lt;code&gt;lst&lt;/code&gt;. And I would like to be able to use lambda functions as arguments and as return values:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I also want to be able to combine lambdas and named functions:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sq&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The reason I want to do this is mostly curiosity, but there are some practical advantages because the lambda functions can be generated dynamically based on runtime values. Also, the &amp;quot;quoting&amp;quot; mechanism used to build lambdas is more general and allows for &amp;quot;lazy&amp;quot; or delayed evaluation.&lt;/p&gt;
+
+&lt;p&gt;From the above examples, the clear feature of a lambda function is that it identifies by name the variables used as its arguments. I want to reflect this closely in Uxntal. The other key feature is that the lambda functions are values, and we need to apply them to an argument to get a computation. That is very similar to calling a function in Uxntal. Suppose we have&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+#0003 #0004 ;f JSR2 
+BRK
+@f
+    .x STZ2
+    .y STZ2
+    .x LDZ2 .x LDZ2 MUL2 .y LDZ2 .y LDZ2 MUL2 ADD2
+    .x LDZ2 .y LDZ2 MUL2 #0002 MUL2 ADD2
+    JMP2r
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Using some macros I have defined for convenience, I can write this as&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+3 4 ;f call 
+BRK
+@f
+    -&amp;gt;x
+    -&amp;gt;y
+    x x * y y * +
+    x y * 2 * + 
+    return
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With a lambda notation, this would become&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+3 4  [&amp;#39; \x. \y. 
+        x&amp;#39; x&amp;#39; *&amp;#39; y&amp;#39; y&amp;#39; *&amp;#39; +&amp;#39; 
+        x&amp;#39; y&amp;#39; *&amp;#39; 2&amp;#39; *&amp;#39; +&amp;#39; 
+    ]&amp;#39; apply
+BRK
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The nested example &lt;code&gt;(\x -&amp;gt; (\y -&amp;gt; x+y)) 2 3&lt;/code&gt; would be with named functions:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+3 2 ;f call
+BRK
+@f
+    -&amp;gt;x
+    ;g call
+    return
+@g
+    -&amp;gt;y
+    x y +
+    return
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and with lambdas&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+3 2 [&amp;#39; \x. 
+        [&amp;#39; \y. 
+            x&amp;#39; y&amp;#39; +&amp;#39; 
+        ]&amp;#39; 
+    ]&amp;#39; apply 
+    apply
+BRK
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In other words, the function is defined inside the quoted brackets and called using &lt;code&gt;apply&lt;/code&gt; rather than &lt;code&gt;call&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Implementation&lt;/h2&gt;
+
+&lt;p&gt;So how do we do this? There are several components than need to be brought together to have named variables, nesting, and functions as values.&lt;/p&gt;
+
+&lt;h3&gt;Uxntal quoting and unquoting&lt;/h3&gt;
+
+&lt;h4&gt;Quoting&lt;/h4&gt;
+
+&lt;p&gt;First of all, we need some mechanism to defer evaluation of an operation, which I call &amp;quot;quoting&amp;quot; for short. 
+Luckily, Uxntal has the essential feature: it is possible to quote an operation and unquote it later. For example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#06 #07 ADD 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;would immediately compute 6*7; but if we write&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#06 #07 LIT ADD 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;then we have the ADD operation as a symbol on the stack. This is what I call &amp;quot;quoting&amp;quot; for opcodes. &lt;/p&gt;
+
+&lt;h4&gt;Unquoting through self-modification&lt;/h4&gt;
+
+&lt;p&gt;To unquote the symbol and so evaluate the expression, we can do&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#00 STR $1 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;which is a bit of Uxn magic: it is a relative store with a relative address of 0, and effectively it takes the symbol from the stack and puts it as the next instruction to be executed. The &lt;code&gt;$1&lt;/code&gt; is just a placeholder on the stack to create the space for the store. So the following would calculate &lt;code&gt;6*7&lt;/code&gt; and print out &lt;code&gt;*&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+    #06 #07 LIT ADD 
+    #00 STR $1
+    #18 DEO ( prints the character to stdout )
+BRK
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There isn&amp;#39;t really anything magical going on here: an equivalent program would be &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+    #06 #07 LIT ADD 
+    ;eval STA @eval $1
+    #18 DEO ( prints the character to stdout )
+BRK    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or even&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
+    #06 #07 LIT ADD
+    ;eval STA ;eval JSR2
+    #18 DEO ( prints the character to stdout )
+BRK
+
+@eval $1
+JMP2r
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The key mechanism is that Uxntal allows to overwrite the program code, so the &lt;code&gt;$1&lt;/code&gt; placeholder can at runtim be replaced by any byte, and all bytes are valid instructions.&lt;/p&gt;
+
+&lt;h4&gt;Unquoting without self-modification&lt;/h4&gt;
+
+&lt;p&gt;Even if Uxntal did not have modifiable code, we could still quote and unquote. After all, e.g. &lt;code&gt;LIT MUL&lt;/code&gt; is exactly the same as &lt;code&gt;LIT 1a&lt;/code&gt; or &lt;code&gt;#1a&lt;/code&gt; so we can always put opcodes on the stack, they are just bytes. And to unquote them, we could use conditional jumps, for example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#06 #07 LIT MUL
+( opcode on the stack )
+#1a EQU ,&amp;amp;eval-mul JCN
+...
+&amp;amp;eval-mul
+MUL
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So the self-modification is purely a more efficient way of unquoting.&lt;/p&gt;
+
+&lt;h3&gt;Kinds of symbols&lt;/h3&gt;
+
+&lt;p&gt;Apart from the opcodes, there are several other types of symbols we need to be able to quote and unquote: variables, constants and function calls. &lt;/p&gt;
+
+&lt;p&gt;For the variables, we need to handle declaration and use: the declaration results in the argument being stored at the location referenced by the variable, and the use results in the value stored at the referenced location being read. I store the variables in the zero-page memory:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;@x $2 @y $2 @z $2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The declaration macro &lt;code&gt;\x.&lt;/code&gt; should when unquoted result in&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;.x STZ2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Using a variable macro &lt;code&gt;x&amp;#39;&lt;/code&gt; should when unquoted result in&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;.x LDZ2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Unquoting a constant simply means putting it on the stack.&lt;/p&gt;
+
+&lt;p&gt;Finally, named function call should when unquoted result in&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;;f JSR2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Grouping symbols&lt;/h3&gt;
+
+&lt;p&gt;As we want to be able to nest lambdas, we need some delimiters to group the quoted symbols. That is what the &lt;code&gt;[&amp;#39;&lt;/code&gt; and &lt;code&gt;]&amp;#39;&lt;/code&gt; bracket macros do.  A quoted sequence returns its address onto the working stack. In this way we can pass lambdas around as values.&lt;/p&gt;
+
+&lt;h3&gt;Building the lambda&lt;/h3&gt;
+
+&lt;p&gt;To build the lambda function, I need to store the quoted symbols. Crucially, I need to be able to identify the kind of each symbol. I encode each symbol using three bytes, the third byte is a label to identify the kind of symbol. The opening and closing brackets are also labelled and stored in this way. The opening bracket symbol contains the size of the lambda; the closing bracket is only there as a jump target. For example, &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; \x. x&amp;#39; 1&amp;#39; +&amp;#39; ;f call&amp;#39; ]&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;is encoded as&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;Value   Label
+------  ------
+00 07   LAMBDA
+.x __  BIND
+.x __  ARG
+00 01   CONST
+ADD __  OPCODE
+;f      CALL
+__ __   END 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;__&lt;/code&gt; are unused slots because for simplicity I have currently made all symbols the same size (this will probably change as I don&amp;#39;t like inefficiency). For an 8-bit version, it would be possible to encode everything in two bytes.&lt;/p&gt;
+
+&lt;p&gt;Each quoting operation is implemented as a function and those functions keep track of where to write the symbols in memory. The memory for the lambdas starts from &lt;code&gt;|0100&lt;/code&gt;, so I effectively overwrite the program. This is OK because the lambda definition in the program takes up more space than the encoding of the lambda, so there is no risk of overwriting named functions.&lt;/p&gt;
+
+&lt;h3&gt;The lambda stack&lt;/h3&gt;
+
+&lt;p&gt;Because I want to be able to nest lambdas, I need a stack. I could abuse the return stack for this purpose, but I don&amp;#39;t think using either of the Uxn stacks for persistent state is a good idea. So I build a stack in the second half of the zero-page memory. This stack stores tuples of the starting address and the size (in 3-byte words) of each lambda. Each quoting operation manipulates that stack to create the memory encoding for each lambda. &lt;/p&gt;
+
+&lt;h3&gt;Applying the lambda&lt;/h3&gt;
+
+&lt;p&gt;The unquoting operation (the &lt;code&gt;apply&lt;/code&gt; call) uses the same lambda stack. It takes the address of the lambda as argument, and loops over all symbols in the stored representation. The interesting case is that of nested lambdas: when the symbol represents an opening bracket, the evaluator puts the address of the nested lambda on the stack and jumps to the closing bracket, which acts as a no-op. For non-nested lambdas, the closing bracket returns the lambda&amp;#39;s address. In this way I can evaluate nested lambdas as part of an &lt;code&gt;apply&lt;/code&gt; call, and I can also return lambdas. &lt;/p&gt;
+
+&lt;h2&gt;More uses of quoting&lt;/h2&gt;
+
+&lt;p&gt;The quoting mechanism can be used for other purposes than creating lambda functions. Or to look at it another way, lambda functions that take no arguments (&amp;quot;blocks&amp;quot;) are valid:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ;f call&amp;#39; ]&amp;#39; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This gives us an option to have deferred calls. &lt;/p&gt;
+
+&lt;h3&gt;A lazy &lt;code&gt;if&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Lazy means here that we will only evaluate the true or false branch after evaluating the condition, instead of evaluating both and returning the result based on the condition. We can create a &lt;code&gt;lazy-if&lt;/code&gt; function using quoting as follows:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; &amp;lt;false-expr&amp;gt;&amp;#39; ]&amp;#39; [&amp;#39; &amp;lt;true-expr&amp;gt;&amp;#39; ]&amp;#39; &amp;lt;cond&amp;gt;  ;lazy-if call
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;lazy-if&lt;/code&gt; function is quite simple:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;@lazy-if
+    ,&amp;amp;if-true JCN
+    ( if-false )
+    POP2 apply-tc    
+    &amp;amp;if-true
+    NIP2 apply-tc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here, &lt;code&gt;apply-tc&lt;/code&gt; is a tail call version of &lt;code&gt;apply&lt;/code&gt;, so equivalent to &lt;code&gt;apply return&lt;/code&gt;. We could of course create a &lt;code&gt;case&lt;/code&gt; expression in this way too.  &lt;/p&gt;
+
+&lt;h3&gt;Tuples&lt;/h3&gt;
+
+&lt;p&gt;The quoting mechanism can also be used to create immutable lists, or actually tuples (a tuple is a generalisation of a pair, can have any number of values of any type but can&amp;#39;t be modified):&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; 2 4 + \&amp;#39; 3 5 + \&amp;#39; ]&amp;#39; ( a tuple (6,8) )
+[&amp;#39; 1 2 + \&amp;#39; 4 \&amp;#39; ]&amp;#39;  ( a tuple (3,4) )
+SWP2
+apply * apply * / ( 4 )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this example, &lt;code&gt;[&amp;#39; ... ]&amp;#39;&lt;/code&gt; first creates two tuples and stores it somewhere; 
+then &lt;code&gt;apply&lt;/code&gt; puts the values on the stack. It would be quite easy to write an indexing function to access element by index. &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; 2 4 + \&amp;#39; 3 5 + \&amp;#39; ]&amp;#39;  ( creates (6,8) )
+[&amp;#39; 1 2 + \&amp;#39; 4 2 /  2&amp;#39; ]&amp;#39;  ( creates (3,2,2) )
+SWP2 
+apply * ( 6*8 ) 
+SWP2 
+apply [ * * ]  ( 3*2*2 )
+/ ( 48/12 )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Another example to illustrate the functions to work on tuples: &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; [ 1 2 + ] \&amp;#39; [ 3 4 * ] \&amp;#39; 5&amp;#39; ]&amp;#39; -&amp;gt;l ( store the tuple in l )
+l fst  print16-nl ( first element )
+l snd print16-nl ( second element )
+l 2 at print16-nl ( at takes the index (base 0) and returns the element )
+[  + + ] POP2
+l empty print8-nl ( test if the tuple is empty, returns #00 here )
+[&amp;#39; ]&amp;#39; empty print8-nl ( test if the tuple is empty, returns #01 here )
+l size print16-nl ( returns the number of elements in the tuple, i.e. 3 )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Because Uxntal is not statically typed, there is no difference between immutable lists and tuples.&lt;/p&gt;
+
+&lt;h3&gt;Cons lists&lt;/h3&gt;
+
+&lt;p&gt;What I call a &amp;quot;cons list&amp;quot; is a list constructed starting from an empty list by adding a single element. The function to construct such a list is typically called &lt;code&gt;cons&lt;/code&gt; in functional programming languages, and in Haskell it has a corresponding operator &lt;code&gt;:&lt;/code&gt;. So the list&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[ 1 2 3 4 ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;is really syntactic sugar for&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;1:2:3:4:()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;which is a shorter notation for&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;(cons 1 (cons 2 (cons 3 (cons 4 ()))))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can use the tuples in combination with a &lt;code&gt;cons&lt;/code&gt; function in Uxntal to create cons lists:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons ( [ 5 6 7 ] ) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There are a few functions to manipulate such lists, the most common ones are &lt;code&gt;head&lt;/code&gt; which returns the first element and &lt;code&gt;tail&lt;/code&gt; which returns the rest of the list (&lt;code&gt;car&lt;/code&gt; and &lt;code&gt;cdr&lt;/code&gt; in Scheme).&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons -&amp;gt;l ( (5:6:(7:[])) ) 
+l tail tail head ( )
+l tail head
+* 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There is of course also a &lt;code&gt;length&lt;/code&gt; function, and a function &lt;code&gt;null&lt;/code&gt; to check if the list is empty:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons -&amp;gt;l ( (5:6:(7:[])) ) 
+l 4 cons length ( 4 )
+l tail tail tail null  ( #01 )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Partial application and closures&lt;/h3&gt;
+
+&lt;p&gt;The nested lambdas allow partial application:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 [&amp;#39; \x.  [&amp;#39; \y. x&amp;#39; y&amp;#39; +&amp;#39; ]&amp;#39;  ]&amp;#39; lambda-call 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This means that we don&amp;#39;t have to provide values for all arguments, and what we return is a function that has been specialised with the arguments that have been provided. In the example, we will effective obtain a function that will calculate &lt;code&gt;y+5&lt;/code&gt;. This is a technique that can be used to generate specialised functions from a template. &lt;/p&gt;
+
+&lt;p&gt;This looks a lot like a proper &lt;a href=&quot;https://en.wikipedia.org/wiki/Closure_(computer_programming)&quot;&gt;closure&lt;/a&gt; but while it seems to work, the value is not really captured. We simply store 5 in &lt;code&gt;@x&lt;/code&gt;; if I modify &lt;code&gt;x&lt;/code&gt; between the lambda calls, it will use the modified value. With a proper closure, once it has been created, it does not matter that the original value gets modified. This is not the case in my approach because x and y are globals, not locals. It is possible to address this but it would be very expensive:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;In &lt;code&gt;\x.&lt;/code&gt;, we store the address of &lt;code&gt;.x&lt;/code&gt; somewhere;&lt;/li&gt;
+&lt;li&gt;Then we check the entire downstream lambda definition for occurrences of that address;&lt;/li&gt;
+&lt;li&gt;We need to take into account that any further occurrence of &lt;code&gt;\x.&lt;/code&gt; resets this;&lt;/li&gt;
+&lt;li&gt;Then we could replace &lt;code&gt;.x LIT LDZ2 OPCODE&amp;#39;&lt;/code&gt; with &lt;code&gt;.x LDZ2 CONST&amp;#39;&lt;/code&gt;, so the value would become embedded in the lambda.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you want to address this issue, please let me know.&lt;/p&gt;
+
+&lt;h3&gt;Desugaring&lt;/h3&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 \[ \x. x&amp;#39; x&amp;#39; *&amp;#39; \[ \y. y&amp;#39; 1&amp;#39; +&amp;#39; \] lambda-call&amp;#39; \] lambda-call ( returns #001a )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;\[&lt;/code&gt; ... &lt;code&gt;\]&lt;/code&gt; brackets indicate the start and end of a quoting region. Within a quoting region, all quote symbols make up the anonymous function. I use macros to make it a bit nicer. Desugaring the example one layer, we get the following:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#0033 
+[&amp;#39; 
+    .x bind&amp;#39;
+    .x arg&amp;#39;
+    .x arg&amp;#39;
+    LIT MUL2 opcode&amp;#39;
+    [&amp;#39;
+        .y bind&amp;#39;
+        .y arg&amp;#39;
+        #0001 const&amp;#39;
+        LIT ADD2 opcode&amp;#39;
+    ]&amp;#39;
+    ;lambda-call call&amp;#39;
+]&amp;#39; 
+;lambda-call call
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Although it may seem at first sight that a stack-based assembly language is quite far removed from a high-level functional language, in Uxntal we can implement many fundamental functional programming concepts such as lambdas, lazy conditionals, tuples and lists and concepts such as partial application and closures, simply by introducing the concept of quoting and unquoting symbols. Uxntal&amp;#39;s simple macro mechanism provides sufficient abstraction to create readable functional programs. &lt;/p&gt;
+
+&lt;h2&gt;Code&lt;/h2&gt;
+
+&lt;p&gt;The code implementing the constructs described in this article is available &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/hyakuwa/src/branch/main/quoting-lambdas&quot;&gt;on Codeberg&lt;/a&gt;. &lt;/p&gt;
+
+&lt;h3&gt;8-bit vs 16-bit&lt;/h3&gt;
+
+&lt;p&gt;By default, my implementation uses 16-bit words as values. It is possible to use 8-bit constants, arguments and operations. The macro files  &lt;code&gt;quote-lambda_macros_8bit.tal&lt;/code&gt; and &lt;code&gt;lambda_decls_8bit.tal&lt;/code&gt; have the appropriate definitions, or with less sugar you can use &lt;code&gt;bind8&amp;#39;&lt;/code&gt;,&lt;code&gt;arg8&amp;#39;&lt;/code&gt; and &lt;code&gt;const8&amp;#39;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;What&amp;#39;s next?&lt;/h2&gt;
+
+&lt;p&gt;As is the nature of such projects, there is always a lot more that could be done. There are two main drawbacks to the current approach: the macro mechanism is not expressive enough and the computational overhead is very high. &lt;/p&gt;
+
+&lt;p&gt;To address the former we could create a custom assembler, which effectively means we have a new functional language that assembles into Uxntal, either source or rom. If we did that, we could write &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 \[ \x. x&amp;#39; x&amp;#39; *&amp;#39; \[ \y. y&amp;#39; 1&amp;#39; +&amp;#39; \] lambda-call&amp;#39; \] lambda-call
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;as, for example,&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 (\x -&amp;gt; x x * (\y -&amp;gt; y 1 +))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This would be a lot more readable and it would also allow to tailor the memory allocation for variables.     &lt;/p&gt;
+
+&lt;p&gt;We can&amp;#39;t fundamentally address the computational overhead. It can definitely be reduced as the current implementation is not optimised. But effectively, the quoting mechanism is a kind of interpreter, so it always incurs the read-eval-write overhead. What we could do instead is compile the Uxntal code itself, rather than emulating it. But that will be the topic of another article.&lt;/p&gt;
+
+        </content>
+    </entry>
     
     <entry>
         <title>The politics of writing compilers</title>
