@@ -4,8 +4,8 @@ title: ""
 description: ""
 locale: en_GB
 
-#url: http://127.0.0.1/~wim/wv-blog
-url: http://workbookpro.local/~wim/wv-blog
+url: http://127.0.0.1/~wim/wv-blog
+#url: http://hackbox.local/~wim/wv-blog
 
 # Jekyll configuration
 # For plugins

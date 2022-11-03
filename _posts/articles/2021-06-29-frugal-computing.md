@@ -49,7 +49,7 @@ With this growth in computational capability, increasing use of computational re
 
 Because of this, the economics of hardware and software development have been built on the assumption that with every generation, performance would double for free. Now, this unlimited growth is no longer sustainable because of a combination of technological limitations and the climate emergency. Therefore, we need to do more with less. 
 
-Moore's law has effectively come to an end as integrated circuits can't be scaled down any more. As a result, the performance per Watt is no longer increasing exponentially. On the other hand, the demand for computational resources is set to increase considerably.   
+Moore's law has effectively come to an end as integrated circuits can't be scaled down any more. As a result, the improvement in performance per Watt is slowing down continuously. On the other hand, the demand for computational resources is set to increase considerably.   
 
 The consequence is that at least for the next decades, growth in demand for computational resources will not be offset by increased power efficiency. Therefore with business as usual, the total energy budget and carbon footprint resulting from the use of computational resources will grow dramatically to become a major contributor to the world total.
 
@@ -63,7 +63,9 @@ I would like to call this "frugal computing": achieving the same results for les
 
 ### Meeting the climate targets
 
-To limit global warming to 1.5&deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed [[5]](#5). So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. By 2040, a further reduction to 13 GtCO₂e per year is necessary. According to the International Energy Agency [[10]](#10), emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 [[15]](#15). In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. 
+To limit global warming to 1.5&deg;C, within the next decade a global reduction from 55 gigatonnes CO₂ equivalent (GtCO₂e) by 32 GtCO₂e to 23 GtCO₂e per year is needed [[5]](#5). So by 2030 that would mean a necessary reduction in overall CO₂ emissions of more than 50%. By 2040, a further reduction to 13 GtCO₂e per year is necessary. According to the International Energy Agency [[10]](#10), emissions from electricity are currently estimated at about 10 GtCO₂e. The global proportion of electricity from renewables is projected to rise from the current figure of 22% to slightly more than 30% by 2040 [[15]](#15). A more optimistic scenario by the International Energy Agency [[17]](#17) projects 70% of electricity from renewables, but even in that scenario, generation from fossil fuels reduces only slightly, so there is only a slight reduction in emissions as a result.
+
+In other words, we cannot count on renewables to eliminate CO₂ emissions from electricity in time to meet the climate targets. Reducing the energy consumption is the only option. 
 
 ### Emissions from consumption of computational resources
 
@@ -177,4 +179,5 @@ To address these challenges, action is needed on many fronts. What will you do t
   <span id="14">[14] [_"On Global Electricity Usage of Communication Technology: Trends to 2030"_, Anders S. G. Andrae, Tomas Edler, Challenges 2015, 6(1), 117-157 ](https://doi.org/10.3390/challe6010117)</span><br>
   <span id="15">[15] [_"BP Energy Outlook: 2020 Edition"_,BP plc](https://www.bp.com/en/global/corporate/energy-economics/energy-outlook.html)</span><br>
   <span id="16">[16] [_"2015 International Technology Roadmap for Semiconductors (ITRS)"_, Semiconductor Industry Association, June 2015](https://www.semiconductors.org/resources/2015-international-technology-roadmap-for-semiconductors-itrs/)</span><br>
+  <span id="17">[17] [_"Net Zero by 2050 &mdash; A Roadmap for the Global Energy Sector"_, International Energy Agency, October 2021]( https://iea.blob.core.windows.net/assets/deebef5d-0c34-4539-9d0c-10b13d840027/NetZeroby2050-ARoadmapfortheGlobalEnergySector_CORR.pdf)</span><br>
 </small>
