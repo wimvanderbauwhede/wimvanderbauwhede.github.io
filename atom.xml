@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2022-10-16T11:19:52+01:00</updated>
+    <updated>2022-11-22T17:51:51+00:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,197 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>Immutable Datastructures Reduction</title>
+        <link href="https://wimvanderbauwhede.github.io/immutable-datastructures-reduction/"/>
+        <updated>2022-11-20T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/immutable-datastructures-reduction</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	
+        	multi sub reduce (&amp;with, +list)
+
+-&gt; T2 \acc, T1 \elt --&gt; T2 { ... }
+
+role ParsedProgram {
+    has Map $.blocks = Map.new; # {String =&gt; ParsedCodeBlock}
+    has List $.blocks-sequence = List.new; # [String]
+	...
+}
+
+role ParsedCodeBlock {
+    has List $.code = List.new; # [Token]
+	...
+}
+
+reduce(
+    -&gt; ParsedProgram \ppr_, String \code_block_label {
+        my ParsedCodeBlock \parsed_block =
+            ppr_.blocks{code_block_label};
+
+        my List \mod_block_code = reduce(
+            -&gt; \mod_block_code_,\token_ {
+                my Token \mod_token_ = ...;
+                append(mode_block_code_,mod_token_);
+            },
+            List.new,
+            |parsed_block.code
+        );
+        my ParsedCodeBlock \mod_block_ =
+            parsed_block.clone(code=&gt;mode_block_code);
+        my Map \blocks_ = insert(
+            ppr_glob.blocks,code_block_label,mod_block_);
+        ppr_.clone(blocks=&gt;blocks_);
+    },
+    parsed_program,
+    |parsed_program.blocks-sequence
+);
+
+sub insert(Map \m_, Str \k_, \v_ --&gt; Map )
+sub update(Map \m_, Str \k_, \v_ --&gt; Map )
+sub remove(Map \m_, Str \k_ --&gt; Map )
+
+# push
+sub append(List \l_, \e_ --&gt; List)
+# unshift
+sub prepend(List \l_, \e_ --&gt; List)
+
+# return the first element, like shift
+sub head(List \l_ --&gt; Any)
+# drops the first element
+sub tail(List \l_ --&gt; List)
+
+# This is like head:tail in Haskell
+sub headTail(List \l_ --&gt; List) # List is a tuple (head, tail)
+
+
+my (Str \leaf, List \leaves_) = headTail(leaves);
+
+# drop the last element
+sub init(List \l_ --&gt; List)
+# return the last element, like pop.
+sub top(List \l_ --&gt; Any) ,
+# Split the list on the last element
+sub initLast(List \l_ --&gt; List) # List is a tuple (init, top)
+
+my (List \leaves_, Str \leaf) = headTail(leaves);
+
+
+
+        </content>
+    </entry>
+    
+    <entry>
+        <title>Immutable data structures and reduction in Raku</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/immutable-datastructures-reduction/"/>
+        <updated>2022-11-20T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/immutable-datastructures-reduction</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/immutable-datastructures-reduction_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;h1&gt;Immutable data structures and reduction in Raku&lt;/h1&gt;
+
+&lt;p&gt;For &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/uxntal-to-C/&quot;&gt;a little compiler&lt;/a&gt; I&amp;#39;ve been writing, I felt increasingly the need for immutable data structures to ensure that nothing was passed by references between passes. I love Perl and Raku but I am a functional programmer at heart, so I prefer map and reduce over loops. It bothered me to run reductions on a mutable data structure. So I made &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/nito/src/branch/main/lib/ImmutableDatastructureHelpers.rakumod&quot;&gt;a small library&lt;/a&gt; to make it easier to work with immutable maps and lists.&lt;/p&gt;
+
+&lt;p&gt;A reduction combines all elements of a list into a result. A typical example is the sum of all elements in a list. According to the Raku docs, &lt;code&gt;reduce()&lt;/code&gt; has the following signature&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;multi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reduce&lt;/span&gt; (&lt;span class=&quot;nv&quot;&gt;&amp;amp;with&lt;/span&gt;, +&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In general, if we have a list of elements of type &lt;code&gt;T1&lt;/code&gt; and a result of type &lt;code&gt;T2&lt;/code&gt;, Raku&amp;#39;s &lt;code&gt;reduce()&lt;/code&gt; function takes as first argument a function of the form&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;-&amp;gt; &lt;span class=&quot;n&quot;&gt;T2&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;, &lt;span class=&quot;n&quot;&gt;T1&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;elt&lt;/span&gt; --&amp;gt; &lt;span class=&quot;n&quot;&gt;T2&lt;/span&gt; { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I use the form of &lt;code&gt;reduce&lt;/code&gt; that takes three arguments: the reducing function, the accumulator (what the Raku docs call the initial value) and the list.  As explained in the docs, Raku&amp;#39;s &lt;code&gt;reduce&lt;/code&gt; operates from left to right. (In Haskell speak, it is a &lt;code&gt;foldl :: (b -&amp;gt; a -&amp;gt; b) -&amp;gt; b -&amp;gt; [a]&lt;/code&gt;.)&lt;/p&gt;
+
+&lt;p&gt;The use case is the traversal of a role-based datastructure &lt;code&gt;ParsedProgram&lt;/code&gt; which contains a map and an ordered list of keys. The map itself contains elements of type &lt;code&gt;ParsedCodeBlock&lt;/code&gt; which is essentially a list of tokens.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ParsedProgram&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.blocks&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;; &lt;span class=&quot;c1&quot;&gt;# {String =&amp;gt; ParsedCodeBlock}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.blocks-sequence&lt;/span&gt; = &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;; &lt;span class=&quot;c1&quot;&gt;# [String]&lt;/span&gt;
+    ...
+}
+
+&lt;span class=&quot;k&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ParsedCodeBlock&lt;/span&gt; {
+    &lt;span class=&quot;k&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$.code&lt;/span&gt; = &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;; &lt;span class=&quot;c1&quot;&gt;# [Token]&lt;/span&gt;
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;List and Map are immutable, so we have immutable datastructures. What I want do do is update these datastructures using a nested reduction where I iterate over all the keys in the &lt;code&gt;blocks-sequence&lt;/code&gt; List and then modify the corresponding ParsedCodeBlock. For that purpose, I wrote a small API, and in the code below, &lt;code&gt;append&lt;/code&gt; and &lt;code&gt;insert&lt;/code&gt; are part of that API. What they do is create a fresh List resp. Map rather than updating in place.&lt;/p&gt;
+
+&lt;p&gt;I prefer to use sigil-less variables for immutable data, so that sigils in my code show where I have use mutable variables.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce&lt;/span&gt;(
+    -&amp;gt; &lt;span class=&quot;n&quot;&gt;ParsedProgram&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;ppr_&lt;/span&gt;, &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;code_block_label&lt;/span&gt; {
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ParsedCodeBlock&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;parsed_block&lt;/span&gt; =
+            &lt;span class=&quot;n&quot;&gt;ppr_&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;blocks&lt;/span&gt;{&lt;span class=&quot;n&quot;&gt;code_block_label&lt;/span&gt;};
+
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;mod_block_code&lt;/span&gt; = &lt;span class=&quot;nb&quot;&gt;reduce&lt;/span&gt;(
+            -&amp;gt; \&lt;span class=&quot;n&quot;&gt;mod_block_code_&lt;/span&gt;,\&lt;span class=&quot;n&quot;&gt;token_&lt;/span&gt; {
+                &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Token&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;mod_token_&lt;/span&gt; = ...;
+                &lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;mode_block_code_&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;mod_token_&lt;/span&gt;);
+            },
+            &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;,
+            |&lt;span class=&quot;n&quot;&gt;parsed_block&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;
+        );
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ParsedCodeBlock&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;mod_block_&lt;/span&gt; =
+            &lt;span class=&quot;n&quot;&gt;parsed_block&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;clone&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;=&amp;gt;&lt;span class=&quot;n&quot;&gt;mode_block_code&lt;/span&gt;);
+        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;blocks_&lt;/span&gt; = &lt;span class=&quot;n&quot;&gt;insert&lt;/span&gt;(
+            &lt;span class=&quot;n&quot;&gt;ppr_glob&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;blocks&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;code_block_label&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;mod_block_&lt;/span&gt;);
+        &lt;span class=&quot;n&quot;&gt;ppr_&lt;/span&gt;.&lt;span class=&quot;nb&quot;&gt;clone&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;blocks&lt;/span&gt;=&amp;gt;&lt;span class=&quot;n&quot;&gt;blocks_&lt;/span&gt;);
+    },
+    &lt;span class=&quot;n&quot;&gt;parsed_program&lt;/span&gt;,
+    |&lt;span class=&quot;n&quot;&gt;parsed_program&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;blocks-sequence&lt;/span&gt;
+);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The entire library is only a handful of functions. The naming of the functions is based on Haskell&amp;#39;s, except where Raku already claimed a name as a keyword.&lt;/p&gt;
+
+&lt;h2&gt;Map manipulation&lt;/h2&gt;
+
+&lt;p&gt;Insert, update and remove entries in a Map. Given an existing key, &lt;code&gt;insert&lt;/code&gt; will update the entry.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;insert&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;m_&lt;/span&gt;, &lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;k_&lt;/span&gt;, \&lt;span class=&quot;n&quot;&gt;v_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; )
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;m_&lt;/span&gt;, &lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;k_&lt;/span&gt;, \&lt;span class=&quot;n&quot;&gt;v_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; )
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;m_&lt;/span&gt;, &lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;k_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt; )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;List manipulation&lt;/h2&gt;
+
+&lt;p&gt;There are more list manipulation functions because reductions operate on lists.&lt;/p&gt;
+
+&lt;h3&gt;Add/remove an element at the front:&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# push&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;(&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;l_&lt;/span&gt;, \&lt;span class=&quot;n&quot;&gt;e_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;)
+&lt;span class=&quot;c1&quot;&gt;# unshift&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prepend&lt;/span&gt;(&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;l_&lt;/span&gt;, \&lt;span class=&quot;n&quot;&gt;e_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Split a list into its first element and the rest:&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# return the first element, like shift&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;(&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;l_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;)
+&lt;span class=&quot;c1&quot;&gt;# drops the first element&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;(&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;l_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;)
+
+&lt;span class=&quot;c1&quot;&gt;# This is like head:tail in Haskell&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headTail&lt;/span&gt;(&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;l_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;) &lt;span class=&quot;c1&quot;&gt;# List is a tuple (head, tail)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The typical use of &lt;code&gt;headTail&lt;/code&gt; is something like:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; (&lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;leaf&lt;/span&gt;, &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;leaves_&lt;/span&gt;) = &lt;span class=&quot;n&quot;&gt;headTail&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;leaves&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Similar operations but for the last element:&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# drop the last element&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;(&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;l_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;)
+&lt;span class=&quot;c1&quot;&gt;# return the last element, like pop.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;top&lt;/span&gt;(&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;l_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;nb&quot;&gt;Any&lt;/span&gt;) ,
+&lt;span class=&quot;c1&quot;&gt;# Split the list on the last element&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initLast&lt;/span&gt;(&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;l_&lt;/span&gt; --&amp;gt; &lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt;) &lt;span class=&quot;c1&quot;&gt;# List is a tuple (init, top)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The typical use of &lt;code&gt;initLast&lt;/code&gt; is something like:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl6&quot; data-lang=&quot;perl6&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; (&lt;span class=&quot;nb&quot;&gt;List&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;leaves_&lt;/span&gt;, &lt;span class=&quot;nb&quot;&gt;Str&lt;/span&gt; \&lt;span class=&quot;n&quot;&gt;leaf&lt;/span&gt;) = &lt;span class=&quot;n&quot;&gt;headTail&lt;/span&gt;(&lt;span class=&quot;n&quot;&gt;leaves&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        </content>
+    </entry>
     
     <entry>
         <title>Compiling stack-based assembly to C</title>
@@ -6616,344 +6807,6 @@ helps to understand the structure of an ActivityPub &lt;em&gt;action&lt;/em&gt; 
     │   ├── web_finger.ex
     │   └── web_finger_controller.ex
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-        </content>
-    </entry>
-    
-    <entry>
-        <title>A little maths puzzle in two parts</title>
-        <link href="https://wimvanderbauwhede.github.io/articles/constructing-a-pentagon/"/>
-        <updated>2018-03-13T00:00:00+00:00</updated>
-        <id>https://wimvanderbauwhede.github.io/articles/constructing-a-pentagon</id>
-        <author>
-					<name>Wim Vanderbauwhede</name>
-					<uri>https://wimvanderbauwhede.github.io/</uri>
-					
-				</author>
-        <content type="html">
-        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/constructing-a-pentagon_1600x600.jpg&quot;&gt;&lt;br/&gt;
-        	&lt;p&gt;I like solving little maths puzzles, deriving known results using nothing more complicated than secondary school level trigonometry, algebra and maybe a little calculus. The one below is actually two puzzles, but both have to do with regular polygons. &lt;/p&gt;
-
-&lt;h2&gt;Part 1 Approximating &amp;pi; by the perimeter of a regular polygon&lt;/h2&gt;
-
-&lt;p&gt;Can one approximate $\pi$ by the perimeter of regular polygon with
-increasing numbers of sides inscribed in a unit circle, so starting with
-a triangle, then a hexagon, a dodecagon,... ? You may say that is obvious: the more sides, the closer the polygon approximates a circle. But I still wanted to work out the proof.&lt;/p&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/polygons-to-pi.png&quot; width=&quot;80%&quot; alt=&quot;Relationship between length of the side of a polygon and the
-angle&quot; id=&quot;fig:Relationship-between-lenght&quot; /&gt;
-&lt;figcaption&gt;Figure 1. Relationship between length of the side of a polygon and the
-angle&lt;/figcaption&gt;&lt;/figure&gt;
-
-From  &lt;a href=&quot;#fig:Relationship-between-lenght&quot;&gt;Figure 1&lt;/a&gt;, clearly
-
-$$\begin{equation}
-b=2\,sin\frac{\alpha}{2}\label{eq:1}
-\end{equation}$$
-
-
-For a polygon with *n* sides, we have
-
-$$\begin{equation}
-\alpha=\frac{2\pi}{n}\label{eq:2}
-\end{equation}$$
-
-So we can express the lenght of the side of a polygon as a function of
-the number of sides as
-
-$$\begin{equation}
-b(n)=2\,sin\frac{\pi}{n}\label{eq:3}
-\end{equation}$$
-
-The perimeter of a regular polygon is obviously
-
-$$\begin{align}
-n.b(n) &amp; = &amp; 2n\,sin\frac{\pi}{n}\label{eq:4}\\
- &amp; = &amp; 2\pi\frac{sin\frac{\pi}{n}}{\frac{\pi}{n}}\nonumber \end{align}$$
-
-We know that
-
-$$\begin{equation}
-\underset{x\rightarrow0}{lim}\frac{sin\,x}{x}=1\label{eq:5}
-\end{equation}$$
-
-
-This is easily proven using &lt;a href=&quot;https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule&quot;&gt;de l’Hôpital’s
-rule&lt;/a&gt;
-&lt;br&gt;&lt;br&gt;
-
-Using $x=\frac{\pi}{n}$ it follows indeed that
-
-$$\begin{equation}
-\underset{n\rightarrow\infty}{lim}n.b(n)=2\pi\label{eq:6}
-\end{equation}$$
-
-In other words the perimeter of successive polygons inscribed in a unit
-circle does approach $2\pi$ -- which of course comes hardly as a surprise.
-
-The following code implements this starting from a polygon with a given number of sides $n$ . The argument $h$ is half of the length of the side, and $n_{max}$ is the number of iterations. What the algorithm does is recursively creating polygons with $n, 2n, 4n, 8n, ... $ sides. The example starts from a triangle so $n=3$ and $h=\sqrt(3)/2$.
-&lt;br&gt;
-&lt;br&gt;
-
-&lt;code style=&quot;font-size:80%&quot;&gt;
-      -- n: # sides of the polygon&lt;br&gt;
-      -- h: half of the length of a side&lt;br&gt;
-&lt;br&gt;
-      approx_pi n h n_max&lt;br&gt;
-        | n == n_max = n*h&lt;br&gt;
-        | otherwise =&lt;br&gt;
-            approx_pi (2*n) (sqrt ((1 - sqrt (1-h*h) )/2)) n_max&lt;br&gt;
-      -- e.g starting from a triangle.&lt;br&gt;
-      main = print $ approx_pi 3 ((sqrt 3)/2) (3*2**14)&lt;br&gt;
-&lt;br&gt;
-&lt;/code&gt;
-&lt;br&gt;
-
-What I find interesting is that every prime polygon produces a different series but they all converge towards $\pi$.
-&lt;br&gt;
-
-&lt;figure&gt;
-&lt;/figure&gt;
-
-&lt;h2&gt;Part 2 How to construct a pentagon using a compass and a ruler&lt;/h2&gt;
-
-&lt;p&gt;People have worked out &lt;a href=&quot;https://en.wikipedia.org/wiki/Pentagon&quot;&gt;how to construct a pentagon using only a compass
-and a ruler&lt;/a&gt; long ago. Nevertheless, I wanted to derive the construction
-from first principles.&lt;/p&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/pentagon-relationships.png&quot; width=&quot;80%&quot;  alt=&quot;Relationships in a pentagon&quot; id=&quot;fig:Relationships-in-a&quot; /&gt;
-&lt;figcaption&gt;Figure 2. Relationships in a pentagon&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h3&gt;The length of a side of a pentagon&lt;/h3&gt;
-
-&lt;p&gt;From &lt;a href=&quot;#fig:Relationships-in-a&quot;&gt;Figure 2&lt;/a&gt; we can write down some
-straightforward relationships between the length of a side of a pentagon
-(&lt;em&gt;b&lt;/em&gt; from the previous part) and the angle of the arc, $\frac{2\pi}{5}$.&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-x=\frac{b}{2}=sin\frac{\pi}{5}\label{eq:2.1}
-\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-y=cos\frac{\pi}{5}\label{eq:2.2}
-\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-x^{2}+y^{2}=1\label{eq:2.3}
-\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-q = 2sin\frac{2\pi}{5}=4sin\frac{\pi}{5}cos\frac{\pi}{5}\label{eq:2.4}\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;Substitution of Eqs. $\ref{eq:2.1}$ and $\ref{eq:2.2}$ gives&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-q = 4xy\label{eq:2.5}\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;Now we consider the right triangle with hypothenuse &lt;em&gt;q&lt;/em&gt;:&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-q^{2} = x^{2}+(1+y)^{2}\label{eq:2.6}\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;Substitution of Eq. $\ref{eq:2.3}$ in the RHS of Eq. $\ref{eq:2.6}$ and refactoring gives:&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-q^{2} = 2+2y\label{eq:2.7}\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;Substitution of Eq. $\ref{eq:2.3}$ and Eq. $\ref{eq:2.5}$ in the LHS of Eq. $\ref{eq:2.7}$ and refactoring gives:&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-(4-(2y)^{2})(2y)^{2} = 2+2y\label{eq:2.8}\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;Now we define $z=2y$ and rewrite Eq. $\ref{eq:2.8}$ as:&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-(4-z^{2}).z^{2}=2+z\label{eq:2.9}
-\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;Which after more refactoring finally gives&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-z^{2}(2-z)-1=0\label{eq:2.10}
-\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;This is a third-order equation but fortunately there is an obvious root
-for $z=1$. After some factorization we obtain the remaining second-order
-equation:&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-z^{2}-z-1=0\label{eq:2.11}
-\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;The roots of this equation are:&lt;/p&gt;
-
-&lt;p&gt;$$\begin{align}
-z &amp;amp; = &amp;amp; \frac{1\pm\sqrt{(-1)^{2}-4.1.(-1)}}{2.1}\label{eq:2.12}\
- &amp;amp; = &amp;amp; \frac{1\pm\sqrt{5}}{2}\nonumber \end{align}$$&lt;/p&gt;
-
-&lt;p&gt;This is actually a very famous equation and its positive root is known as the &lt;a href=&quot;https://en.wikipedia.org/wiki/Golden_ratio&quot;&gt;Golden ratio&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;$$\begin{align}
-\phi &amp;amp; = &amp;amp; \frac{1}{a} &amp;amp; = &amp;amp; \frac{a}{1-a}\label{eq:goldenratio}
-\end{align}$$&lt;/p&gt;
-
-&lt;p&gt;Clearly &lt;em&gt;y&lt;/em&gt; as defined is positive so $y=\frac{z}{2}=\frac{\phi}{2}$ or&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-y=\frac{1+\sqrt{5}}{4}\label{eq:2.13}
-\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;From Eq. $\ref{eq:2.13}$ we can express &lt;em&gt;b&lt;/em&gt; in terms of &lt;em&gt;y&lt;/em&gt; using Eqns
-$\ref{eq:2.1}$, $\ref{eq:2.2}$ and $\ref{eq:2.3}$:&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-b=2\sqrt{1-y^{2}}\label{eq:2.14}
-\end{equation}$$&lt;/p&gt;
-
-&lt;p&gt;And so we obtain the expression for the length of the side of a pentagon
-as&lt;/p&gt;
-
-&lt;p&gt;$$\begin{equation}
-b=\sqrt{\frac{5-\sqrt{5}}{2}}\label{eq:2.15}
-\end{equation}$$&lt;/p&gt;
-
-&lt;h3&gt;Construction of the pentagon&lt;/h3&gt;
-
-&lt;p&gt;The remaining question is then, how do we construct a line of length &lt;em&gt;b&lt;/em&gt;
-using a rules and compass?&lt;/p&gt;
-
-&lt;p&gt;We do this indirectly, by constructing a line
-of length &lt;em&gt;y&lt;/em&gt; as shown in &lt;a href=&quot;#fig:Construction-of-a&quot;&gt;Figure 3&lt;/a&gt;. First, we
-construct a line of length 1/2. Then the hypothenuse of the right
-triangle with sides 1/2 and 1 has a lenght of $\frac{\sqrt{5}}{2}$. We
-add this to the 1/2 by drawing an arc of radius $\frac{\sqrt{5}}{2}$
-using the compass. This way we get a line of length
-$\phi = \frac{1+\sqrt{5}}{2}$. Dividing this into two gives &lt;em&gt;y&lt;/em&gt; and through the
-way we constructed this, we immediately get &lt;em&gt;b&lt;/em&gt; as well and so we can
-construct the pentagon using arcs of radius &lt;em&gt;b&lt;/em&gt;.&lt;/p&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/pentagon-construction.png&quot; alt=&quot;Construction of a regular pentagon using ruler and compass&quot; id=&quot;fig:Construction-of-a&quot; /&gt;
-&lt;figcaption&gt;Figure 3. Construction of a regular pentagon using ruler and compass&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h3&gt;A hidden triangle&lt;/h3&gt;
-
-&lt;p&gt;The equation we solved to obtain &lt;em&gt;y&lt;/em&gt; (&lt;a href=&quot;#eq:2.11&quot;&gt;Eq. $\ref{eq:2.10}$&lt;/a&gt;) is a third order equation, and
-its other positive root is $z=1$. This shows in a way the danger of transforming a geometry problem into algebra:
-only one of these roots, $z=\phi$, corresponds to a solution of our geometric problem.&lt;/p&gt;
-
-&lt;p&gt;But there is also a geometric interpretation for the root $z=1$. Substitution of $y=1/2$ in the equations for  results in $q=\sqrt{3}$ and $b=\sqrt{3}$,
-in other words a regular triangle inscribed in the unit circle.&lt;/p&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/triangle-relationships.png&quot; width=&quot;70%&quot; alt=&quot;Relationships in a triangle&quot; id=&quot;fig:Relationships-in-a&quot; /&gt;
-&lt;figcaption&gt;Figure 4. Relationships in a triangle&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-        </content>
-    </entry>
-    
-    <entry>
-        <title>A strategy for debugging</title>
-        <link href="https://wimvanderbauwhede.github.io/articles/debugging/"/>
-        <updated>2018-03-05T00:00:00+00:00</updated>
-        <id>https://wimvanderbauwhede.github.io/articles/debugging</id>
-        <author>
-					<name>Wim Vanderbauwhede</name>
-					<uri>https://wimvanderbauwhede.github.io/</uri>
-					
-				</author>
-        <content type="html">
-        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/debugging_1600x600.jpg&quot;&gt;&lt;br/&gt;
-        	&lt;p&gt;For a long time it has been my contention that for a developer, more than programming, debugging should be treated as a core skill. A developer typically spends more time debugging code than writing code so it makes sense to try and optimize this process. Over the years I have developed a strategy for debugging. I see debugging as a generic, transferable skill that is applicable not only to coding but to any form of systems design.&lt;/p&gt;
-
-&lt;h2&gt;The mental models&lt;/h2&gt;
-
-&lt;p&gt;To debug a system we need a mental model, an understanding of the system in our mind. I believe this is the real cornerstone of debugging, and the common mistake is to spend too little time in constructing these models.&lt;/p&gt;
-
-&lt;p&gt;The mental model should cover all aspects of the system that you need to understand. For example, if you want to understand why a program is slow, your mental model of the system should allow you to reason about the performance trade-offs.&lt;/p&gt;
-
-&lt;p&gt;I distinguish three types of mental models, each of them corresponds to a different view of the system.&lt;/p&gt;
-
-&lt;h3&gt;Behavioural system model&lt;/h3&gt;
-
-&lt;p&gt;The understanding of &lt;em&gt;what&lt;/em&gt; the system does (or should do), how it should behave, is the &lt;em&gt;behavioural&lt;/em&gt; model. A bug is observed through this model: the system behaves in a way that does not conform to the behavioural model.
-Usually (or at least if you&amp;#39;re lucky) the behavioural system model is codified in a specification.&lt;/p&gt;
-
-&lt;h3&gt;Operational system model&lt;/h3&gt;
-
-&lt;p&gt;The &lt;em&gt;operational&lt;/em&gt; system model is your understanding of &lt;em&gt;how&lt;/em&gt; the system works. This model allows us to formulate hypotheses about &lt;em&gt;why&lt;/em&gt; the system does not behave as expected. This is the most important mental system model, and part of the debugging process is actually improving and refining this model.&lt;/p&gt;
-
-&lt;p&gt;In many cases, the operational model is actually your model of how a program in a given language is compiled/interpreted and executed on the hardware. This model starts from the syntax and semantics of the programming language, and includes a model for any API used in the code. As a trivial example, in Python, the keys in a dictionary are unordered, whereas the default in a C++ map is ordered.&lt;/p&gt;
-
-&lt;p&gt;The closer you are to the bare metal, or the more you care about performance or memory footprint, the more details your mental model will have to include about the actual hardware, to the extent that for e.g. running code on FPGAs you even need to have a detailed mental model for the memory controllers. For debugging in higher-level languages, usually the model can be much more abstract, with a basic notion of memory management and code execution.&lt;/p&gt;
-
-&lt;h3&gt;Structural system model&lt;/h3&gt;
-
-&lt;p&gt;The &lt;em&gt;structural&lt;/em&gt; system model is the model of &lt;em&gt;where&lt;/em&gt; we should look to trace and fix a bug. For software, this model is our understanding of the code structure. In general, the structure of software systems tends to be hierarchical and relatively loosely coupled. This means we only need to focus on a fraction of the codebase at a time. If this were not the case, debugging time would grow more than linearly with the code size. Fortunately for most systems it&amp;#39;s closer to logarithmic.&lt;/p&gt;
-
-&lt;h2&gt;The debugging activity&lt;/h2&gt;
-
-&lt;p&gt;Given the above mental system models, the activity of debugging is an iterative process involving several steps, and during the process we often jump between these steps.&lt;/p&gt;
-
-&lt;h3&gt;Identifying the bug&lt;/h3&gt;
-
-&lt;p&gt;First, identify the bug. Is it really a bug or is your behavioural model incorrect, not specific enough or ambiguous? If necessary, adapt the model and re-iterate.&lt;/p&gt;
-
-&lt;p&gt;Then there are essentially three stages in the process of finding the bug.&lt;/p&gt;
-
-&lt;h3&gt;Narrowing down through exclusion&lt;/h3&gt;
-
-&lt;p&gt;We start by narrowing down through a process of exclusion: &amp;quot;This bug can&amp;#39;t be caused by X because of reason Y&amp;quot;. This process relies mostly on the operational system model, but sometimes also on the structural model, especially if you&amp;#39;re not 100% certain: &amp;quot;it is unlikely that the bug is in module X because of reason Y&amp;quot;. For example, it is unlikely that the cause of the bug is located in a standard library, compiler or interpreter. The chances that the bug is in your own code is much higher, so that possibility should be explored first.&lt;/p&gt;
-
-&lt;h3&gt;Formulating hypotheses&lt;/h3&gt;
-
-&lt;p&gt;Once we cannot proceed any further through exclusion, we switch to the most interesting stage. We formulate a hypothesis &amp;quot;Let&amp;#39;s assume that the bug is caused by X&amp;quot; and then we use this as the basis for further investigation.&lt;/p&gt;
-
-&lt;p&gt;The main difference between exclusion and formulating a hypothesis is that when we formulate a hypothesis, we don&amp;#39;t know if it is true or false, so we need to test it. With the exclusion process, we do know that our stated reason holds -- or at least we have a high degree of confidence -- so we don&amp;#39;t test it.&lt;/p&gt;
-
-&lt;p&gt;Quite frequently our hypothesis will prove to be false, and then we have one fewer possible cause for the bug. Equally frequently, when our hypothesis proves to be false, this indicates that our operational model is incomplete. In that case we should formulate additional hypotheses to improve our mental model. I believe this is an important step that is often skipped because it seems to detract from the real task, i.e. finding the bug. But without an accurate operational model, it is much harder to find bugs, so the time spent in improving your system knowledge is always well spent.&lt;/p&gt;
-
-&lt;h3&gt;Gathering information&lt;/h3&gt;
-
-&lt;p&gt;To test a hypothesis we can either use emulation or observation of the system behaviour. This requires the structural model to tell us where to look.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;By emulation I mean that we mentally run part of a program using our operational model. In that case we assume that our operational model is accurate enough to produce the same result as the actual system. In general, this is a tricky approach to debugging because if our mental model is inaccurate we won&amp;#39;t find the bug. However, it is generally the approach taken when we have narrowed down the location of the bug sufficiently.&lt;/li&gt;
-&lt;li&gt;We can observe the system behaviour through compiler or interpreter warnings, by using a debugger, or by making the code generate additional information. This requires a good structural model to guide us to the locations that we want to inspect using the debugger or where we want to add the code to generate the debugging information.&lt;/li&gt;
-&lt;li&gt;Either way, the result should be some information that helps to test the hypothesis.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Example scenarios&lt;/h2&gt;
-
-&lt;h3&gt;Debugging your own code&lt;/h3&gt;
-
-&lt;p&gt;Debugging code you wrote and understand, and whose use case is intimately familiar to you, should be the easiest type of debugging. However, the problem with this kind of code is often that, precisely because it is your own code and you have a very precise behavioural model, and of course a perfect structural model, you never bothered to create an accurate operational model of the code. This may sound strange because after all, if you wrote it, you should know how it works. But the reality is that we often perform very limited mental verification, esp. of corner cases, on our own code.&lt;/p&gt;
-
-&lt;h3&gt;Debugging a minimal, complete, and verifiable example&lt;/h3&gt;
-
-&lt;p&gt;Debugging someone else&amp;#39;s code is much harder because you typically lack all of the mental models.&lt;/p&gt;
-
-&lt;p&gt;I often have to debug code written by my students, usually long after they have graduated. The main conclusion is that we should teach our students how to write maintainable code, i.e. code that makes it easy to understand the structural model.&lt;/p&gt;
-
-&lt;p&gt;If the code is a Minimal, Complete, and Verifiable example &lt;a href=&quot;https://stackoverflow.com/help/mcve&quot;&gt;MCVE&lt;/a&gt; then building your mental models is relatively easy because the code base should be small and self-contained. For such examples, the operational model is usually defined at the level of language semantics and standard library APIs. There is a nice detailed post about debugging small programs on &lt;a href=&quot;https://ericlippert.com/2014/03/05/how-to-debug-small-programs/&quot;&gt;Eric Lippert&amp;#39;s blog&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3&gt;Debugging a huge codebase&lt;/h3&gt;
-
-&lt;p&gt;The main challenge with debugging a truly huge codebase (millions of lines of code) is that you need to build mental models that cover the overall system, even if you are looking to debug a very specific aspect of the system behaviour.&lt;/p&gt;
-
-&lt;p&gt;For example, some years ago I modified the Weather Research and Forecasting model to run on GPUs, and debugged the changes. This is a numerical weather simulator with a codebase of about two million lines of Fortran 90. It is very well architected and there is reasonably good documentation. The main challenge in this system was actually to understand the build system first, because a large amount of code is generated at build time. Apart from that, I had to learn how a weather simulator works at the level of the physics, and how the code was parallelised. I modified the part of the code known as the advection kernel, to make it work on GPUs. As expected, the changes were not first-time-right, and debugging GPU code is difficult because it is hard to observe what happens inside the GPU. Nevertheless, I followed essentially the approach outlined above.
-In this case, the original, unmodified code provided the reference behavioural model. I built the structural model through the process of working out which part of the code needed to be modified.  So the difficulty was as usual with the operational model, and in this case the bugs mostly originated from the fact that the GPU code is essentially C, and the host code Fortran, and they have different views on arrays and argument passing.&lt;/p&gt;
-
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Debugging is difficult and time consuming but a strategy based on behavioural, operational and structural mental models can make the process more efficient in a variety of scenarios.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;I would like to thank &lt;a href=&quot;https://fasiha.github.io/&quot;&gt;Ahmed Fasih&lt;/a&gt; for motivating me to write this article and suggesting the example scenarios.&lt;/em&gt;&lt;/p&gt;
-
         </content>
     </entry>
     
