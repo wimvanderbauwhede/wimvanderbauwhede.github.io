@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Immutable data structures and reduction in Raku • Wim Vanderbauwhede</title>
+    <meta name="description" content="What does it take to bring functional programming to a stack-based assembly language?">
+    <meta name="keywords" content="programming, raku">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Immutable data structures and reduction in Raku">
+	<meta name="twitter:description" content="What does it take to bring functional programming to a stack-based assembly language?">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/immutable-datastructures-reduction_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/immutable-datastructures-reduction/#">
+	<meta property="og:title" content="Immutable data structures and reduction in Raku">
+	<meta property="og:description" content="What does it take to bring functional programming to a stack-based assembly language?">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/immutable-datastructures-reduction_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/immutable-datastructures-reduction/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<!-- WV: NO!
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+	  <!-- WV: NO!
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    -->
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/immutable-datastructures-reduction_1600x600.jpg" class="page-feature-image" alt="Immutable data structures and reduction in Raku" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>Immutable data structures and reduction in Raku</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<h1>Immutable data structures and reduction in Raku</h1>
+
+<p>For <a href="https://wimvanderbauwhede.github.io/articles/uxntal-to-C/">a little compiler</a> I&#39;ve been writing, I felt increasingly the need for immutable data structures to ensure that nothing was passed by references between passes. I love Perl and Raku but I am a functional programmer at heart, so I prefer map and reduce over loops. It bothered me to run reductions on a mutable data structure. So I made <a href="https://codeberg.org/wimvanderbauwhede/nito/src/branch/main/lib/ImmutableDatastructureHelpers.rakumod">a small library</a> to make it easier to work with immutable maps and lists.</p>
+
+<p>A reduction combines all elements of a list into a result. A typical example is the sum of all elements in a list. According to the Raku docs, <code>reduce()</code> has the following signature</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">multi</span> <span class="k">sub</span> <span class="nb">reduce</span> (<span class="nv">&amp;with</span>, +<span class="n">list</span>)
+</code></pre></div>
+<p>In general, if we have a list of elements of type <code>T1</code> and a result of type <code>T2</code>, Raku&#39;s <code>reduce()</code> function takes as first argument a function of the form</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span>-&gt; <span class="n">T2</span> \<span class="n">acc</span>, <span class="n">T1</span> \<span class="n">elt</span> --&gt; <span class="n">T2</span> { ... }
+</code></pre></div>
+<p>I use the form of <code>reduce</code> that takes three arguments: the reducing function, the accumulator (what the Raku docs call the initial value) and the list.  As explained in the docs, Raku&#39;s <code>reduce</code> operates from left to right. (In Haskell speak, it is a <code>foldl :: (b -&gt; a -&gt; b) -&gt; b -&gt; [a]</code>.)</p>
+
+<p>The use case is the traversal of a role-based datastructure <code>ParsedProgram</code> which contains a map and an ordered list of keys. The map itself contains elements of type <code>ParsedCodeBlock</code> which is essentially a list of tokens.</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">ParsedProgram</span> {
+    <span class="k">has</span> <span class="n">Map</span> <span class="nv">$.blocks</span> = <span class="n">Map</span>.<span class="nb">new</span>; <span class="c1"># {String =&gt; ParsedCodeBlock}</span>
+    <span class="k">has</span> <span class="nb">List</span> <span class="nv">$.blocks-sequence</span> = <span class="nb">List</span>.<span class="nb">new</span>; <span class="c1"># [String]</span>
+    ...
+}
+
+<span class="k">role</span> <span class="n">ParsedCodeBlock</span> {
+    <span class="k">has</span> <span class="nb">List</span> <span class="nv">$.code</span> = <span class="nb">List</span>.<span class="nb">new</span>; <span class="c1"># [Token]</span>
+    ...
+}
+</code></pre></div>
+<p>List and Map are immutable, so we have immutable datastructures. What I want do do is update these datastructures using a nested reduction where I iterate over all the keys in the <code>blocks-sequence</code> List and then modify the corresponding ParsedCodeBlock. For that purpose, I wrote a small API, and in the code below, <code>append</code> and <code>insert</code> are part of that API. What they do is create a fresh List resp. Map rather than updating in place.</p>
+
+<p>I prefer to use sigil-less variables for immutable data, so that sigils in my code show where I have use mutable variables.</p>
+
+<p>The code below is an example of a typical traversal. We iterate over a list of code blocks in a program, <code>parsed_program.blocks-sequence</code>; on every iteration, we update the program <code>parsed_program</code> (the accumulator).
+The <code>reduce()</code> call takes a lambda function with the accumulator  (<code>ppr_</code>) and a list element (<code>code_block_label</code>).</p>
+
+<p>We get the code blocks from the program&#39;s map of blocks, and use <code>reduce()</code> again to update the tokens in the code block. So we iterate over the original list of tokens (<code>parsed_block.code</code>) and build a new list. The lambda function therefore has as accumulator the updated list (<code>mod_block_code_</code>) and as element a token (<code>token_</code>). </p>
+
+<p>The inner reduce creates a modified token and puts it in the updated list using <code>append</code>. Then the outer reduce updates the block code using <code>clone</code> and updates the map of code blocks in the program using <code>insert</code>, which updates the entry if it was present. Finally, we update the program using <code>clone</code>.</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">reduce</span>(
+    -&gt; <span class="n">ParsedProgram</span> \<span class="n">ppr_</span>, <span class="n">String</span> \<span class="n">code_block_label</span> {
+        <span class="k">my</span> <span class="n">ParsedCodeBlock</span> \<span class="n">parsed_block</span> =
+            <span class="n">ppr_</span>.<span class="n">blocks</span>{<span class="n">code_block_label</span>};
+
+        <span class="k">my</span> <span class="nb">List</span> \<span class="n">mod_block_code</span> = <span class="nb">reduce</span>(
+            -&gt; \<span class="n">mod_block_code_</span>,\<span class="n">token_</span> {
+                <span class="k">my</span> <span class="n">Token</span> \<span class="n">mod_token_</span> = ...;
+                <span class="n">append</span>(<span class="n">mode_block_code_</span>,<span class="n">mod_token_</span>);
+            },
+            <span class="nb">List</span>.<span class="nb">new</span>,
+            |<span class="n">parsed_block</span>.<span class="n">code</span>
+        );
+        <span class="k">my</span> <span class="n">ParsedCodeBlock</span> \<span class="n">mod_block_</span> =
+            <span class="n">parsed_block</span>.<span class="nb">clone</span>(<span class="n">code</span>=&gt;<span class="n">mode_block_code</span>);
+        <span class="k">my</span> <span class="n">Map</span> \<span class="n">blocks_</span> = <span class="n">insert</span>(
+            <span class="n">ppr_glob</span>.<span class="n">blocks</span>,<span class="n">code_block_label</span>,<span class="n">mod_block_</span>);
+        <span class="n">ppr_</span>.<span class="nb">clone</span>(<span class="n">blocks</span>=&gt;<span class="n">blocks_</span>);
+    },
+    <span class="n">parsed_program</span>,
+    |<span class="n">parsed_program</span>.<span class="n">blocks-sequence</span>
+);
+</code></pre></div>
+<p>The entire library is only a handful of functions. The naming of the functions is based on Haskell&#39;s, except where Raku already claimed a name as a keyword.</p>
+
+<h2>Map manipulation</h2>
+
+<p>Insert, update and remove entries in a Map. Given an existing key, <code>insert</code> will update the entry.</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">insert</span>(<span class="n">Map</span> \<span class="n">m_</span>, <span class="nb">Str</span> \<span class="n">k_</span>, \<span class="n">v_</span> --&gt; <span class="n">Map</span> )
+<span class="k">sub</span> <span class="n">update</span>(<span class="n">Map</span> \<span class="n">m_</span>, <span class="nb">Str</span> \<span class="n">k_</span>, \<span class="n">v_</span> --&gt; <span class="n">Map</span> )
+<span class="k">sub</span> <span class="n">remove</span>(<span class="n">Map</span> \<span class="n">m_</span>, <span class="nb">Str</span> \<span class="n">k_</span> --&gt; <span class="n">Map</span> )
+</code></pre></div>
+<h2>List manipulation</h2>
+
+<p>There are more list manipulation functions because reductions operate on lists.</p>
+
+<h3>Add/remove an element at the front:</h3>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># push</span>
+<span class="k">sub</span> <span class="n">append</span>(<span class="nb">List</span> \<span class="n">l_</span>, \<span class="n">e_</span> --&gt; <span class="nb">List</span>)
+<span class="c1"># unshift</span>
+<span class="k">sub</span> <span class="n">prepend</span>(<span class="nb">List</span> \<span class="n">l_</span>, \<span class="n">e_</span> --&gt; <span class="nb">List</span>)
+</code></pre></div>
+<h3>Split a list into its first element and the rest:</h3>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># return the first element, like shift</span>
+<span class="k">sub</span> <span class="n">head</span>(<span class="nb">List</span> \<span class="n">l_</span> --&gt; <span class="nb">Any</span>)
+<span class="c1"># drops the first element</span>
+<span class="k">sub</span> <span class="n">tail</span>(<span class="nb">List</span> \<span class="n">l_</span> --&gt; <span class="nb">List</span>)
+
+<span class="c1"># This is like head:tail in Haskell</span>
+<span class="k">sub</span> <span class="n">headTail</span>(<span class="nb">List</span> \<span class="n">l_</span> --&gt; <span class="nb">List</span>) <span class="c1"># List is a tuple (head, tail)</span>
+</code></pre></div>
+<p>The typical use of <code>headTail</code> is something like:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> (<span class="nb">Str</span> \<span class="n">leaf</span>, <span class="nb">List</span> \<span class="n">leaves_</span>) = <span class="n">headTail</span>(<span class="n">leaves</span>);
+</code></pre></div>
+<h3>Similar operations but for the last element:</h3>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># drop the last element</span>
+<span class="k">sub</span> <span class="n">init</span>(<span class="nb">List</span> \<span class="n">l_</span> --&gt; <span class="nb">List</span>)
+<span class="c1"># return the last element, like pop.</span>
+<span class="k">sub</span> <span class="n">top</span>(<span class="nb">List</span> \<span class="n">l_</span> --&gt; <span class="nb">Any</span>) ,
+<span class="c1"># Split the list on the last element</span>
+<span class="k">sub</span> <span class="n">initLast</span>(<span class="nb">List</span> \<span class="n">l_</span> --&gt; <span class="nb">List</span>) <span class="c1"># List is a tuple (init, top)</span>
+</code></pre></div>
+<p>The typical use of <code>initLast</code> is something like:</p>
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> (<span class="nb">List</span> \<span class="n">leaves_</span>, <span class="nb">Str</span> \<span class="n">leaf</span>) = <span class="n">headTail</span>(<span class="n">leaves</span>);
+</code></pre></div>
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+                    <div class="inline-btn">
+    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <!--
+	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
+	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
+	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
+	&nbsp;
+<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+    -->
+</div><!-- /.follow-us -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2022-11-20T00:00:00Z" itemprop="dateModified">November 20, 2022</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2022 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
