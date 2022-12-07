@@ -253,7 +253,7 @@ The <code>reduce()</code> call takes a lambda function with the accumulator  (<c
 <span class="k">sub</span> <span class="n">initLast</span>(<span class="nb">List</span> \<span class="n">l_</span> --&gt; <span class="nb">List</span>) <span class="c1"># List is a tuple (init, top)</span>
 </code></pre></div>
 <p>The typical use of <code>initLast</code> is something like:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> (<span class="nb">List</span> \<span class="n">leaves_</span>, <span class="nb">Str</span> \<span class="n">leaf</span>) = <span class="n">headTail</span>(<span class="n">leaves</span>);
+<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> (<span class="nb">List</span> \<span class="n">leaves_</span>, <span class="nb">Str</span> \<span class="n">leaf</span>) = <span class="n">initLast</span>(<span class="n">leaves</span>);
 </code></pre></div>
 				<hr />
 				<footer class="page-footer">
