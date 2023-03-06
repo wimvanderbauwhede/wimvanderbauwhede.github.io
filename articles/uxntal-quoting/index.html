@@ -166,7 +166,7 @@
 
 <p>Concepts such as lambda functions, quoting, partial application and closures are common in functional programming languages, but if you are not familiar with these you should still be able to follow most of the explanation. My article <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/">&quot;Cleaner code with functional programming&quot;</a>, explains the basics of functional programming.</p>
 
-<p>Although Uxn is a stack machine and Uxntal a stack language, it is quite easy to do register based programming by using labels as variables: the purely stack based </p>
+<p>Although Uxn is a stack machine and Uxntal a stack language, it is quite easy to do register based programming by using labels as variables: the purely stack based</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
 #06 #07 MUL
 </code></pre></div>
@@ -186,7 +186,7 @@
 
 <h2>Anonymous functions</h2>
 
-<p>Uxntal supports variables and named function calls through labels. And as the program is stored in writeable memory, it can me overwritten or modified in place. </p>
+<p>Uxntal supports variables and named function calls through labels. And as the program is stored in writeable memory, it can be overwritten or modified in place.</p>
 
 <p>I wanted to see if I could implement or emulate the behaviour of anonymous functions (called &quot;lambda functions&quot; in functional programming). For example, I&#39;d like to be able to write something similar to the following Haskell code:</p>
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="p">)</span> <span class="n">lst</span>
@@ -207,7 +207,7 @@
 
 <p>From the above examples, the clear feature of a lambda function is that it identifies by name the variables used as its arguments. I want to reflect this closely in Uxntal. The other key feature is that the lambda functions are values, and we need to apply them to an argument to get a computation. That is very similar to calling a function in Uxntal. Suppose we have</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
-#0003 #0004 ;f JSR2 
+#0003 #0004 ;f JSR2
 BRK
 @f
     .x STZ2
@@ -218,20 +218,20 @@ BRK
 </code></pre></div>
 <p>Using some macros I have defined for convenience, I can write this as</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
-3 4 ;f call 
+3 4 ;f call
 BRK
 @f
     -&gt;x
     -&gt;y
     x x * y y * +
-    x y * 2 * + 
+    x y * 2 * +
     return
 </code></pre></div>
 <p>With a lambda notation, this would become</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
-3 4  [&#39; \x. \y. 
-        x&#39; x&#39; *&#39; y&#39; y&#39; *&#39; +&#39; 
-        x&#39; y&#39; *&#39; 2&#39; *&#39; +&#39; 
+3 4  [&#39; \x. \y.
+        x&#39; x&#39; *&#39; y&#39; y&#39; *&#39; +&#39;
+        x&#39; y&#39; *&#39; 2&#39; *&#39; +&#39;
     ]&#39; apply
 BRK
 </code></pre></div>
@@ -250,11 +250,11 @@ BRK
 </code></pre></div>
 <p>and with lambdas</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
-3 2 [&#39; \x. 
-        [&#39; \y. 
-            x&#39; y&#39; +&#39; 
-        ]&#39; 
-    ]&#39; apply 
+3 2 [&#39; \x.
+        [&#39; \y.
+            x&#39; y&#39; +&#39;
+        ]&#39;
+    ]&#39; apply
     apply
 BRK
 </code></pre></div>
@@ -268,33 +268,33 @@ BRK
 
 <h4>Quoting</h4>
 
-<p>First of all, we need some mechanism to defer evaluation of an operation, which I call &quot;quoting&quot; for short. 
+<p>First of all, we need some mechanism to defer evaluation of an operation, which I call &quot;quoting&quot; for short.
 Luckily, Uxntal has the essential feature: it is possible to quote an operation and unquote it later. For example:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#06 #07 ADD 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#06 #07 ADD
 </code></pre></div>
 <p>would immediately compute 6*7; but if we write</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#06 #07 LIT ADD 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#06 #07 LIT ADD
 </code></pre></div>
-<p>then we have the ADD operation as a symbol on the stack. This is what I call &quot;quoting&quot; for opcodes. </p>
+<p>then we have the ADD operation as a symbol on the stack. This is what I call &quot;quoting&quot; for opcodes.</p>
 
 <h4>Unquoting through self-modification</h4>
 
 <p>To unquote the symbol and so evaluate the expression, we can do</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#00 STR $1 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#00 STR $1
 </code></pre></div>
 <p>which is a bit of Uxn magic: it is a relative store with a relative address of 0, and effectively it takes the symbol from the stack and puts it as the next instruction to be executed. The <code>$1</code> is just a placeholder on the stack to create the space for the store. So the following would calculate <code>6*7</code> and print out <code>*</code>.</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
-    #06 #07 LIT ADD 
+    #06 #07 LIT ADD
     #00 STR $1
     #18 DEO ( prints the character to stdout )
 BRK
 </code></pre></div>
-<p>There isn&#39;t really anything magical going on here: an equivalent program would be </p>
+<p>There isn&#39;t really anything magical going on here: an equivalent program would be</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
-    #06 #07 LIT ADD 
+    #06 #07 LIT ADD
     ;eval STA @eval $1
     #18 DEO ( prints the character to stdout )
-BRK    
+BRK
 </code></pre></div>
 <p>or even</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>|0100
@@ -323,7 +323,7 @@ MUL
 
 <h3>Kinds of symbols</h3>
 
-<p>Apart from the opcodes, there are several other types of symbols we need to be able to quote and unquote: variables, constants and function calls. </p>
+<p>Apart from the opcodes, there are several other types of symbols we need to be able to quote and unquote: variables, constants and function calls.</p>
 
 <p>For the variables, we need to handle declaration and use: the declaration results in the argument being stored at the location referenced by the variable, and the use results in the value stored at the referenced location being read. I store the variables in the zero-page memory:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>@x $2 @y $2 @z $2
@@ -345,7 +345,7 @@ MUL
 
 <h3>Building the lambda</h3>
 
-<p>To build the lambda function, I need to store the quoted symbols. Crucially, I need to be able to identify the kind of each symbol. I encode each symbol using three bytes, the third byte is a label to identify the kind of symbol. The opening and closing brackets are also labelled and stored in this way. The opening bracket symbol contains the size of the lambda; the closing bracket is only there as a jump target. For example, </p>
+<p>To build the lambda function, I need to store the quoted symbols. Crucially, I need to be able to identify the kind of each symbol. I encode each symbol using three bytes, the third byte is a label to identify the kind of symbol. The opening and closing brackets are also labelled and stored in this way. The opening bracket symbol contains the size of the lambda; the closing bracket is only there as a jump target. For example,</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; \x. x&#39; 1&#39; +&#39; ;f call&#39; ]&#39;
 </code></pre></div>
 <p>is encoded as</p>
@@ -357,7 +357,7 @@ MUL
 00 01   CONST
 ADD __  OPCODE
 ;f      CALL
-__ __   END 
+__ __   END
 </code></pre></div>
 <p>The <code>__</code> are unused slots because for simplicity I have currently made all symbols the same size (this will probably change as I don&#39;t like inefficiency). For an 8-bit version, it would be possible to encode everything in two bytes.</p>
 
@@ -365,18 +365,18 @@ __ __   END
 
 <h3>The lambda stack</h3>
 
-<p>Because I want to be able to nest lambdas, I need a stack. I could abuse the return stack for this purpose, but I don&#39;t think using either of the Uxn stacks for persistent state is a good idea. So I build a stack in the second half of the zero-page memory. This stack stores tuples of the starting address and the size (in 3-byte words) of each lambda. Each quoting operation manipulates that stack to create the memory encoding for each lambda. </p>
+<p>Because I want to be able to nest lambdas, I need a stack. I could abuse the return stack for this purpose, but I don&#39;t think using either of the Uxn stacks for persistent state is a good idea. So I build a stack in the second half of the zero-page memory. This stack stores tuples of the starting address and the size (in 3-byte words) of each lambda. Each quoting operation manipulates that stack to create the memory encoding for each lambda.</p>
 
 <h3>Applying the lambda</h3>
 
-<p>The unquoting operation (the <code>apply</code> call) uses the same lambda stack. It takes the address of the lambda as argument, and loops over all symbols in the stored representation. The interesting case is that of nested lambdas: when the symbol represents an opening bracket, the evaluator puts the address of the nested lambda on the stack and jumps to the closing bracket, which acts as a no-op. For non-nested lambdas, the closing bracket returns the lambda&#39;s address. In this way I can evaluate nested lambdas as part of an <code>apply</code> call, and I can also return lambdas. </p>
+<p>The unquoting operation (the <code>apply</code> call) uses the same lambda stack. It takes the address of the lambda as argument, and loops over all symbols in the stored representation. The interesting case is that of nested lambdas: when the symbol represents an opening bracket, the evaluator puts the address of the nested lambda on the stack and jumps to the closing bracket, which acts as a no-op. For non-nested lambdas, the closing bracket returns the lambda&#39;s address. In this way I can evaluate nested lambdas as part of an <code>apply</code> call, and I can also return lambdas.</p>
 
 <h2>More uses of quoting</h2>
 
 <p>The quoting mechanism can be used for other purposes than creating lambda functions. Or to look at it another way, lambda functions that take no arguments (&quot;blocks&quot;) are valid:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ;f call&#39; ]&#39; 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ;f call&#39; ]&#39;
 </code></pre></div>
-<p>This gives us an option to have deferred calls. </p>
+<p>This gives us an option to have deferred calls.</p>
 
 <h3>A lazy <code>if</code></h3>
 
@@ -387,11 +387,11 @@ __ __   END
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>@lazy-if
     ,&amp;if-true JCN
     ( if-false )
-    POP2 apply-tc    
+    POP2 apply-tc
     &amp;if-true
     NIP2 apply-tc
 </code></pre></div>
-<p>Here, <code>apply-tc</code> is a tail call version of <code>apply</code>, so equivalent to <code>apply return</code>. We could of course create a <code>case</code> expression in this way too.  </p>
+<p>Here, <code>apply-tc</code> is a tail call version of <code>apply</code>, so equivalent to <code>apply return</code>. We could of course create a <code>case</code> expression in this way too.</p>
 
 <h3>Tuples</h3>
 
@@ -401,17 +401,17 @@ __ __   END
 SWP2
 apply * apply * / ( 4 )
 </code></pre></div>
-<p>In this example, <code>[&#39; ... ]&#39;</code> first creates two tuples and stores it somewhere; 
-then <code>apply</code> puts the values on the stack. It would be quite easy to write an indexing function to access element by index. </p>
+<p>In this example, <code>[&#39; ... ]&#39;</code> first creates two tuples and stores it somewhere;
+then <code>apply</code> puts the values on the stack. It would be quite easy to write an indexing function to access element by index.</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; 2 4 + \&#39; 3 5 + \&#39; ]&#39;  ( creates (6,8) )
 [&#39; 1 2 + \&#39; 4 2 /  2&#39; ]&#39;  ( creates (3,2,2) )
-SWP2 
-apply * ( 6*8 ) 
-SWP2 
+SWP2
+apply * ( 6*8 )
+SWP2
 apply [ * * ]  ( 3*2*2 )
 / ( 48/12 )
 </code></pre></div>
-<p>Another example to illustrate the functions to work on tuples: </p>
+<p>Another example to illustrate the functions to work on tuples:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; [ 1 2 + ] \&#39; [ 3 4 * ] \&#39; 5&#39; ]&#39; -&gt;l ( store the tuple in l )
 l fst  print16-nl ( first element )
 l snd print16-nl ( second element )
@@ -435,25 +435,25 @@ l size print16-nl ( returns the number of elements in the tuple, i.e. 3 )
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>(cons 1 (cons 2 (cons 3 (cons 4 ()))))
 </code></pre></div>
 <p>We can use the tuples in combination with a <code>cons</code> function in Uxntal to create cons lists:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons ( [ 5 6 7 ] ) 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons ( [ 5 6 7 ] )
 </code></pre></div>
 <p>There are a few functions to manipulate such lists, the most common ones are <code>head</code> which returns the first element and <code>tail</code> which returns the rest of the list (<code>car</code> and <code>cdr</code> in Scheme).</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons -&gt;l ( (5:6:(7:[])) ) 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons -&gt;l ( (5:6:(7:[])) )
 l tail tail head ( )
 l tail head
-* 
+*
 </code></pre></div>
 <p>There is of course also a <code>length</code> function, and a function <code>null</code> to check if the list is empty:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons -&gt;l ( (5:6:(7:[])) ) 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>[&#39; ]&#39; 7 cons 6 cons 5 cons -&gt;l ( (5:6:(7:[])) )
 l 4 cons length ( 4 )
 l tail tail tail null  ( #01 )
 </code></pre></div>
 <h3>Partial application and closures</h3>
 
 <p>The nested lambdas allow partial application:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 [&#39; \x.  [&#39; \y. x&#39; y&#39; +&#39; ]&#39;  ]&#39; lambda-call 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 [&#39; \x.  [&#39; \y. x&#39; y&#39; +&#39; ]&#39;  ]&#39; lambda-call
 </code></pre></div>
-<p>This means that we don&#39;t have to provide values for all arguments, and what we return is a function that has been specialised with the arguments that have been provided. In the example, we will effective obtain a function that will calculate <code>y+5</code>. This is a technique that can be used to generate specialised functions from a template. </p>
+<p>This means that we don&#39;t have to provide values for all arguments, and what we return is a function that has been specialised with the arguments that have been provided. In the example, we will effective obtain a function that will calculate <code>y+5</code>. This is a technique that can be used to generate specialised functions from a template.</p>
 
 <p>This looks a lot like a proper <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">closure</a> but while it seems to work, the value is not really captured. We simply store 5 in <code>@x</code>; if I modify <code>x</code> between the lambda calls, it will use the modified value. With a proper closure, once it has been created, it does not matter that the original value gets modified. This is not the case in my approach because x and y are globals, not locals. It is possible to address this but it would be very expensive:</p>
 
@@ -472,8 +472,8 @@ l tail tail tail null  ( #01 )
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 \[ \x. x&#39; x&#39; *&#39; \[ \y. y&#39; 1&#39; +&#39; \] lambda-call&#39; \] lambda-call ( returns #001a )
 </code></pre></div>
 <p>The <code>\[</code> ... <code>\]</code> brackets indicate the start and end of a quoting region. Within a quoting region, all quote symbols make up the anonymous function. I use macros to make it a bit nicer. Desugaring the example one layer, we get the following:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#0033 
-[&#39; 
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#0033
+[&#39;
     .x bind&#39;
     .x arg&#39;
     .x arg&#39;
@@ -485,16 +485,16 @@ l tail tail tail null  ( #01 )
         LIT ADD2 opcode&#39;
     ]&#39;
     ;lambda-call call&#39;
-]&#39; 
+]&#39;
 ;lambda-call call
 </code></pre></div>
 <h2>Conclusion</h2>
 
-<p>Although it may seem at first sight that a stack-based assembly language is quite far removed from a high-level functional language, in Uxntal we can implement many fundamental functional programming concepts such as lambdas, lazy conditionals, tuples and lists and concepts such as partial application and closures, simply by introducing the concept of quoting and unquoting symbols. Uxntal&#39;s simple macro mechanism provides sufficient abstraction to create readable functional programs. </p>
+<p>Although it may seem at first sight that a stack-based assembly language is quite far removed from a high-level functional language, in Uxntal we can implement many fundamental functional programming concepts such as lambdas, lazy conditionals, tuples and lists and concepts such as partial application and closures, simply by introducing the concept of quoting and unquoting symbols. Uxntal&#39;s simple macro mechanism provides sufficient abstraction to create readable functional programs.</p>
 
 <h2>Code</h2>
 
-<p>The code implementing the constructs described in this article is available <a href="https://codeberg.org/wimvanderbauwhede/hyakuwa/src/branch/main/quoting-lambdas">in my <code>hyakuwa</code> repo on Codeberg</a>. </p>
+<p>The code implementing the constructs described in this article is available <a href="https://codeberg.org/wimvanderbauwhede/hyakuwa/src/branch/main/quoting-lambdas">in my <code>hyakuwa</code> repo on Codeberg</a>.</p>
 
 <h3>8-bit vs 16-bit</h3>
 
@@ -502,21 +502,21 @@ l tail tail tail null  ( #01 )
 
 <h2>What&#39;s next?</h2>
 
-<p>As is the nature of such projects, there is always a lot more that could be done. There are two main drawbacks to the current approach: the macro mechanism is not expressive enough and the computational overhead is very high. </p>
+<p>As is the nature of such projects, there is always a lot more that could be done. There are two main drawbacks to the current approach: the macro mechanism is not expressive enough and the computational overhead is very high.</p>
 
-<p>To address the former we could create a custom assembler, which effectively means we have a new functional language that assembles into Uxntal, either source or rom. If we did that, we could write </p>
+<p>To address the former we could create a custom assembler, which effectively means we have a new functional language that assembles into Uxntal, either source or rom. If we did that, we could write</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 \[ \x. x&#39; x&#39; *&#39; \[ \y. y&#39; 1&#39; +&#39; \] lambda-call&#39; \] lambda-call
 </code></pre></div>
 <p>as, for example,</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>5 (\x -&gt; x x * (\y -&gt; y 1 +))
 </code></pre></div>
-<p>This would be a lot more readable and it would also allow to tailor the memory allocation for variables.     </p>
+<p>This would be a lot more readable and it would also allow to tailor the memory allocation for variables.</p>
 
 <p>We can&#39;t fundamentally address the computational overhead. It can definitely be reduced as the current implementation is not optimised. But effectively, the quoting mechanism is a kind of interpreter, so it always incurs the read-eval-write overhead. What we could do instead is compile the Uxntal code itself, rather than emulating it. But that will be the topic of another article.</p>
 
 <p><br></p>
 
-<p><em>The banner picture shows a row of small rabbit status at a Shinto shrine in Kyoto.</em> </p>
+<p><em>The banner picture shows a row of small rabbit status at a Shinto shrine in Kyoto.</em></p>
 
 				<hr />
 				<footer class="page-footer">
@@ -571,7 +571,7 @@ l tail tail tail null  ( #01 )
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2022 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">

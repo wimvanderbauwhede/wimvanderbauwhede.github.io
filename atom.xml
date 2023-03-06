@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2022-12-07T17:54:07+00:00</updated>
+    <updated>2023-03-06T11:28:02+00:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -467,7 +467,7 @@ Power est.    Usage     Device name
 
 &lt;p&gt;Concepts such as lambda functions, quoting, partial application and closures are common in functional programming languages, but if you are not familiar with these you should still be able to follow most of the explanation. My article &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/&quot;&gt;&amp;quot;Cleaner code with functional programming&amp;quot;&lt;/a&gt;, explains the basics of functional programming.&lt;/p&gt;
 
-&lt;p&gt;Although Uxn is a stack machine and Uxntal a stack language, it is quite easy to do register based programming by using labels as variables: the purely stack based &lt;/p&gt;
+&lt;p&gt;Although Uxn is a stack machine and Uxntal a stack language, it is quite easy to do register based programming by using labels as variables: the purely stack based&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
 #06 #07 MUL
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -487,7 +487,7 @@ Power est.    Usage     Device name
 
 &lt;h2&gt;Anonymous functions&lt;/h2&gt;
 
-&lt;p&gt;Uxntal supports variables and named function calls through labels. And as the program is stored in writeable memory, it can me overwritten or modified in place. &lt;/p&gt;
+&lt;p&gt;Uxntal supports variables and named function calls through labels. And as the program is stored in writeable memory, it can be overwritten or modified in place.&lt;/p&gt;
 
 &lt;p&gt;I wanted to see if I could implement or emulate the behaviour of anonymous functions (called &amp;quot;lambda functions&amp;quot; in functional programming). For example, I&amp;#39;d like to be able to write something similar to the following Haskell code:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lst&lt;/span&gt;
@@ -508,7 +508,7 @@ Power est.    Usage     Device name
 
 &lt;p&gt;From the above examples, the clear feature of a lambda function is that it identifies by name the variables used as its arguments. I want to reflect this closely in Uxntal. The other key feature is that the lambda functions are values, and we need to apply them to an argument to get a computation. That is very similar to calling a function in Uxntal. Suppose we have&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
-#0003 #0004 ;f JSR2 
+#0003 #0004 ;f JSR2
 BRK
 @f
     .x STZ2
@@ -519,20 +519,20 @@ BRK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Using some macros I have defined for convenience, I can write this as&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
-3 4 ;f call 
+3 4 ;f call
 BRK
 @f
     -&amp;gt;x
     -&amp;gt;y
     x x * y y * +
-    x y * 2 * + 
+    x y * 2 * +
     return
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With a lambda notation, this would become&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
-3 4  [&amp;#39; \x. \y. 
-        x&amp;#39; x&amp;#39; *&amp;#39; y&amp;#39; y&amp;#39; *&amp;#39; +&amp;#39; 
-        x&amp;#39; y&amp;#39; *&amp;#39; 2&amp;#39; *&amp;#39; +&amp;#39; 
+3 4  [&amp;#39; \x. \y.
+        x&amp;#39; x&amp;#39; *&amp;#39; y&amp;#39; y&amp;#39; *&amp;#39; +&amp;#39;
+        x&amp;#39; y&amp;#39; *&amp;#39; 2&amp;#39; *&amp;#39; +&amp;#39;
     ]&amp;#39; apply
 BRK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -551,11 +551,11 @@ BRK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;and with lambdas&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
-3 2 [&amp;#39; \x. 
-        [&amp;#39; \y. 
-            x&amp;#39; y&amp;#39; +&amp;#39; 
-        ]&amp;#39; 
-    ]&amp;#39; apply 
+3 2 [&amp;#39; \x.
+        [&amp;#39; \y.
+            x&amp;#39; y&amp;#39; +&amp;#39;
+        ]&amp;#39;
+    ]&amp;#39; apply
     apply
 BRK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -569,33 +569,33 @@ BRK
 
 &lt;h4&gt;Quoting&lt;/h4&gt;
 
-&lt;p&gt;First of all, we need some mechanism to defer evaluation of an operation, which I call &amp;quot;quoting&amp;quot; for short. 
+&lt;p&gt;First of all, we need some mechanism to defer evaluation of an operation, which I call &amp;quot;quoting&amp;quot; for short.
 Luckily, Uxntal has the essential feature: it is possible to quote an operation and unquote it later. For example:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#06 #07 ADD 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#06 #07 ADD
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;would immediately compute 6*7; but if we write&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#06 #07 LIT ADD 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#06 #07 LIT ADD
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;then we have the ADD operation as a symbol on the stack. This is what I call &amp;quot;quoting&amp;quot; for opcodes. &lt;/p&gt;
+&lt;p&gt;then we have the ADD operation as a symbol on the stack. This is what I call &amp;quot;quoting&amp;quot; for opcodes.&lt;/p&gt;
 
 &lt;h4&gt;Unquoting through self-modification&lt;/h4&gt;
 
 &lt;p&gt;To unquote the symbol and so evaluate the expression, we can do&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#00 STR $1 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#00 STR $1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;which is a bit of Uxn magic: it is a relative store with a relative address of 0, and effectively it takes the symbol from the stack and puts it as the next instruction to be executed. The &lt;code&gt;$1&lt;/code&gt; is just a placeholder on the stack to create the space for the store. So the following would calculate &lt;code&gt;6*7&lt;/code&gt; and print out &lt;code&gt;*&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
-    #06 #07 LIT ADD 
+    #06 #07 LIT ADD
     #00 STR $1
     #18 DEO ( prints the character to stdout )
 BRK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;There isn&amp;#39;t really anything magical going on here: an equivalent program would be &lt;/p&gt;
+&lt;p&gt;There isn&amp;#39;t really anything magical going on here: an equivalent program would be&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
-    #06 #07 LIT ADD 
+    #06 #07 LIT ADD
     ;eval STA @eval $1
     #18 DEO ( prints the character to stdout )
-BRK    
+BRK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;or even&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|0100
@@ -624,7 +624,7 @@ MUL
 
 &lt;h3&gt;Kinds of symbols&lt;/h3&gt;
 
-&lt;p&gt;Apart from the opcodes, there are several other types of symbols we need to be able to quote and unquote: variables, constants and function calls. &lt;/p&gt;
+&lt;p&gt;Apart from the opcodes, there are several other types of symbols we need to be able to quote and unquote: variables, constants and function calls.&lt;/p&gt;
 
 &lt;p&gt;For the variables, we need to handle declaration and use: the declaration results in the argument being stored at the location referenced by the variable, and the use results in the value stored at the referenced location being read. I store the variables in the zero-page memory:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;@x $2 @y $2 @z $2
@@ -646,7 +646,7 @@ MUL
 
 &lt;h3&gt;Building the lambda&lt;/h3&gt;
 
-&lt;p&gt;To build the lambda function, I need to store the quoted symbols. Crucially, I need to be able to identify the kind of each symbol. I encode each symbol using three bytes, the third byte is a label to identify the kind of symbol. The opening and closing brackets are also labelled and stored in this way. The opening bracket symbol contains the size of the lambda; the closing bracket is only there as a jump target. For example, &lt;/p&gt;
+&lt;p&gt;To build the lambda function, I need to store the quoted symbols. Crucially, I need to be able to identify the kind of each symbol. I encode each symbol using three bytes, the third byte is a label to identify the kind of symbol. The opening and closing brackets are also labelled and stored in this way. The opening bracket symbol contains the size of the lambda; the closing bracket is only there as a jump target. For example,&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; \x. x&amp;#39; 1&amp;#39; +&amp;#39; ;f call&amp;#39; ]&amp;#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;is encoded as&lt;/p&gt;
@@ -658,7 +658,7 @@ MUL
 00 01   CONST
 ADD __  OPCODE
 ;f      CALL
-__ __   END 
+__ __   END
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;__&lt;/code&gt; are unused slots because for simplicity I have currently made all symbols the same size (this will probably change as I don&amp;#39;t like inefficiency). For an 8-bit version, it would be possible to encode everything in two bytes.&lt;/p&gt;
 
@@ -666,18 +666,18 @@ __ __   END
 
 &lt;h3&gt;The lambda stack&lt;/h3&gt;
 
-&lt;p&gt;Because I want to be able to nest lambdas, I need a stack. I could abuse the return stack for this purpose, but I don&amp;#39;t think using either of the Uxn stacks for persistent state is a good idea. So I build a stack in the second half of the zero-page memory. This stack stores tuples of the starting address and the size (in 3-byte words) of each lambda. Each quoting operation manipulates that stack to create the memory encoding for each lambda. &lt;/p&gt;
+&lt;p&gt;Because I want to be able to nest lambdas, I need a stack. I could abuse the return stack for this purpose, but I don&amp;#39;t think using either of the Uxn stacks for persistent state is a good idea. So I build a stack in the second half of the zero-page memory. This stack stores tuples of the starting address and the size (in 3-byte words) of each lambda. Each quoting operation manipulates that stack to create the memory encoding for each lambda.&lt;/p&gt;
 
 &lt;h3&gt;Applying the lambda&lt;/h3&gt;
 
-&lt;p&gt;The unquoting operation (the &lt;code&gt;apply&lt;/code&gt; call) uses the same lambda stack. It takes the address of the lambda as argument, and loops over all symbols in the stored representation. The interesting case is that of nested lambdas: when the symbol represents an opening bracket, the evaluator puts the address of the nested lambda on the stack and jumps to the closing bracket, which acts as a no-op. For non-nested lambdas, the closing bracket returns the lambda&amp;#39;s address. In this way I can evaluate nested lambdas as part of an &lt;code&gt;apply&lt;/code&gt; call, and I can also return lambdas. &lt;/p&gt;
+&lt;p&gt;The unquoting operation (the &lt;code&gt;apply&lt;/code&gt; call) uses the same lambda stack. It takes the address of the lambda as argument, and loops over all symbols in the stored representation. The interesting case is that of nested lambdas: when the symbol represents an opening bracket, the evaluator puts the address of the nested lambda on the stack and jumps to the closing bracket, which acts as a no-op. For non-nested lambdas, the closing bracket returns the lambda&amp;#39;s address. In this way I can evaluate nested lambdas as part of an &lt;code&gt;apply&lt;/code&gt; call, and I can also return lambdas.&lt;/p&gt;
 
 &lt;h2&gt;More uses of quoting&lt;/h2&gt;
 
 &lt;p&gt;The quoting mechanism can be used for other purposes than creating lambda functions. Or to look at it another way, lambda functions that take no arguments (&amp;quot;blocks&amp;quot;) are valid:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ;f call&amp;#39; ]&amp;#39; 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ;f call&amp;#39; ]&amp;#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This gives us an option to have deferred calls. &lt;/p&gt;
+&lt;p&gt;This gives us an option to have deferred calls.&lt;/p&gt;
 
 &lt;h3&gt;A lazy &lt;code&gt;if&lt;/code&gt;&lt;/h3&gt;
 
@@ -688,11 +688,11 @@ __ __   END
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;@lazy-if
     ,&amp;amp;if-true JCN
     ( if-false )
-    POP2 apply-tc    
+    POP2 apply-tc
     &amp;amp;if-true
     NIP2 apply-tc
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Here, &lt;code&gt;apply-tc&lt;/code&gt; is a tail call version of &lt;code&gt;apply&lt;/code&gt;, so equivalent to &lt;code&gt;apply return&lt;/code&gt;. We could of course create a &lt;code&gt;case&lt;/code&gt; expression in this way too.  &lt;/p&gt;
+&lt;p&gt;Here, &lt;code&gt;apply-tc&lt;/code&gt; is a tail call version of &lt;code&gt;apply&lt;/code&gt;, so equivalent to &lt;code&gt;apply return&lt;/code&gt;. We could of course create a &lt;code&gt;case&lt;/code&gt; expression in this way too.&lt;/p&gt;
 
 &lt;h3&gt;Tuples&lt;/h3&gt;
 
@@ -702,17 +702,17 @@ __ __   END
 SWP2
 apply * apply * / ( 4 )
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In this example, &lt;code&gt;[&amp;#39; ... ]&amp;#39;&lt;/code&gt; first creates two tuples and stores it somewhere; 
-then &lt;code&gt;apply&lt;/code&gt; puts the values on the stack. It would be quite easy to write an indexing function to access element by index. &lt;/p&gt;
+&lt;p&gt;In this example, &lt;code&gt;[&amp;#39; ... ]&amp;#39;&lt;/code&gt; first creates two tuples and stores it somewhere;
+then &lt;code&gt;apply&lt;/code&gt; puts the values on the stack. It would be quite easy to write an indexing function to access element by index.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; 2 4 + \&amp;#39; 3 5 + \&amp;#39; ]&amp;#39;  ( creates (6,8) )
 [&amp;#39; 1 2 + \&amp;#39; 4 2 /  2&amp;#39; ]&amp;#39;  ( creates (3,2,2) )
-SWP2 
-apply * ( 6*8 ) 
-SWP2 
+SWP2
+apply * ( 6*8 )
+SWP2
 apply [ * * ]  ( 3*2*2 )
 / ( 48/12 )
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Another example to illustrate the functions to work on tuples: &lt;/p&gt;
+&lt;p&gt;Another example to illustrate the functions to work on tuples:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; [ 1 2 + ] \&amp;#39; [ 3 4 * ] \&amp;#39; 5&amp;#39; ]&amp;#39; -&amp;gt;l ( store the tuple in l )
 l fst  print16-nl ( first element )
 l snd print16-nl ( second element )
@@ -736,25 +736,25 @@ l size print16-nl ( returns the number of elements in the tuple, i.e. 3 )
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;(cons 1 (cons 2 (cons 3 (cons 4 ()))))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We can use the tuples in combination with a &lt;code&gt;cons&lt;/code&gt; function in Uxntal to create cons lists:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons ( [ 5 6 7 ] ) 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons ( [ 5 6 7 ] )
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;There are a few functions to manipulate such lists, the most common ones are &lt;code&gt;head&lt;/code&gt; which returns the first element and &lt;code&gt;tail&lt;/code&gt; which returns the rest of the list (&lt;code&gt;car&lt;/code&gt; and &lt;code&gt;cdr&lt;/code&gt; in Scheme).&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons -&amp;gt;l ( (5:6:(7:[])) ) 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons -&amp;gt;l ( (5:6:(7:[])) )
 l tail tail head ( )
 l tail head
-* 
+*
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;There is of course also a &lt;code&gt;length&lt;/code&gt; function, and a function &lt;code&gt;null&lt;/code&gt; to check if the list is empty:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons -&amp;gt;l ( (5:6:(7:[])) ) 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;[&amp;#39; ]&amp;#39; 7 cons 6 cons 5 cons -&amp;gt;l ( (5:6:(7:[])) )
 l 4 cons length ( 4 )
 l tail tail tail null  ( #01 )
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Partial application and closures&lt;/h3&gt;
 
 &lt;p&gt;The nested lambdas allow partial application:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 [&amp;#39; \x.  [&amp;#39; \y. x&amp;#39; y&amp;#39; +&amp;#39; ]&amp;#39;  ]&amp;#39; lambda-call 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 [&amp;#39; \x.  [&amp;#39; \y. x&amp;#39; y&amp;#39; +&amp;#39; ]&amp;#39;  ]&amp;#39; lambda-call
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This means that we don&amp;#39;t have to provide values for all arguments, and what we return is a function that has been specialised with the arguments that have been provided. In the example, we will effective obtain a function that will calculate &lt;code&gt;y+5&lt;/code&gt;. This is a technique that can be used to generate specialised functions from a template. &lt;/p&gt;
+&lt;p&gt;This means that we don&amp;#39;t have to provide values for all arguments, and what we return is a function that has been specialised with the arguments that have been provided. In the example, we will effective obtain a function that will calculate &lt;code&gt;y+5&lt;/code&gt;. This is a technique that can be used to generate specialised functions from a template.&lt;/p&gt;
 
 &lt;p&gt;This looks a lot like a proper &lt;a href=&quot;https://en.wikipedia.org/wiki/Closure_(computer_programming)&quot;&gt;closure&lt;/a&gt; but while it seems to work, the value is not really captured. We simply store 5 in &lt;code&gt;@x&lt;/code&gt;; if I modify &lt;code&gt;x&lt;/code&gt; between the lambda calls, it will use the modified value. With a proper closure, once it has been created, it does not matter that the original value gets modified. This is not the case in my approach because x and y are globals, not locals. It is possible to address this but it would be very expensive:&lt;/p&gt;
 
@@ -773,8 +773,8 @@ l tail tail tail null  ( #01 )
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 \[ \x. x&amp;#39; x&amp;#39; *&amp;#39; \[ \y. y&amp;#39; 1&amp;#39; +&amp;#39; \] lambda-call&amp;#39; \] lambda-call ( returns #001a )
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;\[&lt;/code&gt; ... &lt;code&gt;\]&lt;/code&gt; brackets indicate the start and end of a quoting region. Within a quoting region, all quote symbols make up the anonymous function. I use macros to make it a bit nicer. Desugaring the example one layer, we get the following:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#0033 
-[&amp;#39; 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;#0033
+[&amp;#39;
     .x bind&amp;#39;
     .x arg&amp;#39;
     .x arg&amp;#39;
@@ -786,16 +786,16 @@ l tail tail tail null  ( #01 )
         LIT ADD2 opcode&amp;#39;
     ]&amp;#39;
     ;lambda-call call&amp;#39;
-]&amp;#39; 
+]&amp;#39;
 ;lambda-call call
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;Although it may seem at first sight that a stack-based assembly language is quite far removed from a high-level functional language, in Uxntal we can implement many fundamental functional programming concepts such as lambdas, lazy conditionals, tuples and lists and concepts such as partial application and closures, simply by introducing the concept of quoting and unquoting symbols. Uxntal&amp;#39;s simple macro mechanism provides sufficient abstraction to create readable functional programs. &lt;/p&gt;
+&lt;p&gt;Although it may seem at first sight that a stack-based assembly language is quite far removed from a high-level functional language, in Uxntal we can implement many fundamental functional programming concepts such as lambdas, lazy conditionals, tuples and lists and concepts such as partial application and closures, simply by introducing the concept of quoting and unquoting symbols. Uxntal&amp;#39;s simple macro mechanism provides sufficient abstraction to create readable functional programs.&lt;/p&gt;
 
 &lt;h2&gt;Code&lt;/h2&gt;
 
-&lt;p&gt;The code implementing the constructs described in this article is available &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/hyakuwa/src/branch/main/quoting-lambdas&quot;&gt;in my &lt;code&gt;hyakuwa&lt;/code&gt; repo on Codeberg&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;The code implementing the constructs described in this article is available &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/hyakuwa/src/branch/main/quoting-lambdas&quot;&gt;in my &lt;code&gt;hyakuwa&lt;/code&gt; repo on Codeberg&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3&gt;8-bit vs 16-bit&lt;/h3&gt;
 
@@ -803,21 +803,21 @@ l tail tail tail null  ( #01 )
 
 &lt;h2&gt;What&amp;#39;s next?&lt;/h2&gt;
 
-&lt;p&gt;As is the nature of such projects, there is always a lot more that could be done. There are two main drawbacks to the current approach: the macro mechanism is not expressive enough and the computational overhead is very high. &lt;/p&gt;
+&lt;p&gt;As is the nature of such projects, there is always a lot more that could be done. There are two main drawbacks to the current approach: the macro mechanism is not expressive enough and the computational overhead is very high.&lt;/p&gt;
 
-&lt;p&gt;To address the former we could create a custom assembler, which effectively means we have a new functional language that assembles into Uxntal, either source or rom. If we did that, we could write &lt;/p&gt;
+&lt;p&gt;To address the former we could create a custom assembler, which effectively means we have a new functional language that assembles into Uxntal, either source or rom. If we did that, we could write&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 \[ \x. x&amp;#39; x&amp;#39; *&amp;#39; \[ \y. y&amp;#39; 1&amp;#39; +&amp;#39; \] lambda-call&amp;#39; \] lambda-call
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;as, for example,&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;5 (\x -&amp;gt; x x * (\y -&amp;gt; y 1 +))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This would be a lot more readable and it would also allow to tailor the memory allocation for variables.     &lt;/p&gt;
+&lt;p&gt;This would be a lot more readable and it would also allow to tailor the memory allocation for variables.&lt;/p&gt;
 
 &lt;p&gt;We can&amp;#39;t fundamentally address the computational overhead. It can definitely be reduced as the current implementation is not optimised. But effectively, the quoting mechanism is a kind of interpreter, so it always incurs the read-eval-write overhead. What we could do instead is compile the Uxntal code itself, rather than emulating it. But that will be the topic of another article.&lt;/p&gt;
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;The banner picture shows a row of small rabbit status at a Shinto shrine in Kyoto.&lt;/em&gt; &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The banner picture shows a row of small rabbit status at a Shinto shrine in Kyoto.&lt;/em&gt;&lt;/p&gt;
 
         </content>
     </entry>
@@ -1963,7 +1963,7 @@ run the program.&lt;/p&gt;
 &lt;h3&gt;The vision:&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Imagine we can extend the useful life of our devices and even increase their capabilities without any increase in energy consumption.&lt;/li&gt;
+&lt;li&gt;Imagine we can extend the useful life of our devices and even increase their capabilities without any increase in energy consumption, purely by improving the software.&lt;/li&gt;
 &lt;li&gt;Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life.&lt;/li&gt;
 &lt;li&gt;Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.&lt;/li&gt;
 &lt;/ul&gt;
@@ -2030,7 +2030,7 @@ run the program.&lt;/p&gt;
 
 &lt;h3&gt;Emissions from production of computational resources&lt;/h3&gt;
 
-&lt;p&gt;To make matters worse, the carbon emissions resulting from the production of computing devices exceeds those incurred during operation. This is a crucial point, because it means that we can&amp;#39;t rely on next-generation hardware technologies to save energy: the production of this next generation of devices will create more emissions than any operational gains can offset. It does not mean research into more efficient technologies should stop. But their deployment cycles should be much slower. Extending the useful life of compute technologies must become our priority.&lt;/p&gt;
+&lt;p&gt;To make matters worse, the carbon emissions resulting from the production of computing devices exceeds those incurred during operation. This is a crucial point, because it means that we can&amp;#39;t rely on next-generation hardware technologies to save energy: the production of this next generation of devices will create more emissions than any operational gains can offset. It does not mean research into more efficient technologies should stop. But their deployment cycles should be much slower. Extending the useful life of compute technologies by improving the way we design and use software must become our priority.&lt;/p&gt;
 
 &lt;p&gt;The report about the cost of planned obsolescence by the European Environmental Bureau &lt;a href=&quot;#7&quot;&gt;[7]&lt;/a&gt; makes the scale of the problem very clear. For laptops and similar computers, manufacturing, distribution and disposal account for 52% of their &lt;a href=&quot;https://www.sciencedirect.com/topics/earth-and-planetary-sciences/global-warming-potential&quot;&gt;Global Warming Potential&lt;/a&gt; (i.e. the amount of CO₂-equivalent emissions caused). For mobile phones, this is 72%. The report calculates that the lifetime of these devices should be at least 25 years to limit their Global Warming Potential. Currently, for laptops it is about 5 years and for mobile phones 3 years. According to &lt;a href=&quot;#8&quot;&gt;[8]&lt;/a&gt;, the typical lifetime for servers in data centres is also 3-5 years, which again falls short of these minimal requirements. According to this paper, the impact of manufacturing of the servers is 20% of the total, which would require an extension of the useful life to 11-18 years. &lt;/p&gt;
 
@@ -2076,13 +2076,15 @@ title=&quot;A graph with two bars: world emissions (55) and emissions from compu
 
 &lt;p&gt;The above data make it clear which actions are necessary: the main carbon cost of phones, tablets and IoT devices is their production and the use of the mobile network, so we must extend their useful life very considerably and reduce network utilisation. Extending the life time is also the key action for datacentres and desktop computers, but their energy consumption also needs to be reduced considerably, as does the energy consumption of the wired, WiFi and mobile networks. &lt;/p&gt;
 
+&lt;p&gt;From the technical side, these are primarily software issues: the hardware exists because of the software&lt;/p&gt;
+
 &lt;h2&gt;A vision for low carbon and sustainable computing&lt;/h2&gt;
 
 &lt;p&gt;It is clear that urgent action is needed: in less than two decades, the global use of computational resources needs to be transformed radically. Otherwise, the world will fail to meet its climate targets, even with significant reductions in other emission areas. The carbon cost of both production and operation of the devices must be considerably reduced. &lt;/p&gt;
 
 &lt;p&gt;To use devices for longer, a change in business models as well as consumer attitudes is needed. This requires raising awareness and education but also providing incentives for behavioural change. And to support devices for a long time, an infrastructure for repair and maintenance is needed, with long-term availability of parts, open repair manuals and training. To make all this happen, economic incentives and policies will be needed (e.g. taxation, regulation). Therefore we need to convince key decision makers in society, politics and business.&lt;/p&gt;
 
-&lt;p&gt;Imagine that we can extend the useful life of our devices and even increase their capabilities, purely through better computing science. With every improvement, the computational capacity will in effect increase without any increase in energy consumption. Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life. Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.&lt;/p&gt;
+&lt;p&gt;Imagine that we can extend the useful life of our devices and even increase their capabilities, purely by improving the software. With every improvement, the computational capacity will in effect increase without any increase in energy consumption. Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life. Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.&lt;/p&gt;
 
 &lt;figure&gt;
 &lt;img src=&quot;https://wimvanderbauwhede.github.io/images/towards-zero-carbon-computing.png&quot; alt=&quot;A graph with four trends: emissions from production, emissions in total, performance and emissions/performance.&quot;
@@ -2100,6 +2102,12 @@ title=&quot;A graph with four trends: emissions from production, emissions in to
 &lt;/ul&gt;
 
 &lt;p&gt;To address these challenges, action is needed on many fronts. What will you do to make frugal computing a reality?&lt;/p&gt;
+
+&lt;h4&gt;Edits&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2023-03-06: edits to make it more clear that frugal computing is primarily a software issue.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2&gt;References&lt;/h2&gt;
 
