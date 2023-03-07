@@ -31,7 +31,7 @@ On the need for low-carbon and sustainable computing and the path towards zero-c
   - As a society we need to start treating computational resources as finite and precious, to be utilised only when necessary, and as effectively as possible. We need _frugal computing_: achieving the same results for less energy. 
 
 ### The vision: 
-  - Imagine we can extend the useful life of our devices and even increase their capabilities without any increase in energy consumption.
+  - Imagine we can extend the useful life of our devices and even increase their capabilities without any increase in energy consumption, purely by improving the software.
   - Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life.
   - Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.
 
@@ -91,7 +91,7 @@ To put it in absolute values, based on the above estimate, by 2040 energy consum
 
 ### Emissions from production of computational resources
 
-To make matters worse, the carbon emissions resulting from the production of computing devices exceeds those incurred during operation. This is a crucial point, because it means that we can't rely on next-generation hardware technologies to save energy: the production of this next generation of devices will create more emissions than any operational gains can offset. It does not mean research into more efficient technologies should stop. But their deployment cycles should be much slower. Extending the useful life of compute technologies must become our priority.
+To make matters worse, the carbon emissions resulting from the production of computing devices exceeds those incurred during operation. This is a crucial point, because it means that we can't rely on next-generation hardware technologies to save energy: the production of this next generation of devices will create more emissions than any operational gains can offset. It does not mean research into more efficient technologies should stop. But their deployment cycles should be much slower. Extending the useful life of compute technologies by improving the way we design and use software must become our priority.
 
 The report about the cost of planned obsolescence by the European Environmental Bureau [[7]](#7) makes the scale of the problem very clear. For laptops and similar computers, manufacturing, distribution and disposal account for 52% of their [Global Warming Potential](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/global-warming-potential) (i.e. the amount of CO₂-equivalent emissions caused). For mobile phones, this is 72%. The report calculates that the lifetime of these devices should be at least 25 years to limit their Global Warming Potential. Currently, for laptops it is about 5 years and for mobile phones 3 years. According to [[8]](#8), the typical lifetime for servers in data centres is also 3-5 years, which again falls short of these minimal requirements. According to this paper, the impact of manufacturing of the servers is 20% of the total, which would require an extension of the useful life to 11-18 years. 
 
@@ -122,7 +122,7 @@ To decide on the required actions to reduce emissions, it is important to look a
 <tr><td>IoT devices</td><td> 2000M</td></tr>
 </table>
 
-The energy consumption of all communication and computation technology currently in use in the world is currently around 3,000 TWh, about 11% of the world's electricity consumption, projected to rise by 3-4 times by 2040 with business as usual according to [[2]](#2). This is a conservative estimate: the study in [[14]](#14) includes a worst-case projection of a rise to 30,000 TWh (exceeding the current world electricity consumption) by 2030. 
+The energy consumption of all communication and computation technology currently in use in the world is currently around 3,000 TWh/y, about 11% of the world's electricity consumption, projected to rise by 3-4 times by 2040 with business as usual according to [[2]](#2). This is a conservative estimate: the study in [[14]](#14) includes a worst-case projection of a rise to 30,000 TWh (exceeding the current world electricity consumption) by 2030. 
 
 <table>
 <caption>Yearly energy consumption estimates in TWh</caption>
@@ -137,6 +137,8 @@ The energy consumption of all communication and computation technology currently
 
 The above data make it clear which actions are necessary: the main carbon cost of phones, tablets and IoT devices is their production and the use of the mobile network, so we must extend their useful life very considerably and reduce network utilisation. Extending the life time is also the key action for datacentres and desktop computers, but their energy consumption also needs to be reduced considerably, as does the energy consumption of the wired, WiFi and mobile networks. 
 
+From the technical side, these are primarily software issues: the hardware exists because of the software
+
 
 ## A vision for low carbon and sustainable computing
 
@@ -144,7 +146,7 @@ It is clear that urgent action is needed: in less than two decades, the global u
 
 To use devices for longer, a change in business models as well as consumer attitudes is needed. This requires raising awareness and education but also providing incentives for behavioural change. And to support devices for a long time, an infrastructure for repair and maintenance is needed, with long-term availability of parts, open repair manuals and training. To make all this happen, economic incentives and policies will be needed (e.g. taxation, regulation). Therefore we need to convince key decision makers in society, politics and business.
 
-Imagine that we can extend the useful life of our devices and even increase their capabilities, purely through better computing science. With every improvement, the computational capacity will in effect increase without any increase in energy consumption. Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life. Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.
+Imagine that we can extend the useful life of our devices and even increase their capabilities, purely by improving the software. With every improvement, the computational capacity will in effect increase without any increase in energy consumption. Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life. Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.
 
 <figure>
 <img src="{{ site.url }}/images/towards-zero-carbon-computing.png" alt="A graph with four trends: emissions from production, emissions in total, performance and emissions/performance."
@@ -160,6 +162,10 @@ This is a very challenging vision, spanning all aspects of computing science. To
 - We need to develop new approaches to reduce overall energy consumption across the entire system.
 
 To address these challenges, action is needed on many fronts. What will you do to make frugal computing a reality?
+
+#### Edits
+
+- 2023-03-06: edits to make it more clear that frugal computing is primarily a software issue.
 
 ## References
 <small>

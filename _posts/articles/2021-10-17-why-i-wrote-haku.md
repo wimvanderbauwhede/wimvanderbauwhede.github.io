@@ -121,7 +121,7 @@ There are already several Japanese natural-language programming languages, all m
 * _Dolittle_ ドリトル is an object-oriented language specifically designed for teaching children to program and follows the [Logo](http://people.eecs.berkeley.edu/~bh/logo.html) tradition with a turtle to draw shapes. 
 * _Produire_ プロデル is an imperative and object-oriented language but more general purpose. It also has a turtle library, so education is definitely one of the main design purposes.
 * _Nadeshiko_ なでしこ (meaning "pink", the flower) is an open source general purpose imperative language.
-* _Mind_ is also imperative. Although it is actually a [Forth](https://www.forth.com/)-style stack-based language, in general structure it is similar to the other three. 
+* _Mind_ is also imperative. Although it is actually a [Forth](https://www.forth.com/)-style stack-based language, in general structure it is similar to the other three. 
 
 All these language are complete with support for graphics, networking etc and their own IDE and/or web-based editor. They are practical programming languages, so they all support the use of Arabic numerals as well as operators for arithmetic, logic and comparison operations. 
 

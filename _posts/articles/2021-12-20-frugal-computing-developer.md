@@ -36,7 +36,7 @@ This is a follow-up on my [article about Frugal Computing]({{site.url}}/articles
   - Make software that uses the least amount of total energy to achieve its results.
   - Make software that also uses the least amount of network data transfer, memory and storage.
   - Make software that encourages the user to use it in a frugal way.
-  
+
 ## Extending the useful life of computing devices is key
 
 End-user computing devices (phones, laptops, desktops) [create more emissions during their manufacturing than during their useful life, and this is not likely to change significantly in the next two decades](https://reboxed.co/blogs/outsidethebox/the-carbon-footprint-of-your-phone-and-how-you-can-reduce-it). Therefore, we must extend the useful life of our computing devices. This is the top priority.
@@ -61,9 +61,9 @@ Whereas for mobile phones the emissions from usage are much lower than the emiss
 
 ### Make software that uses the least amount of total energy to achieve its results
 
-Not only do older devices have fewer resources, resource consumption eventually means emissions, because all resources on a device consume energy. In practice, the main source of emissions in an end user device is the network activity, because generating and transfering the data (e.g. video) consumes a lot of energy. However, on laptops, desktops and servers, CPU and GPU power consumption is also a significant factor. 
+Not only do older devices have fewer resources, resource consumption eventually means emissions, because all resources on a device consume energy. In practice, a large source of emissions resulting from end user device activity is the local Wifi, because transfering the data (e.g. video) consumes a lot of energy. However, on laptops, desktops and servers, CPU and GPU power consumption is also a significant factor.
 
-The consequence is that as a developer, you need to be aware of all factors that contribute to the total enery consumption of a task performed by your software. For apps and web sites, the dominant sources of emissions are [the network and the data centres](https://www.sciencedirect.com/science/article/abs/pii/S0921344920307072). For [non-networked games, the power consumption of the CPU and GPU](https://www.researchgate.net/publication/336909520_Toward_Greener_Gaming_Estimating_National_Energy_Use_and_Energy_Efficiency_Potential) is the main source of emissions. 
+The consequence is that as a developer, you need to be aware of all factors that contribute to the total enery consumption of a task performed by your software. For apps and web sites, the dominant sources of emissions are [in the home](https://www.carbontrust.com/our-work-and-impact/guides-reports-and-tools/carbon-impact-of-video-streaming). For [non-networked games, the power consumption of the CPU and GPU](https://www.researchgate.net/publication/336909520_Toward_Greener_Gaming_Estimating_National_Energy_Use_and_Energy_Efficiency_Potential) is the main source of emissions. 
 
 ### Make software that encourages the user to be frugal
 
@@ -74,3 +74,5 @@ For example:
 - Web browsers need resources depending on the number of sites the user is accessing concurrently as well as on the design of the sites;
 - for video based applications, energy consumption depends on the resolution of the video; 
 - if the user experiences the app as sluggish or erratic, they might be more inclined to upgrade their device.
+
+[Note: post edited on 2022-12-07 because the original post assumed that internet network emissions are proportional to the traffic volume, and more recent research shows this is not the case.]

@@ -4,7 +4,9 @@ perl generate_sitemap.pl > sitemap.xml
 cp _config.yml.publish _config.yml
 bundle exec jekyll build -d ~/Git/wimvanderbauwhede.github.io/
 cd  ~/Git/wimvanderbauwhede.github.io/
-cp index.html.redir index.html
-cp index.html.redir articles/index.html
-git commit -a -m "nm"
+git add articles/${1}/index.html
+git add images/${1}_1600x600.jpg
+git add images/${1}_400x150.jpg
+perl add_blog_post_images.pl ${1}
+git commit -a -m "$1"
 git push origin master
