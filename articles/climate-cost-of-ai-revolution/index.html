@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The climate cost of the AI revolution • Wim Vanderbauwhede</title>
+    <meta name="description" content="On the energy cost of Large  Language Models, what their widespread adoption could mean for global CO₂ emissions, and what could be done about it.">
+    <meta name="keywords" content="computing, climate">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="The climate cost of the AI revolution">
+	<meta name="twitter:description" content="On the energy cost of Large  Language Models, what their widespread adoption could mean for global CO₂ emissions, and what could be done about it.">
+	<meta name="twitter:site" content="@wim_v12e">
+	<meta name="twitter:creator" content="@wim_v12e">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/climate-cost-of-ai-revolution_1600x600.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Wim Vanderbauwhede">
+	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/climate-cost-of-ai-revolution/#">
+	<meta property="og:title" content="The climate cost of the AI revolution">
+	<meta property="og:description" content="On the energy cost of Large  Language Models, what their widespread adoption could mean for global CO₂ emissions, and what could be done about it.">
+	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/climate-cost-of-ai-revolution_1600x600.jpg" />
+
+    
+
+    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/climate-cost-of-ai-revolution/">
+
+    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
+    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
+      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<!-- WV: NO!
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73376688-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+-->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19948710-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+        
+  </head>
+
+  <body>
+	  <!-- WV: NO!
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    -->
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://wimvanderbauwhede.github.io/images/climate-cost-of-ai-revolution_1600x600.jpg" class="page-feature-image" alt="The climate cost of the AI revolution" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>The climate cost of the AI revolution</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>ChatGPT and other AI applications such as Midjourney have pushed &quot;Artificial Intelligence&quot; high on the hype cycle. In this article, I want to focus specifically on the energy cost of training and using applications like ChatGPT, what their widespread adoption could mean for global CO₂ emissions, and what we could do to limit these emissions.</p>
+
+<h2>Key points</h2>
+
+<h3>Training of large AI models is not the problem</h3>
+
+<p>Training of large AI models requires a lot of electricity. However, for a modest growth scenario where there would be a hundred very popular AI-based services in the entire world, I estimate that the global CO₂ emissions from training AI are likely to remain relatively small.</p>
+
+<h3>Large-scale use of large AI models would be unsustainable</h3>
+
+<p>For that same  modest growth scenario, with a hundred very popular AI-based services in the entire world, the electricity consumption resulting from the use of these services would lead to unsustainable increases in global CO₂ emissions.</p>
+
+<h3>Renewables are not making AI more sustainable</h3>
+
+<p>Using renewables to power AI is not the solution. Large scale adoption of AI would lead to a huge increase in electricity consumption, much more than can be offset even by the fastest possible roll-out of renewables. So even if all AI is powered by renewables, it will not help us reduce global emissions and we will still miss the global climate targets.</p>
+
+<h3>Reducing the climate cost of AI</h3>
+
+<p>Technological solutions to increase energy efficiency of AI are likely to lead to a more than proportionate increase in demand for AI - as history has shown us with other technology adoptions. As with any activity that consumes energy, the best way to limit energy consumption is to limit the activity. As a society we need to treat AI resources as finite and precious, to be utilised only when necessary, and as effectively as possible. We need <em>frugal AI</em>. </p>
+
+<h2>Carbon cost of electricity usage</h2>
+
+<p>Many tech companies make much of their use of renewables to power their services. What metric should we use for the electricity usage of ICT in general and Large Language Models in particular? I argue that the metric to use is the carbon intensity of the geographical area in which the electricity is generated and can be traded. In practice, that means the country or group of countries of generation. If the usage is globally distributed, we should use the weighted average intensity.</p>
+
+<p>Because electricity is still predominantly generated from fossil fuels. In the US, where most of the data centres for AI training and use are located, <a href="https://www.eia.gov/tools/faqs/faq.php?id=427&t=3">according to IEA data</a> this is 60%; only 21% is truly renewable. According to <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Renewable_energy_statistics">EuroStat</a>, in the EU renewables account for 22% and according to <a href="https://www.nationalgrid.com/stories/energy-explained/how-much-uks-energy-renewable">National Grid</a>, in the UK it is 38%. Therefore, using renewables for increased electricity usage simply results in displacement of the emissions. <a href="https://www.weforum.org/agenda/2021/07/renewables-cheapest-energy-source/">Renewables are already the cheapest form of generation</a>, so generators do not need market pull to install more capacity: to maximise their profit, they will maximise their renewables capacity. Even when the generation is on-site, the argument still stands: the electricity use to power AI could be traded on the grid. So in the case of GPT-3 we should use the overall carbon intensity of the US, which is 371 gCO₂/kWh according to <a href="https://carbonfund.org/calculation-methods/">the Carbon Fund</a>, or alternatively the global carbon intensity, 476 gCO₂/kWh according to <a href="https://www.iea.org/reports/world-energy-outlook-2019">the IEA World Energy Outlook 2019</a>.</p>
+
+<h2>Carbon emissions from ICT</h2>
+
+<p><a href="https://limited.systems/articles/frugal-computing/">There is an imperative to <em>reduce</em> emissions from information and communication technologies</a> (ICT): purely to keep to the Paris agreement, they should drop to a quarter of current emissions in the next 20 years, from about <a href="https://www.sciencedirect.com/science/article/pii/S2666389921001884">2 GtCO₂e/y (including embodied emissions)</a> to 500 MtCO₂e/y. So this is the global ICT carbon budget for the future.</p>
+
+<p>This is not going to happen through renewables: with business as usual, by 2040 renewables will be <a href="https://iea.blob.core.windows.net/assets/deebef5d-0c34-4539-9d0c-10b13d840027/NetZeroby2050-ARoadmapfortheGlobalEnergySector_CORR.pdf">at best 70% of all generated electricity</a>, and crucially, <a href="https://iea.blob.core.windows.net/assets/deebef5d-0c34-4539-9d0c-10b13d840027/NetZeroby2050-ARoadmapfortheGlobalEnergySector_CORR.pdf">generation from fossil fuels will largely remain constant</a>. So even though we will have more electricity, we will not have less emissions. Therefore, reducing global electricity consumption from ICT is critical.</p>
+
+<h2>Training Large Language Models</h2>
+
+<p>Although the large amount of CO₂ emissions resulting from AI training has received a lot of attention, I would argue that training of LLMs is not the main problem.</p>
+
+<p>According to a peer-reviewed paper by <a href="https://arxiv.org/pdf/2104.10350.pdf">Patterson et al.</a>, training GPT-3 generates 552 ton of CO₂ (tCO₂e). (Using yearly average carbon intensity, it is 477 tCO₂e; the paper used the actual intensity during the period of training, and that was slightly higher).
+This is not much compared to the <a href="https://www.sciencedirect.com/science/article/pii/S2666389921001884">total emissions from ICT</a>, but it is still the same amount of CO₂ as produced by <a href="https://heatable.co.uk/boiler-advice/average-carbon-footprint">heating 250 average UK homes for one year</a>.</p>
+
+<p>However, on the one hand, this is just a single model. On the other hand, one of the problems with those large language models is that they need to be kept up-to-date. People will expect the chat bot to know who this week&#39;s Prime Minister is, or the current hit songs, games and movies. Which means that training will need to be an ongoing process. So the carbon footprint will become many times larger than it already is. For the sake of argument, let&#39;s assume as a worst case that the model would need to be retrained fully every day. Then emissions from training would be 365 times larger, so about 175 ktCO₂e/y. If globally there would be a hundred such models from competing companies in different countries, that would mean an increase in global emissions of about 20 MtCO₂e/y.</p>
+
+<p>This assumes full retraining; it will likely become possible to split the training data into a large static pre-trained set which needs to be updated infrequently, and a dynamic set which needs to be updated weekly or even daily. It is also likely that computational efficiency gains will be found.</p>
+
+<p>In any case, even if this was not so, and even if updates were daily, emissions from electricity generation used for training would not exceed 2% of global ICT CO₂ budget &mdash; assuming that the number of such large models does not rise to thousands.</p>
+
+<p>What about the embodied carbon? <a href="https://news.microsoft.com/source/features/ai/openai-azure-supercomputer/">Microsoft claims</a> that the supercomputer used to train GPT-3 hosts 10,000 GPUs and 285,000 CPU cores. Assuming these were similar to <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/ndv2-series">NDv2 instances</a>, we can estimate their embodied carbon <a href="https://www.boavizta.org/en/blog/empreinte-de-la-fabrication-d-un-serveur">starting from work by Boavizta</a> in the order of 2 tCO₂e per node, for 1250 nodes (8 GPUs per node). This is based on the assumptions that each node has a 3TB SSD, 512GB RAM and 2 Xeon CPUs, plus 8 V100 GPUs with each 32GB RAM.</p>
+
+<p>So the total embodied carbon is of the order 2.5 ktCO₂ per machine. However, it takes 14 days to train GPT-3. So to manage daily retraining, 14 such machines are needed. Assuming 4 years useful life, that would result  in embodied carbon of the order of 35 ktCO₂e/y. So the embodied carbon is of the order of 20% of the total emissions, and we can put the total between 10 and 100 MtCO₂e/y to account for uncertainties in the estimates.</p>
+
+<p>This means that the increased consumption from training of LLMs could with the highest estimate amount to 20% of the global ICT CO₂ budget. Nevertheless, as the cost of this amount of energy for training would probably be prohibitive, and there are clearly technical options to reduce the energy consumption, I don&#39;t think it is likely that training of LLMs will lead to more than a few percent increase in ICT CO₂ emissions. So far, so good.</p>
+
+<h2>Using Large Language Models</h2>
+
+<p>Next, let&#39;s consider the use of LLMs. An estimate for the footprint of ChatGPT is given by  <a href="https://medium.com/@chrispointon/the-carbon-footprint-of-chatgpt-e1bc14e4cc2a">Chris Pointon</a> as 77,160 kWh per day assuming 13 million users per day with 5 questions each, so 65 million queries. This would generate
+30 tCO₂e per day or 0.5 gCO₂e per query.</p>
+
+<p>Just to be clear, in the big picture (<a href="https://www.sciencedirect.com/science/article/pii/S2666389921001884">total global ICT emissions of 2 GtCO₂e</a>) this kind of footprint is still very small. But with a billions of queries per day, that means tens of MtCO₂e/y.</p>
+
+<p>If that sounds improbable, consider this:  currently, Bing and Google each process 10 billion queries per day. So already, we would be looking at an electricity consumption of 8.7 TWh/y or emissions of 4 MtCO₂e/y purely from Bing and Google searches alone, without any growth or any other applications.</p>
+
+<p>If there would be 100 such models as assumed above, that would mean 435 TWh/y or 200 MtCO₂e/y, even without taking into account the embodied carbon; recall that ICT has a proportional carbon budget of 500 MtCO₂e/y by 2040, so that would be 40% of that budget; and this is a budget that can&#39;t be exceeded without letting global warming get out of control.</p>
+
+<p>There is probably no room for a hundred major search engines, but there are many other use cases for ChatGPT and other LLMs, e.g. dynamic content generation for SEO spamming, better email spam etc and there are of course also the image-based generative models. So the coexistence of just a hundred large applications of LLMs in the whole world is entirely plausible.</p>
+
+<p>From this it is clear that large-scale adoption of LLMs would lead to unsustainable increases in ICT CO₂ emissions.</p>
+
+<h2>Reducing the climate cost</h2>
+
+<p>Assuming that ChatGPT-style LLMs make it through the <a href="https://www.gartner.com/en/research/methodologies/gartner-hype-cycle">Gartner hype cycle</a> and are here to stay, then their energy consumption will become a major concern. In the big picture, the best way to address this would of course be not to use this highly polluting technology. After all, there is no burning need for LLMs, it is currently very much a case of a solution looking for a problem.</p>
+
+<p>Second best would be to put a carbon tax on electricity usage. That might seem like a good way to curb electricity use in general. However, companies would likely resort to on-site generation. Considering the scale of the required electricity generation, it is more precise to say &quot;private generation&quot; than &quot;on-site&quot; or &quot;local&quot;:
+435 TWh/y is 15% of the global ICT electricity consumption. This can&#39;t simply be generated by putting a few solar panels on the roofs of the data centres. It would require a 500 MW wind farm per application. For example, the <a href="https://en.wikipedia.org/wiki/Whitelee_Wind_Farm">Whitelee wind farm</a> near Glasgow, the largest on-shore wind farm in the UK, has a maximum generative capacity of 539 MW and covers an area of 55 km² (about the size of Manhattan). Solar power in hot countries has a higher energy density, but is still of the same order: e.g. the <a href="https://www.theecoexperts.co.uk/solar-panels/biggest-solar-farms">Bhadla Solar Park</a> in India, one of the largest solar farms in the world, has 2.7 GW capacity and covers 160 km², so 500MW would require 30 km².</p>
+
+<p>So to provide &quot;on-site&quot; generation for an LLM application such as ChatGPT-enabled search, a company would have to buy a similar area of land for its private wind or solar farm, thereby reducing the area available for public generation.</p>
+
+<p>There is however a lot of scope for energy savings. To start with, for many applications there is no need for a model of the size of GPT-3. Something 10x smaller will do the job just fine, at a fraction of the cost. For example, many of Google&#39;s current models are of that size. Of course, if there are many, then combined they will have similar footprints.</p>
+
+<p>Then there are potential efficiency savings, e.g. through use of energy-efficient hardware accelerators such as FPGAs, Google&#39;s TPU chips or Cerebras&#39; Wafer-Scale Engine. All of these have in principle the potential to be an order of magnitude more efficient for both the training tasks and queries.</p>
+
+<p>In fact, for many tasks an LLM or other large-scale model is at best total overkill, and at worst unsuitable, and a conventional Machine Learning or Information Retrieval technique will be orders of magnitude more energy efficient and cost effective to run. Especially in the context of chat-based search, the energy consumption could be reduced significantly through generalised forms of caching, replacement of the LLM with a rule-based engines for much-posed queries, or of course simply defaulting to non-AI search.</p>
+
+<p>However, improved resource usage efficiency also lowers the relative cost of using a resource, which leads to increased demand. This is known as <a href="https://www.oecd-forum.org/posts/the-jevons-paradox-and-rebound-effect-are-we-implementing-the-right-energy-and-climate-change-policies">Jevons paradox</a> or the &quot;rebound effect&quot;. Jevons described in 1865 how energy efficiency improvements increased  consumption of coal. What this means is that the way to reduce the climate cost of the AI revolution can&#39;t be purely technological. As with any activity that consumes energy, the best way to limit energy consumption is to limit the activity. </p>
+
+<p>As a society we need to treat AI resources as finite and precious, to be utilised only when necessary, and as effectively as possible. We need <em>frugal AI</em>. </p>
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+                    <div class="inline-btn">
+    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <!--
+	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
+	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
+	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
+	&nbsp;
+<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+    -->
+</div><!-- /.follow-us -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2023-03-06T00:00:00Z" itemprop="dateModified">March 06, 2023</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+
+    
+
+  </body>
+
+</html>
