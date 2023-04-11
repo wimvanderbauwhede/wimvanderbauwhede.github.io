@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2023-04-11T09:39:23+01:00</updated>
+    <updated>2023-04-11T10:42:52+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -233,10 +233,13 @@ Real Programmers do String Manipulation in FORTRAN.
 
 &lt;h2&gt;Status&lt;/h2&gt;
 
-&lt;p&gt;Funktal needs a lot more work. In terms of features, it needs at least:
-- a proper type checker and probably a better type system;
-- support for devices and state for GUI programming;
-- a mechanism to include libraries, both funktal and uxntal.&lt;/p&gt;
+&lt;p&gt;Funktal needs a lot more work. In terms of features, it needs at least:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a proper type checker and probably a better type system;&lt;/li&gt;
+&lt;li&gt;support for devices and state for GUI programming;&lt;/li&gt;
+&lt;li&gt;a mechanism to include libraries, both funktal and uxntal.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;Apart from that, there are plenty of bugs and shortcomings that need fixing. But it is already good enough to have some fun with, which is of course the main purpose.&lt;/p&gt;
 
