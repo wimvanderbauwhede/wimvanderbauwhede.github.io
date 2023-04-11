@@ -303,7 +303,7 @@ main {
     -- The rest of the list
     tail = (\ List &lt;- (xs x Cons) . xs )
     -- Creates a list with a range of integers
-    range Creates a list with = ( Nil integers ec
+    range = ( Nil range_rec )
     range_rec = (\List &lt;- b: Int &lt;- e: Int &lt;- lst : List . `( lst e Cons ) `( b 1 + e lst b Cons range_rec ) b e == if )
     -- A reduction: fold takes a list, an accumulator and a function and combines all elements of the list into the accumulator
     fold = (\ Any &lt;- lst : List &lt;- acc : Any  &lt;- f : Any . `( acc ) `( lst tail acc lst head f apply f fold ) lst `Nil is if )
