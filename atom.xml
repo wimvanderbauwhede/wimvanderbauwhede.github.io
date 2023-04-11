@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2023-03-13T14:37:53+00:00</updated>
+    <updated>2023-04-11T09:28:06+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,233 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>Funktal: a frugal functional programming language</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/funktal/"/>
+        <updated>2023-04-10T00:00:00+01:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/funktal</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/funktal_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal&quot;&gt;&lt;code&gt;Funktal&lt;/code&gt;&lt;/a&gt; is a functional programming language for the &lt;a href=&quot;https://wiki.xxiivv.com/site/uxn.html&quot;&gt;Uxn&lt;/a&gt; virtual machine, a tiny VM with 8-bit opcodes and 64 kB of memory. I have written about implementing functional constructs in Uxn&amp;#39;s native stack based assembly language &lt;a href=&quot;https://wiki.xxiivv.com/site/uxntal.html&quot;&gt;Uxntal&lt;/a&gt; in &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/uxntal-quoting/&quot;&gt;a previous post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Rationale&lt;/h2&gt;
+
+&lt;p&gt;The main reason for creating Funktal was to see if it was possible to create a statically typed functional language with &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/&quot;&gt;algebraic data types&lt;/a&gt; and &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/function-types/&quot;&gt;function types&lt;/a&gt; that could run on the Uxn VM, with a compiler that could be implemented in Uxntal. This is motivated by the observation that most modern languages are very resource-intensive: typical projects take a lot of disk space, compilers are large and require a lot of CPU cycles and memory to compile code, and the programs themselves are also very often CPU- and memory-intensive.&lt;/p&gt;
+
+&lt;p&gt;Hard disks and solid-state drives are major contributors to the &lt;a href=&quot;https://principles.green/principles/embodied-carbon/&quot;&gt;embodied carbon&lt;/a&gt; in a computer, followed by the CPU and memory. Reducing these resources is an important way to reduce CO₂ emissions from computing. The ability to write useful software for older generations of hardware allows to use them for longer, and that is the main way to reduce embodied carbon.&lt;/p&gt;
+
+&lt;h2&gt;Funktal design principles&lt;/h2&gt;
+
+&lt;p&gt;The main principle for the design of Funktal is that it should use as little memory as possible, both for the compiler and the programs it produces. This influences most of the design decisions. But at the same time, it should be minimally but fully featured: I want a pure, strict functional language, with a sufficiently expressive static type system. Also, I want the language to be simple to write easy code but expressive enough to write more complex code.&lt;/p&gt;
+
+&lt;p&gt;The main characteristics of Funktal are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It uses postfix notations (aka Reverse Polish Notation, Forth-style).&lt;/li&gt;
+&lt;li&gt;It is entirely based on lambda functions (anonymous functions), but has named functions too.&lt;/li&gt;
+&lt;li&gt;All variables are immutable (as they are lambda function arguments)&lt;/li&gt;
+&lt;li&gt;The type system is based on primitive types and product and sum types and function types to create new types.&lt;/li&gt;
+&lt;li&gt;Typing is optional, and therefore Funktal is not fully type safe.&lt;/li&gt;
+&lt;li&gt;I/O is not pure.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There is a &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/SPEC.md&quot;&gt;specification&lt;/a&gt; (aimed at people who want to program in Funktal) and a &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/DESIGN.md&quot;&gt;design document&lt;/a&gt; (aimed at people who want to help develop Funktal or are just curious), both still very much in flux.&lt;/p&gt;
+
+&lt;h2&gt;Funktal by example&lt;/h2&gt;
+
+&lt;p&gt;All examples can be found in the &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples&quot;&gt;examples folder in the repo&lt;/a&gt;. To try them out, please see the &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/&quot;&gt;README&lt;/a&gt; for installation instructions.&lt;/p&gt;
+
+&lt;h3&gt;Basic syntax&lt;/h3&gt;
+
+&lt;p&gt;Funktal is whitespace separated and consists of a number of blocks, the most important of which are &lt;code&gt;types&lt;/code&gt;, &lt;code&gt;constants&lt;/code&gt;, &lt;code&gt;functions&lt;/code&gt;, and &lt;code&gt;main&lt;/code&gt;. There are only expressions, so the entire main program is a single sequence of expressions. Newlines are only for readability and as comment delimiters: anything after a &lt;code&gt;--&lt;/code&gt; until a newline is considered a comment.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;main {
+    6 7 * print -- prints 42
+    0x0a print  -- prints a newline
+    &amp;quot;Hello&amp;quot; print -- prints Hello
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Lambdas and named functions&lt;/h3&gt;
+
+&lt;p&gt;Funktal is a functional language so the key building block is the lambda function (anonymous function). Each lambda is enclosed in parentheses and the arguments are listed between &lt;code&gt;\&lt;/code&gt; and &lt;code&gt;.&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Lambdas do not need to have arguments. Because Funktal is a stack language, if there is anything on the stack, it will be used as argument for the functions. But arguments are often convenient.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;main {
+    6 (\x. x x * x 2 * + x -  print ) -- 42
+    6  (\x. 7 (\y . x y * print ) ) -- 42
+    2 84 `( / ) (\ x y div . y x div apply ) print -- 0x002a
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The second example shows a nesting lambdas, with the &lt;code&gt;x&lt;/code&gt; argument of the outer lambda in scope in the body of the nested lambda.&lt;/p&gt;
+
+&lt;p&gt;The last line is an example of &lt;em&gt;quoting&lt;/em&gt; of functions: &lt;code&gt;( / )&lt;/code&gt; is anonymous function without arguments which only performs a division. More fully we could write it as &lt;code&gt;(\ x y . x y /)&lt;/code&gt;. Normally, this function would be called right away. By quoting it with a backtick, it is not called until we call it explicitly using &lt;code&gt;apply&lt;/code&gt;. The example also shows that functions can be passed as arguments to other functions.&lt;/p&gt;
+
+&lt;h3&gt;Primitive types&lt;/h3&gt;
+
+&lt;p&gt;Funktal has primitive types &lt;code&gt;Int8&lt;/code&gt;, &lt;code&gt;Int16&lt;/code&gt;, &lt;code&gt;AChar&lt;/code&gt;, &lt;code&gt;Byte&lt;/code&gt; and &lt;code&gt;Short&lt;/code&gt;. &lt;code&gt;Int&lt;/code&gt; is currently a synonym for &lt;code&gt;Int16&lt;/code&gt;. &lt;code&gt;AChar&lt;/code&gt; is an ASCII character; &lt;code&gt;Byte&lt;/code&gt; is a raw byte value and &lt;code&gt;Short&lt;/code&gt; a raw 2-byte value. The arrow &lt;code&gt;&amp;lt;-&lt;/code&gt; in the type signature separates arguments and return type of a function. The colon &lt;code&gt;:&lt;/code&gt; separates the argument from its type.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;main {
+    6 (\ Int &amp;lt;- x : Int . x x * 2 x * + x - ) print
+    (\ Int8 . 6 (\ Int8 &amp;lt;- x : Int8 . x x * 2 x * + x - ) print )
+    0x2a 0x2b (\ Byte &amp;lt;- b1: Byte &amp;lt;- b2 : Byte . b1 b2 &amp;amp; ) print
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Without type information, Funktal defaults to 16-bit operations. If you want to use 8-bit operations, explicit typing is necessary, as in the examples above. As shown in the second example, a lambda without arguments can still have an explicit return type.&lt;/p&gt;
+
+&lt;h3&gt;Constants&lt;/h3&gt;
+
+&lt;p&gt;Constants are a convenience. The main purpose is to define arrays of values (e.g. bitmaps) and strings, but scalars are also supported. There is a built-in type that is not strictly speaking primitive: &lt;code&gt;Array&lt;/code&gt;, used to create array constants. Its constructor takes the type and number of the elements in the array.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;constants {
+    hello : AChar 6 Array = &amp;quot;Hello!&amp;quot;
+}
+
+main {
+    hello print
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Sum types and conditionals&lt;/h3&gt;
+
+&lt;p&gt;As mentioned above, Funktal has algebraic data types. The Boolean type is an example of a sum type (similar to an enum): it has two alternatives, &lt;code&gt;True&lt;/code&gt; and &lt;code&gt;False&lt;/code&gt;. The example also shows the &lt;code&gt;if&lt;/code&gt; builtin, which takes two quoted lambdas and a condition, i.e. any expression which returns True or False.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;Any&lt;/code&gt; type is the supertype of all types. Funktal does (currently) not have polymorphism. The &lt;code&gt;Any&lt;/code&gt; type can be used explicitly and is also the type of any untyped expression. Because Funktal allows untyped expressions and does not do type inference (yet), it is not fully type safe.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    Bool = True | False
+}
+
+main {
+    True (\ Any &amp;lt;- cond : Bool .
+        `( &amp;quot;true&amp;quot; print )
+        `( &amp;quot;false&amp;quot; print )
+        cond if
+    )
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Product data type construction and pattern matching&lt;/h3&gt;
+
+&lt;p&gt;This is an example of a record or product type. The &lt;code&gt;RGB&lt;/code&gt; type is a triplet of 8-bit integers. The reason why the entire expression is wrapped in a typed lambda is that otherwise the integers would be treated as 16-bit. Funktal does not have proper type checking yet. The return type of a function determines the size of the operations and constants used in the function body.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    RGB =  Int8 Int8 Int8 RGB
+}
+
+main {
+        (\ Int8 . 42 43 44 RGB (\ Int8 &amp;lt;- (r g b RGB) : RGB . r ) ) print
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Recursion&lt;/h3&gt;
+
+&lt;p&gt;Funktal does not have mutable variables so it has no loops. Instead, it uses recursion.&lt;/p&gt;
+
+&lt;h4&gt;Factorial with named functions&lt;/h4&gt;
+
+&lt;p&gt;This is a straightforward recursion to calculate a factorial: if &lt;code&gt;b==e&lt;/code&gt; then return the result &lt;code&gt;r&lt;/code&gt; else recurse with the counter &lt;code&gt;b+1&lt;/code&gt; and the accumulator &lt;code&gt;r*b&lt;/code&gt;. This is a tail recursion. It also demonstrates the use if named functions, and Funktal&amp;#39;s natural ability to support point-free programming.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;function {
+    fact = ( 1 1 fact_rec )
+    fact_rec =  (\ Int  &amp;lt;- e : Int &amp;lt;- b : Int &amp;lt;- r : Int . `( r e * )  `(  e b 1 + r b * fact_rec) b e == if )
+}
+
+main {
+    5 fact 1 * print
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I use an actual recursive function &lt;code&gt;fact_rec&lt;/code&gt; and a wrapper to initialise the counter and the accumulator.&lt;/p&gt;
+
+&lt;h4&gt;Recursion without named functions&lt;/h4&gt;
+
+&lt;p&gt;Recursion means a function calls itself. But what if the function doesn&amp;#39;t have a name? A &lt;em&gt;fixed-point combinator&lt;/em&gt; allows to do recursion on unnamed functions. The most common one is the Y-combinator. The way I&amp;#39;ve done this here is a bit different, but equivalent. The quoted function describes the recursion. But because that function has no name, it can&amp;#39;t call itself. The function &lt;code&gt;(\f. f f apply)&lt;/code&gt; takes it as its argument, so now it has a name and can be called recursively.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;main {
+    5
+    `(\ n &amp;lt;- f . `(1) `( n 1 - f f apply n * ) n 1 == if)
+    (\ Int &amp;lt;- f : Any . f f apply ) print
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4&gt;Lists and fold&lt;/h4&gt;
+
+&lt;p&gt;Algebraic data types can also be used to construct lists, like this:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    List = List Any Cons | Nil
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is a recursive type, a List is either a function Cons with takes a List and some value, or a function Nil which takes no arguments. So we can build lists by writing e.g.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;Nil 11 Cons 22 Cons 33 Cons
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In practice, it is handy to have a function to generate a range of numbers (&lt;code&gt;range&lt;/code&gt; below) and list manipulation functions like &lt;code&gt;head&lt;/code&gt;, &lt;code&gt;tail&lt;/code&gt;, &lt;code&gt;fold&lt;/code&gt; and &lt;code&gt;map&lt;/code&gt;. The example shows the use of &lt;code&gt;range&lt;/code&gt; and &lt;code&gt;fold&lt;/code&gt; to calculate a factorial by multiplying all values in a list.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;functions {
+    -- First element of a list
+    head = (\ Any &amp;lt;- (xs x Cons) . x )
+    -- The rest of the list
+    tail = (\ List &amp;lt;- (xs x Cons) . xs )
+    -- Creates a list with a range of integers
+    range Creates a list with = ( Nil integers ec
+    range_rec = (\List &amp;lt;- b: Int &amp;lt;- e: Int &amp;lt;- lst : List . `( lst e Cons ) `( b 1 + e lst b Cons range_rec ) b e == if )
+    -- A reduction: fold takes a list, an accumulator and a function and combines all elements of the list into the accumulator
+    fold = (\ Any &amp;lt;- lst : List &amp;lt;- acc : Any  &amp;lt;- f : Any . `( acc ) `( lst tail acc lst head f apply f fold ) lst `Nil is if )
+}
+
+main {
+    (\Int . 1 5 range 1 `( * ) fold ) print
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Implementation&lt;/h2&gt;
+
+&lt;p&gt;The Funktal compiler should be implementable in Uxntal (or even Funktal) and run on Uxn. I did not feel I was sufficiently fluent in Uxntal to use it as the implementation language. Instead, I opted to write the compiler in &lt;code&gt;Fortran&lt;/code&gt;, but in such a way that porting to Uxntal should be straightforward.&lt;/p&gt;
+
+&lt;p&gt;Why Fortran? Funktal is essentially an art project; using Fortran is a statement. I could have done this in C, but I prefer Fortran&amp;#39;s arrays. I am using Fortran-90 but with a very restricted feature set. In case you don&amp;#39;t know Fortran, here are some of its characteristics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;No lexical scoping&lt;/li&gt;
+&lt;li&gt;Numeric labels for &lt;code&gt;goto&lt;/code&gt;; no &lt;code&gt;break&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Arrays starting by default at 1 but can start at any integer value&lt;/li&gt;
+&lt;li&gt;No unsigned integers&lt;/li&gt;
+&lt;li&gt;No native hash tables&lt;/li&gt;
+&lt;li&gt;Implicit typing based on the first letter of the variable name (*)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;small&gt;(*) But luckily you can disable that feature in Fortran-90&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;Furthermore, because of the restricted subset I use:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;No pointers so no native linked lists&lt;/li&gt;
+&lt;li&gt;No derived types, so no structs&lt;/li&gt;
+&lt;li&gt;No dynamic allocation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is almost as if I&amp;#39;d have taken the &lt;a href=&quot;https://homepages.inf.ed.ac.uk/rni/papers/realprg.html&quot;&gt;&amp;quot;Real Programmers Don&amp;#39;t Use PASCAL&amp;quot;&lt;/a&gt; essay too literally:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;LANGUAGES&lt;br&gt;
+The easiest way to tell a Real Programmer from the crowd is by the programming language he (or she) uses. Real Programmers use FORTRAN. [...]&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;Real Programmers do List Processing in FORTRAN
+Real Programmers do String Manipulation in FORTRAN.
+[...]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you can&amp;#39;t do it in FORTRAN, do it in assembly language. If you can&amp;#39;t do it in assembly language, it isn&amp;#39;t worth doing.&lt;/p&gt;
+
+&lt;p&gt;STRUCTURED PROGRAMMING&lt;br&gt;
+[...] Some quick observations on Real Programmers and Structured Programming:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;Real Programmers aren&amp;#39;t afraid to use GOTO&amp;#39;s.
+[...]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;[...]. As all Real Programmers know, the only useful data structure is the Array. Strings, lists, structures, sets -- these are all special cases of arrays and can be treated that way just as easily without messing up your programming language with all sorts of complications. [...]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Be that as it may, this restricted subset maps cleanly to Uxntal, and also forces me to think very carefully about data structures. As a result, the compiler in its current states about 5,000 lines of code, allocates less than 64 kB and compiles to an executable of about 100 kB. For reference, &lt;code&gt;uxnasm&lt;/code&gt; is 20 kB, &lt;code&gt;uxncli&lt;/code&gt; is   25 kB and &lt;code&gt;uxnemu&lt;/code&gt; is 50 kB. But &lt;code&gt;gcc&lt;/code&gt; and &lt;code&gt;gfortran&lt;/code&gt; are 1.2 MB and &lt;code&gt;rustc&lt;/code&gt; is 15 MB.&lt;/p&gt;
+
+&lt;h2&gt;Status&lt;/h2&gt;
+
+&lt;p&gt;Funktal needs a lot more work. In terms of features, it needs at least:
+- a proper type checker and probably a better type system;
+- support for devices and state for GUI programming;
+- a mechanism to include libraries, both funktal and uxntal.&lt;/p&gt;
+
+&lt;p&gt;Apart from that, there are plenty of bugs and shortcomings that need fixing. But it is already good enough to have some fun with, which is of course the main purpose.&lt;/p&gt;
+
+        </content>
+    </entry>
     
     <entry>
         <title>The climate cost of the AI revolution</title>
@@ -101,7 +328,7 @@ This is not much compared to the &lt;a href=&quot;https://www.sciencedirect.com/
 &lt;p&gt;Second best would be to put a carbon tax on electricity usage. That might seem like a good way to curb electricity use in general. However, companies would likely resort to on-site generation. Considering the scale of the required electricity generation, it is more precise to say &amp;quot;private generation&amp;quot; than &amp;quot;on-site&amp;quot; or &amp;quot;local&amp;quot;:
 435 TWh/y is 15% of the global ICT electricity consumption. This can&amp;#39;t simply be generated by putting a few solar panels on the roofs of the data centres. It would require a 500 MW wind farm per application. For example, the &lt;a href=&quot;https://en.wikipedia.org/wiki/Whitelee_Wind_Farm&quot;&gt;Whitelee wind farm&lt;/a&gt; near Glasgow, the largest on-shore wind farm in the UK, has a maximum generative capacity of 539 MW and covers an area of 55 km² (about the size of Manhattan). Solar power in hot countries has a higher energy density, but is still of the same order: e.g. the &lt;a href=&quot;https://www.theecoexperts.co.uk/solar-panels/biggest-solar-farms&quot;&gt;Bhadla Solar Park&lt;/a&gt; in India, one of the largest solar farms in the world, has 2.7 GW capacity and covers 160 km², so 500MW would require 30 km².&lt;/p&gt;
 
-&lt;p&gt;So to provide &amp;quot;on-site&amp;quot; generation for an LLM application such as ChatGPT-enabled search, a company would have to buy a similar area of land for its private wind or solar farm, thereby reducing the area available for public generation.&lt;/p&gt;
+&lt;p&gt;So to provide &amp;quot;on-site&amp;quot; generation for an LLM application such as ChatGPT-enabled search, a company would have to buy a similar area of land for its private wind or solar farm, thereby reducing the area available for replacing generation from fossil fuels.&lt;/p&gt;
 
 &lt;p&gt;There is however a lot of scope for energy savings. To start with, for many applications there is no need for a model of the size of GPT-3. Something 10x smaller will do the job just fine, at a fraction of the cost. For example, many of Google&amp;#39;s current models are of that size. Of course, if there are many, then combined they will have similar footprints.&lt;/p&gt;
 
@@ -109,9 +336,9 @@ This is not much compared to the &lt;a href=&quot;https://www.sciencedirect.com/
 
 &lt;p&gt;In fact, for many tasks an LLM or other large-scale model is at best total overkill, and at worst unsuitable, and a conventional Machine Learning or Information Retrieval technique will be orders of magnitude more energy efficient and cost effective to run. Especially in the context of chat-based search, the energy consumption could be reduced significantly through generalised forms of caching, replacement of the LLM with a rule-based engines for much-posed queries, or of course simply defaulting to non-AI search.&lt;/p&gt;
 
-&lt;p&gt;However, improved resource usage efficiency also lowers the relative cost of using a resource, which leads to increased demand. This is known as &lt;a href=&quot;https://www.oecd-forum.org/posts/the-jevons-paradox-and-rebound-effect-are-we-implementing-the-right-energy-and-climate-change-policies&quot;&gt;Jevons paradox&lt;/a&gt; or the &amp;quot;rebound effect&amp;quot;. Jevons described in 1865 how energy efficiency improvements increased  consumption of coal. What this means is that the way to reduce the climate cost of the AI revolution can&amp;#39;t be purely technological. As with any activity that consumes energy, the best way to limit energy consumption is to limit the activity. &lt;/p&gt;
+&lt;p&gt;However, improved resource usage efficiency also lowers the relative cost of using a resource, which leads to increased demand [1]. This is known as &lt;a href=&quot;https://www.oecd-forum.org/posts/the-jevons-paradox-and-rebound-effect-are-we-implementing-the-right-energy-and-climate-change-policies&quot;&gt;Jevons paradox&lt;/a&gt; or the &amp;quot;rebound effect&amp;quot;. Jevons described in 1865 how energy efficiency improvements increased  consumption of coal. What this means is that the way to reduce the climate cost of the AI revolution can&amp;#39;t be purely technological. As with any activity that consumes energy, the best way to limit energy consumption is to limit the activity.&lt;/p&gt;
 
-&lt;p&gt;As a society we need to treat AI resources as finite and precious, to be utilised only when necessary, and as effectively as possible. We need &lt;em&gt;frugal AI&lt;/em&gt;. &lt;/p&gt;
+&lt;p&gt;As a society we need to treat AI resources as finite and precious, to be utilised only when necessary, and as effectively as possible. We need &lt;em&gt;frugal AI&lt;/em&gt;.&lt;/p&gt;
 
         </content>
     </entry>
@@ -6500,350 +6727,6 @@ A capability for accurate forecasting of hurricane trajectories is necessary for
 [^4]: In the northwestern Pacific, the term &amp;quot;super typhoon&amp;quot; is used for tropical cyclones with sustained winds exceeding 240 km/h.&lt;br&gt;
 [^5]: This was a &lt;a href=&quot;https://en.wikipedia.org/wiki/European_windstorm&quot;&gt;European windstorm&lt;/a&gt;, a type of extratropical cyclone, caused by different weather phenomena than hurricanes. There is evidence that this type of storms is also getting stronger [5].&lt;/p&gt;
 
-        </content>
-    </entry>
-    
-    <entry>
-        <title>Hacking the Pleroma: Elixir, Phoenix and a bit of ActivityPub</title>
-        <link href="https://wimvanderbauwhede.github.io/articles/hacking-pleroma/"/>
-        <updated>2018-04-19T00:00:00+01:00</updated>
-        <id>https://wimvanderbauwhede.github.io/articles/hacking-pleroma</id>
-        <author>
-					<name>Wim Vanderbauwhede</name>
-					<uri>https://wimvanderbauwhede.github.io/</uri>
-					
-				</author>
-        <content type="html">
-        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/hacking-pleroma_1600x600.jpg&quot;&gt;&lt;br/&gt;
-        	&lt;p&gt;&lt;a href=&quot;https://pleroma.social/&quot;&gt;Pleroma&lt;/a&gt; &amp;quot;is a microblogging server software that can federate (= exchange messages with) other servers that support the same federation standards (OStatus and ActivityPub). What that means is that you can host a server for yourself or your friends and stay in control of your online identity, but still exchange messages with people on larger servers. Pleroma will federate with all servers that implement either OStatus or ActivityPub, like GNU Social, Friendica, Hubzilla and Mastodon.&amp;quot; &lt;a href=&quot;https://blog.soykaf.com/post/what-is-pleroma/&quot;&gt;(stolen from Lain&amp;#39;s blog post)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Recently I modified my Pleroma instance to support bot services: parse a posted message, take an action, post the result. To get there I had to learn &lt;a href=&quot;https://elixir-lang.org/&quot;&gt;Elixir&lt;/a&gt;, the language in which Pleroma is written, as well as &lt;a href=&quot;https://hexdocs.pm/phoenix/overview.html&quot;&gt;Phoenix&lt;/a&gt;, the web framework Elixir uses, and a little bit about ActivityPub, the protocol for exchanging messages. What I want to explain here in particular is the architecture of Pleroma, so that you can hack it more easily, for fun or if you want to participate in the development.&lt;/p&gt;
-
-&lt;h2&gt;Elixir&lt;/h2&gt;
-
-&lt;p&gt;As Pleroma is written in &lt;a href=&quot;https://elixir-lang.org/&quot;&gt;Elixir&lt;/a&gt; you&amp;#39;ll need to learn that language to some extent. If you are familiar with Ruby (or Perl, for that matter) and with the idea of functional programming (everything is a function), then it is quite easy to learn and understand. The &lt;a href=&quot;https://hexdocs.pm/elixir/&quot;&gt;documentation&lt;/a&gt; and &lt;a href=&quot;https://elixir-lang.org/getting-started/introduction.html&quot;&gt;guides&lt;/a&gt; are very good. &lt;/p&gt;
-
-&lt;p&gt;If you&amp;#39;ve never hear of functional programming, the main difference with e.g. Ruby or Java is that Elixir does not use an object-oriented programming model. Instead, there are functions that manipulate data structures and other functions. A particular consequence of the functional model is that there are no for- or while-loops. Instead, there are what is called higher-order functions which e.g. apply another function to a list. Elixir programs also make a lot more use of recursion. &lt;/p&gt;
-
-&lt;p&gt;Another point about Elixir as a web programming language is that it is built on a system where processes communicate by passing messages to one another, and it is  built in such a way that if a process dies it will normally be restarted automatically. This approach makes it very easy to offload work to separate worker processes etc. &lt;/p&gt;
-
-&lt;p&gt;All this comes courtesy of &lt;a href=&quot;https://www.erlang.org/&quot;&gt;Erlang&lt;/a&gt;, the language on which Elixir is built, with its powerfull OTP framework for building applications and its BEAM virtual machine, which manages the processes. &lt;/p&gt;
-
-&lt;h2&gt;Phoenix&lt;/h2&gt;
-
-&lt;p&gt;A lot of the groundwork of Pleroma is done by &lt;a href=&quot;https://hexdocs.pm/phoenix/overview.html&quot;&gt;Phoenix&lt;/a&gt;, a very easy-to-use web server framework. Essentially, what happens is that the end user accesses the application using a specific url, typically via a web browser, and based on this url the application performs a number of actions, which in the end result in a change in the state of the application and usually in what is shown in the browser window.&lt;/p&gt;
-
-&lt;p&gt;In Phoenix, there are five stages or components  between the connection and the resulting action by the application:&lt;/p&gt;
-
-&lt;h3&gt;Endpoint&lt;/h3&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://hexdocs.pm/phoenix/Phoenix.Endpoint.html&quot;&gt;endpoint&lt;/a&gt; is the boundary where all requests to your web application start. It is also the interface your application provides to the underlying web servers.&lt;/p&gt;
-
-&lt;p&gt;Pleroma&amp;#39;s endpoint is &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/endpoint.ex&quot;&gt;&lt;code&gt;web/endpoint.ex&lt;/code&gt;&lt;/a&gt;. If you look at the source you see several occurrences of &lt;code&gt;plug(Plug...)&lt;/code&gt;. &lt;a href=&quot;https://hexdocs.pm/phoenix/plug.html&quot;&gt;Plug&lt;/a&gt; is a specification for composable modules in between web applications, and it is very heavily used in Pleroma.  For example, to serve only specific static files/folders from &lt;code&gt;priv/static&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;nc&quot;&gt;Plug.Static&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;ss&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;ss&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:pleroma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;ss&quot;&gt;only&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;~w(index.html static finmoji emoji packs sounds images instance sw.js)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Another very nice feature of Phoenis is that you can edit your code while your server is running. It gets automatically recompiled and the affected processes are automatically restarted, courtesy of the &lt;a href=&quot;https://hexdocs.pm/phoenix/Phoenix.CodeReloader.html&quot;&gt;Phoenix.CodeReloader&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# Code reloading can be explicitly enabled under the&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# :code_reloader configuration of your endpoint.&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code_reloading?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;plug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Phoenix.CodeReloader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Router&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://hexdocs.pm/phoenix/Phoenix.Router.html&quot;&gt;Routers&lt;/a&gt; are the main hubs of Phoenix applications. They match HTTP requests to controller actions, wire up real-time channel handlers, and define a series of pipeline transformations for scoping middleware to sets of routes.&lt;/p&gt;
-
-&lt;p&gt;Pleroma&amp;#39;s router is &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/router.ex&quot;&gt;&lt;code&gt;web/router.ex&lt;/code&gt;&lt;/a&gt;. The key function in the router is the &lt;code&gt;pipeline&lt;/code&gt; which lets you create pipelines of plugs. Other functions are &lt;code&gt;scope&lt;/code&gt;, &lt;code&gt;get&lt;/code&gt;, &lt;code&gt;post&lt;/code&gt;, &lt;code&gt;pipe_through&lt;/code&gt;, all of these let you match on the url and whether you are dealing with a get or post request, and define appropriate pipelines of actions. For example, federated ActivityPub requests handled as follows:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Pleroma.Web.ActivityPub&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;pipe_through&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:activitypub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/users/:nickname/inbox&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ActivityPubController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:inbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/inbox&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ActivityPubController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:inbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;where the &lt;code&gt;pipe_through(:activitypub)&lt;/code&gt; call is used to insert a custom pipeline:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pipeline&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:activitypub&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;plug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:accepts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;activity+json&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;plug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Pleroma.Web.Plugs.HTTPSignaturePlug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Controllers&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://hexdocs.pm/phoenix/Phoenix.Controller.htm&quot;&gt;Controllers&lt;/a&gt; are used to group common functionality in the same (pluggable) module.  &lt;/p&gt;
-
-&lt;p&gt;Pleroma makes heavy use of controllers: almost every request is handled by a specific controller for any given protocol, e.g. &lt;code&gt;MastodonAPIController&lt;/code&gt; or &lt;code&gt;ActivityPubController&lt;/code&gt;. This makes it easy to identify the files to work on if you need to make a change to the code for a given protocol. For example, the ActivityPub post requests in the Router are handled by &lt;code&gt;inbox&lt;/code&gt; function in the &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/activity_pub_controller.ex&quot;&gt;ActivityPubController&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;valid_signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;nc&quot;&gt;Federator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enqueue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:incoming_ap_doc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;ok&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Views&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://hexdocs.pm/phoenix/Phoenix.View.html&quot;&gt;Views&lt;/a&gt; are used to control the rendering of templates. You create a view module, a template and a set of assigns, which are basically key-value pairs.&lt;/p&gt;
-
-&lt;p&gt;Pleroma uses views for &amp;quot;rendering&amp;quot; JSON objects. For example in &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/activity_pub_controller.ex&quot;&gt;&lt;code&gt;web/activity_pub/activity_pub_controller.ex&lt;/code&gt;&lt;/a&gt; there are lines like&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;UserView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;user.json&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Here, &lt;code&gt;UserView.render&lt;/code&gt; is defined in &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/views/user_view.ex&quot;&gt;&lt;code&gt;web/activity_pub/views/user_view.ex&lt;/code&gt;&lt;/a&gt; for a number of different &amp;quot;*.json&amp;quot; strings. These are not really templates, they are simply used to pattern match on the function definitions.&lt;/p&gt;
-
-&lt;p&gt;The more conventional usage to create HTML is also used, e.g. the template &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/templates/mastodon_api/mastodon/index.html.eex&quot;&gt;&lt;code&gt;web/templates/mastodon_api/mastodon/index.html.eex&lt;/code&gt;&lt;/a&gt;
-is used in &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/mastodon_api/mastodon_api_controller.ex&quot;&gt;&lt;code&gt;web/mastodon_api/mastodon_api_controller.ex&lt;/code&gt;&lt;/a&gt; via the view
-&lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/mastodon_api/views/mastodon_view.ex&quot;&gt;&lt;code&gt;web/mastodon_api/views/mastodon_view.ex&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;MastodonView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;index.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;initial_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initial_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Templates&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://hexdocs.pm/phoenix/Phoenix.Template.html&quot;&gt;Templates&lt;/a&gt; are text files (typically html pages) with Elixir code to generate the specific values based on the assigns, included in &lt;code&gt;&amp;lt;%= ... %&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;For example, in Pleroma, the Mastodon front-end uses a template for the &lt;code&gt;index.html&lt;/code&gt; file which has the code&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:pleroma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:instance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;to show the name of the instance.&lt;/p&gt;
-
-&lt;h2&gt;Ecto&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://hexdocs.pm/ecto/Ecto.html&quot;&gt;Ecto&lt;/a&gt; is not a part of Phoenix, but it is an integral part of most web applications: Ecto is Elixir&amp;#39;s main library for working with databases. It provides the tools to interact with databases under a common API.&lt;/p&gt;
-
-&lt;p&gt;Ecto is split into 4 main components:&lt;/p&gt;
-
-&lt;p&gt;Ecto.Repo - repositories are wrappers around the data store. Via the repository, we can create, update, destroy and query existing entries. A repository needs an adapter and credentials to communicate to the database&lt;/p&gt;
-
-&lt;p&gt;Pleroma uses the PostgresQL database.&lt;/p&gt;
-
-&lt;p&gt;Ecto.Schema - schemas are used mainly to map tables into Elixir data (there are other use cases too).&lt;/p&gt;
-
-&lt;p&gt;Ecto.Changeset - changesets provide a way for developers to filter and cast external parameters, as well as a mechanism to track and validate changes before they are applied to your data&lt;/p&gt;
-
-&lt;p&gt;Ecto.Query - written in Elixir syntax, queries are used to retrieve information from the database.&lt;/p&gt;
-
-&lt;h2&gt;GenServer&lt;/h2&gt;
-
-&lt;p&gt;Because Elixir, like Erlang, uses a processes-with-message-passing paradigm, client-server relationships are so common that they have been abstracted as a &lt;em&gt;behaviour&lt;/em&gt;, which in Elixir is a specification for composable modules which have to implement specified public functions (a bit like an interface in Java or typeclass in Haskell).&lt;/p&gt;
-
-&lt;p&gt;If we look at the &lt;code&gt;Federator.enqueue&lt;/code&gt; function, its implementation actually reduces to a single line:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;GenServer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;__MODULE__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:enqueue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;priority&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;a href=&quot;https://hexdocs.pm/elixir/GenServer.html&quot;&gt;GenServer&lt;/a&gt; is an Elixir behaviour module for implementing the server of a client-server relation. The &lt;code&gt;cast&lt;/code&gt; call sends an asynchronous request to the server (synchronous requests use &lt;code&gt;call&lt;/code&gt;). The server behaviour is implemented using the &lt;code&gt;handle_cast&lt;/code&gt; callback, which handles &lt;code&gt;cast&lt;/code&gt; calls. &lt;/p&gt;
-
-&lt;p&gt;In &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/federator/federator.ex&quot;&gt;&lt;code&gt;Pleroma.Federator&lt;/code&gt;&lt;/a&gt;, these are implemented in the same module as the &lt;code&gt;enqueue&lt;/code&gt; function, hence the use of &lt;code&gt;__MODULE__&lt;/code&gt; rather than the hardcoded module name.&lt;/p&gt;
-
-&lt;h2&gt;Applications, Workers and Supervisors&lt;/h2&gt;
-
-&lt;p&gt;Elixir borrows the concept of a &amp;quot;supervision tree&amp;quot; from Erlang/OTP. AN application consists of a tree of processes than can either be &lt;em&gt;supervisors&lt;/em&gt; or &lt;em&gt;workers&lt;/em&gt;. The task of a supervisors is to ensure that the worker processes do their work, including distributing the work and restarting the worker processes when they die. Supervisors can supervise either worker or other supervisors, so you can build a &lt;em&gt;supervision tree&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Elixir provides an &lt;a href=&quot;http://elixir-lang.org/docs/stable/elixir/Application.html&quot;&gt;Application&lt;/a&gt; behaviour module and a &lt;a href=&quot;https://hexdocs.pm/elixir/Supervisor.html&quot;&gt;Supervisor&lt;/a&gt; module to make this easy. The Application module requires a &lt;code&gt;start()&lt;/code&gt; function as entry point. Typical code to create a supervision tree is&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Supervisor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start_link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;children&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;where &lt;code&gt;start_link()&lt;/code&gt; spawns the top process of the tree, and it spawns all the child processes in the list &lt;code&gt;children&lt;/code&gt;. &lt;/p&gt;
-
-&lt;p&gt;Pleroma uses a convenient but deprecated module called &lt;a href=&quot;https://hexdocs.pm/elixir/Supervisor.Spec.html&quot;&gt;Supervisor.Spec&lt;/a&gt; which provides &lt;code&gt;worker()&lt;/code&gt; and &lt;code&gt;supervisor()&lt;/code&gt; functions, for example:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;children&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;supervisor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Pleroma.Repo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]),&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;supervisor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Pleroma.Web.Endpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]),&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Pleroma.Web.Federator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]),&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Every worker has this own &lt;code&gt;start_link&lt;/code&gt; function,  e.g.  in &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/federator/federator.ex&quot;&gt;&lt;code&gt;web/federator/federator.ex&lt;/code&gt;&lt;/a&gt; we find: &lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start_link&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
-  &lt;span class=&quot;nc&quot;&gt;GenServer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start_link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;__MODULE__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This means that the Federator module borrows the &lt;code&gt;start_link&lt;/code&gt; from the GenServer module. This is a very common way to create a worker.&lt;/p&gt;
-
-&lt;h2&gt;Mix&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://hexdocs.pm/mix/Mix.html&quot;&gt;Mix&lt;/a&gt; is the build tool for Elixir, and its main advantage is that the build scripts are also written in Elixir. Some key &lt;code&gt;mix&lt;/code&gt; actions are provided by Phoenix, for example to build and run the final Pleroma application the action is &lt;code&gt;mix phx.server&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Hacking Pleroma&lt;/h2&gt;
-
-&lt;p&gt;After this brief tour of Elixir and Phoenix I want to give an example of adding simple bot functionality to Pleroma. See &lt;a href=&quot;https://git.pleroma.social/andarna/pleroma&quot;&gt;my fork of Pleroma&lt;/a&gt; for the code.&lt;/p&gt;
-
-&lt;p&gt;My bot parses incoming messages for &lt;code&gt;@pixelbot&lt;/code&gt;, extracts a list of pixel from the message, modifies a canvas with the new pixels and creates a PNG image of the result. It then posts a link to the PNG image. &lt;/p&gt;
-
-&lt;h3&gt;Adding a worker&lt;/h3&gt;
-
-&lt;p&gt;Because updating the canvas and creating the PNG image could be time-consuming, especially if the canvas were large, I put this functionality in a separate server module, and added this to the list of workers for the &lt;a href=&quot;https://git.pleroma.social/andarna/pleroma/tree/develop/lib/pleroma/application.ex&quot;&gt;main Pleroma application&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;children&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bot_enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Pleroma.Bots.PixelBot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_canvas_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PixelBot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The bot takes the size of the canvas from my &lt;a href=&quot;https://git.pleroma.social/andarna/pleroma/blob/develop/config/config.exs&quot;&gt;&lt;code&gt;config.exs&lt;/code&gt;&lt;/a&gt; using the helper function &lt;code&gt;get_canvas_size()&lt;/code&gt;. The &lt;code&gt;id: PixelBot&lt;/code&gt; allows to access the worker by name.&lt;/p&gt;
-
-&lt;p&gt;When the application starts, it launches the PixelBot worker (&lt;a href=&quot;https://git.pleroma.social/andarna/pleroma/tree/develop/lib/pleroma/bots/pixelbot.ex&quot;&gt;&lt;code&gt;bots/pixelbot.ex&lt;/code&gt;&lt;/a&gt;). The worker calls its &lt;code&gt;init()&lt;/code&gt; function (part of the GenServer behaviour) which loads the last canvas from a file.&lt;/p&gt;
-
-&lt;h3&gt;A bit of ActivityPub&lt;/h3&gt;
-
-&lt;p&gt;One of the protocols used for federation is &lt;a href=&quot;https://www.w3.org/TR/activitypub/&quot;&gt;ActivityPub&lt;/a&gt;. The specification is long and not so easy to read. However, for the purpose of hacking Pleroma it mainly
-helps to understand the structure of an ActivityPub &lt;em&gt;action&lt;/em&gt; (in this case a post):&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;
- &lt;span class=&quot;ss&quot;&gt;actor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
- &lt;span class=&quot;ss&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;actor&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-   &lt;span class=&quot;s2&quot;&gt;&amp;quot;cc&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/followers&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-   &lt;span class=&quot;s2&quot;&gt;&amp;quot;context&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/contexts/&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-   &lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/activities/&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activity_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-   &lt;span class=&quot;s2&quot;&gt;&amp;quot;object&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;actor&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;attachment&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;type&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Image&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-       &lt;span class=&quot;s2&quot;&gt;&amp;quot;url&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-           &lt;span class=&quot;s2&quot;&gt;&amp;quot;href&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/media/&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uuid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-           &lt;span class=&quot;s2&quot;&gt;&amp;quot;mediaType&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;image/png&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;type&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Link&amp;quot;&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-       &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-       &lt;span class=&quot;s2&quot;&gt;&amp;quot;uuid&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uuid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;cc&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/followers&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;content&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content_str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;context&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/contexts/&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;emoji&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{},&lt;/span&gt;
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/objects/&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;published&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;summary&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tag&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;to&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;https://www.w3.org/ns/activitystreams&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Public&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-     &lt;span class=&quot;s2&quot;&gt;&amp;quot;type&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Note&amp;quot;&lt;/span&gt;
-   &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;published&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-   &lt;span class=&quot;s2&quot;&gt;&amp;quot;to&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;https://www.w3.org/ns/activitystreams&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Public&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-   &lt;span class=&quot;s2&quot;&gt;&amp;quot;type&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Create&amp;quot;&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;inserted_at&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ndt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
- &lt;span class=&quot;ss&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
- &lt;span class=&quot;ss&quot;&gt;recipients&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;https://www.w3.org/ns/activitystreams&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Public&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/followers&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
- &lt;span class=&quot;ss&quot;&gt;updated_at&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ndt&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In my case, &lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;https://pynq.limited.systems&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/users/pixelbot&amp;quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;canvas.png&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;content_str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Canvas:&amp;lt;br&amp;gt;&amp;lt;a href=\&amp;quot;&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/media/&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uuid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;\&amp;quot; class=&amp;#39;attachment&amp;#39;&amp;gt;&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;/a&amp;gt;&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In Pleroma this activity is linked to the Ecto repository Pleroma.Repo (&lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/repo.ex&quot;&gt;&lt;code&gt;repo.ex&lt;/code&gt;&lt;/a&gt;) in the module Pleroma.Activity (&lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/activity.ex&quot;&gt;&lt;code&gt;activity.ex&lt;/code&gt;&lt;/a&gt;), which defines a schema.&lt;/p&gt;
-
-&lt;h3&gt;Getting the messages&lt;/h3&gt;
-
-&lt;p&gt;The bot only supports ActivityPub. As we have seen above, in Pleroma incoming messages are handled by &lt;code&gt;inbox&lt;/code&gt; function in the ActivityPubController (in &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/activity_pub_controller.ex&quot;&gt;&lt;code&gt;web/activity_pub/activity_pub_controller.ex&lt;/code&gt;&lt;/a&gt;), so I put in a little hook there to detect if a message is for &lt;code&gt;@pixelbot&lt;/code&gt; and has an actual message body (&lt;code&gt;content&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;valid_signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Enum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;into&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req_headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{})&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;has_key?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;nickname&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;has_key?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;nickname&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;pixelbot&amp;quot;&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;has_key?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;GenServer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Pleroma.Bots.PixelBot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;ss&quot;&gt;:ok&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-      &lt;span class=&quot;ss&quot;&gt;:nok&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;:nok&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;As you can see, the content of a message for &lt;code&gt;@pixelbot&lt;/code&gt; is passed on to the PixelBot worker for processing using the &lt;code&gt;GenServer.cast(Pleroma.Bots.PixelBot,content)&lt;/code&gt; call.&lt;/p&gt;
-
-&lt;h3&gt;Processing the messages&lt;/h3&gt;
-
-&lt;p&gt;The PixelBot worker parses the message to extract any pixels from it (&lt;a href=&quot;https://git.pleroma.social/andarna/pleroma/tree/develop/lib/pleroma/bots/pixelbot/parse_messages.ex&quot;&gt;&lt;code&gt;bots/pixelbot/parse_messages.ex&lt;/code&gt;&lt;/a&gt;). If there are any, it updates the canvas (which is just a list of lists). It and writes the content to a file, and calls an external program to create the final image. &lt;/p&gt;
-
-&lt;h3&gt;Posting a reply&lt;/h3&gt;
-
-&lt;p&gt;Finally, the bot posts a status to the public timeline (&lt;a href=&quot;https://git.pleroma.social/andarna/pleroma/tree/develop/lib/pleroma/bots/pixelbot/pixelbot_post_status.ex&quot;&gt;&lt;code&gt;bots/pixelbot/pixelbot_post_status.ex&lt;/code&gt;&lt;/a&gt;). The status contains the current time and a link to the latest canvas.  The function &lt;code&gt;pixelbot_post_status()&lt;/code&gt; creates the status and wraps it in the correct structure required by ActivityPub. &lt;/p&gt;
-
-&lt;p&gt;It also gets the user object based on the nickname via &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/user.ex&quot;&gt;&lt;code&gt;Pleroma.User.get_cached_by_nickname(nickname)&lt;/code&gt;&lt;/a&gt;. Like the activity, this user object is defined via a schema and linked to the Ecto repository (in &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/user.ex&quot;&gt;&lt;code&gt;user.ex&lt;/code&gt;&lt;/a&gt;). So &lt;code&gt;user&lt;/code&gt; in the code below is a complicated object, not a url or nickname.&lt;/p&gt;
-
-&lt;p&gt;Finally, the function calls &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/web/activity_pub/activity_pub.ex&quot;&gt;&lt;code&gt;ActivityPub.create()&lt;/code&gt;&lt;/a&gt; which creates the activity, and in this case that means it posts a status.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pixelbot_post_status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utc_now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;nickname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;pixelbot&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Pleroma.User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_cached_by_nickname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nickname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;visibility&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;public&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#get_visibility(data)&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;https://pynq.limited.systems&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/users/pixelbot&amp;quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;canvas_512x512.png&amp;quot;&lt;/span&gt;
-
-
-    &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;https://www.w3.org/ns/activitystreams&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Public&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/followers&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/contexts/pixelbot-dummy-context&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;actor&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s2&quot;&gt;&amp;quot;attachment&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;type&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Image&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              &lt;span class=&quot;s2&quot;&gt;&amp;quot;url&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;href&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/pixelbot/&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;s2&quot;&gt;&amp;quot;mediaType&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;image/png&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;type&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Link&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}],&lt;/span&gt;
-              &lt;span class=&quot;s2&quot;&gt;&amp;quot;uuid&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;pixelbot-dummy-uuid&amp;quot;&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}],&lt;/span&gt;
-            &lt;span class=&quot;s2&quot;&gt;&amp;quot;cc&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/followers&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;s2&quot;&gt;&amp;quot;content&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Canvas at &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;br&amp;gt;&amp;lt;a href=\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/pixelbot/&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;\&amp;quot; class=&amp;#39;attachment&amp;#39;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_file_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;/a&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s2&quot;&gt;&amp;quot;context&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s2&quot;&gt;&amp;quot;emoji&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{},&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;summary&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tag&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
-            &lt;span class=&quot;s2&quot;&gt;&amp;quot;to&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;https://www.w3.org/ns/activitystreams&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Public&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;type&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Note&amp;quot;&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Pleroma.Web.ActivityPub.ActivityPub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(%{&lt;/span&gt;
-              &lt;span class=&quot;ss&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              &lt;span class=&quot;ss&quot;&gt;actor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              &lt;span class=&quot;ss&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              &lt;span class=&quot;ss&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              &lt;span class=&quot;ss&quot;&gt;additional&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;cc&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;Pleroma.User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;increase_note_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Pleroma source tree&lt;/h2&gt;
-
-&lt;p&gt;This is only a part of the &lt;a href=&quot;https://git.pleroma.social/pleroma/pleroma/blob/develop/lib/pleroma/&quot;&gt;Pleroma source tree&lt;/a&gt;, it shows on the files mentioned above.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;/lib/pleroma/
-├── activity.ex
-├── application.ex
-├── notification.ex
-├── object.ex
-├── plugs
-│   ├── authentication_plug.ex
-│   ├── http_signature.ex
-│   └── oauth_plug.ex
-├── repo.ex
-├── user.ex
-└── web
-    ├── activity_pub
-    │   ├── activity_pub.ex
-    │   ├── activity_pub_controller.ex
-    │   ├── transmogrifier.ex
-    │   ├── utils.ex
-    │   └── views
-    │       ├── object_view.ex
-    │       └── user_view.ex
-    ├── common_api
-    │   ├── common_api.ex
-    │   └── utils.ex
-    ├── endpoint.ex
-    ├── federator
-    │   └── federator.ex
-    ├── mastodon_api
-    │   ├── mastodon_api.ex
-    │   ├── mastodon_api_controller.ex
-    │   ├── mastodon_socket.ex
-    │   └── views
-    │       ├── mastodon_view.ex
-    ├── router.ex
-    ├── templates
-    │   ├── mastodon_api
-    │   │   └── mastodon
-    │   │       ├── index.html.eex
-    ├── web.ex
-    ├── web_finger
-    │   ├── web_finger.ex
-    │   └── web_finger_controller.ex
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         </content>
     </entry>
     
