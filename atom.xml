@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2023-04-11T20:04:06+01:00</updated>
+    <updated>2023-05-27T17:53:09+01:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -1296,7 +1296,7 @@ l tail tail tail null  ( #01 )
 
 &lt;p&gt;Not only do older devices have fewer resources, resource consumption eventually means emissions, because all resources on a device consume energy. In practice, a large source of emissions resulting from end user device activity is the local Wifi, because transfering the data (e.g. video) consumes a lot of energy. However, on laptops, desktops and servers, CPU and GPU power consumption is also a significant factor.&lt;/p&gt;
 
-&lt;p&gt;The consequence is that as a developer, you need to be aware of all factors that contribute to the total enery consumption of a task performed by your software. For apps and web sites, the dominant sources of emissions are &lt;a href=&quot;https://www.carbontrust.com/our-work-and-impact/guides-reports-and-tools/carbon-impact-of-video-streaming&quot;&gt;in the home&lt;/a&gt;. For &lt;a href=&quot;https://www.researchgate.net/publication/336909520_Toward_Greener_Gaming_Estimating_National_Energy_Use_and_Energy_Efficiency_Potential&quot;&gt;non-networked games, the power consumption of the CPU and GPU&lt;/a&gt; is the main source of emissions. &lt;/p&gt;
+&lt;p&gt;The consequence is that as a developer, you need to be aware of all factors that contribute to the total energy consumption of a task performed by your software. For apps and web sites, the dominant sources of emissions are &lt;a href=&quot;https://www.carbontrust.com/our-work-and-impact/guides-reports-and-tools/carbon-impact-of-video-streaming&quot;&gt;in the home&lt;/a&gt;. For &lt;a href=&quot;https://www.researchgate.net/publication/336909520_Toward_Greener_Gaming_Estimating_National_Energy_Use_and_Energy_Efficiency_Potential&quot;&gt;non-networked games, the power consumption of the CPU and GPU&lt;/a&gt; is the main source of emissions. &lt;/p&gt;
 
 &lt;h3&gt;Make software that encourages the user to be frugal&lt;/h3&gt;
 
