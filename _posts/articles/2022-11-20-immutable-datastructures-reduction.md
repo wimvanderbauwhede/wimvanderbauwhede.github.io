@@ -4,7 +4,7 @@ title: "Immutable data structures and reduction in Raku"
 date: 2022-11-20
 modified: 2022-11-20
 tags: [ programming, raku ]
-excerpt: "What does it take to bring functional programming to a stack-based assembly language?"
+excerpt: "A small library to make it easier to work with immutable maps and lists."
 current_image: immutable-datastructures-reduction_1600x600.jpg
 comments: false
 toc: false

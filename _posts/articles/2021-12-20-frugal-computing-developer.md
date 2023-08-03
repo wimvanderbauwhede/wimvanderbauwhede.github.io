@@ -63,7 +63,7 @@ Whereas for mobile phones the emissions from usage are much lower than the emiss
 
 Not only do older devices have fewer resources, resource consumption eventually means emissions, because all resources on a device consume energy. In practice, a large source of emissions resulting from end user device activity is the local Wifi, because transfering the data (e.g. video) consumes a lot of energy. However, on laptops, desktops and servers, CPU and GPU power consumption is also a significant factor.
 
-The consequence is that as a developer, you need to be aware of all factors that contribute to the total enery consumption of a task performed by your software. For apps and web sites, the dominant sources of emissions are [in the home](https://www.carbontrust.com/our-work-and-impact/guides-reports-and-tools/carbon-impact-of-video-streaming). For [non-networked games, the power consumption of the CPU and GPU](https://www.researchgate.net/publication/336909520_Toward_Greener_Gaming_Estimating_National_Energy_Use_and_Energy_Efficiency_Potential) is the main source of emissions. 
+The consequence is that as a developer, you need to be aware of all factors that contribute to the total energy consumption of a task performed by your software. For apps and web sites, the dominant sources of emissions are [in the home](https://www.carbontrust.com/our-work-and-impact/guides-reports-and-tools/carbon-impact-of-video-streaming). For [non-networked games, the power consumption of the CPU and GPU](https://www.researchgate.net/publication/336909520_Toward_Greener_Gaming_Estimating_National_Energy_Use_and_Energy_Efficiency_Potential) is the main source of emissions. 
 
 ### Make software that encourages the user to be frugal
 
