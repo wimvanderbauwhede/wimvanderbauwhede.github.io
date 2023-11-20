@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2023-05-27T17:53:09+01:00</updated>
+    <updated>2023-11-20T10:00:59+00:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,490 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>Emissions from ChatGPT are much higher than from conventional search</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/google-search-vs-chatgpt-emissions/"/>
+        <updated>2023-11-17T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/google-search-vs-chatgpt-emissions</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/google-search-vs-chatgpt-emissions_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;Chat-assisted search is one of the key applications for ChatGPT. To illustrate the impact of ChatGPT-style augmented search queries more clearly, I compare the energy consumption and emission of a ChatGPT-style query with that of a conventional Google search-style query. If all search queries are replaced by ChatGPT-style queries, what does that mean for energy consumption and emissions?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;tl;dr: Emissions would increase by 60x.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/climate-cost-of-ai-revolution&quot;&gt;a previous post&lt;/a&gt; I wrote about the potential climate impact from widespread adoption of ChatGPT-style Large Language Models. My projections are in line with those made by de Vries in his recent article &lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt;. In this post, I look in more detail at the increase in energy consumption from using ChatGPT for search tasks.&lt;/p&gt;
+
+&lt;h2&gt;Google search energy and emissions&lt;/h2&gt;
+
+&lt;p&gt;In 2009, The Guardian published &lt;a href=&quot;https://www.theguardian.com/environment/ethicallivingblog/2009/jan/12/carbon-emissions-google&quot;&gt;an article about the carbon cost of Google search&lt;/a&gt;. Google &lt;a href=&quot;https://googleblog.blogspot.com/2009/01/powering-google-search.html&quot;&gt;had posted a rebuttal to the claim that every search emits 7 g of CO₂ on their blog&lt;/a&gt;. What they claimed was that, in 2009, the energy cost was 0.0003 kWh per search, or 1 kJ. That corresponded to 0.2 g CO₂, and I think that was indeed a closer estimate.&lt;/p&gt;
+
+&lt;p&gt;This number is still often cited but it is entirely outdated. In the meanwhile, &lt;a href=&quot;https://www.science.org/doi/abs/10.1126/science.aba3758&quot;&gt;computing efficiency has rapidly increased&lt;/a&gt;: Power Usage Effectiveness (PUE, metric for overhead of the data centre infrastructure) dropped by 25% from 2010 to 2018; server energy intensity dropped by a factor of four; the average number of servers per workload dropped by a factor of five, and average storage drive energy use per TB dropped by almost a factor of ten. Google has released &lt;a href=&quot;https://www.google.co.uk/about/datacenters/efficiency/&quot;&gt;some figures about their data centre efficiency&lt;/a&gt; that are in line with these broad trends. It is interesting to see that PUE has not improved much in the last decade.&lt;/p&gt;
+
+&lt;p&gt;Therefore, with the ChatGPT hype, I wanted to revise that figure from 2009. Three things have changed: the carbon intensity of electricity generation has dropped &lt;a href=&quot;#11&quot;&gt;[11]&lt;/a&gt;, server energy efficiency has increased a lot &lt;a href=&quot;#9&quot;&gt;[9]&lt;/a&gt;, and PUE of data centres has improved &lt;a href=&quot;#10&quot;&gt;[10]&lt;/a&gt;. Combining all that, my new estimate for energy consumption and the carbon footprint of a Google search is 0.00004 kWh and 0.02 g CO₂ (using carbon intensity for the US).
+According to Masanet&amp;#39;s peer-reviewed article &lt;a href=&quot;#9&quot;&gt;[9]&lt;/a&gt;, hardware efficiency increases with 4.17x from 2010 to 2018. This is a power law, so extrapolating this to 12 years gives 6.70x. I use 12 years instead of 14 from 2009 as typically servers have a life of 4 years. Therefore the most likely estimate is that the current servers are two years old, i.e. they have the efficiency from 2021.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;PUE: 1.16 in 2010; 1.1 in 2023;
+efficiency increase of hardware in 12 years: 6.70x
+US overall carbon intensity: 367 gCO₂/kWh
+
+0.0003*(1.1/1.16)*(1/6.70) = 0.0000424 kWh per search
+0.0000424*367 = 0.02 g CO₂ per search
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So the energy consumption per conventional search query has dropped by 7x in 14 years. There is quite some uncertainty on this estimate, but it is conservative, so it will not be less than that, but could be up to 10x. Microsoft has not published similar figures but there is no reason to assume that their trend would be different; in fact, their use of FPGAs should in principle lead to a lower energy consumption per query. In that same period, carbon emissions per search have dropped about 10x because of the decrease in carbon intensity of electricity.&lt;/p&gt;
+
+&lt;h2&gt;ChatGPT energy consumption per query&lt;/h2&gt;
+
+&lt;p&gt;There are several estimates of the energy consumption per query for ChatGPT. I have summarised the ones that I used in the following table. There are many more, these are the top ranked ones in a conventional search ☺.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;Ref&lt;/th&gt;&lt;th&gt;Estimate (kWh/query)&lt;/th&gt;&lt;th&gt;Increase vs Google search&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;!-- &lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#1&quot;&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;0.00297&lt;/td&gt;&lt;td&gt;42x&lt;/td&gt; &lt;/tr&gt; --&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#1&quot;&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;0.001 - 0.01&lt;/td&gt; &lt;td&gt;24x - 236x&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#2&quot;&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;0.0017 - 0.0026&lt;/td&gt;&lt;td&gt;40x - 61x&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#3&quot;&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;0.0068&lt;/td&gt;&lt;td&gt;160x&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#4&quot;&gt;[4]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;0.0012&lt;/td&gt;&lt;td&gt;28x&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;0.0029&lt;/td&gt;&lt;td&gt;68x&lt;/td&gt; &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Reference &lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt; is the peer-reviewed article by Alex de Vries. It uses the estimates from &lt;a href=&quot;#6&quot;&gt;[6]&lt;/a&gt; for energy consumption but does not present a per-query value so I used the query estimate from &lt;a href=&quot;#6&quot;&gt;[6]&lt;/a&gt;. Overall, the estimates lie between 24x and 236x (from [1], which is a collation of estimates from Reddit and therefore very broad) or 28x to 160x (all other sources). &lt;/p&gt;
+
+&lt;p&gt;I consider any estimate lower than 0.002 kWh/query overly optimistic and any estimate higher than 0.005 kWh/query overly pessimistic. However, rather than judging, I calculated the mean over all these estimates. I used four types of means. Typically, an ordinary average gives more weight to large numbers; a harmonic mean gives more weight to small numbers. Given the nature of the data, I think the geometric mean is the best estimate:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;Type of Mean&lt;/th&gt;&lt;th&gt;Mean increase &lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Average&lt;/td&gt;&lt;td&gt;88&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Median&lt;/td&gt;&lt;td&gt;61&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Geometric mean&lt;/td&gt;&lt;td&gt;63&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Harmonic mean&lt;/td&gt;&lt;td&gt;48&lt;/td&gt; &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;As you can see, there is not that much difference between the geometric mean and the media. So we can conclude that ChatGPT consumes between fifty and ninety times more energy per query than a conventional (&amp;quot;Google&amp;quot;) search, with sixty times being the most likely estimate.&lt;/p&gt;
+
+&lt;h2&gt;Other factors contributing to emissions&lt;/h2&gt;
+
+&lt;h3&gt;Training&lt;/h3&gt;
+
+&lt;p&gt;Contrary to popular belief, it is the use of ChatGPT, not its training, that dominates emissions. I wrote about this in &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/climate-cost-of-ai-revolution&quot;&gt;my previous post&lt;/a&gt;. In the initial phase of adoption, with low numbers of users, emissions from training are not negligible, but I assume the scenario where conventional search is replaced by ChatGPT-style queries, and in that case emissions from training are only a small fraction. How much is hard to say as we don&amp;#39;t know how frequently the model gets retrained and what the emissions are from retraining; they are almost certainly much lower as the changes in the corpus are small, so it is tuning.&lt;/p&gt;
+
+&lt;h3&gt;Data centre efficiency&lt;/h3&gt;
+
+&lt;p&gt;As far as I can tell, PUE is not taken into account in the above estimates. For a typical hyperscale data centre, it is around 1.1.&lt;/p&gt;
+
+&lt;h3&gt;Embodied carbon&lt;/h3&gt;
+
+&lt;p&gt;Neither the Google search estimate nor the ChatGPT query estimates include embodied carbon. The embodied carbon can be anywhere between 20% and 50% of the emissions from use, depending on many factors. My best guess is that the embodied emission are proportionate to the energy consumption, so this would not affect the factor much.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Taken all this into account, it is possible that the emissions from a ChatGPT query are more than a hundred times that of a conventional search query. But as I don&amp;#39;t have enough data to back this up, I will keep the conservative estimates from above (50x - 90x; 60x most likely).&lt;/p&gt;
+
+&lt;p&gt;Now, if we want sustainable ICT, then the sector as a whole needs to reduce its emissions to a quarter from the current ones by 2040. The combined increase in energy use and growth in adoption of ChatGPT-like applications is therefore deeply problematic.&lt;/p&gt;
+
+&lt;h2&gt;References&lt;/h2&gt;
+
+&lt;h3&gt;Google Search energy consumption estimates&lt;/h3&gt;
+
+&lt;p&gt;&lt;a name=&quot;7&quot;&gt;[7]&lt;/a&gt; &lt;a href=&quot;https://www.theguardian.com/environment/ethicallivingblog/2009/jan/12/carbon-emissions-google&quot;&gt;&amp;quot;The carbon cost of Googling&amp;quot;, Leo Hickman, 2009, The Guardian&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;8&quot;&gt;[8]&lt;/a&gt; &lt;a href=&quot;https://googleblog.blogspot.com/2009/01/powering-google-search.html&quot;&gt;&amp;quot;Powering a Google search&amp;quot;, Google, 2009&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;9&quot;&gt;[9]&lt;/a&gt; &lt;a href=&quot;https://www.science.org/doi/abs/10.1126/science.aba3758&quot;&gt;&amp;quot;Recalibrating global data center energy-use estimates&amp;quot;, Eric Masanet et al, 2020&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;10&quot;&gt;[10]&lt;/a&gt; &lt;a href=&quot;https://www.google.co.uk/about/datacenters/efficiency/&quot;&gt;&amp;quot;Data Centers: Efficiency&amp;quot;, Google, 2023&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;11&quot;&gt;[11]&lt;/a&gt; &lt;a href=&quot;https://ourworldindata.org/grapher/carbon-intensity-electricity&quot;&gt;&amp;quot;Carbon intensity of electricity, 2022&amp;quot;, Our World in Data, 2023&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h3&gt;ChatGPT energy consumption estimates&lt;/h3&gt;
+
+&lt;!-- &lt;a name=&quot;1&quot;&gt;[1]&lt;/a&gt; [&quot;ChatGPT’s Electricity Consumption&quot;, Kasper Groes Albin Ludvigsen, 2023, Towards Data Science](https://towardsdatascience.com/chatgpts-electricity-consumption-7873483feac4) --&gt;
+
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;[1]&lt;/a&gt; &lt;a href=&quot;https://lifestyle.livemint.com/news/big-story/ai-carbon-footprint-openai-chatgpt-water-google-microsoft-111697802189371.html&quot;&gt;&amp;quot;AI and its carbon footprint: How much water does ChatGPT consume?&amp;quot;, Nitin Sreedhar, 2023, lifestyle.livemint.com&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;2&quot;&gt;[2]&lt;/a&gt; &lt;a href=&quot;https://towardsdatascience.com/chatgpts-energy-use-per-query-9383b8654487&quot;&gt;&amp;quot;ChatGPT’s energy use per query&amp;quot;, Kasper Groes Albin Ludvigsen, 2023, Towards Data Science)&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;3&quot;&gt;[3]&lt;/a&gt; &lt;a href=&quot;https://medium.com/@zodhyatech/how-much-energy-does-chatgpt-consume-4cba1a7aef85&quot;&gt;&amp;quot;How much energy does ChatGPT consume?&amp;quot; (Zodhya, 2023, medium.com)&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;4&quot;&gt;[4]&lt;/a&gt; &lt;a href=&quot;https://medium.com/@chrispointon/the-carbon-footprint-of-chatgpt-e1bc14e4cc2a&quot;&gt;&amp;quot;The carbon footprint of ChatGPT&amp;quot; (Chris Pointon, 2023, medium.com)&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;5&quot;&gt;[5]&lt;/a&gt; &lt;a href=&quot;https://www.cell.com/joule/fulltext/S2542-4351(23)00365-3&quot;&gt;&amp;quot;The growing energy footprint of artificial intelligence&amp;quot; (Alex de Vries, 2023, Joule&lt;/a&gt;&lt;br&gt;
+&lt;a name=&quot;6&quot;&gt;[6]&lt;/a&gt; &lt;a href=&quot;https://www.semianalysis.com/p/the-inference-cost-of-search-disruption&quot;&gt;&amp;quot;The Inference Cost Of Search Disruption – Large Language Model Cost Analysis&amp;quot; (Dylan Patel and Afzal Ahmad, 2023, SemiAnalysis)&lt;/a&gt;&lt;/p&gt;
+
+        </content>
+    </entry>
+    
+    <entry>
+        <title>More on Funktal: I/O devices and state</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/funktal-devices-state/"/>
+        <updated>2023-08-03T00:00:00+01:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/funktal-devices-state</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/funktal-devices-state_1600x600.jpg&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;In &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/funktal/&quot;&gt;a previous post&lt;/a&gt;, I introduced &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal&quot;&gt;&lt;code&gt;Funktal&lt;/code&gt;&lt;/a&gt;, a frugal functional programming language created for the &lt;a href=&quot;https://wiki.xxiivv.com/site/uxn.html&quot;&gt;Uxn&lt;/a&gt; VM. The Uxn VM is the heart of a clean-slate computing platform called &lt;a href=&quot;https://wiki.xxiivv.com/site/varvara.html&quot;&gt;Varvara&lt;/a&gt;. This post explains how you can access Varvara&amp;#39;s I/O devices from Funktal, and the closely related support for mutable state. I illustrate these features using three small GUI-based programs.&lt;/p&gt;
+
+&lt;p&gt;The main purpose of Uxn and Varvara is as a portable platform for GUI-based applications, such as the &lt;a href=&quot;https://wiki.xxiivv.com/site/noodle.html&quot;&gt;&lt;code&gt;left&lt;/code&gt;&lt;/a&gt; editor, the &lt;a href=&quot;https://wiki.xxiivv.com/site/noodle.html&quot;&gt;&lt;code&gt;noodle&lt;/code&gt;&lt;/a&gt; drawing program and many others, in particular games. To make Funktal a practical language for this platform, support for I/O devices (keyboard, mouse, screen, audio) is essential.&lt;/p&gt;
+
+&lt;h2&gt;Mutable state: why and how&lt;/h2&gt;
+
+&lt;p&gt;Uxn I/O is event based, for example a button press or mouse click results in an event handler (aka vector or callback) being called. These handlers can access the Uxn VM&amp;#39;s  working and return stack as well as its memory. Most programs are stateful, so a efficient mechanism for handling state is important.&lt;/p&gt;
+
+&lt;h3&gt;Keeping state on the stack&lt;/h3&gt;
+
+&lt;p&gt;We could keep the state on the stack. This is OK for simple cases but quickly gets cumbersome. Suppose we have three items of state then our function needs to look like this:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;(\s1_in s2_in s3_in.
+    &amp;lt;all computations&amp;gt;
+    s3_out s2_out s1_out
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But we don&amp;#39;t know the type of items on the stack, so we need explicit typing, e.g.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    RGB = Int Int Int MkRGB
+}
+
+(\(RGB,Int,Bool) &amp;lt;- s1_in:Bool&amp;lt;- s2_in: Int&amp;lt;- s3_in:RGB.
+    &amp;lt;all computations&amp;gt;
+    s3_out s2_out s1_out
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The tuple syntax only indicates that the function pushes multiple values on the stack, it is not an algebraic data type and so we can&amp;#39;t construct it or pattern match on it.&lt;/p&gt;
+
+&lt;h3&gt;Putting the state in a record type&lt;/h3&gt;
+
+&lt;p&gt;An improvement would be if the stack held an instance of a record type, because then all we have to do is keep such an instance on the stack.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    RGB = Int Int Int MkRGB
+    State = Bool Int RGB MkState
+}
+
+(\State &amp;lt;- s_in:State. &amp;lt;all computations&amp;gt; s_out )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It still means that this state should remain on the stack, and if there are several event handlers each with their own state, either that means juggling those states or creating an overall state for all event handlers in the program and passing that around. Either way that would mean additional code for accessing the state.&lt;/p&gt;
+
+&lt;p&gt;Because each instance of a type is immutable, this approach also means that every update of the state requires to construct a new type. (And in practice we&amp;#39;ll have to delete the old one, otherwise we&amp;#39;d run out of memory very quickly. But Funktal does not have managed memory yet. Yet another story.) Constructing types is expensive (and deletion even more so).&lt;/p&gt;
+
+&lt;h3&gt;Making state mutable&lt;/h3&gt;
+
+&lt;p&gt;For all these reasons, I decided to add mutable state to Funktal. It is very simple: in a special block called &lt;code&gt;state&lt;/code&gt; we define a singleton instance of the type used for the state:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    RGB = Int Int Int MkRGB
+    State = Bool Int RGB MkState
+}
+
+state {
+    s : State
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So this defines &lt;code&gt;s&lt;/code&gt; as a mutable instance of &lt;code&gt;State&lt;/code&gt;. There can only be one such instance per type.
+And now the function simple becomes&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;( &amp;lt;all computations on s&amp;gt; )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To access the information in a stateful record, there are two built-in functions, &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;put&lt;/code&gt;, which access a field in the record using its (base-0) index:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;0_1 s get -- gets the Bool from the record
+42 1_1 s put -- puts 42 in the Int slot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;These are polymorphic functions that work for any record type registered as a &lt;code&gt;state&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To make this more readable, I define some constants to identify the fields. Suppose the purpose of the fields in the State type are &lt;code&gt;greyscale&lt;/code&gt;, &lt;code&gt;transparency&lt;/code&gt; and &lt;code&gt;colour&lt;/code&gt;, we can define&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;constants {
+    greyscale#State = 0_1
+    transparency#State = 1_1
+    colour#State = 2_1
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and write&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;greyscale#State s get -- gets the greyscale from the record
+42 transparency#State s put -- puts 42 in the transparency field
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;(The &amp;#39;#&amp;#39; has no special meaning, I use it as a separator so that I can use the same field names in different types.)&lt;/p&gt;
+
+&lt;p&gt;Because &lt;code&gt;State&lt;/code&gt; is a proper Funktal type, you can also use pattern matching to bind the field values to names:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;s (\None &amp;lt;- (greyscale transparency colour MkState) : State . &amp;lt;all computations on s&amp;gt; )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But as bound variables are immutable, you can&amp;#39;t update the state this way.&lt;/p&gt;
+
+&lt;h3&gt;Mutable arrays&lt;/h3&gt;
+
+&lt;p&gt;Funktal has a built-in &lt;code&gt;Array&lt;/code&gt; type for immutable array constants, with built-in functions &lt;code&gt;size&lt;/code&gt; and &lt;code&gt;at&lt;/code&gt;.
+Within the context of a mutable state type, such arrays can be updated using a built-in &lt;code&gt;update&lt;/code&gt; function. 
+For example, assuming a state &lt;code&gt;s : AState&lt;/code&gt; has a field labelled &lt;code&gt;array&lt;/code&gt; which is of type &lt;code&gt;Array&lt;/code&gt;, we can write&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;val idx array#AState s get update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Devices&lt;/h2&gt;
+
+&lt;p&gt;I/O devices in Uxn are typically defined in this way:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;|20 @Screen &amp;amp;vector $2 
+    &amp;amp;width $2 &amp;amp;height $2 &amp;amp;pad $2 
+    &amp;amp;x $2 &amp;amp;y $2 &amp;amp;addr $2 
+    &amp;amp;pixel $1 &amp;amp;sprite $1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In Funktal we simply define a corresponding record type:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    Screen = Int Int Int Int Int Int Int Int8 Int8 MkScreen
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And to make this more readable, there is an aliasing mechanism&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;aliases {
+    Vector = Int
+    Width = Int; Height = Int; Pad = Int; X = Int; Y = Int; Addr = Int; Pixel = Int8; Sprite = Int8
+}
+
+types {
+    Screen = Vector Width Height Pad X Y Addr Pixel Sprite MkScreen
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The key difference with our mutable state is that each device has a unique address. &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;devices {
+    0x20 scr : Screen
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And to make a clear distinction with state operations, the built-in function to access I/O devices are &lt;code&gt;read&lt;/code&gt; and &lt;code&gt;write&lt;/code&gt;, for example&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;(\None&amp;lt;-colour:Int8 . colour sprite#Screen scr write )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Bits and bobs: blocks, loops, done&lt;/h2&gt;
+
+&lt;p&gt;There are a few more features of Funktal that make implementing device interactions easier.&lt;/p&gt;
+
+&lt;h3&gt;The &lt;code&gt;Block&lt;/code&gt; type&lt;/h3&gt;
+
+&lt;p&gt;A very common action in Uxn programs is to read constant data for sprites. For example, the following is typical:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;;font-hex ADD2 .Screen/addr DEO2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This can&amp;#39;t be implemented with the existing Arrays API in Funktal, because the &lt;code&gt;addr&lt;/code&gt; field of the screen device expect the actual address in Uxn memory. Therefore I added a &lt;code&gt;Block&lt;/code&gt; datatype, which is simply a contiguous sequence of bytes:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;font_hex : Byte 128 Block = [
+     0x00,0x7c ,0x82,0x82 ,0x82,0x82 
+    ... ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is only used for constants, and the instance of the type (i.e. the constant) contains the address of the first element (like an array in C). So you can write:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;font_hex + addr#Screen scr write
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;The &lt;code&gt;loop&lt;/code&gt; built-in&lt;/h3&gt;
+
+&lt;p&gt;Although I conceived Funktal as a functional language, where a natural programming paradigm is using higher-order list functions such as &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;fold&lt;/code&gt;, for I/O actions it is very common to loop over some action that does not return anything. It is of course easy to implement such a loop in native Funktal, but it can be done more efficiently in Uxntal, so Funktal has a built-in &lt;code&gt;loop&lt;/code&gt; function which takes a start and end value and a lambda function, and returns nothing:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;loop: None &amp;lt;- Int &amp;lt;- Int &amp;lt;- (None&amp;lt;-Int)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For example&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;0 9 `(\None&amp;lt;-idx:Int. idx 1 + print ) loop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;will print all values in the range. (And although I know all the arguments to the contrary, the range is 0 to 9, not 0 to 8). &lt;/p&gt;
+
+&lt;h3&gt;Stateful loop iteration&lt;/h3&gt;
+
+&lt;p&gt;Sometimes you might to maintain some state during the loop iteration, similar to a &lt;code&gt;fold&lt;/code&gt;. This can be done via the stack:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;0 -- This puts a 0 on the working stack
+0 len 1_1 - Int
+`(\ Int &amp;lt;- val : Int &amp;lt;- idx : Int .
+    idx array at (\Int &amp;lt;- elt : Int .
+        val idx array update
+        elt
+    )
+) loop
+-- Clear the working stack
+(\None&amp;lt;-null:Int.)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This example loops over indices 0 to len-1, and gets the element from an array. It then updates the array with the value on the stack, and puts the element on the stack. So if the array was [11, 22, 33, 44], it will become [0, 11, 22, 33]. The one thing to look out for is that this will leave the final element on the stack, so you may want to remove it by calling an empty lambda on it, which is what &lt;code&gt;(\None&amp;lt;-null:Int.)&lt;/code&gt; does.&lt;/p&gt;
+
+&lt;h3&gt;The &lt;code&gt;done&lt;/code&gt; built-in&lt;/h3&gt;
+
+&lt;p&gt;Funktal normally expects a called function to return. Event handlers have nowhere to return to. As a simple way to handle this is I added the &lt;code&gt;done&lt;/code&gt; built-in, which will tell the compiler to emit a &lt;code&gt;BRK&lt;/code&gt; rather than a &lt;code&gt;JMP2r&lt;/code&gt; at the end of a function. If it is used elsewhere, it simply emits a &lt;code&gt;BRK&lt;/code&gt; which is useful for debugging.&lt;/p&gt;
+
+&lt;h2&gt;Examples&lt;/h2&gt;
+
+&lt;p&gt;I have implemented a few examples of GUI-based programs. Two are ports of Uxn demos, the third renders the Funktal logo.&lt;/p&gt;
+
+&lt;h3&gt;Example 1: DVD&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/devel/examples/dvd.ftal&quot;&gt;This example&lt;/a&gt; is a simple program that bounces the DVD icon around the screen. &lt;/p&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/dvd.png&quot; alt=&quot;A white DVD logo on a blue background&quot; title=&quot;A white DVD logo on a blue background&quot; /&gt;
+&lt;figcaption&gt;DVD icon bouncing&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;It is a straight port of the &lt;code&gt;dvd.tal&lt;/code&gt; program. We define types for the system and screen devices and the dvd state:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    System = Word Int8 Int8 Int Int8 Int8 Word Word Word Int8 Int8 MkSystem
+    Screen = Int Int Int Byte Int8 Int Int Int Int8 Int8 MkScreen
+    DVD = Int Int Int Int MkDVD
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then we create the instance:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;state {
+    dvd : DVD
+}
+
+devices {
+    0x00 sys : System
+    0x20 scr : Screen
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There are no loops in this program, and no controls. It simply calculates the new position of the icon on every clock tick. The only event handler is &lt;code&gt;onFrame&lt;/code&gt;. Because this is a straight port, it does use the stack for some values. The main program registers that event handler, does some setup and puts the borders on the stack:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;main {
+    ...
+`onFrame vec#Screen scr write
+...
+    20 w#Screen scr read 20 -
+    20 h#Screen scr read 20 -
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;These borders are used by the event handler but not modified:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;functions {
+
+    -- takes the borders from the stack
+    onFrame = ( \ xmin xmax ymin ymax .
+        0x00 drawDVD
+        x#DVD dvd get
+        y#DVD dvd get
+        dx#DVD dvd get
+        dy#DVD dvd get
+        (\ Int &amp;lt;- x : Int &amp;lt;- y : Int &amp;lt;- dx : Int &amp;lt;- dy : Int .
+            ... calculate new position ....
+        )
+        0x01 drawDVD
+        -- put the borders back on the stack
+        xmin xmax ymin ymax
+        done
+    )
+}
+
+-- takes the colour (0 or 1) as argument
+drawDVD = (\ None &amp;lt;- c : Int8. ... )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note the use of &lt;code&gt;done&lt;/code&gt; at the end of the &lt;code&gt;onFrame&lt;/code&gt; function, because it is an event handler.&lt;/p&gt;
+
+&lt;h2&gt;Example 2: Snake&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/devel/examples/snake.ftal&quot;&gt;This example&lt;/a&gt; is a straight port of the &lt;code&gt;snake.tal&lt;/code&gt; program, a game where you control a snake to eat apples, and the snake grows longer and longer. &lt;/p&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/snake.png&quot; alt=&quot;A green snake with a tail of 5 segments, about to eat a red apple, on a black background &quot; title=&quot;A green snake with a tail of 5 segments, about to eat a red apple, on a black background&quot; /&gt;
+&lt;figcaption&gt;Snake in action&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The main differences with the DVD code is that there are buttons to control the direction of the snake, so we need a controller device, and that the tail of the snake is an array, so we use loops to update it.&lt;/p&gt;
+
+&lt;p&gt;The controller device:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;types {
+    Controller = Vector Button Key MkController
+}
+
+devices {
+    0x80 ctl : Controller
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The button handler is registered as before:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;`onButton vec ctl write
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The handler itself:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;onButton = (
+    button#Ctl ctl read
+    (\None &amp;lt;-b:Int8.
+         b 8_1 /=
+        `( b noEscape )
+        `( reset )
+         if
+    )
+    done
+)
+
+noEscape = (\ None &amp;lt;- b : Int8 .
+    b 4_1 &amp;gt;&amp;gt; (\None &amp;lt;-bb : Int8 .
+        bb 0_1 /=
+        `( bb dir#Snake snake put )
+        `() if
+    )
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So we read the button value, compute a value based on the button that is pressed, and write that into the &lt;code&gt;dir&lt;/code&gt; field if the &lt;code&gt;snake&lt;/code&gt; state. The &lt;code&gt;Snake&lt;/code&gt; type is&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;aliases {
+    X=Int8; Y=Int8
+    Dir=Int8; Len=Int8; Dead=Int8
+    Tail = Int 32 Array
+}
+
+types {
+    Snake = Dir Len Dead X Y Tail MkSnake
+}
+
+state {
+    snake : Snake
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is an example of a state containing an array. The main action is &lt;code&gt;drawSnake&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;drawSnake = (\None&amp;lt;-c:Int8.
+    -- draw tail
+    snake_icns addr#Screen scr write 
+    len#Snake snake get (\None &amp;lt;- len:Int8 .
+        0 len 1_1 - Int
+        `(\None&amp;lt;-idx:Int .
+            idx (tail#Snake snake get) at (\None &amp;lt;- xy:Int.
+            xy 8_1 &amp;gt;&amp;gt; Int8 Int 3_1 &amp;lt;&amp;lt; x#Screen scr write
+            xy        Int8 Int 3_1 &amp;lt;&amp;lt; y#Screen scr write
+        )
+        c sprite#Screen scr write
+        ) loop
+    )
+    -- draw head
+    ...
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The tail is an array of 16-bit integers which are actually pairs of 8-bit integers representing the coordinate for each segment of the tail. So what the code does is reading &lt;code&gt;xy&lt;/code&gt; from the &lt;code&gt;tail&lt;/code&gt; array, unpacking it into an x and y value, and multiplying these by 8 because we have 8x8 sprites so the movement is in steps of 8 pixels.&lt;/p&gt;
+
+&lt;h2&gt;Example 3: Funktal logo rendering&lt;/h2&gt;
+
+&lt;p&gt;I implemented various ways of rendering the Funktal logo.&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/funktal-logo.png&quot; alt=&quot;The Funktal logo, triangles and rectangles rendered as a grid of black dots&quot; title=&quot;The Funktal logo, triangles and rectangles rendered as a grid of black dots&quot; /&gt;
+&lt;figcaption&gt;Funktal logo rendered using the example code&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/devel/examples/render-logo-gui-state-onFrame.ftal&quot;&gt;This example&lt;/a&gt; is rendering it one pixel at a time for every frame event (clock tick). So it has no internal loops. It is a bit complicated because the Funktal logo can be decomposed into isosceles right triangles (the base and height are the same) and symmetry operations.
+The array &lt;code&gt;triangleEncodings&lt;/code&gt; contains a list of (triangle orientation, triangle position) pairs. There is a state &lt;code&gt;counters&lt;/code&gt; with a counter for the triangle and the row and column position of the current pixel to be drawn. &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;onFrame = (\None.
+    0_1 run get 1_1 ==
+   `(
+        trCodeIdx counters get
+        rowIdx counters get
+        colIdx counters get
+        (\None &amp;lt;- tIdx:Int8 &amp;lt;- rIdx:Int8 &amp;lt;- cIdx:Int8.
+             tIdx Int triangleEncodings at rIdx cIdx drawPixel
+             cIdx rIdx &amp;lt;
+            `( cIdx 1_1 + colIdx counters put )
+            `( 0_1 colIdx counters put
+                 rIdx triangleDim 1_1 - &amp;lt;
+                `( rIdx 1_1 + rowIdx counters put )
+                `( 0_1 rowIdx counters put
+                     tIdx 14_1 &amp;lt;
+                    `( tIdx 1_1 + trCodeIdx counters put )
+                    `() if
+                 ) if
+             ) if
+        )
+    ) `() if
+    done
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There is a single control, pressing any key toggles pausing/continuing the rendering. That is the purpose of the first condition in the above code, &lt;code&gt;run&lt;/code&gt; is a separate state.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I hope this post and the previous one have provided some idea of what Funktal is like and what you can do with it. I plan to write another, longer article on how the compiler is made. For more information, see the a &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/SPEC.md&quot;&gt;specification&lt;/a&gt; (aimed at people who want to program in Funktal) and the &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/DESIGN.md&quot;&gt;design document&lt;/a&gt; (aimed at people who want to help develop Funktal or are just curious), both still very much in flux.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The banner picture shows a detail of the control panel of a Japanese train&lt;/em&gt;&lt;/p&gt;
+
+        </content>
+    </entry>
     
     <entry>
         <title>Funktal: a frugal functional programming language</title>
@@ -66,6 +550,8 @@
     &amp;quot;Hello&amp;quot; print -- prints Hello
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/01-print.ftal&quot;&gt;Example 1: printing&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;h3&gt;Lambdas and named functions&lt;/h3&gt;
 
 &lt;p&gt;Funktal is a functional language so the key building block is the lambda function (anonymous function). Each lambda is enclosed in parentheses and the arguments are listed between &lt;code&gt;\&lt;/code&gt; and &lt;code&gt;.&lt;/code&gt;.&lt;/p&gt;
@@ -77,6 +563,8 @@
     2 84 `( / ) (\ x y div . y x div apply ) print -- 0x002a
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/02-lambdas.ftal&quot;&gt;Example 2: lambdas&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;p&gt;The second example shows a nesting lambdas, with the &lt;code&gt;x&lt;/code&gt; argument of the outer lambda in scope in the body of the nested lambda.&lt;/p&gt;
 
 &lt;p&gt;The last line is an example of &lt;em&gt;quoting&lt;/em&gt; of functions: &lt;code&gt;( / )&lt;/code&gt; is anonymous function without arguments which only performs a division. More fully we could write it as &lt;code&gt;(\ x y . x y /)&lt;/code&gt;. Normally, this function would be called right away. By quoting it with a backtick, it is not called until we call it explicitly using &lt;code&gt;apply&lt;/code&gt;. The example also shows that functions can be passed as arguments to other functions.&lt;/p&gt;
@@ -90,6 +578,8 @@
     0x2a 0x2b (\ Byte &amp;lt;- b1: Byte &amp;lt;- b2 : Byte . b1 b2 &amp;amp; ) print
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/03-primitive-types.ftal&quot;&gt;Example 3: primitive types&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;p&gt;Without type information, Funktal defaults to 16-bit operations. If you want to use 8-bit operations, explicit typing is necessary, as in the examples above. As shown in the second example, a lambda without arguments can still have an explicit return type.&lt;/p&gt;
 
 &lt;h3&gt;Constants&lt;/h3&gt;
@@ -103,6 +593,8 @@ main {
     hello print
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/04-constants.ftal&quot;&gt;Example 4: constants&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;h3&gt;Sum types and conditionals&lt;/h3&gt;
 
 &lt;p&gt;As mentioned above, Funktal has algebraic data types. The Boolean type is an example of a sum type (similar to an enum): it has two alternatives, &lt;code&gt;True&lt;/code&gt; and &lt;code&gt;False&lt;/code&gt;. The example also shows the &lt;code&gt;if&lt;/code&gt; builtin, which takes two quoted lambdas and a condition, i.e. any expression which returns True or False.&lt;/p&gt;
@@ -114,12 +606,15 @@ main {
 
 main {
     True (\ Any &amp;lt;- cond : Bool .
+         cond
         `( &amp;quot;true&amp;quot; print )
         `( &amp;quot;false&amp;quot; print )
-        cond if
+         if
     )
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/05-if.ftal&quot;&gt;Example 5: &lt;code&gt;if&lt;/code&gt;&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;h3&gt;Product data type construction and pattern matching&lt;/h3&gt;
 
 &lt;p&gt;This is an example of a record or product type. The &lt;code&gt;RGB&lt;/code&gt; type is a triplet of 8-bit integers. The reason why the entire expression is wrapped in a typed lambda is that otherwise the integers would be treated as 16-bit. Funktal does not have proper type checking yet. The return type of a function determines the size of the operations and constants used in the function body.&lt;/p&gt;
@@ -131,6 +626,8 @@ main {
         (\ Int8 . 42 43 44 RGB (\ Int8 &amp;lt;- (r g b RGB) : RGB . r ) ) print
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/06-rgb.ftal&quot;&gt;Example 6: records&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;h3&gt;Recursion&lt;/h3&gt;
 
 &lt;p&gt;Funktal does not have mutable variables so it has no loops. Instead, it uses recursion.&lt;/p&gt;
@@ -140,13 +637,15 @@ main {
 &lt;p&gt;This is a straightforward recursion to calculate a factorial: if &lt;code&gt;b==e&lt;/code&gt; then return the result &lt;code&gt;r&lt;/code&gt; else recurse with the counter &lt;code&gt;b+1&lt;/code&gt; and the accumulator &lt;code&gt;r*b&lt;/code&gt;. This is a tail recursion. It also demonstrates the use if named functions, and Funktal&amp;#39;s natural ability to support point-free programming.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;function {
     fact = ( 1 1 fact_rec )
-    fact_rec =  (\ Int  &amp;lt;- e : Int &amp;lt;- b : Int &amp;lt;- r : Int . `( r e * )  `(  e b 1 + r b * fact_rec) b e == if )
+    fact_rec =  (\ Int  &amp;lt;- e : Int &amp;lt;- b : Int &amp;lt;- r : Int . b e == `( r e * )  `(  e b 1 + r b * fact_rec) if )
 }
 
 main {
     5 fact 1 * print
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/07-fact.ftal&quot;&gt;Example 7: factorial&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;p&gt;I use an actual recursive function &lt;code&gt;fact_rec&lt;/code&gt; and a wrapper to initialise the counter and the accumulator.&lt;/p&gt;
 
 &lt;h4&gt;Recursion without named functions&lt;/h4&gt;
@@ -154,10 +653,12 @@ main {
 &lt;p&gt;Recursion means a function calls itself. But what if the function doesn&amp;#39;t have a name? A &lt;em&gt;fixed-point combinator&lt;/em&gt; allows to do recursion on unnamed functions. The most common one is the Y-combinator. The way I&amp;#39;ve done this here is a bit different, but equivalent. The quoted function describes the recursion. But because that function has no name, it can&amp;#39;t call itself. The function &lt;code&gt;(\f. f f apply)&lt;/code&gt; takes it as its argument, so now it has a name and can be called recursively.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;main {
     5
-    `(\ n &amp;lt;- f . `(1) `( n 1 - f f apply n * ) n 1 == if)
+    `(\ n &amp;lt;- f . n 1 == `(1) `( n 1 - f f apply n * ) if)
     (\ Int &amp;lt;- f : Any . f f apply ) print
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/08-fact-fix.ftal&quot;&gt;Example 8: factorial with fixed-point&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;h4&gt;Lists and fold&lt;/h4&gt;
 
 &lt;p&gt;Algebraic data types can also be used to construct lists, like this:&lt;/p&gt;
@@ -176,15 +677,17 @@ main {
     tail = (\ List &amp;lt;- (xs x Cons) . xs )
     -- Creates a list with a range of integers
     range = ( Nil range_rec )
-    range_rec = (\List &amp;lt;- b: Int &amp;lt;- e: Int &amp;lt;- lst : List . `( lst e Cons ) `( b 1 + e lst b Cons range_rec ) b e == if )
+    range_rec = (\List &amp;lt;- b: Int &amp;lt;- e: Int &amp;lt;- lst : List . b e == `( lst e Cons ) `( b 1 + e lst b Cons range_rec ) if )
     -- A reduction: fold takes a list, an accumulator and a function and combines all elements of the list into the accumulator
-    fold = (\ Any &amp;lt;- lst : List &amp;lt;- acc : Any  &amp;lt;- f : Any . `( acc ) `( lst tail acc lst head f apply f fold ) lst `Nil is if )
+    fold = (\ Any &amp;lt;- lst : List &amp;lt;- acc : Any  &amp;lt;- f : Any . lst `Nil is `( acc ) `( lst tail acc lst head f apply f fold ) if )
 }
 
 main {
     (\Int . 1 5 range 1 `( * ) fold ) print
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/09-lists.ftal&quot;&gt;Example 9: lists&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
 &lt;h2&gt;Implementation&lt;/h2&gt;
 
 &lt;p&gt;The Funktal compiler should be implementable in Uxntal (or even Funktal) and run on Uxn. I did not feel I was sufficiently fluent in Uxntal to use it as the implementation language. Instead, I opted to write the compiler in &lt;code&gt;Fortran&lt;/code&gt;, but in such a way that porting to Uxntal should be straightforward.&lt;/p&gt;
@@ -233,15 +736,11 @@ Real Programmers do String Manipulation in FORTRAN.
 
 &lt;h2&gt;Status&lt;/h2&gt;
 
-&lt;p&gt;Funktal needs a lot more work. In terms of features, it needs at least:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;a proper type checker and probably a better type system;&lt;/li&gt;
-&lt;li&gt;support for devices and state for GUI programming;&lt;/li&gt;
-&lt;li&gt;a mechanism to include libraries, both funktal and uxntal.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Funktal needs a lot more work (compilers are never finished), but it is now in a state that most of &lt;a href=&quot;https://git.sr.ht/%7Erabbits/uxn/tree/main/item/projects/examples/demos&quot;&gt;the Uxn demo applications&lt;/a&gt; can be ported to it. It already supports devices and state, as explained in &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/funktal-state-devices&quot;&gt;the follow-on post&lt;/a&gt;. At the top of my long wish list is library support and memory management.&lt;/p&gt;
 
 &lt;p&gt;Apart from that, there are plenty of bugs and shortcomings that need fixing. But it is already good enough to have some fun with, which is of course the main purpose.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The banner picture shows a wooden telephone in a temple in Kyoto&lt;/em&gt;&lt;/p&gt;
 
         </content>
     </entry>
@@ -6347,388 +6846,6 @@ title=&quot;Reynolds stress of wind flow over Kyoto, at 4 different heights&quot
 &lt;/figure&gt;
 
 &lt;p&gt;[1] &lt;a href=&quot;https://doi.org/10.1007/s10546-018-0344-8&quot;&gt;Yoshida, T., Takemi, T. &amp;amp; Horiguchi, M. Large-Eddy-Simulation Study of the Effects of Building-Height Variability on Turbulent Flows over an Actual Urban Area. Boundary-Layer Meteorol 168, 127–153 (2018). &lt;/a&gt;&lt;/p&gt;
-
-        </content>
-    </entry>
-    
-    <entry>
-        <title>Writing faster Perl code</title>
-        <link href="https://wimvanderbauwhede.github.io/articles/writing-faster-perl/"/>
-        <updated>2019-04-27T00:00:00+01:00</updated>
-        <id>https://wimvanderbauwhede.github.io/articles/writing-faster-perl</id>
-        <author>
-					<name>Wim Vanderbauwhede</name>
-					<uri>https://wimvanderbauwhede.github.io/</uri>
-					
-				</author>
-        <content type="html">
-        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/writing-faster-perl_1600x600.jpg&quot;&gt;&lt;br/&gt;
-        	&lt;p&gt;As part of my research I have been developing a &lt;a href=&quot;https://github.com/wimvanderbauwhede/RefactorF4Acc&quot;&gt;Fortran source-to-source compiler&lt;/a&gt; &amp;mdash; in &lt;a href=&quot;https://www.perl.org/&quot;&gt;Perl&lt;/a&gt;. The compiler transforms legacy FORTRAN 77 scientific code into more modern Fortran 95. For the reasons to target FORTRAN 77, please read &lt;a href=&quot;https://www.sciencedirect.com/science/article/pii/S0045793018302950&quot;&gt;my paper&lt;/a&gt;. The compiler is written in Perl because it is available on any Linux-like system and can be executed without the need for a build toolchain. The compiler has no external dependencies at all, so that it is very simple to install and run. This is crucial because my target users are weather and climate scientists, not programmers or computer scientists. Python would have been a viable alternative but I personally prefer Perl.&lt;/p&gt;
-
-&lt;h2&gt;Perl performance as we know it&lt;/h2&gt;
-
-&lt;p&gt;An often-made argument is that if you want performance, you should not write your code in Perl. And it is of course true that compiled code will almost always be faster. However, often rewriting in a compiled language is not an option, so it is important to know how to get the best possible performance in pure Perl. The Perl documentation has &lt;a href=&quot;https://perldoc.perl.org/perlperf.html&quot;&gt;perlperf&lt;/a&gt; which offers good advice and &lt;a href=&quot;http://makepp.sourceforge.net/2.0/perl_performance.html&quot;&gt;these tips&lt;/a&gt; provide some more detail. But for my needs I did not find the answers there, nor anywhere else. So I created some simple test cases to find out. I used Perl version &lt;code&gt;5.28&lt;/code&gt;, the most recent one, but the results should be quite similar for earlier versions.&lt;/p&gt;
-
-&lt;h2&gt;Testing some hunches&lt;/h2&gt;
-
-&lt;p&gt;Before going into the details on the performance bottleneck in my compiler, here are some results of performance comparisons that influenced design decisions for the compiler. The compiler is written in a functional style &amp;mdash; I am after all a Haskell programmer &amp;mdash; but performance matters more than functional purity. &lt;/p&gt;
-
-&lt;h3&gt;Hash key testing is faster than regexp matching&lt;/h3&gt;
-
-&lt;p&gt;Fortran code essentially consists of a list of statements which can contain expressions, and the parser labels each of the statements once using a hashmap, ever the workhorse data structure in Perl. Every parsed line of code is stored as a pair with this hashmap (which I call &lt;code&gt;$info&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$parsed_line&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$src_line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$info&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This means than in principle I can choose to match a pattern in $line using a regex or use one of the lables in &lt;code&gt;$info&lt;/code&gt;. So I tested the performance of hash key testing versus regexp matching, using some genuine FORTRAN 77 code:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;lc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;READ( 1, 2, ERR=8, END=9, IOSTAT=N ) X&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/read/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;ReadCall&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/read/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exists&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;ReadCall&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Without the &lt;code&gt;if&lt;/code&gt;-condidion, the loop takes 3.1 s on my laptop. The loop with the regexp match condition takes 10.1 s; with the hash key existence test it takes 5.6 s. So the actual condition evaluation takes 7 s for regexp and 2.5 s for hash key existence check. So testing hash keys is alsmost three times faster than simple regexp matching. &lt;/p&gt;
-
-&lt;h3&gt;Custom tree traversals are faster&lt;/h3&gt;
-
-&lt;p&gt;I tested the cost of using higher-order functions for tree traversal. Basically, this is the choice between a generic traversal which takes an arbitrary function that operates on the tree nodes: &lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_traverse_ast_with_action&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;&amp;lt;cond&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-        &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-     &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;scalar&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
-            &lt;span class=&quot;n&quot;&gt;_traverse_ast_with_action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;or a custom traversal:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_traverse_ast_custom&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;&amp;lt;cond&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-        &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;custom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;acting&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-    &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;custom&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;acting&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;scalar&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
-            &lt;span class=&quot;n&quot;&gt;_traverse_ast_custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;For the case of the tree data structures in my compiler, the higher-order implementation takes twice as long as the custom traversal, so for performance this is not a good choice. Therefore I don&amp;#39;t use higher-order functions in the parser, but I do use them in the later refactoring passes.&lt;/p&gt;
-
-&lt;h3&gt;Maps are slower than for-loops, but not much&lt;/h3&gt;
-
-&lt;p&gt;Finally I tested the cost of using &lt;code&gt;map&lt;/code&gt; instead of a &lt;code&gt;foreach&lt;/code&gt;-loop:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# map, so much more concise!&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# declarations for all for-loops&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# foreach-loop&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;@src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# index-based for-loop&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10_000_000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10_000_000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# C-style for-loop&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$elt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The &lt;code&gt;foreach&lt;/code&gt;-loop version takes 2.6 s, the &lt;code&gt;map&lt;/code&gt; version 3.3 s, so the map is 25% slower. For reference, the index-based &lt;code&gt;for&lt;/code&gt;-loop version takes 3.8 s and the C-style &lt;code&gt;for&lt;/code&gt;-loop version 4.4 s &amp;mdash; don&amp;#39;t do that! &lt;/p&gt;
-
-&lt;p&gt;Because the map is slower, again I did not use it in the parser, and I implemented my own higher-order functions which use foreach-loops internally for the refactoring passes.&lt;/p&gt;
-
-&lt;h2&gt;Compiler bottleneck: expression parsing&lt;/h2&gt;
-
-&lt;p&gt;As the compiler grew in capabilities, it became noticeably slower. Perl has a great profiling tool, &lt;a href=&quot;https://metacpan.org/pod/Devel::NYTProf&quot;&gt;Devel::NYTProf&lt;/a&gt;, and I used it to identify the bottleneck. As you can see from the flame graph in the banner image, it turned out to be the expression parser. This part of the code was based on &lt;a href=&quot;https://metacpan.org/pod/Math::Expression::Evaluator&quot;&gt;Math::Expression::Evaluator&lt;/a&gt; because it was convenient to reuse. But it was not built for performance, and also not to parse Fortran. So I finally bit the bullet and wrote my own.&lt;/p&gt;
-
-&lt;p&gt;What I loosely call an expression parser is actually a combination of a lexer and a parser: it turns a string of source code into a tree-like datastructure which expresses the structure of the expression and the purpose of its constituents. For example if the expression is &lt;code&gt;2*v+1&lt;/code&gt;, the result of the expression parser will be a data structure which identifies the top-level expression as a sum of a multplication with  the integer constant &lt;code&gt;1&lt;/code&gt;, and the multiplication of an integer constant &lt;code&gt;2&lt;/code&gt; with a variable &lt;code&gt;v&lt;/code&gt;. So how do we build a fast expression parser? It is not my intention to go into the computing science details, but instead to discuss the choices to be considered.&lt;/p&gt;
-
-&lt;h2&gt;Testing some more hunches&lt;/h2&gt;
-
-&lt;p&gt;First, the choice of the data structure matters. As we need a tree-like ordered data structure, it would have to be either an object or a list. But objects in Perl are slow, so I use a nested list. As it happens, &lt;code&gt;Math::Expression&lt;/code&gt; already uses nested lists. Using the parser from &lt;code&gt;Math::Expression&lt;/code&gt;, the above expression would be turned into:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;+&amp;#39;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;$&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;v&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Integer comparison is faster than string comparison&lt;/h3&gt;
-
-&lt;p&gt;This data structure is fine if you don&amp;#39;t need to do a lot of work on it. However, because every node is labeled with a string, testing against the node type is a string comparison. I did a quick test:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;eq&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;On my laptop, the version with string comparison takes 5.3 s, the integer comparison 4.6 s. Without the &lt;code&gt;if&lt;/code&gt;-statement, the code takes 3.1 s. In other words, the actual &lt;code&gt;if&lt;/code&gt; with string comparison takes 2.2 s, with integer comparison 1.5 s. So doing string comparisons is 50% slower than doing integer comparisons. Therefore my data structure uses integer labels. Also, I label the constants so that I can have different labels for string, integer and real constants, and because in this way all nodes are arrays. This avoids having to test if a node is an array or a scalar, which is a slow operation.&lt;/p&gt;
-
-&lt;p&gt;So the example becomes :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;29&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;v&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;29&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Less readable, but faster and easier to extend.&lt;/p&gt;
-
-&lt;h3&gt;Regexes are faster than string comparisons&lt;/h3&gt;
-
-&lt;p&gt;Then we have to decide how to parse the expression string. The traditional way to build an expression parser is using a Finite State Machine, consuming one character at a time (if needed with one or more characters look-ahead) and keeping track of the identified portion of the string. This is very fast in a language such as C but in Perl I was not too sure, because in Perl a character is actually a string of length one, so every test against a character is a string comparison. On the other hand, Perl has a famously efficient regular expression engine. So I created a little testbench to see which approach was faster:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;This means we need a stack per type of operation and run until the end of the expression&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@chrs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$word&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;@chrs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$chr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;shift&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@chrs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$chr&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;ne&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nv&quot;&gt;$word&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$chr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;nv&quot;&gt;$word&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10_000_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-             &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;   &lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;s/^(\w+)//&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;s/^\s+//&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;On my laptop, the FSM version takes 3.25 s, the regex version 1.45 s (mean over 10 runs), so the regexp version is twice as fast &amp;mdash; the choice is clear.&lt;/p&gt;
-
-&lt;h2&gt;A faster expression parser&lt;/h2&gt;
-
-&lt;p&gt;With the choices of string parsing and data structure made, I focused on the structure of the overall algorithm. The basic approach is to loop through a number of states and in every state perform a specific action. This is very simple because we use regular expressions to identify tokens, so most of the state transitions are implicit:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$prev_lev&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$lev&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;@ast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;# Match unary prefix operations&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;# Match terms&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;# Add prefix operations if matched&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;# Match binary operators&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;# Append to the AST&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The matching rules and operations are very simple (I use &lt;code&gt;&amp;lt;pattern&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;integer&amp;gt;&lt;/code&gt; as placeholders for the actual values):&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;prefix operations:
-&lt;code&gt;perl
-if ( $str=~s/^&amp;lt;pattern&amp;gt;// ) { $state=&amp;lt;integer&amp;gt;; } 
-&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;terms:
-&lt;code&gt;perl
-if ( $str=~s/^(&amp;lt;pattern&amp;gt;)// ) { $expr_ast=[&amp;lt;integer&amp;gt;,$1]; }
-&lt;/code&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;operators:
-&lt;code&gt;perl
-$prev_lev=$lev;
-if ( $str=~s/^&amp;lt;pattern&amp;gt;// ) { $lev=&amp;lt;integer&amp;gt;; $op=&amp;lt;integer&amp;gt;; }
-&lt;/code&gt;&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Operators have precedence and associativity, and Fortran requires twelve precedence levels. In the &amp;quot;Append to AST&amp;quot; state, the parser uses &lt;code&gt;$lev&lt;/code&gt; and &lt;code&gt;$prev_lev&lt;/code&gt; to work out how the previously matched &lt;code&gt;$expr_ast&lt;/code&gt; and &lt;code&gt;$op&lt;/code&gt; should be appended to the &lt;code&gt;@ast&lt;/code&gt; array. The prefix operations are handled by setting a state which is checked after term matching. The actual code is a bit more complicated because we need to parse array index expressions and function calls as well. This is done recursively during term matching; if a function call has multiple arguments, the parser is put into a new &lt;code&gt;$state&lt;/code&gt;. &lt;/p&gt;
-
-&lt;p&gt;So the end result is a minimally recursive parser, i.e. it only uses recursion when it is really necessary. This is because Perl is not efficient in doing recursive function calls (nor in fact for non-recursive ones).&lt;/p&gt;
-
-&lt;p&gt;There is a lot of repetition of the patterns for matching terms and operators because if I would instead abstract the &lt;code&gt;&amp;lt;pattern&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;integer&amp;gt;&lt;/code&gt; values by e.g. storing them in an array, the array accesses would considerably reduce the performance. I do store the precedence levels in an array because there are so many of them that the logic for appending terms to the AST would otherwise become very hard to read and update.&lt;/p&gt;
-
-&lt;h2&gt;Expression parser performance&lt;/h2&gt;
-
-&lt;p&gt;I tested the new expression parser on a set of 50 different expressions taken from a weather simulation code. The old expression parser takes 45 s to run this test a thousand times; the new expression parser takes only 2 s. In other words, the new parser is &lt;em&gt;more than twenty times faster&lt;/em&gt; than the old one. &lt;/p&gt;
-
-&lt;p&gt;It is also quite easy to maintain and adapt despite its minimal use of abstractions, and because it is Fortran-specific, the rest of the code has become a lot cleaner too. You can find the code in &lt;a href=&quot;https://github.com/wimvanderbauwhede/RefactorF4Acc/blob/devel/RefactorF4Acc/Parser/Expressions.pm&quot;&gt;my GitHub repo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;Here is a summary of all optimisations I tested. The tests were run using Perl v5.28 on a MacBook Pro (late 2013), timings are averages over 5 runs and measured using &lt;code&gt;time&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;| --- | --- | 
-| Optimisation | Speed-up |
-| --- | --- | 
-| Hash key testing is faster than regexp matching | 3&amp;times; |
-| Custom tree traversals are faster than generic ones | 2&amp;times; |
-| &lt;code&gt;foreach&lt;/code&gt; is faster than &lt;code&gt;map&lt;/code&gt; | 1.3&amp;times; |
-| &lt;code&gt;foreach&lt;/code&gt; is faster than indexed &lt;code&gt;for&lt;/code&gt; | 1.4&amp;times; |
-| &lt;code&gt;foreach&lt;/code&gt; is faster than C-style &lt;code&gt;for&lt;/code&gt; | 1.7&amp;times; | 
-| Integer comparison is faster than string comparison | 1.5&amp;times; |
-| Regexp matching is faster than successive string comparisons | 2.2&amp;times; |&lt;/p&gt;
-
-        </content>
-    </entry>
-    
-    <entry>
-        <title>Why Europe needs hurricane contingency planning</title>
-        <link href="https://wimvanderbauwhede.github.io/articles/prepare-for-hurricanes/"/>
-        <updated>2018-10-21T00:00:00+01:00</updated>
-        <id>https://wimvanderbauwhede.github.io/articles/prepare-for-hurricanes</id>
-        <author>
-					<name>Wim Vanderbauwhede</name>
-					<uri>https://wimvanderbauwhede.github.io/</uri>
-					
-				</author>
-        <content type="html">
-        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/prepare-for-hurricanes_1600x600.jpg&quot;&gt;&lt;br/&gt;
-        	&lt;p&gt;As a result of global warming, hurricanes will become common in Europe in the next few decades. I discuss the evidence, the impact and the need for proper contingency planning.&lt;/p&gt;
-
-&lt;h2&gt;Some terminology&lt;/h2&gt;
-
-&lt;h3&gt;Tropical cyclones&lt;/h3&gt;
-
-&lt;p&gt;A tropical cyclone is a rapidly rotating storm system with a low-pressure centre, strong winds, and a spiral arrangement of thunderstorms that produce heavy rain. They are called &amp;quot;tropical&amp;quot; because they form almost exclusively over tropical or sub-tropical waters. &amp;quot;Cyclone&amp;quot; refers to their winds moving in a circle, rotating around a central clear eye. The winds blow counterclockwise in the Northern Hemisphere and clockwise in the Southern Hemisphere. &lt;/p&gt;
-
-&lt;p&gt;For completeness, an anticyclone is a large-scale circulation of winds around a central region of high atmospheric pressure, clockwise in the Northern Hemisphere, counterclockwise in the Southern Hemisphere&amp;quot;. Anticyclones are not storm systems, and in Belgium, where I used to live, the famous[^1] &lt;a href=&quot;https://en.wikipedia.org/wiki/Azores_High&quot;&gt;Azores Anticyclone&lt;/a&gt; usually lead to nice weather.&lt;/p&gt;
-
-&lt;h3&gt;Storms, hurricanes and typhoons&lt;/h3&gt;
-
-&lt;p&gt;The terms &amp;quot;hurricane&amp;quot; and &amp;quot;typhoon&amp;quot; refer both to powerful tropical cyclones. A hurricane[^2] occurs in the Atlantic Ocean and northeastern Pacific Ocean, and a typhoon[^3] occurs in the northwestern Pacific Ocean[^4].  The diameter of the hurricane is typically of the order of hundreds of kilometers. Last month&amp;#39;s hurricane Florence was over 600 km in diameter, and typhoon Trami about 500 km. A &amp;quot;tropical storm&amp;quot; is &amp;quot;tropical cyclone&amp;quot; that is less strong than a hurricane or typhoon. &lt;/p&gt;
-
-&lt;h2&gt;Strength and potential damage&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://www.nhc.noaa.gov/aboutsshws.php&quot;&gt;Saffir-Simpson Hurricane Wind Scale&lt;/a&gt; is a scale from 1 to 5 based on a hurricane&amp;#39;s sustained wind speed, used to estimate potential property damage. Hurricanes reaching Category 3 and higher are considered major hurricanes because of their potential for significant loss of life and damage. However, Category 1 and 2 hurricanes are still much more dangerous than ordinary tropical storms, and require preventive measures.&lt;/p&gt;
-
-&lt;p&gt;The amount of energy in a hurricane is very large. &lt;a href=&quot;http://www.aoml.noaa.gov/hrd/tcfaq/D7.html&quot;&gt;NOAA&lt;/a&gt; (US National Oceanic and Atmospheric Administration) notes that the energy released by an average hurricane &amp;quot;is equivalent to 200 times the world-wide electrical generating capacity&amp;quot;.&lt;/p&gt;
-
-&lt;p&gt;The table below is adapted from &lt;a href=&quot;https://www.nhc.noaa.gov/aboutsshws.php&quot;&gt;NOAA&lt;/a&gt; page linked above.&lt;/p&gt;
-
-&lt;table&gt;
- &lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;
-Category&lt;/th&gt;
-&lt;th&gt;Sustained wind&amp;nbsp;speed&lt;/th&gt;
-&lt;th&gt;Extent of damage&lt;/th&gt;
-&lt;/tr&gt;
-  &lt;/thead&gt;
-   &lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;
-1&lt;/td&gt;&lt;td&gt;119-153 km/h&lt;/td&gt;&lt;td&gt; &lt;em&gt;Very dangerous winds will produce some damage:&lt;/em&gt; &lt;br&gt;Houses could have damage to roof, shingles and gutters. Large branches of trees will snap and shallowly rooted trees may be toppled. Extensive damage to power lines and poles likely will result in power outages that could last a few to several days.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-2&lt;/td&gt;&lt;td&gt;154-177 km/h&lt;/td&gt;&lt;td&gt; &lt;em&gt;Extremely dangerous winds will cause extensive damage:&lt;/em&gt; &lt;br&gt;Houses could sustain major roof and siding damage. Many shallowly rooted trees will be snapped or uprooted and block numerous roads. Near-total power loss is expected with outages that could last from several days to weeks.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
-&lt;td&gt;
-3&lt;/td&gt;&lt;td&gt;178-208 km/h&lt;/td&gt;&lt;td&gt; &lt;em&gt;Devastating damage will occur:&lt;/em&gt; &lt;br&gt;Houses may incur major damage or removal of roof decking and gable ends. Many trees will be snapped or uprooted, blocking numerous roads. Electricity and water will be unavailable for several days to weeks after the storm passes.&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-4&lt;/td&gt;&lt;td&gt;209-251 km/h&lt;/td&gt;&lt;td&gt; &lt;em&gt;Catastrophic damage will occur:&lt;/em&gt;&lt;br&gt;Houses can sustain severe damage with loss of most of the roof structure and/or some exterior walls. Most trees will be snapped or uprooted and electricity poles downed. Fallen trees and electricity poles will isolate residential areas. Power outages will last weeks to possibly months. Most of the area will be uninhabitable for weeks or months.&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-5&lt;/td&gt;&lt;td&gt;252 km/h or higher&lt;/td&gt;&lt;td&gt;&lt;em&gt;Catastrophic damage will occur:&lt;/em&gt;&lt;br&gt;A high percentage of houses will be destroyed, with total roof failure and wall collapse. Fallen trees and electricity poles will isolate residential areas. Power outages will last for weeks to possibly months. Most of the area will be uninhabitable for weeks or months.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Note that this table uses &lt;a href=&quot;http://www.aoml.noaa.gov/hrd/tcfaq/D4.html&quot;&gt;sustained wind speeds&lt;/a&gt;. The &lt;em&gt;gusts&lt;/em&gt; occuring during a tropical cyclone can be a lot stronger than this (typically about 30% stronger), and are usually what is quoted in the media.&lt;/p&gt;
-
-&lt;h2&gt;Global warming causes hurricanes to get stronger&lt;/h2&gt;
-
-&lt;p&gt;Slightly simplifying, hurricanes get their energy from the heat in the surface sea water. As the planet gets warmer, the sea surface gets warmer, which leads to stronger tropical cyclones.&lt;/p&gt;
-
-&lt;p&gt;There is plenty evidence for this trend. For example, very recent work by my friend and colleague Prof. Takemi of the Disaster Prevention Research Institute (DPRI) of Kyoto University [1] used observation data of historical typhoons to reproduce them in simulation, and then simulated the effects of future warmer conditions. They conclude that both wind speed and precipitation would increase significantly. When I visited DPRI in September, a researcher explained me their latest simulations. With 2 degrees warming, wind speeds and rainfall during a typhoon could double.&lt;/p&gt;
-
-&lt;p&gt;The recent Guardian article &lt;a href=&quot;https://www.theguardian.com/weather/ng-interactive/2018/sep/11/atlantic-hurricanes-are-storms-getting-worse&quot;&gt;&amp;quot;Is climate change making hurricanes worse?&amp;quot;&lt;/a&gt; provides a good overview. Note that this trend refers to &lt;em&gt;all&lt;/em&gt; tropical cyclones, not just these that made landfall.&lt;/p&gt;
-
-&lt;h2&gt;Hurricanes are coming to Europe&lt;/h2&gt;
-
-&lt;p&gt;Historically, &lt;em&gt;none of the tropical storms&lt;/em&gt; in Europe in the last century except &lt;a href=&quot;https://en.wikipedia.org/wiki/Hurricane_Vince&quot;&gt;hurricane Vince in 2005&lt;/a&gt; have been hurricanes, no matter how severe they might have seemed. However, this is about to change.&lt;/p&gt;
-
-&lt;p&gt;As hurricanes get more powerful and last longer, the chance that they can reach Europe grows. Again, there is evidence for this. Already in 2013 Reindert Haarsma, Senior Scientist at the Royal Netherlands Meteorological Institute wrote the article &lt;a href=&quot;https://theconversation.com/the-future-will-bring-hurricanes-to-europe-16339&quot;&gt;&amp;quot;The future will bring hurricanes to Europe&amp;quot;&lt;/a&gt; which gives a good overview. The article is based on Haarsma&amp;#39;s scientific research [2]. Other researchers predict similar trends [3,4,5].&lt;/p&gt;
-
-&lt;h2&gt;Impact and contingency planning&lt;/h2&gt;
-
-&lt;p&gt;Hurricanes do not only cause damage because of the strong winds. They also lead to flash floods because of the very heavy rainfall that they cause (often 30-50 cm/h), and because of the &lt;a href=&quot;https://www.nhc.noaa.gov/surge/&quot;&gt;storm surges&lt;/a&gt; which are several meters in height (e.g. 5 m for hurricane Michael a few weeks ago). &lt;/p&gt;
-
-&lt;p&gt;To put this into perspective, in December 2015 &lt;a href=&quot;https://en.wikipedia.org/wiki/2015%E2%80%9316_Great_Britain_and_Ireland_floods&quot;&gt;storm Desmond&lt;/a&gt; broke the United Kingdom&amp;#39;s 24-hour rainfall record with 34 cm of rainfall in 24 hours, and led to widespread flooding in the UK and Ireland.  The only storm surge on record comparable to those caused by hurricanes was the notorious &lt;a href=&quot;https://en.wikipedia.org/wiki/North_Sea_flood_of_1953&quot;&gt;Great Storm of 1953&lt;/a&gt;. In Scotland, where storms are common, this was the worst storm[^5] in 500 years.&lt;/p&gt;
-
-&lt;p&gt;Better flood defenses are therefore absolutely crucial to deal with future hurricanes. As a result of the 1953 disaster, much was done in the UK, the Netherlands and Belgium to strenghten flood defenses, but these focus on the North Sea. Similar works on the coasts facing the Atlantic will be necessary. Furthermore because of the increased damage, power outages and disruption of supplies will last much longer than for the storms we have now and therefore contingency plans will have to be put in place. 
-A capability for accurate forecasting of hurricane trajectories is necessary for timely evacuation of people in the affected areas.  &lt;/p&gt;
-
-&lt;p&gt;The good news is that Europe can benefit from the extensive know-how developed for example in the US and Japan, both in predictions and in dealing with the effects of such severe weather events. &lt;/p&gt;
-
-&lt;h3&gt;References&lt;/h3&gt;
-
-&lt;p&gt;[1] Kanada S, Takemi T, Kato M, Yamasaki S, Fudeyasu H, Tsuboki K, Arakawa O, Takayabu I. A multimodel intercomparison of an intense typhoon in future, warmer climates by four 5-km-mesh models. &lt;em&gt;Journal of Climate.&lt;/em&gt; 2017 Aug;30(15):6017-36.&lt;/p&gt;
-
-&lt;p&gt;[2] Haarsma RJ, Hazeleger W, Severijns C, De Vries H, Sterl A, Bintanja R, Van Oldenborgh GJ, van den Brink HW. More hurricanes to hit western Europe due to global warming. &lt;em&gt;Geophysical Research Letters.&lt;/em&gt; 2013 May 16;40(9):1783-8.&lt;/p&gt;
-
-&lt;p&gt;[3] Baker A, Hodges K, Schiemann R, Vidale PL. North Atlantic post-tropical cyclones in reanalysis datasets. In &lt;em&gt;EGU General Assembly Conference Abstracts&lt;/em&gt;, 2018 Apr (Vol. 20, p. 14606).&lt;/p&gt;
-
-&lt;p&gt;[4] Dekker MM, Haarsma RJ, de Vries H, Baatsen M, van Delden AJ. Characteristics and development of European cyclones with tropical origin in reanalysis data. &lt;em&gt;Climate Dynamics.&lt;/em&gt; 2018 Jan 1;50(1-2):445-55.&lt;/p&gt;
-
-&lt;p&gt;[5] Mousavi ME, Irish JL, Frey AE, Olivera F, Edge BL. Global warming and hurricanes: the potential impact of hurricane intensification and sea level rise on coastal flooding. &lt;em&gt;Climatic Change.&lt;/em&gt; 2011 Feb 1;104(3-4):575-97.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;The banner image shows typhoon Halong approaching Japan in September 2014, &amp;copy; NASA Terra/MODIS 2014&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;[^1]: It is so famous that a travel book shop in Brussels took it as its name.&lt;br&gt;
-[^2]: The term &amp;quot;hurricane&amp;quot; derives from the Spanish word &lt;em&gt;huracán&lt;/em&gt;, which in turn probably derives from the Taino (an indigenous people of the Caribbean) word &lt;em&gt;hurakán&lt;/em&gt; &amp;quot;god of the storm&amp;quot;.&lt;br&gt;
-[^3]: In Japan they are called 台風 (&lt;em&gt;taifuu&lt;/em&gt;) and are given numbers rather than names.&lt;br&gt;
-[^4]: In the northwestern Pacific, the term &amp;quot;super typhoon&amp;quot; is used for tropical cyclones with sustained winds exceeding 240 km/h.&lt;br&gt;
-[^5]: This was a &lt;a href=&quot;https://en.wikipedia.org/wiki/European_windstorm&quot;&gt;European windstorm&lt;/a&gt;, a type of extratropical cyclone, caused by different weather phenomena than hurricanes. There is evidence that this type of storms is also getting stronger [5].&lt;/p&gt;
 
         </content>
     </entry>

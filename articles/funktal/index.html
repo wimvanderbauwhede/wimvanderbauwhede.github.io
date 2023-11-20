@@ -194,6 +194,8 @@
     &quot;Hello&quot; print -- prints Hello
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/01-print.ftal">Example 1: printing</a></small></p>
+
 <h3>Lambdas and named functions</h3>
 
 <p>Funktal is a functional language so the key building block is the lambda function (anonymous function). Each lambda is enclosed in parentheses and the arguments are listed between <code>\</code> and <code>.</code>.</p>
@@ -205,6 +207,8 @@
     2 84 `( / ) (\ x y div . y x div apply ) print -- 0x002a
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/02-lambdas.ftal">Example 2: lambdas</a></small></p>
+
 <p>The second example shows a nesting lambdas, with the <code>x</code> argument of the outer lambda in scope in the body of the nested lambda.</p>
 
 <p>The last line is an example of <em>quoting</em> of functions: <code>( / )</code> is anonymous function without arguments which only performs a division. More fully we could write it as <code>(\ x y . x y /)</code>. Normally, this function would be called right away. By quoting it with a backtick, it is not called until we call it explicitly using <code>apply</code>. The example also shows that functions can be passed as arguments to other functions.</p>
@@ -218,6 +222,8 @@
     0x2a 0x2b (\ Byte &lt;- b1: Byte &lt;- b2 : Byte . b1 b2 &amp; ) print
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/03-primitive-types.ftal">Example 3: primitive types</a></small></p>
+
 <p>Without type information, Funktal defaults to 16-bit operations. If you want to use 8-bit operations, explicit typing is necessary, as in the examples above. As shown in the second example, a lambda without arguments can still have an explicit return type.</p>
 
 <h3>Constants</h3>
@@ -231,6 +237,8 @@ main {
     hello print
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/04-constants.ftal">Example 4: constants</a></small></p>
+
 <h3>Sum types and conditionals</h3>
 
 <p>As mentioned above, Funktal has algebraic data types. The Boolean type is an example of a sum type (similar to an enum): it has two alternatives, <code>True</code> and <code>False</code>. The example also shows the <code>if</code> builtin, which takes two quoted lambdas and a condition, i.e. any expression which returns True or False.</p>
@@ -242,12 +250,15 @@ main {
 
 main {
     True (\ Any &lt;- cond : Bool .
+         cond
         `( &quot;true&quot; print )
         `( &quot;false&quot; print )
-        cond if
+         if
     )
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/05-if.ftal">Example 5: <code>if</code></a></small></p>
+
 <h3>Product data type construction and pattern matching</h3>
 
 <p>This is an example of a record or product type. The <code>RGB</code> type is a triplet of 8-bit integers. The reason why the entire expression is wrapped in a typed lambda is that otherwise the integers would be treated as 16-bit. Funktal does not have proper type checking yet. The return type of a function determines the size of the operations and constants used in the function body.</p>
@@ -259,6 +270,8 @@ main {
         (\ Int8 . 42 43 44 RGB (\ Int8 &lt;- (r g b RGB) : RGB . r ) ) print
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/06-rgb.ftal">Example 6: records</a></small></p>
+
 <h3>Recursion</h3>
 
 <p>Funktal does not have mutable variables so it has no loops. Instead, it uses recursion.</p>
@@ -268,13 +281,15 @@ main {
 <p>This is a straightforward recursion to calculate a factorial: if <code>b==e</code> then return the result <code>r</code> else recurse with the counter <code>b+1</code> and the accumulator <code>r*b</code>. This is a tail recursion. It also demonstrates the use if named functions, and Funktal&#39;s natural ability to support point-free programming.</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>function {
     fact = ( 1 1 fact_rec )
-    fact_rec =  (\ Int  &lt;- e : Int &lt;- b : Int &lt;- r : Int . `( r e * )  `(  e b 1 + r b * fact_rec) b e == if )
+    fact_rec =  (\ Int  &lt;- e : Int &lt;- b : Int &lt;- r : Int . b e == `( r e * )  `(  e b 1 + r b * fact_rec) if )
 }
 
 main {
     5 fact 1 * print
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/07-fact.ftal">Example 7: factorial</a></small></p>
+
 <p>I use an actual recursive function <code>fact_rec</code> and a wrapper to initialise the counter and the accumulator.</p>
 
 <h4>Recursion without named functions</h4>
@@ -282,10 +297,12 @@ main {
 <p>Recursion means a function calls itself. But what if the function doesn&#39;t have a name? A <em>fixed-point combinator</em> allows to do recursion on unnamed functions. The most common one is the Y-combinator. The way I&#39;ve done this here is a bit different, but equivalent. The quoted function describes the recursion. But because that function has no name, it can&#39;t call itself. The function <code>(\f. f f apply)</code> takes it as its argument, so now it has a name and can be called recursively.</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>main {
     5
-    `(\ n &lt;- f . `(1) `( n 1 - f f apply n * ) n 1 == if)
+    `(\ n &lt;- f . n 1 == `(1) `( n 1 - f f apply n * ) if)
     (\ Int &lt;- f : Any . f f apply ) print
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/08-fact-fix.ftal">Example 8: factorial with fixed-point</a></small></p>
+
 <h4>Lists and fold</h4>
 
 <p>Algebraic data types can also be used to construct lists, like this:</p>
@@ -304,15 +321,17 @@ main {
     tail = (\ List &lt;- (xs x Cons) . xs )
     -- Creates a list with a range of integers
     range = ( Nil range_rec )
-    range_rec = (\List &lt;- b: Int &lt;- e: Int &lt;- lst : List . `( lst e Cons ) `( b 1 + e lst b Cons range_rec ) b e == if )
+    range_rec = (\List &lt;- b: Int &lt;- e: Int &lt;- lst : List . b e == `( lst e Cons ) `( b 1 + e lst b Cons range_rec ) if )
     -- A reduction: fold takes a list, an accumulator and a function and combines all elements of the list into the accumulator
-    fold = (\ Any &lt;- lst : List &lt;- acc : Any  &lt;- f : Any . `( acc ) `( lst tail acc lst head f apply f fold ) lst `Nil is if )
+    fold = (\ Any &lt;- lst : List &lt;- acc : Any  &lt;- f : Any . lst `Nil is `( acc ) `( lst tail acc lst head f apply f fold ) if )
 }
 
 main {
     (\Int . 1 5 range 1 `( * ) fold ) print
 }
 </code></pre></div>
+<p><small><a href="https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/examples/09-lists.ftal">Example 9: lists</a></small></p>
+
 <h2>Implementation</h2>
 
 <p>The Funktal compiler should be implementable in Uxntal (or even Funktal) and run on Uxn. I did not feel I was sufficiently fluent in Uxntal to use it as the implementation language. Instead, I opted to write the compiler in <code>Fortran</code>, but in such a way that porting to Uxntal should be straightforward.</p>
@@ -361,15 +380,11 @@ Real Programmers do String Manipulation in FORTRAN.
 
 <h2>Status</h2>
 
-<p>Funktal needs a lot more work. In terms of features, it needs at least:</p>
-
-<ul>
-<li>a proper type checker and probably a better type system;</li>
-<li>support for devices and state for GUI programming;</li>
-<li>a mechanism to include libraries, both funktal and uxntal.</li>
-</ul>
+<p>Funktal needs a lot more work (compilers are never finished), but it is now in a state that most of <a href="https://git.sr.ht/%7Erabbits/uxn/tree/main/item/projects/examples/demos">the Uxn demo applications</a> can be ported to it. It already supports devices and state, as explained in <a href="https://wimvanderbauwhede.github.io/articles/funktal-state-devices">the follow-on post</a>. At the top of my long wish list is library support and memory management.</p>
 
 <p>Apart from that, there are plenty of bugs and shortcomings that need fixing. But it is already good enough to have some fun with, which is of course the main purpose.</p>
+
+<p><em>The banner picture shows a wooden telephone in a temple in Kyoto</em></p>
 
 				<hr />
 				<footer class="page-footer">
