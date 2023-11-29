@@ -1,9 +1,6 @@
 perl set_mod_date.pl
-#perl create_index.pl
 perl generate_sitemap.pl > sitemap.xml
 cp _config.yml.publish.codeberg _config.yml
-#bundle exec jekyll build -d ~/Git/wimvanderbauwhede.github.io/
-#cd  ~/Git/wimvanderbauwhede.github.io/
 bundle exec jekyll build -d ~/Git/wimvanderbauwhede.codeberg.page/
 cd  ~/Git/wimvanderbauwhede.codeberg.page/
 git add articles/${1}/index.html

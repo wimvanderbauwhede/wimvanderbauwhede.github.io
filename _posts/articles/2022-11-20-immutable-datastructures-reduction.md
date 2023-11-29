@@ -15,8 +15,6 @@ image:
   thumb: immutable-datastructures-reduction_400x150.jpg
 ---
 
-# Immutable data structures and reduction in Raku
-
 For [a little compiler](https://wimvanderbauwhede.github.io/articles/uxntal-to-C/) I've been writing, I felt increasingly the need for immutable data structures to ensure that nothing was passed by references between passes. I love Perl and Raku but I am a functional programmer at heart, so I prefer map and reduce over loops. It bothered me to run reductions on a mutable data structure. So I made [a small library](https://codeberg.org/wimvanderbauwhede/nito/src/branch/main/lib/ImmutableDatastructureHelpers.rakumod) to make it easier to work with immutable maps and lists.
 
 A reduction combines all elements of a list into a result. A typical example is the sum of all elements in a list. According to the Raku docs, `reduce()` has the following signature

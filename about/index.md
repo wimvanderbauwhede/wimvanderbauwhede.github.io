@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "About"
-date: 2023-08-03
+date: 2023-11-27
 tags: []
 excerpt: ""
 comments: false

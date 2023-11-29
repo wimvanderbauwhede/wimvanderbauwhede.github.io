@@ -16,18 +16,18 @@ image:
   thumb: funktal-devices-state_400x150.jpg
 ---
 
-In [a previous post]({{site.url}}/articles/funktal/), I introduced [`Funktal`](https://codeberg.org/wimvanderbauwhede/funktal), a frugal functional programming language created for the [Uxn](https://wiki.xxiivv.com/site/uxn.html) VM. The Uxn VM is the heart of a clean-slate computing platform called [Varvara](https://wiki.xxiivv.com/site/varvara.html). This post explains how you can access Varvara's I/O devices from Funktal, and the closely related support for mutable state.
+In [a previous post]({{site.url}}/articles/funktal/), I introduced [`Funktal`](https://codeberg.org/wimvanderbauwhede/funktal), a frugal functional programming language created for the [Uxn](https://wiki.xxiivv.com/site/uxn.html) VM. The Uxn VM is the heart of a clean-slate computing platform called [Varvara](https://wiki.xxiivv.com/site/varvara.html). This post explains how you can access Varvara's I/O devices from Funktal, and the closely related support for mutable state. I illustrate these features using three small GUI-based programs.
 
-The main purpose of Uxn and Varvara is as a portable platform for GUI-based applications, such as the [`left`](https://wiki.xxiivv.com/site/noodle.html) editor, the [`noodle`](https://wiki.xxiivv.com/site/noodle.html) drawing program and many others, in particular games. To make Funktal a practical language for this platform, support for devices is essential.
+The main purpose of Uxn and Varvara is as a portable platform for GUI-based applications, such as the [`left`](https://wiki.xxiivv.com/site/noodle.html) editor, the [`noodle`](https://wiki.xxiivv.com/site/noodle.html) drawing program and many others, in particular games. To make Funktal a practical language for this platform, support for I/O devices (keyboard, mouse, screen, audio) is essential.
 
 ## Mutable state: why and how
 
-Uxn I/O is event based, for example a button press or mouse click results in an event handler (aka vector or callback) being called. These handlers can access the Uxn VM's  working and return stack as well as its memory.
+Uxn I/O is event based, for example a button press or mouse click results in an event handler (aka vector or callback) being called. These handlers can access the Uxn VM's  working and return stack as well as its memory. Most programs are stateful, so a efficient mechanism for handling state is important.
 
 
 ### Keeping state on the stack
 
-We could keep the state on the stack. However, this is a bit cumbersome. Suppose we have three items of state then our function needs to look like this:
+We could keep the state on the stack. This is OK for simple cases but quickly gets cumbersome. Suppose we have three items of state then our function needs to look like this:
 
     (\s1_in s2_in s3_in.
         <all computations>
@@ -40,16 +40,12 @@ But we don't know the type of items on the stack, so we need explicit typing, e.
         RGB = Int Int Int MkRGB
     }
 
-    (\Any <- s1_in:Bool<- s2_in: Int<- s3_in:RGB.
+    (\(RGB,Int,Bool) <- s1_in:Bool<- s2_in: Int<- s3_in:RGB.
         <all computations>
         s3_out s2_out s1_out
     )
 
-Note in particular that from a typing perspective, this function is really of type
-
-    Bool <- Bool <- Int <- RGB
-
-because Funktal does not support multiple return values. This is not so nice.
+The tuple syntax only indicates that the function pushes multiple values on the stack, it is not an algebraic data type and so we can't construct it or pattern match on it.
 
 ### Putting the state in a record type
 
@@ -64,11 +60,11 @@ An improvement would be if the stack held an instance of a record type, because 
 
 It still means that this state should remain on the stack, and if there are several event handlers each with their own state, either that means juggling those states or creating an overall state for all event handlers in the program and passing that around. Either way that would mean additional code for accessing the state.
 
-Because each instance of a type is immutable, this approach also means that every update of the state requires to construct a new type. (And in practice we'll have to delete the old one, otherwise we'd run out of memory very quickly. But Funktal does not have managed memory yet.) Constructing types is expensive (and deletion even more so).
+Because each instance of a type is immutable, this approach also means that every update of the state requires to construct a new type. (And in practice we'll have to delete the old one, otherwise we'd run out of memory very quickly. But Funktal does not have managed memory yet. Yet another story.) Constructing types is expensive (and deletion even more so).
 
 ### Making state mutable
 
-For all these reasons, I decided to add mutable state to Funktal. It is very simple: in using a special block called `state` we define a singleton instance of the type used for the state:
+For all these reasons, I decided to add mutable state to Funktal. It is very simple: in a special block called `state` we define a singleton instance of the type used for the state:
 
     types {
         RGB = Int Int Int MkRGB
@@ -79,16 +75,19 @@ For all these reasons, I decided to add mutable state to Funktal. It is very sim
         s : State
     }
 
-    (\None. <all computations on s> )
-
 So this defines `s` as a mutable instance of `State`. There can only be one such instance per type.
+And now the function simple becomes
+
+    ( <all computations on s> )
 
 To access the information in a stateful record, there are two built-in functions, `get` and `put`, which access a field in the record using its (base-0) index:
 
     0_1 s get -- gets the Bool from the record
     42 1_1 s put -- puts 42 in the Int slot
 
-To make this more readable, I define some constants to identify the fields. Suppose the purpose of the fields in the State type are greyscale, transparency and colour, we can define
+These are polymorphic functions that work for any record type registered as a `state`.
+
+To make this more readable, I define some constants to identify the fields. Suppose the purpose of the fields in the State type are `greyscale`, `transparency` and `colour`, we can define
 
     constants {
         greyscale#State = 0_1
@@ -101,9 +100,9 @@ and write
     greyscale#State s get -- gets the greyscale from the record
     42 transparency#State s put -- puts 42 in the transparency field
 
-(The '#' has no special meaning, I use it as a separator so that I can use same field names in different types. Maybe later I might define a more )
+(The '#' has no special meaning, I use it as a separator so that I can use the same field names in different types.)
 
-Because State is a proper Funktal type, you can also use pattern matching to bind the field values to names:
+Because `State` is a proper Funktal type, you can also use pattern matching to bind the field values to names:
 
     s (\None <- (greyscale transparency colour MkState) : State . <all computations on s> )
 
@@ -113,7 +112,7 @@ But as bound variables are immutable, you can't update the state this way.
 
 Funktal has a built-in `Array` type for immutable array constants, with built-in functions `size` and `at`.
 Within the context of a mutable state type, such arrays can be updated using a built-in `update` function. 
-For example, assuming a state `AState` has a field labeled `array` which is of type `Array`, we can write
+For example, assuming a state `s : AState` has a field labelled `array` which is of type `Array`, we can write
 
     val idx array#AState s get update
 
@@ -121,7 +120,10 @@ For example, assuming a state `AState` has a field labeled `array` which is of t
 
 I/O devices in Uxn are typically defined in this way:
 
-    |20 @Screen vector $2 &width $2 &height $2 &pad $2 &x $2 &y $2 &addr $2 &pixel $1 &sprite $1
+    |20 @Screen &vector $2 
+        &width $2 &height $2 &pad $2 
+        &x $2 &y $2 &addr $2 
+        &pixel $1 &sprite $1
 
 In Funktal we simply define a corresponding record type:
 
@@ -160,7 +162,7 @@ A very common action in Uxn programs is to read constant data for sprites. For e
 
     ;font-hex ADD2 .Screen/addr DEO2
 
-This can't be implemented with the exising Arrays API in Funktal, because the `addr` field of the screen device expect the actual address in Uxn memory. Therefore I added a `Block` datatype, which is simply a contiguous sequence of bytes:
+This can't be implemented with the existing Arrays API in Funktal, because the `addr` field of the screen device expect the actual address in Uxn memory. Therefore I added a `Block` datatype, which is simply a contiguous sequence of bytes:
 
     font_hex : Byte 128 Block = [
          0x00,0x7c ,0x82,0x82 ,0x82,0x82 
@@ -201,7 +203,7 @@ This example loops over indices 0 to len-1, and gets the element from an array. 
 
 ### The `done` built-in
 
-Funktal normally expects a called function to return. Event handlers have nowhere to return to. A simple way to handle this is the `done` built-in, which will tell the compiler to emit a `BRK` rather than a `JMP2r` at the end of a function. If it is used elsewhere, it simply emits a `BRK` which is useful for debugging.
+Funktal normally expects a called function to return. Event handlers have nowhere to return to. As a simple way to handle this is I added the `done` built-in, which will tell the compiler to emit a `BRK` rather than a `JMP2r` at the end of a function. If it is used elsewhere, it simply emits a `BRK` which is useful for debugging.
 
 ## Examples
 
@@ -209,7 +211,14 @@ I have implemented a few examples of GUI-based programs. Two are ports of Uxn de
 
 ### Example 1: DVD
 
-This is a simple program that bounces the DVD icon around the screen. It has no controls. It is a straight port of the `dvd.tal` program. We define types for the system and screen devices and the dvd state:
+[This example](https://codeberg.org/wimvanderbauwhede/funktal/src/branch/devel/examples/dvd.ftal) is a simple program that bounces the DVD icon around the screen. 
+
+<figure>
+<img src="{{ site.url }}/images/dvd.png" alt="A white DVD logo on a blue background" title="A white DVD logo on a blue background" />
+<figcaption>DVD icon bouncing</figcaption>
+</figure>
+
+It is a straight port of the `dvd.tal` program. We define types for the system and screen devices and the dvd state:
 
     types {
         System = Word Int8 Int8 Int Int8 Int8 Word Word Word Int8 Int8 MkSystem
@@ -229,7 +238,7 @@ Then we create the instance:
     }
 
 
-There are no loops in this program, it simply calculates the new position of the icon on every clock tick. The only event handler is `onFrame`. Because this is a straight port, it does use the stack for some values. The main program registers that event handler, does some setup and puts the borders on the stack:
+There are no loops in this program, and no controls. It simply calculates the new position of the icon on every clock tick. The only event handler is `onFrame`. Because this is a straight port, it does use the stack for some values. The main program registers that event handler, does some setup and puts the borders on the stack:
 
     main {
         ...
@@ -267,7 +276,14 @@ Note the use of `done` at the end of the `onFrame` function, because it is an ev
 
 ## Example 2: Snake
 
-This is a straight port of the `snake.tal` program, a game where you control a snake to eat apples, and the snake grows longer and longer. The main differences with the DVD code is that there are buttons to control the direction of the snake, so we need a controller device, and that the tail of the snake is an array, so we use loops to update it.
+[This example](https://codeberg.org/wimvanderbauwhede/funktal/src/branch/devel/examples/snake.ftal) is a straight port of the `snake.tal` program, a game where you control a snake to eat apples, and the snake grows longer and longer. 
+
+<figure>
+<img src="{{ site.url }}/images/snake.png" alt="A green snake with a tail of 5 segments, about to eat a red apple, on a black background " title="A green snake with a tail of 5 segments, about to eat a red apple, on a black background" />
+<figcaption>Snake in action</figcaption>
+</figure>
+
+The main differences with the DVD code is that there are buttons to control the direction of the snake, so we need a controller device, and that the tail of the snake is an array, so we use loops to update it.
 
 The controller device:
 
@@ -343,7 +359,14 @@ The tail is an array of 16-bit integers which are actually pairs of 8-bit intege
 
 ## Example 3: Funktal logo rendering
 
-I implemented various ways of rendering the Funktal logo, [this one]() is rendering it one pixel at a time for every frame event (clock tick). So it has no internal loops. It is a bit complicated because the Funktal logo can be decomposed into isosceles right triangles (so the base and height are the same) and symmetry operations. 
+I implemented various ways of rendering the Funktal logo.
+
+<figure>
+<img src="{{ site.url }}/images/funktal-logo.png" alt="The Funktal logo, triangles and rectangles rendered as a grid of black dots" title="The Funktal logo, triangles and rectangles rendered as a grid of black dots" />
+<figcaption>Funktal logo rendered using the example code</figcaption>
+</figure>
+
+[This example](https://codeberg.org/wimvanderbauwhede/funktal/src/branch/devel/examples/render-logo-gui-state-onFrame.ftal) is rendering it one pixel at a time for every frame event (clock tick). So it has no internal loops. It is a bit complicated because the Funktal logo can be decomposed into isosceles right triangles (the base and height are the same) and symmetry operations.
 The array `triangleEncodings` contains a list of (triangle orientation, triangle position) pairs. There is a state `counters` with a counter for the triangle and the row and column position of the current pixel to be drawn. 
 
 
@@ -371,4 +394,10 @@ The array `triangleEncodings` contains a list of (triangle orientation, triangle
         done
     )
 
-There is a single control, pressing any key toggles pausing/continuing the rendering, that is the `run` condition, which is a separate state.
+There is a single control, pressing any key toggles pausing/continuing the rendering. That is the purpose of the first condition in the above code, `run` is a separate state.
+
+## Conclusion
+
+I hope this post and the previous one have provided some idea of what Funktal is like and what you can do with it. I plan to write another, longer article on how the compiler is made. For more information, see the a [specification](https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/SPEC.md) (aimed at people who want to program in Funktal) and the [design document](https://codeberg.org/wimvanderbauwhede/funktal/src/branch/main/DESIGN.md) (aimed at people who want to help develop Funktal or are just curious), both still very much in flux.
+
+_The banner picture shows a detail of the control panel of a Japanese train_
