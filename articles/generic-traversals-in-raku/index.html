@@ -6,25 +6,6 @@
     <meta name="description" content="Scrap your boilerplate with generic traversals in Raku.">
     <meta name="keywords" content="computing, raku, programming">
     
-    	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="Generic datastructure traversals with roles and introspection">
-	<meta name="twitter:description" content="Scrap your boilerplate with generic traversals in Raku.">
-	<meta name="twitter:site" content="@wim_v12e">
-	<meta name="twitter:creator" content="@wim_v12e">
-	
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/generic-traversals-in-raku_1600x600.jpg">
-	
-	<!-- Open Graph -->
-	<meta property="og:locale" content="en_GB">
-	<meta property="og:type" content="article">
-	<meta property="og:site_name" content="Wim Vanderbauwhede">
-	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/generic-traversals-in-raku/#">
-	<meta property="og:title" content="Generic datastructure traversals with roles and introspection">
-	<meta property="og:description" content="Scrap your boilerplate with generic traversals in Raku.">
-	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/generic-traversals-in-raku_1600x600.jpg" />
-
-    
 
     <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/generic-traversals-in-raku/">
 
@@ -37,7 +18,7 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
     <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
-    <style>
+    <!-- <style>
     .sliding-menu-content {
       top: 0;
       right: 0;
@@ -51,63 +32,25 @@
       -o-transform: translateX(100%);
       transform: translateX(100%);
     }
-    </style>
+    </style> -->
 
     <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
     <![endif]-->
-<!-- Google Analytics -->
-<!-- WV: NO!
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-73376688-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
--->
-<!--
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19948710-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
--->
     <!-- Include the jQuery library (local or CDN) -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
-	  <!-- WV: NO!
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    -->
     <header id="masthead">
   <div class="inner-wrap">
 <a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
@@ -119,11 +62,11 @@
 </ul>
 
     </nav>
-<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
-    <nav role="navigation" class="js-menu sliding-menu-content">
+    <!-- <nav role="navigation" class="js-menu sliding-menu-content">
 	<ul class="menu-item">
 		
 	</ul>
@@ -133,7 +76,7 @@
 </button>
 
 <div class="js-menu-screen menu-screen"></div>
-
+ -->
 
     <div id="page-wrapper">
 
@@ -142,7 +85,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/generic-traversals-in-raku_1600x600.jpg" class="page-feature-image" alt="Generic datastructure traversals with roles and introspection" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/generic-traversals-in-raku_1600x600.avif" class="page-feature-image" alt="Generic datastructure traversals with roles and introspection" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -156,323 +99,356 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>I am a <a href="https://andrewshitov.com/2015/05/05/interview-with-audrey-tang/">lambdacamel</a> and therefore I like to adapt concepts and techniques from functional programming, and in particular from the <a href="https://www.haskell.org/">Haskell</a> language, to Raku. One of the techniques that I use a lot is <em>generic traversals</em>, also known as &quot;Scrap Your Boilerplate&quot; after the title of <a href="https://archive.alvb.in/msc/02_infogp/papers/SYB1.pdf">the paper by Simon Peyton Jones and Ralf Lämmel</a> that introduced this approach. In their words: </p>
+				<p>I am a <a href="https://andrewshitov.com/2015/05/05/interview-with-audrey-tang/">lambdacamel</a> and therefore I like to adapt concepts and techniques from functional programming, and in particular from the <a href="https://www.haskell.org/">Haskell</a> language, to Raku. One of the techniques that I use a lot is <em>generic traversals</em>, also known as “Scrap Your Boilerplate” after the title of <a href="https://archive.alvb.in/msc/02_infogp/papers/SYB1.pdf">the paper by Simon Peyton Jones and Ralf Lämmel</a> that introduced this approach. In their words:</p>
 
 <blockquote>
-<p>Many programs traverse data structures built from rich mutually-recursive data types. Such programs often have a great deal of “boilerplate” code that simply walks the structure, hiding a small amount of “real” code that constitutes the reason for the traversal. ”Generic programming” is the umbrella term to describe a wide variety of programming technology directed at this problem. </p>
+  <p>Many programs traverse data structures built from rich mutually-recursive data types. Such programs often have a great deal of “boilerplate” code that simply walks the structure, hiding a small amount of “real” code that constitutes the reason for the traversal. ”Generic programming” is the umbrella term to describe a wide variety of programming technology directed at this problem.</p>
 </blockquote>
 
 <p>So to save you having to write your own custom traversal, this approach gives you generic functions that do traversals on arbitrary data strucures. In this article, I will explain how you can easily implement such generics in Raku for arbitrary role-based datastructures. There is no Haskell in this article.</p>
 
-<h2>Roles as datatypes by example</h2>
+<h2 id="roles-as-datatypes-by-example">Roles as datatypes by example</h2>
 
-<p>I implemented of these generics for use with role-based datatypes. Raku&#39;s <a href="https://docs.raku.org/language/objects#index-entry-Parameterized_Roles">parameterised roles</a> make creating complex datastructures very easy. I use the roles purely as datatypes, so they have no associated methods. </p>
+<p>I implemented of these generics for use with role-based datatypes. Raku’s <a href="https://docs.raku.org/language/objects#index-entry-Parameterized_Roles">parameterised roles</a> make creating complex datastructures very easy. I use the roles purely as datatypes, so they have no associated methods.</p>
 
-<p>For example, here is an example code snippet in a little language that I use in my research. </p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>map (f1 . f2) (map g (zipt (v1,map h v2)))
-</code></pre></div>
-<p>The primitives are <code>map</code>, <code>.</code> (function composition), <code>zipt</code> and the tuple <code>(...)</code>, and the names of functions and vectord. The datatype for the abstract syntax of this little language is called <code>Expr</code> and looks as follows:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Any expression in the language</span>
-<span class="k">role</span> <span class="n">Expr</span> {}
-<span class="c1"># map f v</span>
-<span class="k">role</span> <span class="n">MapV</span>[<span class="n">Expr</span> \<span class="n">f_</span>,<span class="n">Expr</span> \<span class="n">v_</span>] <span class="nb">does</span> <span class="n">Expr</span> {
-    <span class="k">has</span> <span class="n">Expr</span> <span class="nv">$.f</span> = <span class="n">f_</span>;
-    <span class="k">has</span> <span class="n">Expr</span> <span class="nv">$.v</span> = <span class="n">v_</span>;
-}
-<span class="c1"># function composition f . g</span>
-<span class="k">role</span> <span class="n">Comp</span>[<span class="n">Expr</span> \<span class="n">f_</span>, <span class="n">Expr</span> \<span class="n">g_</span>] <span class="nb">does</span> <span class="n">Expr</span> {
-    <span class="k">has</span> <span class="n">Expr</span> <span class="nv">$.f</span> = <span class="n">f_</span>;
-    <span class="k">has</span> <span class="n">Expr</span> <span class="nv">$.g</span> = <span class="n">g_</span>;
-}
-<span class="c1"># zipt t turns a tuple of vectors into a vector of tuples</span>
-<span class="k">role</span> <span class="n">ZipT</span>[<span class="n">Expr</span> \<span class="n">t_</span>] <span class="nb">does</span> <span class="n">Expr</span> {
-    <span class="k">has</span> <span class="n">Expr</span> <span class="nv">$.t</span> = <span class="n">t_</span>
-}
-<span class="c1"># tuples are just arrays of Expr</span>
-<span class="k">role</span> <span class="n">Tuple</span>[<span class="nb">Array</span>[<span class="n">Expr</span>] \<span class="n">e_</span>] <span class="nb">does</span> <span class="n">Expr</span> {
-    <span class="k">has</span> <span class="nb">Array</span>[<span class="n">Expr</span>] <span class="nv">$.e</span> = <span class="n">e_</span>
-}
-<span class="c1"># names of functions and vectors are just string constants</span>
-<span class="k">role</span> <span class="n">Name</span>[<span class="nb">Str</span> \<span class="n">n_</span>] <span class="nb">does</span> <span class="n">Expr</span> {
-    <span class="k">has</span> <span class="nb">Str</span> <span class="nv">$.n</span> = <span class="n">n_</span>
-}
-</code></pre></div>
-<p>The <code>Expr</code> role is the toplevel datatype. It is empty because it is implemented entirely in terms of the other roles, which thanks to the <code>does</code> are all of type <code>Expr</code>. And most of the roles have attributes that are also of type <code>Expr</code>. So we have a recursive datatype, a tree with the <code>Name</code> node as leaves. </p>
+<p>For example, here is an example code snippet in a little language that I use in my research.</p>
 
-<p>We can now write the abstract syntax tree (AST) of the example code using this <code>Expr</code> datatype:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">ast</span> = <span class="n">MapV</span>[ 
-    <span class="n">Comp</span>[
-        <span class="n">Name</span>[<span class="s">&#39;f1&#39;</span>].<span class="nb">new</span>,
-        <span class="n">Name</span>[<span class="s">&#39;f2&#39;</span>].<span class="nb">new</span>
-    ].<span class="nb">new</span>,
-    <span class="n">MapV</span>[
-        <span class="n">Name</span>[<span class="s">&#39;g&#39;</span>].<span class="nb">new</span>,
-        <span class="n">ZipT</span>[
-            <span class="n">Tuple</span>[
-                <span class="nb">Array</span>[<span class="n">Expr</span>].<span class="nb">new</span>(
-                    <span class="n">Name</span>[<span class="s">&#39;v1&#39;</span>].<span class="nb">new</span>,
-                    <span class="n">MapV</span>[
-                        <span class="n">Name</span>[<span class="s">&#39;h&#39;</span>].<span class="nb">new</span>,
-                        <span class="n">Name</span>[<span class="s">&#39;v2&#39;</span>].<span class="nb">new</span>
-                    ].<span class="nb">new</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>map (f1 . f2) (map g (zipt (v1,map h v2)))
+</code></pre></div></div>
+
+<p>The primitives are <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">.</code> (function composition), <code class="language-plaintext highlighter-rouge">zipt</code> and the tuple <code class="language-plaintext highlighter-rouge">(...)</code>, and the names of functions and vectord. The datatype for the abstract syntax of this little language is called <code class="language-plaintext highlighter-rouge">Expr</code> and looks as follows:</p>
+
+<pre><code class="language-perl6"># Any expression in the language
+role Expr {}
+# map f v
+role MapV[Expr \f_,Expr \v_] does Expr {
+    has Expr $.f = f_;
+    has Expr $.v = v_;
+}
+# function composition f . g
+role Comp[Expr \f_, Expr \g_] does Expr {
+    has Expr $.f = f_;
+    has Expr $.g = g_;
+}
+# zipt t turns a tuple of vectors into a vector of tuples
+role ZipT[Expr \t_] does Expr {
+    has Expr $.t = t_
+}
+# tuples are just arrays of Expr
+role Tuple[Array[Expr] \e_] does Expr {
+    has Array[Expr] $.e = e_
+}
+# names of functions and vectors are just string constants
+role Name[Str \n_] does Expr {
+    has Str $.n = n_
+}
+</code></pre>
+
+<p>The <code class="language-plaintext highlighter-rouge">Expr</code> role is the toplevel datatype. It is empty because it is implemented entirely in terms of the other roles, which thanks to the <code class="language-plaintext highlighter-rouge">does</code> are all of type <code class="language-plaintext highlighter-rouge">Expr</code>. And most of the roles have attributes that are also of type <code class="language-plaintext highlighter-rouge">Expr</code>. So we have a recursive datatype, a tree with the <code class="language-plaintext highlighter-rouge">Name</code> node as leaves.</p>
+
+<p>We can now write the abstract syntax tree (AST) of the example code using this <code class="language-plaintext highlighter-rouge">Expr</code> datatype:</p>
+
+<pre><code class="language-perl6">my \ast = MapV[ 
+    Comp[
+        Name['f1'].new,
+        Name['f2'].new
+    ].new,
+    MapV[
+        Name['g'].new,
+        ZipT[
+            Tuple[
+                Array[Expr].new(
+                    Name['v1'].new,
+                    MapV[
+                        Name['h'].new,
+                        Name['v2'].new
+                    ].new
                 )
-            ].<span class="nb">new</span>
-        ].<span class="nb">new</span>
-    ].<span class="nb">new</span>
-].<span class="nb">new</span>;
-</code></pre></div>
-<p>The typical way to work with such a datastructure is using a <code>given/when</code>:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">worker</span>(<span class="n">Expr</span> \<span class="n">expr</span>) {
-    <span class="k">given</span> <span class="n">expr</span> {
-        <span class="k">when</span> <span class="n">MapV</span> {...}
-        <span class="k">when</span> <span class="n">Comp</span> {...}
-        <span class="k">when</span> <span class="n">ZipT</span> {...}
+            ].new
+        ].new
+    ].new
+].new;
+</code></pre>
+
+<p>The typical way to work with such a datastructure is using a <code class="language-plaintext highlighter-rouge">given/when</code>:</p>
+
+<pre><code class="language-perl6">sub worker(Expr \expr) {
+    given expr {
+        when MapV {...}
+        when Comp {...}
+        when ZipT {...}
         ...        
     }
 }
-</code></pre></div>
+</code></pre>
 <p>Alternatively, you can use a multi sub:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">multi</span> <span class="k">sub</span> <span class="n">worker</span>(<span class="n">Mapv</span> \<span class="n">expr</span>) {...}
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">worker</span>(<span class="n">Comp</span> \<span class="n">expr</span>) {...}
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">worker</span>(<span class="n">ZipT</span> \<span class="n">expr</span>) {...}
+
+<pre><code class="language-perl6">multi sub worker(Mapv \expr) {...}
+multi sub worker(Comp \expr) {...}
+multi sub worker(ZipT \expr) {...}
 ...        
-</code></pre></div>
+</code></pre>
+
 <p>In both cases, we use the roles as the types to match against for the actions we want to take.</p>
 
 <p>(For more details about algebraic datatypes see my earlier article <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">Roles as Algebraic Data Types in Raku</a>.)</p>
 
-<h2>Generics</h2>
+<h2 id="generics">Generics</h2>
 
 <p>If I want to traverse the AST above, what I would normally do is write a worker as above, where for every node except the leaf nodes, I would call the worker recursively, for example:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">worker</span>(<span class="n">Expr</span> \<span class="n">expr</span>) {
-    <span class="k">given</span> <span class="n">expr</span> {
-        <span class="k">when</span> <span class="n">MapV</span> {
-            <span class="k">my</span> \<span class="n">f_</span> = <span class="n">worker</span>(<span class="n">expr</span>.<span class="n">f</span>);
-            <span class="k">my</span> \<span class="n">v_</span> = <span class="n">worker</span>(<span class="n">expr</span>.<span class="n">v</span>);
+
+<pre><code class="language-perl6">sub worker(Expr \expr) {
+    given expr {
+        when MapV {
+            my \f_ = worker(expr.f);
+            my \v_ = worker(expr.v);
             ...
         }
         ...        
     }
 }
-</code></pre></div>
-<p>But wouldn&#39;t it be nice if I did not have to write that code at all? Enter generics.</p>
+</code></pre>
 
-<p>I base my naming and function arguments on that of the <a href="https://hackage.haskell.org/package/syb-0.7.2.1/docs/Data-Generics.html">Haskell library <code>Data.Generics</code></a>. It provides many schemes for traversals, but the most important ones are <code>everything</code> and <code>everywhere</code>. </p>
+<p>But wouldn’t it be nice if I did not have to write that code at all? Enter generics.</p>
+
+<p>I base my naming and function arguments on that of the <a href="https://hackage.haskell.org/package/syb-0.7.2.1/docs/Data-Generics.html">Haskell library <code class="language-plaintext highlighter-rouge">Data.Generics</code></a>. It provides many schemes for traversals, but the most important ones are <code class="language-plaintext highlighter-rouge">everything</code> and <code class="language-plaintext highlighter-rouge">everywhere</code>.</p>
 
 <ul>
-<li><p><code>everything</code> is a function which takes a datastructure, a matching function, an accumulator and an update function for the accumulator. The matching function defines what you are looking for in the datastructure. The result is put into the accumulator using the update function.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">everything</span>(
-    <span class="nb">Any</span> \<span class="n">datastructure</span>, 
-    <span class="nb">Any</span> \<span class="n">accumulator</span>, 
-    <span class="nv">&amp;joiner</span>, 
-    <span class="nv">&amp;matcher</span> 
-    --&gt; <span class="nb">Any</span>){...}
-</code></pre></div></li>
-<li><p><code>everywhere</code> is a function which takes a datastructure and a modifier function. The modifier function defines which parts of the datastructure you want to modify. The result of the traversal is a modified version of the datastructure.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">everywhere</span>(
-    <span class="nb">Any</span> \<span class="n">datastructure</span>, 
-    <span class="nv">&amp;modifier</span> 
-    --&gt; <span class="nb">Any</span>){...}
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">everything</code> is a function which takes a datastructure, a matching function, an accumulator and an update function for the accumulator. The matching function defines what you are looking for in the datastructure. The result is put into the accumulator using the update function.</p>
+
+    <pre><code class="language-perl6">  sub everything(
+      Any \datastructure, 
+      Any \accumulator, 
+      &amp;joiner, 
+      &amp;matcher 
+      --&gt; Any){...}
+</code></pre>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">everywhere</code> is a function which takes a datastructure and a modifier function. The modifier function defines which parts of the datastructure you want to modify. The result of the traversal is a modified version of the datastructure.</p>
+
+    <pre><code class="language-perl6">  sub everywhere(
+      Any \datastructure, 
+      &amp;modifier 
+      --&gt; Any){...}
+</code></pre>
+  </li>
 </ul>
 
 <p>The most common case for the accumulator is to use a list, so the updated function appends lists to the accumulator:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">append</span>(\<span class="n">acc</span>, \<span class="n">res</span>) {
-    <span class="k">return</span> (|<span class="n">acc</span>, |<span class="n">res</span>);
+
+<pre><code class="language-perl6">sub append(\acc, \res) {
+    return (|acc, |res);
 }
-</code></pre></div>
-<p>As an example of a matching function, let&#39;s for example find all the function and vector names in our AST above:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">matcher</span>(\<span class="n">expr</span>) {
-    <span class="k">given</span> <span class="n">expr</span> {
-        <span class="k">when</span> <span class="n">Name</span> {
-            <span class="k">return</span> [<span class="n">expr</span>.<span class="n">n</span>]
+</code></pre>
+
+<p>As an example of a matching function, let’s for example find all the function and vector names in our AST above:</p>
+
+<pre><code class="language-perl6">sub matcher(\expr) {
+    given expr {
+        when Name {
+            return [expr.n]
         } 
     }
-    <span class="k">return</span> []
+    return []
 }
-</code></pre></div>
-<p>So if we find a <code>Name</code> node, we return its <code>n</code> attribute as a single-element list; otherwise we return an empty list.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">names</span> = <span class="n">everything</span>(<span class="n">ast</span>,[],<span class="nv">&amp;append</span>,<span class="nv">&amp;matcher</span>); 
-<span class="c1"># =&gt; returns (f1 f2 g h v1 v2)</span>
-</code></pre></div>
-<p>Or let&#39;s say we want to change the names in this AST:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">modifier</span>(\<span class="n">t</span>) {
-    <span class="k">given</span> <span class="n">t</span> {
-        <span class="k">when</span> <span class="n">Name</span> {
-            <span class="n">Name</span>[<span class="n">t</span>.<span class="n">n</span>~<span class="s">&#39;_updated&#39;</span>].<span class="nb">new</span> 
+</code></pre>
+
+<p>So if we find a <code class="language-plaintext highlighter-rouge">Name</code> node, we return its <code class="language-plaintext highlighter-rouge">n</code> attribute as a single-element list; otherwise we return an empty list.</p>
+
+<pre><code class="language-perl6">my \names = everything(ast,[],&amp;append,&amp;matcher); 
+# =&gt; returns (f1 f2 g h v1 v2)
+</code></pre>
+
+<p>Or let’s say we want to change the names in this AST:</p>
+
+<pre><code class="language-perl6">sub modifier(\t) {
+    given t {
+        when Name {
+            Name[t.n~'_updated'].new 
         }
-        <span class="k">default</span> {<span class="n">t</span>}
+        default {t}
     }
 }
 
-<span class="k">my</span> \<span class="n">ast_</span> = <span class="n">everywhere</span>(<span class="n">ast</span>,<span class="nv">&amp;modifier</span>); 
-<span class="c1"># =&gt; returns the AST with all names appended with &quot;_updated&quot;</span>
-</code></pre></div>
-<h2>Implementing Generics</h2>
+my \ast_ = everywhere(ast,&amp;modifier); 
+# =&gt; returns the AST with all names appended with "_updated"
+</code></pre>
 
-<p>So how do we implement these magic <code>everything</code> and <code>everywhere</code> functions? The problem to solve is that we want to iterate through the attributes of every role without having to name it. The solution for this is to use Raku&#39;s <a href="https://docs.raku.org/language/mop">Metaobject protocol (MOP)</a> for introspection. In practice, we use the Rakudo-specific <a href="https://docs.raku.org/type/Metamodel::ClassHOW"><code>Metamodel</code></a>. We need only three methods: <code>attribute</code>, <code>get_value</code> and <code>set_value</code>. With these, we can iterate through the attributes and visit them recursively.</p>
+<h2 id="implementing-generics">Implementing Generics</h2>
 
-<p>Attributes can be <code>$</code>, <code>@</code> or <code>%</code> (and even <code>&amp;</code> but I will skip this). What this means in terms of Raku&#39;s type system is that they can be scalar, Iterable or Associative, and we need to distinguish these cases. With that, we can write <code>everything</code> as follows:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">everything</span> (\<span class="n">t</span>, \<span class="n">acc</span>,<span class="nv">&amp;update</span>,<span class="nv">&amp;match</span>) {
-    <span class="c1"># Arguments a immutable, so copy to $acc_</span>
-    <span class="k">my</span> <span class="nv">$acc_</span> = <span class="n">acc</span>;
-    <span class="c1"># Match and update $acc_</span>
-    <span class="nv">$acc_</span> =<span class="n">update</span>(<span class="nv">$acc_</span>,<span class="n">match</span>(<span class="n">t</span>));
-    <span class="c1"># Test the attribute type</span>
-    <span class="k">if</span> <span class="n">t</span> ~~ <span class="nb">Associative</span> {
-        <span class="c1"># Iterate over the values</span>
-        <span class="k">for</span> <span class="n">t</span>.<span class="nb">values</span> -&gt; \<span class="n">t_elt</span>  {
-            <span class="nv">$acc_</span> = <span class="n">everything</span>(<span class="n">t_elt</span>,<span class="nv">$acc_</span>,<span class="nv">&amp;update</span>,<span class="nv">&amp;match</span>)
+<p>So how do we implement these magic <code class="language-plaintext highlighter-rouge">everything</code> and <code class="language-plaintext highlighter-rouge">everywhere</code> functions? The problem to solve is that we want to iterate through the attributes of every role without having to name it. The solution for this is to use Raku’s <a href="https://docs.raku.org/language/mop">Metaobject protocol (MOP)</a> for introspection. In practice, we use the Rakudo-specific <a href="https://docs.raku.org/type/Metamodel::ClassHOW"><code class="language-plaintext highlighter-rouge">Metamodel</code></a>. We need only three methods: <code class="language-plaintext highlighter-rouge">attribute</code>, <code class="language-plaintext highlighter-rouge">get_value</code> and <code class="language-plaintext highlighter-rouge">set_value</code>. With these, we can iterate through the attributes and visit them recursively.</p>
+
+<p>Attributes can be <code class="language-plaintext highlighter-rouge">$</code>, <code class="language-plaintext highlighter-rouge">@</code> or <code class="language-plaintext highlighter-rouge">%</code> (and even <code class="language-plaintext highlighter-rouge">&amp;</code> but I will skip this). What this means in terms of Raku’s type system is that they can be scalar, Iterable or Associative, and we need to distinguish these cases. With that, we can write <code class="language-plaintext highlighter-rouge">everything</code> as follows:</p>
+
+<pre><code class="language-perl6">sub everything (\t, \acc,&amp;update,&amp;match) {
+    # Arguments a immutable, so copy to $acc_
+    my $acc_ = acc;
+    # Match and update $acc_
+    $acc_ =update($acc_,match(t));
+    # Test the attribute type
+    if t ~~ Associative {
+        # Iterate over the values
+        for t.values -&gt; \t_elt  {
+            $acc_ = everything(t_elt,$acc_,&amp;update,&amp;match)
         }
-        <span class="k">return</span> <span class="nv">$acc_</span>; 
+        return $acc_; 
     }     
-    <span class="k">elsif</span> <span class="n">t</span> ~~ <span class="n">Iterable</span> {
-        <span class="c1"># Iterate</span>
-        <span class="k">for</span> |<span class="n">t</span> -&gt; \<span class="n">t_elt</span>  {
-            <span class="nv">$acc_</span> = <span class="n">everything</span>(<span class="n">t_elt</span>,<span class="nv">$acc_</span>,<span class="nv">&amp;update</span>,<span class="nv">&amp;match</span>)
+    elsif t ~~ Iterable {
+        # Iterate
+        for |t -&gt; \t_elt  {
+            $acc_ = everything(t_elt,$acc_,&amp;update,&amp;match)
         }
-        <span class="k">return</span> <span class="nv">$acc_</span>; 
+        return $acc_; 
     }
 
-    <span class="k">else</span> { 
-        <span class="c1"># Go through all attributes</span>
-        <span class="k">for</span> <span class="n">t</span>.^<span class="n">attributes</span> -&gt; \<span class="nb">attr</span> {
-            <span class="c1"># Not everyting return by ^attributes </span>
-            <span class="c1"># is of type Attribute</span>
-            <span class="k">if</span> <span class="nb">attr</span> ~~ <span class="n">Attribute</span> {
-                <span class="c1"># Get the attribute value</span>
-                <span class="k">my</span> \<span class="n">expr</span> = <span class="nb">attr</span>.<span class="n">get_value</span>(<span class="n">t</span>);
-                <span class="k">if</span> <span class="nb">not</span> <span class="n">expr</span> ~~ <span class="nb">Any</span>  { <span class="c1"># for ContainerDescriptor::Untyped</span>
-                    <span class="k">return</span> <span class="nv">$acc_</span>;
+    else { 
+        # Go through all attributes
+        for t.^attributes -&gt; \attr {
+            # Not everyting return by ^attributes 
+            # is of type Attribute
+            if attr ~~ Attribute {
+                # Get the attribute value
+                my \expr = attr.get_value(t);
+                if not expr ~~ Any  { # for ContainerDescriptor::Untyped
+                    return $acc_;
                 }
-                <span class="c1"># Descend into this expression</span>
-                <span class="nv">$acc_</span> = <span class="n">everything</span>(<span class="n">expr</span>,<span class="nv">$acc_</span>,<span class="nv">&amp;update</span>, <span class="nv">&amp;match</span>);
+                # Descend into this expression
+                $acc_ = everything(expr,$acc_,&amp;update, &amp;match);
             }
         }
     }
-    <span class="k">return</span> <span class="nv">$acc_</span>
+    return $acc_
 }
-</code></pre></div>
+</code></pre>
+
 <p>So what we do here essentially is:</p>
 
 <ul>
-<li>for <code>@</code> and <code>%</code> we iterate through the values </li>
-<li>iterate through the attributes using <code>^attributes</code></li>
-<li>for each attribute, get the expression using <code>get_value</code></li>
-<li>call <code>everything</code> on that expression</li>
-<li>the first thing <code>everything</code> does is update the accumulator</li>
+  <li>for <code class="language-plaintext highlighter-rouge">@</code> and <code class="language-plaintext highlighter-rouge">%</code> we iterate through the values</li>
+  <li>iterate through the attributes using <code class="language-plaintext highlighter-rouge">^attributes</code></li>
+  <li>for each attribute, get the expression using <code class="language-plaintext highlighter-rouge">get_value</code></li>
+  <li>call <code class="language-plaintext highlighter-rouge">everything</code> on that expression</li>
+  <li>the first thing <code class="language-plaintext highlighter-rouge">everything</code> does is update the accumulator</li>
 </ul>
 
-<p><code>everywhere</code> is similar:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">everywhere</span> (\<span class="n">t_</span>,<span class="nv">&amp;modifier</span>) {
-    <span class="c1"># Modify the node</span>
-    <span class="k">my</span> \<span class="n">t</span> = <span class="n">modifier</span>(<span class="n">t_</span>);
-    <span class="c1"># Test the type for Iterable or Associative</span>
-    <span class="k">if</span> <span class="n">t</span> ~~ <span class="nb">Associative</span> {
-        <span class="c1"># Build the updated map</span>
-        <span class="k">my</span> <span class="nv">%t_</span>;
-        <span class="k">for</span> <span class="n">t</span>.<span class="nb">keys</span> -&gt; \<span class="n">t_k</span>  {
-            <span class="k">my</span> \<span class="n">t_v</span> = <span class="n">t</span>{<span class="n">t_k</span>};
-            <span class="nv">%t_</span>{<span class="n">t_k</span>} = <span class="n">everywhere</span> (<span class="n">t_v</span>,<span class="nv">&amp;modifier</span>);
+<p><code class="language-plaintext highlighter-rouge">everywhere</code> is similar:</p>
+
+<pre><code class="language-perl6">sub everywhere (\t_,&amp;modifier) {
+    # Modify the node
+    my \t = modifier(t_);
+    # Test the type for Iterable or Associative
+    if t ~~ Associative {
+        # Build the updated map
+        my %t_;
+        for t.keys -&gt; \t_k  {
+            my \t_v = t{t_k};
+            %t_{t_k} = everywhere (t_v,&amp;modifier);
         }
-        <span class="k">return</span> <span class="nv">%t_</span>; 
+        return %t_; 
     }     
-    <span class="k">elsif</span> <span class="n">t</span> ~~ <span class="n">Iterable</span> {
-        <span class="c1"># Build the updated list</span>
-        <span class="k">my</span> <span class="nv">@t_</span>=[];
-        <span class="k">for</span> |<span class="n">t</span> -&gt; \<span class="n">t_elt</span>  {
-            <span class="nv">@t_</span>.<span class="nb">push</span>( <span class="n">everywhere</span>(<span class="n">t_elt</span>,<span class="nv">&amp;modifier</span>) );
+    elsif t ~~ Iterable {
+        # Build the updated list
+        my @t_=[];
+        for |t -&gt; \t_elt  {
+            @t_.push( everywhere(t_elt,&amp;modifier) );
         }
-        <span class="k">return</span> <span class="nv">@t_</span>; 
+        return @t_; 
     }
 
-    <span class="k">else</span> {
-        <span class="c1"># t is immutable so copyto $t_</span>
-        <span class="k">my</span> <span class="nv">$t_</span> = <span class="n">t</span>;
-        <span class="k">for</span> <span class="n">t</span>.^<span class="n">attributes</span> -&gt; \<span class="nb">attr</span> {            
-            <span class="k">if</span> <span class="nb">attr</span> ~~ <span class="n">Attribute</span> {
-                <span class="k">my</span> \<span class="n">expr</span> = <span class="nb">attr</span>.<span class="n">get_value</span>(<span class="n">t</span>);
-                <span class="k">if</span> <span class="nb">not</span> <span class="n">expr</span> ~~ <span class="nb">Any</span>  { <span class="c1"># for ContainerDescriptor::Untyped</span>
-                    <span class="k">return</span> <span class="nv">$t_</span>;
+    else {
+        # t is immutable so copyto $t_
+        my $t_ = t;
+        for t.^attributes -&gt; \attr {            
+            if attr ~~ Attribute {
+                my \expr = attr.get_value(t);
+                if not expr ~~ Any  { # for ContainerDescriptor::Untyped
+                    return $t_;
                 }
-                <span class="k">my</span> \<span class="n">expr_</span> = <span class="n">everywhere</span>(<span class="n">expr</span>,<span class="nv">&amp;modifier</span>);                
-                <span class="nb">attr</span>.<span class="n">set_value</span>(<span class="nv">$t_</span>,<span class="n">expr_</span>);
+                my \expr_ = everywhere(expr,&amp;modifier);                
+                attr.set_value($t_,expr_);
             }
         }
-        <span class="k">return</span> <span class="nv">$t_</span>;
+        return $t_;
     }
-    <span class="k">return</span> <span class="n">t</span>;
+    return t;
 }
-</code></pre></div>
+</code></pre>
+
 <p>So what we do here essentially is:</p>
 
 <ul>
-<li>for <code>@</code> and <code>%</code> we iterate through the values</li>
-<li>iterate through the attributes using <code>^attributes</code></li>
-<li>for each attribute, get the expression using <code>get_value</code></li>
-<li>call <code>everywhere</code> on that expression</li>
-<li>update the attribute using <code>set_value</code> </li>
+  <li>for <code class="language-plaintext highlighter-rouge">@</code> and <code class="language-plaintext highlighter-rouge">%</code> we iterate through the values</li>
+  <li>iterate through the attributes using <code class="language-plaintext highlighter-rouge">^attributes</code></li>
+  <li>for each attribute, get the expression using <code class="language-plaintext highlighter-rouge">get_value</code></li>
+  <li>call <code class="language-plaintext highlighter-rouge">everywhere</code> on that expression</li>
+  <li>update the attribute using <code class="language-plaintext highlighter-rouge">set_value</code></li>
 </ul>
 
-<h2>This works without roles too</h2>
+<h2 id="this-works-without-roles-too">This works without roles too</h2>
 
-<p>First of all, the above works for classes too, because the Metamodel methods are not specific to roles. Furthermore, because we test for <code>@</code> and <code>%</code>, the generics above work just fine for data structures without roles, built from hashes and arrays:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">lst</span> = [<span class="mi">1</span>,[<span class="mi">2</span>,<span class="mi">3</span>,<span class="mi">4</span>,[<span class="mi">5</span>,<span class="mi">6</span>,<span class="mi">7</span>]],[<span class="mi">8</span>,<span class="mi">9</span>,[<span class="mi">10</span>,<span class="mi">11</span>,[<span class="mi">12</span>]]]];
+<p>First of all, the above works for classes too, because the Metamodel methods are not specific to roles. Furthermore, because we test for <code class="language-plaintext highlighter-rouge">@</code> and <code class="language-plaintext highlighter-rouge">%</code>, the generics above work just fine for data structures without roles, built from hashes and arrays:</p>
 
-<span class="k">sub</span> <span class="n">matcher</span> (\<span class="n">expr</span>) {
-    <span class="k">given</span> <span class="n">expr</span> {
-        <span class="k">when</span> <span class="nb">List</span> {
-            <span class="k">if</span> <span class="n">expr</span>[<span class="mi">0</span>] % <span class="mi">2</span> == <span class="mi">0</span> {                
-                    <span class="k">return</span> [<span class="n">expr</span>]                
+<pre><code class="language-perl6">my \lst = [1,[2,3,4,[5,6,7]],[8,9,[10,11,[12]]]];
+
+sub matcher (\expr) {
+    given expr {
+        when List {
+            if expr[0] % 2 == 0 {                
+                    return [expr]                
             }            
         }
     }
-    <span class="k">return</span> []
+    return []
 }
 
-<span class="k">my</span> \<span class="n">res</span> = <span class="n">everything</span>(<span class="n">lst</span>,[],<span class="nv">&amp;append</span>,<span class="n">matcher</span>);
-<span class="nb">say</span> <span class="n">res</span>;
-<span class="c1"># ([2 3 4 [5 6 7]] [8 9 [10 11 [12]]] [10 11 [12]] [12])</span>
-</code></pre></div>
+my \res = everything(lst,[],&amp;append,matcher);
+say res;
+# ([2 3 4 [5 6 7]] [8 9 [10 11 [12]]] [10 11 [12]] [12])
+</code></pre>
+
 <p>Or for hashes:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">%hsh</span> = 
-    <span class="n">a</span> =&gt; {
-        <span class="n">b</span> =&gt; {
-            <span class="n">c</span> =&gt; <span class="mi">1</span>,
-            <span class="n">a</span> =&gt; {
-                <span class="n">b</span> =&gt;<span class="mi">1</span>,<span class="n">c</span>=&gt;<span class="mi">2</span>
+
+<pre><code class="language-perl6">my %hsh = 
+    a =&gt; {
+        b =&gt; {
+            c =&gt; 1,
+            a =&gt; {
+                b =&gt;1,c=&gt;2
             } 
         },
-        <span class="n">c</span> =&gt; {
-            <span class="n">a</span> =&gt;<span class="mi">3</span>
+        c =&gt; {
+            a =&gt;3
         }
     },
-    <span class="n">b</span> =&gt; <span class="mi">4</span>,
-    <span class="n">c</span> =&gt; {<span class="n">d</span>=&gt;<span class="mi">5</span>,<span class="nb">e</span>=&gt;<span class="mi">6</span>}
+    b =&gt; 4,
+    c =&gt; {d=&gt;5,e=&gt;6}
 ;
 
-<span class="k">sub</span> <span class="n">hmatcher</span> (\<span class="n">expr</span>) {
-    <span class="k">given</span> (<span class="n">expr</span>) {
-        <span class="k">when</span> <span class="n">Map</span> {
-            <span class="k">my</span> <span class="nv">$acc</span>=[];
-            <span class="k">for</span> <span class="n">expr</span>.<span class="nb">keys</span> -&gt; \<span class="n">k</span> {                
-                <span class="k">if</span> <span class="n">k</span> <span class="o">eq</span> <span class="s">&#39;a&#39;</span> {
-                    <span class="nv">$acc</span>.<span class="nb">push</span>(<span class="n">expr</span>{<span class="n">k</span>})
+sub hmatcher (\expr) {
+    given (expr) {
+        when Map {
+            my $acc=[];
+            for expr.keys -&gt; \k {                
+                if k eq 'a' {
+                    $acc.push(expr{k})
                 }
             }
-            <span class="k">return</span> <span class="nv">$acc</span>;
+            return $acc;
         }
     }
-    <span class="k">return</span> []
+    return []
 }
 
-<span class="k">my</span> \<span class="n">hres</span> = <span class="n">everything</span>(<span class="nv">%hsh</span>,[],<span class="nv">&amp;append</span>,<span class="nv">&amp;hmatcher</span>);
-<span class="nb">say</span> <span class="n">hres</span>;
-<span class="c1"># ({b =&gt; {a =&gt; {b =&gt; 1, c =&gt; 2}, c =&gt; 1}, c =&gt; {a =&gt; 3}} {b =&gt; 1, c =&gt; 2} 3)</span>
-</code></pre></div>
-<h2>Conclusion</h2>
+my \hres = everything(%hsh,[],&amp;append,&amp;hmatcher);
+say hres;
+# ({b =&gt; {a =&gt; {b =&gt; 1, c =&gt; 2}, c =&gt; 1}, c =&gt; {a =&gt; 3}} {b =&gt; 1, c =&gt; 2} 3)
+</code></pre>
 
-<p>Generic datastructure traversals are a great way to reduce boilerplate code and focus on the actual purpose of the traversals. And now you can have them in Raku too. I have shown the implementation for the two main schemes <code>everything</code> and <code>everywhere</code> and shown that they work for role based datastructures as well as traditional hash- or array-based datastructures.</p>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Generic datastructure traversals are a great way to reduce boilerplate code and focus on the actual purpose of the traversals. And now you can have them in Raku too. I have shown the implementation for the two main schemes <code class="language-plaintext highlighter-rouge">everything</code> and <code class="language-plaintext highlighter-rouge">everywhere</code> and shown that they work for role based datastructures as well as traditional hash- or array-based datastructures.</p>
 
 				<hr />
 				<footer class="page-footer">
@@ -491,13 +467,6 @@
 
                     <div class="inline-btn">
     <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
-    <!--
-	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
-	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
-	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
-	&nbsp;
-<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-    -->
 </div><!-- /.follow-us -->
 
 					
@@ -527,7 +496,7 @@
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2024 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -551,8 +520,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
 
     
 

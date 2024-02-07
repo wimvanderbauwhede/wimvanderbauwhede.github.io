@@ -6,25 +6,6 @@
     <meta name="description" content="An illustration that Raku's junctions are greedy by design, and a proposal.">
     <meta name="keywords" content="coding, hacking, programming, raku">
     
-    	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="The strange case of the greedy junction">
-	<meta name="twitter:description" content="An illustration that Raku's junctions are greedy by design, and a proposal.">
-	<meta name="twitter:site" content="@wim_v12e">
-	<meta name="twitter:creator" content="@wim_v12e">
-	
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/greedy-junctions_1600x600.jpg">
-	
-	<!-- Open Graph -->
-	<meta property="og:locale" content="en_GB">
-	<meta property="og:type" content="article">
-	<meta property="og:site_name" content="Wim Vanderbauwhede">
-	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/greedy-junctions/#">
-	<meta property="og:title" content="The strange case of the greedy junction">
-	<meta property="og:description" content="An illustration that Raku's junctions are greedy by design, and a proposal.">
-	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/greedy-junctions_1600x600.jpg" />
-
-    
 
     <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/greedy-junctions/">
 
@@ -37,7 +18,7 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
     <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
-    <style>
+    <!-- <style>
     .sliding-menu-content {
       top: 0;
       right: 0;
@@ -51,63 +32,25 @@
       -o-transform: translateX(100%);
       transform: translateX(100%);
     }
-    </style>
+    </style> -->
 
     <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
     <![endif]-->
-<!-- Google Analytics -->
-<!-- WV: NO!
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-73376688-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
--->
-<!--
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19948710-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
--->
     <!-- Include the jQuery library (local or CDN) -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
-	  <!-- WV: NO!
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    -->
     <header id="masthead">
   <div class="inner-wrap">
 <a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
@@ -119,11 +62,11 @@
 </ul>
 
     </nav>
-<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
-    <nav role="navigation" class="js-menu sliding-menu-content">
+    <!-- <nav role="navigation" class="js-menu sliding-menu-content">
 	<ul class="menu-item">
 		
 	</ul>
@@ -133,7 +76,7 @@
 </button>
 
 <div class="js-menu-screen menu-screen"></div>
-
+ -->
 
     <div id="page-wrapper">
 
@@ -142,7 +85,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/greedy-junctions_1600x600.jpg" class="page-feature-image" alt="The strange case of the greedy junction" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/greedy-junctions_1600x600.avif" class="page-feature-image" alt="The strange case of the greedy junction" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -156,73 +99,86 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p><a href="https://raku.org/">Raku</a> has a neat feature called <a href="https://docs.raku.org/type/Junction">Junctions</a>. In this short article I want to highlight a peculiar consequence of the interaction of junctions with functions: they are <em>greedy</em>, by which I mean that they inadvertently turn other arguments of functions into junctions. </p>
+				<p><a href="https://raku.org/">Raku</a> has a neat feature called <a href="https://docs.raku.org/type/Junction">Junctions</a>. In this short article I want to highlight a peculiar consequence of the interaction of junctions with functions: they are <em>greedy</em>, by which I mean that they inadvertently turn other arguments of functions into junctions.</p>
 
-<p>If you don&#39;t know Raku or are unfamiliar with the functional style of programming, I suggest you read my introductory article <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming">&quot;Cleaner code with functional programming&quot;</a>.</p>
+<p>If you don’t know Raku or are unfamiliar with the functional style of programming, I suggest you read my introductory article <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming">“Cleaner code with functional programming”</a>.</p>
 
-<p>To illustrate the greedy behaviour, let&#39;s create a <code>pair</code> data structure that can take two values of different types, using a closure.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Pair Constructor: the arguments of pair() are captured</span>
-<span class="c1"># in a closure that is returned</span>
-<span class="k">sub</span> <span class="nb">pair</span>(\<span class="o">x</span>, \<span class="n">y</span>) {
-    <span class="k">sub</span> (<span class="nv">&amp;p</span>){ <span class="n">p</span>(<span class="o">x</span>, <span class="n">y</span>) } 
+<p>To illustrate the greedy behaviour, let’s create a <code class="language-plaintext highlighter-rouge">pair</code> data structure that can take two values of different types, using a closure.</p>
+
+<pre><code class="language-perl6"># Pair Constructor: the arguments of pair() are captured
+# in a closure that is returned
+sub pair(\x, \y) {
+    sub (&amp;p){ p(x, y) } 
 }
-</code></pre></div>
-<p>So <code>pair</code> takes two arguments of arbitrary type and returns a closure which takes a function as argument. We will use this function to access the values stored in the pair. I will call these accessor functions <code>fst</code> and <code>snd</code>:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Accessors to get the values from the closure</span>
-<span class="k">my</span> <span class="k">sub</span> <span class="n">fst</span> (<span class="nv">&amp;p</span>) {<span class="n">p</span>( <span class="k">sub</span> (\<span class="o">x</span>,\<span class="n">y</span>){<span class="o">x</span>})}
-<span class="k">my</span> <span class="k">sub</span> <span class="n">snd</span> (<span class="nv">&amp;p</span>) {<span class="n">p</span>( <span class="k">sub</span> (\<span class="o">x</span>,\<span class="n">y</span>){<span class="n">y</span>})}
-</code></pre></div>
-<p>The function that does the actual selection is the anonymous subroutine returned by <code>fst</code> and <code>snd</code>, this is purely so that I can apply them to the pair rather than have to pass them as an argument. Let&#39;s look at an example, a pair of an <code>Int</code> and an <code>enum RGB</code>:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">enum</span> <span class="n">RGB</span> <span class="s">&lt;R G B&gt;</span>;
+</code></pre>
 
-<span class="k">my</span> \<span class="n">p1</span> = <span class="nb">pair</span> <span class="mi">42</span>, <span class="n">R</span>;
+<p>So <code class="language-plaintext highlighter-rouge">pair</code> takes two arguments of arbitrary type and returns a closure which takes a function as argument. We will use this function to access the values stored in the pair. I will call these accessor functions <code class="language-plaintext highlighter-rouge">fst</code> and <code class="language-plaintext highlighter-rouge">snd</code>:</p>
 
-<span class="k">if</span> ( <span class="mi">42</span> == <span class="n">fst</span> <span class="n">p1</span>) {
-    <span class="nb">say</span> <span class="n">snd</span> <span class="n">p1</span>; <span class="c1">#=&gt; says &quot;R&quot;</span>
+<pre><code class="language-perl6"># Accessors to get the values from the closure
+my sub fst (&amp;p) {p( sub (\x,\y){x})}
+my sub snd (&amp;p) {p( sub (\x,\y){y})}
+</code></pre>
+
+<p>The function that does the actual selection is the anonymous subroutine returned by <code class="language-plaintext highlighter-rouge">fst</code> and <code class="language-plaintext highlighter-rouge">snd</code>, this is purely so that I can apply them to the pair rather than have to pass them as an argument. Let’s look at an example, a pair of an <code class="language-plaintext highlighter-rouge">Int</code> and an <code class="language-plaintext highlighter-rouge">enum RGB</code>:</p>
+
+<pre><code class="language-perl6">enum RGB &lt;R G B&gt;;
+
+my \p1 = pair 42, R;
+
+if ( 42 == fst p1) {
+    say snd p1;	#=&gt; says "R"
 }
-</code></pre></div>
-<p>So we create a pair by calling <code>pair</code> with two values, and use <code>fst</code> and <code>snd</code> to access the values in the pair. This is an immutable data structure so updates are not possible.</p>
+</code></pre>
 
-<p>Now let&#39;s use a junction for one of the arguments.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Example instance with a &#39;one&#39;-type junction</span>
-<span class="k">my</span> <span class="nb">Junction</span> \<span class="n">p1j</span> = <span class="nb">pair</span> (<span class="mi">42</span><span class="o">^</span><span class="mi">43</span>),<span class="n">R</span>;
+<p>So we create a pair by calling <code class="language-plaintext highlighter-rouge">pair</code> with two values, and use <code class="language-plaintext highlighter-rouge">fst</code> and <code class="language-plaintext highlighter-rouge">snd</code> to access the values in the pair. This is an immutable data structure so updates are not possible.</p>
 
-<span class="k">if</span> ( <span class="mi">42</span> == <span class="n">fst</span> <span class="n">p1j</span>) {
-    <span class="nb">say</span> <span class="n">snd</span> <span class="n">p1j</span>; <span class="c1">#=&gt; one(R, R)</span>
+<p>Now let’s use a junction for one of the arguments.</p>
+
+<pre><code class="language-perl6"># Example instance with a 'one'-type junction
+my Junction \p1j = pair (42^43),R;
+
+if ( 42 == fst p1j) {
+    say snd p1j; #=&gt; one(R, R)
 }
-</code></pre></div>
-<p>What has happened here is that the original argument <code>R</code> has been irrevocably turned into a junction with itself. This happens despite the fact that we never explicitly created a junction on <code>R</code>. This is a consequence of the application of a junction type to a function, and it is not a bug, simply an effect of junction behaviour. For a more detailed explanation, see my article <a href="https://wimvanderbauwhede.github.io/articles/reconstructing-raku-junctions">&quot;Reconstructing Raku&#39;s Junctions&quot;</a>.</p>
+</code></pre>
+
+<p>What has happened here is that the original argument <code class="language-plaintext highlighter-rouge">R</code> has been irrevocably turned into a junction with itself. This happens despite the fact that we never explicitly created a junction on <code class="language-plaintext highlighter-rouge">R</code>. This is a consequence of the application of a junction type to a function, and it is not a bug, simply an effect of junction behaviour. For a more detailed explanation, see my article <a href="https://wimvanderbauwhede.github.io/articles/reconstructing-raku-junctions">“Reconstructing Raku’s Junctions”</a>.</p>
 
 <p>The <a href="https://docs.raku.org/type/Junction">Raku documentation of junctions</a> says that you should not really try to get values out of a junction:</p>
 
-<p>&quot;Junctions are meant to be used as matchers in Boolean context; introspection of junctions is not supported. If you feel the urge to introspect a junction, use a Set or a related type instead.&quot;</p>
+<p>“Junctions are meant to be used as matchers in Boolean context; introspection of junctions is not supported. If you feel the urge to introspect a junction, use a Set or a related type instead.”</p>
 
 <p>Luckily, there is a FAQ that <a href="https://docs.raku.org/language/faq#index-entry-Junction_(FAQ)">grudgingly shows you how to do it</a>. The FAQ once again warns against doing this:</p>
 
-<p>&quot;If you want to extract the values (eigenstates) from a Junction, you are probably doing something wrong and should be using a Set instead.&quot;</p>
+<p>“If you want to extract the values (eigenstates) from a Junction, you are probably doing something wrong and should be using a Set instead.”</p>
 
 <p>However, as demonstrated by the example I have given, there is a clear use case for recovering values from junctions. It is of course not the intention that one of the values stored in the pair becomes inaccessible simply because the other value happens to be a junction.</p>
 
-<p>I therefore propose the addition of a <code>collapse</code> function which will allow to collapse these inadvertent junction values into their original values.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">if</span> ( <span class="mi">42</span> == <span class="n">fst</span> <span class="n">p1j</span>) {
-    <span class="nb">say</span> <span class="n">collapse</span>(<span class="n">snd</span> <span class="n">p1j</span>); <span class="c1">#=&gt; says &#39;R&#39;</span>
+<p>I therefore propose the addition of a <code class="language-plaintext highlighter-rouge">collapse</code> function which will allow to collapse these inadvertent junction values into their original values.</p>
+
+<pre><code class="language-perl6">if ( 42 == fst p1j) {
+    say collapse(snd p1j); #=&gt; says 'R'
 }
-</code></pre></div>
-<p>The implementation of this function is taken from <a href="https://docs.raku.org/language/faq#index-entry-Junction_(FAQ)">the above-mentioned FAQ</a>, with the addition of a check to ensure that all values on the junction are identical. </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">collapse</span>(<span class="nb">Junction</span> \<span class="n">j</span>) {    
-    <span class="k">my</span> <span class="nv">@vvs</span>;
-    -&gt; <span class="nb">Any</span> \<span class="o">s</span> { <span class="nb">push</span> <span class="nv">@vvs</span>, <span class="o">s</span> }.(<span class="n">j</span>);    
-    <span class="k">my</span> <span class="nv">$v</span> =  <span class="nb">shift</span> <span class="nv">@vvs</span>;        
-    <span class="k">my</span> <span class="nv">@ts</span> = <span class="nb">grep</span> {!(<span class="nv">$_</span> ~~ <span class="nv">$v</span>)}, <span class="nv">@vvs</span>;
-    <span class="k">if</span> (<span class="nv">@ts</span>.<span class="nb">elems</span><span class="o">==</span><span class="mi">0</span>) {  
-        <span class="nv">$v</span>
-    } <span class="k">else</span> {
-        <span class="k">die</span> <span class="s">&quot;Can&#39;t collapse this Junction: elements are not identical: {$v,@vvs}&quot;</span>;
+</code></pre>
+
+<p>The implementation of this function is taken from <a href="https://docs.raku.org/language/faq#index-entry-Junction_(FAQ)">the above-mentioned FAQ</a>, with the addition of a check to ensure that all values on the junction are identical.</p>
+
+<pre><code class="language-perl6">sub collapse(Junction \j) {    
+    my @vvs;
+    -&gt; Any \s { push @vvs, s }.(j);    
+    my $v =  shift @vvs;        
+    my @ts = grep {!($_ ~~ $v)}, @vvs;
+    if (@ts.elems==0) {  
+        $v
+    } else {
+        die "Can't collapse this Junction: elements are not identical: {$v,@vvs}";
     }
 }
-</code></pre></div>
-<p>In the first draft of this article, which I shared as a gist, I wrote that it would be nice if this <code>collapse</code> would be added as an additional method to the <code>Junction</code> class. And thanks to <a href="https://twitter.com/liztormato">Elizabeth Mattijsen</a>, there is already <a href="https://github.com/rakudo/rakudo/pull/3944">a pull request implementing this feature in Rakudo</a>!<br>
-I will update the post when it has made it into a release. </p>
+</code></pre>
+
+<p>In the first draft of this article, which I shared as a gist, I wrote that it would be nice if this <code class="language-plaintext highlighter-rouge">collapse</code> would be added as an additional method to the <code class="language-plaintext highlighter-rouge">Junction</code> class. And thanks to <a href="https://twitter.com/liztormato">Elizabeth Mattijsen</a>, there is already <a href="https://github.com/rakudo/rakudo/pull/3944">a pull request implementing this feature in Rakudo</a>!<br />
+I will update the post when it has made it into a release.</p>
+
 
 				<hr />
 				<footer class="page-footer">
@@ -241,13 +197,6 @@ I will update the post when it has made it into a release. </p>
 
                     <div class="inline-btn">
     <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
-    <!--
-	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
-	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
-	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
-	&nbsp;
-<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-    -->
 </div><!-- /.follow-us -->
 
 					
@@ -277,7 +226,7 @@ I will update the post when it has made it into a release. </p>
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2024 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -301,8 +250,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
 
     
 

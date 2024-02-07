@@ -6,25 +6,6 @@
     <meta name="description" content="Although it might seem that a language like Haskell has a lot of different objects and constructs, they can all be reduced to functions.">
     <meta name="keywords" content="coding, hacking, programming, haskell">
     
-    	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="Everything is a function">
-	<meta name="twitter:description" content="Although it might seem that a language like Haskell has a lot of different objects and constructs, they can all be reduced to functions.">
-	<meta name="twitter:site" content="@wim_v12e">
-	<meta name="twitter:creator" content="@wim_v12e">
-	
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/everything-is-a-function_1600x600.jpg">
-	
-	<!-- Open Graph -->
-	<meta property="og:locale" content="en_GB">
-	<meta property="og:type" content="article">
-	<meta property="og:site_name" content="Wim Vanderbauwhede">
-	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/#">
-	<meta property="og:title" content="Everything is a function">
-	<meta property="og:description" content="Although it might seem that a language like Haskell has a lot of different objects and constructs, they can all be reduced to functions.">
-	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/everything-is-a-function_1600x600.jpg" />
-
-    
 
     <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">
 
@@ -37,7 +18,7 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
     <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
-    <style>
+    <!-- <style>
     .sliding-menu-content {
       top: 0;
       right: 0;
@@ -51,63 +32,25 @@
       -o-transform: translateX(100%);
       transform: translateX(100%);
     }
-    </style>
+    </style> -->
 
     <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
     <![endif]-->
-<!-- Google Analytics -->
-<!-- WV: NO!
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-73376688-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
--->
-<!--
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19948710-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
--->
     <!-- Include the jQuery library (local or CDN) -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
-	  <!-- WV: NO!
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    -->
     <header id="masthead">
   <div class="inner-wrap">
 <a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
@@ -119,11 +62,11 @@
 </ul>
 
     </nav>
-<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
-    <nav role="navigation" class="js-menu sliding-menu-content">
+    <!-- <nav role="navigation" class="js-menu sliding-menu-content">
 	<ul class="menu-item">
 		
 	</ul>
@@ -133,7 +76,7 @@
 </button>
 
 <div class="js-menu-screen menu-screen"></div>
-
+ -->
 
     <div id="page-wrapper">
 
@@ -142,7 +85,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/everything-is-a-function_1600x600.jpg" class="page-feature-image" alt="Everything is a function" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/everything-is-a-function_1600x600.avif" class="page-feature-image" alt="Everything is a function" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -156,314 +99,405 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>This is an article I wrote several years ago. It is part of the <a href="https://www.futurelearn.com/courses/functional-programming-haskell">&quot;Functional Programming in Haskell&quot; online course</a>. It discusses one of the aspects of functional programming that I like in particular, the fact that the entire language can be build starting from the <a href="https://www.futurelearn.com/courses/functional-programming-haskell/0/steps/27249">lambda calculus</a>.</p>
+				<p>This is an article I wrote several years ago. It is part of the <a href="https://www.futurelearn.com/courses/functional-programming-haskell">“Functional Programming in Haskell” online course</a>. It discusses one of the aspects of functional programming that I like in particular, the fact that the entire language can be build starting from the <a href="https://www.futurelearn.com/courses/functional-programming-haskell/0/steps/27249">lambda calculus</a>.</p>
 
-<h2>In a functional language, there are only functions</h2>
+<h2 id="in-a-functional-language-there-are-only-functions">In a functional language, there are only functions</h2>
 
 <p>Although it might seem that a language like Haskell has a lot of different objects and constructs, they can all be reduced to functions. We will demonstrate how variables, tuples, lists, conditionals, Booleans and numbers can all be constructed from lambda functions. The article assumes some familiarity with Haskell, but here is a quick introduction.</p>
 
-<h3>Haskell: a quick introduction</h3>
+<h3 id="haskell-a-quick-introduction">Haskell: a quick introduction</h3>
 
-<p>Haskell is whitespace-sensitive like Python, but has a markedly different syntax. Because everything is a function, there is no keyword to mark a function; because there is only lexical scope, there is no need for any special scope identifiers. Function arguments are separated by spaces; anonymous functions are called <em>lambda functions</em> and have a special syntax to identify them: </p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="c1">-- named function</span>
-<span class="nf">square</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+<p>Haskell is whitespace-sensitive like Python, but has a markedly different syntax. Because everything is a function, there is no keyword to mark a function; because there is only lexical scope, there is no need for any special scope identifiers. Function arguments are separated by spaces; anonymous functions are called <em>lambda functions</em> and have a special syntax to identify them:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- named function</span>
+<span class="n">square</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
 <span class="c1">-- lambda function bound to a named variable</span>
-<span class="nf">anon_square</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span>  <span class="n">x</span><span class="o">*</span><span class="n">x</span>
-</code></pre></div>
-<p>Several of the examples use the  <code>let ... in ...</code>  construct, which behaves as a lexically scoped block:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">let_square</span> <span class="n">x</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="ow">=</span> <span class="kr">let</span>
-    <span class="n">x2</span> <span class="ow">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
-    <span class="n">x1</span> <span class="ow">=</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
-    <span class="n">x0</span> <span class="ow">=</span> <span class="n">c</span>
+<span class="n">anon_square</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span>  <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</code></pre></div></div>
+
+<p>Several of the examples use the  <code class="language-plaintext highlighter-rouge">let ... in ...</code>  construct, which behaves as a lexically scoped block:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">let_square</span> <span class="n">x</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">=</span> <span class="kr">let</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">c</span>
   <span class="kr">in</span>
     <span class="n">x2</span><span class="o">+</span><span class="n">x1</span><span class="o">+</span><span class="n">x0</span>
-</code></pre></div>
-<p><code>x0</code>, <code>x1</code> and <code>x2</code> are in scope only in the expression after the <code>in</code> keyword.</p>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">x0</code>, <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> are in scope only in the expression after the <code class="language-plaintext highlighter-rouge">in</code> keyword.</p>
 
 <p>Haskell is statically typed, and the type of a function or variable is written in a separate annotation, for example:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">isEmpty</span> <span class="ow">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
-<span class="nf">isEmpty</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">==</span> <span class="mi">0</span>
-</code></pre></div>
-<p>The <code>isEmpty</code> function has a type signature, identified by <code>::</code>, that reads &quot;<code>isEmpty</code> is a function from a list of anything to a Boolean&quot;. Types must be written with an initial capital. The <code>a</code> is a <em>type variable</em> which can take on any type, as explained in <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">my post on algebraic data types</a>. Most of the time, you don&#39;t need to write type declarations as Haskell works them out automatically. In the rest of the article, I&#39;m not focusing on the types so I have omitted them.</p>
 
-<h3>Variables and <code>let</code></h3>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">isEmpty</span> <span class="o">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">isEmpty</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></div></div>
 
-<p>Haskell uses <code>let</code> expressions to define variables used in a final expression, for example:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="kr">let</span>
-      <span class="n">n</span> <span class="ow">=</span> <span class="mi">10</span>
-      <span class="n">f</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+<p>The <code class="language-plaintext highlighter-rouge">isEmpty</code> function has a type signature, identified by <code class="language-plaintext highlighter-rouge">::</code>, that reads “<code class="language-plaintext highlighter-rouge">isEmpty</code> is a function from a list of anything to a Boolean”. Types must be written with an initial capital. The <code class="language-plaintext highlighter-rouge">a</code> is a <em>type variable</em> which can take on any type, as explained in <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">my post on algebraic data types</a>. Most of the time, you don’t need to write type declarations as Haskell works them out automatically. In the rest of the article, I’m not focusing on the types so I have omitted them.</p>
+
+<h3 id="variables-and-let">Variables and <code class="language-plaintext highlighter-rouge">let</code></h3>
+
+<p>Haskell uses <code class="language-plaintext highlighter-rouge">let</code> expressions to define variables used in a final expression, for example:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kr">let</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+      <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
     <span class="kr">in</span>
       <span class="n">f</span> <span class="n">n</span>
-</code></pre></div>
-<p>We can rewrite this to use only one variable per <code>let</code>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="kr">let</span>
-      <span class="n">n</span> <span class="ow">=</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p>We can rewrite this to use only one variable per <code class="language-plaintext highlighter-rouge">let</code>:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kr">let</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="kr">in</span>
       <span class="kr">let</span>  
-        <span class="n">f</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
       <span class="kr">in</span>
         <span class="n">f</span> <span class="n">n</span>
-</code></pre></div>
-<p>Now we rewrite any named functions (<code>f</code>) as lambda functions:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="kr">let</span>
-      <span class="n">n</span> <span class="ow">=</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p>Now we rewrite any named functions (<code class="language-plaintext highlighter-rouge">f</code>) as lambda functions:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kr">let</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="kr">in</span>
       <span class="kr">let</span>  
-        <span class="n">f</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
       <span class="kr">in</span>
         <span class="n">f</span> <span class="n">n</span>
-</code></pre></div>
-<p>Then we rewrite the <code>let</code> expressions themselves as lambdas, first the inner <code>let</code>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="kr">let</span>
-      <span class="n">n</span> <span class="ow">=</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p>Then we rewrite the <code class="language-plaintext highlighter-rouge">let</code> expressions themselves as lambdas, first the inner <code class="language-plaintext highlighter-rouge">let</code>:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kr">let</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="kr">in</span>
-      <span class="p">(</span><span class="nf">\</span><span class="n">f</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  
-</code></pre></div>
-<p>We do this by turning the variable in the <code>let</code> part of the expression (<code>f</code>) into a parameter of a lambda function (<code>\f -&gt; ...</code>). The body of the function is the expression after the <code>in</code> (<code>f n</code>). Then we apply this lambda function to the expression bound to the variable (<code>\x -&gt; x+1</code>).   </p>
+      <span class="p">(</span><span class="nf">\</span><span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  
+</code></pre></div></div>
 
-<p>Then we rewrite outer <code>let</code> in the same way:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span> <span class="nf">\</span><span class="n">n</span> <span class="ow">-&gt;</span> <span class="p">((</span><span class="nf">\</span><span class="n">f</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span> <span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span> <span class="p">))</span> <span class="p">)</span> <span class="mi">10</span>    
-</code></pre></div>
-<p>This expression consists only of lambda expressions, which shows that variables and <code>let</code>-expressions are just syntactic sugar for lambda expressions.    </p>
+<p>We do this by turning the variable in the <code class="language-plaintext highlighter-rouge">let</code> part of the expression (<code class="language-plaintext highlighter-rouge">f</code>) into a parameter of a lambda function (<code class="language-plaintext highlighter-rouge">\f -&gt; ...</code>). The body of the function is the expression after the <code class="language-plaintext highlighter-rouge">in</code> (<code class="language-plaintext highlighter-rouge">f n</code>). Then we apply this lambda function to the expression bound to the variable (<code class="language-plaintext highlighter-rouge">\x -&gt; x+1</code>).</p>
 
-<h3>Tuples</h3>
+<p>Then we rewrite outer <code class="language-plaintext highlighter-rouge">let</code> in the same way:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">(</span> <span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="p">((</span><span class="nf">\</span><span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span> <span class="p">))</span> <span class="p">)</span> <span class="mi">10</span>    
+</code></pre></div></div>
+
+<p>This expression consists only of lambda expressions, which shows that variables and <code class="language-plaintext highlighter-rouge">let</code>-expressions are just syntactic sugar for lambda expressions.</p>
+
+<h3 id="tuples">Tuples</h3>
 
 <p>Haskell has <em>tuples</em>, also called record types or product types, ordered collections of expressions of potentially different types:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">tp</span> <span class="ow">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;2&quot;</span><span class="p">,[</span><span class="mi">3</span><span class="p">])</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">tp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">"2"</span><span class="p">,[</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></div></div>
+
 <p>The tuple notation is syntactic sugar for a function application:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>      <span class="n">tp</span> <span class="ow">=</span> <span class="n">mkTup</span> <span class="mi">1</span> <span class="s">&quot;2&quot;</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="n">tp</span> <span class="o">=</span> <span class="n">mkTup</span> <span class="mi">1</span> <span class="s">"2"</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
 <p>The tuple construction function can again be defined purely using lambdas:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>          <span class="n">mkTup</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">t</span> <span class="ow">-&gt;</span> <span class="n">t</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
-</code></pre></div>
-<p>What we do here is to use the elements of the tuple as the arguments of a lambda function. So what <code>mkTup</code> returns is also a lambda function, in other words <code>mkTup</code> is a higher-order function. Now we rewrite the <code>mkTup</code> named function as lambda function as well:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>          <span class="n">mkTup</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">-&gt;</span> <span class="nf">\</span><span class="n">t</span> <span class="ow">-&gt;</span> <span class="n">t</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>          <span class="n">mkTup</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span> <span class="nf">\</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
+</code></pre></div></div>
+
+<p>What we do here is to use the elements of the tuple as the arguments of a lambda function. So what <code class="language-plaintext highlighter-rouge">mkTup</code> returns is also a lambda function, in other words <code class="language-plaintext highlighter-rouge">mkTup</code> is a higher-order function. Now we rewrite the <code class="language-plaintext highlighter-rouge">mkTup</code> named function as lambda function as well:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>          <span class="n">mkTup</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">-&gt;</span> <span class="nf">\</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
+</code></pre></div></div>
+
 <p>So our tuples are now also encoded purely as lambda functions.</p>
 
-<p>The same goes for the tuple accessor functions:          </p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">fst</span> <span class="n">tp</span> <span class="ow">=</span> <span class="n">tp</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">snd</span> <span class="n">tp</span> <span class="ow">=</span> <span class="n">tp</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">-&gt;</span> <span class="n">y</span><span class="p">)</span>
-</code></pre></div>
-<p>Let&#39;s see what happens here: the argument <code>tp</code> of <code>fst</code> is a function: <code>\t -&gt; t x&#39; y&#39; z&#39;</code>. We now apply this function to another function, <code>\x y z -&gt; x</code>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="nf">\</span><span class="n">t</span> <span class="ow">-&gt;</span> <span class="n">t</span> <span class="n">x&#39;</span> <span class="n">y&#39;</span> <span class="n">z&#39;</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="p">)</span>
-</code></pre></div>
+<p>The same goes for the tuple accessor functions:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">fst</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">tp</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">snd</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">tp</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">-&gt;</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Let’s see what happens here: the argument <code class="language-plaintext highlighter-rouge">tp</code> of <code class="language-plaintext highlighter-rouge">fst</code> is a function: <code class="language-plaintext highlighter-rouge">\t -&gt; t x' y' z'</code>. We now apply this function to another function, <code class="language-plaintext highlighter-rouge">\x y z -&gt; x</code>:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">(</span><span class="nf">\</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="n">x'</span> <span class="n">y'</span> <span class="n">z'</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
 <p>Applying the function gives:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="n">x&#39;</span> <span class="n">y&#39;</span> <span class="n">z&#39;</span>
-</code></pre></div>
-<p>And so the result will of course be <code>x&#39;</code>, which is indeed the first element of the tuple. </p>
 
-<h3>Lists</h3>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="n">x'</span> <span class="n">y'</span> <span class="n">z'</span>
+</code></pre></div></div>
 
-<p>Lists can be defined in terms of the empty lists <code>[]</code> and the <code>cons</code> operation <code>(:)</code>.</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">ls</span> <span class="ow">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-</code></pre></div>
-<p>Rewriting this using <code>:</code> and <code>[]</code>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">ls</span> <span class="ow">=</span> <span class="mi">1</span> <span class="kt">:</span> <span class="mi">2</span> <span class="kt">:</span> <span class="mi">3</span> <span class="kt">:</span> <span class="kt">[]</span>
-</code></pre></div>
-<p>Or using <code>cons</code> explicitly:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">ls</span> <span class="ow">=</span> <span class="n">cons</span> <span class="mi">1</span> <span class="p">(</span><span class="n">cons</span> <span class="mi">2</span> <span class="p">(</span><span class="n">cons</span> <span class="mi">3</span> <span class="kt">[]</span><span class="p">))</span>
-</code></pre></div>
-<h4>Defining <code>cons</code></h4>
+<p>And so the result will of course be <code class="language-plaintext highlighter-rouge">x'</code>, which is indeed the first element of the tuple.</p>
 
-<p>We can define <code>cons</code> using only lambda functions as</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>  <span class="n">cons</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="ow">-&gt;</span>
-       <span class="nf">\</span><span class="n">c</span> <span class="ow">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span>
-</code></pre></div>
-<p>We&#39;ve used the same approach as for the tuples: <code>cons</code> returns a lambda function. So we can write a list as:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">ls</span> <span class="ow">=</span> <span class="n">cons</span> <span class="mi">1</span> <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-       <span class="ow">=</span> <span class="nf">\</span><span class="n">c</span> <span class="ow">-&gt;</span> <span class="n">c</span> <span class="mi">1</span> <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-</code></pre></div>
-<p>We can also define <code>head</code> and <code>tail</code> using only lambdas, similar to what we did for <code>fst</code> and <code>snd</code> above:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">head</span> <span class="n">ls</span> <span class="ow">=</span> <span class="n">ls</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">tail</span> <span class="n">ls</span> <span class="ow">=</span> <span class="n">ls</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">y</span><span class="p">)</span>
-</code></pre></div>
-<h4>The empty list</h4>
+<h3 id="lists">Lists</h3>
+
+<p>Lists can be defined in terms of the empty lists <code class="language-plaintext highlighter-rouge">[]</code> and the <code class="language-plaintext highlighter-rouge">cons</code> operation <code class="language-plaintext highlighter-rouge">(:)</code>.</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+<p>Rewriting this using <code class="language-plaintext highlighter-rouge">:</code> and <code class="language-plaintext highlighter-rouge">[]</code>:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">ls</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">3</span> <span class="o">:</span> <span class="kt">[]</span>
+</code></pre></div></div>
+
+<p>Or using <code class="language-plaintext highlighter-rouge">cons</code> explicitly:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">ls</span> <span class="o">=</span> <span class="n">cons</span> <span class="mi">1</span> <span class="p">(</span><span class="n">cons</span> <span class="mi">2</span> <span class="p">(</span><span class="n">cons</span> <span class="mi">3</span> <span class="kt">[]</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="defining-cons">Defining <code class="language-plaintext highlighter-rouge">cons</code></h4>
+
+<p>We can define <code class="language-plaintext highlighter-rouge">cons</code> using only lambda functions as</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">cons</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="o">-&gt;</span>
+	   <span class="nf">\</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span>
+</code></pre></div></div>
+
+<p>We’ve used the same approach as for the tuples: <code class="language-plaintext highlighter-rouge">cons</code> returns a lambda function. So we can write a list as:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">ls</span> <span class="o">=</span> <span class="n">cons</span> <span class="mi">1</span> <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+       <span class="o">=</span> <span class="nf">\</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span> <span class="mi">1</span> <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can also define <code class="language-plaintext highlighter-rouge">head</code> and <code class="language-plaintext highlighter-rouge">tail</code> using only lambdas, similar to what we did for <code class="language-plaintext highlighter-rouge">fst</code> and <code class="language-plaintext highlighter-rouge">snd</code> above:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">head</span> <span class="n">ls</span> <span class="o">=</span> <span class="n">ls</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">tail</span> <span class="n">ls</span> <span class="o">=</span> <span class="n">ls</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="the-empty-list">The empty list</h4>
 
 <p>We can define the empty list as follows:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="kt">[]</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">f</span> <span class="ow">-&gt;</span> <span class="n">true</span>
-</code></pre></div>
-<p>This is a lambda function which always returns <code>true</code>, regardless of its argument. The definitions for <code>true</code> and <code>false</code> are given below under Booleans.  With this definition we can check if a list is empty or not:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">isEmpty</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">lst</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="ow">-&gt;</span> <span class="n">false</span><span class="p">)</span>
-</code></pre></div>
-<p>Let&#39;s see how this works. A non-empty list is always defined as:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">lst</span> <span class="ow">=</span> <span class="n">x</span><span class="kt">:</span><span class="n">xs</span>
-</code></pre></div>
-<p>which with our definition of <code>(:)</code> (i.e. <code>cons</code>) is:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">lst</span> <span class="ow">=</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="ow">-&gt;</span> <span class="nf">\</span><span class="n">c</span> <span class="ow">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="n">x</span> <span class="n">xs</span>
-    <span class="ow">=</span> <span class="nf">\</span><span class="n">c</span> <span class="ow">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">[]</span> <span class="o">=</span> <span class="nf">\</span><span class="n">f</span> <span class="o">-&gt;</span> <span class="n">true</span>
+</code></pre></div></div>
+<p>This is a lambda function which always returns <code class="language-plaintext highlighter-rouge">true</code>, regardless of its argument. The definitions for <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code> are given below under Booleans.  With this definition we can check if a list is empty or not:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">isEmpty</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">false</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Let’s see how this works. A non-empty list is always defined as:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">lst</span> <span class="o">=</span> <span class="n">x</span><span class="o">:</span><span class="n">xs</span>
+</code></pre></div></div>
+
+<p>which with our definition of <code class="language-plaintext highlighter-rouge">(:)</code> (i.e. <code class="language-plaintext highlighter-rouge">cons</code>) is:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">lst</span> <span class="o">=</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="nf">\</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="n">x</span> <span class="n">xs</span>
+    <span class="o">=</span> <span class="nf">\</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span>
+</code></pre></div></div>
+
 <p>And therefore:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">isEmpty</span> <span class="n">lst</span>
-    <span class="ow">=</span> <span class="n">isEmpty</span> <span class="p">(</span><span class="nf">\</span><span class="n">c</span> <span class="ow">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span>
-    <span class="ow">=</span>  <span class="p">(</span><span class="nf">\</span><span class="n">c</span> <span class="ow">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="ow">-&gt;</span> <span class="n">false</span><span class="p">)</span>
-    <span class="ow">=</span> <span class="n">false</span>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">isEmpty</span> <span class="n">lst</span>
+    <span class="o">=</span> <span class="n">isEmpty</span> <span class="p">(</span><span class="nf">\</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span>
+    <span class="o">=</span>  <span class="p">(</span><span class="nf">\</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">false</span><span class="p">)</span>
+    <span class="o">=</span> <span class="n">false</span>
 
     <span class="n">isEmpty</span> <span class="kt">[]</span>
-    <span class="ow">=</span> <span class="n">isEmpty</span> <span class="p">(</span><span class="nf">\</span><span class="n">f</span> <span class="ow">-&gt;</span> <span class="n">true</span><span class="p">)</span>
-    <span class="ow">=</span> <span class="p">(</span><span class="nf">\</span><span class="n">f</span><span class="ow">-&gt;</span><span class="n">true</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="ow">-&gt;</span> <span class="n">false</span><span class="p">)</span>
-    <span class="ow">=</span> <span class="n">true</span>
-</code></pre></div>
-<p>And so we have a pure-lambda definition of lists, including construction, access and testing for empty. </p>
+    <span class="o">=</span> <span class="n">isEmpty</span> <span class="p">(</span><span class="nf">\</span><span class="n">f</span> <span class="o">-&gt;</span> <span class="n">true</span><span class="p">)</span>
+    <span class="o">=</span> <span class="p">(</span><span class="nf">\</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">true</span><span class="p">)</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">false</span><span class="p">)</span>
+    <span class="o">=</span> <span class="n">true</span>
+</code></pre></div></div>
 
-<h4>Recursion on lists</h4>
+<p>And so we have a pure-lambda definition of lists, including construction, access and testing for empty.</p>
 
-<p>Now that we can test for the empty list we can define recursions on lists such as <code>foldl</code>, <code>map</code> etc.:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">foldl</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">lst</span> <span class="ow">=</span>
+<h4 id="recursion-on-lists">Recursion on lists</h4>
+
+<p>Now that we can test for the empty list we can define recursions on lists such as <code class="language-plaintext highlighter-rouge">foldl</code>, <code class="language-plaintext highlighter-rouge">map</code> etc.:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">foldl</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">lst</span> <span class="o">=</span>
       <span class="kr">if</span> <span class="n">isEmpty</span> <span class="n">lst</span>
         <span class="kr">then</span> <span class="n">acc</span>
         <span class="kr">else</span> <span class="n">foldl</span> <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="n">head</span> <span class="n">lst</span><span class="p">)</span> <span class="n">acc</span><span class="p">)</span> <span class="p">(</span><span class="n">tail</span> <span class="n">lst</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>and</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">map</span> <span class="n">f</span> <span class="n">lst</span>  <span class="ow">=</span>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">map</span> <span class="n">f</span> <span class="n">lst</span>  <span class="o">=</span>
       <span class="kr">let</span>
-        <span class="n">map&#39;</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">lst&#39;</span> <span class="ow">=</span> 
+        <span class="n">map'</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">lst'</span> <span class="o">=</span> 
           <span class="kr">if</span> <span class="n">isEmpty</span> <span class="n">lst</span> 
-            <span class="kr">then</span> <span class="p">(</span><span class="n">reverse</span> <span class="n">lst&#39;</span><span class="p">)</span> 
-            <span class="kr">else</span> <span class="n">map&#39;</span> <span class="n">f</span> <span class="p">(</span><span class="n">tail</span> <span class="n">lst</span><span class="p">)</span> <span class="p">(</span><span class="n">head</span> <span class="n">lst</span><span class="kt">:</span> <span class="n">lst&#39;</span><span class="p">)</span>
+            <span class="kr">then</span> <span class="p">(</span><span class="n">reverse</span> <span class="n">lst'</span><span class="p">)</span> 
+            <span class="kr">else</span> <span class="n">map'</span> <span class="n">f</span> <span class="p">(</span><span class="n">tail</span> <span class="n">lst</span><span class="p">)</span> <span class="p">(</span><span class="n">head</span> <span class="n">lst</span><span class="o">:</span> <span class="n">lst'</span><span class="p">)</span>
       <span class="kr">in</span>
-        <span class="n">map&#39;</span> <span class="n">f</span> <span class="n">lst</span> <span class="kt">[]</span>
-</code></pre></div>
+        <span class="n">map'</span> <span class="n">f</span> <span class="n">lst</span> <span class="kt">[]</span>
+</code></pre></div></div>
+
 <p>with</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">reverse</span> <span class="n">lst</span> <span class="ow">=</span> <span class="p">(</span><span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">elt</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">elt</span><span class="kt">:</span><span class="n">acc</span><span class="p">))</span> <span class="kt">[]</span> <span class="n">lst</span>
-</code></pre></div>
-<p>The definitions of <code>foldl</code> and <code>map</code> use an if-then-else expression which is defined below under Conditionals.</p>
 
-<h4> List concatenation</h4>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">reverse</span> <span class="n">lst</span> <span class="o">=</span> <span class="p">(</span><span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">elt</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">elt</span><span class="o">:</span><span class="n">acc</span><span class="p">))</span> <span class="kt">[]</span> <span class="n">lst</span>
+</code></pre></div></div>
 
-<p>With <code>foldl</code> and <code>reverse</code> it is easy to express list concatenation:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="o">++</span><span class="p">)</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="ow">=</span> 
-      <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">elt</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">elt</span><span class="kt">:</span><span class="n">acc</span><span class="p">))</span> <span class="n">lst2</span> <span class="p">(</span><span class="n">reverse</span> <span class="n">lst1</span><span class="p">)</span>
-</code></pre></div>
-<h4> The length of a list</h4>
+<p>The definitions of <code class="language-plaintext highlighter-rouge">foldl</code> and <code class="language-plaintext highlighter-rouge">map</code> use an if-then-else expression which is defined below under Conditionals.</p>
+
+<p>#### List concatenation</p>
+
+<p>With <code class="language-plaintext highlighter-rouge">foldl</code> and <code class="language-plaintext highlighter-rouge">reverse</code> it is easy to express list concatenation:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">(</span><span class="o">++</span><span class="p">)</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span> 
+      <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">elt</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">elt</span><span class="o">:</span><span class="n">acc</span><span class="p">))</span> <span class="n">lst2</span> <span class="p">(</span><span class="n">reverse</span> <span class="n">lst1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>#### The length of a list</p>
 
 <p>To compute the length of a list we need integers, they are defined below. We increment the lent counter for every element of the list consumed by the fold.</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">length</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">calc_length</span> <span class="mi">0</span> <span class="n">lst</span>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">length</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">foldl</span> <span class="n">calc_length</span> <span class="mi">0</span> <span class="n">lst</span>
       <span class="kr">where</span>
-        <span class="n">calc_length</span> <span class="kr">_</span> <span class="n">len</span> <span class="ow">=</span> <span class="n">inc</span> <span class="n">len</span>
-</code></pre></div>
-<h3>Conditionals</h3>
+        <span class="n">calc_length</span> <span class="kr">_</span> <span class="n">len</span> <span class="o">=</span> <span class="n">inc</span> <span class="n">len</span>
+</code></pre></div></div>
+
+<h3 id="conditionals">Conditionals</h3>
 
 <p>We have used conditionals in the above expressions:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="kr">if</span> <span class="n">cond</span> <span class="kr">then</span> <span class="n">if_true_exp</span> <span class="kr">else</span> <span class="n">if_false_exp</span>
-</code></pre></div>
-<p>Here <code>cond</code> is an expression returning either <code>true</code> or <code>false</code>, these are defined below.</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kr">if</span> <span class="n">cond</span> <span class="kr">then</span> <span class="n">if_true_exp</span> <span class="kr">else</span> <span class="n">if_false_exp</span>
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">cond</code> is an expression returning either <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, these are defined below.</p>
 
 <p>We can write the if-then-else clause as a pure function:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">ifthenelse</span> <span class="n">cond</span> <span class="n">if_true_exp</span> <span class="n">if_false_exp</span>
-</code></pre></div>
-<h3>Booleans</h3>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">ifthenelse</span> <span class="n">cond</span> <span class="n">if_true_exp</span> <span class="n">if_false_exp</span>
+</code></pre></div></div>
+
+<h3 id="booleans">Booleans</h3>
 
 <p>To evaluate the condition we need to define Booleans as lambda functions:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">true</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">x</span>
-    <span class="n">false</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">y</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">true</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span>
+    <span class="n">false</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">y</span>
+</code></pre></div></div>
+
 <p>The Boolean is a function selecting the expression corresponding to true or false. With this definition, the if-then-else becomes simply:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">ifthenelse</span> <span class="n">cond</span> <span class="n">if_true_exp</span> <span class="n">if_false_exp</span> <span class="ow">=</span> 
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">ifthenelse</span> <span class="n">cond</span> <span class="n">if_true_exp</span> <span class="n">if_false_exp</span> <span class="o">=</span> 
       <span class="n">cond</span> <span class="n">if_true_exp</span> <span class="n">if_false_exp</span>
-</code></pre></div>
-<h4>Basic Boolean operations: <code>and</code>, <code>or</code> and <code>not</code></h4>
+</code></pre></div></div>
 
-<p>Using <code>ifthenelse</code> we can define <code>and</code>, <code>or</code> and <code>not</code>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">and</span> <span class="n">x</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">ifthenelse</span> <span class="n">x</span> <span class="p">(</span><span class="n">ifthenelse</span> <span class="n">y</span> <span class="n">true</span><span class="p">)</span> <span class="n">false</span>
-    <span class="n">or</span> <span class="n">x</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">ifthenelse</span> <span class="n">x</span> <span class="n">true</span> <span class="p">(</span><span class="n">ifthenelse</span> <span class="n">y</span> <span class="n">true</span> <span class="n">false</span><span class="p">)</span>
-    <span class="n">not</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">ifthenelse</span> <span class="n">x</span> <span class="n">false</span> <span class="n">true</span>
-</code></pre></div>
-<h4>Boolean equality: <code>xnor</code></h4>
+<h4 id="basic-boolean-operations-and-or-and-not">Basic Boolean operations: <code class="language-plaintext highlighter-rouge">and</code>, <code class="language-plaintext highlighter-rouge">or</code> and <code class="language-plaintext highlighter-rouge">not</code></h4>
 
-<p>We note that to test equality of Booleans we can use <code>xnor</code>, and we can of course define <code>xor</code> in terms of <code>and</code>, <code>or</code> and <code>not</code>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">xor</span> <span class="n">x</span> <span class="n">y</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">or</span> <span class="n">y</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">not</span> <span class="n">x</span> <span class="n">or</span> <span class="n">not</span> <span class="n">y</span><span class="p">)</span>
-</code></pre></div>
-<p>and </p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">xnor</span> <span class="n">x</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">not</span> <span class="p">(</span><span class="n">xor</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span>
-</code></pre></div>
-<h3>Signed Integers</h3>
+<p>Using <code class="language-plaintext highlighter-rouge">ifthenelse</code> we can define <code class="language-plaintext highlighter-rouge">and</code>, <code class="language-plaintext highlighter-rouge">or</code> and <code class="language-plaintext highlighter-rouge">not</code>:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">and</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ifthenelse</span> <span class="n">x</span> <span class="p">(</span><span class="n">ifthenelse</span> <span class="n">y</span> <span class="n">true</span><span class="p">)</span> <span class="n">false</span>
+    <span class="n">or</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ifthenelse</span> <span class="n">x</span> <span class="n">true</span> <span class="p">(</span><span class="n">ifthenelse</span> <span class="n">y</span> <span class="n">true</span> <span class="n">false</span><span class="p">)</span>
+    <span class="n">not</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ifthenelse</span> <span class="n">x</span> <span class="n">false</span> <span class="n">true</span>
+</code></pre></div></div>
+
+<h4 id="boolean-equality-xnor">Boolean equality: <code class="language-plaintext highlighter-rouge">xnor</code></h4>
+
+<p>We note that to test equality of Booleans we can use <code class="language-plaintext highlighter-rouge">xnor</code>, and we can of course define <code class="language-plaintext highlighter-rouge">xor</code> in terms of <code class="language-plaintext highlighter-rouge">and</code>, <code class="language-plaintext highlighter-rouge">or</code> and <code class="language-plaintext highlighter-rouge">not</code>:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">xor</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="n">or</span> <span class="n">y</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">not</span> <span class="n">x</span> <span class="n">or</span> <span class="n">not</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>and</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">xnor</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">not</span> <span class="p">(</span><span class="n">xor</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="signed-integers">Signed Integers</h3>
 
 <p>The common way to define integers in the lambda calculus is as <a href="https://en.wikipedia.org/wiki/Church_encoding">Church numerals</a>. Here we take a different approach, but it is of course equivalent. We define an integer as a list of Booleans, using <a href="https://en.wikipedia.org/wiki/Unary_coding">thermometer code</a>, and with the following definitions:</p>
 
-<p>We define unsigned <code>0</code> as a 1-element list containing <code>false</code>. To get signed integers we simply define the first bit of the list as the sign bit. We define unsigned and signed versions of <code>0</code>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">u0</span> <span class="ow">=</span> <span class="n">false</span><span class="kt">:[]</span>
-    <span class="mi">0</span> <span class="ow">=</span> <span class="o">+</span><span class="mi">0</span> <span class="ow">=</span> <span class="n">true</span><span class="kt">:</span><span class="n">u0</span>
-    <span class="o">-</span><span class="mi">0</span> <span class="ow">=</span> <span class="n">false</span><span class="kt">:</span><span class="n">u0</span>
-</code></pre></div>
-<p>For convenience we define also:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">isPos</span> <span class="n">n</span> <span class="ow">=</span> <span class="n">head</span> <span class="n">n</span>
-    <span class="n">isNeg</span> <span class="n">n</span> <span class="ow">=</span> <span class="n">not</span> <span class="p">(</span><span class="n">head</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">isZero</span> <span class="n">n</span> <span class="ow">=</span> <span class="n">not</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">))</span>
-    <span class="n">sign</span> <span class="n">n</span> <span class="ow">=</span> <span class="n">head</span> <span class="n">n</span>
-</code></pre></div>
-<h4>Integer equality</h4>
+<p>We define unsigned <code class="language-plaintext highlighter-rouge">0</code> as a 1-element list containing <code class="language-plaintext highlighter-rouge">false</code>. To get signed integers we simply define the first bit of the list as the sign bit. We define unsigned and signed versions of <code class="language-plaintext highlighter-rouge">0</code>:</p>
 
-<p>The definition of <code>0</code> makes the integer equality <code>(==)</code> easier:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="o">==</span><span class="p">)</span> <span class="n">n1</span> <span class="n">n2</span> <span class="ow">=</span> <span class="kr">let</span>
-      <span class="n">s1</span> <span class="ow">=</span> <span class="n">head</span> <span class="n">n1</span>
-      <span class="n">s2</span> <span class="ow">=</span> <span class="n">head</span> <span class="n">n2</span>
-      <span class="n">b1</span> <span class="ow">=</span> <span class="n">head</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n1</span><span class="p">)</span>
-      <span class="n">b2</span> <span class="ow">=</span> <span class="n">head</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n2</span><span class="p">)</span>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">u0</span> <span class="o">=</span> <span class="n">false</span><span class="o">:</span><span class="kt">[]</span>
+    <span class="mi">0</span> <span class="o">=</span> <span class="o">+</span><span class="mi">0</span> <span class="o">=</span> <span class="n">true</span><span class="o">:</span><span class="n">u0</span>
+    <span class="o">-</span><span class="mi">0</span> <span class="o">=</span> <span class="n">false</span><span class="o">:</span><span class="n">u0</span>
+</code></pre></div></div>
+
+<p>For convenience we define also:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">isPos</span> <span class="n">n</span> <span class="o">=</span> <span class="n">head</span> <span class="n">n</span>
+    <span class="n">isNeg</span> <span class="n">n</span> <span class="o">=</span> <span class="n">not</span> <span class="p">(</span><span class="n">head</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">isZero</span> <span class="n">n</span> <span class="o">=</span> <span class="n">not</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">sign</span> <span class="n">n</span> <span class="o">=</span> <span class="n">head</span> <span class="n">n</span>
+</code></pre></div></div>
+
+<h4 id="integer-equality">Integer equality</h4>
+
+<p>The definition of <code class="language-plaintext highlighter-rouge">0</code> makes the integer equality <code class="language-plaintext highlighter-rouge">(==)</code> easier:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">(</span><span class="o">==</span><span class="p">)</span> <span class="n">n1</span> <span class="n">n2</span> <span class="o">=</span> <span class="kr">let</span>
+      <span class="n">s1</span> <span class="o">=</span> <span class="n">head</span> <span class="n">n1</span>
+      <span class="n">s2</span> <span class="o">=</span> <span class="n">head</span> <span class="n">n2</span>
+      <span class="n">b1</span> <span class="o">=</span> <span class="n">head</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n1</span><span class="p">)</span>
+      <span class="n">b2</span> <span class="o">=</span> <span class="n">head</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n2</span><span class="p">)</span>
       <span class="kr">if</span> <span class="p">(</span><span class="n">xnor</span> <span class="n">s1</span> <span class="n">s2</span><span class="p">)</span> <span class="kr">then</span>
         <span class="kr">if</span> <span class="p">(</span><span class="n">and</span> <span class="p">(</span><span class="n">not</span> <span class="n">b1</span><span class="p">)</span> <span class="p">(</span><span class="n">not</span> <span class="n">b2</span><span class="p">))</span>
           <span class="kr">then</span> <span class="n">true</span>
           <span class="kr">else</span>
             <span class="kr">if</span> <span class="p">(</span><span class="n">and</span> <span class="p">(</span><span class="n">not</span> <span class="n">b1</span><span class="p">)</span> <span class="p">(</span><span class="n">not</span> <span class="n">b2</span><span class="p">))</span>
-              <span class="kr">then</span>  <span class="p">(</span><span class="o">==</span><span class="p">)</span> <span class="p">(</span><span class="n">s1</span><span class="kt">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n1</span><span class="p">))</span> <span class="p">(</span><span class="n">s2</span><span class="kt">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n2</span><span class="p">))</span>
+              <span class="kr">then</span>  <span class="p">(</span><span class="o">==</span><span class="p">)</span> <span class="p">(</span><span class="n">s1</span><span class="o">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n1</span><span class="p">))</span> <span class="p">(</span><span class="n">s2</span><span class="o">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n2</span><span class="p">))</span>
               <span class="kr">else</span> <span class="n">false</span>
         <span class="kr">else</span> <span class="n">false</span>
-</code></pre></div>
-<h4>Negation</h4>
+</code></pre></div></div>
+
+<h4 id="negation">Negation</h4>
 
 <p>We can also easily define negation:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">neg</span> <span class="n">n</span> <span class="ow">=</span> <span class="p">(</span><span class="n">not</span> <span class="p">(</span><span class="n">head</span> <span class="n">n</span><span class="p">))</span><span class="kt">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">)</span>
-</code></pre></div>
-<h4>Increment and Decrement</h4>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">neg</span> <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">not</span> <span class="p">(</span><span class="n">head</span> <span class="n">n</span><span class="p">))</span><span class="o">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="increment-and-decrement">Increment and Decrement</h4>
 
 <p>For convenience we define also define increment and decrement operations:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">inc</span> <span class="n">n</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">isPos</span> <span class="n">n</span> 
-      <span class="kr">then</span> <span class="n">true</span><span class="kt">:</span><span class="n">true</span><span class="kt">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">)</span> 
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">inc</span> <span class="n">n</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">isPos</span> <span class="n">n</span> 
+      <span class="kr">then</span> <span class="n">true</span><span class="o">:</span><span class="n">true</span><span class="o">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">)</span> 
       <span class="kr">else</span> <span class="kr">if</span> <span class="n">isZero</span> <span class="n">n</span> 
         <span class="kr">then</span> <span class="mi">1</span> 
-        <span class="kr">else</span> <span class="n">false</span><span class="kt">:</span><span class="p">(</span><span class="n">tail</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">))</span>
-    <span class="n">dec</span> <span class="n">n</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">isZero</span> <span class="n">n</span> 
+        <span class="kr">else</span> <span class="n">false</span><span class="o">:</span><span class="p">(</span><span class="n">tail</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">dec</span> <span class="n">n</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">isZero</span> <span class="n">n</span> 
       <span class="kr">then</span> <span class="o">-</span><span class="mi">1</span> 
       <span class="kr">else</span> <span class="kr">if</span> <span class="n">isNeg</span> <span class="n">n</span> 
-        <span class="kr">then</span> <span class="n">false</span><span class="kt">:</span><span class="n">true</span><span class="kt">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">)</span> <span class="n">n</span> 
-        <span class="kr">else</span> <span class="n">true</span><span class="kt">:</span><span class="p">(</span><span class="n">tail</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">))</span>
-</code></pre></div>
-<h4>Addition and Subtraction</h4>
+        <span class="kr">then</span> <span class="n">false</span><span class="o">:</span><span class="n">true</span><span class="o">:</span><span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">)</span> <span class="n">n</span> 
+        <span class="kr">else</span> <span class="n">true</span><span class="o">:</span><span class="p">(</span><span class="n">tail</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="addition-and-subtraction">Addition and Subtraction</h4>
 
 <p>General addition is quite easy:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">add</span> <span class="n">n1</span> <span class="n">n2</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">add_if_true</span> <span class="n">n1</span> <span class="n">n2</span>
-      <span class="kr">where</span>
-        <span class="n">add_if_true</span> <span class="n">elt</span> <span class="n">n1</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">elt</span> <span class="kr">then</span> <span class="n">true</span><span class="kt">:</span><span class="n">n1</span> <span class="kr">else</span> <span class="n">n1</span>
-</code></pre></div>
-<p>In the same way, subtraction is also straightforward:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">sub</span> <span class="n">n1</span> <span class="n">n2</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">sub_if_true</span> <span class="n">n1</span> <span class="n">n2</span>
-      <span class="kr">where</span>
-        <span class="n">sub_if_true</span> <span class="n">elt</span> <span class="n">n1</span> <span class="ow">=</span> <span class="kr">of</span> <span class="n">elt</span> <span class="kr">then</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n1</span><span class="p">)</span> <span class="kr">else</span> <span class="n">n1</span>
-</code></pre></div>
-<h4>Multiplication</h4>
 
-<p>An easy way to define multiplication is by defining the <code>replicate</code> and <code>sum</code> operations:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">replicate</span> <span class="n">n</span> <span class="n">m</span> <span class="ow">=</span>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">add</span> <span class="n">n1</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">foldl</span> <span class="n">add_if_true</span> <span class="n">n1</span> <span class="n">n2</span>
+      <span class="kr">where</span>
+        <span class="n">add_if_true</span> <span class="n">elt</span> <span class="n">n1</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">elt</span> <span class="kr">then</span> <span class="n">true</span><span class="o">:</span><span class="n">n1</span> <span class="kr">else</span> <span class="n">n1</span>
+</code></pre></div></div>
+
+<p>In the same way, subtraction is also straightforward:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">sub</span> <span class="n">n1</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">foldl</span> <span class="n">sub_if_true</span> <span class="n">n1</span> <span class="n">n2</span>
+      <span class="kr">where</span>
+        <span class="n">sub_if_true</span> <span class="n">elt</span> <span class="n">n1</span> <span class="o">=</span> <span class="kr">of</span> <span class="n">elt</span> <span class="kr">then</span> <span class="p">(</span><span class="n">tail</span> <span class="n">n1</span><span class="p">)</span> <span class="kr">else</span> <span class="n">n1</span>
+</code></pre></div></div>
+
+<h4 id="multiplication">Multiplication</h4>
+
+<p>An easy way to define multiplication is by defining the <code class="language-plaintext highlighter-rouge">replicate</code> and <code class="language-plaintext highlighter-rouge">sum</code> operations:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">replicate</span> <span class="n">n</span> <span class="n">m</span> <span class="o">=</span>
       <span class="kr">let</span>
-        <span class="n">repl</span> <span class="n">n</span> <span class="n">m</span> <span class="n">lst</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span> 
+        <span class="n">repl</span> <span class="n">n</span> <span class="n">m</span> <span class="n">lst</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span> 
           <span class="kr">then</span> <span class="n">lst</span> 
-          <span class="kr">else</span> <span class="n">repl</span> <span class="p">(</span><span class="n">dec</span> <span class="n">n</span><span class="p">)</span> <span class="n">m</span> <span class="p">(</span><span class="n">m</span><span class="kt">:</span><span class="n">lst</span><span class="p">)</span>
+          <span class="kr">else</span> <span class="n">repl</span> <span class="p">(</span><span class="n">dec</span> <span class="n">n</span><span class="p">)</span> <span class="n">m</span> <span class="p">(</span><span class="n">m</span><span class="o">:</span><span class="n">lst</span><span class="p">)</span>
       <span class="kr">in</span>
         <span class="n">repl</span> <span class="n">n</span> <span class="n">m</span> <span class="kt">[]</span>
 
-    <span class="n">sum</span> <span class="n">lst</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">add</span> <span class="mi">0</span> <span class="n">lst</span>
-</code></pre></div>
+    <span class="n">sum</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">foldl</span> <span class="n">add</span> <span class="mi">0</span> <span class="n">lst</span>
+</code></pre></div></div>
+
 <p>Then multiplication simply becomes</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="n">mult</span> <span class="n">n</span> <span class="n">m</span> <span class="ow">=</span> <span class="n">sum</span> <span class="p">(</span><span class="n">replicate</span> <span class="n">n</span> <span class="n">m</span><span class="p">)</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">mult</span> <span class="n">n</span> <span class="n">m</span> <span class="o">=</span> <span class="n">sum</span> <span class="p">(</span><span class="n">replicate</span> <span class="n">n</span> <span class="n">m</span><span class="p">)</span>
+</code></pre></div></div>
+
 <p>In a similar way we can define integer division and modulo.</p>
 
-<h3>Floats, Characters and Strings</h3>
+<h3 id="floats-characters-and-strings">Floats, Characters and Strings</h3>
 
-<p>We note that floating-point numbers and characters use an integer representation, and strings are simply lists of characters. So we don&#39;t need to do any additional work to represent them, and the operations on them are analogous to the ones defined above. </p>
+<p>We note that floating-point numbers and characters use an integer representation, and strings are simply lists of characters. So we don’t need to do any additional work to represent them, and the operations on them are analogous to the ones defined above.</p>
 
-<h2>Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>In this way, we have defined a language with variables, (higher-order) functions, conditionals and recursion. We can manipulate lists and tuples of integers, floats, chars and strings. And yet it consists of nothing more than lambda functions!</p>
 
@@ -484,13 +518,6 @@
 
                     <div class="inline-btn">
     <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
-    <!--
-	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
-	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
-	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
-	&nbsp;
-<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-    -->
 </div><!-- /.follow-us -->
 
 					
@@ -520,7 +547,7 @@
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2024 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -544,8 +571,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
 
     
 

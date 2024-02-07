@@ -6,25 +6,6 @@
     <meta name="description" content="A reconstruction of Raku's junctions as an algebraic data with higher-order functions.">
     <meta name="keywords" content="coding, hacking, programming, raku, haskell">
     
-    	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="Reconstructing Raku's Junctions">
-	<meta name="twitter:description" content="A reconstruction of Raku's junctions as an algebraic data with higher-order functions.">
-	<meta name="twitter:site" content="@wim_v12e">
-	<meta name="twitter:creator" content="@wim_v12e">
-	
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/reconstructing-raku-junctions_1600x600.jpg">
-	
-	<!-- Open Graph -->
-	<meta property="og:locale" content="en_GB">
-	<meta property="og:type" content="article">
-	<meta property="og:site_name" content="Wim Vanderbauwhede">
-	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/reconstructing-raku-junctions/#">
-	<meta property="og:title" content="Reconstructing Raku's Junctions">
-	<meta property="og:description" content="A reconstruction of Raku's junctions as an algebraic data with higher-order functions.">
-	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/reconstructing-raku-junctions_1600x600.jpg" />
-
-    
 
     <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/reconstructing-raku-junctions/">
 
@@ -37,7 +18,7 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
     <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
-    <style>
+    <!-- <style>
     .sliding-menu-content {
       top: 0;
       right: 0;
@@ -51,63 +32,25 @@
       -o-transform: translateX(100%);
       transform: translateX(100%);
     }
-    </style>
+    </style> -->
 
     <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
     <![endif]-->
-<!-- Google Analytics -->
-<!-- WV: NO!
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-73376688-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
--->
-<!--
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19948710-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
--->
     <!-- Include the jQuery library (local or CDN) -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
-	  <!-- WV: NO!
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    -->
     <header id="masthead">
   <div class="inner-wrap">
 <a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
@@ -119,11 +62,11 @@
 </ul>
 
     </nav>
-<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
-    <nav role="navigation" class="js-menu sliding-menu-content">
+    <!-- <nav role="navigation" class="js-menu sliding-menu-content">
 	<ul class="menu-item">
 		
 	</ul>
@@ -133,7 +76,7 @@
 </button>
 
 <div class="js-menu-screen menu-screen"></div>
-
+ -->
 
     <div id="page-wrapper">
 
@@ -142,7 +85,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/reconstructing-raku-junctions_1600x600.jpg" class="page-feature-image" alt="Reconstructing Raku's Junctions" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/reconstructing-raku-junctions_1600x600.avif" class="page-feature-image" alt="Reconstructing Raku's Junctions" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -158,244 +101,306 @@
 			<div id="content" class="page-content" itemprop="articleBody">
 				<p>Junctions in Raku are cool but at first glance they do not follow the rules for static typing. I was curious about their formal typing semantics, so I deconstructed and then reconstructed junctions from a functional, static typing perspective.</p>
 
-<p>If you don&#39;t know Raku or are unfamiliar with the functional style of programming, I suggest you read my introductory article <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming">&quot;Cleaner code with functional programming&quot;</a>. If you have not heard of algebraic data types before, I suggest my article <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku">&quot;Roles as Algebraic Data Types in Raku&quot;</a>.</p>
+<p>If you don’t know Raku or are unfamiliar with the functional style of programming, I suggest you read my introductory article <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming">“Cleaner code with functional programming”</a>. If you have not heard of algebraic data types before, I suggest my article <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku">“Roles as Algebraic Data Types in Raku”</a>.</p>
 
-<h2>Junctions in Raku</h2>
+<h2 id="junctions-in-raku">Junctions in Raku</h2>
 
-<p><a href="https://raku.org/">Raku</a> has this neat feature called <a href="https://docs.raku.org/">Junctions</a>. A junction is an unordered composite value. When a junction is used instead of a value, the operation is carried out for each junction element, and the result is the junction of the return values of all those operators. Junctions collapse into a single value when used in a Boolean context. Junctions can be of type <em>all</em> (<code>&amp;</code>), <em>any</em> (<code>|</code>), <em>one</em> (<code>^</code>) or <em>none</em> (empty junction).</p>
+<p><a href="https://raku.org/">Raku</a> has this neat feature called <a href="https://docs.raku.org/">Junctions</a>. A junction is an unordered composite value. When a junction is used instead of a value, the operation is carried out for each junction element, and the result is the junction of the return values of all those operators. Junctions collapse into a single value when used in a Boolean context. Junctions can be of type <em>all</em> (<code class="language-plaintext highlighter-rouge">&amp;</code>), <em>any</em> (<code class="language-plaintext highlighter-rouge">|</code>), <em>one</em> (<code class="language-plaintext highlighter-rouge">^</code>) or <em>none</em> (empty junction).</p>
 
-<p>For example, </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">$j</span> = <span class="mi">11</span><span class="o">|</span><span class="mi">22</span>; <span class="c1"># short for any(11,22)</span>
-<span class="k">if</span> <span class="mi">33</span> == <span class="nv">$j</span> + <span class="mi">11</span> {
-    <span class="nb">say</span> <span class="s">&#39;yes&#39;</span>;
+<p>For example,</p>
+
+<pre><code class="language-perl6">my $j = 11|22; # short for any(11,22)
+if 33 == $j + 11 {
+    say 'yes';
 }
 
-<span class="nb">say</span> <span class="o">so</span> <span class="mi">3</span> == (<span class="mi">1</span><span class="o">..</span><span class="mi">30</span>).<span class="nb">one</span>;         <span class="c1">#=&gt; True </span>
-<span class="nb">say</span> <span class="o">so</span> (<span class="s">&quot;a&quot;</span> ^ <span class="s">&quot;b&quot;</span> ^ <span class="s">&quot;c&quot;</span>) <span class="o">eq</span> <span class="s">&quot;a&quot;</span>; <span class="c1">#=&gt; True</span>
-</code></pre></div>
-<p>The function <code>so</code> forces the Boolean context.</p>
+say so 3 == (1..30).one;         #=&gt; True 
+say so ("a" ^ "b" ^ "c") eq "a"; #=&gt; True
+</code></pre>
 
-<p>Junctions have type <em>Junction</em>, and I was curious about the typing rules, because at first sight there is something strange. Let&#39;s say we have a function <code>sq</code> from <em>Int</em> to <em>Int</em> :</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">sq</span>(<span class="nb">Int</span> <span class="nv">$x</span> --&gt; <span class="nb">Int</span>) { <span class="nv">$x</span>*<span class="nv">$x</span> }
+<p>The function <code class="language-plaintext highlighter-rouge">so</code> forces the Boolean context.</p>
 
-<span class="k">my</span> <span class="nb">Int</span> <span class="nv">$res</span> = <span class="n">sq</span>(<span class="mi">11</span>); <span class="c1"># OK</span>
-<span class="nb">say</span> <span class="nv">$res</span>; <span class="c1">#=&gt; 121 </span>
-</code></pre></div>
-<p>Now let&#39;s define a junction of type <em>any</em> of <em>Int</em> values:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nb">Junction</span> <span class="nv">$j</span> = <span class="mi">11</span> | <span class="mi">22</span>; 
-</code></pre></div>
-<p>When we apply <code>sq</code> to <code>$j</code>, we do not get a type error, even though the functions has type <code>:(Int --&gt; Int)</code> and the junction has type <code>Junction</code>. Instead, we get a junction of the results:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span> <span class="n">sq</span>(<span class="nv">$j</span>); <span class="c1">#=&gt; any(121, 484)</span>
-</code></pre></div>
+<p>Junctions have type <em>Junction</em>, and I was curious about the typing rules, because at first sight there is something strange. Let’s say we have a function <code class="language-plaintext highlighter-rouge">sq</code> from <em>Int</em> to <em>Int</em> :</p>
+
+<pre><code class="language-perl6">sub sq(Int $x --&gt; Int) { $x*$x }
+
+my Int $res = sq(11); # OK
+say $res; #=&gt; 121 
+</code></pre>
+
+<p>Now let’s define a junction of type <em>any</em> of <em>Int</em> values:</p>
+
+<pre><code class="language-perl6">my Junction $j = 11 | 22; 
+</code></pre>
+
+<p>When we apply <code class="language-plaintext highlighter-rouge">sq</code> to <code class="language-plaintext highlighter-rouge">$j</code>, we do not get a type error, even though the functions has type <code class="language-plaintext highlighter-rouge">:(Int --&gt; Int)</code> and the junction has type <code class="language-plaintext highlighter-rouge">Junction</code>. Instead, we get a junction of the results:</p>
+
+<pre><code class="language-perl6">say sq($j); #=&gt; any(121, 484)
+</code></pre>
+
 <p>If we assign this to a variable of type <em>Int</em> as before, we get a type error:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nb">Int</span> <span class="nv">$rj</span> = <span class="n">sq</span>(<span class="nv">$j</span>); <span class="c1">#=&gt; Type check failed in assignment to $rj; expected Int but got Junction (any(121, 484))</span>
-</code></pre></div>
+
+<pre><code class="language-perl6">my Int $rj = sq($j); #=&gt; Type check failed in assignment to $rj; expected Int but got Junction (any(121, 484))
+</code></pre>
+
 <p>Instead, the return value is now of type <em>Junction</em>:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>my Junction $rj = sq(11|22); # OK
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my Junction $rj = sq(11|22); # OK
+</code></pre></div></div>
+
 <p>So the <em>Junction</em> type can take the place of any other type but then the operation becomes a junction as well.</p>
 
-<p>On the other hand, junctions are implicitly typed by their constituent values, even though they seem to be of the opaque type <em>Junction</em>. For example, if we create a junction of <em>Str</em> values, and try to pass this junction value into <code>sq</code>, we get a type error:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">$sj</span> = <span class="s">&#39;11&#39;</span> | <span class="s">&#39;22&#39;</span>;
-<span class="nb">say</span> <span class="nv">$sj</span>.<span class="nb">WHAT</span>; <span class="c1">#=&gt;(Junction)</span>
+<p>On the other hand, junctions are implicitly typed by their constituent values, even though they seem to be of the opaque type <em>Junction</em>. For example, if we create a junction of <em>Str</em> values, and try to pass this junction value into <code class="language-plaintext highlighter-rouge">sq</code>, we get a type error:</p>
 
-<span class="k">my</span> <span class="nb">Junction</span> <span class="nv">$svj</span> = <span class="n">sq</span>(<span class="nv">$sj</span>); <span class="c1">#=&gt; Type check failed in binding to parameter &#39;x&#39;; expected Int but got Str (&quot;11&quot;)</span>
-</code></pre></div>
-<h2>Do junctions follow static typing rules?</h2>
+<pre><code class="language-perl6">my $sj = '11' | '22';
+say $sj.WHAT; #=&gt;(Junction)
 
-<p>Although this <em>kind of</em> makes sense (we don&#39;t want it to work with <em>Str</em> if the original function expects <em>Int</em>), this does flout the rules for static typing, even with subtyping. If an argument is of type <em>Int</em> then any type below it in the type graph can be used instead. But the simplified type graph for <em>Int</em> and <em>Junction</em> is as follows:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>    Int -&gt; Cool -&gt; Any -&gt; Mu &lt;- Junction
-</code></pre></div>
+my Junction $svj = sq($sj); #=&gt; Type check failed in binding to parameter 'x'; expected Int but got Str ("11")
+</code></pre>
+
+<h2 id="do-junctions-follow-static-typing-rules">Do junctions follow static typing rules?</h2>
+
+<p>Although this <em>kind of</em> makes sense (we don’t want it to work with <em>Str</em> if the original function expects <em>Int</em>), this does flout the rules for static typing, even with subtyping. If an argument is of type <em>Int</em> then any type below it in the type graph can be used instead. But the simplified type graph for <em>Int</em> and <em>Junction</em> is as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Int -&gt; Cool -&gt; Any -&gt; Mu &lt;- Junction
+</code></pre></div></div>
+
 <p>So a <em>Junction</em> is never a subtype of anything below <em>Any</em>. Therefore putting a junction in a slot of type <em>Any</em> or subtype thereof should be a type error.</p>
 
-<p>Furthermore, because the <em>Junction</em> type is opaque (i.e. it is not a parametrised type), it should not hold any information about the type of the values inside the junction. And yet it does type check against these invisible, inaccessible values. </p>
+<p>Furthermore, because the <em>Junction</em> type is opaque (i.e. it is not a parametrised type), it should not hold any information about the type of the values inside the junction. And yet it does type check against these invisible, inaccessible values.</p>
 
-<p>So what is happening here? </p>
+<p>So what is happening here?</p>
 
-<h2>A working hypothesis</h2>
+<h2 id="a-working-hypothesis">A working hypothesis</h2>
 
 <p>A working hypothesis is that a <em>Junction</em> type does not really take the place of any other type: it is merely a syntactic sugar that makes it seem so.</p>
 
-<h2>Reconstructing junctions part 1: types</h2>
+<h2 id="reconstructing-junctions-part-1-types">Reconstructing junctions part 1: types</h2>
 
-<p>Let&#39;s try and reconstruct this. The aim is to come up with a data type and some actions that will replicate the observed behaviour of Raku&#39;s junctions.
-First we discuss the types, using Haskell notation for clarity. Then I present the implementation in Raku. This implementation will behave like Raku&#39;s native junctions but without the magic syntactic sugar. In this way I show that Raku&#39;s junctions do follow proper typing rules after all.</p>
+<p>Let’s try and reconstruct this. The aim is to come up with a data type and some actions that will replicate the observed behaviour of Raku’s junctions.
+First we discuss the types, using Haskell notation for clarity. Then I present the implementation in Raku. This implementation will behave like Raku’s native junctions but without the magic syntactic sugar. In this way I show that Raku’s junctions do follow proper typing rules after all.</p>
 
-<h3>The Junction type</h3>
+<h3 id="the-junction-type">The Junction type</h3>
 
 <p>A <em>Junction</em> is a data structure consisting of a junction type <em>JType</em> and a set of values. 
 I restrict this set of values to a single type for convenience and also because a junction of mixed types does actually not make much sense. I use a list to model the set, again for convenience. Because a <em>Junction</em> can contain values of any type, it is a polymorphic algebraic data type:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">data</span> <span class="kt">JType</span> <span class="ow">=</span> <span class="kt">JAny</span> <span class="o">|</span> <span class="kt">JAll</span> <span class="o">|</span> <span class="kt">JOne</span> <span class="o">|</span> <span class="kt">JNone</span>
 
-<span class="kr">data</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Junction</span> <span class="kt">JType</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
-</code></pre></div>
-<h3>Applying junctions</h3>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">JType</span> <span class="o">=</span> <span class="kt">JAny</span> <span class="o">|</span> <span class="kt">JAll</span> <span class="o">|</span> <span class="kt">JOne</span> <span class="o">|</span> <span class="kt">JNone</span>
+
+<span class="kr">data</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">Junction</span> <span class="kt">JType</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="applying-junctions">Applying junctions</h3>
 
 <p>Doing anything with a junction means applying a function to it. We can consider three cases, and I introduce an ad-hoc custom operator for each of them:</p>
 
 <ul>
-<li>Apply a non-<em>Junction</em> function to a <em>Junction</em> expression</li>
+  <li>Apply a non-_Junction_ function to a <em>Junction</em> expression</li>
 </ul>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="err">•￮</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="ow">-&gt;</span>  <span class="kt">Junction</span> <span class="n">b</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">(</span><span class="err">•￮</span><span class="p">)</span> <span class="o">::</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="o">-&gt;</span>  <span class="kt">Junction</span> <span class="n">b</span>
+</code></pre></div></div>
+
 <ul>
-<li>Apply a <em>Junction</em> function to a non-<em>Junction</em> expression</li>
+  <li>Apply a <em>Junction</em> function to a non-_Junction_ expression</li>
 </ul>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="err">￮•</span><span class="p">)</span> <span class="ow">::</span>  <span class="kt">Junction</span> <span class="p">(</span><span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">b</span> <span class="ow">-&gt;</span> <span class="kt">Junction</span> <span class="n">c</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">(</span><span class="err">￮•</span><span class="p">)</span> <span class="o">::</span>  <span class="kt">Junction</span> <span class="p">(</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="kt">Junction</span> <span class="n">c</span>
+</code></pre></div></div>
+
 <ul>
-<li>Apply a <em>Junction</em> function to a <em>Junction</em> expression, creating a nested junction</li>
+  <li>Apply a <em>Junction</em> function to a <em>Junction</em> expression, creating a nested junction</li>
 </ul>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="p">(</span><span class="err">￮￮</span><span class="p">)</span> <span class="ow">::</span>  <span class="kt">Junction</span> <span class="p">(</span><span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">Junction</span> <span class="n">b</span> <span class="ow">-&gt;</span> <span class="kt">Junction</span> <span class="p">(</span><span class="kt">Junction</span> <span class="n">c</span><span class="p">)</span>
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">(</span><span class="err">￮￮</span><span class="p">)</span> <span class="o">::</span>  <span class="kt">Junction</span> <span class="p">(</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Junction</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="kt">Junction</span> <span class="p">(</span><span class="kt">Junction</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
 <p>For convenience, we can also create custom comparison operators between <em>Junction a</em> and <em>a</em>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>    <span class="c1">-- and similar for /-, &gt;, &lt;, &lt;=,&gt;=</span>
-    <span class="p">(</span><span class="err">￮</span><span class="o">==</span><span class="err">•</span><span class="p">)</span> <span class="ow">::</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
-</code></pre></div>
-<h3>Collapsing junctions</h3>
 
-<p>Then we have <code>so</code>, the Boolean coercion function. What it does is to collapse a junction of Booleans into a single Boolean. </p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">so</span> <span class="ow">::</span> <span class="kt">Junction</span> <span class="kt">Bool</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
-</code></pre></div>
-<p>Finally we have <code>collapse</code>, which returns the value from a junction, provided that it is a junction where all stored values are the same. </p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">collapse</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Show</span> <span class="n">a</span><span class="p">,</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span>
-</code></pre></div>
-<p>This may seem like a strange function but it is necessary because of the behaviour of junctions. As we will see, the above semantics imply that junctions are greedy: if a single argument of a function is a junction, then all other arguments also become junctions, but all values in the junction are identical. I have discussed this in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">&quot;The strange case of the greedy junction&quot;</a>, but we can now formalise this behaviour.</p>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">-- and similar for /-, &gt;, &lt;, &lt;=,&gt;=</span>
+    <span class="p">(</span><span class="err">￮</span><span class="o">==</span><span class="err">•</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+</code></pre></div></div>
 
-<h3>Revisiting the strange case of the greedy junction</h3>
+<h3 id="collapsing-junctions">Collapsing junctions</h3>
 
-<p>Suppose we have a function of two arguments <code>f :: a -&gt; b -&gt; c</code>, and we apply a junction <code>j :: Junction a</code> to the first argument, <code>f •￮ j</code>. Then the result is a partially applied function wrapped in a Junction: <code>fp :: Junction b -&gt; c</code>. If we now want to apply this function a non-Junction value <code>v :: b</code> using <code>fp ￮• v</code>, the result is of type <code>Junction c</code>. So already we see that the non-Junction value <code>v</code> is assimilated into the junction.</p>
+<p>Then we have <code class="language-plaintext highlighter-rouge">so</code>, the Boolean coercion function. What it does is to collapse a junction of Booleans into a single Boolean.</p>
 
-<p>Now, let&#39;s consider the particular case where the type <code>c</code> is <code>forall d . (a -&gt; b -&gt; d) -&gt; d</code>, so we have <code>Junction (forall d . (a-&gt;b-&gt;d) -&gt; d)</code>. This is a function which takes a function argument and returns something of the return type of that function. We use the <code>forall</code> so that <code>d</code> can be anything, but in practice we want it to be either <code>a</code> or <code>b</code>.</p>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">so</span> <span class="o">::</span> <span class="kt">Junction</span> <span class="kt">Bool</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+</code></pre></div></div>
 
-<p>Let&#39;s assume we apply this function (call it <code>p</code>) to <code>fst :: a-&gt;b-&gt;a</code>, using <code>p ￮• fst</code>, then we get <code>Junction a</code>. But if we apply it to <code>snd :: a-&gt;b-&gt;b</code>, using <code>p ￮• snd</code>, then we get <code>Junction b</code>. Recall that we applied the original function <code>f</code> to a <code>Junction a</code> and a non-Junction <code>b</code>. Yet whatever we do, we can&#39;t recover the <code>b</code>. The result is always wrapped in a junction. </p>
+<p>Finally we have <code class="language-plaintext highlighter-rouge">collapse</code>, which returns the value from a junction, provided that it is a junction where all stored values are the same.</p>
 
-<p>This is the formal type-based analysis of why we can&#39;t return a non-Junction value from a pair as explained in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">&quot;The strange case of the greedy junction&quot;</a>. And this is why we need the <code>collapse</code> function.</p>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">collapse</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Show</span> <span class="n">a</span><span class="p">,</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+</code></pre></div></div>
 
-<h2>Reconstructing junctions part 2: Raku implementation</h2>
+<p>This may seem like a strange function but it is necessary because of the behaviour of junctions. As we will see, the above semantics imply that junctions are greedy: if a single argument of a function is a junction, then all other arguments also become junctions, but all values in the junction are identical. I have discussed this in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">“The strange case of the greedy junction”</a>, but we can now formalise this behaviour.</p>
+
+<h3 id="revisiting-the-strange-case-of-the-greedy-junction">Revisiting the strange case of the greedy junction</h3>
+
+<p>Suppose we have a function of two arguments <code class="language-plaintext highlighter-rouge">f :: a -&gt; b -&gt; c</code>, and we apply a junction <code class="language-plaintext highlighter-rouge">j :: Junction a</code> to the first argument, <code class="language-plaintext highlighter-rouge">f •￮ j</code>. Then the result is a partially applied function wrapped in a Junction: <code class="language-plaintext highlighter-rouge">fp :: Junction b -&gt; c</code>. If we now want to apply this function a non-Junction value <code class="language-plaintext highlighter-rouge">v :: b</code> using <code class="language-plaintext highlighter-rouge">fp ￮• v</code>, the result is of type <code class="language-plaintext highlighter-rouge">Junction c</code>. So already we see that the non-Junction value <code class="language-plaintext highlighter-rouge">v</code> is assimilated into the junction.</p>
+
+<p>Now, let’s consider the particular case where the type <code class="language-plaintext highlighter-rouge">c</code> is <code class="language-plaintext highlighter-rouge">forall d . (a -&gt; b -&gt; d) -&gt; d</code>, so we have <code class="language-plaintext highlighter-rouge">Junction (forall d . (a-&gt;b-&gt;d) -&gt; d)</code>. This is a function which takes a function argument and returns something of the return type of that function. We use the <code class="language-plaintext highlighter-rouge">forall</code> so that <code class="language-plaintext highlighter-rouge">d</code> can be anything, but in practice we want it to be either <code class="language-plaintext highlighter-rouge">a</code> or <code class="language-plaintext highlighter-rouge">b</code>.</p>
+
+<p>Let’s assume we apply this function (call it <code class="language-plaintext highlighter-rouge">p</code>) to <code class="language-plaintext highlighter-rouge">fst :: a-&gt;b-&gt;a</code>, using <code class="language-plaintext highlighter-rouge">p ￮• fst</code>, then we get <code class="language-plaintext highlighter-rouge">Junction a</code>. But if we apply it to <code class="language-plaintext highlighter-rouge">snd :: a-&gt;b-&gt;b</code>, using <code class="language-plaintext highlighter-rouge">p ￮• snd</code>, then we get <code class="language-plaintext highlighter-rouge">Junction b</code>. Recall that we applied the original function <code class="language-plaintext highlighter-rouge">f</code> to a <code class="language-plaintext highlighter-rouge">Junction a</code> and a non-Junction <code class="language-plaintext highlighter-rouge">b</code>. Yet whatever we do, we can’t recover the <code class="language-plaintext highlighter-rouge">b</code>. The result is always wrapped in a junction.</p>
+
+<p>This is the formal type-based analysis of why we can’t return a non-Junction value from a pair as explained in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">“The strange case of the greedy junction”</a>. And this is why we need the <code class="language-plaintext highlighter-rouge">collapse</code> function.</p>
+
+<h2 id="reconstructing-junctions-part-2-raku-implementation">Reconstructing junctions part 2: Raku implementation</h2>
 
 <p>We start by creating the Junction type, using an enum for the four types of junctions, and a role for the actual <em>Junction</em> data type:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># The types of Junctions</span>
-<span class="k">enum</span> <span class="n">JType</span> &lt;<span class="n">JAny</span>  <span class="n">JAll</span>  <span class="n">JOne</span>  <span class="n">JNone</span> &gt;;
 
-<span class="c1"># The actual Junction type</span>
-<span class="k">role</span> <span class="nb">Junction</span>[\<span class="n">jt</span>, <span class="nv">@vs</span>] {
-    <span class="k">has</span> <span class="n">JType</span> <span class="nv">$.junction-type</span>=<span class="n">jt</span>;
-    <span class="k">has</span> <span class="nv">@.values</span>=<span class="nv">@vs</span>;
+<pre><code class="language-perl6"># The types of Junctions
+enum JType &lt;JAny  JAll  JOne  JNone &gt;;
+
+# The actual Junction type
+role Junction[\jt, @vs] {
+    has JType $.junction-type=jt;
+    has @.values=@vs;
 }
-</code></pre></div>
+</code></pre>
+
 <p>Next, the constructors for the four types of junctions (underscore to avoid the name conflict with the builtins):</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">our</span> <span class="k">sub</span> <span class="n">all_</span>(<span class="nv">@vs</span>) {
-    <span class="nb">Junction</span>[ <span class="n">JAll</span>, <span class="nv">@vs</span>].<span class="nb">new</span>;
+
+<pre><code class="language-perl6">our sub all_(@vs) {
+    Junction[ JAll, @vs].new;
 }
 
-<span class="k">our</span> <span class="k">sub</span> <span class="n">any_</span>(<span class="nv">@vs</span>) {
-    <span class="nb">Junction</span>[ <span class="n">JAny</span>, <span class="nv">@vs</span>].<span class="nb">new</span>;
+our sub any_(@vs) {
+    Junction[ JAny, @vs].new;
 }
 
-<span class="k">our</span> <span class="k">sub</span> <span class="n">one_</span>(<span class="nv">@vs</span>) {
-    <span class="nb">Junction</span>[ <span class="n">JOne</span>, <span class="nv">@vs</span>].<span class="nb">new</span>;
+our sub one_(@vs) {
+    Junction[ JOne, @vs].new;
 }
 
-<span class="k">our</span> <span class="k">sub</span> <span class="n">none_</span>(<span class="nv">@vs</span>) {
-    <span class="nb">Junction</span>[ <span class="n">JNone</span>, <span class="nv">@vs</span>].<span class="nb">new</span>;
+our sub none_(@vs) {
+    Junction[ JNone, @vs].new;
 }
-</code></pre></div>
+</code></pre>
+
 <p>To apply a (single-argument) function to a junction argument</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">infix:</span><span class="s">&lt;●○&gt;</span>( <span class="nv">&amp;f</span>, \<span class="n">j</span> ) <span class="k">is</span> <span class="k">export</span> {
-    <span class="k">my</span> \<span class="n">jt</span>=<span class="n">j</span>.<span class="n">junction-type</span>; 
-    <span class="k">my</span> <span class="nv">@vs</span> = <span class="n">j</span>.<span class="nb">values</span>;
 
-    <span class="nb">Junction</span>[ <span class="n">jt</span>, <span class="nb">map</span>( {<span class="nv">&amp;f</span>(<span class="nv">$_</span>)}, <span class="nv">@vs</span>)].<span class="nb">new</span>;
+<pre><code class="language-perl6">sub infix:&lt;●○&gt;( &amp;f, \j ) is export {
+    my \jt=j.junction-type; 
+    my @vs = j.values;
+  
+    Junction[ jt, map( {&amp;f($_)}, @vs)].new;
 }
-</code></pre></div>
+</code></pre>
+
 <p>To apply a function inside a junction to a non-junction an argument</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">infix:</span><span class="s">&lt;○●&gt;</span>( \<span class="n">jf</span>, \<span class="n">v</span> ) <span class="k">is</span> <span class="k">export</span> {
-    <span class="k">my</span> \<span class="n">jt</span>=<span class="n">jf</span>.<span class="n">junction-type</span>; 
-    <span class="k">my</span> <span class="nv">@fs</span> = <span class="n">jf</span>.<span class="nb">values</span>;
 
-    <span class="nb">Junction</span>[ <span class="n">jt</span>, <span class="nb">map</span>( {<span class="nv">$_</span>( <span class="n">v</span>)}, <span class="nv">@fs</span>)].<span class="nb">new</span>;
-}
-</code></pre></div>
-<p>To apply a function to two junction arguments is equivalent to applying a function inside a junction to a junction. There is a complication here: Raku imposes an ordering on the nesting such that <code>all</code> is always the outer nest. Therefore we must check the types of the junctions and swap the maps if required. </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">infix:</span><span class="s">&lt;○○&gt;</span>( \<span class="n">jf</span>, \<span class="n">jv</span> ) <span class="k">is</span> <span class="k">export</span> {
-    <span class="k">my</span> \<span class="n">jft</span>= <span class="n">jf</span>.<span class="n">junction-type</span>; 
-    <span class="k">my</span> <span class="nv">@fs</span> = <span class="n">jf</span>.<span class="nb">values</span>;
-    <span class="k">my</span> \<span class="n">jvt</span> = <span class="n">jv</span>.<span class="n">junction-type</span>;
-    <span class="k">my</span> <span class="nv">@vs</span> = <span class="n">jv</span>.<span class="nb">values</span>;
-    <span class="k">if</span> (<span class="n">jvt</span> == <span class="n">JAll</span> <span class="o">and</span> <span class="n">jft</span> != <span class="n">JAll</span>) {        
-        <span class="nb">Junction</span>[ <span class="n">jvt</span>, <span class="nb">map</span>( <span class="k">sub</span> (\<span class="n">v</span>){<span class="n">jf</span> ○● <span class="n">v</span>}, <span class="nv">@vs</span>)].<span class="nb">new</span>;  
-    } <span class="k">else</span> {        
-        <span class="nb">Junction</span>[ <span class="n">jft</span>, <span class="nb">map</span>( <span class="k">sub</span> (<span class="nv">&amp;f</span>){ <span class="nv">&amp;f</span> ●○ <span class="n">jv</span>}, <span class="nv">@fs</span>)].<span class="nb">new</span>;
-    }
-}
-</code></pre></div>
-<p>For completeness, here is the definition of <code>○==●</code>. Definitions of <code>○!=●</code>, <code>○&gt;●</code>. etc are analogous.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">infix:</span>&lt; ○==● &gt;( \<span class="n">j</span>, \<span class="n">v</span> ) <span class="k">is</span> <span class="k">export</span> {
-    <span class="k">sub</span> (\<span class="o">x</span>){<span class="o">x==</span><span class="n">v</span>} ●○ <span class="n">j</span>
-}
-</code></pre></div>
-<p>Next we have <code>so</code>, which turns a junction of Booleans into a Boolean:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">our</span> <span class="k">sub</span> <span class="o">so</span> (\<span class="n">jv</span>) { 
-    <span class="k">my</span> <span class="nv">@vs</span> = <span class="n">jv</span>.<span class="nb">values</span>;
-    <span class="k">given</span> <span class="n">jv</span>.<span class="n">junction-type</span> {
-        <span class="k">when</span> <span class="n">JAny</span> { <span class="nb">elems</span>(<span class="nb">grep</span> {<span class="nv">$_</span>},  <span class="nv">@vs</span>) &gt;<span class="mi">0</span>}
-        <span class="k">when</span> <span class="n">JAll</span> { <span class="nb">elems</span>(<span class="nb">grep</span> {!<span class="nv">$_</span>}, <span class="nv">@vs</span>)==<span class="mi">0</span>}
-        <span class="k">when</span> <span class="n">JOne</span> { <span class="nb">elems</span>(<span class="nb">grep</span> {<span class="nv">$_</span>},  <span class="nv">@vs</span>)==<span class="mi">1</span>}
-        <span class="k">when</span> <span class="n">JOne</span> { <span class="nb">elems</span>(<span class="nb">grep</span> {<span class="nv">$_</span>},  <span class="nv">@vs</span>)==<span class="mi">0</span>}
-    }
-}
-</code></pre></div>
-<p>And finally we have <code>collapse</code>, as defined in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">the article on greedy junctions</a>. <code>collapse</code> returns the value form a junction provided they are all the same:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">our</span> <span class="k">sub</span> <span class="n">collapse</span>( \<span class="n">j</span> ) {
-    <span class="k">my</span> \<span class="n">jt</span>=<span class="n">j</span>.<span class="n">junction-type</span>; 
-    <span class="k">my</span> <span class="nv">@vvs</span> = <span class="n">j</span>.<span class="nb">values</span>;
-    <span class="k">my</span> <span class="nv">$v</span> =  <span class="nb">shift</span> <span class="nv">@vvs</span>;        
-    <span class="k">my</span> <span class="nv">@ts</span> = <span class="nb">grep</span> {!(<span class="nv">$_</span> ~~ <span class="nv">$v</span>)}, <span class="nv">@vvs</span>;
-    <span class="k">if</span> (<span class="nv">@ts</span>.<span class="nb">elems</span><span class="o">==</span><span class="mi">0</span>) {  
-        <span class="nv">$v</span>
-    } <span class="k">else</span> {
-        <span class="k">die</span> <span class="s">&quot;Can&#39;t collapse this Junction: elements are not identical: {$v,@vvs}&quot;</span>;
-    }
-}
-</code></pre></div>
-<h2>Junctions desugared</h2>
+<pre><code class="language-perl6">sub infix:&lt;○●&gt;( \jf, \v ) is export {
+    my \jt=jf.junction-type; 
+    my @fs = jf.values;
 
-<p>Let&#39;s now look at our working hypothesis again, the interpretation of actions on Raku&#39;s junctions as syntactic sugar for the above type and operators.  </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">sq</span>(<span class="nb">Int</span> <span class="nv">$x</span> --&gt; <span class="nb">Int</span>) { <span class="nv">$x</span>*<span class="nv">$x</span> }
-<span class="k">my</span> <span class="nb">Junction</span> <span class="nv">$j</span> = <span class="mi">11</span> | <span class="mi">22</span>; 
-<span class="k">my</span> <span class="nb">Junction</span> <span class="nv">$rj</span> = <span class="n">sq</span>(<span class="nv">$j</span>); 
-</code></pre></div>
+    Junction[ jt, map( {$_( v)}, @fs)].new;
+}
+</code></pre>
+
+<p>To apply a function to two junction arguments is equivalent to applying a function inside a junction to a junction. There is a complication here: Raku imposes an ordering on the nesting such that <code class="language-plaintext highlighter-rouge">all</code> is always the outer nest. Therefore we must check the types of the junctions and swap the maps if required.</p>
+
+<pre><code class="language-perl6">sub infix:&lt;○○&gt;( \jf, \jv ) is export {
+    my \jft= jf.junction-type; 
+    my @fs = jf.values;
+    my \jvt = jv.junction-type;
+    my @vs = jv.values;
+    if (jvt == JAll and jft != JAll) {        
+        Junction[ jvt, map( sub (\v){jf ○● v}, @vs)].new;  
+    } else {        
+        Junction[ jft, map( sub (&amp;f){ &amp;f ●○ jv}, @fs)].new;
+    }
+}
+</code></pre>
+
+<p>For completeness, here is the definition of <code class="language-plaintext highlighter-rouge">○==●</code>. Definitions of <code class="language-plaintext highlighter-rouge">○!=●</code>, <code class="language-plaintext highlighter-rouge">○&gt;●</code>. etc are analogous.</p>
+
+<pre><code class="language-perl6">sub infix:&lt; ○==● &gt;( \j, \v ) is export {
+    sub (\x){x==v} ●○ j
+}
+</code></pre>
+
+<p>Next we have <code class="language-plaintext highlighter-rouge">so</code>, which turns a junction of Booleans into a Boolean:</p>
+
+<pre><code class="language-perl6">our sub so (\jv) { 
+    my @vs = jv.values;
+    given jv.junction-type {
+        when JAny { elems(grep {$_},  @vs) &gt;0}
+        when JAll { elems(grep {!$_}, @vs)==0}
+        when JOne { elems(grep {$_},  @vs)==1}
+        when JOne { elems(grep {$_},  @vs)==0}
+    }
+}
+</code></pre>
+
+<p>And finally we have <code class="language-plaintext highlighter-rouge">collapse</code>, as defined in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">the article on greedy junctions</a>. <code class="language-plaintext highlighter-rouge">collapse</code> returns the value form a junction provided they are all the same:</p>
+
+<pre><code class="language-perl6">our sub collapse( \j ) {
+    my \jt=j.junction-type; 
+    my @vvs = j.values;
+    my $v =  shift @vvs;        
+    my @ts = grep {!($_ ~~ $v)}, @vvs;
+    if (@ts.elems==0) {  
+        $v
+    } else {
+        die "Can't collapse this Junction: elements are not identical: {$v,@vvs}";
+    }
+}
+</code></pre>
+
+<h2 id="junctions-desugared">Junctions desugared</h2>
+
+<p>Let’s now look at our working hypothesis again, the interpretation of actions on Raku’s junctions as syntactic sugar for the above type and operators.</p>
+
+<pre><code class="language-perl6">sub sq(Int $x --&gt; Int) { $x*$x }
+my Junction $j = 11 | 22; 
+my Junction $rj = sq($j); 
+</code></pre>
+
 <p>Desugared this becomes:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">my</span> <span class="kt">Junction</span> <span class="o">$</span><span class="n">j</span> <span class="ow">=</span> <span class="n">any_</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">];</span>
-<span class="nf">my</span> <span class="kt">Junction</span> <span class="o">$</span><span class="n">rj</span> <span class="ow">=</span> <span class="o">&amp;</span><span class="n">sq</span> <span class="err">●○</span> <span class="o">$</span><span class="n">j</span><span class="p">;</span>
-</code></pre></div>
-<p>Similarly, </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">if</span> (<span class="nv">$j</span> == <span class="mi">42</span>) {...} 
-</code></pre></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my</span> <span class="kt">Junction</span> <span class="o">$</span><span class="n">j</span> <span class="o">=</span> <span class="n">any_</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">];</span>
+<span class="n">my</span> <span class="kt">Junction</span> <span class="o">$</span><span class="n">rj</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">sq</span> <span class="err">●○</span> <span class="o">$</span><span class="n">j</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Similarly,</p>
+
+<pre><code class="language-perl6">if ($j == 42) {...} 
+</code></pre>
+
 <p>becomes</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>if (so ($j ○==● 42)) {...}
-</code></pre></div>
-<p>and similar for other Boolean contexts. </p>
 
-<p>If we look closer at <a href="https://wimvanderbauwhede.github.io/greedy-junctions">the pair example from the greedy junctions article</a>, then applying a junction to a function with multiple arguments </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nb">Junction</span> \<span class="n">p1j</span> = <span class="nb">pair</span> <span class="n">R</span>,(<span class="mi">42</span><span class="o">^</span><span class="mi">43</span>);
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (so ($j ○==● 42)) {...}
+</code></pre></div></div>
+
+<p>and similar for other Boolean contexts.</p>
+
+<p>If we look closer at <a href="https://wimvanderbauwhede.github.io/greedy-junctions">the pair example from the greedy junctions article</a>, then applying a junction to a function with multiple arguments</p>
+
+<pre><code class="language-perl6">my Junction \p1j = pair R,(42^43);
+</code></pre>
+
 <p>is desugared as</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nb">Junction</span> \<span class="n">p1j</span> = <span class="nv">&amp;pair</span>.<span class="nb">assuming</span>(<span class="n">R</span>) ●○ <span class="n">one_</span> [<span class="mi">42</span>,<span class="mi">43</span>];
-</code></pre></div>
-<p>We use <code>.assuming()</code> because we need partial application. It does not matter whether we apply first the non-junction argument or the junction argument:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">p1jr</span> = ( <span class="k">sub</span> (<span class="nv">$y</span>){ <span class="nv">&amp;pair</span>.<span class="nb">assuming</span>(*,<span class="nv">$y</span>) } ●○ <span class="n">one_</span> [<span class="mi">42</span>,<span class="mi">43</span>] ) ○● <span class="n">R</span>;
-</code></pre></div>
-<p>Finally, an example where both arguments are junctions. Because of the definition of <code>○○</code>, the order of application does not matter.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="sr">m(\x,\y)</span>{<span class="o">x*</span><span class="n">y</span>}
 
-<span class="k">my</span> \<span class="n">p4</span> = ( <span class="k">sub</span> (\<span class="o">x</span>){ <span class="nv">&amp;m</span>.<span class="nb">assuming</span>(<span class="o">x</span>) } ●○ <span class="n">any_</span> [<span class="mi">11</span>,<span class="mi">22</span>] ) ○○ <span class="n">all_</span> [<span class="mi">33</span>,<span class="mi">44</span>];
-<span class="k">my</span> \<span class="n">p4r</span> = ( <span class="k">sub</span> (\<span class="o">x</span>){ <span class="nv">&amp;m</span>.<span class="nb">assuming</span>(*,<span class="o">x</span>) } ●○ <span class="n">all_</span> [<span class="mi">33</span>,<span class="mi">44</span>] ) ○○ <span class="n">any_</span> [<span class="mi">11</span>,<span class="mi">22</span>];
-</code></pre></div>
-<h2>Conclusion</h2>
+<pre><code class="language-perl6">my Junction \p1j = &amp;pair.assuming(R) ●○ one_ [42,43];
+</code></pre>
 
-<p>Starting from the hypothesis that the magic typing behaviour of Raku&#39;s junctions is actually syntactic sugar, I have reconstructed the Junction type and its actions using a polymorphic algebraic data type operating on functions via a set of higher-order functions. I have shown that the interpretation of Raku&#39;s behaviour as syntactic sugar holds for the presented implementation. In other words, Raku&#39;s Junctions do follow static typing rules.</p>
+<p>We use <code class="language-plaintext highlighter-rouge">.assuming()</code> because we need partial application. It does not matter whether we apply first the non-junction argument or the junction argument:</p>
+
+<pre><code class="language-perl6">my \p1jr = ( sub ($y){ &amp;pair.assuming(*,$y) } ●○ one_ [42,43] ) ○● R;
+</code></pre>
+
+<p>Finally, an example where both arguments are junctions. Because of the definition of <code class="language-plaintext highlighter-rouge">○○</code>, the order of application does not matter.</p>
+
+<pre><code class="language-perl6">sub m(\x,\y){x*y}
+
+my \p4 = ( sub (\x){ &amp;m.assuming(x) } ●○ any_ [11,22] ) ○○ all_ [33,44];
+my \p4r = ( sub (\x){ &amp;m.assuming(*,x) } ●○ all_ [33,44] ) ○○ any_ [11,22];
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Starting from the hypothesis that the magic typing behaviour of Raku’s junctions is actually syntactic sugar, I have reconstructed the Junction type and its actions using a polymorphic algebraic data type operating on functions via a set of higher-order functions. I have shown that the interpretation of Raku’s behaviour as syntactic sugar holds for the presented implementation. In other words, Raku’s Junctions do follow static typing rules.</p>
 
 				<hr />
 				<footer class="page-footer">
@@ -414,13 +419,6 @@ I restrict this set of values to a single type for convenience and also because 
 
                     <div class="inline-btn">
     <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
-    <!--
-	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
-	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
-	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
-	&nbsp;
-<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-    -->
 </div><!-- /.follow-us -->
 
 					
@@ -450,7 +448,7 @@ I restrict this set of values to a single type for convenience and also because 
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2024 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -474,8 +472,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
 
     
 

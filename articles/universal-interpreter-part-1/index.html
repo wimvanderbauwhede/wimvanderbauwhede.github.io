@@ -6,25 +6,6 @@
     <meta name="description" content="The Böhm-Berarducci encoding is a way to express an algebraic data type as a function type. We show how to do this in Raku using roles.">
     <meta name="keywords" content="coding, hacking, programming, raku">
     
-    	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="Encoding types as functions in Raku">
-	<meta name="twitter:description" content="The Böhm-Berarducci encoding is a way to express an algebraic data type as a function type. We show how to do this in Raku using roles.">
-	<meta name="twitter:site" content="@wim_v12e">
-	<meta name="twitter:creator" content="@wim_v12e">
-	
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-1_1600x600.jpg">
-	
-	<!-- Open Graph -->
-	<meta property="og:locale" content="en_GB">
-	<meta property="og:type" content="article">
-	<meta property="og:site_name" content="Wim Vanderbauwhede">
-	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1/#">
-	<meta property="og:title" content="Encoding types as functions in Raku">
-	<meta property="og:description" content="The Böhm-Berarducci encoding is a way to express an algebraic data type as a function type. We show how to do this in Raku using roles.">
-	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-1_1600x600.jpg" />
-
-    
 
     <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1/">
 
@@ -37,7 +18,7 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
     <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
-    <style>
+    <!-- <style>
     .sliding-menu-content {
       top: 0;
       right: 0;
@@ -51,63 +32,25 @@
       -o-transform: translateX(100%);
       transform: translateX(100%);
     }
-    </style>
+    </style> -->
 
     <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
     <![endif]-->
-<!-- Google Analytics -->
-<!-- WV: NO!
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-73376688-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
--->
-<!--
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19948710-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
--->
     <!-- Include the jQuery library (local or CDN) -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
-	  <!-- WV: NO!
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    -->
     <header id="masthead">
   <div class="inner-wrap">
 <a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
@@ -119,11 +62,11 @@
 </ul>
 
     </nav>
-<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
-    <nav role="navigation" class="js-menu sliding-menu-content">
+    <!-- <nav role="navigation" class="js-menu sliding-menu-content">
 	<ul class="menu-item">
 		
 	</ul>
@@ -133,7 +76,7 @@
 </button>
 
 <div class="js-menu-screen menu-screen"></div>
-
+ -->
 
     <div id="page-wrapper">
 
@@ -142,7 +85,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-1_1600x600.jpg" class="page-feature-image" alt="Encoding types as functions in Raku" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-1_1600x600.avif" class="page-feature-image" alt="Encoding types as functions in Raku" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -158,26 +101,29 @@
 			<div id="content" class="page-content" itemprop="articleBody">
 				<p>This is the first part of an article in my series about functional programming in general and algebraic data types and function types in particular in <a href="https://raku.org/">Raku</a>. It builds on my earlier articles on <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">algebraic data types in Raku</a> and their use in the practical example of <a href="https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/">list-based parser combinators</a>. It also makes heavily use of <a href="https://wimvanderbauwhede.github.io/articles/function-types">function types</a>.</p>
 
-<p>If you are not familiar with functional programming or with Raku, I suggest you read my introduction <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/">&quot;Cleaner code with functional programming&quot;</a>. If you are not familiar with algebraic data types or function types, you might want to read the other articles as well. </p>
+<p>If you are not familiar with functional programming or with Raku, I suggest you read my introduction <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/">“Cleaner code with functional programming”</a>. If you are not familiar with algebraic data types or function types, you might want to read the other articles as well.</p>
 
-<p>In this article, I want to explain a technique called <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a> of algebraic data types. The link above is to Oleg Kiselyov&#39;s explanation, which makes for interesting reading but is not required for what follows. Oleg says:</p>
+<p>In this article, I want to explain a technique called <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a> of algebraic data types. The link above is to Oleg Kiselyov’s explanation, which makes for interesting reading but is not required for what follows. Oleg says:</p>
 
-<p><em>&quot;Boehm-Berarducci&#39;s paper has many great insights. Alas, the generality of the presentation makes the paper very hard to understand. It has a Zen-like quality: it is incomprehensible unless you already know its results.&quot;</em></p>
+<p><em>“Boehm-Berarducci’s paper has many great insights. Alas, the generality of the presentation makes the paper very hard to understand. It has a Zen-like quality: it is incomprehensible unless you already know its results.”</em></p>
 
-<p>Fortunately, to follow the explanation in this article, you don&#39;t need to read either Böhm and Berarducci&#39;s  original paper or Oleg&#39;s explanation. For the purpose of this article, it is sufficient to say that the Böhm-Berarducci encoding is a way to encode an algebraic data type as a function type. This means that the data itself is also encoded as a function. As a result, the function encoding the data type becomes a &quot;universal interpreter&quot;. This makes it is easy to create various interpreters for algebraic data types. </p>
+<p>Fortunately, to follow the explanation in this article, you don’t need to read either Böhm and Berarducci’s  original paper or Oleg’s explanation. For the purpose of this article, it is sufficient to say that the Böhm-Berarducci encoding is a way to encode an algebraic data type as a function type. This means that the data itself is also encoded as a function. As a result, the function encoding the data type becomes a “universal interpreter”. This makes it is easy to create various interpreters for algebraic data types.</p>
 
-<p>In this first part, I will explain a way to implement Böhm-Berarducci (BB) encoding using roles in Raku, with basic examples. In <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2">the second part</a> I will show how to use BB encoding to construct a &#39;universal interpreter&#39; which makes it very easy to create specific interpreters for complex data structures. </p>
+<p>In this first part, I will explain a way to implement Böhm-Berarducci (BB) encoding using roles in Raku, with basic examples. In <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2">the second part</a> I will show how to use BB encoding to construct a ‘universal interpreter’ which makes it very easy to create specific interpreters for complex data structures.</p>
 
-<h2>The basic idea behind the Böhm-Berarducci encoding</h2>
+<h2 id="the-basic-idea-behind-the-böhm-berarducci-encoding">The basic idea behind the Böhm-Berarducci encoding</h2>
 
 <p>The basic idea behind the Böhm-Berarducci (BB) encoding is to create a type which represents a function with an argument for every alternative in a sum type.
-Every argument is itself a function which takes as arguments the arguments of each alternative product type, and returns a polymorphic type. Because the return type is polymorphic, we decide what it will be when we use the BB type. In this way a BB-encoded data structure is a generator for whatever type we like, in other words it is a universal interpreter. </p>
+Every argument is itself a function which takes as arguments the arguments of each alternative product type, and returns a polymorphic type. Because the return type is polymorphic, we decide what it will be when we use the BB type. In this way a BB-encoded data structure is a generator for whatever type we like, in other words it is a universal interpreter.</p>
 
-<p>For example, if we define a sum type <code>S</code> with three alternatives <code>A1</code>, <code>A2</code> and <code>A3</code>, using the same notation as in the article on <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">algebraic data types in Raku</a>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">datatype</span> <span class="kt">S</span> <span class="ow">=</span> <span class="kt">A1</span> <span class="kt">Int</span> <span class="o">|</span> <span class="kt">A2</span> <span class="kt">String</span> <span class="kt">Bool</span> <span class="o">|</span> <span class="kt">A3</span>
-</code></pre></div>
+<p>For example, if we define a sum type <code class="language-plaintext highlighter-rouge">S</code> with three alternatives <code class="language-plaintext highlighter-rouge">A1</code>, <code class="language-plaintext highlighter-rouge">A2</code> and <code class="language-plaintext highlighter-rouge">A3</code>, using the same notation as in the article on <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">algebraic data types in Raku</a>:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">S</span> <span class="o">=</span> <span class="kt">A1</span> <span class="kt">Int</span> <span class="o">|</span> <span class="kt">A2</span> <span class="kt">String</span> <span class="kt">Bool</span> <span class="o">|</span> <span class="kt">A3</span>
+</code></pre></div></div>
+
 <p>then the corresponding BB type will be</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">datatype</span> <span class="kt">S</span> <span class="ow">=</span> <span class="kt">S</span> <span class="p">(</span> <span class="err">∀</span> <span class="n">a</span> <span class="o">.</span>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">S</span> <span class="o">=</span> <span class="kt">S</span> <span class="p">(</span> <span class="err">∀</span> <span class="n">a</span> <span class="o">.</span>
     <span class="c1">-- A1 Int</span>
     <span class="p">(</span><span class="kt">Int</span> <span class="err">⟶</span> <span class="n">a</span><span class="p">)</span> <span class="err">⟶</span> 
     <span class="c1">-- A2 String</span>
@@ -187,281 +133,355 @@ Every argument is itself a function which takes as arguments the arguments of ea
     <span class="c1">-- The return type</span>
     <span class="n">a</span>
     <span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>I have put parentheses to show which part of the type is the function type corresponding to each alterative. 
-Because the constructor for <code>A3</code> takes no arguments, the corresponding function signature in the BB encoding is simply <code>a</code>: a function which takes no arguments and returns something of type <code>a</code>. The final <code>a</code> is the return value of the top-level function: every type alternative is an argument to the function. When applying the function, it must return a value of a given type. This type is <code>a</code> because <code>a</code> is the return type of every function representing an alternative. I will explain the <code>∀ a .</code> later.</p>
+Because the constructor for <code class="language-plaintext highlighter-rouge">A3</code> takes no arguments, the corresponding function signature in the BB encoding is simply <code class="language-plaintext highlighter-rouge">a</code>: a function which takes no arguments and returns something of type <code class="language-plaintext highlighter-rouge">a</code>. The final <code class="language-plaintext highlighter-rouge">a</code> is the return value of the top-level function: every type alternative is an argument to the function. When applying the function, it must return a value of a given type. This type is <code class="language-plaintext highlighter-rouge">a</code> because <code class="language-plaintext highlighter-rouge">a</code> is the return type of every function representing an alternative. I will explain the <code class="language-plaintext highlighter-rouge">∀ a .</code> later.</p>
 
-<h2>Some simple examples</h2>
+<h2 id="some-simple-examples">Some simple examples</h2>
 
-<p>Let&#39;s look at a few examples to see how this works in practice.</p>
+<p>Let’s look at a few examples to see how this works in practice.</p>
 
-<h3>OpinionatedBool: an enum-style sum type</h3>
+<h3 id="opinionatedbool-an-enum-style-sum-type">OpinionatedBool: an enum-style sum type</h3>
 
-<p>In a <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">previous post</a> I showed how you can use Raku&#39;s <em>role</em> feature to implement algebraic data types. I gave the example of 
-<code>OpinionatedBool</code>:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">datatype</span> <span class="kt">OpinionatedBool</span> <span class="ow">=</span> <span class="kt">AbsolutelyTrue</span> <span class="o">|</span> <span class="kt">TotallyFalse</span>
-</code></pre></div>
+<p>In a <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">previous post</a> I showed how you can use Raku’s <em>role</em> feature to implement algebraic data types. I gave the example of 
+<code class="language-plaintext highlighter-rouge">OpinionatedBool</code>:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">OpinionatedBool</span> <span class="o">=</span> <span class="kt">AbsolutelyTrue</span> <span class="o">|</span> <span class="kt">TotallyFalse</span>
+</code></pre></div></div>
+
 <p>which in Raku becomes</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">OpinionatedBool</span> {}
-<span class="k">role</span> <span class="n">AbsolutelyTrue</span> <span class="nb">does</span> <span class="n">OpinionatedBool</span> {}
-<span class="k">role</span> <span class="n">TotallyFalse</span> <span class="nb">does</span> <span class="n">OpinionatedBool</span> {}
-</code></pre></div>
-<p>This is a sum type with two alternatives. </p>
+
+<pre><code class="language-perl6">role OpinionatedBool {}
+role AbsolutelyTrue does OpinionatedBool {}
+role TotallyFalse does OpinionatedBool {}
+</code></pre>
+
+<p>This is a sum type with two alternatives.</p>
 
 <p>The type declaration of the BB type lists the types of all the arguments representing the alternatives. As in this case the constructors for the alternatives take no arguments, the corresponding functions also take no arguments:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">datatype</span> <span class="kt">OpinionatedBoolBB</span> <span class="ow">=</span> <span class="kt">OpinionatedBoolBB</span> <span class="p">(</span>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">OpinionatedBoolBB</span> <span class="o">=</span> <span class="kt">OpinionatedBoolBB</span> <span class="p">(</span>
     <span class="err">∀</span> <span class="n">a</span> <span class="o">.</span> 
       <span class="n">a</span> <span class="c1">-- AbsolutelyTrue</span>
     <span class="err">⟶</span> <span class="n">a</span> <span class="c1">-- TotallyFalse</span>
     <span class="err">⟶</span> <span class="n">a</span>
 <span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>In <a href="https://haskell.org">Haskell</a>, we would implement this type as follows:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">newtype</span> <span class="kt">OpinionatedBoolBB</span> <span class="ow">=</span> <span class="kt">OpinionatedBoolBB</span> <span class="p">{</span>
-    <span class="n">unBoolBB</span> <span class="ow">::</span> <span class="n">forall</span> <span class="n">a</span> <span class="o">.</span> 
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">newtype</span> <span class="kt">OpinionatedBoolBB</span> <span class="o">=</span> <span class="kt">OpinionatedBoolBB</span> <span class="p">{</span>
+    <span class="n">unBoolBB</span> <span class="o">::</span> <span class="n">forall</span> <span class="n">a</span> <span class="o">.</span> 
        <span class="n">a</span> <span class="c1">-- AbsolutelyTrue</span>
-    <span class="ow">-&gt;</span> <span class="n">a</span> <span class="c1">-- TotallyFalse</span>
-    <span class="ow">-&gt;</span> <span class="n">a</span>
+    <span class="o">-&gt;</span> <span class="n">a</span> <span class="c1">-- TotallyFalse</span>
+    <span class="o">-&gt;</span> <span class="n">a</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>You don&#39;t need to know any Haskell for what follows, but as the Raku implementation is closely modeled on the Haskell one, it is worth explaining a bit.
-The <code>newtype</code> keyword in Haskell is used to declare types with a single constructor. What we have here is a record type with a single field, and this field has the accessor function <code>unBoolBB</code>, which is a convenience to allow easy access to the function encoded in the type. The <code>∀ a</code>  or <code>forall a</code> allows us to introduce a type parameter that is only in scope in the expression on the right-hand side. Because the Haskell notation is so close to the formal notation, I will from now on use the Haskell notation.</p>
+</code></pre></div></div>
+
+<p>You don’t need to know any Haskell for what follows, but as the Raku implementation is closely modeled on the Haskell one, it is worth explaining a bit.
+The <code class="language-plaintext highlighter-rouge">newtype</code> keyword in Haskell is used to declare types with a single constructor. What we have here is a record type with a single field, and this field has the accessor function <code class="language-plaintext highlighter-rouge">unBoolBB</code>, which is a convenience to allow easy access to the function encoded in the type. The <code class="language-plaintext highlighter-rouge">∀ a</code>  or <code class="language-plaintext highlighter-rouge">forall a</code> allows us to introduce a type parameter that is only in scope in the expression on the right-hand side. Because the Haskell notation is so close to the formal notation, I will from now on use the Haskell notation.</p>
 
 <p>In Raku, we can implement this  BB type minimally as a parametric role with a method with a typed signature:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">BoolBB</span>[<span class="nv">&amp;b</span>] {
-    <span class="k">method</span> <span class="n">unBoolBB</span>(<span class="nb">Any</span> \<span class="n">t</span>, <span class="nb">Any</span> \<span class="n">f</span> --&gt; <span class="nb">Any</span>) {
-        <span class="n">b</span>(<span class="n">t</span>,<span class="n">f</span>);
+
+<pre><code class="language-perl6">role BoolBB[&amp;b] {
+    method unBoolBB(Any \t, Any \f --&gt; Any) {
+        b(t,f);
     }
 }
-</code></pre></div>
+</code></pre>
+
 <p>This tells us a lot:</p>
 
 <ul>
-<li>the parameter to the role has an <code>&amp;</code> sigil so it of type <code>Callable</code> (i.e. it is a function)</li>
-<li>the method&#39;s type tells us that there are two arguments of type <code>Any</code>. The method itself also returns a value of type <code>Any</code>, i.e. there is no constraint on the type of the return value. </li>
+  <li>the parameter to the role has an <code class="language-plaintext highlighter-rouge">&amp;</code> sigil so it of type <code class="language-plaintext highlighter-rouge">Callable</code> (i.e. it is a function)</li>
+  <li>the method’s type tells us that there are two arguments of type <code class="language-plaintext highlighter-rouge">Any</code>. The method itself also returns a value of type <code class="language-plaintext highlighter-rouge">Any</code>, i.e. there is no constraint on the type of the return value.</li>
 </ul>
 
 <p>With this implementation, the type safety is not quite as strong as in Haskell, where we guarantee that all these return values will be of the same type. The main purpose for using the types here is to make it provide documentation. We can enforce the type safety at a different point if desired.</p>
 
-<p>Now, the whole idea is that this role <code>BoolBB</code> will serve the same purpose as my <code>OpinionatedBool</code>. So instead of saying</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">OpinionatedBool</span> \<span class="n">trueOB</span> = <span class="n">AbsolutelyTrue</span>;
-</code></pre></div>
-<p>I want something like </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">BoolBB</span> \<span class="n">trueBB</span> = <span class="n">BBTrue</span>;
-</code></pre></div>
-<p>So in this example, <code>BBTrue</code> will be an instance of <code>BoolBB</code> with a specific function as parameter. Let&#39;s call that function <code>true</code>, so we have</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">BBTrue</span> = <span class="n">BoolBB</span>[ <span class="nb">true</span> ].<span class="nb">new</span>;
-</code></pre></div>
-<p>and similar for the <code>false</code> case. We can make this a little nicer using a helper function to create <code>BoolBB</code> instances:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">bbb</span>(\<span class="n">tf</span> --&gt; <span class="n">BoolBB</span>) { <span class="n">BoolBB</span>[ <span class="n">tf</span> ].<span class="nb">new</span> };
-</code></pre></div>
-<p>In this way we can write</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">BBTrue</span> { <span class="n">bbb</span> <span class="nb">true</span> } 
-<span class="k">sub</span> <span class="n">BBFalse</span> { <span class="n">bbb</span> <span class="n">false</span> }
-</code></pre></div>
-<p>In this particular case, because none of the constructors takes any arguments, we can also write this as</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">BoolBB</span> \<span class="n">BBTrue</span> = <span class="n">bbb</span> <span class="nb">true</span>;
-<span class="k">my</span> <span class="n">BoolBB</span> \<span class="n">BBFalse</span> = <span class="n">bbb</span> <span class="n">false</span>;
-</code></pre></div>
-<!-- ∀ -->
+<p>Now, the whole idea is that this role <code class="language-plaintext highlighter-rouge">BoolBB</code> will serve the same purpose as my <code class="language-plaintext highlighter-rouge">OpinionatedBool</code>. So instead of saying</p>
 
-<p>The question is then: what are the functions <code>true</code> and <code>false</code>? We know they are of type <code>a ⟶ a ⟶ a</code>; an obvious choice is:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="nb">true</span>  = -&gt; <span class="nb">Any</span> \<span class="n">t</span>, <span class="nb">Any</span> \<span class="n">f</span> --&gt; <span class="nb">Any</span> { <span class="n">t</span> }
-<span class="k">my</span> \<span class="n">false</span> = <span class="k">sub</span> (<span class="nb">Any</span> \<span class="n">t</span>,<span class="nb">Any</span> \<span class="n">f</span> --&gt; <span class="nb">Any</span> ) { <span class="n">f</span> }
-</code></pre></div>
-<p>This is the same choice we made in <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">the article &quot;Everything is a function&quot;</a>. In fact, these are simply <em>selector</em> functions which select the first or second argument. </p>
+<pre><code class="language-perl6">my OpinionatedBool \trueOB = AbsolutelyTrue;
+</code></pre>
+
+<p>I want something like</p>
+
+<pre><code class="language-perl6">my BoolBB \trueBB = BBTrue;
+</code></pre>
+
+<p>So in this example, <code class="language-plaintext highlighter-rouge">BBTrue</code> will be an instance of <code class="language-plaintext highlighter-rouge">BoolBB</code> with a specific function as parameter. Let’s call that function <code class="language-plaintext highlighter-rouge">true</code>, so we have</p>
+
+<pre><code class="language-perl6">my \BBTrue = BoolBB[ true ].new;
+</code></pre>
+
+<p>and similar for the <code class="language-plaintext highlighter-rouge">false</code> case. We can make this a little nicer using a helper function to create <code class="language-plaintext highlighter-rouge">BoolBB</code> instances:</p>
+
+<pre><code class="language-perl6">sub bbb(\tf --&gt; BoolBB) { BoolBB[ tf ].new };
+</code></pre>
+
+<p>In this way we can write</p>
+
+<pre><code class="language-perl6">sub BBTrue { bbb true } 
+sub BBFalse { bbb false }
+</code></pre>
+
+<p>In this particular case, because none of the constructors takes any arguments, we can also write this as</p>
+
+<pre><code class="language-perl6">my BoolBB \BBTrue = bbb true;
+my BoolBB \BBFalse = bbb false;
+</code></pre>
+
+<!-- ∀ -->
+<p>The question is then: what are the functions <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code>? We know they are of type <code class="language-plaintext highlighter-rouge">a ⟶ a ⟶ a</code>; an obvious choice is:</p>
+
+<pre><code class="language-perl6">my \true  = -&gt; Any \t, Any \f --&gt; Any { t }
+my \false = sub (Any \t,Any \f --&gt; Any ) { f }
+</code></pre>
+
+<p>This is the same choice we made in <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">the article “Everything is a function”</a>. In fact, these are simply <em>selector</em> functions which select the first or second argument.</p>
 
 <p>In practice, we often want to convert between BB types and their algebraic counterparts.</p>
 
 <ul>
-<li>To turn a Bool into a BoolBB:</li>
+  <li>To turn a Bool into a BoolBB:</li>
 </ul>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">boolBB</span> (<span class="nb">Bool</span> \<span class="n">tf</span> --&gt; <span class="n">BoolBB</span>){ <span class="n">tf</span> ?? <span class="n">BBTrue</span> !! <span class="n">BBFalse</span> }
-</code></pre></div>
+
+<pre><code class="language-perl6">sub boolBB (Bool \tf --&gt; BoolBB){ tf ?? BBTrue !! BBFalse }
+</code></pre>
+
 <ul>
-<li>To turn the BB Boolean into an actual Boolean:</li>
+  <li>To turn the BB Boolean into an actual Boolean:</li>
 </ul>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="nb">bool</span>(<span class="n">BoolBB</span> \<span class="n">b</span> --&gt; <span class="nb">Bool</span>) { 
-    <span class="n">b</span>.<span class="n">unBoolBB</span>( <span class="nb">True</span>, <span class="nb">False</span>) 
+
+<pre><code class="language-perl6">sub bool(BoolBB \b --&gt; Bool) { 
+    b.unBoolBB( True, False) 
 }
-</code></pre></div>
+</code></pre>
+
 <p>So we have:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span> <span class="nb">bool</span> <span class="n">BBTrue</span>; <span class="c1"># =&gt; True</span>
-<span class="nb">say</span> <span class="nb">bool</span> <span class="n">BBFalse</span>; <span class="c1"># =&gt; False</span>
-<span class="nb">say</span> <span class="nb">bool</span> <span class="n">boolBB</span>( <span class="nb">bool</span> <span class="n">BBTrue</span>); <span class="c1"># =&gt; True</span>
-<span class="nb">say</span> <span class="nb">bool</span> <span class="n">boolBB</span>( <span class="nb">bool</span> <span class="n">BBFalse</span>); <span class="c1"># =&gt; False</span>
-</code></pre></div>
-<p>(Note that this works with either way of defining <code>BBTrue</code> and <code>BBFalse</code> because calling a function without arguments in Raku does not require parentheses.)</p>
 
-<p>We can do this more OO-like by making <code>bool</code> a method of <code>BoolBB</code>:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">BoolBB</span>[<span class="nv">&amp;b</span>] {
-    <span class="k">method</span> <span class="n">unBoolBB</span>(<span class="nb">Any</span> \<span class="n">t</span>, <span class="nb">Any</span> \<span class="n">f</span> --&gt; <span class="nb">Any</span>) {
-        <span class="n">b</span>(<span class="n">t</span>,<span class="n">f</span>);
+<pre><code class="language-perl6">say bool BBTrue; # =&gt; True
+say bool BBFalse; # =&gt; False
+say bool boolBB( bool BBTrue); # =&gt; True
+say bool boolBB( bool BBFalse); # =&gt; False
+</code></pre>
+
+<p>(Note that this works with either way of defining <code class="language-plaintext highlighter-rouge">BBTrue</code> and <code class="language-plaintext highlighter-rouge">BBFalse</code> because calling a function without arguments in Raku does not require parentheses.)</p>
+
+<p>We can do this more OO-like by making <code class="language-plaintext highlighter-rouge">bool</code> a method of <code class="language-plaintext highlighter-rouge">BoolBB</code>:</p>
+
+<pre><code class="language-perl6">role BoolBB[&amp;b] {
+    method unBoolBB(Any \t, Any \f --&gt; Any) {
+        b(t,f);
     }
 
-    <span class="k">method</span> <span class="nb">bool</span>() { 
-        <span class="k">self</span>.<span class="n">unBoolBB</span>( <span class="nb">True</span>, <span class="nb">False</span>) 
+    method bool() { 
+        self.unBoolBB( True, False) 
     }
 }
-</code></pre></div>
+</code></pre>
 <p>Then we can say</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span>  <span class="n">BBTrue</span>.<span class="nb">bool</span>; <span class="c1"># =&gt; True</span>
-<span class="nb">say</span>  <span class="n">BBFalse</span>.<span class="nb">bool</span>; <span class="c1"># =&gt; False</span>
-<span class="nb">say</span>  <span class="n">boolBB</span>( <span class="nb">bool</span> <span class="n">BBTrue</span>).<span class="nb">bool</span>; <span class="c1"># =&gt; True</span>
-<span class="nb">say</span>  <span class="n">boolBB</span>( <span class="nb">bool</span> <span class="n">BBFalse</span>).<span class="nb">bool</span>; <span class="c1"># =&gt; False</span>
-</code></pre></div>
-<p>and I&#39;m sure those dots will make some people happy.</p>
 
-<p>Note however that we do not really need the <code>bool</code> method, instead we can simply compare the types:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span>  <span class="n">trueBB</span> ~~ <span class="n">BBTrue</span>; <span class="c1"># =&gt; True</span>
-<span class="nb">say</span>  <span class="n">BBFalse</span> ~~ <span class="n">trueBB</span>; <span class="c1"># =&gt; False</span>
-</code></pre></div>
-<p>We can generalise this approach as an alternative to arbitrary enums. For example, and <code>RGB</code> enum can be written very easily as a BB type:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">RGB</span>[<span class="nv">&amp;b</span>] {
-    <span class="k">method</span> <span class="n">unRGB</span>(<span class="nb">Any</span> \<span class="n">r</span>, <span class="nb">Any</span> \<span class="n">g</span>, <span class="nb">Any</span> \<span class="n">b</span> --&gt; <span class="nb">Any</span>) {
-        <span class="n">b</span>(<span class="n">r</span>,<span class="n">g</span>,<span class="n">b</span>);
+<pre><code class="language-perl6">say  BBTrue.bool; # =&gt; True
+say  BBFalse.bool; # =&gt; False
+say  boolBB( bool BBTrue).bool; # =&gt; True
+say  boolBB( bool BBFalse).bool; # =&gt; False
+</code></pre>
+
+<p>and I’m sure those dots will make some people happy.</p>
+
+<p>Note however that we do not really need the <code class="language-plaintext highlighter-rouge">bool</code> method, instead we can simply compare the types:</p>
+
+<pre><code class="language-perl6">say  trueBB ~~ BBTrue; # =&gt; True
+say  BBFalse ~~ trueBB; # =&gt; False
+</code></pre>
+
+<p>We can generalise this approach as an alternative to arbitrary enums. For example, and <code class="language-plaintext highlighter-rouge">RGB</code> enum can be written very easily as a BB type:</p>
+
+<pre><code class="language-perl6">role RGB[&amp;b] {
+    method unRGB(Any \r, Any \g, Any \b --&gt; Any) {
+        b(r,g,b);
     }
 }
-</code></pre></div>
-<p>with selector functions </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">red</span>  = -&gt; \<span class="n">r</span>,\<span class="n">g</span>,\<span class="n">b</span> { <span class="n">r</span> }
-<span class="k">my</span> \<span class="n">green</span> = -&gt; \<span class="n">r</span>,\<span class="n">g</span>,\<span class="n">b</span> { <span class="n">g</span> }
-<span class="k">my</span> \<span class="n">blue</span> = -&gt; \<span class="n">r</span>,\<span class="n">g</span>,\<span class="n">b</span> { <span class="n">b</span> }
-</code></pre></div>
-<p>However, the main reason for using BB types is to make it easier to perform computations on the data structure encoded in the type. Constant sum types like <code>Bool</code> and <code>RGB</code> don&#39;t store data to compute on, except in the most trivial way, and are therefore not the main target of this encoding. I presented them only because they are the easiest ones to explain.</p>
+</code></pre>
 
-<p>The <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2">second part</a> of the article presents a worked example. But first, let&#39;s look at a few more simple examples explaining more features of the BB approach.</p>
+<p>with selector functions</p>
 
-<h3>The <code>Maybe</code> type: a sum type with a polymorphic argument</h3>
+<pre><code class="language-perl6">my \red  = -&gt; \r,\g,\b { r }
+my \green = -&gt; \r,\g,\b { g }
+my \blue = -&gt; \r,\g,\b { b }
+</code></pre>
 
-<p>The Boolean type above had two constructors without arguments. A simple algebraic data type where one of the constructors has an argument is the <code>Maybe</code> type:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">data</span> <span class="kt">Maybe</span> <span class="n">b</span> <span class="ow">=</span> <span class="kt">Just</span> <span class="n">b</span> <span class="o">|</span> <span class="kt">Nothing</span>
-</code></pre></div>
-<p>This type is used to express that a function does not always return a value of a given type. For example, if we look up a key in a map, it is possible that there is no entry for that key. So using <code>Maybe</code> we could write a safe lookup function:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">safeLookup</span>(<span class="nv">%v</span>,<span class="nv">$k</span> --&gt; <span class="n">Maybe</span>) {
-    <span class="k">if</span>  (<span class="nv">%v</span>{<span class="nv">$k</span>}:<span class="n">exists</span>) {
-        <span class="n">Just</span>[<span class="nv">%v</span>{<span class="nv">$k</span>}].<span class="nb">new</span>;
-    } <span class="k">else</span> {
-        <span class="n">Nothing</span>;
+<p>However, the main reason for using BB types is to make it easier to perform computations on the data structure encoded in the type. Constant sum types like <code class="language-plaintext highlighter-rouge">Bool</code> and <code class="language-plaintext highlighter-rouge">RGB</code> don’t store data to compute on, except in the most trivial way, and are therefore not the main target of this encoding. I presented them only because they are the easiest ones to explain.</p>
+
+<p>The <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2">second part</a> of the article presents a worked example. But first, let’s look at a few more simple examples explaining more features of the BB approach.</p>
+
+<h3 id="the-maybe-type-a-sum-type-with-a-polymorphic-argument">The <code class="language-plaintext highlighter-rouge">Maybe</code> type: a sum type with a polymorphic argument</h3>
+
+<p>The Boolean type above had two constructors without arguments. A simple algebraic data type where one of the constructors has an argument is the <code class="language-plaintext highlighter-rouge">Maybe</code> type:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">Maybe</span> <span class="n">b</span> <span class="o">=</span> <span class="kt">Just</span> <span class="n">b</span> <span class="o">|</span> <span class="kt">Nothing</span>
+</code></pre></div></div>
+
+<p>This type is used to express that a function does not always return a value of a given type. For example, if we look up a key in a map, it is possible that there is no entry for that key. So using <code class="language-plaintext highlighter-rouge">Maybe</code> we could write a safe lookup function:</p>
+
+<pre><code class="language-perl6">sub safeLookup(%v,$k --&gt; Maybe) {
+    if  (%v{$k}:exists) {
+        Just[%v{$k}].new;
+    } else {
+        Nothing;
     }
 }
-</code></pre></div>
-<p>The <code>Maybe</code> type is polymorphic, so we have instances of <code>Maybe</code> for any type we like.  In Haskell:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">newtype</span> <span class="kt">MayBB</span> <span class="n">b</span> <span class="ow">=</span> <span class="kt">MayBB</span> <span class="p">{</span>
-<span class="nf">unMayBB</span> <span class="ow">::</span> <span class="n">forall</span> <span class="n">a</span> <span class="o">.</span>  
-<span class="p">(</span><span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">a</span><span class="p">)</span> <span class="c1">-- Just b </span>
-<span class="ow">-&gt;</span> <span class="n">a</span> <span class="c1">-- Nothing </span>
-<span class="ow">-&gt;</span> <span class="n">a</span>
-</code></pre></div>
+</code></pre>
+
+<p>The <code class="language-plaintext highlighter-rouge">Maybe</code> type is polymorphic, so we have instances of <code class="language-plaintext highlighter-rouge">Maybe</code> for any type we like.  In Haskell:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">newtype</span> <span class="kt">MayBB</span> <span class="n">b</span> <span class="o">=</span> <span class="kt">MayBB</span> <span class="p">{</span>
+<span class="n">unMayBB</span> <span class="o">::</span> <span class="n">forall</span> <span class="n">a</span> <span class="o">.</span>  
+<span class="p">(</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="n">a</span><span class="p">)</span> <span class="c1">-- Just b </span>
+<span class="o">-&gt;</span> <span class="n">a</span> <span class="c1">-- Nothing </span>
+<span class="o">-&gt;</span> <span class="n">a</span>
+</code></pre></div></div>
+
 <p>and in Raku:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">MayBB</span>[ <span class="nv">&amp;mb</span> ] {
-    <span class="k">method</span> <span class="n">unMayBB</span>(
-        <span class="nv">&amp;j:</span>(<span class="nb">Any</span> --&gt; <span class="nb">Any</span>),
-        <span class="nb">Any</span> \<span class="n">n</span> 
-        --&gt; <span class="nb">Any</span>
+
+<pre><code class="language-perl6">role MayBB[ &amp;mb ] {
+    method unMayBB(
+        &amp;j:(Any --&gt; Any),
+        Any \n 
+        --&gt; Any
     ) {
-        <span class="n">mb</span>(<span class="nv">&amp;j</span>,<span class="n">n</span>);
+        mb(&amp;j,n);
     }
 }
-</code></pre></div>
-<p>We use a <code>Callable</code> (<code>&amp;j</code>) for the <code>Just</code> variant but a (sigil-less) scalar (<code>\n</code>) for the <code>Nothing</code> as it is a constant.</p>
+</code></pre>
 
-<p>As before for the BB Boolean, we create some helper functions. </p>
+<p>We use a <code class="language-plaintext highlighter-rouge">Callable</code> (<code class="language-plaintext highlighter-rouge">&amp;j</code>) for the <code class="language-plaintext highlighter-rouge">Just</code> variant but a (sigil-less) scalar (<code class="language-plaintext highlighter-rouge">\n</code>) for the <code class="language-plaintext highlighter-rouge">Nothing</code> as it is a constant.</p>
+
+<p>As before for the BB Boolean, we create some helper functions.</p>
 
 <ul>
-<li>First we have the <em>selectors</em>:</li>
+  <li>First we have the <em>selectors</em>:</li>
 </ul>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># selectors</span>
-<span class="k">sub</span> <span class="n">bbj</span>( \<span class="o">x</span> ) { -&gt; <span class="nv">&amp;j:</span>(<span class="nb">Any</span> --&gt; <span class="nb">Any</span>), <span class="nb">Any</span> \<span class="n">n</span> --&gt; <span class="nb">Any</span> { <span class="nv">&amp;j</span>(<span class="o">x</span>)} }
-<span class="k">sub</span> <span class="n">bbn</span> { -&gt; <span class="nv">&amp;j:</span>(<span class="nb">Any</span> --&gt; <span class="nb">Any</span>),<span class="nb">Any</span> \<span class="n">n</span> --&gt; <span class="nb">Any</span> {<span class="n">n</span>} }
-</code></pre></div>
+
+<pre><code class="language-perl6"># selectors
+sub bbj( \x ) { -&gt; &amp;j:(Any --&gt; Any), Any \n --&gt; Any { &amp;j(x)} }
+sub bbn { -&gt; &amp;j:(Any --&gt; Any),Any \n --&gt; Any {n} }
+</code></pre>
+
 <ul>
-<li>Then we have a wrapper to make role construction nicer:</li>
+  <li>Then we have a wrapper to make role construction nicer:</li>
 </ul>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">mbb</span> (<span class="nv">&amp;jm</span> --&gt; <span class="n">MayBB</span>) {
-    <span class="n">MayBB</span>[ <span class="nv">&amp;jm</span> ].<span class="nb">new</span>;
+
+<pre><code class="language-perl6">sub mbb (&amp;jm --&gt; MayBB) {
+    MayBB[ &amp;jm ].new;
 }
-</code></pre></div>
+</code></pre>
+
 <ul>
-<li>With these we can easily write the final BB type constructors:</li>
+  <li>With these we can easily write the final BB type constructors:</li>
 </ul>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">Just</span>(\<span class="n">v</span>) { <span class="n">mbb</span> <span class="n">bbj</span>(<span class="n">v</span>) }
-<span class="k">sub</span> <span class="n">Nothing</span> { <span class="n">mbb</span> <span class="n">bbn</span> }
-</code></pre></div>
-<p>Now we can create values of our <code>MayBB</code> type, e.g.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">MayBB</span> \<span class="n">mbb</span> = <span class="n">Just</span> <span class="mi">42</span>;
-<span class="k">my</span> <span class="n">MayBB</span> \<span class="n">mbbn</span> = <span class="n">Nothing</span>;
-</code></pre></div>
+
+<pre><code class="language-perl6">sub Just(\v) { mbb bbj(v) }
+sub Nothing { mbb bbn }
+</code></pre>
+
+<p>Now we can create values of our <code class="language-plaintext highlighter-rouge">MayBB</code> type, e.g.</p>
+
+<pre><code class="language-perl6">my MayBB \mbb = Just 42;
+my MayBB \mbbn = Nothing;
+</code></pre>
+
 <p>As you can see, the BB type now functions exactly as an ordinary algebraic data type.</p>
 
-<p>Let&#39;s make a simple printer for this type:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">printMayBB</span>(<span class="n">MayBB</span> \<span class="n">mb</span> --&gt; <span class="nb">Str</span>) {
-    <span class="n">mb</span>.<span class="n">unMayBB</span>( <span class="k">sub</span> (<span class="nb">Any</span> \<span class="o">x</span> --&gt; <span class="nb">Str</span>) { <span class="s">&quot;{x}&quot;</span> }, <span class="s">&#39;NaN&#39;</span> );
+<p>Let’s make a simple printer for this type:</p>
+
+<pre><code class="language-perl6">sub printMayBB(MayBB \mb --&gt; Str) {
+    mb.unMayBB( sub (Any \x --&gt; Str) { "{x}" }, 'NaN' );
 }
 
-<span class="nb">say</span> <span class="n">printMayBB</span> <span class="n">mbb</span>; <span class="c1"># =&gt; 42</span>
-<span class="nb">say</span> <span class="n">printMayBB</span> <span class="n">mbbn</span>; <span class="c1"># =&gt; NaN</span>
-</code></pre></div>
-<p>As before, this function could be made a method of the <code>MayBB</code> role if desired. The point to note however is that to create this printer, all we had to do was provide the right arguments to <code>unMayBB</code>. We chose the concrete type <code>Str</code> for the type parameter in the BB type. Recall that to turn the BB Boolean into an actual Boolean, all we had to do was to provide arguments of type <code>Bool</code> to <code>unBoolBB</code>. These are simple examples that already illustrate some of the power of the BB encoding.</p>
+say printMayBB mbb; # =&gt; 42
+say printMayBB mbbn; # =&gt; NaN
+</code></pre>
 
-<h3>A pair, the simplest product type</h3>
+<p>As before, this function could be made a method of the <code class="language-plaintext highlighter-rouge">MayBB</code> role if desired. The point to note however is that to create this printer, all we had to do was provide the right arguments to <code class="language-plaintext highlighter-rouge">unMayBB</code>. We chose the concrete type <code class="language-plaintext highlighter-rouge">Str</code> for the type parameter in the BB type. Recall that to turn the BB Boolean into an actual Boolean, all we had to do was to provide arguments of type <code class="language-plaintext highlighter-rouge">Bool</code> to <code class="language-plaintext highlighter-rouge">unBoolBB</code>. These are simple examples that already illustrate some of the power of the BB encoding.</p>
 
-<p>The two previous examples were for sum types. Let&#39;s look at a simple product type, a pair of two values also known as a tuple. Assuming the tuple is polymorphic with type parameters <code>t1</code> and <code>t2</code>, the BB type is in Haskell:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">newtype</span> <span class="kt">PairBB</span> <span class="n">t1</span> <span class="n">t2</span> <span class="ow">=</span> <span class="kt">PairBB</span> <span class="p">{</span>
-    <span class="n">unPairBB</span> <span class="ow">::</span> <span class="n">forall</span> <span class="n">a</span> <span class="o">.</span> <span class="p">(</span><span class="n">t1</span> <span class="ow">-&gt;</span> <span class="n">t2</span> <span class="ow">-&gt;</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">a</span>
+<h3 id="a-pair-the-simplest-product-type">A pair, the simplest product type</h3>
+
+<p>The two previous examples were for sum types. Let’s look at a simple product type, a pair of two values also known as a tuple. Assuming the tuple is polymorphic with type parameters <code class="language-plaintext highlighter-rouge">t1</code> and <code class="language-plaintext highlighter-rouge">t2</code>, the BB type is in Haskell:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">newtype</span> <span class="kt">PairBB</span> <span class="n">t1</span> <span class="n">t2</span> <span class="o">=</span> <span class="kt">PairBB</span> <span class="p">{</span>
+    <span class="n">unPairBB</span> <span class="o">::</span> <span class="n">forall</span> <span class="n">a</span> <span class="o">.</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-&gt;</span> <span class="n">t2</span> <span class="o">-&gt;</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">a</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>and in Raku:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">PairBB</span>[ <span class="nv">&amp;p</span> ] {
-    <span class="k">method</span> <span class="n">unPairBB</span>(<span class="nv">&amp;p_:</span>(<span class="nb">Any</span>,<span class="nb">Any</span> --&gt; <span class="nb">Any</span>)  --&gt; <span class="nb">Any</span>) {
-        <span class="n">p</span>(<span class="nv">&amp;p_</span>);
+
+<pre><code class="language-perl6">role PairBB[ &amp;p ] {
+    method unPairBB(&amp;p_:(Any,Any --&gt; Any)  --&gt; Any) {
+        p(&amp;p_);
     }
 }
-</code></pre></div>
-<p>The selectors (for convenience we reuse the <code>true</code> and <code>false</code> functions used for the <code>BoolBB</code>):</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># To get the elements out of the pair</span>
-<span class="k">sub</span> <span class="n">fst</span>( \<span class="n">p</span> ){ <span class="n">p</span>.<span class="n">unPairBB</span>(<span class="nb">true</span>) }
-<span class="k">sub</span> <span class="n">snd</span>( \<span class="n">p</span> ){ <span class="n">p</span>.<span class="n">unPairBB</span>(<span class="n">false</span>) }
-</code></pre></div>
-<p>The pair constructor takes the values <code>x</code> and <code>y</code> to be put in the pair, and uses them in an anonymous function used as the parameter for the role. The single argument of this anonymous function is a selector function <code>&amp;p</code>, which is applied to <code>x</code> and <code>y</code> in its body. </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Final pair constructor</span>
-<span class="k">sub</span> <span class="nb">Pair</span>(\<span class="o">x</span>,\<span class="n">y</span> --&gt; <span class="n">PairBB</span>) {
-    <span class="n">PairBB</span>[ -&gt; <span class="nv">&amp;p</span> { <span class="n">p</span>(<span class="o">x</span>, <span class="n">y</span>) } ].<span class="nb">new</span>;
+</code></pre>
+
+<p>The selectors (for convenience we reuse the <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code> functions used for the <code class="language-plaintext highlighter-rouge">BoolBB</code>):</p>
+
+<pre><code class="language-perl6"># To get the elements out of the pair
+sub fst( \p ){ p.unPairBB(true) }
+sub snd( \p ){ p.unPairBB(false) }
+</code></pre>
+
+<p>The pair constructor takes the values <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> to be put in the pair, and uses them in an anonymous function used as the parameter for the role. The single argument of this anonymous function is a selector function <code class="language-plaintext highlighter-rouge">&amp;p</code>, which is applied to <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> in its body.</p>
+
+<pre><code class="language-perl6"># Final pair constructor
+sub Pair(\x,\y --&gt; PairBB) {
+    PairBB[ -&gt; &amp;p { p(x, y) } ].new;
 }
-</code></pre></div>
+</code></pre>
 <p>We can use this to build pairs e.g.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">PairBB</span> \<span class="n">bbp</span> = <span class="nb">Pair</span> <span class="mi">42</span>,<span class="s">&quot;forty-two&quot;</span>;
 
-<span class="c1"># print it</span>
-<span class="nb">say</span> <span class="s">&quot;({fst bbp},{snd bbp})&quot;</span>; <span class="c1"># =&gt; (42,forty-two)</span>
-</code></pre></div>
-<p>As with the Boolean, we can do this a bit more OO-like if you prefer by making <code>fst</code> and <code>snd</code> methods of the <code>PairBB</code> role:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">PairBB</span>[ <span class="nv">&amp;p</span> ] {
-    <span class="k">method</span> <span class="n">unPairBB</span>(<span class="nv">&amp;p_:</span>(<span class="nb">Any</span>,<span class="nb">Any</span> --&gt; <span class="nb">Any</span>)  --&gt; <span class="nb">Any</span>) {
-        <span class="n">p</span>(<span class="nv">&amp;p_</span>);
+<pre><code class="language-perl6">my PairBB \bbp = Pair 42,"forty-two";
+
+# print it
+say "({fst bbp},{snd bbp})"; # =&gt; (42,forty-two)
+</code></pre>
+
+<p>As with the Boolean, we can do this a bit more OO-like if you prefer by making <code class="language-plaintext highlighter-rouge">fst</code> and <code class="language-plaintext highlighter-rouge">snd</code> methods of the <code class="language-plaintext highlighter-rouge">PairBB</code> role:</p>
+
+<pre><code class="language-perl6">role PairBB[ &amp;p ] {
+    method unPairBB(&amp;p_:(Any,Any --&gt; Any)  --&gt; Any) {
+        p(&amp;p_);
     }
 
-    <span class="c1"># To get the elements out of the pair</span>
-    <span class="k">method</span> <span class="n">fst</span>( ){ <span class="k">self</span>.<span class="n">unPairBB</span>(<span class="nb">true</span>) }
-    <span class="k">method</span> <span class="n">snd</span>( ){ <span class="k">self</span>.<span class="n">unPairBB</span>(<span class="n">false</span>) }
+    # To get the elements out of the pair
+    method fst( ){ self.unPairBB(true) }
+    method snd( ){ self.unPairBB(false) }
 }
-</code></pre></div>
+</code></pre>
+
 <p>Thus we can say</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span> <span class="s">&quot;({bbp.fst },{bbp.snd})&quot;</span>; <span class="c1"># =&gt; (42,forty-two)</span>
-</code></pre></div>
-<p>An important point is that the BB-encoded data structures are immutable, so you can&#39;t update a field. Instead, you create a new variable:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="n">PairBB</span> \<span class="n">pbb2</span> = <span class="nb">Pair</span> <span class="n">fst</span>(<span class="n">pbb</span>) + <span class="mi">1</span>, <span class="s">&#39;forty-three&#39;</span>;
-</code></pre></div>
-<p>Now, let&#39;s assume for a moment that our <code>PairBB</code> represents a complex number and we want to convert it from (Real, Imaginary) into polar form (Modulus, Phase). Again we can use the same approach:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">toPolar</span>(<span class="n">PairBB</span> \<span class="n">mb</span> --&gt; <span class="n">PairBB</span>) {
-    <span class="n">mb</span>.<span class="n">unPairBB</span>( <span class="k">sub</span> (<span class="nb">Any</span> \<span class="o">x</span>,<span class="nb">Any</span> \<span class="n">y</span> --&gt; <span class="n">PairBB</span>) {
-        <span class="nb">Pair</span> <span class="nb">sqrt</span>(<span class="o">x*x+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span>),<span class="nb">atan2</span>(<span class="o">x</span>,<span class="n">y</span>);
+
+<pre><code class="language-perl6">say "({bbp.fst },{bbp.snd})"; # =&gt; (42,forty-two)
+</code></pre>
+
+<p>An important point is that the BB-encoded data structures are immutable, so you can’t update a field. Instead, you create a new variable:</p>
+
+<pre><code class="language-perl6">my PairBB \pbb2 = Pair fst(pbb) + 1, 'forty-three';
+</code></pre>
+
+<p>Now, let’s assume for a moment that our <code class="language-plaintext highlighter-rouge">PairBB</code> represents a complex number and we want to convert it from (Real, Imaginary) into polar form (Modulus, Phase). Again we can use the same approach:</p>
+
+<pre><code class="language-perl6">sub toPolar(PairBB \mb --&gt; PairBB) {
+    mb.unPairBB( sub (Any \x,Any \y --&gt; PairBB) {
+        Pair sqrt(x*x+y*y),atan2(x,y);
     } );
 }
-</code></pre></div>
-<h2>Summary</h2>
+</code></pre>
 
-<p>What we have learned so far is how to create sum (alternative) and product (record) types in Raku using a formalism called Böhm-Berarducci (BB) encoding, which uses functions to create data structures. We use Raku&#39;s roles to implement BB types, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values. </p>
+<h2 id="summary">Summary</h2>
+
+<p>What we have learned so far is how to create sum (alternative) and product (record) types in Raku using a formalism called Böhm-Berarducci (BB) encoding, which uses functions to create data structures. We use Raku’s roles to implement BB types, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values.</p>
 
 <p>In <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2">the next part</a>, we will see how BB types make it easy tointerpreter create interpreters for complex data structures.</p>
 
@@ -484,13 +504,6 @@ The <code>newtype</code> keyword in Haskell is used to declare types with a sing
 
                     <div class="inline-btn">
     <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
-    <!--
-	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
-	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
-	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
-	&nbsp;
-<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-    -->
 </div><!-- /.follow-us -->
 
 					
@@ -520,7 +533,7 @@ The <code>newtype</code> keyword in Haskell is used to declare types with a sing
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2024 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -544,8 +557,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
 
     
 

@@ -6,25 +6,6 @@
     <meta name="description" content="An introduction to some powerful functional programming techniques in Raku and Python.">
     <meta name="keywords" content="coding, hacking, programming, raku">
     
-    	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="Cleaner code with functional programming">
-	<meta name="twitter:description" content="An introduction to some powerful functional programming techniques in Raku and Python.">
-	<meta name="twitter:site" content="@wim_v12e">
-	<meta name="twitter:creator" content="@wim_v12e">
-	
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/decluttering-with-functional-programming_1600x600.jpg">
-	
-	<!-- Open Graph -->
-	<meta property="og:locale" content="en_GB">
-	<meta property="og:type" content="article">
-	<meta property="og:site_name" content="Wim Vanderbauwhede">
-	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/#">
-	<meta property="og:title" content="Cleaner code with functional programming">
-	<meta property="og:description" content="An introduction to some powerful functional programming techniques in Raku and Python.">
-	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/decluttering-with-functional-programming_1600x600.jpg" />
-
-    
 
     <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/">
 
@@ -37,7 +18,7 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
     <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
-    <style>
+    <!-- <style>
     .sliding-menu-content {
       top: 0;
       right: 0;
@@ -51,63 +32,25 @@
       -o-transform: translateX(100%);
       transform: translateX(100%);
     }
-    </style>
+    </style> -->
 
     <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
     <![endif]-->
-<!-- Google Analytics -->
-<!-- WV: NO!
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-73376688-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
--->
-<!--
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19948710-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
--->
     <!-- Include the jQuery library (local or CDN) -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
-	  <!-- WV: NO!
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    -->
     <header id="masthead">
   <div class="inner-wrap">
 <a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
@@ -119,11 +62,11 @@
 </ul>
 
     </nav>
-<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
-    <nav role="navigation" class="js-menu sliding-menu-content">
+    <!-- <nav role="navigation" class="js-menu sliding-menu-content">
 	<ul class="menu-item">
 		
 	</ul>
@@ -133,7 +76,7 @@
 </button>
 
 <div class="js-menu-screen menu-screen"></div>
-
+ -->
 
     <div id="page-wrapper">
 
@@ -142,7 +85,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/decluttering-with-functional-programming_1600x600.jpg" class="page-feature-image" alt="Cleaner code with functional programming" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/decluttering-with-functional-programming_1600x600.avif" class="page-feature-image" alt="Cleaner code with functional programming" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -156,405 +99,491 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<!-- To a functional programmer like me, every programming language is a functional language. --> 
-
+				<!-- To a functional programmer like me, every programming language is a functional language. -->
 <p>Functional programming is a style of programming and modern languages support this style to a greater or lesser extent. In this article I want to explain how programming in a functional style provides you with powerful abstractions to make your code cleaner. I will illustrate this with examples in Raku and Python, which as we will see are both excellent languages for functional programming.</p>
 
-<h2>Raku: a quick introduction</h2>
+<h2 id="raku-a-quick-introduction">Raku: a quick introduction</h2>
 
 <p>The code examples in this article are written in <a href="https://www.python.org/">Python</a> and <a href="https://raku.org/">Raku</a>. I assume most people are familiar with Python, but Raku is less well known, so I will explain the basics first. The code in this article is not very idiomatic so you should be able to understand it easily if you know another programming language.</p>
 
-<p>Raku is most similar to <a href="https://www.perl.org">Perl</a>. Both languages are syntactically similar to C/C++, Java and JavaScript: block-based, with statements separated by semicolons, blocks demarcated by braces, and argument lists in parentheses and separated by commas. The main feature that sets Perl and Raku apart from other languages is the use of sigils (&#39;funny characters&#39;) which identify the type of a variable: <code>$</code> for a scalar, <code>@</code> for an array, <code>%</code> for a hash (map) and <code>&amp;</code> for a subroutine. Variables also have keywords to identify their scope, I will only use <code>my</code> which marks the variable as lexically scoped. A subroutine is declared with the <code>sub</code> keyword, and subroutines can be named or anonymous:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">square</span> (<span class="nv">$x</span>) {
-    <span class="nv">$x</span>*<span class="nv">$x</span>;
+<p>Raku is most similar to <a href="https://www.perl.org">Perl</a>. Both languages are syntactically similar to C/C++, Java and JavaScript: block-based, with statements separated by semicolons, blocks demarcated by braces, and argument lists in parentheses and separated by commas. The main feature that sets Perl and Raku apart from other languages is the use of sigils (‘funny characters’) which identify the type of a variable: <code class="language-plaintext highlighter-rouge">$</code> for a scalar, <code class="language-plaintext highlighter-rouge">@</code> for an array, <code class="language-plaintext highlighter-rouge">%</code> for a hash (map) and <code class="language-plaintext highlighter-rouge">&amp;</code> for a subroutine. Variables also have keywords to identify their scope, I will only use <code class="language-plaintext highlighter-rouge">my</code> which marks the variable as lexically scoped. A subroutine is declared with the <code class="language-plaintext highlighter-rouge">sub</code> keyword, and subroutines can be named or anonymous:</p>
+
+<pre><code class="language-perl6">sub square ($x) {
+    $x*$x;
 }
-<span class="c1"># anonymous subroutine </span>
-<span class="k">my</span> <span class="nv">$anon_square</span> = <span class="k">sub</span> (<span class="nv">$x</span>) {
-    <span class="nv">$x</span>*<span class="nv">$x</span>;
+# anonymous subroutine 
+my $anon_square = sub ($x) {
+    $x*$x;
 }
-</code></pre></div>
+</code></pre>
+
 <p>In Python this would be:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
 
-<span class="c1"># anonymous subroutine </span>
-<span class="n">anon_square</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
-</code></pre></div>
+<span class="c1"># anonymous subroutine 
+</span><span class="n">anon_square</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</code></pre></div></div>
+
 <!-- Raku also has [twigils](https://docs.raku.org/language/variables#index-entry-Twigil), secondary sigils that influence the scoping of a variable. For this article, the only twigil used in the code is `.` which is used to declare a role or class attribute with automatically generated accessors (like `$.notes` in the example below). -->
 
-<p>Raku supports sigil-less variables, and uses the <code>\</code> syntax to declare them. For more on the difference between ordinary and sigil-less variables, see <a href="https://docs.raku.org/language/variables#Sigilless_variables">the Raku documentation</a>. For example (<code>say</code> prints its argument followed by a newline):</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="o">x</span> = <span class="mi">42</span>; <span class="c1"># sigilless</span>
-<span class="k">my</span> <span class="nv">$y</span> = <span class="mi">43</span>; 
-<span class="nb">say</span> <span class="o">x</span> + <span class="nv">$y</span>; 
-</code></pre></div>
+<p>Raku supports sigil-less variables, and uses the <code class="language-plaintext highlighter-rouge">\</code> syntax to declare them. For more on the difference between ordinary and sigil-less variables, see <a href="https://docs.raku.org/language/variables#Sigilless_variables">the Raku documentation</a>. For example (<code class="language-plaintext highlighter-rouge">say</code> prints its argument followed by a newline):</p>
+
+<pre><code class="language-perl6">my \x = 42; # sigilless
+my $y = 43; 
+say x + $y; 
+</code></pre>
+
 <p>In the code in this article, I will use the sigil-less variables whenever possible.</p>
 
-<p>Raku has several types of sequence data structures. In the code below I will use <a href="https://docs.raku.org/language/list">lists and arrays</a> and <a href="https://docs.raku.org/type/Range">ranges</a>. The main difference between a list and an array in Raku is that a list is immutable, which means that once created, it can&#39;t be modified. So it is a read-only data structure. To &#39;update&#39; an immutable data structure, you need to create an updated copy. Arrays on the other hand are mutable, so we can update their elements, extend them, shrink them etc. All updates happen in place on the original. </p>
+<p>Raku has several types of sequence data structures. In the code below I will use <a href="https://docs.raku.org/language/list">lists and arrays</a> and <a href="https://docs.raku.org/type/Range">ranges</a>. The main difference between a list and an array in Raku is that a list is immutable, which means that once created, it can’t be modified. So it is a read-only data structure. To ‘update’ an immutable data structure, you need to create an updated copy. Arrays on the other hand are mutable, so we can update their elements, extend them, shrink them etc. All updates happen in place on the original.</p>
 
-<p>Raku&#39;s arrays are similar to Python&#39;s lists and Raku&#39;s lists are similar to Python&#39;s tuples, which are also immutable. Apart from the syntax, ranges in Raku are similar to ranges in Python, and both are immutable.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">@array1</span> = <span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span>; <span class="c1">#=&gt; an array because of the &#39;@&#39; sigil</span>
-<span class="k">my</span> \<span class="n">array2</span> = [<span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span>]; <span class="c1">#=&gt; an array, because of the &#39;[...]&#39;</span>
+<p>Raku’s arrays are similar to Python’s lists and Raku’s lists are similar to Python’s tuples, which are also immutable. Apart from the syntax, ranges in Raku are similar to ranges in Python, and both are immutable.</p>
 
-<span class="k">my</span> \<span class="n">range1</span> = <span class="mi">1</span> .. <span class="mi">10</span>; <span class="c1">#=&gt; a range 1 .. 10</span>
-<span class="k">my</span> <span class="nv">@array3</span> = <span class="mi">1</span> .. <span class="mi">10</span>; <span class="c1">#=&gt; an array from a range, because of the &#39;@&#39; sigil</span>
+<pre><code class="language-perl6">my @array1 = 1,2,3; #=&gt; an array because of the '@' sigil
+my \array2 = [1,2,3]; #=&gt; an array, because of the '[...]'
 
-<span class="k">my</span> \<span class="n">list1</span> = <span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span>; <span class="c1">#=&gt; a list</span>
-<span class="k">my</span> <span class="nv">$list2</span> = (<span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span>); <span class="c1">#=&gt; also a list</span>
-<span class="k">my</span> \<span class="n">list3</span> = |(<span class="mi">1</span> .. <span class="mi">10</span>);  <span class="c1">#=&gt; an array from a range because of the &#39;|&#39; flattening operation</span>
-</code></pre></div>
+my \range1 = 1 .. 10; #=&gt; a range 1 .. 10
+my @array3 = 1 .. 10; #=&gt; an array from a range, because of the '@' sigil
+
+my \list1 = 1,2,3; #=&gt; a list
+my $list2 = (1,2,3); #=&gt; also a list
+my \list3 = |(1 .. 10);  #=&gt; an array from a range because of the '|' flattening operation
+</code></pre>
+
 <p>The equivalent Python code would be</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="n">list1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="c1">#=&gt; a list from a tuple</span>
-<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span> <span class="c1">#=&gt; a list, because of the &#39;[...]&#39;</span>
 
-<span class="n">range1</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="c1">#=&gt; a range 1 .. 10</span>
-<span class="n">list3</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">));</span> <span class="c1">#=&gt; a list from a range</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list1</span> <span class="o">=</span> <span class="nf">list</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="c1">#=&gt; a list from a tuple
+</span><span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span> <span class="c1">#=&gt; a list, because of the '[...]'
+</span>
+<span class="n">range1</span> <span class="o">=</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="c1">#=&gt; a range 1 .. 10
+</span><span class="n">list3</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">));</span> <span class="c1">#=&gt; a list from a range
+</span>
+<span class="n">tuple1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">;</span> <span class="c1">#=&gt; a tuple
+</span><span class="n">tuple2</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1">#=&gt; a tuple from a list
+</span><span class="n">tuple3</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">))</span> <span class="c1">#=&gt; creates a tuple from a range
+</span></code></pre></div></div>
 
-<span class="n">tuple1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">;</span> <span class="c1">#=&gt; a tuple</span>
-<span class="n">tuple2</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1">#=&gt; a tuple from a list</span>
-<span class="n">tuple3</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">))</span> <span class="c1">#=&gt; creates a tuple from a range</span>
-</code></pre></div>
-<p>Other specific bits of syntax or functionality will be explained for the particular examples. </p>
+<p>Other specific bits of syntax or functionality will be explained for the particular examples.</p>
 
-<h2><em>A function, by any other name</em> &mdash; functions as values</h2>
+<h2 id="a-function-by-any-other-name--functions-as-values"><em>A function, by any other name</em> — functions as values</h2>
 
-<p>Functions are the essence of functional programming. As I explained in my article <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function">&quot;Everything is a function&quot;</a>, in a proper functional language, all constructs are built from functions. </p>
+<p>Functions are the essence of functional programming. As I explained in my article <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function">“Everything is a function”</a>, in a proper functional language, all constructs are built from functions.</p>
 
 <p>All modern programming languages have a notion of functions, procedures, subroutines or methods. They are an essential mechanism for code reuse.
-Typically, we think of a function as something that operates on some input values to produce one or more output values. The input values can be globally declared, attributes of a class or passed as arguments to the function. Similarly, the output values can be returned directly, to global variables, as class attributes or by modifying the input values. </p>
+Typically, we think of a function as something that operates on some input values to produce one or more output values. The input values can be globally declared, attributes of a class or passed as arguments to the function. Similarly, the output values can be returned directly, to global variables, as class attributes or by modifying the input values.</p>
 
 <p>To benefit most from functional programming, it is best if functions are <em>pure</em>, which means that a call to the function always produces the same output for the same inputs. In practice, this is easier to achieve if the function only takes inputs as arguments and returns the output directly, but this is not essential.</p>
 
-<p>The crucial feature of functional programming is that the input and output values of a function <em>can themselves be functions</em>. So functions must be values in your language. Sometimes this is called &quot;functions must be first-class&quot;, and a function that takes and/or returns a function is sometimes called a &quot;higher-order function&quot;. </p>
+<p>The crucial feature of functional programming is that the input and output values of a function <em>can themselves be functions</em>. So functions must be values in your language. Sometimes this is called “functions must be first-class”, and a function that takes and/or returns a function is sometimes called a “higher-order function”.</p>
 
-<p>If functions are values, it follows that we can assign them to variables. In particular we will assign them to the arguments of other functions. But we can also assign them to ordinary variables. </p>
+<p>If functions are values, it follows that we can assign them to variables. In particular we will assign them to the arguments of other functions. But we can also assign them to ordinary variables.</p>
 
-<p>Let&#39;s consider the following function, <code>choose</code>, which takes three arguments <code>t</code>, <code>f</code> and <code>c</code>. </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="n">choose</span> (\<span class="n">t</span>, \<span class="n">f</span>, \<span class="n">d</span>) {
-    <span class="k">if</span> (<span class="n">d</span>) {<span class="n">t</span>} <span class="k">else</span> {<span class="n">f</span>}
+<p>Let’s consider the following function, <code class="language-plaintext highlighter-rouge">choose</code>, which takes three arguments <code class="language-plaintext highlighter-rouge">t</code>, <code class="language-plaintext highlighter-rouge">f</code> and <code class="language-plaintext highlighter-rouge">c</code>.</p>
+
+<pre><code class="language-perl6"># Raku
+sub choose (\t, \f, \d) {
+	if (d) {t} else {f}
 }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">choose</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+</code></pre>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">choose</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">d</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">t</span> 
   <span class="k">else</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">f</span>
-</code></pre></div>
-<p>First let&#39;s call <code>choose</code> with strings as values for the first two arguments:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">my</span> \<span class="n">tstr</span> = <span class="s">&quot;True!&quot;</span>;
-<span class="k">my</span> \<span class="n">fstr</span> = <span class="s">&quot;False!&quot;</span>;
+</code></pre></div></div>
 
-<span class="k">my</span> \<span class="n">res_str</span> = <span class="n">choose</span>(<span class="n">tstr</span>, <span class="n">fstr</span>, <span class="nb">True</span>);
+<p>First let’s call <code class="language-plaintext highlighter-rouge">choose</code> with strings as values for the first two arguments:</p>
 
-<span class="nb">say</span> <span class="n">res_str</span>; <span class="c1">#=&gt; says &quot;True!&quot;</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">tstr</span> <span class="o">=</span> <span class="s2">&quot;True!&quot;</span>
-<span class="n">fstr</span> <span class="o">=</span> <span class="s2">&quot;False!&quot;</span>
+<pre><code class="language-perl6"># Raku
+my \tstr = "True!";
+my \fstr = "False!";
 
-<span class="n">res_str</span> <span class="o">=</span> <span class="n">choose</span><span class="p">(</span><span class="n">tstr</span><span class="p">,</span><span class="n">fstr</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+my \res_str = choose(tstr, fstr, True);
 
-<span class="k">print</span><span class="p">(</span><span class="n">res_str</span><span class="p">)</span> <span class="c1">#=&gt; says &quot;True!&quot;</span>
-</code></pre></div>
-<p>Now let&#39;s try with functions as arguments:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="n">tt</span> (\<span class="o">s</span>) { <span class="nb">say</span> <span class="s">&quot;True {s}!&quot;</span> }
-<span class="k">sub</span> <span class="o">ff</span> (\<span class="o">s</span>) { <span class="nb">say</span> <span class="s">&quot;False {s}!&quot;</span> }
+say res_str; #=&gt; says "True!"
+</code></pre>
 
-<span class="k">my</span> <span class="nv">&amp;res_f</span> = <span class="n">choose</span>(<span class="nv">&amp;tt</span>, <span class="nv">&amp;ff</span>, <span class="nb">False</span>);
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="n">tstr</span> <span class="o">=</span> <span class="sh">"</span><span class="s">True!</span><span class="sh">"</span>
+<span class="n">fstr</span> <span class="o">=</span> <span class="sh">"</span><span class="s">False!</span><span class="sh">"</span>
 
-<span class="nb">say</span> <span class="nv">&amp;res_f</span>; <span class="c1">#=&gt; says &amp;ff</span>
-<span class="n">res_f</span>(<span class="s">&quot;rumour&quot;</span>); <span class="c1">#=&gt; says &quot;False rumour!&quot;</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">tt</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-  <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;True &quot;</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="s2">&quot;!&quot;</span><span class="p">)</span>
+<span class="n">res_str</span> <span class="o">=</span> <span class="nf">choose</span><span class="p">(</span><span class="n">tstr</span><span class="p">,</span><span class="n">fstr</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">res_str</span><span class="p">)</span> <span class="c1">#=&gt; says "True!"
+</span></code></pre></div></div>
+<p>Now let’s try with functions as arguments:</p>
+
+<pre><code class="language-perl6"># Raku
+sub tt (\s) { say "True {s}!" }
+sub ff (\s) { say "False {s}!" }
+
+my &amp;res_f = choose(&amp;tt, &amp;ff, False);
+
+say &amp;res_f; #=&gt; says &amp;ff
+res_f("rumour"); #=&gt; says "False rumour!"
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">tt</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+  <span class="nf">print</span><span class="p">(</span> <span class="sh">"</span><span class="s">True </span><span class="sh">"</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="sh">"</span><span class="s">!</span><span class="sh">"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">ff</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>  
-  <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;False&quot;</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="s2">&quot;!&quot;</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span> <span class="sh">"</span><span class="s">False</span><span class="sh">"</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="sh">"</span><span class="s">!</span><span class="sh">"</span><span class="p">)</span>
 
-<span class="n">res_f</span> <span class="o">=</span> <span class="n">choose</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span><span class="n">ff</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">res_f</span> <span class="o">=</span> <span class="nf">choose</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span><span class="n">ff</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">res_f</span><span class="p">)</span> <span class="c1">#=&gt; says &lt;function tt at 0x7f829c3aa310&gt;</span>
-<span class="n">res_f</span><span class="p">(</span><span class="s2">&quot;rumour&quot;</span><span class="p">)</span> <span class="c1">#=&gt; says &quot;False rumour!&quot;</span>
-</code></pre></div>
-<p>So our function <code>choose</code> took two functions as its first two arguments, and returned a function. In Raku we need the <code>&amp;</code> sigil on the function names because otherwise they would be evaluated: a bare function name like <code>tt</code> is the same as calling the function without arguments, <code>tt()</code>. By assigning this function to a variable (<code>res_f</code>), we can now call <code>res_f</code> as a function and it will eventually call <code>tt</code> or <code>ff</code> depending of the choice.</p>
+<span class="nf">print</span><span class="p">(</span><span class="n">res_f</span><span class="p">)</span> <span class="c1">#=&gt; says &lt;function tt at 0x7f829c3aa310&gt;
+</span><span class="nf">res_f</span><span class="p">(</span><span class="sh">"</span><span class="s">rumour</span><span class="sh">"</span><span class="p">)</span> <span class="c1">#=&gt; says "False rumour!"
+</span></code></pre></div></div>
 
-<h2>Functions don&#39;t need a name</h2>
+<p>So our function <code class="language-plaintext highlighter-rouge">choose</code> took two functions as its first two arguments, and returned a function. In Raku we need the <code class="language-plaintext highlighter-rouge">&amp;</code> sigil on the function names because otherwise they would be evaluated: a bare function name like <code class="language-plaintext highlighter-rouge">tt</code> is the same as calling the function without arguments, <code class="language-plaintext highlighter-rouge">tt()</code>. By assigning this function to a variable (<code class="language-plaintext highlighter-rouge">res_f</code>), we can now call <code class="language-plaintext highlighter-rouge">res_f</code> as a function and it will eventually call <code class="language-plaintext highlighter-rouge">tt</code> or <code class="language-plaintext highlighter-rouge">ff</code> depending of the choice.</p>
 
-<p>Now, if we can assign functions to variables, they don&#39;t really need a name themselves. So our functions can be anonymous. Most languages support anonymous functions. In functional languages they are usually called <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">&quot;lambda functions&quot;</a>. In Raku, we have two ways to create anonymous functions:</p>
+<h2 id="functions-dont-need-a-name">Functions don’t need a name</h2>
 
-<p>Using the <code>sub (...)</code> syntax:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">tt</span> = <span class="k">sub</span> (\<span class="o">s</span>) { <span class="nb">say</span> <span class="s">&quot;True {s}!&quot;</span> };
-</code></pre></div>
-<p>Or using the <a href="https://docs.raku.org/language/functions#index-entry-pointy_blocks">&#39;pointy block&#39; syntax</a>, which is a little bit more compact:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="o">ff</span> = -&gt; \<span class="o">s</span> { <span class="nb">say</span> <span class="s">&quot;False {s}!&quot;</span> };
-</code></pre></div>
-<p>Python uses the <code>lambda</code> keyword:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="n">tt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span> <span class="p">:</span> <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;True &quot;</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="s2">&quot;!&quot;</span> <span class="p">)</span>
-<span class="n">ff</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span> <span class="p">:</span> <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;False &quot;</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="s2">&quot;!&quot;</span> <span class="p">)</span>
-</code></pre></div>
+<p>Now, if we can assign functions to variables, they don’t really need a name themselves. So our functions can be anonymous. Most languages support anonymous functions. In functional languages they are usually called <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">“lambda functions”</a>. In Raku, we have two ways to create anonymous functions:</p>
+
+<p>Using the <code class="language-plaintext highlighter-rouge">sub (...)</code> syntax:</p>
+
+<pre><code class="language-perl6">my \tt = sub (\s) { say "True {s}!" };
+</code></pre>
+
+<p>Or using the <a href="https://docs.raku.org/language/functions#index-entry-pointy_blocks">‘pointy block’ syntax</a>, which is a little bit more compact:</p>
+
+<pre><code class="language-perl6">my \ff = -&gt; \s { say "False {s}!" };
+</code></pre>
+
+<p>Python uses the <code class="language-plaintext highlighter-rouge">lambda</code> keyword:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span> <span class="p">:</span> <span class="nf">print</span><span class="p">(</span> <span class="sh">"</span><span class="s">True </span><span class="sh">"</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="sh">"</span><span class="s">!</span><span class="sh">"</span> <span class="p">)</span>
+<span class="n">ff</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span> <span class="p">:</span> <span class="nf">print</span><span class="p">(</span> <span class="sh">"</span><span class="s">False </span><span class="sh">"</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="sh">"</span><span class="s">!</span><span class="sh">"</span> <span class="p">)</span>
+</code></pre></div></div>
+
 <p>So now we can say</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">&amp;res_f</span> = <span class="n">choose</span>(<span class="n">tt</span>, <span class="o">ff</span>, <span class="nb">True</span>);
 
-<span class="nb">say</span> <span class="nv">&amp;res_f</span>; <span class="c1">#=&gt; says sub { }</span>
-<span class="n">res_f</span>(<span class="s">&quot;story&quot;</span>); <span class="c1">#=&gt; says &quot;True story!&quot;</span>
-</code></pre></div>
-<p>When we print out the variable to which the function is bound, Raku returns <code>sub { }</code> to indicate that the variable contains a function.</p>
+<pre><code class="language-perl6">my &amp;res_f = choose(tt, ff, True);
+
+say &amp;res_f; #=&gt; says sub { }
+res_f("story"); #=&gt; says "True story!"
+</code></pre>
+
+<p>When we print out the variable to which the function is bound, Raku returns <code class="language-plaintext highlighter-rouge">sub { }</code> to indicate that the variable contains a function.</p>
 
 <p>In Python:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="n">res_f</span> <span class="o">=</span> <span class="n">choose</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="n">ff</span><span class="p">,</span> <span class="bp">True</span><span class="p">);</span>
 
-<span class="k">print</span><span class="p">(</span> <span class="n">res_f</span><span class="p">)</span> <span class="c1">#=&gt; says &lt;function &lt;lambda&gt; at 0x7f829b298b80&gt;</span>
-<span class="n">res_f</span><span class="p">(</span><span class="s2">&quot;story&quot;</span><span class="p">)</span> <span class="c1">#=&gt; says &quot;True story!&quot;</span>
-</code></pre></div>
-<h2>Examples: <code>map</code>, <code>grep</code> and <code>reduce</code></h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">res_f</span> <span class="o">=</span> <span class="nf">choose</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="n">ff</span><span class="p">,</span> <span class="bp">True</span><span class="p">);</span>
 
-<p>Functions of functions have many uses, and I just want to highlight three examples that are available readily in Raku: <code>map</code>, <code>reduce</code> and <code>grep</code>. Python has <code>map</code> and <code>filter</code>, and provides <code>reduce</code> via the <code>functools</code> module. What these functions have in common is that they offer an alternative to <code>for</code>-loops over lists.</p>
+<span class="nf">print</span><span class="p">(</span> <span class="n">res_f</span><span class="p">)</span> <span class="c1">#=&gt; says &lt;function &lt;lambda&gt; at 0x7f829b298b80&gt;
+</span><span class="nf">res_f</span><span class="p">(</span><span class="sh">"</span><span class="s">story</span><span class="sh">"</span><span class="p">)</span> <span class="c1">#=&gt; says "True story!"
+</span></code></pre></div></div>
 
-<h3><code>map</code> : applying a function to all elements of a list</h3>
+<h2 id="examples-map-grep-and-reduce">Examples: <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">grep</code> and <code class="language-plaintext highlighter-rouge">reduce</code></h2>
 
-<p><code>map</code> takes two arguments: a function and a list. It applies the function to all values in the list in order and returns the results, for example to square all values in a list:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">res</span> = <span class="nb">map</span> -&gt; \<span class="o">x</span> {<span class="o">x*x</span>} , <span class="mi">1</span> .. <span class="mi">10</span>;
-</code></pre></div>
+<p>Functions of functions have many uses, and I just want to highlight three examples that are available readily in Raku: <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">reduce</code> and <code class="language-plaintext highlighter-rouge">grep</code>. Python has <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">filter</code>, and provides <code class="language-plaintext highlighter-rouge">reduce</code> via the <code class="language-plaintext highlighter-rouge">functools</code> module. What these functions have in common is that they offer an alternative to <code class="language-plaintext highlighter-rouge">for</code>-loops over lists.</p>
+
+<h3 id="map--applying-a-function-to-all-elements-of-a-list"><code class="language-plaintext highlighter-rouge">map</code> : applying a function to all elements of a list</h3>
+
+<p><code class="language-plaintext highlighter-rouge">map</code> takes two arguments: a function and a list. It applies the function to all values in the list in order and returns the results, for example to square all values in a list:</p>
+
+<pre><code class="language-perl6">my \res = map -&gt; \x {x*x} , 1 .. 10;
+</code></pre>
+
 <p>In Python we need to explicitly create the tuple, but apart from the syntax differences, the structure is quite the same:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span> <span class="nb">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)))</span>
-</code></pre></div>
-<p>This is the functional alternative to the more conventional <code>for</code>-loop:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">my</span> \<span class="n">res</span> = [];
-<span class="k">for</span> <span class="mi">1</span> .. <span class="mi">10</span> -&gt; \<span class="o">x</span> {
-    <span class="n">res</span>.<span class="nb">push</span>(<span class="o">x*x</span>);
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">res</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span> <span class="nf">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>This is the functional alternative to the more conventional <code class="language-plaintext highlighter-rouge">for</code>-loop:</p>
+
+<pre><code class="language-perl6"># Raku
+my \res = [];
+for 1 .. 10 -&gt; \x {
+	res.push(x*x);
 }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
-    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-</code></pre></div>
-<p>Note that in both Raku and Python we need to use a mutable data structure for the <code>for</code>-loop version, whereas the <code>map</code> version uses immutable data structures.</p>
+</code></pre>
 
-<h3><code>grep</code> : filtering a list</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
+	<span class="n">res</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p><code>grep</code> (called <code>filter</code> in Python) also takes arguments, a function and a list, but it only returns the values from the list for which the function returns <code>true</code>:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">my</span> \<span class="n">res</span> = <span class="nb">grep</span> -&gt; \<span class="o">x</span> { <span class="o">x</span> % <span class="mi">5</span> == <span class="mi">0</span> }, <span class="mi">1</span> .. <span class="mi">30</span>;
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)))</span>
-</code></pre></div>
-<p>We can of course write this using a <code>for</code>-loop and an <code>if</code>-statement, but that again requires a mutable data structure:  </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">my</span> \<span class="n">res</span> = [];
-<span class="k">for</span> <span class="mi">1</span> .. <span class="mi">30</span> -&gt; \<span class="o">x</span> {
-    <span class="k">if</span> (<span class="o">x</span> % <span class="mi">5</span> == <span class="mi">0</span>) {
-    <span class="n">res</span>.<span class="nb">push</span>(<span class="o">x</span>);
-    }
+<p>Note that in both Raku and Python we need to use a mutable data structure for the <code class="language-plaintext highlighter-rouge">for</code>-loop version, whereas the <code class="language-plaintext highlighter-rouge">map</code> version uses immutable data structures.</p>
+
+<h3 id="grep--filtering-a-list"><code class="language-plaintext highlighter-rouge">grep</code> : filtering a list</h3>
+
+<p><code class="language-plaintext highlighter-rouge">grep</code> (called <code class="language-plaintext highlighter-rouge">filter</code> in Python) also takes arguments, a function and a list, but it only returns the values from the list for which the function returns <code class="language-plaintext highlighter-rouge">true</code>:</p>
+
+<pre><code class="language-perl6"># Raku
+my \res = grep -&gt; \x { x % 5 == 0 }, 1 .. 30;
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="n">res</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">,</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>We can of course write this using a <code class="language-plaintext highlighter-rouge">for</code>-loop and an <code class="language-plaintext highlighter-rouge">if</code>-statement, but that again requires a mutable data structure:</p>
+
+<pre><code class="language-perl6"># Raku
+my \res = [];
+for 1 .. 30 -&gt; \x {
+	if (x % 5 == 0) {
+	res.push(x);
+	}
 }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> 
-  <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
-    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</code></pre></div>
-<p>What&#39;s nice about <code>map</code> and <code>grep</code> is that you can easily chain them together:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="nb">grep</span> -&gt; \<span class="o">x</span> { <span class="o">x</span> % <span class="mi">5</span> == <span class="mi">0</span> }, <span class="nb">map</span> -&gt; \<span class="o">x</span> {<span class="o">x*x</span>}, <span class="mi">1</span><span class="o">..</span><span class="mi">30</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">,</span><span class="nb">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">))))</span>
-</code></pre></div>
-<p>This is because <code>map</code> and <code>grep</code> take a list and return a list, so as long as you need to operate on a list, you can do this by chaining the calls.</p>
+</code></pre>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> 
+  <span class="nf">if </span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">res</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
 
-<h3><code>reduce</code> : combining all elements of a list into a single value</h3>
+<p>What’s nice about <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">grep</code> is that you can easily chain them together:</p>
 
-<p><code>reduce</code> also takes a function and a list, but it uses the function to combine all elements of the list into a single result. So the function must take two arguments. The <em>second</em> argument is the element taken from the list, and the first argument is used as a state variable to combine all elements. For example, calculating the sum of a list of numbers:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">my</span> \<span class="nb">sum</span> = <span class="nb">reduce</span> <span class="k">sub</span> (\<span class="n">acc</span>,\<span class="n">elt</span>) {<span class="n">acc</span><span class="o">+</span><span class="n">elt</span>}, <span class="mi">1</span> .. <span class="mi">10</span>;
+<pre><code class="language-perl6"># Raku
+grep -&gt; \x { x % 5 == 0 }, map -&gt; \x {x*x}, 1..30
+</code></pre>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="n">res</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">,</span><span class="nf">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="p">,</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">))))</span>
+</code></pre></div></div>
 
-<span class="nb">say</span> <span class="nb">sum</span>; <span class="c1">#=&gt; says 55</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+<p>This is because <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">grep</code> take a list and return a list, so as long as you need to operate on a list, you can do this by chaining the calls.</p>
 
-<span class="nb">sum</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">:</span> <span class="n">acc</span><span class="o">+</span><span class="n">elt</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">))</span>
+<h3 id="reduce--combining-all-elements-of-a-list-into-a-single-value"><code class="language-plaintext highlighter-rouge">reduce</code> : combining all elements of a list into a single value</h3>
 
-<span class="k">print</span><span class="p">(</span> <span class="nb">sum</span><span class="p">);</span> <span class="c1">#=&gt; says 55</span>
-</code></pre></div>
-<p>What happens here is that <code>acc</code> is first set to the first element of the list (1), and then the second element is added to it, so <code>acc</code> becomes 1+2=3; then the third element (3) is added to this, and so on. The effect is to consecutively sum all the numbers in list.</p>
+<p><code class="language-plaintext highlighter-rouge">reduce</code> also takes a function and a list, but it uses the function to combine all elements of the list into a single result. So the function must take two arguments. The <em>second</em> argument is the element taken from the list, and the first argument is used as a state variable to combine all elements. For example, calculating the sum of a list of numbers:</p>
 
-<p>To make this more clear, let&#39;s write our own version of <code>reduce</code>.</p>
+<pre><code class="language-perl6"># Raku
+my \sum = reduce sub (\acc,\elt) {acc+elt}, 1 .. 10;
 
-<h3>Writing your own</h3>
+say sum; #=&gt; says 55
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="nb">sum</span> <span class="o">=</span> <span class="nf">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">:</span> <span class="n">acc</span><span class="o">+</span><span class="n">elt</span><span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">))</span>
+
+<span class="nf">print</span><span class="p">(</span> <span class="nb">sum</span><span class="p">);</span> <span class="c1">#=&gt; says 55
+</span></code></pre></div></div>
+
+<p>What happens here is that <code class="language-plaintext highlighter-rouge">acc</code> is first set to the first element of the list (1), and then the second element is added to it, so <code class="language-plaintext highlighter-rouge">acc</code> becomes 1+2=3; then the third element (3) is added to this, and so on. The effect is to consecutively sum all the numbers in list.</p>
+
+<p>To make this more clear, let’s write our own version of <code class="language-plaintext highlighter-rouge">reduce</code>.</p>
+
+<h3 id="writing-your-own">Writing your own</h3>
 
 <p>In many functional languages, a distinction is made between a left-to-right (starting at the lowest index) and right-to-left (starting at the highest index) reduction. This matters because depending on the function doing the reducing, the result can be different if the list is consumed from the left or from the right. For example, suppose our reducing function is</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
--&gt; \<span class="o">x</span>,\<span class="n">y</span> {<span class="o">x+</span><span class="n">y</span>}
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
-</code></pre></div>
+
+<pre><code class="language-perl6"># Raku
+-&gt; \x,\y {x+y}
+</code></pre>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+</code></pre></div></div>
+
 <p>then it does not matter which direction we traverse the list. But consider the following function:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
--&gt; \<span class="o">x</span>,\<span class="n">y</span> { <span class="o">x</span> &lt; <span class="n">y</span> ?? <span class="o">x+</span><span class="n">y</span> !! <span class="o">x</span> }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="k">if</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
-</code></pre></div>
-<p>( <code>... ?? ... !! ...</code> is the Raku syntax for the conditional operator which is  <code>... ? ... : ...</code> in most other languages and <code>... if ... else ...</code> in Python)</p>
 
-<p>In this case the result will be different if the list is reduced from the left or from the right. In Raku and Python, <code>reduce</code> is a left-to-right reduction.     </p>
+<pre><code class="language-perl6"># Raku
+-&gt; \x,\y { x &lt; y ?? x+y !! x }
+</code></pre>
 
-<p>Also, instead of using the first element of the list, the reduction function can take an additional argument, usually called the accumulator. In functional languages, reduce is usually  called <em>fold</em>, so we can have a left fold and a right fold. Let&#39;s have a look how we could implement these. </p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="k">if</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
+</code></pre></div></div>
+<p>( ` … ?? … !! …<code class="language-plaintext highlighter-rouge"> is the Raku syntax for the conditional operator which is  </code>… ? … : …<code class="language-plaintext highlighter-rouge"> in most other languages and </code>… if … else …` in Python)</p>
 
-<h4>Left fold</h4>
+<p>In this case the result will be different if the list is reduced from the left or from the right. In Raku and Python, <code class="language-plaintext highlighter-rouge">reduce</code> is a left-to-right reduction.</p>
 
-<p>A straightforward way to implement a left fold (so the same as <code>reduce</code>) is to use a <code>for</code>-loop inside the function. That means we have to update the value of the accumulator on every iteration of the loop. In Raku, sigil-less variables are immutable (I am simplifying here, see <a href="https://docs.raku.org/language/containers#Binding">the Raku documentation</a> for the full story) so we need to use a sigiled variable, <code>$acc</code>. </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="n">foldll</span> (<span class="nv">&amp;f</span>, \<span class="n">iacc</span>, \<span class="n">lst</span>) { 
-  <span class="k">my</span> <span class="nv">$acc</span> = <span class="n">iacc</span>; 
-  <span class="k">for</span> <span class="n">lst</span> -&gt; \<span class="n">elt</span> {
-    <span class="nv">$acc</span> = <span class="n">f</span>(<span class="nv">$acc</span>,<span class="n">elt</span>);
+<p>Also, instead of using the first element of the list, the reduction function can take an additional argument, usually called the accumulator. In functional languages, reduce is usually  called <em>fold</em>, so we can have a left fold and a right fold. Let’s have a look how we could implement these.</p>
+
+<h4 id="left-fold">Left fold</h4>
+
+<p>A straightforward way to implement a left fold (so the same as <code class="language-plaintext highlighter-rouge">reduce</code>) is to use a <code class="language-plaintext highlighter-rouge">for</code>-loop inside the function. That means we have to update the value of the accumulator on every iteration of the loop. In Raku, sigil-less variables are immutable (I am simplifying here, see <a href="https://docs.raku.org/language/containers#Binding">the Raku documentation</a> for the full story) so we need to use a sigiled variable, <code class="language-plaintext highlighter-rouge">$acc</code>.</p>
+
+<pre><code class="language-perl6"># Raku
+sub foldll (&amp;f, \iacc, \lst) { 
+  my $acc = iacc; 
+  for lst -&gt; \elt {
+    $acc = f($acc,elt);
   }
-  <span class="nv">$acc</span>;
+  $acc;
 }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">foldll</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">iacc</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">foldll</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">iacc</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
   <span class="n">acc</span> <span class="o">=</span> <span class="n">iacc</span>
   <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-    <span class="n">acc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">)</span>  
+    <span class="n">acc</span> <span class="o">=</span> <span class="nf">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">)</span>  
   <span class="k">return</span> <span class="n">acc</span>
-</code></pre></div>
-<p>If we want to use immutable variables only, we can use recursion. Raku makes this easy because it allows multiple signatures for a subroutine (<code>multi sub</code>s), and it will call the variant that matches the signature. In Python, there is the module <a href="https://pypi.org/project/multipledispatch/">multipledispatch</a> that lets you do something similar to multi subs.</p>
+</code></pre></div></div>
 
-<p>Our <code>foldl</code> will consume the input list <code>lst</code> and use <code>f</code> combine its elements into the accumulator <code>acc</code>. When the list has been consumed, the computation is finished and we can return <code>acc</code> as the result. So our first variant says that if the input list is empty, we should return <code>acc</code>.
-The second variant takes an element <code>elt</code> from the list (see <a href="https://docs.raku.org/type/Range">the Raku documentation</a> for details on the <code>*</code>) and combines it with <code>acc</code> into <code>f(acc,elt)</code>. It then calls <code>foldl</code> again with this new accumulator and the remainder of the list, <code>rest</code>.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># When the list is empty, return the accumulator</span>
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">foldl</span> (<span class="nv">&amp;f</span>, \<span class="n">acc</span>, ()) { <span class="n">acc</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">foldl</span> (<span class="nv">&amp;f</span>, \<span class="n">acc</span>, \<span class="n">lst</span>) {
-  <span class="c1"># Raku&#39;s way of splitting a list in the first elt and the rest</span>
-  <span class="c1"># The &#39;*&#39; is a shorthand for the end of the list</span>
-   <span class="k">my</span> (\<span class="n">elt</span>,\<span class="n">rest</span>) = <span class="n">lst</span>[<span class="mi">0</span>, <span class="mi">1</span> .. * ]; 
-   <span class="c1"># The actual recursion</span>
-   <span class="n">foldl</span>( <span class="nv">&amp;f</span>, <span class="n">f</span>(<span class="n">acc</span>, <span class="n">elt</span>), <span class="n">rest</span>);
+<p>If we want to use immutable variables only, we can use recursion. Raku makes this easy because it allows multiple signatures for a subroutine (<code class="language-plaintext highlighter-rouge">multi sub</code>s), and it will call the variant that matches the signature. In Python, there is the module <a href="https://pypi.org/project/multipledispatch/">multipledispatch</a> that lets you do something similar to multi subs.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">foldl</code> will consume the input list <code class="language-plaintext highlighter-rouge">lst</code> and use <code class="language-plaintext highlighter-rouge">f</code> combine its elements into the accumulator <code class="language-plaintext highlighter-rouge">acc</code>. When the list has been consumed, the computation is finished and we can return <code class="language-plaintext highlighter-rouge">acc</code> as the result. So our first variant says that if the input list is empty, we should return <code class="language-plaintext highlighter-rouge">acc</code>.
+The second variant takes an element <code class="language-plaintext highlighter-rouge">elt</code> from the list (see <a href="https://docs.raku.org/type/Range">the Raku documentation</a> for details on the <code class="language-plaintext highlighter-rouge">*</code>) and combines it with <code class="language-plaintext highlighter-rouge">acc</code> into <code class="language-plaintext highlighter-rouge">f(acc,elt)</code>. It then calls <code class="language-plaintext highlighter-rouge">foldl</code> again with this new accumulator and the remainder of the list, <code class="language-plaintext highlighter-rouge">rest</code>.</p>
+
+<pre><code class="language-perl6"># When the list is empty, return the accumulator
+multi sub foldl (&amp;f, \acc, ()) { acc }
+multi sub foldl (&amp;f, \acc, \lst) {
+  # Raku's way of splitting a list in the first elt and the rest
+  # The '*' is a shorthand for the end of the list
+   my (\elt,\rest) = lst[0, 1 .. * ]; 
+   # The actual recursion
+   foldl( &amp;f, f(acc, elt), rest);
 }
-</code></pre></div>
+</code></pre>
+
 <p>Python does not allow pattern matching of this kind so we need to write the recursion using a conditional:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">def</span> <span class="nf">foldl</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">foldl</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">lst</span> <span class="o">==</span> <span class="p">():</span> 
     <span class="k">return</span> <span class="n">acc</span> 
   <span class="k">else</span><span class="p">:</span>
-  <span class="c1"># Python&#39;s way of splitting a tuple in the first elt and the rest</span>
-  <span class="c1"># rest will be a list, not a tuple, but we&#39;ll let that pass</span>
-   <span class="p">(</span><span class="n">elt</span><span class="p">,</span><span class="o">*</span><span class="n">rest</span><span class="p">)</span> <span class="o">=</span> <span class="n">lst</span> 
-   <span class="c1"># The actual recursion</span>
-   <span class="k">return</span> <span class="n">foldl</span><span class="p">(</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">elt</span><span class="p">),</span> <span class="n">rest</span><span class="p">)</span>
-</code></pre></div>
-<p>In this implementation, none of the variables is ever updated. So all variables can be immutable. </p>
+  <span class="c1"># Python's way of splitting a tuple in the first elt and the rest
+</span>  <span class="c1"># rest will be a list, not a tuple, but we'll let that pass
+</span>   <span class="p">(</span><span class="n">elt</span><span class="p">,</span><span class="o">*</span><span class="n">rest</span><span class="p">)</span> <span class="o">=</span> <span class="n">lst</span> 
+   <span class="c1"># The actual recursion
+</span>   <span class="k">return</span> <span class="nf">foldl</span><span class="p">(</span> <span class="n">f</span><span class="p">,</span> <span class="nf">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">elt</span><span class="p">),</span> <span class="n">rest</span><span class="p">)</span>
+</code></pre></div></div>
 
-<h4>Right fold</h4>
+<p>In this implementation, none of the variables is ever updated. So all variables can be immutable.</p>
 
-<p>The right fold is quite similar to the left fold. For the loop-based version, all we do is <code>reverse</code> the list.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="n">foldrl</span> (<span class="nv">&amp;f</span>, \<span class="n">acc</span>, \<span class="n">lst</span>) { 
-  <span class="k">my</span> <span class="nv">$res</span> = <span class="n">acc</span>;
-  <span class="k">for</span>  <span class="n">lst</span>.<span class="nb">reverse</span> -&gt; \<span class="n">elt</span> {
-    <span class="nv">$res</span> = <span class="n">f</span>(<span class="nv">$res</span>,<span class="n">elt</span>);
+<h4 id="right-fold">Right fold</h4>
+
+<p>The right fold is quite similar to the left fold. For the loop-based version, all we do is <code class="language-plaintext highlighter-rouge">reverse</code> the list.</p>
+
+<pre><code class="language-perl6"># Raku
+sub foldrl (&amp;f, \acc, \lst) { 
+  my $res = acc;
+  for  lst.reverse -&gt; \elt {
+    $res = f($res,elt);
   }
-  <span class="nv">$res</span>;
+  $res;
 }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">foldlr</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">iacc</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">foldlr</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">iacc</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
   <span class="n">acc</span> <span class="o">=</span> <span class="n">iacc</span>
-  <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">lst</span><span class="o">.</span><span class="n">reverse</span><span class="p">():</span>
-    <span class="n">acc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">)</span>  
+  <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">.</span><span class="nf">reverse</span><span class="p">():</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="nf">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">)</span>  
   <span class="k">return</span> <span class="n">acc</span>
-</code></pre></div>
-<p>In the recursive version, we take the last element from the list instead of the first one. For details on the <code>..^ * - 1</code> syntax please see <a href="https://docs.raku.org/language/operators#infix_..%5E">the Raku documentation</a>.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">foldr</span> ( <span class="nv">&amp;f</span>, \<span class="n">acc</span>, ()) { <span class="n">acc</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">foldr</span> (<span class="nv">&amp;f</span>, \<span class="n">acc</span>, \<span class="n">lst</span>) {
-    <span class="k">my</span> (\<span class="n">rest</span>,\<span class="n">elt</span>) = <span class="n">lst</span>[<span class="mi">0</span>..^*-<span class="mi">1</span>, *  ];
-    <span class="n">foldr</span>( <span class="nv">&amp;f</span>, <span class="n">f</span>(<span class="n">acc</span>, <span class="n">elt</span>), <span class="n">rest</span>);
+</code></pre></div></div>
+
+<p>In the recursive version, we take the last element from the list instead of the first one. For details on the <code class="language-plaintext highlighter-rouge">..^ * - 1</code> syntax please see <a href="https://docs.raku.org/language/operators#infix_..^">the Raku documentation</a>.</p>
+
+<pre><code class="language-perl6"># Raku
+multi sub foldr ( &amp;f, \acc, ()) { acc }
+multi sub foldr (&amp;f, \acc, \lst) {
+    my (\rest,\elt) = lst[0..^*-1, *  ];
+    foldr( &amp;f, f(acc, elt), rest);
 }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">foldr</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">foldr</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">lst</span> <span class="o">==</span> <span class="p">():</span> 
     <span class="k">return</span> <span class="n">acc</span> 
   <span class="k">else</span><span class="p">:</span>
    <span class="p">(</span><span class="o">*</span><span class="n">rest</span><span class="p">,</span><span class="n">elt</span><span class="p">)</span> <span class="o">=</span> <span class="n">lst</span> 
-   <span class="k">return</span> <span class="n">foldr</span><span class="p">(</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">elt</span><span class="p">),</span> <span class="n">rest</span><span class="p">)</span>
-</code></pre></div>
-<h4><code>map</code> and <code>grep</code> are folds</h4>
+   <span class="k">return</span> <span class="nf">foldr</span><span class="p">(</span> <span class="n">f</span><span class="p">,</span> <span class="nf">f</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">elt</span><span class="p">),</span> <span class="n">rest</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p>Now, what about <code>map</code> and <code>grep</code>? We can of course implement these with <code>for</code>-loops, but we can also implement them using our <code>foldl</code>:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="nb">map</span> (<span class="nv">&amp;f</span>,\<span class="n">lst</span>) {
-    <span class="n">foldl</span>( <span class="k">sub</span> (\<span class="n">acc</span>,\<span class="n">elt</span>) {
-            (|<span class="n">acc</span>,<span class="n">f</span>(<span class="n">elt</span>))
-            }, (), <span class="n">lst</span>);
+<h4 id="map-and-grep-are-folds"><code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">grep</code> are folds</h4>
+
+<p>Now, what about <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">grep</code>? We can of course implement these with <code class="language-plaintext highlighter-rouge">for</code>-loops, but we can also implement them using our <code class="language-plaintext highlighter-rouge">foldl</code>:</p>
+
+<pre><code class="language-perl6"># Raku
+sub map (&amp;f,\lst) {
+    foldl( sub (\acc,\elt) {
+            (|acc,f(elt))
+            }, (), lst);
 }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">map</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">lst</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">foldl</span><span class="p">(</span> 
-      <span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">:(</span><span class="o">*</span><span class="n">acc</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">elt</span><span class="p">))</span>
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">map</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">foldl</span><span class="p">(</span> 
+      <span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">:(</span><span class="o">*</span><span class="n">acc</span><span class="p">,</span> <span class="nf">f</span><span class="p">(</span><span class="n">elt</span><span class="p">))</span>
       <span class="p">,()</span>
       <span class="p">,</span><span class="n">lst</span>
     <span class="p">)</span>
-</code></pre></div>
-<p>Because the function <code>f</code> is mappable, it only has a single argument. But <code>foldl</code> needs a function with two arguments, the first for the accumulator. So we call <code>foldl</code> with an anonymous function of two arguments. The accumulator itself is an empty list. Although we said earlier that a reduction combines all elements of the original list into a single return value, this return value can of course be any data type, so also a list. So we call <code>f</code> on every element of the original list and add it to the end of the accumulator list. (The <code>|</code> flattens the list, so <code>(|acc,f(elt))</code> is a new list built from the elements of <code>acc</code> and result of <code>f(elt)</code>.)</p>
+</code></pre></div></div>
+<p>Because the function <code class="language-plaintext highlighter-rouge">f</code> is mappable, it only has a single argument. But <code class="language-plaintext highlighter-rouge">foldl</code> needs a function with two arguments, the first for the accumulator. So we call <code class="language-plaintext highlighter-rouge">foldl</code> with an anonymous function of two arguments. The accumulator itself is an empty list. Although we said earlier that a reduction combines all elements of the original list into a single return value, this return value can of course be any data type, so also a list. So we call <code class="language-plaintext highlighter-rouge">f</code> on every element of the original list and add it to the end of the accumulator list. (The <code class="language-plaintext highlighter-rouge">|</code> flattens the list, so <code class="language-plaintext highlighter-rouge">(|acc,f(elt))</code> is a new list built from the elements of <code class="language-plaintext highlighter-rouge">acc</code> and result of <code class="language-plaintext highlighter-rouge">f(elt)</code>.)</p>
 
-<p>In a similar way we can also define <code>grep</code>:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="nb">grep</span> (<span class="nv">&amp;f</span>,\<span class="n">lst</span>) {
-    <span class="n">foldl</span>( <span class="k">sub</span> (\<span class="n">acc</span>,\<span class="n">elt</span>) {
-      <span class="k">if</span> (<span class="n">f</span>(<span class="n">elt</span>)) {
-          (|<span class="n">acc</span>,<span class="n">elt</span>)
-      } <span class="k">else</span> {
-          <span class="n">acc</span>
+<p>In a similar way we can also define <code class="language-plaintext highlighter-rouge">grep</code>:</p>
+
+<pre><code class="language-perl6"># Raku
+sub grep (&amp;f,\lst) {
+    foldl( sub (\acc,\elt) {
+      if (f(elt)) {
+          (|acc,elt)
+      } else {
+          acc
       }
-    }, (), <span class="n">lst</span>);
+    }, (), lst);
 }
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">filter</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">lst</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">foldl</span><span class="p">(</span> 
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">filter</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">foldl</span><span class="p">(</span> 
       <span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">:</span>
-        <span class="p">(</span><span class="o">*</span><span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">elt</span><span class="p">)</span> <span class="k">else</span> <span class="n">acc</span>
+        <span class="p">(</span><span class="o">*</span><span class="n">acc</span><span class="p">,</span><span class="n">elt</span><span class="p">)</span> <span class="k">if</span> <span class="nf">f</span><span class="p">(</span><span class="n">elt</span><span class="p">)</span> <span class="k">else</span> <span class="n">acc</span>
       <span class="p">,</span> <span class="p">(),</span> <span class="n">lst</span><span class="p">)</span>
-</code></pre></div>
-<p>Just like in the <code>map</code> implementation, we call <code>foldl</code> with an anonymous function. In this function we test if <code>f(elt)</code> is true for every <code>elt</code> in <code>lst</code>. If it is true we create a new list from <code>acc</code> and <code>elt</code>, otherwise we just return <code>acc</code>. Because <code>map</code> and <code>grep</code> operate on each element of the list separately, we could implement them using the right fold as well. </p>
+</code></pre></div></div>
 
-<p>With these examples I hope that both the concept of a function working on functions and the possible ways of implementing them has become more clear. The advantage of the recursive implementation is that it allows us to use immutable data structures. </p>
+<p>Just like in the <code class="language-plaintext highlighter-rouge">map</code> implementation, we call <code class="language-plaintext highlighter-rouge">foldl</code> with an anonymous function. In this function we test if <code class="language-plaintext highlighter-rouge">f(elt)</code> is true for every <code class="language-plaintext highlighter-rouge">elt</code> in <code class="language-plaintext highlighter-rouge">lst</code>. If it is true we create a new list from <code class="language-plaintext highlighter-rouge">acc</code> and <code class="language-plaintext highlighter-rouge">elt</code>, otherwise we just return <code class="language-plaintext highlighter-rouge">acc</code>. Because <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">grep</code> operate on each element of the list separately, we could implement them using the right fold as well.</p>
 
-<h3>Why immutable data structures?</h3>
+<p>With these examples I hope that both the concept of a function working on functions and the possible ways of implementing them has become more clear. The advantage of the recursive implementation is that it allows us to use immutable data structures.</p>
 
-<p>You may wonder why I focus on these immutable data structures. As we will have seen, functional programming works really well with immutable data structures. And they have one big advantage: you never have to worry if you have accidentally modified your data, or whether you should make a copy to be sure. So using immutable data structures make code less error-prone and easier to debug. They also have potential performance benefits. And as we&#39;ll see next, in Raku there is yet another advantage.</p>
+<h3 id="why-immutable-data-structures">Why immutable data structures?</h3>
 
-<h2>Functions returning functions</h2>
+<p>You may wonder why I focus on these immutable data structures. As we will have seen, functional programming works really well with immutable data structures. And they have one big advantage: you never have to worry if you have accidentally modified your data, or whether you should make a copy to be sure. So using immutable data structures make code less error-prone and easier to debug. They also have potential performance benefits. And as we’ll see next, in Raku there is yet another advantage.</p>
 
-<p>Functions can also return functions. This is in particular useful if we want to have a parametrisable function. As a trivial example, suppose we want a series of functions that increments a number with a fixed value: <code>add1</code>, <code>add2</code> etc. We could of course write each of them separately:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="n">add_1</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">1</span>}
-<span class="k">sub</span> <span class="n">add_2</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">2</span>}
-<span class="k">sub</span> <span class="n">add_3</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">3</span>}
-<span class="k">sub</span> <span class="n">add_4</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">4</span>}
-<span class="k">sub</span> <span class="n">add_5</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">5</span>}
+<h2 id="functions-returning-functions">Functions returning functions</h2>
 
-<span class="nb">say</span> <span class="n">add_1</span>(<span class="mi">4</span>); <span class="c1">#=&gt; says 5</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">add_1</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+<p>Functions can also return functions. This is in particular useful if we want to have a parametrisable function. As a trivial example, suppose we want a series of functions that increments a number with a fixed value: <code class="language-plaintext highlighter-rouge">add1</code>, <code class="language-plaintext highlighter-rouge">add2</code> etc. We could of course write each of them separately:</p>
+
+<pre><code class="language-perl6"># Raku
+sub add_1 (\x) {x+1}
+sub add_2 (\x) {x+2}
+sub add_3 (\x) {x+3}
+sub add_4 (\x) {x+4}
+sub add_5 (\x) {x+5}
+
+say add_1(4); #=&gt; says 5
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">add_1</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
 <span class="k">def</span> <span class="nf">add_2</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span>
 <span class="k">def</span> <span class="nf">add_3</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">3</span>
 <span class="k">def</span> <span class="nf">add_4</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">4</span>
 <span class="k">def</span> <span class="nf">add_5</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">5</span>
 
-<span class="k">print</span><span class="p">(</span> <span class="n">add_1</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#=&gt; says 5</span>
-</code></pre></div>
+<span class="nf">print</span><span class="p">(</span> <span class="nf">add_1</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#=&gt; says 5
+</span></code></pre></div></div>
 <p>Or we could use a list filled with anonymous functions:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">my</span> \<span class="n">add</span> =
-<span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x</span>},
-<span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">1</span>},
-<span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">2</span>},
-<span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">3</span>},
-<span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">4</span>},
-<span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="mi">5</span>};
 
-<span class="nb">say</span> <span class="n">add</span>[<span class="mi">0</span>].(<span class="mi">4</span>); <span class="c1">#=&gt; says 5</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">add</span> <span class="o">=</span> <span class="p">(</span>
+<pre><code class="language-perl6"># Raku
+my \add =
+sub (\x) {x},
+sub (\x) {x+1},
+sub (\x) {x+2},
+sub (\x) {x+3},
+sub (\x) {x+4},
+sub (\x) {x+5};
+
+say add[0].(4); #=&gt; says 5
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="n">add</span> <span class="o">=</span> <span class="p">(</span>
 <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
 <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span>
 <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span>
@@ -562,95 +591,120 @@ The second variant takes an element <code>elt</code> from the list (see <a href=
 <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">5</span>
 <span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span> <span class="n">add</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#=&gt; says 5</span>
-</code></pre></div>
+<span class="nf">print</span><span class="p">(</span> <span class="n">add</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#=&gt; says 5
+</span></code></pre></div></div>
+
 <p>We could do better and use a loop to fill an array with anonymous functions:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">my</span> \<span class="n">add</span> = [];
-<span class="k">for</span> <span class="mi">0</span> .. <span class="mi">5</span> -&gt; \<span class="n">n</span> {
-  <span class="n">add</span>.<span class="nb">push</span>(<span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="n">n</span>});
+
+<pre><code class="language-perl6"># Raku
+my \add = [];
+for 0 .. 5 -&gt; \n {
+  add.push(sub (\x) {x+n});
 }
 
-<span class="nb">say</span> <span class="n">add</span>[<span class="mi">1</span>].(<span class="mi">4</span>); <span class="c1">#=&gt; says 5</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="n">add</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
-  <span class="n">add</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">n</span><span class="p">)</span>
-</code></pre></div>
-<p>We create a new anonymous function with every loop iteration, and add it to the array. But instead, we could use a function to create these anonymous functions, and then we could use <code>map</code> instead of a loop, and use an immutable data structure:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="n">gen_add</span>(\<span class="n">n</span>) {  
-  <span class="k">sub</span> (\<span class="o">x</span>) {<span class="o">x+</span><span class="n">n</span>}
+say add[1].(4); #=&gt; says 5
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="n">add</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+  <span class="n">add</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We create a new anonymous function with every loop iteration, and add it to the array. But instead, we could use a function to create these anonymous functions, and then we could use <code class="language-plaintext highlighter-rouge">map</code> instead of a loop, and use an immutable data structure:</p>
+
+<pre><code class="language-perl6"># Raku
+sub gen_add(\n) {  
+  sub (\x) {x+n}
 }
 
-<span class="k">my</span> \<span class="n">add</span> = <span class="nb">map</span> <span class="nv">&amp;gen_add</span>, <span class="mi">0</span><span class="o">..</span><span class="mi">5</span>;
+my \add = map &amp;gen_add, 0..5;
 
-<span class="nb">say</span> <span class="n">add</span>[<span class="mi">1</span>].(<span class="mi">4</span>); <span class="c1">#=&gt; says 5</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">gen_add</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  
+say add[1].(4); #=&gt; says 5
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">gen_add</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  
   <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">n</span>
 
-<span class="n">add</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span> <span class="n">gen_add</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)))</span>
+<span class="n">add</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span> <span class="n">gen_add</span><span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)))</span>
 
-<span class="k">print</span><span class="p">(</span> <span class="n">add</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#=&gt; says 5</span>
-</code></pre></div>
-<h3>Laziness</h3>
+<span class="nf">print</span><span class="p">(</span> <span class="n">add</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#=&gt; says 5
+</span></code></pre></div></div>
 
-<p>In Raku, using a range has an additional benefit: we can set the end of the range to infinity, which in Raku can be written as <code>∞</code> (unicode 221E), <code>*</code> or <code>Inf</code>. </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">my</span> \<span class="n">add</span> = <span class="nb">map</span> <span class="nv">&amp;gen_add</span>, <span class="mi">0</span> .. ∞;  
+<h3 id="laziness">Laziness</h3>
 
-<span class="nb">say</span> <span class="n">add</span>[<span class="mi">244</span>].(<span class="mi">7124</span>); <span class="c1">#=&gt; says 7368</span>
-</code></pre></div>
-<p>This is an example of what is called &quot;lazy evaluation&quot;, or laziness for short: Raku is not going to try (and fail) to process this infinite list. Instead, it will do the processing when we actually use an element of that list. The evaluation of the expression is delayed until the result is needed, so when we call <code>add[244]</code>, what happens is that <code>gen_add(244)</code> is called to generate that function. 
-Note that this will not work with the for-loop, because to use the for-loop we need a mutable data structure, and the lazy lists have to be immutable. So this is a nice example of how the functional programming style allows you to benefit from laziness. For the full story of laziness in Raku, please see <a href="https://docs.raku.org/language/list#index-entry-laziness_in_Iterable_objects">the documentation</a>. </p>
+<p>In Raku, using a range has an additional benefit: we can set the end of the range to infinity, which in Raku can be written as <code class="language-plaintext highlighter-rouge">∞</code> (unicode 221E), <code class="language-plaintext highlighter-rouge">*</code> or <code class="language-plaintext highlighter-rouge">Inf</code>.</p>
 
-<p>Python does not have lazy lists but is have a different form of laziness: the call to <code>map</code> (or <code>filter</code>) does not return the sequence of results but instead it returns a <em>generator</em>:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Pythom</span>
-<span class="n">map_gen</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span> <span class="n">gen_add</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6666</span><span class="p">))</span>
+<pre><code class="language-perl6"># Raku
+my \add = map &amp;gen_add, 0 .. ∞;  
 
-<span class="k">print</span><span class="p">(</span><span class="n">map_gen</span><span class="p">)</span> <span class="c1">#=&gt; says &lt;map object at 0x7f344caefdc0&gt;</span>
-</code></pre></div>
-<p>It is only when we wrap the generator in a sequence constructor such as <code>tuple()</code> that the results are actually generated. </p>
+say add[244].(7124); #=&gt; says 7368
+</code></pre>
 
-<h2>Function composition</h2>
+<p>This is an example of what is called “lazy evaluation”, or laziness for short: Raku is not going to try (and fail) to process this infinite list. Instead, it will do the processing when we actually use an element of that list. The evaluation of the expression is delayed until the result is needed, so when we call <code class="language-plaintext highlighter-rouge">add[244]</code>, what happens is that <code class="language-plaintext highlighter-rouge">gen_add(244)</code> is called to generate that function. 
+Note that this will not work with the for-loop, because to use the for-loop we need a mutable data structure, and the lazy lists have to be immutable. So this is a nice example of how the functional programming style allows you to benefit from laziness. For the full story of laziness in Raku, please see <a href="https://docs.raku.org/language/list#index-entry-laziness_in_Iterable_objects">the documentation</a>.</p>
 
-<p>We saw above that you can chain calls to <code>map</code> and <code>grep</code> together. Often you only need to chain <code>map</code> calls together, for example</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="nb">map</span> -&gt; \<span class="o">x</span> { <span class="o">x</span> + <span class="mi">5</span> }, <span class="nb">map</span> -&gt; \<span class="o">x</span> {<span class="o">x*x</span>}, <span class="mi">1</span><span class="o">..</span><span class="mi">30</span>;
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="nb">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)))</span>
-</code></pre></div>
+<p>Python does not have lazy lists but is have a different form of laziness: the call to <code class="language-plaintext highlighter-rouge">map</code> (or <code class="language-plaintext highlighter-rouge">filter</code>) does not return the sequence of results but instead it returns a <em>generator</em>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Pythom
+</span><span class="n">map_gen</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span> <span class="n">gen_add</span><span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6666</span><span class="p">))</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">map_gen</span><span class="p">)</span> <span class="c1">#=&gt; says &lt;map object at 0x7f344caefdc0&gt;
+</span></code></pre></div></div>
+
+<p>It is only when we wrap the generator in a sequence constructor such as <code class="language-plaintext highlighter-rouge">tuple()</code> that the results are actually generated.</p>
+
+<h2 id="function-composition">Function composition</h2>
+
+<p>We saw above that you can chain calls to <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">grep</code> together. Often you only need to chain <code class="language-plaintext highlighter-rouge">map</code> calls together, for example</p>
+
+<pre><code class="language-perl6"># Raku
+map -&gt; \x { x + 5 }, map -&gt; \x {x*x}, 1..30;
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="nf">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="nf">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)))</span>
+</code></pre></div></div>
+
 <p>In that case, we can do this a little bit more efficient: rather than creating a list and then calling map on that list, we can do both computations at once by composing the functions. Raku provides a special operator for this:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">map</span> -&gt; \<span class="o">x</span> { <span class="o">x</span> + <span class="mi">5</span> } ∘ -&gt; \<span class="o">x</span> { <span class="o">x</span> * <span class="o">x</span> }, <span class="mi">1</span><span class="o">..</span><span class="mi">30</span>;
-</code></pre></div>
-<p>The operator <code>∘</code> (the &quot;ring operator&quot;, unicode 2218, but you can also use a plain <code>o</code>) is the function composition operator, and it&#39;s pronounced &quot;after&quot;, so <code>f ∘ g</code> is &quot;f after g&quot;. What it does is create a new function by combining two existing functions:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> <span class="nv">&amp;h</span> = <span class="nv">&amp;f</span> ∘ <span class="nv">&amp;g</span>;
-</code></pre></div>
-<p>is the same as</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">h</span> (\<span class="o">x</span>) {
-    <span class="n">f</span>(<span class="n">g</span>(<span class="o">x</span>))
-}
-</code></pre></div>
-<p>The advantage of the composition operator is that that it works for any function, including anonymous ones. But in fact, it is just another higher-order functions. It is simply the operator form of the following function:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Raku</span>
-<span class="k">sub</span> <span class="n">compose</span>(<span class="nv">&amp;f</span>,<span class="nv">&amp;g</span>) {
-    <span class="k">sub</span> (\<span class="o">x</span>) { <span class="n">f</span>(<span class="n">g</span>(<span class="o">x</span>)) }
-}
-</code></pre></div>
-<p>Python does not have a function composition operator, but you can easily have <code>compose</code> in Python too:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Python</span>
-<span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">):</span>
-    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</code></pre></div>
-<h2>Conclusion</h2>
 
-<p>In this article I have used Raku and Python examples to introduce three key functional programming techniques: functions that operate on functions, functions that return functions and function composition. I have shown how you to use the functions <em>map</em>, <em>reduce</em> (<em>fold</em>) and <em>grep</em> (<em>filter</em>) to operate on immutable lists. I have explained how yo(u can implement such functions with and without recursion, and what the advantage is of the recursive implementation. Here is the code from the article, <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/decluttering-with-functional-programming.raku">Raku</a> and <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/decluttering-with-functional-programming.py">Python</a>. </p>
+<pre><code class="language-perl6">map -&gt; \x { x + 5 } ∘ -&gt; \x { x * x }, 1..30;
+</code></pre>
+
+<p>The operator <code class="language-plaintext highlighter-rouge">∘</code> (the “ring operator”, unicode 2218, but you can also use a plain <code class="language-plaintext highlighter-rouge">o</code>) is the function composition operator, and it’s pronounced “after”, so <code class="language-plaintext highlighter-rouge">f ∘ g</code> is “f after g”. What it does is create a new function by combining two existing functions:</p>
+
+<pre><code class="language-perl6">my &amp;h = &amp;f ∘ &amp;g;
+</code></pre>
+<p>is the same as</p>
+
+<pre><code class="language-perl6">sub h (\x) {
+    f(g(x))
+}
+</code></pre>
+
+<p>The advantage of the composition operator is that that it works for any function, including anonymous ones. But in fact, it is just another higher-order functions. It is simply the operator form of the following function:</p>
+
+<pre><code class="language-perl6"># Raku
+sub compose(&amp;f,&amp;g) {
+    sub (\x) { f(g(x)) }
+}
+</code></pre>
+
+<p>Python does not have a function composition operator, but you can easily have <code class="language-plaintext highlighter-rouge">compose</code> in Python too:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python
+</span><span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nf">f</span><span class="p">(</span><span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this article I have used Raku and Python examples to introduce three key functional programming techniques: functions that operate on functions, functions that return functions and function composition. I have shown how you to use the functions <em>map</em>, <em>reduce</em> (<em>fold</em>) and <em>grep</em> (<em>filter</em>) to operate on immutable lists. I have explained how yo(u can implement such functions with and without recursion, and what the advantage is of the recursive implementation. Here is the code from the article, <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/decluttering-with-functional-programming.raku">Raku</a> and <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/decluttering-with-functional-programming.py">Python</a>.</p>
 
 <p>There is of course a lot more to functional programming and I have written <a href="https://wimvanderbauwhede.github.io/articles/">a few articles on more advanced topics</a>. The concepts introduced in this article should provide a good basis for understanding those more advanced topics. If you want to learn more about functional programming, you might consider <a href="https://www.futurelearn.com/courses/functional-programming-haskell">my free online course</a>.</p>
 
 <!-- (reduce ->\x,\y {x o y}, -> \x {x+1},-> \x {x*2}, -> \x {2*x-1})(33) -->
-
 <!-- ([∘] fs)(x) -->
 
 <!-- List comprehensions
@@ -677,13 +731,6 @@ Note that this will not work with the for-loop, because to use the for-loop we n
 
                     <div class="inline-btn">
     <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
-    <!--
-	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
-	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
-	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
-	&nbsp;
-<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-    -->
 </div><!-- /.follow-us -->
 
 					
@@ -713,7 +760,7 @@ Note that this will not work with the for-loop, because to use the for-loop we n
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2024 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -737,8 +784,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
 
     
 

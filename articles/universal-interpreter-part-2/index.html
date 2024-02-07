@@ -6,25 +6,6 @@
     <meta name="description" content="The Böhm-Berarducci encoding of a type can be considered as a universal interpreter. We illustrate this in Raku with an evaluator and pretty printer.">
     <meta name="keywords" content="coding, hacking, programming, raku">
     
-    	<!-- Twitter Cards -->
-	<meta name="twitter:title" content="A universal interpreter">
-	<meta name="twitter:description" content="The Böhm-Berarducci encoding of a type can be considered as a universal interpreter. We illustrate this in Raku with an evaluator and pretty printer.">
-	<meta name="twitter:site" content="@wim_v12e">
-	<meta name="twitter:creator" content="@wim_v12e">
-	
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image" content="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-2_1600x600.jpg">
-	
-	<!-- Open Graph -->
-	<meta property="og:locale" content="en_GB">
-	<meta property="og:type" content="article">
-	<meta property="og:site_name" content="Wim Vanderbauwhede">
-	<meta property="og:url" content="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2/#">
-	<meta property="og:title" content="A universal interpreter">
-	<meta property="og:description" content="The Böhm-Berarducci encoding of a type can be considered as a universal interpreter. We illustrate this in Raku with an evaluator and pretty printer.">
-	<meta property="og:image" content="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-2_1600x600.jpg" />
-
-    
 
     <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2/">
 
@@ -37,7 +18,7 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
     <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
-    <style>
+    <!-- <style>
     .sliding-menu-content {
       top: 0;
       right: 0;
@@ -51,63 +32,25 @@
       -o-transform: translateX(100%);
       transform: translateX(100%);
     }
-    </style>
+    </style> -->
 
     <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css">
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css">
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
       <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
     <![endif]-->
-<!-- Google Analytics -->
-<!-- WV: NO!
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-73376688-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
--->
-<!--
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19948710-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
--->
     <!-- Include the jQuery library (local or CDN) -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
-	  <!-- WV: NO!
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    -->
     <header id="masthead">
   <div class="inner-wrap">
 <a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
@@ -119,11 +62,11 @@
 </ul>
 
     </nav>
-<form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form>
+<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
-    <nav role="navigation" class="js-menu sliding-menu-content">
+    <!-- <nav role="navigation" class="js-menu sliding-menu-content">
 	<ul class="menu-item">
 		
 	</ul>
@@ -133,7 +76,7 @@
 </button>
 
 <div class="js-menu-screen menu-screen"></div>
-
+ -->
 
     <div id="page-wrapper">
 
@@ -142,7 +85,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-2_1600x600.jpg" class="page-feature-image" alt="A universal interpreter" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-2_1600x600.avif" class="page-feature-image" alt="A universal interpreter" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -156,271 +99,298 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>In <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous article</a> I explained the basic idea behind a technique called <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a> of algebraic data types, and showed a way to implement this technique in <a href="https://raku.org/">Raku</a>. Unless you are already familiar with this formalism, I recommend you read that article first. </p>
+				<p>In <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous article</a> I explained the basic idea behind a technique called <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a> of algebraic data types, and showed a way to implement this technique in <a href="https://raku.org/">Raku</a>. Unless you are already familiar with this formalism, I recommend you read that article first.</p>
 
 <p>In this article I want to illustrate how the Böhm-Berarducci (BB) encoding of a data structure based on algebraic data types can be considered as a universal interpreter. What this means is that it is easy to perform computations that turn the data structure into something else. As an example, I will demonstrate how to create an evaluator and pretty-printer for a parsed polynomial expression.</p>
 
-<h2>A parse tree type</h2>
+<h2 id="a-parse-tree-type">A parse tree type</h2>
 
-<p>Consider expressions of the form <code>a*x^2+b*x+c</code> or <code>x^3+1</code> or <code>x*y^2-x^2*y</code>. Let&#39;s assume we have a parser for such an expression, for example built using <a href="https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/">parser combinators</a>. Let&#39;s also assume that this parser returns the parsed data as an algebraic data type, defined in Haskell as:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">data</span> <span class="kt">Term</span> <span class="ow">=</span> 
+<p>Consider expressions of the form <code class="language-plaintext highlighter-rouge">a*x^2+b*x+c</code> or <code class="language-plaintext highlighter-rouge">x^3+1</code> or <code class="language-plaintext highlighter-rouge">x*y^2-x^2*y</code>. Let’s assume we have a parser for such an expression, for example built using <a href="https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/">parser combinators</a>. Let’s also assume that this parser returns the parsed data as an algebraic data type, defined in Haskell as:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">Term</span> <span class="o">=</span> 
       <span class="kt">Var</span> <span class="kt">String</span>
     <span class="o">|</span> <span class="kt">Par</span> <span class="kt">String</span> 
     <span class="o">|</span> <span class="kt">Const</span> <span class="kt">Int</span>
     <span class="o">|</span> <span class="kt">Pow</span> <span class="kt">Term</span> <span class="kt">Int</span>
     <span class="o">|</span> <span class="kt">Add</span> <span class="p">[</span><span class="kt">Term</span><span class="p">]</span>
     <span class="o">|</span> <span class="kt">Mult</span> <span class="p">[</span><span class="kt">Term</span><span class="p">]</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>and in Raku:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">Term</span> {}
-<span class="k">role</span> <span class="n">Var</span> [<span class="nb">Str</span> \<span class="n">v</span>] <span class="nb">does</span> <span class="n">Term</span> {
-    <span class="k">has</span> <span class="nb">Str</span> <span class="nv">$.var</span> = <span class="n">v</span>;
-}
-<span class="k">role</span> <span class="n">Par</span> [<span class="nb">Str</span> \<span class="n">p</span>] <span class="nb">does</span> <span class="n">Term</span> {
-    <span class="k">has</span> <span class="nb">Str</span> <span class="nv">$.par</span> = <span class="n">p</span>;
-}
-<span class="k">role</span> <span class="n">Const</span> [<span class="nb">Int</span> \<span class="n">c</span>] <span class="nb">does</span> <span class="n">Term</span> {
-    <span class="k">has</span> <span class="nb">Int</span> <span class="nv">$.const</span> = <span class="n">c</span>;
-}
-<span class="k">role</span> <span class="n">Pow</span> [<span class="n">Term</span> \<span class="n">t</span>, <span class="nb">Int</span> \<span class="n">n</span>] <span class="nb">does</span> <span class="n">Term</span> {
-    <span class="k">has</span> <span class="n">Term</span> <span class="nv">$.term</span> = <span class="n">t</span>;
-    <span class="k">has</span> <span class="nb">Int</span> <span class="nv">$.exp</span> = <span class="n">n</span>;
-}
-<span class="k">role</span> <span class="n">Add</span> [<span class="nb">Array</span>[<span class="n">Term</span>] \<span class="n">ts</span>] <span class="nb">does</span> <span class="n">Term</span> {
-    <span class="k">has</span> <span class="nb">Array</span>[<span class="n">Term</span>] <span class="nv">$.terms</span> = <span class="n">ts</span>;
-}
-<span class="k">role</span> <span class="n">Mult</span> [<span class="nb">Array</span>[<span class="n">Term</span>] \<span class="n">ts</span>] <span class="nb">does</span> <span class="n">Term</span> {
-    <span class="k">has</span> <span class="nb">Array</span>[<span class="n">Term</span>] <span class="nv">$.terms</span> = <span class="n">ts</span>;
-}
-</code></pre></div>
-<p>The additional complexity compared to the types discussed in <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous article</a> is that this type is recursive: the <code>Pow</code>, <code>Add</code> and <code>Mult</code> roles take parameters of type <code>Term</code>. </p>
 
-<p>Before we look at the BB encoding, let&#39;s first write a pretty-printer for this type, using recursive <code>multi sub</code>s. </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Pretty-print a Term </span>
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Var</span> \<span class="n">t</span>) { <span class="n">t</span>.<span class="n">var</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Par</span> \<span class="n">c</span>) { <span class="n">c</span>.<span class="n">par</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Const</span> \<span class="n">n</span>) { <span class="s">&quot;{n.const}&quot;</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Pow</span> \<span class="n">pw</span>){ 
-    <span class="n">ppTerm</span>(<span class="n">pw</span>.<span class="n">term</span>) ~ <span class="s">&#39;^&#39;</span> ~ <span class="s">&quot;{pw.exp}&quot;</span> 
+<pre><code class="language-perl6">role Term {}
+role Var [Str \v] does Term {
+    has Str $.var = v;
 }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Add</span> \<span class="n">t</span>) { 
-    <span class="k">my</span> <span class="nv">@pts</span> = <span class="nb">map</span> {<span class="n">ppTerm</span>(<span class="nv">$_</span>)}, |<span class="n">t</span>.<span class="n">terms</span>;
-    <span class="s">&quot;(&quot;</span>~<span class="nb">join</span>( <span class="s">&quot; + &quot;</span>, <span class="nv">@pts</span>)~<span class="s">&quot;)&quot;</span>
+role Par [Str \p] does Term {
+    has Str $.par = p;
 }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Mult</span> \<span class="n">t</span>){ 
-    <span class="k">my</span> <span class="nv">@pts</span> = <span class="nb">map</span> {<span class="n">ppTerm</span>(<span class="nv">$_</span>)}, |<span class="n">t</span>.<span class="n">terms</span>;
-    <span class="nb">join</span>( <span class="s">&quot; * &quot;</span>, <span class="nv">@pts</span>)
+role Const [Int \c] does Term {
+    has Int $.const = c;
 }
-</code></pre></div>
+role Pow [Term \t, Int \n] does Term {
+    has Term $.term = t;
+    has Int $.exp = n;
+}
+role Add [Array[Term] \ts] does Term {
+    has Array[Term] $.terms = ts;
+}
+role Mult [Array[Term] \ts] does Term {
+    has Array[Term] $.terms = ts;
+}
+</code></pre>
+
+<p>The additional complexity compared to the types discussed in <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous article</a> is that this type is recursive: the <code class="language-plaintext highlighter-rouge">Pow</code>, <code class="language-plaintext highlighter-rouge">Add</code> and <code class="language-plaintext highlighter-rouge">Mult</code> roles take parameters of type <code class="language-plaintext highlighter-rouge">Term</code>.</p>
+
+<p>Before we look at the BB encoding, let’s first write a pretty-printer for this type, using recursive <code class="language-plaintext highlighter-rouge">multi sub</code>s.</p>
+
+<pre><code class="language-perl6"># Pretty-print a Term 
+multi sub ppTerm(Var \t) { t.var }
+multi sub ppTerm(Par \c) { c.par }
+multi sub ppTerm(Const \n) { "{n.const}" }
+multi sub ppTerm(Pow \pw){ 
+    ppTerm(pw.term) ~ '^' ~ "{pw.exp}" 
+}
+multi sub ppTerm(Add \t) { 
+    my @pts = map {ppTerm($_)}, |t.terms;
+    "("~join( " + ", @pts)~")"
+}
+multi sub ppTerm(Mult \t){ 
+    my @pts = map {ppTerm($_)}, |t.terms;
+    join( " * ", @pts)
+}
+</code></pre>
+
 <p>In the same way we can write an evaluator for this type:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Evaluate a Term </span>
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>, <span class="n">Var</span> \<span class="n">t</span>) { <span class="nv">%vars</span>{<span class="n">t</span>.<span class="n">var</span>} }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="n">Par</span> \<span class="n">c</span>) { <span class="nv">%pars</span>{<span class="n">c</span>.<span class="n">par</span>} }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="n">Const</span> \<span class="n">n</span>) { <span class="n">n</span>.<span class="n">const</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="n">Pow</span> \<span class="n">pw</span>){ 
-    <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="n">pw</span>.<span class="n">term</span>) ** <span class="n">pw</span>.<span class="nb">exp</span> 
+
+<pre><code class="language-perl6"># Evaluate a Term 
+multi sub evalTerm(%vars,  %pars, Var \t) { %vars{t.var} }
+multi sub evalTerm(%vars,  %pars,Par \c) { %pars{c.par} }
+multi sub evalTerm(%vars,  %pars,Const \n) { n.const }
+multi sub evalTerm(%vars,  %pars,Pow \pw){ 
+    evalTerm(%vars,  %pars,pw.term) ** pw.exp 
 }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="n">Add</span> \<span class="n">t</span>) { 
-    <span class="k">my</span> <span class="nv">@pts</span> = <span class="nb">map</span> {<span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="nv">$_</span>)}, |<span class="n">t</span>.<span class="n">terms</span>;
-    [+] <span class="nv">@pts</span>
+multi sub evalTerm(%vars,  %pars,Add \t) { 
+    my @pts = map {evalTerm(%vars,  %pars,$_)}, |t.terms;
+    [+] @pts
 }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="n">Mult</span> \<span class="n">t</span>){ 
-    <span class="k">my</span> <span class="nv">@pts</span> = <span class="nb">map</span> {<span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="nv">$_</span>)}, |<span class="n">t</span>.<span class="n">terms</span>;
-    [*] <span class="nv">@pts</span>
+multi sub evalTerm(%vars,  %pars,Mult \t){ 
+    my @pts = map {evalTerm(%vars,  %pars,$_)}, |t.terms;
+    [*] @pts
 }
-</code></pre></div>
-<h3>Example parse trees</h3>
+</code></pre>
 
-<p>As an example, let&#39;s create the parse tree for a few expressions using the <code>Term</code> type.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># a*x^2 + b*x + x</span>
-<span class="k">my</span> \<span class="n">qterm1</span> = <span class="n">Add</span>[ 
-    <span class="nb">Array</span>[<span class="n">Term</span>].<span class="nb">new</span>(
-    <span class="n">Mult</span>[ <span class="nb">Array</span>[<span class="n">Term</span>].<span class="nb">new</span>(
-        <span class="n">Par</span>[ <span class="s">&quot;a&quot;</span>].<span class="nb">new</span>, 
-        <span class="n">Pow</span>[ <span class="n">Var</span>[ <span class="s">&quot;x&quot;</span>].<span class="nb">new</span>, <span class="mi">2</span>].<span class="nb">new</span>) 
-        ].<span class="nb">new</span>,
-    <span class="n">Mult</span>[
-        <span class="nb">Array</span>[<span class="n">Term</span>].<span class="nb">new</span>(
-            <span class="n">Par</span>[ <span class="s">&quot;b&quot;</span>].<span class="nb">new</span>, 
-            <span class="n">Var</span>[ <span class="s">&quot;x&quot;</span>].<span class="nb">new</span>) 
-        ].<span class="nb">new</span>,
-    <span class="n">Par</span>[ <span class="s">&quot;c&quot;</span>].<span class="nb">new</span>
+<h3 id="example-parse-trees">Example parse trees</h3>
+
+<p>As an example, let’s create the parse tree for a few expressions using the <code class="language-plaintext highlighter-rouge">Term</code> type.</p>
+
+<pre><code class="language-perl6"># a*x^2 + b*x + x
+my \qterm1 = Add[ 
+    Array[Term].new(
+    Mult[ Array[Term].new(
+        Par[ "a"].new, 
+        Pow[ Var[ "x"].new, 2].new) 
+        ].new,
+    Mult[
+        Array[Term].new(
+            Par[ "b"].new, 
+            Var[ "x"].new) 
+        ].new,
+    Par[ "c"].new
     )
-    ].<span class="nb">new</span>;
+    ].new;
 
-<span class="c1">#   x^3 + 1    </span>
-<span class="k">my</span> \<span class="n">qterm2</span> = <span class="n">Add</span>[ 
-    <span class="nb">Array</span>[<span class="n">Term</span>].<span class="nb">new</span>(
-        <span class="n">Pow</span>[ <span class="n">Var</span>[ <span class="s">&quot;x&quot;</span>].<span class="nb">new</span>, <span class="mi">3</span>].<span class="nb">new</span>, 
-        <span class="n">Const</span>[ <span class="mi">1</span>].<span class="nb">new</span>
+#   x^3 + 1    
+my \qterm2 = Add[ 
+    Array[Term].new(
+        Pow[ Var[ "x"].new, 3].new, 
+        Const[ 1].new
     )
-    ].<span class="nb">new</span>;
+    ].new;
 
-<span class="c1">#   qterm1 * qterm2    </span>
-<span class="k">my</span> \<span class="n">qterm</span> = <span class="n">Mult</span>[ 
-    <span class="nb">Array</span>[<span class="n">Term</span>].<span class="nb">new</span>(
-        <span class="n">qterm1</span>, <span class="n">qterm2</span>
+#   qterm1 * qterm2    
+my \qterm = Mult[ 
+    Array[Term].new(
+        qterm1, qterm2
     )
-    ].<span class="nb">new</span>;
-</code></pre></div>
-<p>Calling the pretty-printer and evaluator on this term: </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="nb">say</span> <span class="n">ppTerm</span>( <span class="n">qterm</span>); <span class="c1"># =&gt; (a * x^2 + b * x + c) * (x^3 + 1)</span>
+    ].new;
+</code></pre>
 
-<span class="nb">say</span> <span class="n">evalTerm</span>(
-    {<span class="s">&quot;x&quot;</span> =&gt; <span class="mi">2</span>}, {<span class="s">&quot;a&quot;</span> =&gt;<span class="mi">2</span>,<span class="s">&quot;b&quot;</span>=&gt;<span class="mi">3</span>,<span class="s">&quot;c&quot;</span>=&gt;<span class="mi">4</span>},  <span class="n">qterm</span>
-); <span class="c1"># =&gt; 162</span>
-</code></pre></div>
-<h2>BB encoding of the parse tree type</h2>
+<p>Calling the pretty-printer and evaluator on this term:</p>
 
-<p>The BB encoding of the <code>Term</code> algebraic data type in Raku is pleasingly compact:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">role</span> <span class="n">TermBB</span>[<span class="nv">&amp;f</span>] {
-    <span class="k">method</span> <span class="n">unTermBB</span>(
-        <span class="nv">&amp;var:</span>(<span class="nb">Str</span> --&gt; <span class="nb">Any</span>),
-        <span class="nv">&amp;par:</span>(<span class="nb">Str</span> --&gt; <span class="nb">Any</span>),
-        <span class="nv">&amp;const:</span>(<span class="nb">Int</span> --&gt; <span class="nb">Any</span>),
-        <span class="nv">&amp;pow:</span>(<span class="nb">Any</span>,<span class="nb">Int</span> --&gt; <span class="nb">Any</span>),
-        <span class="nv">&amp;add:</span>(<span class="nb">Array</span>[<span class="nb">Any</span>] --&gt; <span class="nb">Any</span>),
-        <span class="nv">&amp;mult:</span>(<span class="nb">Array</span>[<span class="nb">Any</span>] --&gt; <span class="nb">Any</span>) 
-        --&gt; <span class="nb">Any</span>
+<pre><code class="language-perl6">say ppTerm( qterm); # =&gt; (a * x^2 + b * x + c) * (x^3 + 1)
+
+say evalTerm(
+    {"x" =&gt; 2}, {"a" =&gt;2,"b"=&gt;3,"c"=&gt;4},  qterm
+); # =&gt; 162
+</code></pre>
+
+<h2 id="bb-encoding-of-the-parse-tree-type">BB encoding of the parse tree type</h2>
+
+<p>The BB encoding of the <code class="language-plaintext highlighter-rouge">Term</code> algebraic data type in Raku is pleasingly compact:</p>
+
+<pre><code class="language-perl6">role TermBB[&amp;f] {
+    method unTermBB(
+        &amp;var:(Str --&gt; Any),
+        &amp;par:(Str --&gt; Any),
+        &amp;const:(Int --&gt; Any),
+        &amp;pow:(Any,Int --&gt; Any),
+        &amp;add:(Array[Any] --&gt; Any),
+        &amp;mult:(Array[Any] --&gt; Any) 
+        --&gt; Any
     ) {
-        <span class="n">f</span>(<span class="nv">&amp;var</span>,<span class="nv">&amp;par</span>,<span class="nv">&amp;const</span>,<span class="nv">&amp;pow</span>,<span class="nv">&amp;add</span>,<span class="nv">&amp;mult</span>);
+        f(&amp;var,&amp;par,&amp;const,&amp;pow,&amp;add,&amp;mult);
     }
 }
-</code></pre></div>
-<p>It would of course be even more compact without the signatures, but then we&#39;d have no information about the encoded type.</p>
+</code></pre>
 
-<p>We could of course use this type directly, but instead I want to look at how we can convert between <code>Term</code> and <code>TermBB</code>. </p>
+<p>It would of course be even more compact without the signatures, but then we’d have no information about the encoded type.</p>
 
-<p>As before, we create our little helpers. Each of the functions below is a constructor which generates the <code>TermBB</code> instance for the corresponding alternative in the <code>Term</code> algebraic data type. (When Raku&#39;s macro language is more developed, we will be able to generate these automatically.)</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">VarBB</span>(<span class="nb">Str</span> \<span class="o">s</span> --&gt; <span class="n">TermBB</span>) { 
-    <span class="n">TermBB</span>[ 
-        <span class="k">sub</span> (\<span class="n">v</span>, \<span class="n">c</span>, \<span class="n">n</span>, \<span class="n">p</span>, \<span class="n">a</span>, \<span class="sr">m) { v.(s)</span> }
-    ].<span class="nb">new</span>;
+<p>We could of course use this type directly, but instead I want to look at how we can convert between <code class="language-plaintext highlighter-rouge">Term</code> and <code class="language-plaintext highlighter-rouge">TermBB</code>.</p>
+
+<p>As before, we create our little helpers. Each of the functions below is a constructor which generates the <code class="language-plaintext highlighter-rouge">TermBB</code> instance for the corresponding alternative in the <code class="language-plaintext highlighter-rouge">Term</code> algebraic data type. (When Raku’s macro language is more developed, we will be able to generate these automatically.)</p>
+
+<pre><code class="language-perl6">sub VarBB(Str \s --&gt; TermBB) { 
+    TermBB[ 
+        sub (\v, \c, \n, \p, \a, \m) { v.(s) }
+    ].new;
     }
-<span class="k">sub</span> <span class="n">ParBB</span>(<span class="nb">Str</span> \<span class="o">s</span> --&gt; <span class="n">TermBB</span>) { 
-    <span class="n">TermBB</span>[ 
-        <span class="k">sub</span> (\<span class="n">v</span>, \<span class="n">c</span>, \<span class="n">n</span>, \<span class="n">p</span>, \<span class="n">a</span>, \<span class="sr">m) { c.(s)</span> }
-    ].<span class="nb">new</span>;
+sub ParBB(Str \s --&gt; TermBB) { 
+    TermBB[ 
+        sub (\v, \c, \n, \p, \a, \m) { c.(s) }
+    ].new;
     }
-<span class="k">sub</span> <span class="n">ConstBB</span>(<span class="nb">Int</span> \<span class="n">i</span> --&gt; <span class="n">TermBB</span>) { 
-    <span class="n">TermBB</span>[ 
-        <span class="k">sub</span> (\<span class="n">v</span>, \<span class="n">c</span>, \<span class="n">n</span>, \<span class="n">p</span>, \<span class="n">a</span>, \<span class="sr">m) { n.(i)</span> }
-    ].<span class="nb">new</span>;
+sub ConstBB(Int \i --&gt; TermBB) { 
+    TermBB[ 
+        sub (\v, \c, \n, \p, \a, \m) { n.(i) }
+    ].new;
     }    
-<span class="k">sub</span> <span class="n">PowBB</span>( <span class="n">TermBB</span> \<span class="n">t</span>, <span class="nb">Int</span> \<span class="n">i</span> --&gt; <span class="n">TermBB</span>) {
-    <span class="n">TermBB</span>[  <span class="k">sub</span> (\<span class="n">v</span>, \<span class="n">c</span>, \<span class="n">n</span>, \<span class="n">p</span>, \<span class="n">a</span>, \<span class="sr">m) { </span>
-<span class="sr">        p.( t.unTermBB( v, c, n, p, a, m )</span>, <span class="n">i</span>);
+sub PowBB( TermBB \t, Int \i --&gt; TermBB) {
+    TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
+        p.( t.unTermBB( v, c, n, p, a, m ), i);
     }
-    ].<span class="nb">new</span>;
+    ].new;
 }
-<span class="k">sub</span> <span class="n">AddB</span>( <span class="nb">Array</span>[<span class="n">TermBB</span>] \<span class="n">ts</span> --&gt; <span class="n">TermBB</span>) {
-    <span class="n">TermBB</span>[  <span class="k">sub</span> (\<span class="n">v</span>, \<span class="n">c</span>, \<span class="n">n</span>, \<span class="n">p</span>, \<span class="n">a</span>, \<span class="sr">m) { </span>
-<span class="sr">        a.( map {.unTermBB( v, c, n, p, a, m )</span>}, <span class="n">ts</span> )
+sub AddB( Array[TermBB] \ts --&gt; TermBB) {
+    TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
+        a.( map {.unTermBB( v, c, n, p, a, m )}, ts )
     }
-    ].<span class="nb">new</span>;
+    ].new;
 }
-<span class="k">sub</span> <span class="n">MultBB</span>(  <span class="nb">Array</span>[<span class="n">TermBB</span>] \<span class="n">ts</span> --&gt; <span class="n">TermBB</span>) { 
-    <span class="n">TermBB</span>[  <span class="k">sub</span> (\<span class="n">v</span>, \<span class="n">c</span>, \<span class="n">n</span>, \<span class="n">p</span>, \<span class="n">a</span>, \<span class="sr">m) { </span>
-<span class="sr">        m.( map {.unTermBB( v, c, n, p, a, m )</span>}, <span class="n">ts</span> )
+sub MultBB(  Array[TermBB] \ts --&gt; TermBB) { 
+    TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
+        m.( map {.unTermBB( v, c, n, p, a, m )}, ts )
     }
-    ].<span class="nb">new</span>;
+    ].new;
 }
-</code></pre></div>
-<p>The interesting generators are <code>PowBB</code>, <code>AddBB</code> and <code>MultBB</code> because they are recursive. In <code>PowBB</code>, the function passed as parameter to the <code>TermBB</code> role constructor calls <code>p</code> which has a signature of <code>:(Any,Int --&gt; Any)</code>, but actually requires an argument of the same type as the return value (we need <code>a -&gt; Int -&gt; a</code>). The argument <code>t</code>  is of type <code>TermBB</code> which is a wrapper around a function which, when applied, will return the right type. In the Raku implementation, this function is the method <code>unTermBB</code>. So we need to call <code>t.unTermBB( ... )</code>.
-In <code>AddBB</code> and <code>MultBB</code>, we have an <code>Array[TermBB]</code> so we need to call <code>unTermBB</code> on every element, hence the <code>map</code> call.</p>
+</code></pre>
 
-<p>Using these generators we can write a single function to convert the algebraic data type into its BB encoding. Unsurprisingly, it is very similar to the pretty-printer and evaluator we wrote for <code>Term</code> instances:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># Turn a Term into a BB Term</span>
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">termToBB</span>(<span class="n">Var</span> \<span class="n">t</span>  ) { <span class="n">VarBB</span>(<span class="n">t</span>.<span class="n">var</span>)}
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">termToBB</span>(<span class="n">Par</span> \<span class="n">c</span>  ) { <span class="n">ParBB</span>( <span class="n">c</span>.<span class="n">par</span>)}
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">termToBB</span>(<span class="n">Const</span> \<span class="n">n</span>) {<span class="n">ConstBB</span>(<span class="n">n</span>.<span class="n">const</span>)}
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">termToBB</span>(<span class="n">Pow</span> \<span class="n">pw</span> ) { 
-    <span class="n">PowBB</span>( <span class="n">termToBB</span>(<span class="n">pw</span>.<span class="n">term</span>), <span class="n">pw</span>.<span class="nb">exp</span>)
+<p>The interesting generators are <code class="language-plaintext highlighter-rouge">PowBB</code>, <code class="language-plaintext highlighter-rouge">AddBB</code> and <code class="language-plaintext highlighter-rouge">MultBB</code> because they are recursive. In <code class="language-plaintext highlighter-rouge">PowBB</code>, the function passed as parameter to the <code class="language-plaintext highlighter-rouge">TermBB</code> role constructor calls <code class="language-plaintext highlighter-rouge">p</code> which has a signature of <code class="language-plaintext highlighter-rouge">:(Any,Int --&gt; Any)</code>, but actually requires an argument of the same type as the return value (we need <code class="language-plaintext highlighter-rouge">a -&gt; Int -&gt; a</code>). The argument <code class="language-plaintext highlighter-rouge">t</code>  is of type <code class="language-plaintext highlighter-rouge">TermBB</code> which is a wrapper around a function which, when applied, will return the right type. In the Raku implementation, this function is the method <code class="language-plaintext highlighter-rouge">unTermBB</code>. So we need to call <code class="language-plaintext highlighter-rouge">t.unTermBB( ... )</code>.
+In <code class="language-plaintext highlighter-rouge">AddBB</code> and <code class="language-plaintext highlighter-rouge">MultBB</code>, we have an <code class="language-plaintext highlighter-rouge">Array[TermBB]</code> so we need to call <code class="language-plaintext highlighter-rouge">unTermBB</code> on every element, hence the <code class="language-plaintext highlighter-rouge">map</code> call.</p>
+
+<p>Using these generators we can write a single function to convert the algebraic data type into its BB encoding. Unsurprisingly, it is very similar to the pretty-printer and evaluator we wrote for <code class="language-plaintext highlighter-rouge">Term</code> instances:</p>
+
+<pre><code class="language-perl6"># Turn a Term into a BB Term
+multi sub termToBB(Var \t  ) { VarBB(t.var)}
+multi sub termToBB(Par \c  ) { ParBB( c.par)}
+multi sub termToBB(Const \n) {ConstBB(n.const)}
+multi sub termToBB(Pow \pw ) { 
+    PowBB( termToBB(pw.term), pw.exp)
 }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">termToBB</span>(<span class="n">Add</span> \<span class="n">t</span>  ) { 
-    <span class="n">AddBB</span>( <span class="n">typed-map</span>( <span class="n">TermBB</span>, <span class="n">t</span>.<span class="n">terms</span>, <span class="nv">&amp;termToBB</span> ))
+multi sub termToBB(Add \t  ) { 
+    AddBB( typed-map( TermBB, t.terms, &amp;termToBB ))
 }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">termToBB</span>(<span class="n">Mult</span> \<span class="n">t</span> ) { 
-    <span class="n">MultBB</span>( <span class="n">typed-map</span>( <span class="n">TermBB</span>, <span class="n">t</span>.<span class="n">terms</span>, <span class="nv">&amp;termToBB</span> ))
+multi sub termToBB(Mult \t ) { 
+    MultBB( typed-map( TermBB, t.terms, &amp;termToBB ))
 }
 
-<span class="c1"># map &amp;f and return in an Array of type T</span>
-<span class="k">sub</span> <span class="n">typed-map</span> (\<span class="n">T</span>,\<span class="n">lst</span>,<span class="nv">&amp;f</span>) {
-    <span class="nb">Array</span>[<span class="n">T</span>].<span class="nb">new</span>(<span class="nb">map</span> {<span class="n">f</span>(<span class="nv">$_</span>) }, |<span class="n">lst</span> )
+# map &amp;f and return in an Array of type T
+sub typed-map (\T,\lst,&amp;f) {
+    Array[T].new(map {f($_) }, |lst )
 }
-</code></pre></div>
-<p>Because <code>PowBB</code>, <code>AddBB</code> and <code>MultBB</code> require a <code>TermBB</code>, we need to call <code>termToBB</code> on the <code>Term</code> fields. And because  <code>AddBB</code> and <code>MultBB</code> take an array of <code>Term</code>,  we need a <code>map</code>. However, Raku&#39;s <code>map</code> returns values of type <code>Seq</code>, so we need an explicit conversion into <code>Array</code>.</p>
+</code></pre>
 
-<p>We can now convert any data structure of type <code>Term</code> into its BB encoding:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">my</span> \<span class="n">qtermbb</span> = <span class="n">termToBB</span>( <span class="n">qterm</span>);
+<p>Because <code class="language-plaintext highlighter-rouge">PowBB</code>, <code class="language-plaintext highlighter-rouge">AddBB</code> and <code class="language-plaintext highlighter-rouge">MultBB</code> require a <code class="language-plaintext highlighter-rouge">TermBB</code>, we need to call <code class="language-plaintext highlighter-rouge">termToBB</code> on the <code class="language-plaintext highlighter-rouge">Term</code> fields. And because  <code class="language-plaintext highlighter-rouge">AddBB</code> and <code class="language-plaintext highlighter-rouge">MultBB</code> take an array of <code class="language-plaintext highlighter-rouge">Term</code>,  we need a <code class="language-plaintext highlighter-rouge">map</code>. However, Raku’s <code class="language-plaintext highlighter-rouge">map</code> returns values of type <code class="language-plaintext highlighter-rouge">Seq</code>, so we need an explicit conversion into <code class="language-plaintext highlighter-rouge">Array</code>.</p>
 
-<span class="nb">say</span> <span class="n">qtermbb</span>.<span class="n">raku</span>; <span class="c1"># =&gt; TermBB[Sub].new</span>
-</code></pre></div>
-<h3>Interpreter 1: Pretty-printer with BB encoding</h3>
+<p>We can now convert any data structure of type <code class="language-plaintext highlighter-rouge">Term</code> into its BB encoding:</p>
 
-<p>To create a pretty-printer for the BB-encoded type, we write implementations for each alternative, and the <code>unTermBB</code> call magically combines these.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">ppTermBB</span>(<span class="n">TermBB</span> \<span class="n">t</span> --&gt; <span class="nb">Str</span>){ 
-    <span class="k">sub</span> <span class="n">var</span>( \<span class="o">x</span> ) { <span class="o">x</span> }
-    <span class="k">sub</span> <span class="n">par</span>( \<span class="o">x</span> ) { <span class="o">x</span> }
-    <span class="k">sub</span> <span class="n">const</span>(\<span class="o">x</span> ) { <span class="s">&quot;{x}&quot;</span> }
-    <span class="k">sub</span> <span class="n">pow</span>( \<span class="n">t</span>, \<span class="sr">m ) { t ~ &quot;^{m}&quot; } </span>
-<span class="sr">    sub add( \ts )</span> { <span class="s">&quot;(&quot;</span>~<span class="nb">join</span>( <span class="s">&quot; + &quot;</span>, <span class="n">ts</span>)~<span class="s">&quot;)&quot;</span> }
-    <span class="k">sub</span> <span class="n">mult</span>( \<span class="n">ts</span> ) { <span class="nb">join</span>( <span class="s">&quot; * &quot;</span>, <span class="n">ts</span>) }
-    <span class="n">t</span>.<span class="n">unTermBB</span>( <span class="nv">&amp;var</span>, <span class="nv">&amp;par</span>, <span class="nv">&amp;const</span>, <span class="nv">&amp;pow</span>, <span class="nv">&amp;add</span>, <span class="nv">&amp;mult</span>);
+<pre><code class="language-perl6">my \qtermbb = termToBB( qterm);
+
+say qtermbb.raku; # =&gt; TermBB[Sub].new
+</code></pre>
+
+<h3 id="interpreter-1-pretty-printer-with-bb-encoding">Interpreter 1: Pretty-printer with BB encoding</h3>
+
+<p>To create a pretty-printer for the BB-encoded type, we write implementations for each alternative, and the <code class="language-plaintext highlighter-rouge">unTermBB</code> call magically combines these.</p>
+
+<pre><code class="language-perl6">sub ppTermBB(TermBB \t --&gt; Str){ 
+    sub var( \x ) { x }
+    sub par( \x ) { x }
+    sub const(\x ) { "{x}" }
+    sub pow( \t, \m ) { t ~ "^{m}" } 
+    sub add( \ts ) { "("~join( " + ", ts)~")" }
+    sub mult( \ts ) { join( " * ", ts) }
+    t.unTermBB( &amp;var, &amp;par, &amp;const, &amp;pow, &amp;add, &amp;mult);
 }
-</code></pre></div>
-<p>Compared with <code>ppTerm</code> (copied below for convenience), the main differences are that there is no recursion and no need to <code>map</code> anything. We also don&#39;t need a <code>multi sub</code> to pattern match on the constructors, and there is no need to unpack the values stored in the type using attribute accessors. As a result, the BB version is markedly less cluttered.</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Var</span> \<span class="n">t</span> --&gt; <span class="nb">Str</span>) { <span class="n">t</span>.<span class="n">var</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Par</span> \<span class="n">c</span> --&gt; <span class="nb">Str</span>) { <span class="n">c</span>.<span class="n">par</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Const</span> \<span class="n">n</span> --&gt; <span class="nb">Str</span>) { <span class="s">&quot;{n.const}&quot;</span> }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Pow</span> \<span class="n">pw</span> --&gt; <span class="nb">Str</span>){ 
-    <span class="n">ppTerm</span>(<span class="n">pw</span>.<span class="n">term</span>) ~ <span class="s">&#39;^&#39;</span> ~ <span class="s">&quot;{pw.exp}&quot;</span> 
+</code></pre>
+
+<p>Compared with <code class="language-plaintext highlighter-rouge">ppTerm</code> (copied below for convenience), the main differences are that there is no recursion and no need to <code class="language-plaintext highlighter-rouge">map</code> anything. We also don’t need a <code class="language-plaintext highlighter-rouge">multi sub</code> to pattern match on the constructors, and there is no need to unpack the values stored in the type using attribute accessors. As a result, the BB version is markedly less cluttered.</p>
+
+<pre><code class="language-perl6">multi sub ppTerm(Var \t --&gt; Str) { t.var }
+multi sub ppTerm(Par \c --&gt; Str) { c.par }
+multi sub ppTerm(Const \n --&gt; Str) { "{n.const}" }
+multi sub ppTerm(Pow \pw --&gt; Str){ 
+    ppTerm(pw.term) ~ '^' ~ "{pw.exp}" 
 }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Add</span> \<span class="n">t</span> --&gt; <span class="nb">Str</span>) { 
-    <span class="k">my</span> <span class="nv">@pts</span> = <span class="nb">map</span> {<span class="n">ppTerm</span>(<span class="nv">$_</span>)}, |<span class="n">t</span>.<span class="n">terms</span>;
-    <span class="s">&quot;(&quot;</span>~<span class="nb">join</span>( <span class="s">&quot; + &quot;</span>, <span class="nv">@pts</span>)~<span class="s">&quot;)&quot;</span>
+multi sub ppTerm(Add \t --&gt; Str) { 
+    my @pts = map {ppTerm($_)}, |t.terms;
+    "("~join( " + ", @pts)~")"
 }
-<span class="k">multi</span> <span class="k">sub</span> <span class="n">ppTerm</span>(<span class="n">Mult</span> \<span class="n">t</span> --&gt; <span class="nb">Str</span>){ 
-    <span class="k">my</span> <span class="nv">@pts</span> = <span class="nb">map</span> {<span class="n">ppTerm</span>(<span class="nv">$_</span>)}, |<span class="n">t</span>.<span class="n">terms</span>;
-    <span class="nb">join</span>( <span class="s">&quot; * &quot;</span>, <span class="nv">@pts</span>)
+multi sub ppTerm(Mult \t --&gt; Str){ 
+    my @pts = map {ppTerm($_)}, |t.terms;
+    join( " * ", @pts)
 }
-</code></pre></div>
-<h3>Interpreter 2: Evaluator with BB encoding</h3>
+</code></pre>
+
+<h3 id="interpreter-2-evaluator-with-bb-encoding">Interpreter 2: Evaluator with BB encoding</h3>
 
 <p>And an evaluator is equally simple:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">evalTermBB</span>( <span class="nv">%vars</span>,  <span class="nv">%pars</span>, \<span class="n">t</span>) {
-    <span class="n">t</span>.<span class="n">unTermBB</span>( 
-        -&gt; \<span class="o">x</span> { <span class="nv">%vars</span>{<span class="o">x</span>} }, 
-        -&gt; \<span class="o">x</span> { <span class="nv">%pars</span>{<span class="o">x</span>} },
-        -&gt; \<span class="o">x</span> {<span class="o">x</span>},
-        -&gt; \<span class="n">t</span>,\<span class="sr">m { t ** m}</span>,
-        -&gt; \<span class="n">ts</span> { [+] <span class="n">ts</span>},
-        -&gt; \<span class="n">ts</span> { [*] <span class="n">ts</span>}
+
+<pre><code class="language-perl6">sub evalTermBB( %vars,  %pars, \t) {
+    t.unTermBB( 
+        -&gt; \x { %vars{x} }, 
+        -&gt; \x { %pars{x} },
+        -&gt; \x {x},
+        -&gt; \t,\m { t ** m},
+        -&gt; \ts { [+] ts},
+        -&gt; \ts { [*] ts}
     );
 }
-</code></pre></div>
-<p>As with <code>evalTerm</code> below, we pass hashes for variable and parameter definitions as arguments to provide context for the evaluation. In the BB version we need to do this only once, rather than for every multi variant, so I have written it below using a <code>given/when</code>. Even then, the BB version is a lot cleaner, for the same reasons as above. </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>, <span class="n">Term</span> \<span class="n">t</span>) {
-    <span class="k">given</span> <span class="n">t</span> {
-        <span class="k">when</span> <span class="n">Var</span> { <span class="nv">%vars</span>{<span class="n">t</span>.<span class="n">var</span>} }
-        <span class="k">when</span> <span class="n">Par</span> { <span class="nv">%pars</span>{<span class="n">t</span>.<span class="n">par</span>} }
-        <span class="k">when</span> <span class="n">Const</span> { <span class="n">t</span>.<span class="n">const</span> }
-        <span class="k">when</span> <span class="n">Pow</span> { <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="n">t</span>.<span class="n">term</span>) ** <span class="n">t</span>.<span class="nb">exp</span> }
-        <span class="k">when</span> <span class="n">Add</span> {
-            <span class="k">my</span> <span class="nv">@pts</span> = <span class="nb">map</span> {
-                <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="nv">$_</span>)
-                }, |<span class="n">t</span>.<span class="n">terms</span>;
-            [+] <span class="nv">@pts</span>
+</code></pre>
+
+<p>As with <code class="language-plaintext highlighter-rouge">evalTerm</code> below, we pass hashes for variable and parameter definitions as arguments to provide context for the evaluation. In the BB version we need to do this only once, rather than for every multi variant, so I have written it below using a <code class="language-plaintext highlighter-rouge">given/when</code>. Even then, the BB version is a lot cleaner, for the same reasons as above.</p>
+
+<pre><code class="language-perl6">sub evalTerm(%vars,  %pars, Term \t) {
+    given t {
+        when Var { %vars{t.var} }
+        when Par { %pars{t.par} }
+        when Const { t.const }
+        when Pow { evalTerm(%vars,  %pars,t.term) ** t.exp }
+        when Add {
+            my @pts = map {
+                evalTerm(%vars,  %pars,$_)
+                }, |t.terms;
+            [+] @pts
         }
-        <span class="k">when</span> <span class="n">Mult</span> { 
-            <span class="k">my</span> <span class="nv">@pts</span> = <span class="nb">map</span> {
-                <span class="n">evalTerm</span>(<span class="nv">%vars</span>,  <span class="nv">%pars</span>,<span class="nv">$_</span>)
-                }, |<span class="n">t</span>.<span class="n">terms</span>;
-            [*] <span class="nv">@pts</span>
+        when Mult { 
+            my @pts = map {
+                evalTerm(%vars,  %pars,$_)
+                }, |t.terms;
+            [*] @pts
         }
     }
 }
-</code></pre></div>
+</code></pre>
+
 <!-- ### Interpreter 3: Pretty-printer and evaluator combined
 
 Now we can do one better and combine these two interpreters.
@@ -452,63 +422,66 @@ say evalAndppTermBB(
 );
 ``` -->
 
-<h3>Interpreter 3: Converting <code>TermBB</code> to <code>Term</code></h3>
+<h3 id="interpreter-3-converting-termbb-to-term">Interpreter 3: Converting <code class="language-plaintext highlighter-rouge">TermBB</code> to <code class="language-plaintext highlighter-rouge">Term</code></h3>
 
-<p>Finally, let&#39;s look at converting <code>TermBB</code> to <code>Term</code>. This is yet another type of interpreter so we can follow exactly the same approach as before: </p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="k">sub</span> <span class="n">toTerm</span>(<span class="n">TermBB</span> \<span class="n">t</span> --&gt; <span class="n">Term</span>){ 
-        <span class="k">sub</span> <span class="n">var</span>( \<span class="o">x</span> ) { <span class="n">Var</span>[<span class="o">x</span>].<span class="nb">new</span> }
-        <span class="k">sub</span> <span class="n">par</span>( \<span class="o">x</span> ) { <span class="n">Par</span>[<span class="o">x</span>].<span class="nb">new</span> }
-        <span class="k">sub</span> <span class="n">const</span>( <span class="nv">$x</span> ) { <span class="n">Const</span>[<span class="nv">$x</span>].<span class="nb">new</span> }
-        <span class="k">sub</span> <span class="n">pow</span>( \<span class="n">t</span>, <span class="nv">$m</span> ) { <span class="n">Pow</span>[ <span class="n">t</span>, <span class="nv">$m</span>].<span class="nb">new</span> } 
-        <span class="k">sub</span> <span class="n">add</span>( \<span class="n">ts</span> ) { <span class="n">Add</span>[ <span class="n">ts</span> ].<span class="nb">new</span> }
-        <span class="k">sub</span> <span class="n">mult</span>( \<span class="n">ts</span> ) { <span class="n">Mult</span>[ <span class="n">ts</span> ].<span class="nb">new</span>) }
-        <span class="n">t</span>.<span class="n">unTermBB</span>( <span class="nv">&amp;var</span>, <span class="nv">&amp;par</span>, <span class="nv">&amp;const</span>, <span class="nv">&amp;pow</span>, <span class="nv">&amp;add</span>, <span class="nv">&amp;mult</span>);
+<p>Finally, let’s look at converting <code class="language-plaintext highlighter-rouge">TermBB</code> to <code class="language-plaintext highlighter-rouge">Term</code>. This is yet another type of interpreter so we can follow exactly the same approach as before:</p>
+
+<pre><code class="language-perl6">sub toTerm(TermBB \t --&gt; Term){ 
+        sub var( \x ) { Var[x].new }
+        sub par( \x ) { Par[x].new }
+        sub const( $x ) { Const[$x].new }
+        sub pow( \t, $m ) { Pow[ t, $m].new } 
+        sub add( \ts ) { Add[ ts ].new }
+        sub mult( \ts ) { Mult[ ts ].new) }
+        t.unTermBB( &amp;var, &amp;par, &amp;const, &amp;pow, &amp;add, &amp;mult);
 }
 
-<span class="nb">say</span> <span class="n">toTerm</span>(<span class="n">qtermbb</span>).<span class="n">raku</span>;
-</code></pre></div>
-<h2>Using the BB type directly</h2>
+say toTerm(qtermbb).raku;
+</code></pre>
 
-<p>In the examples above I have created the data structures using the <code>Term</code> type and converted the result to a <code>TermBB</code> type. We can of course also directly use the BB type. If we don&#39;t use strict typing and make the argument of <code>Add</code> and <code>Mult</code> slurpy, we get a nice and clean representation:</p>
-<div class="highlight"><pre><code class="language-perl6" data-lang="perl6"><span></span><span class="c1"># a*x^2 + b*x + x</span>
-<span class="k">my</span> \<span class="n">qtermbb1</span> = <span class="n">AddBB</span>(
-    <span class="n">MultBB</span>( 
-        <span class="n">ParBB</span>( <span class="s">&quot;a&quot;</span>), 
-        <span class="n">PowBB</span>( <span class="n">VarBB</span>( <span class="s">&quot;x&quot;</span>), <span class="mi">2</span>) 
+<h2 id="using-the-bb-type-directly">Using the BB type directly</h2>
+
+<p>In the examples above I have created the data structures using the <code class="language-plaintext highlighter-rouge">Term</code> type and converted the result to a <code class="language-plaintext highlighter-rouge">TermBB</code> type. We can of course also directly use the BB type. If we don’t use strict typing and make the argument of <code class="language-plaintext highlighter-rouge">Add</code> and <code class="language-plaintext highlighter-rouge">Mult</code> slurpy, we get a nice and clean representation:</p>
+
+<pre><code class="language-perl6"># a*x^2 + b*x + x
+my \qtermbb1 = AddBB(
+    MultBB( 
+        ParBB( "a"), 
+        PowBB( VarBB( "x"), 2) 
         ),
-    <span class="n">MultBB</span>(
-        <span class="n">ParBB</span>( <span class="s">&quot;b&quot;</span>), 
-        <span class="n">VarBB</span>( <span class="s">&quot;x&quot;</span>) 
+    MultBB(
+        ParBB( "b"), 
+        VarBB( "x") 
         ),
-    <span class="n">ParBB</span>( <span class="s">&quot;c&quot;</span>)
+    ParBB( "c")
 );
 
-<span class="c1">#   x^3 + 1    </span>
-<span class="k">my</span> \<span class="n">qtermbb2</span> = <span class="n">AddBB</span>( 
-    <span class="n">PowBB</span>( <span class="n">VarBB</span>( <span class="s">&quot;x&quot;</span>), <span class="mi">3</span>), 
-    <span class="n">ConstBB</span>(<span class="mi">1</span>)
+#   x^3 + 1    
+my \qtermbb2 = AddBB( 
+    PowBB( VarBB( "x"), 3), 
+    ConstBB(1)
 );
 
-<span class="c1">#   qterm1 * qterm2    </span>
-<span class="k">my</span> \<span class="n">qtermbb3</span> = <span class="n">MultBB</span>( 
-    <span class="n">qterm1</span>, <span class="n">qterm2</span>
+#   qterm1 * qterm2    
+my \qtermbb3 = MultBB( 
+    qterm1, qterm2
 );
-</code></pre></div>
-<p>This is structurally very similar to the examples using the <code>Term</code> type. We can obtain exactly the same representation by using a slurpy helper function to wrap the role constructors for <code>Term</code>. See the code in <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/no-bb-timing.raku">no-b-timing.raku`</a> and <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/ubb-timing.raku">ubb-timing.raku</a> for details. </p>
+    
+</code></pre>
+
+<p>This is structurally very similar to the examples using the <code class="language-plaintext highlighter-rouge">Term</code> type. We can obtain exactly the same representation by using a slurpy helper function to wrap the role constructors for <code class="language-plaintext highlighter-rouge">Term</code>. See the code in <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/no-bb-timing.raku">no-b-timing.raku`</a> and <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/ubb-timing.raku">ubb-timing.raku</a> for details.</p>
 
 <p>The code as presented above is not entirely correct: I have not always typed everything explicitly, but the explicit signatures in the role definition will cause type errors unless everything is explicitly typed. See the code in <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/tbb-timing.raku">tbb-timing.raku</a> for details.</p>
 
-<p>The code in <code>no-bb-timing</code> and <code>ubb-timing</code> is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the &#39;ordinary&#39; implementation. However, the fully-typed version <code>tbb-timing</code> is three times slower. Types in Raku are clearly not zero-cost abstractions. </p>
+<p>The code in <code class="language-plaintext highlighter-rouge">no-bb-timing</code> and <code class="language-plaintext highlighter-rouge">ubb-timing</code> is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the ‘ordinary’ implementation. However, the fully-typed version <code class="language-plaintext highlighter-rouge">tbb-timing</code> is three times slower. Types in Raku are clearly not zero-cost abstractions.</p>
 
-<p>For info, here are the profiling reports (<code>raku --profile</code>) for <a href="https://wimvanderbauwhede.github.io/articles/no-bb-timing.html">no-bb-timing</a> and <a href="https://wimvanderbauwhede.github.io/articles/ubb-timing.html">ubb-timing</a>. Profiling <code>tbb-timing</code> proved infeasible.</p>
+<p>On the other hand, somewhat paradoxically, we don’t really need this explicit typing. It is useful to write down the function types for the BB encoding, and I think it helps with the explanations, but the actual type safety comes from the algebraic data types that we created.</p>
 
-<p>On the other hand, somewhat paradoxically, we don&#39;t really need this explicit typing. It is useful to write down the function types for the BB encoding, and I think it helps with the explanations, but the actual type safety comes from the algebraic data types that we created. </p>
+<h2 id="conclusion">Conclusion</h2>
 
-<h2>Conclusion</h2>
+<p>In this article and <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous one</a> I have shown another way to implement algebraic data types in Raku. As with the approach discussed in <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">‘Roles as Algebraic Data Types in Raku’</a>, I use a role to create the type. However, in this approach the entire data structure is encoded as a function using the <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a>. From a type theoretical perspective, both approaches are precisely equivalent. In terms of coding effort and performance, both approaches are comparable.</p>
 
-<p>In this article and <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous one</a> I have shown another way to implement algebraic data types in Raku. As with the approach discussed in <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">&#39;Roles as Algebraic Data Types in Raku&#39;</a>, I use a role to create the type. However, in this approach the entire data structure is encoded as a function using the <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a>. From a type theoretical perspective, both approaches are precisely equivalent. In terms of coding effort and performance, both approaches are comparable. </p>
-
-<p>The advantage of the BB approach is that because the data is encoded as a function, it becomes easier to create interpreters for the data type, and I have illustrated this with a pretty-printer and evaluator for a parsed expression. All interpreters for BB types have the same structure, which is why I call it a universal interpreter. The key feature is that these interpreters do not require any explicit recursion. </p>
+<p>The advantage of the BB approach is that because the data is encoded as a function, it becomes easier to create interpreters for the data type, and I have illustrated this with a pretty-printer and evaluator for a parsed expression. All interpreters for BB types have the same structure, which is why I call it a universal interpreter. The key feature is that these interpreters do not require any explicit recursion.</p>
 
 <p>The complete code for both articles is in <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/universal-interpreter.raku">universal-interpreter.raku</a></p>
 
@@ -522,11 +495,11 @@ In the article []() I presented a parser combinator library which uses the role-
 role TaggedEntry {}
 # A string value
 role Val[Str @v] does TaggedEntry {
-    has Str @.val=@v;
+	has Str @.val=@v;
 } 
 # A list of TaggedEntry values tagged with a string label
 role ValMap [  @vm] does TaggedEntry {
-    has @.valmap = @vm; 
+	has @.valmap = @vm; 
 }
 ```
 
@@ -567,13 +540,6 @@ say v.raku;
 
                     <div class="inline-btn">
     <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
-    <!--
-	<a href="https://twitter.com/fuss_free_food" target="_blank"><i class="fa fa-twitter"></i></a>
-	<a href="https://www.pinterest.com/fussfreefood" target="_blank"><i class="fa fa-pinterest"></i></a>	
-	<a href="https://www.facebook.com/quickandtastyfood/" target="_blank"><i class="fa fa-facebook"></i></a>
-	&nbsp;
-<div class="fb-like" data-href="https://www.facebook.com/quickandtastyfood/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-    -->
 </div><!-- /.follow-us -->
 
 					
@@ -603,7 +569,7 @@ say v.raku;
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2023 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2024 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -627,8 +593,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="https://wimvanderbauwhede.github.io/js/main.js"></script>
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
 
     
 
