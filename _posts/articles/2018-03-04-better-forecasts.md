@@ -6,14 +6,14 @@ modified: 2018-03-04
 tags: [ weather, accelerators, supercomputing ]
 excerpt: "Current weather forecasts are at the same time very advanced and yet not good enough. Earlier and more accurate warnings could help to limit the damage of such events."
 current: "Imagine we had better weather forecasts"
-current_image: better-forecasts_1600x600.jpg
+current_image: better-forecasts_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: better-forecasts_1600x600.jpg
-  teaser: better-forecasts_400x150.jpg
-  thumb: better-forecasts_400x150.jpg
+  feature: better-forecasts_1600x600.avif
+  teaser: better-forecasts_400x150.avif
+  thumb: better-forecasts_400x150.avif
 ---
 
 The last few days have shown that current weather forecasts are at the same time very advanced and yet not good enough. We had little warning of the very large amount of snow that would cripple our infrastructure. Earlier and more accurate warnings could help to limit the damage of such events (estimated at £470m a day just from the travel disruption). Also, better long-range predictions about the probabilities of such events in the future could help with investment and planning of infrastructure and services: should councils invest in more snow ploughs; should rail operators invest in making the network more resilient to extreme cold weather; how can the emergency services be kept running in such extreme conditions, etc.?

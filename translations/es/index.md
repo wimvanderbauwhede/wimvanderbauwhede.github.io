@@ -6,14 +6,14 @@ modified: 2021-08-30
 tags: [ computing, climate ]
 excerpt: "Sobre la necesidad de una informática baja en carbono y sostenible y el camino hacia una informática de carbono cero."
 current: ""
-current_image: frugal-computing_1600x600.jpg
+current_image: frugal-computing_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: frugal-computing_1600x600.jpg
-  teaser: frugal-computing_400x150.jpg
-  thumb: frugal-computing_400x150.jpg
+  feature: frugal-computing_1600x600.avif
+  teaser: frugal-computing_400x150.avif
+  thumb: frugal-computing_400x150.avif
 ---
 
 Sobre la necesidad de una informática baja en carbono y sostenible y el camino hacia una informática de carbono cero.  
@@ -106,7 +106,7 @@ El informe sobre el coste de la obsolescencia programada elaborado por la Oficin
 Teniendo en cuenta el coste del carbono tanto en su funcionamiento como en su producción, la informática sería responsable de 10 GtCO₂e en 2040, casi la mitad del presupuesto aceptado de emisiones de CO₂ [[2,3,14]](#2).  
 
 <figure>
-<img src="{{ site.url }}/images/computing-emissions-es.png" alt="Un gráfico con dos barras: las emisiones mundiales (55) y las emisiones de la informática (0,1) en 2020; y para 2040, el objetivo de emisiones mundiales para limitar el calentamiento a 1,5 °C (23), y las emisiones previstas de la informática (10)"
+<img src="{{ site.url }}/images/computing-emissions-es.avif" alt="Un gráfico con dos barras: las emisiones mundiales (55) y las emisiones de la informática (0,1) en 2020; y para 2040, el objetivo de emisiones mundiales para limitar el calentamiento a 1,5 °C (23), y las emisiones previstas de la informática (10)"
 title="Un gráfico con dos barras: las emisiones mundiales (55) y las emisiones de la informática (0,1) en 2020; y para 2040, el objetivo de emisiones mundiales para limitar el calentamiento a 1,5 °C (23), y las emisiones previstas de la informática (10)" />
 <figcaption>Emisiones actuales y proyectadas de la informática (producción+operación), y objetivo de emisiones para 2040 para limitar el calentamiento a < 1,5 °C</figcaption>
 </figure>  
@@ -152,7 +152,7 @@ Para utilizar los dispositivos durante más tiempo, es necesario un cambio en lo
 Imaginemos que podemos prolongar la vida útil de nuestros dispositivos e incluso aumentar sus capacidades, simplemente mediante una mejor ciencia informática. Con cada mejora, la capacidad de cálculo aumentará de hecho sin que aumente el consumo de energía. Mientras tanto, desarrollaremos las tecnologías para la siguiente generación de dispositivos, diseñados para la eficiencia energética y una larga vida útil. Cada ciclo posterior durará más, hasta que finalmente el mundo disponga de recursos informáticos que duren para siempre y apenas consuman energía.  
 
 <figure>
-<img src="{{ site.url }}/images/towards-zero-carbon-computing-es.png"
+<img src="{{ site.url }}/images/towards-zero-carbon-computing-es.avif"
 alt="Un gráfico con cuatro tendencias: emisiones de la producción, emisiones en total, rendimiento y emisiones/rendimiento."
 title="Un gráfico con cuatro tendencias: emisiones de la producción, emisiones en total, rendimiento y emisiones/rendimiento." />
 <figcaption>Hacia una informática con cero emisiones de carbono: aumentar el rendimiento y la vida útil y reducir las emisiones. Ilustración con los siguientes supuestos: cada nueva generación dura el doble que la anterior y cuesta la mitad de energía producirla; la eficiencia energética mejora linealmente con un 5% al año.</figcaption>

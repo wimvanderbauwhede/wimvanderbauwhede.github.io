@@ -6,14 +6,14 @@ modified: 2019-04-27
 tags: [ coding, hacking, programming, perl ]
 excerpt: "Sometimes your pure Perl code needs to be as fast as possible. What does it take?"
 current: "Writing faster Perl code"
-current_image: writing-faster-perl_1600x600.jpg
+current_image: writing-faster-perl_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: writing-faster-perl_1600x600.jpg
-  teaser: writing-faster-perl_400x150.jpg
-  thumb: writing-faster-perl_400x150.jpg
+  feature: writing-faster-perl_1600x600.avif
+  teaser: writing-faster-perl_400x150.avif
+  thumb: writing-faster-perl_400x150.avif
 ---
 
 As part of my research I have been developing a [Fortran source-to-source compiler](https://github.com/wimvanderbauwhede/RefactorF4Acc) &mdash; in [Perl](https://www.perl.org/). The compiler transforms legacy FORTRAN 77 scientific code into more modern Fortran 95. For the reasons to target FORTRAN 77, please read [my paper](https://www.sciencedirect.com/science/article/pii/S0045793018302950). The compiler is written in Perl because it is available on any Linux-like system and can be executed without the need for a build toolchain. The compiler has no external dependencies at all, so that it is very simple to install and run. This is crucial because my target users are weather and climate scientists, not programmers or computer scientists. Python would have been a viable alternative but I personally prefer Perl.

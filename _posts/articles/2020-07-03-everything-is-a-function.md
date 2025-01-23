@@ -6,14 +6,14 @@ modified: 2020-07-03
 tags: [ coding, hacking, programming, haskell ]
 excerpt: "Although it might seem that a language like Haskell has a lot of different objects and constructs, they can all be reduced to functions."
 current: "Everything is a function"
-current_image: everything-is-a-function_1600x600.jpg
+current_image: everything-is-a-function_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: everything-is-a-function_1600x600.jpg
-  teaser: everything-is-a-function_400x150.jpg
-  thumb: everything-is-a-function_400x150.jpg
+  feature: everything-is-a-function_1600x600.avif
+  teaser: everything-is-a-function_400x150.avif
+  thumb: everything-is-a-function_400x150.avif
 ---
 
 

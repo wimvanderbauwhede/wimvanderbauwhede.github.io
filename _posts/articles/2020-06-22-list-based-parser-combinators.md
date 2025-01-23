@@ -6,14 +6,14 @@ modified: 2020-06-22
 tags: [ coding, hacking, programming, raku ]
 excerpt: "This is a follow-on of my article on algebraic data types, with list-based parser combinators as a practical application."
 current: "List-based parser combinators in Haskell and Raku"
-current_image: list-based-parser-combinators_1600x600.jpg
+current_image: list-based-parser-combinators_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: list-based-parser-combinators_1600x600.jpg
-  teaser: list-based-parser-combinators_400x150.jpg
-  thumb: list-based-parser-combinators_400x150.jpg
+  feature: list-based-parser-combinators_1600x600.avif
+  teaser: list-based-parser-combinators_400x150.avif
+  thumb: list-based-parser-combinators_400x150.avif
 ---
 
 This is a follow-on from my article [introducing algebraic data types and explaining how to implement them in Raku]({{ site.url }}/articles/roles-as-adts-in-raku/). 

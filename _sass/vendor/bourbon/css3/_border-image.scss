@@ -51,8 +51,8 @@
 }
 
 //Examples:
-// @include border-image(url("image.png"));
-// @include border-image(url("image.png") 20 stretch);
+// @include border-image(url("image.avif"));
+// @include border-image(url("image.avif") 20 stretch);
 // @include border-image(linear-gradient(45deg, orange, yellow));
 // @include border-image(linear-gradient(45deg, orange, yellow) stretch);
 // @include border-image(linear-gradient(45deg, orange, yellow) 20 30 40 50 stretch round);

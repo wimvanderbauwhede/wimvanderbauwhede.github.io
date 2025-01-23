@@ -14,10 +14,12 @@ sass:
   sass_dir: _sass
   style: compressed
 permalink: /:categories/:title/
-#markdown: kramdown
-markdown: redcarpet
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+#markdown: redcarpet
 #highlighter: rouge
-highlighter: pygments
+#highlighter: pygments
 plugins_dir:
   - jekyll-sitemap
   - jekyll-gist

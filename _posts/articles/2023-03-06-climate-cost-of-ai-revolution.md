@@ -6,14 +6,14 @@ modified: 2023-03-06
 tags: [ computing, climate ]
 excerpt: "On the energy cost of Large  Language Models, what their widespread adoption could mean for global CO₂ emissions, and what could be done about it."
 current: ""
-current_image: climate-cost-of-ai-revolution_1600x600.jpg
+current_image: climate-cost-of-ai-revolution_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: climate-cost-of-ai-revolution_1600x600.jpg
-  teaser: climate-cost-of-ai-revolution_400x150.jpg
-  thumb: climate-cost-of-ai-revolution_400x150.jpg
+  feature: climate-cost-of-ai-revolution_1600x600.avif
+  teaser: climate-cost-of-ai-revolution_400x150.avif
+  thumb: climate-cost-of-ai-revolution_400x150.avif
 ---
 
 ChatGPT and other AI applications such as Midjourney have pushed "Artificial Intelligence" high on the hype cycle. In this article, I want to focus specifically on the energy cost of training and using applications like ChatGPT, what their widespread adoption could mean for global CO₂ emissions, and what we could do to limit these emissions.

@@ -1,26 +1,31 @@
 ---
 layout: article
-title: "Emissions from ChatGPT are much higher than from conventional search"
-date: 2023-11-17
-modified: 2023-11-17
+title: "Emissions from ChatGPT are much higher than from conventional search (updated)"
+date: 2025-01-06
+modified: 2025-01-06
 tags: [ computing, climate ]
 excerpt: "ChatGPT-style queries use about sixty times more energy compared to conventional search."
 current: ""
-current_image: google-search-vs-chatgpt-emissions_1600x600.jpg
+current_image: google-search-vs-chatgpt-emissions_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: google-search-vs-chatgpt-emissions_1600x600.jpg
-  teaser: google-search-vs-chatgpt-emissions_400x150.jpg
-  thumb: google-search-vs-chatgpt-emissions_400x150.jpg
+  feature: google-search-vs-chatgpt-emissions_1600x600.avif
+  teaser: google-search-vs-chatgpt-emissions_400x150.avif
+  thumb: google-search-vs-chatgpt-emissions_400x150.avif
 ---
 
 Chat-assisted search is one of the key applications for ChatGPT. To illustrate the impact of ChatGPT-style augmented search queries more clearly, I compare the energy consumption and emission of a ChatGPT-style query with that of a conventional Google search-style query. If all search queries are replaced by ChatGPT-style queries, what does that mean for energy consumption and emissions?
 
-* tl;dr: Emissions would increase by 60x.
+* tl;dr: Emissions would increase by 60x for a GPT-3 style model of around 175B paramters; for a GPT-4 style model, it could be 200x.
 
-In [a previous post]({{ site.url }}/articles/climate-cost-of-ai-revolution) I wrote about the potential climate impact from widespread adoption of ChatGPT-style Large Language Models. My projections are in line with those made by de Vries in his recent article [[5]](#5). In this post, I look in more detail at the increase in energy consumption from using ChatGPT for search tasks.
+In [a previous post]({{ site.url }}/articles/climate-cost-of-ai-revolution) I wrote about the potential climate impact from widespread adoption of ChatGPT-style Large Language Models. My projections are in line with those made by de Vries in his recent article [[5]](#5). In this post, I look in more detail at the increase in energy consumption from using ChatGPT for search tasks. A more detailed analysis is available [as a preprint paper](https://arxiv.org/abs/2407.16894).
+
+## Update 2025-01-06
+
+I originally published the estimates below on 2023-11-17 and they are for GPT-3. According to [George Hotz](https://www.latent.space/p/geohot) GPT-4 consists of 8 instances of 220B-parameter GPT-3 models; [Dylan Patel
+and Gerald Wong](https://semianalysis.com/2023/07/10/gpt-4-architecture-infrastructure/) claim it is 16 instances of each about ~111B, which is the same in total. But they also state that only 2 of these are routed, so the inference is performed on two 111B models; however, they also share Furthermore, ~55B shared parameters for attention, so we get about 280B parameters. For comparison, GPT-3.5 is a single 175B-parameter model. According to Patel and Wong, the inference cost of GPT-4 is 3x more expensive that of than GPT-3.5, which is much more than the increase of 1.6x in parameters would suggest. As for the inference, the energy consumption dominates, this means that GPT-4 likely consume up to 3x more energy than GPT-3.5, and consequently, a search query with a GPT-4 generated AI summary might have emissions of about 200x larger than a search query without AI summary.
 
 ## Google search energy and emissions
 
@@ -115,4 +120,5 @@ Now, if we want sustainable ICT, then the sector as a whole needs to reduce its 
 <a name="4">[4]</a> ["The carbon footprint of ChatGPT" (Chris Pointon, 2023, medium.com)](https://medium.com/@chrispointon/the-carbon-footprint-of-chatgpt-e1bc14e4cc2a)<br>
 <a name="5">[5]</a> ["The growing energy footprint of artificial intelligence" (Alex de Vries, 2023, Joule](https://www.cell.com/joule/fulltext/S2542-4351(23)00365-3)<br>
 <a name="6">[6]</a> ["The Inference Cost Of Search Disruption – Large Language Model Cost Analysis" (Dylan Patel and Afzal Ahmad, 2023, SemiAnalysis)](https://www.semianalysis.com/p/the-inference-cost-of-search-disruption)
+
 

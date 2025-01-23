@@ -6,14 +6,14 @@ modified: 2020-06-05
 tags: [ coding, hacking, programming, raku ]
 excerpt: "Algebraic data types are great for building complex data structures, and easy to implement in Raku using roles."
 current: "Roles as Algebraic Data Types in Raku"
-current_image: roles-as-adts-in-raku_1600x600.jpg
+current_image: roles-as-adts-in-raku_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: roles-as-adts-in-raku_1600x600.jpg
-  teaser: roles-as-adts-in-raku_400x150.jpg
-  thumb: roles-as-adts-in-raku_400x150.jpg
+  feature: roles-as-adts-in-raku_1600x600.avif
+  teaser: roles-as-adts-in-raku_400x150.avif
+  thumb: roles-as-adts-in-raku_400x150.avif
 ---
 
 I have been a [lambdacamel](https://andrewshitov.com/2015/05/05/interview-with-audrey-tang/), one of those who like [Perl](https://www.perl.org/) and functional programming, especially in [Haskell](https://www.haskell.org/), for a long time. I still write most of my code in either of these languages.

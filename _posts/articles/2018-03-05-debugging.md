@@ -6,14 +6,14 @@ modified: 2018-03-05
 tags: [ coding, hacking, programming, debugging ]
 excerpt: "For a long time it has been my contention that for a developer, more that programming, debugging should be treated as a core skill."
 current: "A strategy for debugging"
-current_image: debugging_1600x600.jpg
+current_image: debugging_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: debugging_1600x600.jpg
-  teaser: debugging_400x150.jpg
-  thumb: debugging_400x150.jpg
+  feature: debugging_1600x600.avif
+  teaser: debugging_400x150.avif
+  thumb: debugging_400x150.avif
 ---
 
 For a long time it has been my contention that for a developer, more than programming, debugging should be treated as a core skill. A developer typically spends more time debugging code than writing code so it makes sense to try and optimize this process. Over the years I have developed a strategy for debugging. I see debugging as a generic, transferable skill that is applicable not only to coding but to any form of systems design.

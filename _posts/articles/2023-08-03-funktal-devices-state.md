@@ -6,14 +6,14 @@ modified: 2023-08-03
 tags: [ computing, functional, uxntal ]
 excerpt: "How Funktal programs can interact with I/O devices, and how mutable state helps with this."
 current: ""
-current_image: funktal-devices-state_1600x600.jpg
+current_image: funktal-devices-state_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: funktal-devices-state_1600x600.jpg
-  teaser: funktal-devices-state_400x150.jpg
-  thumb: funktal-devices-state_400x150.jpg
+  feature: funktal-devices-state_1600x600.avif
+  teaser: funktal-devices-state_400x150.avif
+  thumb: funktal-devices-state_400x150.avif
 ---
 
 In [a previous post]({{site.url}}/articles/funktal/), I introduced [`Funktal`](https://codeberg.org/wimvanderbauwhede/funktal), a frugal functional programming language created for the [Uxn](https://wiki.xxiivv.com/site/uxn.html) VM. The Uxn VM is the heart of a clean-slate computing platform called [Varvara](https://wiki.xxiivv.com/site/varvara.html). This post explains how you can access Varvara's I/O devices from Funktal, and the closely related support for mutable state. I illustrate these features using three small GUI-based programs.
@@ -214,7 +214,7 @@ I have implemented a few examples of GUI-based programs. Two are ports of Uxn de
 [This example](https://codeberg.org/wimvanderbauwhede/funktal/src/branch/devel/examples/dvd.ftal) is a simple program that bounces the DVD icon around the screen. 
 
 <figure>
-<img src="{{ site.url }}/images/dvd.png" alt="A white DVD logo on a blue background" title="A white DVD logo on a blue background" />
+<img src="{{ site.url }}/images/dvd.avif" alt="A white DVD logo on a blue background" title="A white DVD logo on a blue background" />
 <figcaption>DVD icon bouncing</figcaption>
 </figure>
 
@@ -279,7 +279,7 @@ Note the use of `done` at the end of the `onFrame` function, because it is an ev
 [This example](https://codeberg.org/wimvanderbauwhede/funktal/src/branch/devel/examples/snake.ftal) is a straight port of the `snake.tal` program, a game where you control a snake to eat apples, and the snake grows longer and longer. 
 
 <figure>
-<img src="{{ site.url }}/images/snake.png" alt="A green snake with a tail of 5 segments, about to eat a red apple, on a black background " title="A green snake with a tail of 5 segments, about to eat a red apple, on a black background" />
+<img src="{{ site.url }}/images/snake.avif" alt="A green snake with a tail of 5 segments, about to eat a red apple, on a black background " title="A green snake with a tail of 5 segments, about to eat a red apple, on a black background" />
 <figcaption>Snake in action</figcaption>
 </figure>
 
@@ -362,7 +362,7 @@ The tail is an array of 16-bit integers which are actually pairs of 8-bit intege
 I implemented various ways of rendering the Funktal logo.
 
 <figure>
-<img src="{{ site.url }}/images/funktal-logo.png" alt="The Funktal logo, triangles and rectangles rendered as a grid of black dots" title="The Funktal logo, triangles and rectangles rendered as a grid of black dots" />
+<img src="{{ site.url }}/images/funktal-logo.avif" alt="The Funktal logo, triangles and rectangles rendered as a grid of black dots" title="The Funktal logo, triangles and rectangles rendered as a grid of black dots" />
 <figcaption>Funktal logo rendered using the example code</figcaption>
 </figure>
 

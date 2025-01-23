@@ -1,6 +1,6 @@
 // GLOBAL
 // --------------------------------------------------
-
+@use 'sass:math';
 .wrap {
   @include outer-container;
 }
@@ -28,7 +28,7 @@
   @include clearfix;
   a, btn {
     display: inline-block;
-    margin-right: $gutter / 2;
+    margin-right: $gutter * 0.5;
     &:last-child {
       margin-right: 0;
     }
@@ -38,7 +38,7 @@
 // shorten length to improve readability
 @include media($medium) {
   .shorten {
-    width: percentage(8/12);
+    width: percentage(math.div(8,12));
   }
 }
 

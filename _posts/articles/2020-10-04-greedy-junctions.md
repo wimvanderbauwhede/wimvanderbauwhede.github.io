@@ -6,14 +6,14 @@ modified: 2020-10-04
 tags: [ coding, hacking, programming, raku ]
 excerpt: "An illustration that Raku's junctions are greedy by design, and a proposal."
 current: ""
-current_image: greedy-junctions_1600x600.jpg
+current_image: greedy-junctions_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: greedy-junctions_1600x600.jpg
-  teaser: greedy-junctions_400x150.jpg
-  thumb: greedy-junctions_400x150.jpg
+  feature: greedy-junctions_1600x600.avif
+  teaser: greedy-junctions_400x150.avif
+  thumb: greedy-junctions_400x150.avif
 ---
 
 [Raku](https://raku.org/) has a neat feature called [Junctions](https://docs.raku.org/type/Junction). In this short article I want to highlight a peculiar consequence of the interaction of junctions with functions: they are _greedy_, by which I mean that they inadvertently turn other arguments of functions into junctions. 

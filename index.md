@@ -6,7 +6,7 @@ excerpt: ""
 comments: false
 toc: true
 image:
-  feature: banner_1500x500.jpg
+  feature: banner_1500x500.avif
 ---
 
 <div class="tiles">

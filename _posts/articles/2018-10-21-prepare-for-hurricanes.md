@@ -6,14 +6,14 @@ modified: 2018-10-21
 tags: [ weather, hurricanes ]
 excerpt: "Hurricanes will become common in Europe in the next few decades. I discuss the evidence, the impact and the need for proper contingency planning."
 current: "Why we need hurricane contingency planning"
-current_image:  prepare-for-hurricanes_1600x600.jpg
+current_image:  prepare-for-hurricanes_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: prepare-for-hurricanes_1600x600.jpg
-  teaser:  prepare-for-hurricanes_400x150.jpg
-  thumb:  prepare-for-hurricanes_400x150.jpg
+  feature: prepare-for-hurricanes_1600x600.avif
+  teaser:  prepare-for-hurricanes_400x150.avif
+  thumb:  prepare-for-hurricanes_400x150.avif
 ---
 
 As a result of global warming, hurricanes will become common in Europe in the next few decades. I discuss the evidence, the impact and the need for proper contingency planning.

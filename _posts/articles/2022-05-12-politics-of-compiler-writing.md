@@ -5,14 +5,14 @@ date: 2021-12-20
 modified: 2021-12-20
 tags: [ computing, climate ]
 excerpt: "Is compiler research apolitical?"
-current_image: politics-of-compiler-writing_1600x600.jpg
+current_image: politics-of-compiler-writing_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: politics-of-compiler-writing_1600x600.jpg
-  teaser: politics-of-compiler-writing_400x150.jpg
-  thumb: politics-of-compiler-writing_400x150.jpg
+  feature: politics-of-compiler-writing_1600x600.avif
+  teaser: politics-of-compiler-writing_400x150.avif
+  thumb: politics-of-compiler-writing_400x150.avif
 ---
 
 Compilers are pieces of software that convert program code from one format into another. Typically, they convert source code into a binary format for execution on specific hardware. Compilers can also target virtual machines instead of physical hardware, or they can convert source code into different source code. 

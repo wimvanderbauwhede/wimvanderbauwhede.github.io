@@ -2,11 +2,11 @@ perl set_mod_date.pl
 #perl create_index.pl
 perl generate_sitemap.pl > sitemap.xml
 cp _config.yml.publish _config.yml
-bundle exec jekyll build -d ~/Git/wimvanderbauwhede.github.io/
+bundle3.0 exec jekyll build -d ~/Git/wimvanderbauwhede.github.io/
 cd  ~/Git/wimvanderbauwhede.github.io/
 git add articles/${1}/index.html
-git add images/${1}_1600x600.jpg
-git add images/${1}_400x150.jpg
+git add images/${1}_1600x600.avif
+git add images/${1}_400x150.avif
 perl add_blog_post_images.pl ${1}
 git commit -a -m "$1"
 git push origin master

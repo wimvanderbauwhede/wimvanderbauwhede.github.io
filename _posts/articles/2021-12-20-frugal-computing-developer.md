@@ -5,14 +5,14 @@ date: 2021-12-20
 modified: 2021-12-20
 tags: [ computing, climate ]
 excerpt: "On the need for low-carbon and sustainable computing and what developers can do about it."
-current_image: frugal-computing-developer_1600x600.jpg
+current_image: frugal-computing-developer_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: frugal-computing-developer_1600x600.jpg
-  teaser: frugal-computing-developer_400x150.jpg
-  thumb: frugal-computing-developer_400x150.jpg
+  feature: frugal-computing-developer_1600x600.avif
+  teaser: frugal-computing-developer_400x150.avif
+  thumb: frugal-computing-developer_400x150.avif
 ---
 
 On the need for low-carbon and sustainable computing and what developers can do about it.

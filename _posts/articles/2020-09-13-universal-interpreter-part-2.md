@@ -6,14 +6,14 @@ modified: 2020-09-13
 tags: [ coding, hacking, programming, raku ]
 excerpt: "The Böhm-Berarducci encoding of a type can be considered as a universal interpreter. We illustrate this in Raku with an evaluator and pretty printer."
 current: ""
-current_image: universal-interpreter-part-2_1600x600.jpg
+current_image: universal-interpreter-part-2_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: universal-interpreter-part-2_1600x600.jpg
-  teaser: universal-interpreter-part-2_400x150.jpg
-  thumb: universal-interpreter-part-2_400x150.jpg
+  feature: universal-interpreter-part-2_1600x600.avif
+  teaser: universal-interpreter-part-2_400x150.avif
+  thumb: universal-interpreter-part-2_400x150.avif
 ---
 
 In [the previous article]({{site.url}}/articles/universal-interpreter-part-1) I explained the basic idea behind a technique called [Böhm-Berarducci encoding](http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html) of algebraic data types, and showed a way to implement this technique in [Raku](https://raku.org/). Unless you are already familiar with this formalism, I recommend you read that article first. 
@@ -409,8 +409,6 @@ This is structurally very similar to the examples using the `Term` type. We can 
 The code as presented above is not entirely correct: I have not always typed everything explicitly, but the explicit signatures in the role definition will cause type errors unless everything is explicitly typed. See the code in [tbb-timing.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/tbb-timing.raku) for details.
 
 The code in `no-bb-timing` and `ubb-timing` is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the 'ordinary' implementation. However, the fully-typed version `tbb-timing` is three times slower. Types in Raku are clearly not zero-cost abstractions. 
-
-For info, here are the profiling reports (`raku --profile`) for [no-bb-timing]({{site.url}}/articles/no-bb-timing.html) and [ubb-timing]({{site.url}}/articles/ubb-timing.html). Profiling `tbb-timing` proved infeasible.
 
 On the other hand, somewhat paradoxically, we don't really need this explicit typing. It is useful to write down the function types for the BB encoding, and I think it helps with the explanations, but the actual type safety comes from the algebraic data types that we created. 
 

@@ -6,14 +6,14 @@ modified: 2020-07-18
 tags: [ coding, hacking, programming, raku ]
 excerpt: "An introduction to some powerful functional programming techniques in Raku and Python."
 current: "Cleaner code with functional programming"
-current_image: decluttering-with-functional-programming_1600x600.jpg
+current_image: decluttering-with-functional-programming_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: decluttering-with-functional-programming_1600x600.jpg
-  teaser: decluttering-with-functional-programming_400x150.jpg
-  thumb: decluttering-with-functional-programming_400x150.jpg
+  feature: decluttering-with-functional-programming_1600x600.avif
+  teaser: decluttering-with-functional-programming_400x150.avif
+  thumb: decluttering-with-functional-programming_400x150.avif
 ---
 
 <!-- To a functional programmer like me, every programming language is a functional language. --> 

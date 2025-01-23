@@ -7,14 +7,14 @@ modified: 2020-09-12
 tags: [ coding, hacking, programming, raku ]
 excerpt: "The Böhm-Berarducci encoding is a way to express an algebraic data type as a function type. We show how to do this in Raku using roles."
 current: ""
-current_image: universal-interpreter-part-1_1600x600.jpg
+current_image: universal-interpreter-part-1_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: universal-interpreter-part-1_1600x600.jpg
-  teaser: universal-interpreter-part-1_400x150.jpg
-  thumb: universal-interpreter-part-1_400x150.jpg
+  feature: universal-interpreter-part-1_1600x600.avif
+  teaser: universal-interpreter-part-1_400x150.avif
+  thumb: universal-interpreter-part-1_400x150.avif
 ---
 
 

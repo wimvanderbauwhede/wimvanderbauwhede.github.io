@@ -1,14 +1,14 @@
 ---
 layout: article
 title: "About"
-date: 2023-11-27
+date: 2025-01-22
 tags: []
 excerpt: ""
 comments: false
 toc: false
 
 image:
-  feature: banner_1500x500.jpg
+  feature: banner_1500x500.avif
 ---
 
 I am Wim Vanderbauwhede, a Professor in Computing Science at the University of Glasgow, where I lead the [Low Carbon and Sustainable Computing](https://www.gla.ac.uk/schools/computing/research/researchthemes/lowcarbon/) activity.

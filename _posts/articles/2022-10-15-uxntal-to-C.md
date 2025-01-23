@@ -5,14 +5,14 @@ date: 2022-10-15
 modified: 2022-10-15
 tags: [ compilers ]
 excerpt: "What does it take to bring functional programming to a stack-based assembly language?"
-current_image: uxntal-to-C_1600x600.jpg
+current_image: uxntal-to-C_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: uxntal-to-C_1600x600.jpg
-  teaser: uxntal-to-C_400x150.jpg
-  thumb: uxntal-to-C_400x150.jpg
+  feature: uxntal-to-C_1600x600.avif
+  teaser: uxntal-to-C_400x150.avif
+  thumb: uxntal-to-C_400x150.avif
 ---
 
 I wrote a proof-of-concept compiler from [Uxntal](https://wiki.xxiivv.com/site/uxntal.html) to `C`. The generated code is linked with a slightly modified version of the [Uxn VM/Varvara code](https://git.sr.ht/~rabbits/uxn) to provide stand-alone applications.

@@ -5,14 +5,14 @@ date: 2021-11-19
 modified: 2021-11-19
 tags: [ computing, climate, digital carbon footprint ]
 excerpt: "The carbon footprint from manufacturing and use of digital devices is huge. Here is what you as a consumer can do to help reduce your digital carbon footprint."
-current_image: frugal-computing-consumer_1600x600.jpg
+current_image: frugal-computing-consumer_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: frugal-computing-consumer_1600x600.jpg
-  teaser: frugal-computing-consumer_400x150.jpg
-  thumb: frugal-computing-consumer_400x150.jpg
+  feature: frugal-computing-consumer_1600x600.avif
+  teaser: frugal-computing-consumer_400x150.avif
+  thumb: frugal-computing-consumer_400x150.avif
 ---
 
 The CO₂ emissions from [manufacturing and use of digital devices (laptops, phones, tablets, TVs, ...) are huge and rising steeply]({{site.url}}/articles/frugal-computing). Here is what you as a consumer can do to help reduce your digital carbon footprint.

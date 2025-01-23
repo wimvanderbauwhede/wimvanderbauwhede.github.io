@@ -6,16 +6,16 @@ modified: 2021-09-20
 tags: [ coding, hacking, programming, raku, haku ]
 excerpt: "Haku is a natural language functional programming language based on literary Japanese and written in Raku"
 current: "Haku: a Japanese programming language"
-current_image: haku-in-raku_1600x600.png
+current_image: haku-in-raku_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: haku-in-raku_1600x600.png
+  feature: haku-in-raku_1600x600.avif
 
-  teaser: haku-in-raku_400x150.png
+  teaser: haku-in-raku_400x150.avif
 
-  thumb: haku-in-raku_400x150.png
+  thumb: haku-in-raku_400x150.avif
 
 ---
 

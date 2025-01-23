@@ -6,16 +6,16 @@ modified: 2021-10-17
 tags: [ coding, hacking, programming, raku, haku ]
 excerpt: "Haku is a natural language functional programming language based on literary Japanese. This article is about my motivation for creating Haku."
 current: "Why I wrote Haku"
-current_image: why-i-wrote-haku_1600x600.png
+current_image: why-i-wrote-haku_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: why-i-wrote-haku_1600x600.png
+  feature: why-i-wrote-haku_1600x600.avif
 
-  teaser: why-i-wrote-haku_400x150.png
+  teaser: why-i-wrote-haku_400x150.avif
 
-  thumb: why-i-wrote-haku_400x150.png
+  thumb: why-i-wrote-haku_400x150.avif
 
 ---
 

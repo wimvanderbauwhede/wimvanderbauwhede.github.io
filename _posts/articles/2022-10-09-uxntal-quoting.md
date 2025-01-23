@@ -5,14 +5,14 @@ date: 2022-10-09
 modified: 2022-10-09
 tags: [ programming ]
 excerpt: "What does it take to bring functional programming to a stack-based assembly language?"
-current_image: uxntal-quoting_1600x600.jpg
+current_image: uxntal-quoting_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: uxntal-quoting_1600x600.jpg
-  teaser: uxntal-quoting_400x150.jpg
-  thumb: uxntal-quoting_400x150.jpg
+  feature: uxntal-quoting_1600x600.avif
+  teaser: uxntal-quoting_400x150.avif
+  thumb: uxntal-quoting_400x150.avif
 ---
 
 ## Quoting in Uxntal: lambda functions, tuples and lists for free

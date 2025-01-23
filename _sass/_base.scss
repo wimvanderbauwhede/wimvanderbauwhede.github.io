@@ -120,7 +120,7 @@ blockquote {
 		@include font-size(16);
 	}
 }
-
+.no-italic { font-style: normal }
 // Code
 tt, code, kbd, samp, pre {
 	font-family: $code-font;
@@ -342,7 +342,7 @@ select {
 
 form button,
 input[type="submit"] {
-	@extend .btn;
+	@extend .btn !optional;
 	@include appearance(none);
 	cursor: pointer;
 	user-select: none;
@@ -378,3 +378,11 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a,
 	font-weight: bold;
     color: $info-color;
 }
+
+.japanese {
+   font-family: $japanese-font;
+   font-weight: normal;
+   font-style: normal;
+//   color: $darkred;
+}
+

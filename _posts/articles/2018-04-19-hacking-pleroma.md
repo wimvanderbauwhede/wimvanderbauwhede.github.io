@@ -6,14 +6,14 @@ modified: 2018-04-19
 tags: [ coding, hacking, programming, elixir, pleroma ]
 excerpt: "A brief guide into hacking Pleroma, a federated microblogging server software."
 current: "Hacking the Pleroma: Elixir, Phoenix and a bit of ActivityPub"
-current_image: hacking-pleroma_1600x600.jpg
+current_image: hacking-pleroma_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: hacking-pleroma_1600x600.jpg
-  teaser: hacking-pleroma_400x150.jpg
-  thumb: hacking-pleroma_400x150.jpg
+  feature: hacking-pleroma_1600x600.avif
+  teaser: hacking-pleroma_400x150.avif
+  thumb: hacking-pleroma_400x150.avif
 ---
 
 [Pleroma](https://pleroma.social/) "is a microblogging server software that can federate (= exchange messages with) other servers that support the same federation standards (OStatus and ActivityPub). What that means is that you can host a server for yourself or your friends and stay in control of your online identity, but still exchange messages with people on larger servers. Pleroma will federate with all servers that implement either OStatus or ActivityPub, like GNU Social, Friendica, Hubzilla and Mastodon." [(stolen from Lain's blog post)](https://blog.soykaf.com/post/what-is-pleroma/).
@@ -260,7 +260,7 @@ In my case,
 ```elixir
 instance_url="https://pynq.limited.systems"
 user_url = user_url<>"/users/pixelbot"`
-image_file_name = "canvas.png"
+image_file_name = "canvas.avif"
 content_str = "Canvas:<br><a href=\""
   <>instance_url
   <>"/media/"<>uuid<>"/"<>image_file_name
@@ -315,7 +315,7 @@ Finally, the function calls [`ActivityPub.create()`](https://git.pleroma.social/
 
     instance_url="https://pynq.limited.systems"
     user_url = user_url<>"/users/pixelbot"`
-    image_file_name = "canvas_512x512.png"
+    image_file_name = "canvas_512x512.avif"
 
 
     to =  ["https://www.w3.org/ns/activitystreams#Public"]

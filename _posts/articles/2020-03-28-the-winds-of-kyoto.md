@@ -6,15 +6,15 @@ modified: 2020-03-28
 tags: [ Japan ]
 excerpt: "A very short story for the Fifth Annual Kyoto Writing Competition."
 current: ""
-current_image:   the-winds-of-kyoto_1600x600.jpg
+current_image:   the-winds-of-kyoto_1600x600.avif
 current_anchor:  homepage_banner
 comments: false
 toc: false
 categories: articles
 image:
-  feature: the-winds-of-kyoto_1600x600.jpg
-  teaser: the-winds-of-kyoto_400x150.jpg
-  thumb: the-winds-of-kyoto_400x150.jpg
+  feature: the-winds-of-kyoto_1600x600.avif
+  teaser: the-winds-of-kyoto_400x150.avif
+  thumb: the-winds-of-kyoto_400x150.avif
 ---
 
 I wrote a very short story for the [Fifth Annual Kyoto Writing Competition](https://www.writersinkyoto.com/2019/12/writers-in-kyoto-present-the-fifth-annual-kyoto-writing-competition/).
@@ -32,7 +32,7 @@ Then Kyoto hunkers down, and waits.
 When the storm has passed, the sky is a transparent clear and blue. The wind of Kyoto is once again cool and mild, blowing gently over the city.
 
 <figure>
-<img src="{{ site.url }}/images/les-reynolds-stress.png" alt="Reynolds stress of wind flow over Kyoto, at 4 different heights"
+<img src="{{ site.url }}/images/les-reynolds-stress.avif" alt="Reynolds stress of wind flow over Kyoto, at 4 different heights"
 title="Reynolds stress of wind flow over Kyoto, at 4 different heights" />
 <figcaption>Result of wind flow simulation over Kyoto,  from a paper [1] by  DPRI researchers</figcaption>
 </figure>

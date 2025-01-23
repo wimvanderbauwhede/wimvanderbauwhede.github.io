@@ -6,14 +6,14 @@ modified: 2020-08-07
 tags: [ coding, hacking, programming, raku ]
 excerpt: "A brief introduction into function types, with a way to implement them in Raku and examples in many languages."
 current: "Function types"
-current_image: function-types_1600x600.jpg
+current_image: function-types_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: function-types_1600x600.jpg
-  teaser: function-types_400x150.jpg
-  thumb: function-types_400x150.jpg
+  feature: function-types_1600x600.avif
+  teaser: function-types_400x150.avif
+  thumb: function-types_400x150.avif
 ---
 
 This article builds on my earlier articles on [algebraic data types]({{site.url}}/articles/roles-as-adts-in-raku/) in on [Raku](https://raku.org/) and their use in the practical example of [list-based parser combinators]({{site.url}}/articles/list-based-parser-combinators/). 

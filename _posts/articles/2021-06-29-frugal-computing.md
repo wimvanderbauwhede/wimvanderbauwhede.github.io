@@ -6,14 +6,14 @@ modified: 2021-06-29
 tags: [ computing, climate ]
 excerpt: "On the need for low-carbon and sustainable computing and the path towards zero-carbon computing."
 current: "Writing faster Raku code"
-current_image: frugal-computing_1600x600.jpg
+current_image: frugal-computing_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: frugal-computing_1600x600.jpg
-  teaser: frugal-computing_400x150.jpg
-  thumb: frugal-computing_400x150.jpg
+  feature: frugal-computing_1600x600.avif
+  teaser: frugal-computing_400x150.avif
+  thumb: frugal-computing_400x150.avif
 ---
 
 On the need for low-carbon and sustainable computing and the path towards zero-carbon computing.
@@ -100,7 +100,7 @@ The report about the cost of planned obsolescence by the European Environmental 
 Taking into account the carbon cost of both operation and production, computing would be responsible for 10 GtCO₂e by 2040, almost 80% of the acceptable CO₂ emissions budget [[2,3,14]](#2).
 
 <figure>
-<img src="{{ site.url }}/images/computing-emissions.png" alt="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (13), and the projected emissions from computing (10)"
+<img src="{{ site.url }}/images/computing-emissions.avif" alt="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (13), and the projected emissions from computing (10)"
 title="A graph with two bars: world emissions (55) and emissions from computing (0.1) in 2020; and for 2040, the world emissions target to limit warming to 1.5°C (13), and the projected emissions from computing (10)" />
 <figcaption>Actual and projected emissions from computing (production+operation), and 2040 emission target to limit warming to &lt;1.5&deg;C</figcaption>
 </figure>
@@ -149,7 +149,7 @@ To use devices for longer, a change in business models as well as consumer attit
 Imagine that we can extend the useful life of our devices and even increase their capabilities, purely by improving the software. With every improvement, the computational capacity will in effect increase without any increase in energy consumption. Meanwhile, we will develop the technologies for the next generation of devices, designed for energy efficiency as well as long life. Every subsequent cycle will last longer, until finally the world will have computing resources that last forever and hardly use any energy.
 
 <figure>
-<img src="{{ site.url }}/images/towards-zero-carbon-computing.png" alt="A graph with four trends: emissions from production, emissions in total, performance and emissions/performance."
+<img src="{{ site.url }}/images/towards-zero-carbon-computing.avif" alt="A graph with four trends: emissions from production, emissions in total, performance and emissions/performance."
 title="A graph with four trends: emissions from production, emissions in total, performance and emissions/performance." />
 <figcaption>Towards zero carbon computing: increasing performance and lifetime and reducing emissions. Illustration with following assumptions: every new generation lasts twice as long as the previous one and cost half as much energy to produce; energy efficiency improves linearly with 5% per year.</figcaption>
 </figure>

@@ -5,14 +5,14 @@ date: 2022-11-20
 modified: 2022-11-20
 tags: [ programming, raku ]
 excerpt: "A small library to make it easier to work with immutable maps and lists."
-current_image: immutable-datastructures-reduction_1600x600.jpg
+current_image: immutable-datastructures-reduction_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: immutable-datastructures-reduction_1600x600.jpg
-  teaser: immutable-datastructures-reduction_400x150.jpg
-  thumb: immutable-datastructures-reduction_400x150.jpg
+  feature: immutable-datastructures-reduction_1600x600.avif
+  teaser: immutable-datastructures-reduction_400x150.avif
+  thumb: immutable-datastructures-reduction_400x150.avif
 ---
 
 For [a little compiler](https://wimvanderbauwhede.github.io/articles/uxntal-to-C/) I've been writing, I felt increasingly the need for immutable data structures to ensure that nothing was passed by references between passes. I love Perl and Raku but I am a functional programmer at heart, so I prefer map and reduce over loops. It bothered me to run reductions on a mutable data structure. So I made [a small library](https://codeberg.org/wimvanderbauwhede/nito/src/branch/main/lib/ImmutableDatastructureHelpers.rakumod) to make it easier to work with immutable maps and lists.

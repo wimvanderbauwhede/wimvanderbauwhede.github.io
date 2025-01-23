@@ -5,14 +5,14 @@ date: 2021-12-13
 modified: 2021-12-13
 tags: [ computing, raku, programming ]
 excerpt: "Scrap your boilerplate with generic traversals in Raku."
-current_image: generic-traversals-in-raku_1600x600.jpg
+current_image: generic-traversals-in-raku_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: generic-traversals-in-raku_1600x600.jpg
-  teaser: generic-traversals-in-raku_400x150.jpg
-  thumb: generic-traversals-in-raku_400x150.jpg
+  feature: generic-traversals-in-raku_1600x600.avif
+  teaser: generic-traversals-in-raku_400x150.avif
+  thumb: generic-traversals-in-raku_400x150.avif
 ---
 
 I am a [lambdacamel](https://andrewshitov.com/2015/05/05/interview-with-audrey-tang/) and therefore I like to adapt concepts and techniques from functional programming, and in particular from the [Haskell](https://www.haskell.org/) language, to Raku. One of the techniques that I use a lot is _generic traversals_, also known as "Scrap Your Boilerplate" after the title of [the paper by Simon Peyton Jones and Ralf Lämmel](https://archive.alvb.in/msc/02_infogp/papers/SYB1.pdf) that introduced this approach. In their words: 

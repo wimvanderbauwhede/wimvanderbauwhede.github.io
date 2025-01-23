@@ -6,14 +6,14 @@ modified: 2021-08-29
 tags: [ computing, climate ]
 excerpt: "À propos du besoin d'une informatique durable et peu émettrice en gaz à effet de serre ainsi que du chemin pour atteindre une neutralité carbone."
 current: ""
-current_image: frugal-computing_1600x600.jpg
+current_image: frugal-computing_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: frugal-computing_1600x600.jpg
-  teaser: frugal-computing_400x150.jpg
-  thumb: frugal-computing_400x150.jpg
+  feature: frugal-computing_1600x600.avif
+  teaser: frugal-computing_400x150.avif
+  thumb: frugal-computing_400x150.avif
 ---
 
 À propos du besoin d'une informatique durable et peu émettrice en gaz à effet de serre ainsi que du chemin pour atteindre une neutralité carbone.
@@ -98,7 +98,7 @@ Le rapport du Bureau Environnemental Européen sur le coût de l'obsolescence pr
 En prenant en compte le coût en carbone de la production comme du fonctionnement, l'informatique sera responsable de 10 GteCO₂ en 2040, presque la moitié des émissions de CO2 acceptables [[2,3,14]](#2).
 
 <figure>
-<img src="{{ site.url }}/images/computing-emissions-fr.png" alt="Un graphe composée de 2 barres imbriquées : les émissions mondiales (55) et les émissions de l'informatique (0,1) en 2020; et en 2040. Le plafond d'émissions nécessaire pour maintenir le réchauffement à 1,5 °C (23) et les émissions estimée de l'informatique (10) sont également représentées."
+<img src="{{ site.url }}/images/computing-emissions-fr.avif" alt="Un graphe composée de 2 barres imbriquées : les émissions mondiales (55) et les émissions de l'informatique (0,1) en 2020; et en 2040. Le plafond d'émissions nécessaire pour maintenir le réchauffement à 1,5 °C (23) et les émissions estimée de l'informatique (10) sont également représentées."
 title="Un graphe composée de 2 barres imbriquées : les émissions mondiales (55) et les émissions de l'informatique (0,1) en 2020; et en 2040. Le plafond d'émissions nécessaire pour maintenir le réchauffement à 1,5 °C (23) et les émissions estimée de l'informatique (10) sont également représentées." />
 <figcaption>Émissions actuelles et projetées liées à l'informatique (production et fonctionnement), et l'objectif de 2040 pour limiter le réchauffement à 1,5°C.</figcaption>
 </figure>
@@ -144,7 +144,7 @@ Pour utiliser les appareils plus longtemps, une modification des modèles écono
 Imaginez que nous puissions étendre la durée de vie utile de nos appareils et même améliorer leurs capacités, purement avec des améliorations techniques. Avec chaque amélioration, les capacités des appareils vont de fait augmenter sans que la consommation énergétique n'augmente. Dans le même temps, nous développerons des technologies pour la prochaine génération d'appareils, conçus pour l'efficacité énergétique et pour durer. Tous les cycles suivants accroîtront la durée de vie des appareils jusqu'au point où nous disposerons d'appareils qui dureront éternellement et qui ne consommeront pratiquement pas d'énergie. 
 
 <figure>
-<img src="{{ site.url }}/images/towards-zero-carbon-computing-fr.png" alt="Un graph avec quatre courbes, les émissions liées à la production, les émissions totales, la performance et le rapport emissions sur performance."
+<img src="{{ site.url }}/images/towards-zero-carbon-computing-fr.avif" alt="Un graph avec quatre courbes, les émissions liées à la production, les émissions totales, la performance et le rapport emissions sur performance."
 title="Un graph avec quatre courbes, les émissions liées à la production, les émissions totales, la performance et le rapport emissions sur performance."/>
 <figcaption>Vers une informatique neutre en carbone : augmentation de la performance et de la durée de vie en réduisant les émissions. Illustration avec les hypothèses suivantes : chaque nouvelle génération dure deux fois plus longtemps que la précedente et coût la moitié d'énergié à produire. L'efficacité énergétique augment linéairement d'environ 5% par an.</figcaption>
 </figure>

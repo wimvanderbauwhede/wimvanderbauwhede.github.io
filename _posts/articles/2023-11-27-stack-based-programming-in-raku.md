@@ -1,23 +1,22 @@
 ---
 layout: article
-title: "Stack-based programming in Raku"
+title: "Embedding a stack-based programming language"
 date: 2023-11-27
 modified: 2023-11-27
 tags: [ computing, functional, uxntal, raku ]
 excerpt: "It takes just one custom operator to allow Uxntal-style programming in Raku."
 current: ""
-current_image: stack-based-programming-in-raku_1600x600.jpg
+current_image: stack-based-programming-in-raku_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: stack-based-programming-in-raku_1600x600.jpg
-  teaser: stack-based-programming-in-raku_400x150.jpg
-  thumb: stack-based-programming-in-raku_400x150.jpg
+  feature: stack-based-programming-in-raku_1600x600.avif
+  teaser: stack-based-programming-in-raku_400x150.avif
+  thumb: stack-based-programming-in-raku_400x150.avif
 ---
-# Stack-based programming in Raku
 
-When `@lizmat` asked me to write a post for the Raku advent calendar I was initially a bit at a loss. I have spent most of the year not writing Raku but working on my own language [Funktal](https://limited.systems/articles/funktal/), a postfix functional language that compiles to [Uxntal](https://wiki.xxiivv.com/site/uxntal.html), the stack-based assembly language for the tiny [Uxn](https://wiki.xxiivv.com/site/uxn.html) virtual machine.
+When [`@lizmat`](https://scholar.social/@lizmat@mastodon.social) asked me to write a post for the [Raku advent calendar](https://raku-advent.blog/category/2023/) I was initially a bit at a loss. I have spent most of the year not writing [Raku](https://raku.org/) but working on my own language [Funktal](https://limited.systems/articles/funktal/), a postfix functional language that compiles to [Uxntal](https://wiki.xxiivv.com/site/uxntal.html), the stack-based assembly language for the tiny [Uxn](https://wiki.xxiivv.com/site/uxn.html) virtual machine.
 
 But as Raku is nothing if not flexible, could we do Uxntal-style stack-based programming in it? Of course I could embed the entire Uxntal language in Raku using [a slang](https://raku.land/zef:lizmat/Slangify). But could we have a more shallow embedding? Let's find out.
 
@@ -228,9 +227,14 @@ becomes
     @array ∘ 0x0001 ∘ ADD ∘ LDA
 ```
 
-and I think that is close enough.
+and that would be close enough, were it not that in Uxntal memory is declared after subroutines. So what I actually need to do is
 
-The way I handle the pointer arithmetic is by pattern matching on the type. Instructions `ADD`, `SUB` and `INC` can take an integer or a label, which in Raku is an `Array`. The valid argument type for these operations is
+```perl6
+    (array) ∘ 0x0001 ∘ ADD ∘ LDA
+    sub array { [ 0x11, 0x22, 0x33 ] }
+```
+
+The way I handle the pointer arithmetic is by pattern matching on the type. Instructions `ADD`, `SUB` and `INC` can take an integer or a label, which in Raku is an `Array`. The valid argument type for these operations is in pseudo-code for types:
 
     Pair  = (Fst,Int)
     Fst = Array | (Fst,Int)
@@ -257,6 +261,8 @@ The non-integer return values of this kind of arithmetic are used in `LDA` and `
 
 In other words, an address must always be relative to a label. So we will check if the argument is not an integer.
 
+## Hello, Uxntal
+
 With this machinery we can run the following Uxntal "Hello World" program
 
         |0100
@@ -264,8 +270,6 @@ With this machinery we can run the following Uxntal "Hello World" program
             ;hello JSR2
 
         BRK
-
-        @hello-word "Hello 20 "World! 00
 
         @hello
             ;hello-word ;print-text JSR2
@@ -281,37 +285,40 @@ With this machinery we can run the following Uxntal "Hello World" program
                 ( loop ) INC2 DUP2 LDA ;while JCN2
         JMP2r
 
+        @hello-word "Hello 20 "World! 00
 
-in Raku as follows (assuming we have aliases with the suffix `2`):
+    ( the `#18 DEO` instruction prints a byte on STDOUT )
+
+in Raku as follows:
 
 ```perl6
-        #|0100
+    #|0100
+        &hello ∘ JSR2 ∘ 
+    BRK;
 
-            &hello ∘ JSR2 ∘
+    sub hello {
+        (hello-world) ∘ &print-text ∘ JSR2 ∘ 
+        RET
+    }
 
-        BRK;
+    sub print-text { # str* --
+        &loop ∘ JSR2 ∘ 
+        RET
+    }
 
-        my @hello-word = "Hello World!", 00;
+    sub loop {
+        DUP2 ∘ LDA ∘ 0x18 ∘ DEO ∘ 
+        INC2 ∘ DUP2 ∘ LDA ∘ &loop ∘ JCN2 ∘ 
+        RET
+    }
 
-        sub hello {
-            @hello-word ∘ &print-text ∘ RET;
-        }
-
-        sub print-text { # str* --
-            &while ∘ JSR2 ∘
-            POP2 ∘
-            RET
-        }
-
-        sub while {
-            DUP2 ∘ LDA ∘ 0x18 ∘ DEO ∘
-            INC2 ∘ DUP2 ∘ LDA ∘ &while ∘ JCN2 ∘
-            RET;
-        }
+    sub hello-world { ["Hello,",0x20,"World!", 0x0a,0x00] }
 ```
-
-(the `#18 DEO` instruction prints a byte on STDOUT)
 
 As this program has a loop implemented as a tail recursion, it is complete in terms of illustrating the features of a stack-based program in Uxntal.
 
-So in conclusion, we can embed a stack-based programming language such as Uxntal in Raku purely by defining a single binary operator and a few enums for the instructions. This is mainly courtesy of Raku's `state` variables and powerful pattern matching.
+## Conclusion
+
+So in conclusion, we can easily embed a stack-based programming language such as Uxntal in Raku purely by defining a single binary operator and a few enums for the instructions. This is mainly courtesy of Raku's `state` variables and powerful pattern matching.
+
+The code for this little experiment is available in my [raku-examples](https://github.com/wimvanderbauwhede/raku-examples) repo, with two sample programs [stack-based-programming.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/stack-based-programming.raku) and [hello-uxntal.raku](https://github.com/wimvanderbauwhede/raku-examples/blob/master/hello-uxntal.raku) and the module implementing the operator [Uxn.rakumod](https://github.com/wimvanderbauwhede/raku-examples/blob/master/Uxn.rakumod).

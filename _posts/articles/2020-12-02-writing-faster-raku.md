@@ -6,14 +6,14 @@ modified: 2020-12-02
 tags: [ coding, hacking, programming, raku, perl ]
 excerpt: "Sometimes you want your Raku code to be faster. What does it take?"
 current: "Writing faster Raku code"
-current_image: writing-faster-raku_1600x600.jpg
+current_image: writing-faster-raku_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: writing-faster-raku_1600x600.jpg
-  teaser: writing-faster-raku_400x150.jpg
-  thumb: writing-faster-raku_400x150.jpg
+  feature: writing-faster-raku_1600x600.avif
+  teaser: writing-faster-raku_400x150.avif
+  thumb: writing-faster-raku_400x150.avif
 ---
 
 In [an earlier article]({{site.url}}/articles/writing-faster-perl), I discussed the result of my attempts to optimize the performance of an expression parser which is part of my Perl-based [Fortran source-to-source compiler](https://github.com/wimvanderbauwhede/RefactorF4Acc). An expression parser takes strings representing expressions in a programming language (in my case Fortran) and turns it into a data structure called a parse tree, which the compiler uses for further analysis and code generation.

@@ -6,14 +6,14 @@ modified: 2020-10-05
 tags: [ coding, hacking, programming, raku, haskell ]
 excerpt: "A reconstruction of Raku's junctions as an algebraic data with higher-order functions."
 current: ""
-current_image: reconstructing-raku-junctions_1600x600.jpg
+current_image: reconstructing-raku-junctions_1600x600.avif
 comments: false
 toc: false
 categories: articles
 image:
-  feature: reconstructing-raku-junctions_1600x600.jpg
-  teaser: reconstructing-raku-junctions_400x150.jpg
-  thumb: reconstructing-raku-junctions_400x150.jpg
+  feature: reconstructing-raku-junctions_1600x600.avif
+  teaser: reconstructing-raku-junctions_400x150.avif
+  thumb: reconstructing-raku-junctions_400x150.avif
 ---
 
 Junctions in Raku are cool but at first glance they do not follow the rules for static typing. I was curious about their formal typing semantics, so I deconstructed and then reconstructed junctions from a functional, static typing perspective.

@@ -29,7 +29,7 @@
 	.bullet-icon {
 		float: left;
 		background: $base-color;
-		padding: $icon-bullet-size /4;
+		padding: $icon-bullet-size * 0.25;
 		border-radius: 50%;
 		width: $icon-bullet-size * 1.25;
 		height: $icon-bullet-size * 1.25;
