@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Emissions from ChatGPT are much higher than from conventional search • Wim Vanderbauwhede</title>
+    <title>Emissions from ChatGPT are much higher than from conventional search (updated) • Wim Vanderbauwhede</title>
     <meta name="description" content="ChatGPT-style queries use about sixty times more energy compared to conventional search.">
     <meta name="keywords" content="computing, climate">
     
@@ -85,7 +85,7 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/google-search-vs-chatgpt-emissions_1600x600.avif" class="page-feature-image" alt="Emissions from ChatGPT are much higher than from conventional search" itemprop="image">
+				<img src="https://wimvanderbauwhede.github.io/images/google-search-vs-chatgpt-emissions_1600x600.avif" class="page-feature-image" alt="Emissions from ChatGPT are much higher than from conventional search (updated)" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
@@ -94,7 +94,7 @@
   <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
 </nav><!-- /.breadcrumbs -->
 		<div class="page-title">
-			<h1>Emissions from ChatGPT are much higher than from conventional search</h1>
+			<h1>Emissions from ChatGPT are much higher than from conventional search (updated)</h1>
 		</div>
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
@@ -102,10 +102,15 @@
 				<p>Chat-assisted search is one of the key applications for ChatGPT. To illustrate the impact of ChatGPT-style augmented search queries more clearly, I compare the energy consumption and emission of a ChatGPT-style query with that of a conventional Google search-style query. If all search queries are replaced by ChatGPT-style queries, what does that mean for energy consumption and emissions?</p>
 
 <ul>
-  <li>tl;dr: Emissions would increase by 60x.</li>
+  <li>tl;dr: Emissions would increase by 60x for a GPT-3 style model of around 175B paramters; for a GPT-4 style model, it could be 200x.</li>
 </ul>
 
-<p>In <a href="https://wimvanderbauwhede.github.io/articles/climate-cost-of-ai-revolution">a previous post</a> I wrote about the potential climate impact from widespread adoption of ChatGPT-style Large Language Models. My projections are in line with those made by de Vries in his recent article <a href="#5">[5]</a>. In this post, I look in more detail at the increase in energy consumption from using ChatGPT for search tasks.</p>
+<p>In <a href="https://wimvanderbauwhede.github.io/articles/climate-cost-of-ai-revolution">a previous post</a> I wrote about the potential climate impact from widespread adoption of ChatGPT-style Large Language Models. My projections are in line with those made by de Vries in his recent article <a href="#5">[5]</a>. In this post, I look in more detail at the increase in energy consumption from using ChatGPT for search tasks. A more detailed analysis is available <a href="https://arxiv.org/abs/2407.16894">as a preprint paper</a>.</p>
+
+<h2 id="update-2025-01-06">Update 2025-01-06</h2>
+
+<p>I originally published the estimates below on 2023-11-17 and they are for GPT-3. According to <a href="https://www.latent.space/p/geohot">George Hotz</a> GPT-4 consists of 8 instances of 220B-parameter GPT-3 models; <a href="https://semianalysis.com/2023/07/10/gpt-4-architecture-infrastructure/">Dylan Patel
+and Gerald Wong</a> claim it is 16 instances of each about ~111B, which is the same in total. But they also state that only 2 of these are routed, so the inference is performed on two 111B models; however, they also share Furthermore, ~55B shared parameters for attention, so we get about 280B parameters. For comparison, GPT-3.5 is a single 175B-parameter model. According to Patel and Wong, the inference cost of GPT-4 is 3x more expensive that of than GPT-3.5, which is much more than the increase of 1.6x in parameters would suggest. As for the inference, the energy consumption dominates, this means that GPT-4 likely consume up to 3x more energy than GPT-3.5, and consequently, a search query with a GPT-4 generated AI summary might have emissions of about 200x larger than a search query without AI summary.</p>
 
 <h2 id="google-search-energy-and-emissions">Google search energy and emissions</h2>
 
@@ -224,7 +229,7 @@ US overall carbon intensity: 367 gCO₂/kWh
 
 					
 					<div class="page-meta">
-	<p>Updated <time datetime="2023-11-17T00:00:00Z" itemprop="dateModified">November 17, 2023</time>
+	<p>Updated <time datetime="2025-01-06T00:00:00Z" itemprop="dateModified">January 06, 2025</time>
 </div><!-- /.page-meta -->
 				</footer><!-- /.footer -->
 				<aside>
@@ -249,7 +254,7 @@ US overall carbon intensity: 367 gCO₂/kWh
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2024 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2025 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
