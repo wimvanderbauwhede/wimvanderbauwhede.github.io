@@ -1,11 +1,10 @@
 # Site wide configuration
 
-title: ""
-description: ""
+title: Wim Vanderbauwhede
+description: "Wim Vanderbauwhede"
 locale: en_GB
+url: https://wimvanderbauwhede.codeberg.page
 
-# url: http://127.0.0.1/~wim/wv-blog
-url: http://hackbox.local/~wim/wv-blog
 
 # Jekyll configuration
 # For plugins
@@ -18,7 +17,7 @@ markdown: kramdown
 kramdown:
   syntax_highlighter: rouge
 #markdown: redcarpet
-#highlighter: rouge
+highlighter: rouge
 #highlighter: pygments
 plugins_dir:
   - jekyll-sitemap
@@ -30,27 +29,5 @@ plugins_dir:
 owner:
   name: Wim Vanderbauwhede
   web: http://www.dcs.gla.ac.uk/~wim
-  twitter: wim_v12e
-
-exclude:
-  - "*.less"
-  - .asset-cache
-  - .bundle
-  - .jekyll-assets-cache
-  - .sass-cache
-  - CHANGELOG
-  - Capfile
-  - Gemfile
-  - Gruntfile.js
-  - LICENSE
-  - README
-  - Rakefile
-  - config
-  - gulpfile.js
-  - lib
-  - log
-  - node_modules
-  - package.json
-  - spec
-  - tmp
+#  twitter: wim_v12e
 

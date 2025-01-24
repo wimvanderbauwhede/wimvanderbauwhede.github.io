@@ -4,7 +4,7 @@ title: Cheaper AI does not mean greener AI
 date: 2025-01-13
 modified: 2025-01-13
 tags: [ computing, climate ]
-excerpt: "The energy efficiency gains of LLM inference are not leading to lower emissions."
+excerpt: "The energy efficiency gains of running LLM promts are not leading to lower emissions."
 comments: false
 toc: false
 categories: articles
@@ -14,12 +14,12 @@ image:
   thumb: cheaper-ai-is-not-greener-ai_400x150.avif
 ---
 
-In this article I have a look at the cost of queries for GPT-4 and similar models. The main conclusions are:
+In this article I have a look at the cost of running queries for GPT-4 and similar models. The main conclusions are:
 
 * The energy efficiency gains for queries to large language models (LLM) are not leading to lower emissions.
 * On the contrary, the lower prices are likely to lead to increased use and therefore higher emissions.
 * The cost of a query is mainly made up of the fixed cost (capex) of the data centre infrastructure and GPU servers. The electricity consumption contribution is a small proportion.
-* Therefore, to maximise profit, it is the GPU utilisation that is optimised, to support as many users as possible on the available hardware. 
+* Therefore, to maximise profit, it is the GPU server utilisation that is optimised, to support as many users as possible on the available hardware. 
 * But higher utilisation means higher energy consumption and therefore higher emissions. Projected growth makes this even worse.
 
 ## The urgent need to reduce emissions
@@ -32,7 +32,9 @@ The 2024 Emissions Gap Report of the UN [[1]](#1) explains in detail why renewab
 
 ## Cheaper prompts, greener prompts?
 
-The price per query/token for various LLMs has come down considerably compared to prices when GPT-3 was released. In his excellent article "Things we learned about LLMs in 2024" [[2]](#2), under the heading "The environmental impact got better" [[3]](#3), Simon Willison makes the following argument:
+* Note on terminology: I use the terms prompt, query and inference interchangeably. The prompt is what you type, the query is sending it to the server. Inference is the process of creating the answer for the prompt. This is done on servers with powerful GPUs. Furthermore, a token is a small group of characters, between a single character and a word. 
+
+The price per query or token for various LLMs has come down considerably compared to prices when GPT-3 was released. In his excellent article "Things we learned about LLMs in 2024" [[2]](#2), under the heading "The environmental impact got better" [[3]](#3), Simon Willison makes the following argument:
 
 > A welcome result of the increased efficiency of the models—both the hosted ones and the ones I can run locally—is that the energy usage and environmental impact of running a prompt has dropped enormously over the past couple of years.
 
@@ -50,34 +52,37 @@ I looked at the electricity cost of running an LLM query and the pricing for a f
 
 Assuming that, because of their size, Google or OpenAI will always get the lowest prices, the price they  pay for their electricity is less than 6 cents [[6]](#6).
 
-## Energy consumption of a GPT-3 style model
+## Energy consumption of a GPT-3 style large language model
 
-As I have discussed in detail in my article on the emissions of AI-augmented search [[7]](#7), the best estimate for the electricity consumption per query for GPT-3 and BLOOM is 0.003 kWh per query. This is to generate the AI summary for a search query so we will conservatively assume that the model is used to generate a 100-word summary. This is very conservative: the average query response length is actually only 30 words [[8]](#8).  At 6 cents per kWh, the electricity cost for such a query would be 0.018 cents per query, i.e. $0.00018; if we had assumed fewer generated tokens, it would be less.
+As I have discussed in detail in my article on the emissions of AI-augmented search [[7]](#7), the best estimate for the electricity consumption per query for GPT-3 and BLOOM is 0.003 kWh per query. The queries in that article are based on short prompts, similar to tradition search queries. They are used to generate the AI summary for a search query. We will conservatively assume that the model is used to generate a 100-word summary. This is very conservative: the average query response length is actually only 30 words [[8]](#8). "Conservative" means we are likely to underestimate the energy consumption per word or token.
+At 6 cents per kWh, the electricity cost for such a query would be 0.018 cents per query, i.e. $0.00018; if we had assumed fewer generated tokens, it would be less.
 
 ## What makes up the cost of a query?
 
 There are three main components to the cost of running a query: 
 
-- the cost of building the infrastructure, 
-- the cost of the servers and 
-- the operation cost. 
+- the cost of the buying servers, 
+- the cost of building the data centre and 
+- the running cost of the data centre. 
 
 The latter is dominated by the electricity cost (maintenance and water usage are lower contributors). Training an deploying a new model does not require a complete new data centre to be built, nor does it require replacing all the servers. But as the new models typically require more compute resources than the previous generation, it requires buying additional servers. 
 
-The upshot is that the energy cost is not dominant. This is because building data centres and buying GPUs is very expensive. 
+The upshot is that the energy cost is not dominant. This is because building data centres and buying GPU servers is very expensive. 
 
-### Hardware cost
+### The cost of the buying servers
 
-For example, a DGX-A100 server with eight A100 GPUs [[9]](#9) would cost $240k. (As I sanity check, in Feb 2023, SemiAnalysis [[10]](#10) quoted $195k for an 8× A100 server.) Running it for a year would cost about $2,400 (using a power consumption of 4550 W as reported by Nvidia [[11]](#11)).
+For example, a Nvidia DGX-A100 server with eight A100 GPUs [[9]](#9) would cost $240k. (As I sanity check, in Feb 2023, SemiAnalysis [[10]](#10) quoted $195k for an 8× A100 server.) Running it for a year would cost about $2,400 (using a power consumption of 4550 W as reported by Nvidia [[11]](#11)).
 So, for the running cost to exceed the fixed cost, the GPU server would need to run for a hundred years. But the servers will likely be replaced by the next generation GPU, which will arrive after two years, or at best after 5 years, so the hardware cost makes up the majority of the price. 
 
-### Data centre infrastructure cost
+### The cost of building the data centre
 
 Although hyperscale data centres are also very expensive to build, the data centre infrastructure cost is a smaller contribution to the overall cost because the data centre will last longer, with an expected life of 15 to 20 years [[12]](#12). The cost for a 60MW data centre that could accommodate 10,000 of the above servers is between $420 and $770M for construction [[13]](#13); but those 10,000 GPUs would cost $2.4 billion. 
 
-### Inference cost contributions
+### The running cost of the data centre
 
-If we assume a conservative model where we replace the servers only after 5 years, we take the average cost of $595M for construction and a 20-year lifespan and start at 1/4 capacity, and add 1/4 every 5 years for 20 years, we'd have $120M/year for the servers, $30M/year for the infrastructure and $15M/year for the electricity, or about 9% of the total cost. 
+The running cost of the data centre is dominate by the cost of the electricity for running the servers, network and cooling. In a modern data centre, the contribution of the network and cooling is small, certainly less that 10%.
+
+So let's consider a 60MW data centre that can host 10,000 servers. As discussed above, running a single server for a year costs $2,400. We assume a conservative model where we replace the servers only after 5 years (usually they are replaced after 3 years), we take the average cost of $595M for construction and a 20-year lifespan. The data centre will not operate at full capacity from the start, so we assume that we start at 1/4 capacity (2,500 servers), and add 1/4 every 5 years for 20 years. With those assumptions we'd have $120M/year for the capex contribution of the servers, $30M/year for the capex contribution of the infrastructure and $15M/year for the electricity, or about 9% of the total cost. 
 
 - This assumes that server and electricity costs costs don't change much over that period. 
 - It is likely that each newer generation is about twice as energy efficient. If we would take that into account, the electricity would only be $2.4M/year, or less than 2% of the cost average over 15 years. 
@@ -88,17 +93,20 @@ If we assume a conservative model where we replace the servers only after 5 year
 
 ### Conclusion on costs
 
+To summarise, more than 70% of the cost of running a query is the capex contribution of the servers, and the electricity consumption is less than 10%.
 What this tells us is that what matters in terms of profit is to optimise the utilisation of those expensive GPUs. So when the cost per query goes down, it is likely the consequence of improved utilisation, which means more users can be supported simultaneously, rather than improved energy efficiency.
 
 ## Price versus energy cost
+
+Let's consider the pricing for two popular large language models: Google's Gemini 1.5 Pro and OpenAI's GPT-4. Both are very recent models and similar in capabilities.
 
 ### Gemini 1.5 Pro pricing
 
 Generating 10,000 words using Gemini 1.5 Pro (10 RPM) costs ~$0.28 [[15]](#15) and the cost is proportional to the number of generated words (1000 words is ~$0.028, 100 words is ~$0.003) 
 
-### OpenAI GPT-4 pricing
+### GPT-4 pricing
 
-OpenAI GPT-4 charges between $0.030 and $0.120 per 1,000 tokens [[16]](#16) depending on the context length. The $0.030 is for GPT-4 Turbo, which is likely smaller than GPT-4.
+OpenAI charges between $0.030 and $0.120 per 1,000 tokens on GPT-4 [[16]](#16) depending on the context length. The $0.030 is for GPT-4 Turbo, which is likely smaller than GPT-4.
 
 ### The price is much higher than the energy cost 
 
@@ -110,7 +118,7 @@ Some say that it is only a 120B parameter model [[19]](#19); if that is the case
 * GPT-4 is said to be 3× more expensive than GPT-3 [[5]](#5), but GPT-4 Turbo could be only 1.5× more expensive. So our estimate is
 GPT-4 : {0.030/1.5, 0.06/3,0.120/3 }/ 0.0018 =  {11.1×, 11.1×, 22.2×}; in other words, the price is 11× or 22× higher than the electricity cost. 
 
-These figures are consistent with the relative cost contributions: with the GPU cost 10× larger, the price should indeed be more than 10× that of the electricity consumption. It also means that the electricity consumption does not matter much in the overall picture, i.e. Google and OpenAI don't have a huge incentive to prioritise increasing energy efficiency.
+These figures are consistent with the relative cost contributions: with the GPU server and data centre capex cost about 10× larger than the electricity cost, the price should indeed be more than 10× that of the electricity consumption. It also means that the electricity consumption does not matter much in the overall picture, i.e. Google and OpenAI don't have a huge incentive to prioritise increasing energy efficiency.
 
 ## Note on faster hardware
 

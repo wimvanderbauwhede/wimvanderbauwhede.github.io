@@ -22,7 +22,7 @@ In short:
 
 * The hype creates an expectation of huge growth in demand for AI. Data centre companies have to start building capacity before this demand is realised, even if it never materialises. As a result, data centre capacity is being built up right now at an unprecedented scale. 
 * This requires electricity generators to provision capacity for those future data centres, even if they would never be used.
-* Without growth in demand, electricity generators would phase out fossil fuel generation because generating electricity from renewable sources is more cost-effective. Because of the AI hype, they are no longer phasing out fossil fuel generation as they want to maximise generation capacity to maximise future profits. New fossil fuel powered electricity plants are being developed as a result [[1]](#1) and existing ones are kept open for longer [[2]](#2). 
+* Without strong growth in demand, electricity generators would phase out fossil fuel generation because generating electricity from renewable sources is more cost-effective. Because of the AI hype, they are no longer phasing out fossil fuel generation as they want to maximise generation capacity to maximise future profits. New fossil fuel powered electricity plants are being developed as a result [[1]](#1) and existing ones are kept open for longer [[2]](#2). 
 * As electricity generators of course want to optimise current profits as well, they want to sell all the electricity they can generate, rather than let plants idle. 
 * And so global emissions from electricity generation are not decreasing at all, and are even expected to rise in the near future. This at a time when we need to reduce global emissions urgently and drastically. 
 
@@ -61,7 +61,7 @@ In 2023, TSMC's fabs consumed 23 TWh. Based on  a report by S&P Global [[10]](#1
 ### Growth in overall data centre emissions
 
 Suppose the demand for AI data centres grows by 10× in ten years. That is about 25% per year and is within McKinsey's [[3]](#3) projections. 
-Assuming a global electricity carbon intensity of 480 gCO₂e/kWh [[13]](#13) or 0.000480 GtCO₂e/TWh, then by 2035  the data centres would consume 4800 TWh/y and this would result in 2.3 GtCO₂e emissions. The chip production would consume 200 TWh/y or an extra 0.1 GtCO₂e. So the total data centre emissions as a result of 25% year on year growth over 10 years would be 2.4 GtCO₂e with this rough estimate.
+Assuming a global electricity carbon intensity of 480 gCO₂e/kWh [[13]](#13) or 0.000480 GtCO₂e/TWh, then by 2035  the data centres would consume 4800 TWh/y and this would result in 2.3 GtCO₂e emissions. The chip production would consume 200 TWh/y or an extra 0.1 GtCO₂e. So the total data centre emissions as a result of 25% year on year growth over 10 years would be 2.4 GtCO₂e with this rough estimate. 
 
 ## Issues with this estimate
 
@@ -72,7 +72,9 @@ There are several oversimplifications in the above estimate. The most important 
 We made a model for the evolution of data centre emissions over time, which takes into account both the embodied carbon [[15]](#15) and the emissions from use [[14]](#14). 
 This model does not take into account the embodied carbon emissions from creating the actual infrastructure (data centres themselves, electricity supplies, networking, roads, water supplies). According to UNEP [[17]](#17), the footprint of the gobal construction sector was 10 GtCO₂e/y. Data centres are only a small fraction of all global construction, but I could not find reliable data and therefore could not include this contribution in the calculations.
 
-Using our model, we arrive at an electricity consumption of 3400 TWh/y for the data centres by 2035. This is of the same order as the rough estimate, but as expected somewhat lower. The embodied carbon (which we modeled above by the estimate share of TSMC's electricity) is also considerably lower. The overall figure is 1.6 GtCO₂e of additional emissions (rather than the 2.4 GtCO₂e from our rough model; but rough as it was, this is quite close). This is still problematic: the total global CO₂ budget for 2035 is 22 GtCO₂e/y according to the UNEP Emissions Gap Report 2024 [[16]](#16). And if the trend would persist, then after 20 years of 22% growth year on year, the additional emissions would be almost 6 GtCO₂e/y.
+Using our model, we arrive at an electricity consumption of 3400 TWh/y for the data centres by 2035. This is of the same order as the rough estimate, but as expected somewhat lower. The embodied carbon (which we modeled above by the estimate share of TSMC's electricity) is also considerably lower. The overall figure is 1.6 GtCO₂e of additional emissions (rather than the 2.4 GtCO₂e from our rough model; but rough as it was, this is quite close). This is still problematic: the total global CO₂ budget for 2035 is 22 GtCO₂e/y according to the UNEP Emissions Gap Report 2024 [[16]](#16). Global emissions from electricity generation were 14 GtCO₂e in 2023 and projected to rise to 15 GtCO₂e by 2035 without the growth in AI.
+
+And if this trend would persist, then after 20 years of 22% growth year on year, the additional emissions would be almost 6 GtCO₂e/y.
 
 
 ## What about a hundred times growth?
@@ -113,8 +115,8 @@ Usage Report"_, Shehabi et al., December 2024, retrieved 17 January 2025](https:
 <span id="11">[11] [_"Taiwan Electricity Production"_, CEIC, retrieved 17 January 2025](https://www.ceicdata.com/en/indicator/taiwan/electricity-production)</span><br>
 <span id="12">[12] [_"TSMC’s Energy Demand Drives Taiwan’s Geopolitical Future"_, Fairley P., IEEE Spectrum, 3 September 2024, retrieved 17 January 2025](https://spectrum.ieee.org/taiwan-semiconductor)</span><br>
 <span id="13">[13] [_"Carbon intensity of electricity generation, 2000 to 2023"_, Our World in Data, 2024, retrieved 17 January 2025](https://ourworldindata.org/grapher/carbon-intensity-electricity?tab=chart&country=EU-27~EU~G20+%28Ember%29~OWID_WRL)</span><br>
-<span id="14">[14] ["LCA model for servers in a data centre", Vanderbauwhede W., 16 January 2025, retrieved 17 January 2025](https://codeberg.org/wimvanderbauwhede/low-carbon-computing/src/branch/master/LCA-model-equations/LCA-data-centre-growth-AI.hs)</span><br>
-<span id="15">[15] [_"Server embodied carbon model"_, Vanderbauwhede W., 17 January 2025, retrieved 17 January 2025](https://codeberg.org/wimvanderbauwhede/low-carbon-computing/src/branch/master/LCA-model-equations/server-embodied-carbon-boavizta.hs)</span><br>
+<span id="14">[14] ["LCA model for servers in a data centre", Vanderbauwhede W., 16 January 2025, retrieved 17 January 2025](https://codeberg.org/wimvanderbauwhede/low-carbon-computing/src/branch/master/LCA-model-equations/runLCAModel-AI.hs)</span><br>
+<span id="15">[15] [_"Server embodied carbon model"_, Vanderbauwhede W., 17 January 2025, retrieved 17 January 2025](https://codeberg.org/wimvanderbauwhede/low-carbon-computing/src/branch/master/LCA-model-equations/calculateServerEmbodiedCarbon-DGX-A100.hs)</span><br>
 <span id="16">[16] [_"Emissions Gap Report 2024"_, UN Environment Programme, 24 October 2024, retrieved 17 January 2025](https://www.unep.org/resources/emissions-gap-report-2024)</span><br>
 <span id="17">[17] [_"2022 Global Status Report for Buildings and Construction"_, UN Environment Programme, 9 November 2022, retrieved 17 January 2025](https://www.unep.org/resources/publication/2022-global-status-report-buildings-and-construction)</span><br>
 <span id="18">[18] [_"Michael Dell: AI to drive data center demand up 100x over next 10 years"_, Yadav N., 18 March 2024, retrieved 17 January 2025](https://www.datacenterdynamics.com/en/news/michael-dell-ai-to-drive-data-center-demand-up-100-fold-over-next-10-years/)</span><br>
