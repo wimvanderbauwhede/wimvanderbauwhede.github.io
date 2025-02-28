@@ -7,7 +7,7 @@
     <subtitle>Wim Vanderbauwhede</subtitle>
     <link href="https://wimvanderbauwhede.github.io/atom.xml" rel="self"/>
     <link href="https://wimvanderbauwhede.github.io/" rel="alternate" type="text/html"/>
-    <updated>2025-01-24T20:00:55+00:00</updated>
+    <updated>2025-02-28T18:35:48+00:00</updated>
     <id>https://wimvanderbauwhede.github.io/</id>
     <author>
 			<name>Wim Vanderbauwhede</name>
@@ -15,6 +15,309 @@
 			
 		</author>
 
+    
+    <entry>
+        <title>Interview on generative AI</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/interview-ctxt-2025/"/>
+        <updated>2025-02-05T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/interview-ctxt-2025</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/interview-ctxt-2025_1600x600.avif&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;I was interviewed by &lt;a href=&quot;https://ctxt.es/user/profile/elenadesus&quot;&gt;Elena de Sus&lt;/a&gt; of Spanish progressive magazine &lt;a href=&quot;https://ctxt.es&quot;&gt;CTXT (Contexto y Acción)&lt;/a&gt;. The article in Spanish is published &lt;a href=&quot;https://ctxt.es/es/20250201/Politica/48565/Elena-de-Sus-entrevista-Wim-Vanderbauwhede-IA-deepseek-medioambiente.htm&quot;&gt;on their web site&lt;/a&gt;. This is the English version of the interview, published with kind permission of CTXT.&lt;/p&gt;
+
+&lt;p&gt;Wim Vanderbauwhede is Professor in Computing Science at the University of Glasgow, where he leads the  Low Carbon and Sustainable Computing research group.&lt;/p&gt;
+
+&lt;p&gt;He has written about &lt;a href=&quot;https://limited.systems/articles/climate-cost-of-ai-revolution/&quot;&gt;the high energy consumption&lt;/a&gt; of the Large Language Models used for generative AI such as ChatGPT. He posits that their projectec expansion is not sustainable.He has is also skeptical that advances in efficiency will lead to a reduction in emissions from this industry.&lt;/p&gt;
+
+&lt;p&gt;He talked to CTXT over video call.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;You research low-carbon and sustainable computing. How did you get interested in the topic?&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;I have been aware of climate change for a very long time, since the 1980s. After all, it is nothing new. Originally I am from Belgium, and when I lived there I was active in an environmental organization, I did volunteering work with them.&lt;/p&gt;
+
+&lt;p&gt;For my academic career, my focus has been mostly on improving the efficiency of computers. But it’s been known for a long time that if you improve the efficiency of something, usually it means it gets cheaper and then you get more demand, and because you get more demand, your emissions actually go up, not down.&lt;/p&gt;
+
+&lt;p&gt;The whole history of the Industrial revolution is one of improved efficiency. The efficiency gains of the steam engine led to us burning lots of coal, because it allowed to pump the mines more efficiently, so mining coal became cheaper.&lt;/p&gt;
+
+&lt;p&gt;Computers have become literally millions of times more efficient since 1930s or 40s. At the same time their use has become ubiquitous. So the total emissions from computing have gone up despite all the efficiency savings. There was this conflict with doing efficiency work, and I wanted to look at sustainability of computing more widely. So some years ago, I essentially got the opportunity to start a new research activity in the department that I work and with the support of the head of the department, and that was the Low Carbon and Sustainable Computing group, which we have now.&lt;/p&gt;
+
+&lt;p&gt;The term I use is &lt;em&gt;frugal computing&lt;/em&gt;. The frugal computing message is that we should use fewer computing resources, just like essentially we should use fewer of any resource if we don’t want catastrophic climate change. We should not go for growth in the terms of growth of resource consumption and growth of energy consumption, because that is destructive. Our whole societal model is built to encourage us to use more resources and more energy. But that is not a sustainable model.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;And the opposite is happening because we are developing very resource intensive stuff like generative AI and Bitcoin.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;At some point before the AI hype started, there was the Bitcoin bubble and it looked like Bitcoin might end up using a huge amount of compute resources. But Bitcoin is not a viable currency for something like a nation state. The former finance minister of Greece, Yanis Varoufakis, has written extensively to explain it. If there is a need for of evidence, El Salvador has abandoned bitcoin as their currency. That means that Bitcoin and the derived models will probably remain rather popular in some circles, but not grow dramatically. And therefore the emissions will probably not go up a lot. Also, cryptocurrencies like Ethereum, based on the proof of stake protocol as opposed to proof of work, have become more popular. The carbon footprint of those is literally a hundred times less, so the emissions from cryptocurrencies haven’t had a dramatic growth. The current amount of emissions is not dramatic. So if it stays that way it is not really a problem. It could have been different, but it didn’t turn out like that.&lt;/p&gt;
+
+&lt;p&gt;AI is a different issue because there’s huge support from governments around the world. Everybody seems to think it’s like magic and it will create unlimited growth. Or maybe even if they don’t believe that, they act like they believe it. That means that the this is a serious driver for creating more computer chips, data centers and generating more electricity. And at the moment, around 70% of the electricity is still from fossil fuels. So it means we’re just going to burn more coal.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;So the problem here is the state support of AI?&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;It works as a delaying factor. If there is a hype bubble, it would normally collapse by itself, because people start to see that there’s nothing in it. But if governments think this is a good idea and they should invest in it, they will commit the investments and the investments will happen even after people start to see that it wasn’t worth it, because they are slow. So the whole thing gets delayed. That’s really what happens. Not so much that it stops the process. It just causes a delay. But in that delay, of course, you create more emissions.&lt;/p&gt;
+
+&lt;p&gt;These days it’s very hard to get economic growth. And if you believe that you must get growth, then anything that promises to give you growth is something that you may want to look into. The UK government, for example, is like that. The US government also, they think that AI is going to give them growth, so they commit to investments in that area and those investments will happen. Probably even if the bubble would burst this year, they would still happen, because they have already set things in motion. It’s not that the governments drive the hype, it just doesn’t help. Of course, if your government is saying that AI is good, then it’s much harder for the ordinary person to say that AI is bad.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;With the launch of generative AI models by the Chinese company DeepSeek, which are apparently more efficient and had to get around the chip export constraints for China, it looks like the bubble has burst. Nvidia stock has gone down and there has been a lot of discourse about the fact that we don’t need that many data centers if we can have a more efficient AI. But I think you are skeptical about this.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;I looked at DeepSeek, based on the information that they have wanted to give. To start with, the narrative that they had to use less capable computer chips, because of the export restrictions of the US government, in short, this is not true. I’ll explain why. 
+There are export restrictions on GPUs and to satisfy these restrictions, Nvidia has created a special series of chips for the Chinese market, and they are less capable in one specific respect: double precision floating point performance. Now, AI does not use double precision floating point performance. This is needed for supercomputers that do scientific computing. But the Chinese have their own very good supercomputers for scientific computing. So they’re not buying Nvidia GPUs for their supercomputers. They’re buying them for AI; and for AI, you don’t need this.&lt;/p&gt;
+
+&lt;p&gt;OpenAI, Google, and the rest of the US companies use an Nvidia GPUs called A100 for running the model. For training, they use a more capable type called H100. For the Chinese market Nvidia sells A800 and H800. In their whitepaper, DeepSeek says that they use the H800. Now the H800 is more capable than the A100 in almost every respect. It’s a little bit less capable in the networking. So if you combine several of these GPUs in a network, the bandwidth of the network is less, and that’s what they explained in that paper, what they did to get around that. And that’s nice engineering, but that’s not getting you so much of a benefit.&lt;/p&gt;
+
+&lt;p&gt;All in all, it’s not as if this is some really constrained compute device. This is high end. This is actually better than what most of the large companies use now for their data centers.&lt;/p&gt;
+
+&lt;p&gt;Deep Seek has been very clever in two ways. They have this app that people started to like. Their pricing is competitive. They have a lot of smaller models that people can play with. And I think that’s what the media has jumped on, these smaller models. But then that’s nothing special. Meta also has released open source smaller models with Llama. They are not really open source, but DeepSeek is also not really open source because the data set is not open. It’s only the code that does the compute that is released as a binary. But that’s a very different discussion.&lt;/p&gt;
+
+&lt;p&gt;I think this was a clever way to say that they have a small model, but what runs the main inference is not all that small.
+Compared to GPT-4, if they can really get the same performance, then they have done something quite clever because they use a lot less of the parameters at any one time. So it will be a bit more energy efficient, but not all that much.&lt;/p&gt;
+
+&lt;p&gt;I mean, this idea is clever, they show that it works and it is a good thing. But we get the same problem. If their pricing is competitive, it means it’s cheaper so more people will use it. So it’s very likely that there will not really be a decrease in emissions as a result. It might very well be an increase if the company gets really big.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;We talk a lot about the cost of training the generative AI models, but you have written that using them is a lot more costly.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Um, yes. And that’s both true in terms of environmental cost and in terms of financial cost. I’m not the only one to write about this. There’s lots of people who look at the economic costs and say the training cost is fast becoming just a detail. I calculated it.&lt;/p&gt;
+
+&lt;p&gt;For inference (running prompts), it scales with the number of users, whereas the model training, of course, only scales if you make a bigger model. And this is probably where Deep Seek has done something clever because their cluster is not very big. So they managed to train the model on a smaller cluster. That saves them their initial cost. Because they started as a small company. So that’s the training cost, but if they are going to become a big company, then they will need lots of data centers for serving all the queries. Then that will be the dominant cost. If you’re an AI company that works with big models and you train them, and that’s a huge cost, then you need a huge amount of users to make it profitable. But to get all those users, you need a lot of hardware to support them, and that’s expensive.&lt;/p&gt;
+
+&lt;p&gt;A few years ago, the costs of training were a lot higher because they started by training these models not very efficiently. They didn’t really know how to do this well. So they needed a lot of resources to get a not so good model. They probably needed to do it a few times and so on. But now it’s definitely the cost of inference that dominates. And also the emissions from inference dominate everything.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Do you think like the markets have overreacted a little bit?&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Absolutely. Yeah. Especially the US markets because this is Chinese and they are afraid of China. But I think Nvidia should not be worried. I mean, for the reason I explained, their sales depend more on the fact that people project enormous growth.&lt;/p&gt;
+
+&lt;p&gt;The CEOs of big tech companies had been saying that they need like a 100 times expansion of chip manufacturing in the next ten years or so. These claims made the market go up. The problem is the data centers are getting committed. And then the electricity generators have to provision the electricity ahead of time because the data center needs to get the electricity as soon as it’s finished. That means if you want more electricity, you have to start building today. And because most of it is not renewable, it’s going to be gas or coal. So even if all this AI stuff does not happen at all, they will have started building it and then they will want to use it because, well, once you’ve built capacity you want to sell your electricity, right? Otherwise you have made a very bad deal. So that’s the damage I think this is doing. It’s the hype that does the damage.&lt;/p&gt;
+
+&lt;p&gt;It’s not possible to scale up semiconductor manufacturing by a factor of 100 because, at best, we could scale up the global mining capacity for all the materials that we need to make the chips by a factor of two. So this factor of 100 is not going to happen. And probably all those people know that.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;So everybody may know it’s a bubble?&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Yes. But it does a lot of damage because it gives the fossil fuel industry a perfect excuse to produce more fossil fuels, to provide the energy that they say we will need for something that is probably not going to happen.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Do you think this large language models are obviously not worth it, right? Even if they can be useful for some things.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Yeah, I personally think that the generative AI that is pushed by OpenAI and then the other companies that follow suit to compete with them, this is not very useful. I mean, it is useful for specific scenarios, but then usually when you have a specific scenario, you could use a much, much smaller model and achieve the same thing.&lt;/p&gt;
+
+&lt;p&gt;We have had the really big models that can do everything for everybody since 2020 or so, meanwhile global productivity definitely has not gone up. The companies that start using the Microsoft Copilot and so on, the large language models for programming, they see that it’s problematic, because it’s much harder to debug code that was not written by your own developers, but written by a machine. Although you may think that you write code faster because the machine writes it, the machine doesn’t guarantee your code is correct. It can’t. You know, a generative language model has no notion of what it means. It’s just guessing. So if you’re lucky, the guess works, and usually it doesn’t. And then the developers still have to debug it. And that takes more time because they can’t read the code so well because they haven’t written it.&lt;/p&gt;
+
+&lt;p&gt;And there’s a lot of things like that. If you look at generative AI for image processing, for generating images, superficially it looks brilliant, but it’s actually quite average. It will not replace good illustrators because people who really want a decent illustration cannot use this. Do you want to burn the planet to produce cheap illustrations?&lt;/p&gt;
+
+&lt;p&gt;I think before generative AI appeared, there was no demand by the people to have it. And so it’s technology push, right? That’s what it’s called, rather than market pull. So the problem is that by creating this extra technology we create a lot of extra emissions at a point in time where we cannot afford any extra emissions. Emissions should go down. It’s not affordable for the planet as a whole. That’s really the problem. Whether it’s useful or not is neither here nor there. It may be extremely useful, but if it’s still burns the planet, it’s no good.&lt;/p&gt;
+
+&lt;p&gt;And from the calculations I’ve done, if those business people’s projections would be realized, AI on its own would be enough to miss all the climate targets. Like I said, this is very unlikely. But it means that they don’t care that it would happen. In terms of energy expenditure, we can’t afford it.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Plain and simple.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;We can afford smaller models. In computing science, we really make a big distinction between what we prefer to call Machine Learning and what is being called AI, which usually means generative AI.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Yeah. Okay. There’s a lot of confusion with this. Could you explain what is the difference?&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;The UK government also makes this mistake. They talk about how AI can do great things like detect cancer in an MRI or X-ray image and therefore we should build more data centers for generative AI. But SegNet, the leading model in colon cancer detection, with a 99% accuracy rate, has 7.6 million parameters, while GPT4 has more than a trillion. 
+This means that SegNet uses 100,000 times less energy than GPT4. It can run on a PC in the hospital. You don’t need to build any data center to get better diagnostics. Just a few servers in hospitals.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;But is there something in common between these different things that we call AI?&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Most models these days use a neural network. A neural network is an abstraction inspired by the brain where essentially you get some inputs which are numbers, and you multiply them by other numbers and you add them, and that gives you another number as an output. And then usually you try to limit the range of that other number or something. That’s what they call a neuron. So something that gets a few inputs multiplies them by weights and then adds them and then normalizes the result and sends that on to another neuron. And if you do that enough times, you get something that actually can do extrapolation on a very large parameter space. So it is very good at… let’s call it guessing, but it’s statistical approximation.&lt;/p&gt;
+
+&lt;p&gt;The model that is used for cancer detection is called a convolutional neural network. These are the ones that are used for images. For text, it’s called recurrent neural network. In an image, you have to look at all the data in parallel in space. So all the pixels are next to one another. In language, your words come one after another. So there are basically two types of neural networks. The generative AI, large language models that we use, they are essentially much advanced versions of these simple neural networks that I described.&lt;/p&gt;
+
+&lt;p&gt;There is a difference between a model that detects a pattern in an image and a generative model has to produce new text or a new image. It’s more work than just finding a pattern. That’s also why generative models are more expensive in energy terms. They need to do more computations because they do more work.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Some people are saying that there is a limit on the training data, that that these models have already used as much data as possible and they maybe cannot find a lot more. I don’t know if that’s true.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Uh, it’s worse than that. A lot of the content on the internet now is AI generated. And the problem is that if you give an AI model AI generated content as input data, then it tends to get very poor performance very quickly. It’s called poisoning. But it’s not easy to avoid because the bots that scrape the internet cannot tell whether a page is AI generated or not. That actually means the best quality general purpose data sets will be from before 2022.&lt;/p&gt;
+
+&lt;p&gt;Also, you can’t really keep on making the models bigger, you have to start doing these things like what DeepSeek does. Actually OpenAI already did that. They just didn’t do it on the same scale. But so OpenAI has a model that is 1.76 trillion parameters, but actually at any point in time they ever use, what was it again, two times 200 billion. So they use a much smaller subset of that. And this is purely because you can’t access all of them all the time. What DeepSeek has shown is that if you use even less, it still works well. Most of the concepts that they use in their paper are already being researched by all the other companies as well.&lt;/p&gt;
+
+&lt;p&gt;Anyway, you can’t keep on making them all bigger and expect that it will perform better because there are limits both on the quality of the data, but also on the engineering of making this happen. So yeah, the performance will probably start to stagnate, will not get much better.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;So the notion that we can reach some kind of artificial general intelligence by doing this is false?&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;This is absurd. I mean, I think the people who promote this idea, they know this this is a distraction, right? Because then you can say “Oh, artificial general intelligence would be very dangerous and we have to have all kinds of safeguards in place to make sure that if we have one, it behaves and it does the right thing for us and so on”, and that’s a perfect distraction not to have to worry about all the real negative consequences of the fact that companies put out all these products. That’s to my mind, what’s behind it.&lt;/p&gt;
+
+&lt;p&gt;There is no chance that what is effectively just a statistical pattern generator can become intelligent. There is nothing in the model that actually mimics intelligence.&lt;/p&gt;
+
+&lt;p&gt;I mean, people have been thinking about artificial intelligence for probably 50 years or more. Very deeply. And I think anyone who really has spent a lot of thought on this would agree that the generative AI models or whatever models that we call AI now really are not of the type that would give us a self-aware piece of software.
+It seems intelligent because almost everything that we know is in there. A summary of all the knowledge that humans have put online is in those models. So there is an approximation of just about anything in there. But it’s by no means intelligent.&lt;/p&gt;
+
+        </content>
+    </entry>
+    
+    <entry>
+        <title>Cheaper AI does not mean greener AI</title>
+        <link href="https://wimvanderbauwhede.github.io/articles/cheaper-ai-is-not-greener-ai/"/>
+        <updated>2025-01-26T00:00:00+00:00</updated>
+        <id>https://wimvanderbauwhede.github.io/articles/cheaper-ai-is-not-greener-ai</id>
+        <author>
+					<name>Wim Vanderbauwhede</name>
+					<uri>https://wimvanderbauwhede.github.io/</uri>
+					
+				</author>
+        <content type="html">
+        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/cheaper-ai-is-not-greener-ai_1600x600.avif&quot;&gt;&lt;br/&gt;
+        	&lt;p&gt;In this article I have a look at the cost of running queries for GPT-4 and similar models, in view of the drop in price per prompt. The main conclusions are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The energy efficiency gains for queries to large language models (LLM) are not leading to lower emissions.&lt;/li&gt;
+  &lt;li&gt;On the contrary, the lower prices are likely to lead to increased use and therefore higher emissions.&lt;/li&gt;
+  &lt;li&gt;The cost of a query is mainly made up of the fixed cost (capex) of the data centre (building, cooling and network infrastructure) and GPU servers. The electricity consumption contribution is a small proportion.&lt;/li&gt;
+  &lt;li&gt;Therefore, to maximise profit, the GPU server utilisation is optimised to support as many users as possible on the available hardware.&lt;/li&gt;
+  &lt;li&gt;But higher utilisation means higher energy consumption and therefore higher emissions, even if the energy consumption per query would be lower. The projected strong growth in number of queries makes this even worse, as it means the data centre capacity needs to grow steepl as well.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-urgent-need-to-reduce-emissions&quot;&gt;The urgent need to reduce emissions&lt;/h2&gt;
+
+&lt;p&gt;To reiterate, according to the 2024 Emissions Gap Report of the UN &lt;a href=&quot;#1&quot;&gt;[1]&lt;/a&gt;, the world must cut global greenhouse gas emissions to 20 gigatons CO₂-equivalent per year (GtCO₂e/y) by 2040 from the current level of 60 GtCO₂e/y to avoid catastrophic global warming, where “catastrophic” is meant quite literally: there will be a huge increase in the frequency and severity of natural catastrophes if we don’t do this. Large parts of the earth will become unsuitable for habitation and agriculture.&lt;/p&gt;
+
+&lt;p&gt;To arrive at a sustainable level of emissions by 2040, global CO₂ emissions should be reduced by close to 20% per year. However, currently, emissions are still rising at 1% – 2% per year, despite the increase in renewable electricity generation capacity.&lt;/p&gt;
+
+&lt;p&gt;The 2024 Emissions Gap Report of the UN &lt;a href=&quot;#1&quot;&gt;[1]&lt;/a&gt; explains in detail why renewables, carbon dioxide removal and carbon offsetting alone will not be sufficient to meet the targets.&lt;/p&gt;
+
+&lt;h2 id=&quot;cheaper-prompts-greener-prompts&quot;&gt;Cheaper prompts, greener prompts?&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Note on terminology: I use the terms prompt and query interchangeably. The prompt is what you type, the query is the action of sending it to the server. Furthermore, a token is a small group of characters, between a single character and a word.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The price per query or token for various LLMs has come down considerably compared to prices when GPT-3 was released &lt;a href=&quot;#2&quot;&gt;[2]&lt;/a&gt;.
+&lt;!-- better glue --&gt;&lt;/p&gt;
+
+&lt;p&gt;However, the energy consumption of GPT-4 is still several times larger than for GPT-3 &lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt;, and the energy consumption of Gemini 1.5 Pro is still of the order of GPT-3. How is this compatible with the more than ten times lower prices for GPT-4 compared to GPT-3? Let’s have a look at the figures — and the factors that influence these.&lt;/p&gt;
+
+&lt;h3 id=&quot;electricity-pricing-for-data-centres-is-very-low&quot;&gt;Electricity pricing for data centres is very low&lt;/h3&gt;
+
+&lt;p&gt;Large users of electricity pay wholesale prices for electrity. So the more electricity you use, the cheaper it is per unit, ironically. Because of their size, Google or OpenAI pay the lowest prices. The price they pay for their electricity is less than 6 cents per kWh &lt;a href=&quot;#6&quot;&gt;[6]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;energy-consumption-of-a-gpt-4-style-large-language-model&quot;&gt;Energy consumption of a GPT-4 style large language model&lt;/h3&gt;
+
+&lt;p&gt;As I have discussed in detail in my article &lt;a href=&quot;#7&quot;&gt;[7]&lt;/a&gt;, the best estimate for the electricity consumption for GPT-3 and BLOOM is 0.003 kWh per query. For the queries used in that work, the average query response length was 100 words. At 6 cents per kWh, the electricity cost for such a query would be 0.018 cents, i.e. $0.00018.&lt;/p&gt;
+
+&lt;p&gt;GPT-4 is said to be 3× more expensive than GPT-3 &lt;a href=&quot;#5&quot;&gt;[5]&lt;/a&gt;, but GPT-4 Turbo could be only 1.5× more expensive, as it is a compressed model.&lt;/p&gt;
+
+&lt;p&gt;Gemini 1.5 Pro is said to have 200B parameters &lt;a href=&quot;#17&quot;&gt;[17]&lt;/a&gt;, which is of the same order as GPT-3. Using the cost per query for GPT-3 query, and model energy consumption scaling as the square root with parameter size as in this paper &lt;a href=&quot;#18&quot;&gt;[18]&lt;/a&gt;, we  estimate that it is 1.07× more expensive than GPT-3. Some say that it is only a 120B parameter model &lt;a href=&quot;#19&quot;&gt;[19]&lt;/a&gt;; if that is the case, the factor is 0.8×, i.e. slightly cheaper than GPT-3.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-makes-up-the-cost-of-a-query&quot;&gt;What makes up the cost of a query?&lt;/h2&gt;
+
+&lt;p&gt;There are three main components to the cost of running a query:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;the capes cost of the servers,&lt;/li&gt;
+  &lt;li&gt;the capex cost of the data centre and&lt;/li&gt;
+  &lt;li&gt;the running cost of the data centre.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-capex-cost-of-the-servers&quot;&gt;The capex cost of the servers&lt;/h3&gt;
+
+&lt;p&gt;For example, a Nvidia DGX-A100 server with eight A100 GPUs &lt;a href=&quot;#9&quot;&gt;[9]&lt;/a&gt; would cost $240k. (As I sanity check, in Feb 2023, SemiAnalysis &lt;a href=&quot;#10&quot;&gt;[10]&lt;/a&gt; quoted $195k for an 8× A100 server.) Running it for a year would cost about $2,400 (using a power consumption of 4550 W as reported by Nvidia &lt;a href=&quot;#11&quot;&gt;[11]&lt;/a&gt;).
+So, for the running cost to exceed the fixed cost, the GPU server would need to run for a hundred years. But the servers will likely be replaced by the next generation GPU, which will arrive after two years, or at best after 5 years, so the hardware cost makes up the majority of the price.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-capex-cost-of-the-data-centre&quot;&gt;The capex cost of the data centre&lt;/h3&gt;
+
+&lt;p&gt;Hyperscale data centres are very expensive to build. The cost for a 60MW data centre that could accommodate 10,000 of the above servers is between $420 and $770M for construction &lt;a href=&quot;#13&quot;&gt;[13]&lt;/a&gt;. Such a data centre has an expected life of 15 to 20 years &lt;a href=&quot;#12&quot;&gt;[12]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-running-cost-of-the-data-centre&quot;&gt;The running cost of the data centre&lt;/h3&gt;
+
+&lt;p&gt;The running cost of the data centre is dominated by the cost of the electricity for running the servers, network and cooling. In a modern data centre, the contribution of the network and cooling is small, certainly less that 10%.&lt;/p&gt;
+
+&lt;p&gt;So let’s consider a 60MW data centre that can host 10,000 servers. As discussed above, running a single server for a year costs $2,400. We assume a conservative model where we replace the servers only after 5 years (usually they are replaced after 3 years). We take the average cost of $595M for construction and a 20-year lifespan. The data centre will not operate at full capacity from the start, so we assume that we start at 1/4 capacity (2,500 servers), and add 1/4 every 5 years for 20 years. With those assumptions, the electricity cost would be $15M/year.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This assumes that server and electricity costs don’t change much over that period.&lt;/li&gt;
+  &lt;li&gt;It is likely that each newer generation of hardware is about twice as energy efficient. If we took that into account, the electricity would only be $2.4M/year, or less than 2% of the cost average over 15 years.&lt;/li&gt;
+  &lt;li&gt;If the costs for servers and electricity decreased over this period, the relative component of the infrastructure would increase but the electricity cost would still be a small proportion.&lt;/li&gt;
+  &lt;li&gt;If servers were replaced more frequently (every two years), then the contribution of the electricity usage to the cost will be even lower.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(For completeness sake, such a 60MW data centre would use about 400M gallons of cooling water per year &lt;a href=&quot;#14&quot;&gt;[14]&lt;/a&gt;, but that would cost only about $1M/year.)&lt;/p&gt;
+
+&lt;h3 id=&quot;overall-costs&quot;&gt;Overall costs&lt;/h3&gt;
+
+&lt;p&gt;On a yearly basis, we have $120M/year for the capex contribution of the servers and $30M/year for the capex contribution of the infrastructure. Consequently, more than 70% of the cost of running a query is the capex contribution of the servers ans the $15M/year for the electricity is less than 10% of the total cost of about $165M/year.&lt;/p&gt;
+
+&lt;p&gt;What this tells us is that what matters in terms of profit is to optimise the utilisation of those expensive GPUs. So when the cost per query goes down, it is likely the consequence of improved utilisation, which means more users can be supported simultaneously, rather than improved energy efficiency.&lt;/p&gt;
+
+&lt;h2 id=&quot;pricing-versus-energy-cost&quot;&gt;Pricing versus energy cost&lt;/h2&gt;
+
+&lt;p&gt;Let’s consider the pricing for two popular large language models: Google’s Gemini 1.5 Pro and OpenAI’s GPT-4. Both are very recent models and similar in capabilities.&lt;/p&gt;
+
+&lt;h3 id=&quot;gemini-15-pro-pricing&quot;&gt;Gemini 1.5 Pro pricing&lt;/h3&gt;
+
+&lt;p&gt;Generating 10,000 words using Gemini 1.5 Pro (10 RPM) costs ~$0.28 &lt;a href=&quot;#15&quot;&gt;[15]&lt;/a&gt; and the cost is proportional to the number of generated words (1000 words is ~$0.028, 100 words is ~$0.003)&lt;/p&gt;
+
+&lt;h3 id=&quot;gpt-4-pricing&quot;&gt;GPT-4 pricing&lt;/h3&gt;
+
+&lt;p&gt;OpenAI charges between $0.030 and $0.120 per 1,000 tokens on GPT-4 &lt;a href=&quot;#16&quot;&gt;[16]&lt;/a&gt; depending on the context length. The $0.030 is for GPT-4 Turbo, which is likely smaller than GPT-4.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-price-is-much-higher-than-the-energy-cost&quot;&gt;The price is much higher than the energy cost&lt;/h3&gt;
+
+&lt;p&gt;From the above data on cost and pricing of the models, we can calculate the price/cost ratios.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;For Gemini 1.5 Pro, the ratio is  $0.028 / ($0.0018*1.07) = 14.55x; in other words, the price is 15× higher than the electricity cost. If the model was only a 120B parameters, the ratio would be 18.8×.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For GPT-4, the ratios are {0.030/1.5, 0.06/3,0.120/3 }/ 0.0018 =  {11.1×, 11.1×, 22.2×}; in other words, the price is 11× or 22× higher than the electricity cost.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These figures are consistent with the relative cost contributions: with the GPU server and data centre capex cost about 10× larger than the electricity cost, the price should indeed be more than 10× that of the electricity consumption.&lt;/p&gt;
+
+&lt;p&gt;As shown above, the electricity consumption does not contribute much to the overall cost. Therefore, Google and OpenAI don’t have a huge incentive to prioritise increasing energy efficiency. The main incentive is to increase utilisation. A higher utilisation means lower energy consumption per query and also a small conbtribution of the capex per query. But it also means a higher overall energy consumption.&lt;/p&gt;
+
+&lt;p&gt;It’s also worth noting that the drop in prices can’t be explained by the utilisation gains or the energy efficiency gains: going from 50% utilisation to 100% would reduce the capex contribution by a factor of two and the energy consumption per query by 30%. And based on the above estimates, none of the models have improved dramatically in terms of energy efficiency. So most of the price drop is due to increased competition.&lt;/p&gt;
+
+&lt;!--
+Say load is 50% and idle is 30%., then 100*.5 +30*.5 for .5 = 130 per q but only 65 overall
+Say load is 100%, 100*1 for 1 = 100 per q but 100 overall
+
+Suppose we are 20% more energy efficient 
+
+80*.5+30*.5 = 55
+80*1+30*0 = 80 
+--&gt;
+
+&lt;h2 id=&quot;a-note-on-the-emissions&quot;&gt;A note on the emissions&lt;/h2&gt;
+
+&lt;p&gt;There are two main components to the emissions for a query: the electricity use and the emissions from manufacturing the server. We have created a detailed life cycle analysis model for the GPU servers in and AI data centre &lt;a href=&quot;#20&quot;&gt;[20]&lt;/a&gt; and calculated the embodied carbon emissions and emissions from use for hardware replacement cycles of 2, 3 and 5 years. The results depend on many assumptions, but the conclusion is robust: embodied carbon from manufacturing the servers will be of the same order as the emissions from running the servers. Replacing the servers sooner by newer hardware does not change the overall picture much.&lt;/p&gt;
+
+&lt;p&gt;This is mainly because of the strong growth in demand for AI data centres, which leads to production of ever increasing amounts of hardware, and the increased energy efficiency of the new hardware does not make up for this growth. I have used a figure of 22% growth per year as per the analysis by McKinsey &lt;a href=&quot;#21&quot;&gt;[21]&lt;/a&gt;. So although the energy efficiency of the hardware increases with every generation, the combination of embodied carbon emissions and emissions from use resulting from the growth in demand results in a huge increase in emissions. For a more detailed discussion on the growth projections of the demand for AI data centres and the concomitant emissions, please read my article “The real problem with the AI hype” &lt;a href=&quot;#22&quot;&gt;[22]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;For both Gemini 1.5 Pro and GPT-4, we see that their energy consumption is still of the order of GPT-3, and even with current low prices, the price is more than ten times the energy cost. This is because the high cost and relatively short lifetime of the GPU servers makes up most of the total cost of running a query. Of course the argument is that both models are more capable than GPT-3. But the point is that large-scale deployment of these models leads to unacceptably high and rapidly increasing CO₂ emissions.&lt;/p&gt;
+
+&lt;p&gt;From a climate change perspective, energy efficiency gains are only really meaningful if they result in a reduction of the overall emissions. That is clearly not the case. And the low price is likely to make this only worse, as it will drive adoption and further growth in data centres and so increase both embodied carbon and runtime emissions.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;p&gt;&lt;small&gt;&lt;span id=&quot;1&quot;&gt;[1] &lt;a href=&quot;https://www.unep.org/resources/emissions-gap-report-2024&quot;&gt;&lt;em&gt;“Emissions Gap Report 2024”&lt;/em&gt;, UN Environment Programme, 24 October 2024, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;2&quot;&gt;[2] &lt;a href=&quot;https://simonwillison.net/2024/Dec/31/llms-in-2024/&quot;&gt;&lt;em&gt;“Things we learned about LLMs in 2024”&lt;/em&gt;, Willison S., 31 December 2024, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;5&quot;&gt;[5] &lt;a href=&quot;https://semianalysis.com/2023/07/10/gpt-4-architecture-infrastructure/&quot;&gt;&lt;em&gt;“GPT-4 Architecture, Infrastructure, Training Dataset, Costs, Vision, MoE Demystifying GPT-4: The engineering tradeoffs that led OpenAI to their architecture”&lt;/em&gt;, Patel D. and Wong G., 10 July 2023, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;6&quot;&gt;[6] &lt;a href=&quot;https://h5datacenters.com/cincinnati-data-centre.html&quot;&gt;&lt;em&gt;“Cincinnati I Data Center Attributes”&lt;/em&gt;, H5 Data Centers, 2024, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;7&quot;&gt;[7] &lt;a href=&quot;https://arxiv.org/abs/2407.16894&quot;&gt;&lt;em&gt;“Estimating the Increase in Emissions caused by AI-augmented Search”&lt;/em&gt;, Vanderbauwhede W., 6 January 2025, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;8&quot;&gt;[8] &lt;a href=&quot;https://www.stylefactoryproductions.com/blog/chatgpt-statistics&quot;&gt;&lt;em&gt;“ChatGPT Statistics — The Key Facts and Figures”&lt;/em&gt;, Walsh M., 22 April 2024, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;9&quot;&gt;[9] &lt;a href=&quot;https://bizon-tech.com/bizon-g9000.html#4654:46140;4656:46198;4658:46417;4660:46293;4661:46306&quot;&gt;&lt;em&gt;“BIZON G9000 – 4x 8x NVIDIA A100, H100, H200 Tensor Core AI GPU Server with AMD EPYC, Intel Xeon”&lt;/em&gt;, BIZON, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;10&quot;&gt;[10] &lt;a href=&quot;https://semianalysis.com/2023/02/09/the-inference-cost-of-search-disruption&quot;&gt;&lt;em&gt;“The Inference Cost Of Search Disruption – Large Language Model Cost Analysis $30B Of Google Profit Evaporating Overnight, Performance Improvement With H100 TPUv4 TPUv5”&lt;/em&gt;, Patel D. and Ahmad A., 9 February 2023, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;11&quot;&gt;[11] &lt;a href=&quot;https://developer-blogs.nvidia.com/wp-content/uploads/2024/10/Energy-Efficiency-GTC.pdf&quot;&gt;&lt;em&gt;“Energy and Power Efficiency for Applications on the Latest NVIDIA Technology”&lt;/em&gt;, Gray A, 
+Alan Gray, GTC 24, GTC 2024, 20th March 2024, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;12&quot;&gt;[12] &lt;a href=&quot;https://www.datacenterdynamics.com/en/analysis/the-data-center-life-story/&quot;&gt;&lt;em&gt;“The data center life story”&lt;/em&gt;, Judge P., 21 July 2017, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;13&quot;&gt;[13] &lt;a href=&quot;https://dgtlinfra.com/how-much-does-it-cost-to-build-a-data-center/&quot;&gt;&lt;em&gt;“How Much Does it Cost to Build a Data Center?”&lt;/em&gt;, Zhang M., 5 November 2023, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;14&quot;&gt;[14] &lt;a href=&quot;https://eng.ox.ac.uk/case-studies/the-true-cost-of-water-guzzling-data-centres&quot;&gt;&lt;em&gt;“Water-guzzling data centres”&lt;/em&gt;, Ashtine M. and Mytton D., retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;15&quot;&gt;[15] &lt;a href=&quot;https://invertedstone.com/calculators/gemini-pricing/&quot;&gt;&lt;em&gt;“Gemini Pro API Pricing Calculator”&lt;/em&gt;, InvertedStone, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;16&quot;&gt;[16] &lt;a href=&quot;https://help.openai.com/en/articles/7127956-how-much-does-gpt-4-cost&quot;&gt;&lt;em&gt;“How much does GPT-4 cost?”&lt;/em&gt;, OpenAI, 2024, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;17&quot;&gt;[17] &lt;a href=&quot;https://felloai.com/2024/09/google-gemini-pro-1-5-all-you-need-to-know-about-this-near-perfect-ai-model/&quot;&gt;&lt;em&gt;“Google Gemini PRO 1.5: All You Need To Know About This Near Perfect AI Model”&lt;/em&gt;, Shittu H., 9 September 2024	, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;18&quot;&gt;[18] &lt;a href=&quot;https://ieeexplore.ieee.org/document/10549890&quot;&gt;&lt;em&gt;“Measuring and Improving the Energy Efficiency of Large Language Models Inference”&lt;/em&gt;, Argerich M. and Patiño-Martínez M., IEEE Access, 2024, Vol. 12, 5 June 2024&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;19&quot;&gt;[19] &lt;a href=&quot;https://www.reddit.com/r/LocalLLaMA/comments/1cxlsa9/i_read_the_full_gemini_15_may_technical_paper_i/&quot;&gt;&lt;em&gt;“Discussion: Gemini 1.5 May Technical paper”&lt;/em&gt;, 2024, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;20&quot;&gt;[20] &lt;a href=&quot;https://codeberg.org/wimvanderbauwhede/low-carbon-computing/src/branch/master/LCA-model-equations/runLCAModel-AI.hs&quot;&gt;&lt;em&gt;“LCA model for servers in a data centre “&lt;/em&gt;, Vanderbauwhede W., 16 January 2025, retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;21&quot;&gt;[21] &lt;a href=&quot;https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/ai-power-expanding-data-center-capacity-to-meet-growing-demand&quot;&gt;&lt;em&gt;“AI power: Expanding data center capacity to meet growing demand”&lt;/em&gt;,  McKinsey &amp;amp; Company, 29 October 2024 , retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;span id=&quot;22&quot;&gt;[22] &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/the-real-problem-with-AI/&quot;&gt;&lt;em&gt;“The real problem with the AI hype”&lt;/em&gt;,  Vanderbauwhede, W., 16 January 2025 , retrieved 17 January 2025&lt;/a&gt;&lt;/span&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+        </content>
+    </entry>
     
     <entry>
         <title>The real problem with the AI hype</title>
@@ -5203,848 +5506,6 @@ if ( 42 == fst p1j) {
 &lt;p&gt;In the first draft of this article, which I shared as a gist, I wrote that it would be nice if this &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;collapse&lt;/code&gt; would be added as an additional method to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Junction&lt;/code&gt; class. And thanks to &lt;a href=&quot;https://twitter.com/liztormato&quot;&gt;Elizabeth Mattijsen&lt;/a&gt;, there is already &lt;a href=&quot;https://github.com/rakudo/rakudo/pull/3944&quot;&gt;a pull request implementing this feature in Rakudo&lt;/a&gt;!&lt;br /&gt;
 I will update the post when it has made it into a release.&lt;/p&gt;
 
-
-        </content>
-    </entry>
-    
-    <entry>
-        <title>A universal interpreter</title>
-        <link href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2/"/>
-        <updated>2020-09-13T00:00:00+01:00</updated>
-        <id>https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2</id>
-        <author>
-					<name>Wim Vanderbauwhede</name>
-					<uri>https://wimvanderbauwhede.github.io/</uri>
-					
-				</author>
-        <content type="html">
-        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/universal-interpreter-part-2_1600x600.avif&quot;&gt;&lt;br/&gt;
-        	&lt;p&gt;In &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1&quot;&gt;the previous article&lt;/a&gt; I explained the basic idea behind a technique called &lt;a href=&quot;http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html&quot;&gt;Böhm-Berarducci encoding&lt;/a&gt; of algebraic data types, and showed a way to implement this technique in &lt;a href=&quot;https://raku.org/&quot;&gt;Raku&lt;/a&gt;. Unless you are already familiar with this formalism, I recommend you read that article first.&lt;/p&gt;
-
-&lt;p&gt;In this article I want to illustrate how the Böhm-Berarducci (BB) encoding of a data structure based on algebraic data types can be considered as a universal interpreter. What this means is that it is easy to perform computations that turn the data structure into something else. As an example, I will demonstrate how to create an evaluator and pretty-printer for a parsed polynomial expression.&lt;/p&gt;
-
-&lt;h2 id=&quot;a-parse-tree-type&quot;&gt;A parse tree type&lt;/h2&gt;
-
-&lt;p&gt;Consider expressions of the form &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a*x^2+b*x+c&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x^3+1&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x*y^2-x^2*y&lt;/code&gt;. Let’s assume we have a parser for such an expression, for example built using &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/&quot;&gt;parser combinators&lt;/a&gt;. Let’s also assume that this parser returns the parsed data as an algebraic data type, defined in Haskell as:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kr&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Term&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
-      &lt;span class=&quot;kt&quot;&gt;Var&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Par&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; 
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Pow&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Term&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Add&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Term&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Mult&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Term&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;and in Raku:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role Term {}
-role Var [Str \v] does Term {
-    has Str $.var = v;
-}
-role Par [Str \p] does Term {
-    has Str $.par = p;
-}
-role Const [Int \c] does Term {
-    has Int $.const = c;
-}
-role Pow [Term \t, Int \n] does Term {
-    has Term $.term = t;
-    has Int $.exp = n;
-}
-role Add [Array[Term] \ts] does Term {
-    has Array[Term] $.terms = ts;
-}
-role Mult [Array[Term] \ts] does Term {
-    has Array[Term] $.terms = ts;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The additional complexity compared to the types discussed in &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1&quot;&gt;the previous article&lt;/a&gt; is that this type is recursive: the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pow&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mult&lt;/code&gt; roles take parameters of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Before we look at the BB encoding, let’s first write a pretty-printer for this type, using recursive &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;multi sub&lt;/code&gt;s.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;# Pretty-print a Term 
-multi sub ppTerm(Var \t) { t.var }
-multi sub ppTerm(Par \c) { c.par }
-multi sub ppTerm(Const \n) { &quot;{n.const}&quot; }
-multi sub ppTerm(Pow \pw){ 
-    ppTerm(pw.term) ~ &apos;^&apos; ~ &quot;{pw.exp}&quot; 
-}
-multi sub ppTerm(Add \t) { 
-    my @pts = map {ppTerm($_)}, |t.terms;
-    &quot;(&quot;~join( &quot; + &quot;, @pts)~&quot;)&quot;
-}
-multi sub ppTerm(Mult \t){ 
-    my @pts = map {ppTerm($_)}, |t.terms;
-    join( &quot; * &quot;, @pts)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the same way we can write an evaluator for this type:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;# Evaluate a Term 
-multi sub evalTerm(%vars,  %pars, Var \t) { %vars{t.var} }
-multi sub evalTerm(%vars,  %pars,Par \c) { %pars{c.par} }
-multi sub evalTerm(%vars,  %pars,Const \n) { n.const }
-multi sub evalTerm(%vars,  %pars,Pow \pw){ 
-    evalTerm(%vars,  %pars,pw.term) ** pw.exp 
-}
-multi sub evalTerm(%vars,  %pars,Add \t) { 
-    my @pts = map {evalTerm(%vars,  %pars,$_)}, |t.terms;
-    [+] @pts
-}
-multi sub evalTerm(%vars,  %pars,Mult \t){ 
-    my @pts = map {evalTerm(%vars,  %pars,$_)}, |t.terms;
-    [*] @pts
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;example-parse-trees&quot;&gt;Example parse trees&lt;/h3&gt;
-
-&lt;p&gt;As an example, let’s create the parse tree for a few expressions using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; type.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;# a*x^2 + b*x + x
-my \qterm1 = Add[ 
-    Array[Term].new(
-    Mult[ Array[Term].new(
-        Par[ &quot;a&quot;].new, 
-        Pow[ Var[ &quot;x&quot;].new, 2].new) 
-        ].new,
-    Mult[
-        Array[Term].new(
-            Par[ &quot;b&quot;].new, 
-            Var[ &quot;x&quot;].new) 
-        ].new,
-    Par[ &quot;c&quot;].new
-    )
-    ].new;
-
-#   x^3 + 1    
-my \qterm2 = Add[ 
-    Array[Term].new(
-        Pow[ Var[ &quot;x&quot;].new, 3].new, 
-        Const[ 1].new
-    )
-    ].new;
-
-#   qterm1 * qterm2    
-my \qterm = Mult[ 
-    Array[Term].new(
-        qterm1, qterm2
-    )
-    ].new;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Calling the pretty-printer and evaluator on this term:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;say ppTerm( qterm); # =&amp;gt; (a * x^2 + b * x + c) * (x^3 + 1)
-
-say evalTerm(
-    {&quot;x&quot; =&amp;gt; 2}, {&quot;a&quot; =&amp;gt;2,&quot;b&quot;=&amp;gt;3,&quot;c&quot;=&amp;gt;4},  qterm
-); # =&amp;gt; 162
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;bb-encoding-of-the-parse-tree-type&quot;&gt;BB encoding of the parse tree type&lt;/h2&gt;
-
-&lt;p&gt;The BB encoding of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; algebraic data type in Raku is pleasingly compact:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role TermBB[&amp;amp;f] {
-    method unTermBB(
-        &amp;amp;var:(Str --&amp;gt; Any),
-        &amp;amp;par:(Str --&amp;gt; Any),
-        &amp;amp;const:(Int --&amp;gt; Any),
-        &amp;amp;pow:(Any,Int --&amp;gt; Any),
-        &amp;amp;add:(Array[Any] --&amp;gt; Any),
-        &amp;amp;mult:(Array[Any] --&amp;gt; Any) 
-        --&amp;gt; Any
-    ) {
-        f(&amp;amp;var,&amp;amp;par,&amp;amp;const,&amp;amp;pow,&amp;amp;add,&amp;amp;mult);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It would of course be even more compact without the signatures, but then we’d have no information about the encoded type.&lt;/p&gt;
-
-&lt;p&gt;We could of course use this type directly, but instead I want to look at how we can convert between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TermBB&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;As before, we create our little helpers. Each of the functions below is a constructor which generates the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TermBB&lt;/code&gt; instance for the corresponding alternative in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; algebraic data type. (When Raku’s macro language is more developed, we will be able to generate these automatically.)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub VarBB(Str \s --&amp;gt; TermBB) { 
-    TermBB[ 
-        sub (\v, \c, \n, \p, \a, \m) { v.(s) }
-    ].new;
-    }
-sub ParBB(Str \s --&amp;gt; TermBB) { 
-    TermBB[ 
-        sub (\v, \c, \n, \p, \a, \m) { c.(s) }
-    ].new;
-    }
-sub ConstBB(Int \i --&amp;gt; TermBB) { 
-    TermBB[ 
-        sub (\v, \c, \n, \p, \a, \m) { n.(i) }
-    ].new;
-    }    
-sub PowBB( TermBB \t, Int \i --&amp;gt; TermBB) {
-    TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
-        p.( t.unTermBB( v, c, n, p, a, m ), i);
-    }
-    ].new;
-}
-sub AddB( Array[TermBB] \ts --&amp;gt; TermBB) {
-    TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
-        a.( map {.unTermBB( v, c, n, p, a, m )}, ts )
-    }
-    ].new;
-}
-sub MultBB(  Array[TermBB] \ts --&amp;gt; TermBB) { 
-    TermBB[  sub (\v, \c, \n, \p, \a, \m) { 
-        m.( map {.unTermBB( v, c, n, p, a, m )}, ts )
-    }
-    ].new;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The interesting generators are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PowBB&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddBB&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MultBB&lt;/code&gt; because they are recursive. In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PowBB&lt;/code&gt;, the function passed as parameter to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TermBB&lt;/code&gt; role constructor calls &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;p&lt;/code&gt; which has a signature of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:(Any,Int --&amp;gt; Any)&lt;/code&gt;, but actually requires an argument of the same type as the return value (we need &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a -&amp;gt; Int -&amp;gt; a&lt;/code&gt;). The argument &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t&lt;/code&gt;  is of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TermBB&lt;/code&gt; which is a wrapper around a function which, when applied, will return the right type. In the Raku implementation, this function is the method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unTermBB&lt;/code&gt;. So we need to call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t.unTermBB( ... )&lt;/code&gt;.
-In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddBB&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MultBB&lt;/code&gt;, we have an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Array[TermBB]&lt;/code&gt; so we need to call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unTermBB&lt;/code&gt; on every element, hence the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; call.&lt;/p&gt;
-
-&lt;p&gt;Using these generators we can write a single function to convert the algebraic data type into its BB encoding. Unsurprisingly, it is very similar to the pretty-printer and evaluator we wrote for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; instances:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;# Turn a Term into a BB Term
-multi sub termToBB(Var \t  ) { VarBB(t.var)}
-multi sub termToBB(Par \c  ) { ParBB( c.par)}
-multi sub termToBB(Const \n) {ConstBB(n.const)}
-multi sub termToBB(Pow \pw ) { 
-    PowBB( termToBB(pw.term), pw.exp)
-}
-multi sub termToBB(Add \t  ) { 
-    AddBB( typed-map( TermBB, t.terms, &amp;amp;termToBB ))
-}
-multi sub termToBB(Mult \t ) { 
-    MultBB( typed-map( TermBB, t.terms, &amp;amp;termToBB ))
-}
-
-# map &amp;amp;f and return in an Array of type T
-sub typed-map (\T,\lst,&amp;amp;f) {
-    Array[T].new(map {f($_) }, |lst )
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Because &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PowBB&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddBB&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MultBB&lt;/code&gt; require a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TermBB&lt;/code&gt;, we need to call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;termToBB&lt;/code&gt; on the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; fields. And because  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddBB&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MultBB&lt;/code&gt; take an array of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt;,  we need a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt;. However, Raku’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; returns values of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Seq&lt;/code&gt;, so we need an explicit conversion into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Array&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;We can now convert any data structure of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; into its BB encoding:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my \qtermbb = termToBB( qterm);
-
-say qtermbb.raku; # =&amp;gt; TermBB[Sub].new
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;interpreter-1-pretty-printer-with-bb-encoding&quot;&gt;Interpreter 1: Pretty-printer with BB encoding&lt;/h3&gt;
-
-&lt;p&gt;To create a pretty-printer for the BB-encoded type, we write implementations for each alternative, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unTermBB&lt;/code&gt; call magically combines these.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub ppTermBB(TermBB \t --&amp;gt; Str){ 
-    sub var( \x ) { x }
-    sub par( \x ) { x }
-    sub const(\x ) { &quot;{x}&quot; }
-    sub pow( \t, \m ) { t ~ &quot;^{m}&quot; } 
-    sub add( \ts ) { &quot;(&quot;~join( &quot; + &quot;, ts)~&quot;)&quot; }
-    sub mult( \ts ) { join( &quot; * &quot;, ts) }
-    t.unTermBB( &amp;amp;var, &amp;amp;par, &amp;amp;const, &amp;amp;pow, &amp;amp;add, &amp;amp;mult);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Compared with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ppTerm&lt;/code&gt; (copied below for convenience), the main differences are that there is no recursion and no need to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; anything. We also don’t need a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;multi sub&lt;/code&gt; to pattern match on the constructors, and there is no need to unpack the values stored in the type using attribute accessors. As a result, the BB version is markedly less cluttered.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;multi sub ppTerm(Var \t --&amp;gt; Str) { t.var }
-multi sub ppTerm(Par \c --&amp;gt; Str) { c.par }
-multi sub ppTerm(Const \n --&amp;gt; Str) { &quot;{n.const}&quot; }
-multi sub ppTerm(Pow \pw --&amp;gt; Str){ 
-    ppTerm(pw.term) ~ &apos;^&apos; ~ &quot;{pw.exp}&quot; 
-}
-multi sub ppTerm(Add \t --&amp;gt; Str) { 
-    my @pts = map {ppTerm($_)}, |t.terms;
-    &quot;(&quot;~join( &quot; + &quot;, @pts)~&quot;)&quot;
-}
-multi sub ppTerm(Mult \t --&amp;gt; Str){ 
-    my @pts = map {ppTerm($_)}, |t.terms;
-    join( &quot; * &quot;, @pts)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;interpreter-2-evaluator-with-bb-encoding&quot;&gt;Interpreter 2: Evaluator with BB encoding&lt;/h3&gt;
-
-&lt;p&gt;And an evaluator is equally simple:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub evalTermBB( %vars,  %pars, \t) {
-    t.unTermBB( 
-        -&amp;gt; \x { %vars{x} }, 
-        -&amp;gt; \x { %pars{x} },
-        -&amp;gt; \x {x},
-        -&amp;gt; \t,\m { t ** m},
-        -&amp;gt; \ts { [+] ts},
-        -&amp;gt; \ts { [*] ts}
-    );
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;evalTerm&lt;/code&gt; below, we pass hashes for variable and parameter definitions as arguments to provide context for the evaluation. In the BB version we need to do this only once, rather than for every multi variant, so I have written it below using a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;given/when&lt;/code&gt;. Even then, the BB version is a lot cleaner, for the same reasons as above.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub evalTerm(%vars,  %pars, Term \t) {
-    given t {
-        when Var { %vars{t.var} }
-        when Par { %pars{t.par} }
-        when Const { t.const }
-        when Pow { evalTerm(%vars,  %pars,t.term) ** t.exp }
-        when Add {
-            my @pts = map {
-                evalTerm(%vars,  %pars,$_)
-                }, |t.terms;
-            [+] @pts
-        }
-        when Mult { 
-            my @pts = map {
-                evalTerm(%vars,  %pars,$_)
-                }, |t.terms;
-            [*] @pts
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;!-- ### Interpreter 3: Pretty-printer and evaluator combined
-
-Now we can do one better and combine these two interpreters.
-
-```perl6
-sub evalAndppTermBB(%vars,  %pars, TermBB \t ){ 
-    t.unTermBB( 
-        -&gt; \x {[%vars{x},x]}, 
-        -&gt; \x {[%pars{x},x]},
-        -&gt; \x {[x,&quot;{x}&quot;]},
-        -&gt; \t,\m {[t[0] ** m, t[1] ~ &quot;^{m}&quot;] },
-        -&gt; \ts { 
-            my \p = 
-                reduce { [ $^a[0] + $^b[0], $^a[1] ~ &quot; + &quot; ~ $^b[1]] }, ts[0],  |ts[1..*];
-            [ p[0], &quot;(&quot;~p[1]~&quot;)&quot; ]; 
-        }, 
-        -&gt; \ts { 
-            reduce { [ $^a[0] * $^b[0], $^a[1] ~ &quot; * &quot; ~ $^b[1]] }, ts[0],  |ts[1..*]
-        }
-    )
-}
-
-say ppTermBB( qtermbb);
-say evalTermBB(
-    {&quot;x&quot; =&gt; 2}, {&quot;a&quot; =&gt;2,&quot;b&quot;=&gt;3,&quot;c&quot;=&gt;4},  qtermbb
-);
-say evalAndppTermBB(
-    {&quot;x&quot; =&gt; 2}, {&quot;a&quot; =&gt;2,&quot;b&quot;=&gt;3,&quot;c&quot;=&gt;4},  qtermbb
-);
-``` --&gt;
-
-&lt;h3 id=&quot;interpreter-3-converting-termbb-to-term&quot;&gt;Interpreter 3: Converting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TermBB&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt;&lt;/h3&gt;
-
-&lt;p&gt;Finally, let’s look at converting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TermBB&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt;. This is yet another type of interpreter so we can follow exactly the same approach as before:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub toTerm(TermBB \t --&amp;gt; Term){ 
-        sub var( \x ) { Var[x].new }
-        sub par( \x ) { Par[x].new }
-        sub const( $x ) { Const[$x].new }
-        sub pow( \t, $m ) { Pow[ t, $m].new } 
-        sub add( \ts ) { Add[ ts ].new }
-        sub mult( \ts ) { Mult[ ts ].new) }
-        t.unTermBB( &amp;amp;var, &amp;amp;par, &amp;amp;const, &amp;amp;pow, &amp;amp;add, &amp;amp;mult);
-}
-
-say toTerm(qtermbb).raku;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;using-the-bb-type-directly&quot;&gt;Using the BB type directly&lt;/h2&gt;
-
-&lt;p&gt;In the examples above I have created the data structures using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; type and converted the result to a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TermBB&lt;/code&gt; type. We can of course also directly use the BB type. If we don’t use strict typing and make the argument of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Add&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mult&lt;/code&gt; slurpy, we get a nice and clean representation:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;# a*x^2 + b*x + x
-my \qtermbb1 = AddBB(
-    MultBB( 
-        ParBB( &quot;a&quot;), 
-        PowBB( VarBB( &quot;x&quot;), 2) 
-        ),
-    MultBB(
-        ParBB( &quot;b&quot;), 
-        VarBB( &quot;x&quot;) 
-        ),
-    ParBB( &quot;c&quot;)
-);
-
-#   x^3 + 1    
-my \qtermbb2 = AddBB( 
-    PowBB( VarBB( &quot;x&quot;), 3), 
-    ConstBB(1)
-);
-
-#   qterm1 * qterm2    
-my \qtermbb3 = MultBB( 
-    qterm1, qterm2
-);
-    
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is structurally very similar to the examples using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt; type. We can obtain exactly the same representation by using a slurpy helper function to wrap the role constructors for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Term&lt;/code&gt;. See the code in &lt;a href=&quot;https://github.com/wimvanderbauwhede/raku-examples/blob/master/no-bb-timing.raku&quot;&gt;no-b-timing.raku`&lt;/a&gt; and &lt;a href=&quot;https://github.com/wimvanderbauwhede/raku-examples/blob/master/ubb-timing.raku&quot;&gt;ubb-timing.raku&lt;/a&gt; for details.&lt;/p&gt;
-
-&lt;p&gt;The code as presented above is not entirely correct: I have not always typed everything explicitly, but the explicit signatures in the role definition will cause type errors unless everything is explicitly typed. See the code in &lt;a href=&quot;https://github.com/wimvanderbauwhede/raku-examples/blob/master/tbb-timing.raku&quot;&gt;tbb-timing.raku&lt;/a&gt; for details.&lt;/p&gt;
-
-&lt;p&gt;The code in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;no-bb-timing&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ubb-timing&lt;/code&gt; is comparable in terms of complexity. I ran a timing test, and the BB implementation of the algebraic data type is about 20% slower than the ‘ordinary’ implementation. However, the fully-typed version &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tbb-timing&lt;/code&gt; is three times slower. Types in Raku are clearly not zero-cost abstractions.&lt;/p&gt;
-
-&lt;p&gt;On the other hand, somewhat paradoxically, we don’t really need this explicit typing. It is useful to write down the function types for the BB encoding, and I think it helps with the explanations, but the actual type safety comes from the algebraic data types that we created.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;In this article and &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1&quot;&gt;the previous one&lt;/a&gt; I have shown another way to implement algebraic data types in Raku. As with the approach discussed in &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/&quot;&gt;‘Roles as Algebraic Data Types in Raku’&lt;/a&gt;, I use a role to create the type. However, in this approach the entire data structure is encoded as a function using the &lt;a href=&quot;http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html&quot;&gt;Böhm-Berarducci encoding&lt;/a&gt;. From a type theoretical perspective, both approaches are precisely equivalent. In terms of coding effort and performance, both approaches are comparable.&lt;/p&gt;
-
-&lt;p&gt;The advantage of the BB approach is that because the data is encoded as a function, it becomes easier to create interpreters for the data type, and I have illustrated this with a pretty-printer and evaluator for a parsed expression. All interpreters for BB types have the same structure, which is why I call it a universal interpreter. The key feature is that these interpreters do not require any explicit recursion.&lt;/p&gt;
-
-&lt;p&gt;The complete code for both articles is in &lt;a href=&quot;https://github.com/wimvanderbauwhede/raku-examples/blob/master/universal-interpreter.raku&quot;&gt;universal-interpreter.raku&lt;/a&gt;&lt;/p&gt;
-
-&lt;!-- 
-
-### Bonus: parsing the expression
-
-In the article []() I presented a parser combinator library which uses the role-based algebraic data types.  The parser returns the following type:
-
-```perl6
-role TaggedEntry {}
-# A string value
-role Val[Str @v] does TaggedEntry {
-	has Str @.val=@v;
-} 
-# A list of TaggedEntry values tagged with a string label
-role ValMap [  @vm] does TaggedEntry {
-	has @.valmap = @vm; 
-}
-```
-
-It is quite straightforward to transform a data structure of this type into our `Term` type:
-
-```perl6
-multi sub taggedEntryToTerm (Var , Val \val_strs) { Var[ val_strs.val.head].new }
-multi sub taggedEntryToTerm (Par , Val \par_strs) { Par[ par_strs.val.head].new }
-multi sub taggedEntryToTerm (Const ,\const_strs) {Const[ Int(const_strs.val.head)].new } 
-# multi sub taggedEntryToTerm (Pow , ValMap [t1,(_,Val [v2])]) { Pow[ taggedEntryToTerm(...,....), Int(...)].new}        
-# multi sub taggedEntryToTerm (Add , ValMap hmap) = Add $ map taggedEntryToTerm hmap
-# multi sub taggedEntryToTerm (Mult , ValMap hmap) = Mult $ map taggedEntryToTerm hmap
-```
-
-
-```perl6
-my Str @val_strs = &quot;42&quot;;
-my \v = taggedEntryToTerm(Const, Val[@val_strs].new);
-say v.raku; 
-```
-
- --&gt;
-
-        </content>
-    </entry>
-    
-    <entry>
-        <title>Encoding types as functions in Raku</title>
-        <link href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1/"/>
-        <updated>2020-09-12T00:00:00+01:00</updated>
-        <id>https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1</id>
-        <author>
-					<name>Wim Vanderbauwhede</name>
-					<uri>https://wimvanderbauwhede.github.io/</uri>
-					
-				</author>
-        <content type="html">
-        	&lt;img src=&quot;https://wimvanderbauwhede.github.io/images/universal-interpreter-part-1_1600x600.avif&quot;&gt;&lt;br/&gt;
-        	&lt;p&gt;This is the first part of an article in my series about functional programming in general and algebraic data types and function types in particular in &lt;a href=&quot;https://raku.org/&quot;&gt;Raku&lt;/a&gt;. It builds on my earlier articles on &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/&quot;&gt;algebraic data types in Raku&lt;/a&gt; and their use in the practical example of &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/&quot;&gt;list-based parser combinators&lt;/a&gt;. It also makes heavily use of &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/function-types&quot;&gt;function types&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you are not familiar with functional programming or with Raku, I suggest you read my introduction &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/&quot;&gt;“Cleaner code with functional programming”&lt;/a&gt;. If you are not familiar with algebraic data types or function types, you might want to read the other articles as well.&lt;/p&gt;
-
-&lt;p&gt;In this article, I want to explain a technique called &lt;a href=&quot;http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html&quot;&gt;Böhm-Berarducci encoding&lt;/a&gt; of algebraic data types. The link above is to Oleg Kiselyov’s explanation, which makes for interesting reading but is not required for what follows. Oleg says:&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;“Boehm-Berarducci’s paper has many great insights. Alas, the generality of the presentation makes the paper very hard to understand. It has a Zen-like quality: it is incomprehensible unless you already know its results.”&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Fortunately, to follow the explanation in this article, you don’t need to read either Böhm and Berarducci’s  original paper or Oleg’s explanation. For the purpose of this article, it is sufficient to say that the Böhm-Berarducci encoding is a way to encode an algebraic data type as a function type. This means that the data itself is also encoded as a function. As a result, the function encoding the data type becomes a “universal interpreter”. This makes it is easy to create various interpreters for algebraic data types.&lt;/p&gt;
-
-&lt;p&gt;In this first part, I will explain a way to implement Böhm-Berarducci (BB) encoding using roles in Raku, with basic examples. In &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2&quot;&gt;the second part&lt;/a&gt; I will show how to use BB encoding to construct a ‘universal interpreter’ which makes it very easy to create specific interpreters for complex data structures.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-basic-idea-behind-the-böhm-berarducci-encoding&quot;&gt;The basic idea behind the Böhm-Berarducci encoding&lt;/h2&gt;
-
-&lt;p&gt;The basic idea behind the Böhm-Berarducci (BB) encoding is to create a type which represents a function with an argument for every alternative in a sum type.
-Every argument is itself a function which takes as arguments the arguments of each alternative product type, and returns a polymorphic type. Because the return type is polymorphic, we decide what it will be when we use the BB type. In this way a BB-encoded data structure is a generator for whatever type we like, in other words it is a universal interpreter.&lt;/p&gt;
-
-&lt;p&gt;For example, if we define a sum type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;S&lt;/code&gt; with three alternatives &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A1&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A2&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A3&lt;/code&gt;, using the same notation as in the article on &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/&quot;&gt;algebraic data types in Raku&lt;/a&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;datatype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A1&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A2&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A3&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;then the corresponding BB type will be&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;datatype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;∀&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;-- A1 Int&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;⟶&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;⟶&lt;/span&gt; 
-    &lt;span class=&quot;c1&quot;&gt;-- A2 String&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;⟶&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;⟶&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;⟶&lt;/span&gt; 
-    &lt;span class=&quot;c1&quot;&gt;-- A3&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;⟶&lt;/span&gt; 
-    &lt;span class=&quot;c1&quot;&gt;-- The return type&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I have put parentheses to show which part of the type is the function type corresponding to each alterative. 
-Because the constructor for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A3&lt;/code&gt; takes no arguments, the corresponding function signature in the BB encoding is simply &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt;: a function which takes no arguments and returns something of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt;. The final &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; is the return value of the top-level function: every type alternative is an argument to the function. When applying the function, it must return a value of a given type. This type is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; because &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; is the return type of every function representing an alternative. I will explain the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;∀ a .&lt;/code&gt; later.&lt;/p&gt;
-
-&lt;h2 id=&quot;some-simple-examples&quot;&gt;Some simple examples&lt;/h2&gt;
-
-&lt;p&gt;Let’s look at a few examples to see how this works in practice.&lt;/p&gt;
-
-&lt;h3 id=&quot;opinionatedbool-an-enum-style-sum-type&quot;&gt;OpinionatedBool: an enum-style sum type&lt;/h3&gt;
-
-&lt;p&gt;In a &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/&quot;&gt;previous post&lt;/a&gt; I showed how you can use Raku’s &lt;em&gt;role&lt;/em&gt; feature to implement algebraic data types. I gave the example of 
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OpinionatedBool&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;datatype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;OpinionatedBool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AbsolutelyTrue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TotallyFalse&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;which in Raku becomes&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role OpinionatedBool {}
-role AbsolutelyTrue does OpinionatedBool {}
-role TotallyFalse does OpinionatedBool {}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is a sum type with two alternatives.&lt;/p&gt;
-
-&lt;p&gt;The type declaration of the BB type lists the types of all the arguments representing the alternatives. As in this case the constructors for the alternatives take no arguments, the corresponding functions also take no arguments:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;datatype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;OpinionatedBoolBB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;OpinionatedBoolBB&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;∀&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; 
-      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- AbsolutelyTrue&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;⟶&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- TotallyFalse&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;⟶&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In &lt;a href=&quot;https://haskell.org&quot;&gt;Haskell&lt;/a&gt;, we would implement this type as follows:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kr&quot;&gt;newtype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;OpinionatedBoolBB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;OpinionatedBoolBB&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;unBoolBB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forall&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; 
-       &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- AbsolutelyTrue&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- TotallyFalse&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;You don’t need to know any Haskell for what follows, but as the Raku implementation is closely modeled on the Haskell one, it is worth explaining a bit.
-The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;newtype&lt;/code&gt; keyword in Haskell is used to declare types with a single constructor. What we have here is a record type with a single field, and this field has the accessor function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unBoolBB&lt;/code&gt;, which is a convenience to allow easy access to the function encoded in the type. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;∀ a&lt;/code&gt;  or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;forall a&lt;/code&gt; allows us to introduce a type parameter that is only in scope in the expression on the right-hand side. Because the Haskell notation is so close to the formal notation, I will from now on use the Haskell notation.&lt;/p&gt;
-
-&lt;p&gt;In Raku, we can implement this  BB type minimally as a parametric role with a method with a typed signature:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role BoolBB[&amp;amp;b] {
-    method unBoolBB(Any \t, Any \f --&amp;gt; Any) {
-        b(t,f);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This tells us a lot:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;the parameter to the role has an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; sigil so it of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Callable&lt;/code&gt; (i.e. it is a function)&lt;/li&gt;
-  &lt;li&gt;the method’s type tells us that there are two arguments of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Any&lt;/code&gt;. The method itself also returns a value of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Any&lt;/code&gt;, i.e. there is no constraint on the type of the return value.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;With this implementation, the type safety is not quite as strong as in Haskell, where we guarantee that all these return values will be of the same type. The main purpose for using the types here is to make it provide documentation. We can enforce the type safety at a different point if desired.&lt;/p&gt;
-
-&lt;p&gt;Now, the whole idea is that this role &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BoolBB&lt;/code&gt; will serve the same purpose as my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OpinionatedBool&lt;/code&gt;. So instead of saying&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my OpinionatedBool \trueOB = AbsolutelyTrue;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I want something like&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my BoolBB \trueBB = BBTrue;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So in this example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BBTrue&lt;/code&gt; will be an instance of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BoolBB&lt;/code&gt; with a specific function as parameter. Let’s call that function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;true&lt;/code&gt;, so we have&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my \BBTrue = BoolBB[ true ].new;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and similar for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;false&lt;/code&gt; case. We can make this a little nicer using a helper function to create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BoolBB&lt;/code&gt; instances:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub bbb(\tf --&amp;gt; BoolBB) { BoolBB[ tf ].new };
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In this way we can write&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub BBTrue { bbb true } 
-sub BBFalse { bbb false }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In this particular case, because none of the constructors takes any arguments, we can also write this as&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my BoolBB \BBTrue = bbb true;
-my BoolBB \BBFalse = bbb false;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;!-- ∀ --&gt;
-&lt;p&gt;The question is then: what are the functions &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;true&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;false&lt;/code&gt;? We know they are of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a ⟶ a ⟶ a&lt;/code&gt;; an obvious choice is:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my \true  = -&amp;gt; Any \t, Any \f --&amp;gt; Any { t }
-my \false = sub (Any \t,Any \f --&amp;gt; Any ) { f }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is the same choice we made in &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/everything-is-a-function/&quot;&gt;the article “Everything is a function”&lt;/a&gt;. In fact, these are simply &lt;em&gt;selector&lt;/em&gt; functions which select the first or second argument.&lt;/p&gt;
-
-&lt;p&gt;In practice, we often want to convert between BB types and their algebraic counterparts.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;To turn a Bool into a BoolBB:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub boolBB (Bool \tf --&amp;gt; BoolBB){ tf ?? BBTrue !! BBFalse }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;To turn the BB Boolean into an actual Boolean:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub bool(BoolBB \b --&amp;gt; Bool) { 
-    b.unBoolBB( True, False) 
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So we have:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;say bool BBTrue; # =&amp;gt; True
-say bool BBFalse; # =&amp;gt; False
-say bool boolBB( bool BBTrue); # =&amp;gt; True
-say bool boolBB( bool BBFalse); # =&amp;gt; False
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;(Note that this works with either way of defining &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BBTrue&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BBFalse&lt;/code&gt; because calling a function without arguments in Raku does not require parentheses.)&lt;/p&gt;
-
-&lt;p&gt;We can do this more OO-like by making &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bool&lt;/code&gt; a method of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BoolBB&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role BoolBB[&amp;amp;b] {
-    method unBoolBB(Any \t, Any \f --&amp;gt; Any) {
-        b(t,f);
-    }
-
-    method bool() { 
-        self.unBoolBB( True, False) 
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then we can say&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;say  BBTrue.bool; # =&amp;gt; True
-say  BBFalse.bool; # =&amp;gt; False
-say  boolBB( bool BBTrue).bool; # =&amp;gt; True
-say  boolBB( bool BBFalse).bool; # =&amp;gt; False
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and I’m sure those dots will make some people happy.&lt;/p&gt;
-
-&lt;p&gt;Note however that we do not really need the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bool&lt;/code&gt; method, instead we can simply compare the types:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;say  trueBB ~~ BBTrue; # =&amp;gt; True
-say  BBFalse ~~ trueBB; # =&amp;gt; False
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We can generalise this approach as an alternative to arbitrary enums. For example, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RGB&lt;/code&gt; enum can be written very easily as a BB type:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role RGB[&amp;amp;b] {
-    method unRGB(Any \r, Any \g, Any \b --&amp;gt; Any) {
-        b(r,g,b);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;with selector functions&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my \red  = -&amp;gt; \r,\g,\b { r }
-my \green = -&amp;gt; \r,\g,\b { g }
-my \blue = -&amp;gt; \r,\g,\b { b }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;However, the main reason for using BB types is to make it easier to perform computations on the data structure encoded in the type. Constant sum types like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bool&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RGB&lt;/code&gt; don’t store data to compute on, except in the most trivial way, and are therefore not the main target of this encoding. I presented them only because they are the easiest ones to explain.&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2&quot;&gt;second part&lt;/a&gt; of the article presents a worked example. But first, let’s look at a few more simple examples explaining more features of the BB approach.&lt;/p&gt;
-
-&lt;h3 id=&quot;the-maybe-type-a-sum-type-with-a-polymorphic-argument&quot;&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Maybe&lt;/code&gt; type: a sum type with a polymorphic argument&lt;/h3&gt;
-
-&lt;p&gt;The Boolean type above had two constructors without arguments. A simple algebraic data type where one of the constructors has an argument is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Maybe&lt;/code&gt; type:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kr&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Maybe&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Just&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Nothing&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This type is used to express that a function does not always return a value of a given type. For example, if we look up a key in a map, it is possible that there is no entry for that key. So using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Maybe&lt;/code&gt; we could write a safe lookup function:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub safeLookup(%v,$k --&amp;gt; Maybe) {
-    if  (%v{$k}:exists) {
-        Just[%v{$k}].new;
-    } else {
-        Nothing;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Maybe&lt;/code&gt; type is polymorphic, so we have instances of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Maybe&lt;/code&gt; for any type we like.  In Haskell:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kr&quot;&gt;newtype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MayBB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MayBB&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;unMayBB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forall&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- Just b &lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- Nothing &lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;and in Raku:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role MayBB[ &amp;amp;mb ] {
-    method unMayBB(
-        &amp;amp;j:(Any --&amp;gt; Any),
-        Any \n 
-        --&amp;gt; Any
-    ) {
-        mb(&amp;amp;j,n);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We use a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Callable&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;j&lt;/code&gt;) for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Just&lt;/code&gt; variant but a (sigil-less) scalar (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\n&lt;/code&gt;) for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Nothing&lt;/code&gt; as it is a constant.&lt;/p&gt;
-
-&lt;p&gt;As before for the BB Boolean, we create some helper functions.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;First we have the &lt;em&gt;selectors&lt;/em&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;# selectors
-sub bbj( \x ) { -&amp;gt; &amp;amp;j:(Any --&amp;gt; Any), Any \n --&amp;gt; Any { &amp;amp;j(x)} }
-sub bbn { -&amp;gt; &amp;amp;j:(Any --&amp;gt; Any),Any \n --&amp;gt; Any {n} }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Then we have a wrapper to make role construction nicer:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub mbb (&amp;amp;jm --&amp;gt; MayBB) {
-    MayBB[ &amp;amp;jm ].new;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;With these we can easily write the final BB type constructors:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub Just(\v) { mbb bbj(v) }
-sub Nothing { mbb bbn }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now we can create values of our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MayBB&lt;/code&gt; type, e.g.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my MayBB \mbb = Just 42;
-my MayBB \mbbn = Nothing;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As you can see, the BB type now functions exactly as an ordinary algebraic data type.&lt;/p&gt;
-
-&lt;p&gt;Let’s make a simple printer for this type:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub printMayBB(MayBB \mb --&amp;gt; Str) {
-    mb.unMayBB( sub (Any \x --&amp;gt; Str) { &quot;{x}&quot; }, &apos;NaN&apos; );
-}
-
-say printMayBB mbb; # =&amp;gt; 42
-say printMayBB mbbn; # =&amp;gt; NaN
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As before, this function could be made a method of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MayBB&lt;/code&gt; role if desired. The point to note however is that to create this printer, all we had to do was provide the right arguments to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unMayBB&lt;/code&gt;. We chose the concrete type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Str&lt;/code&gt; for the type parameter in the BB type. Recall that to turn the BB Boolean into an actual Boolean, all we had to do was to provide arguments of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bool&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unBoolBB&lt;/code&gt;. These are simple examples that already illustrate some of the power of the BB encoding.&lt;/p&gt;
-
-&lt;h3 id=&quot;a-pair-the-simplest-product-type&quot;&gt;A pair, the simplest product type&lt;/h3&gt;
-
-&lt;p&gt;The two previous examples were for sum types. Let’s look at a simple product type, a pair of two values also known as a tuple. Assuming the tuple is polymorphic with type parameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t2&lt;/code&gt;, the BB type is in Haskell:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kr&quot;&gt;newtype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PairBB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PairBB&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;unPairBB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forall&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;and in Raku:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role PairBB[ &amp;amp;p ] {
-    method unPairBB(&amp;amp;p_:(Any,Any --&amp;gt; Any)  --&amp;gt; Any) {
-        p(&amp;amp;p_);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The selectors (for convenience we reuse the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;true&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;false&lt;/code&gt; functions used for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BoolBB&lt;/code&gt;):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;# To get the elements out of the pair
-sub fst( \p ){ p.unPairBB(true) }
-sub snd( \p ){ p.unPairBB(false) }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The pair constructor takes the values &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; to be put in the pair, and uses them in an anonymous function used as the parameter for the role. The single argument of this anonymous function is a selector function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;p&lt;/code&gt;, which is applied to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; in its body.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;# Final pair constructor
-sub Pair(\x,\y --&amp;gt; PairBB) {
-    PairBB[ -&amp;gt; &amp;amp;p { p(x, y) } ].new;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can use this to build pairs e.g.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my PairBB \bbp = Pair 42,&quot;forty-two&quot;;
-
-# print it
-say &quot;({fst bbp},{snd bbp})&quot;; # =&amp;gt; (42,forty-two)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As with the Boolean, we can do this a bit more OO-like if you prefer by making &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fst&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snd&lt;/code&gt; methods of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PairBB&lt;/code&gt; role:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;role PairBB[ &amp;amp;p ] {
-    method unPairBB(&amp;amp;p_:(Any,Any --&amp;gt; Any)  --&amp;gt; Any) {
-        p(&amp;amp;p_);
-    }
-
-    # To get the elements out of the pair
-    method fst( ){ self.unPairBB(true) }
-    method snd( ){ self.unPairBB(false) }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Thus we can say&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;say &quot;({bbp.fst },{bbp.snd})&quot;; # =&amp;gt; (42,forty-two)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;An important point is that the BB-encoded data structures are immutable, so you can’t update a field. Instead, you create a new variable:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;my PairBB \pbb2 = Pair fst(pbb) + 1, &apos;forty-three&apos;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, let’s assume for a moment that our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PairBB&lt;/code&gt; represents a complex number and we want to convert it from (Real, Imaginary) into polar form (Modulus, Phase). Again we can use the same approach:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-perl6&quot;&gt;sub toPolar(PairBB \mb --&amp;gt; PairBB) {
-    mb.unPairBB( sub (Any \x,Any \y --&amp;gt; PairBB) {
-        Pair sqrt(x*x+y*y),atan2(x,y);
-    } );
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;What we have learned so far is how to create sum (alternative) and product (record) types in Raku using a formalism called Böhm-Berarducci (BB) encoding, which uses functions to create data structures. We use Raku’s roles to implement BB types, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values.&lt;/p&gt;
-
-&lt;p&gt;In &lt;a href=&quot;https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2&quot;&gt;the next part&lt;/a&gt;, we will see how BB types make it easy tointerpreter create interpreters for complex data structures.&lt;/p&gt;
-
-&lt;p&gt;The complete code for both articles is in &lt;a href=&quot;https://github.com/wimvanderbauwhede/raku-examples/blob/master/universal-interpreter.raku&quot;&gt;universal-interpreter.raku&lt;/a&gt;.&lt;/p&gt;
 
         </content>
     </entry>
