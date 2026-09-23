@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The growth the AI industry wants is disastrous for climate change • Wim Vanderbauwhede</title>
+    <meta name="description" content="In the worst case, emissions from AI datacentres could consume the entire global CO₂ budget for 2040">
+    <meta name="keywords" content="computing, climate, AI">
+    
+
+    <link rel="canonical" href="https://limited.systems/articles/ai-datacentre-emissions/">
+
+    <link href="https://limited.systems/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://limited.systems/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link rel="icon" type="image/x-icon" href="https://limited.systems/images/favicon.ico">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="p:domain_verify" content="e31ad34d4267c0ac4d997da5cb5ea898"/>
+    <meta http-equiv="X-Clacks-Overhead" content="GNU Natalie Nguyen" />
+    <!-- <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style> -->
+
+    <link rel="stylesheet" href="https://limited.systems/css/main.css">
+    <!-- <link rel="stylesheet" href="https://limited.systems/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://limited.systems/tipuesearch/tipuesearch.css"> -->
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="https://limited.systems/js/vendor/html5shiv.min.js"></script>
+      <script src="https://limited.systems/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <!-- Include the jQuery library (local or CDN) -->
+    <!-- <script src="https://limited.systems/js/plugins/jquery-1.7.1.min.js"></script> -->
+
+    <!-- Include the plugin *after* the jQuery library -->
+    <!-- <script src="https://limited.systems/js/plugins/bjqs-1.3.min.js"></script> -->
+        
+  </head>
+
+  <body>
+    <header id="masthead">
+  <div class="inner-wrap">
+<a href="https://limited.systems" class="site-title">&nbsp;</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
+	
+
+</ul>
+
+    </nav>
+<!-- <form style="float: right;" action="https://limited.systems/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+
+    <!-- <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+ -->
+
+    <div id="page-wrapper">
+
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="https://limited.systems/images/ai-datacentre-emissions_1600x600.avif" class="page-feature-image" alt="The growth the AI industry wants is disastrous for climate change" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		<nav class="breadcrumbs">
+  <a href="https://limited.systems">Home</a> <span class="divider">/</span> <a href="https://limited.systems/articles/">Articles</a> <span class="divider">/</span>
+</nav><!-- /.breadcrumbs -->
+		<div class="page-title">
+			<h1>The growth the AI industry wants is disastrous for climate change</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<!--
+Estimating the growth in emissions from AI data centres
+-->
+
+<blockquote>
+  <p>This is an abridged version of my paper <a href="https://arxiv.org/abs/2608.14421"><em>“Estimating the growth in emissions from AI data centres”</em></a>, presented at the <a href="https://lancaster-university.github.io/loco2026/">2nd International Workshop on Low Carbon Computing</a>, Lancaster, 10 September 2026.</p>
+</blockquote>
+
+<p>The advent of agentic AI is driving an unprecedented growth in global
+data centre expansion.</p>
+
+<p>To look at what this means for global CO₂ emissions, we created a state-of-the-art life cycle
+assessment models for operational and embodied emissions from AI
+servers.  This model allows a rigorous quantification of emissions
+arising from projected AI data centre expansion. We applied it to scenarios put forward by the
+International Energy Agency (IEA) and McKinsey &amp; Company.</p>
+
+<p>The results show that the
+scenarios promoted by the AI industry would result in a dramatic rise
+in overall emissions, in the worst case enough to consume the entire
+global CO₂ budget by 2040, and that the embodied carbon component
+is considerable, and in the worst case of the same order as the
+operational emissions.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Climate change is an environmental problem. But our environment is what
+allows our society to thrive. The damage from climate change is
+therefore societal and economical as well as ecological. The UK Institute and Faculty of Actuaries report “The Emperor’s New Climate Scenarios” <a href="#1">[1]</a> predicts a 50% drop in GDP at 2.5°C. The only 
+way to minimise this damage is to reduce global CO₂ emissions. Even
+keeping them at the current level will cause catastrophic warming. All
+this is explained in detail in the 2024 UNEP Emissions Gap Report
+<a href="#2">[2]</a>.</p>
+
+<p>The current push for generative AI in general and “agentic” AI in
+particular is deeply problematic in many ways. In this article I focus on
+CO₂ emissions arising not only from the use of AI technology
+(operational emissions) but also the emissions resulting from the
+building of the data centres and the manufacturing of the servers, the
+so-called embodied or embedded or embodied emissions.</p>
+
+<p>The main technical contribution is the incorporation into
+the LCA model of the trends of the contributions to the embodied
+emissions of the servers. In this way our work improves on the state of
+the art <a href="#3">[3]</a> where the values of embodied emissions of
+the servers are static.</p>
+
+<p>The main contribution of this article to the “AI” debate is a rigorous
+scenario-based quantification of emissions arising from AI data centre
+expansion.</p>
+
+<h2 id="emissions-for-projected-growth">Emissions for projected growth</h2>
+
+<p>Let’s first consider the very real environmental damage caused not so
+much by the AI technology itself as by the hype surrounding it. By
+“hype” we mean the excessive promotion of a technology. The purpose of
+hype in venture capital based technology adoption is well-studied
+<a href="#4">[4]</a>,<a href="#5">[5]</a>. We want to consider here the
+<em>effect</em> of the current AI hype.</p>
+
+<ul>
+  <li>
+    <p>The hype creates an expectation of huge growth in demand for AI.
+“Agentic” AI is the latest manifestation of this hype, and it
+requires thousands times more resources than chatbot-style
+generative AI. This growth in data centre capacity is seen as a good
+thing, and of course the AI companies do not mention the concomitant
+emissions. Data centre companies have to start building capacity
+before the demand is realised. As a result, data centre capacity is
+being built up right now at an unprecedented scale.</p>
+  </li>
+  <li>
+    <p>This requires electricity generators to provision capacity for those
+future data centres. It also requires provisioning of semiconductor
+fab capacity.</p>
+  </li>
+  <li>
+    <p>Without strong growth in demand, electricity generators would phase
+out fossil fuel generation because generating electricity from
+renewable sources is more cost-effective. Because of the AI hype,
+they are no longer phasing out fossil fuel generation as they want
+to maximise generation capacity to maximise future profits. New
+fossil fuel powered electricity plants are being developed as a
+result <a href="#6">[6]</a> and existing ones are kept open for longer <a href="#7">[7]</a>.</p>
+  </li>
+  <li>
+    <p>As electricity generators of course want to optimise current profits
+as well, they want to sell all the electricity they can generate,
+rather than let plants idle. For the same reason, if semiconductor
+fab capacity is increased, more semiconductor wafers must be
+produced and therefore sold.</p>
+  </li>
+  <li>
+    <p>And so global emissions from electricity generation are not
+decreasing at all, and are even expected to rise in the near future.
+This comes at a time when we need to reduce global emissions
+urgently and drastically. Embodied emissions from semiconductor
+manufacturing are increasing with the increased volume. The extent
+of this increase depends on the trend in embodied emissions.</p>
+  </li>
+</ul>
+
+<p>Because of this very real effect of the AI hype on global emissions, it
+is important to quantify the emissions arising from the <em>projected</em>
+growth in AI use, both embodied and operational.</p>
+
+<h2 id="breakdown-of-data-centre-emissions">Breakdown of data centre emissions</h2>
+
+<p>The greenhouse gas emissions from a data centre can be broken down into
+a few main components, based on when and where the emissions are
+incurred:</p>
+
+<ol>
+  <li>
+    <p>Emissions incurred while building the data centre infrastructure
+(mainly the building itself and the cooling system). This is a
+minority share yet constitutes an important contribution to the
+overall embodied carbon.</p>
+  </li>
+  <li>
+    <p>Emissions incurred while manufacturing the servers used in the data
+centre. The part of server manufacturing that produces by far the
+most emissions is the chip production. Our model includes the carbon
+costs of the packaging, enclosures etc. as well.</p>
+  </li>
+  <li>
+    <p>Emissions incurred while producing the electricity to run the
+servers. This is called the carbon intensity of electricity
+generation and depends on the location of the data centre. As AI
+data centres are globally distributed, we will consider the global
+average emissions of electricity production.</p>
+  </li>
+</ol>
+
+<p>We call (1) and (2) the “embodied (carbon) emissions” and (3) the
+“operational (carbon) emissions”.</p>
+
+<p>The global carbon intensity of electricity generation is decreasing at a
+rate of about 2.5% per year. Unfortunately, this has not resulted in a
+decrease in emissions, which are still <em>rising</em> by 2.3% per year: what
+we see currently is that renewables are installed in addition to fossil
+fuel generation, rather than replacing them. Power generation CO₂
+emissions are plateauing rather than reducing steeply <a href="#8">[8]</a>.</p>
+
+<h2 id="an-estimate-of-the-growth-in-emissions">An estimate of the growth in emissions</h2>
+
+<p>We have created a model for the evolution of data centre emissions over
+time, which takes into account both the embodied carbon and the
+emissions from use. This model does also take into account the embodied
+carbon emissions from creating the actual data centres infrastructure
+but not the supporting infrastructure (electricity supplies, networking,
+roads, water supplies).</p>
+
+<p>Our LCA model for data centres and embodied carbon model was published in <a href="#3">[3]</a>. The source code is available <a href="https://codeberg.org/wimvanderbauwhede/low-carbon-computing/src/branch/master/LCA-model-equations/AI-data-centre-growth">in my Codeberg git repo</a>. If you are interested in the details, please read <a href="https://arxiv.org/abs/2608.14421">the LOCO2026 paper</a>, and/or have a look at the source code.</p>
+
+<h2 id="ai-data-centre-growth-scenarios">AI data centre growth scenarios</h2>
+
+<h3 id="international-energy-agency-scenarios">International Energy Agency Scenarios</h3>
+
+<p>The International Energy Agency (IEA) has published a report with four
+scenarios for the growth in global data centre electricity consumption
+(in TWh/y) between 2025 and 2035, using historical data from 2020 to
+2025 <a href="#9">[9]</a>. We used their results as a reference for our model. Figure 1 shows the comparison between the IEA results results and those from our model. The IEA has not disclosed their model equations, and therefore the match is not perfect. We assume logistic growth and their simulated growth profile is not quite following the logistic trend. I actually suspect our model is better than theirs.</p>
+
+<figure>
+<img src="https://limited.systems/images/iea-vs-our-model.png" alt="Four logistic growth curves for scenarios Headwinds, High-Efficiency, Base and Lift-Off, showing energy usage growing from 250 TWh/y in 2020 to between 750 and 1750 TWh/y in 2035" title="Four logistic growth curves for scenarios Headwinds, High-Efficiency, Base and Lift-Off, showing energy usage growing from 250 TWh/y in 2020 to between 750 and 1750 TWh/y in 2035" />
+<figcaption>Figure 1: Growth in energy consumption for global AI data centre expansion under IEA scenarios, their simulations compared to our model with 3-year serverlifetime</figcaption>
+</figure>
+
+<p>The ensuing CO₂ emissions calculated using our model are shown in Figure 1. We assume a server lifetime of 3 years.
+This is conservative as GPU servers are replaced within 1.5 to 2 years.</p>
+
+<figure>
+<img src="https://limited.systems/images/runLCAModel-AI-data-centre-growth-iea-15y-emissions.png" alt="Nine curves, three for each scenario Headwinds, Base and Lift-Off: 5th, 50th and 95th percentile of the distribution of embodied carbon growth. Emissions grow from 150 MtCO2e/y in 2020 to between 350 and 1250 MtCO2e/y in 2035" title="Nine curves, three for each scenario Headwinds, Base and Lift-Off: 5th, 50th and 95th percentile of the distribution of embodied carbon growth. Emissions grow from 150 MtCO2e/y in 2020 to between 350 and 1250 MtCO2e/y in 2035" />
+<figcaption>Figure 1: Growth in emissions for global AI data centre expansion under IEA scenarios, 3-year serverlifetime</figcaption>
+</figure>
+
+<p>The main observations are that (1) the “Lift-Off” scenario would cause
+and additional 0.8 GtCO₂e/y in operational emissions by 2035; (2) the
+embodied carbon contribution is significant even for median values, 25%
+or 0.2 GtCO₂e/y; (3) With the 95th percentile estimate for the
+embodied carbon contribution, the total emissions would be 1.3
+GtCO₂e/y, i.e embodied emissions make up 40% of the total. The high
+spread on the embodied carbon estimate is a result of the exponential
+growth trends for the constituents.</p>
+
+<h3 id="mckinsey-scenarios">McKinsey Scenarios</h3>
+
+<p>The CEO of Dell has said that AI would “drive data centre demand up by
+100× over the next 10 years” <a href="#10">[10]</a>. The CEO of OpenAI has said
+that the world needs 100× more semiconductor production capacity
+<a href="#11">[11]</a>, which amounts to the same. To show how bad things could get if
+the industry projections would materialise, we use the McKinsey
+“Upper-range” scenario which project 27% compound average growth rate
+(CAGR) in global data centre capacity between 2023 and 2030 <a href="#12">[12]</a>. We
+assume a utilisation of 80% and server lifetime of 3 years. We use 25.9%
+CAGR rather than 27% because this translates to 10× growth in
+capacity in ten years and 100× in 20 years. Figure 2 shows the resulting emissions.
+The worst-case estimate yields emissions of about 3 GtCO₂e/y by 2035 and more that 30 GtCO₂e/y by 2045.</p>
+
+<p>McKinsey puts forward three scenarios: “low-range”, “midrange” and “upper-range”. The worst case estimate for the “low-range” scenarion is 10 GtCO₂e/y by 2045; for the “midrange” scenario it is 20 GtCO₂e/y by 2045. The 50th percentile estimate for the “midrange” scenario is 1.5 GtCO₂e/y by 2035 and 10 GtCO₂e/y by 2045.</p>
+
+<figure>
+<img src="https://limited.systems/images/runLCAModel-AI-data-centre-growth-mckinsey-20y-emissions.png" alt="Seven curves: 50th and 95th percentile of the distribution of embodied carbon growth; operational emissions; and total emissions. Emissions grow from 0.2 GtCO2e/y in 2025 to between 350 and 1250 MtCO2e/y in 2035" title="Seven curves: 50th and 95th percentile of the distribution of embodied carbon growth; operational emissions; and total emissions. Total emissions grow from 150 MtCO2e/y in 2020 to between 15 and 30 GtCO2e/y in 2045" />
+<figcaption>Figure 2: Growth in global emissions at 25.9% CAGR in AI data centre expansion, 3-year server lifetime</figcaption>
+</figure>
+
+<p>If this growth was indeed sustained until 2035, it would be already be
+quite problematic: the total global CO₂ budget for 2035 is 22
+GtCO₂e/y according to the UNEP Emissions Gap Report 2024 <a href="#2">[2]</a>.
+Global emissions from electricity generation were 14 GtCO₂e in 2023
+and projected to rise to 15 GtCO₂e by 2035 without the growth in AI.
+The projected increase would consume 14% to the global emissions budget.
+But if this trend would persist for 20 years, then emissions from AI
+data centres alone would exceed the global emissions budget. As we can
+see from the figure, the worst-case embodied emissions alone would
+consume that budget.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We modeled emissions for the growth scenarios from the IEA and McKinsey &amp; Company using a detailed, state-of-the-art model of the operational and embodied emissions of AI data centres. There are two main observations:</p>
+
+<ol>
+  <li>
+    <p>The embodied carbon contribution is significant in all cases, making
+up 20% of total emissions in the median case and up to 40% in the worst
+case. The spread is large because the embodied carbon trends follow a
+power law so small deviations have large effects.</p>
+  </li>
+  <li>
+    <p>Even the emissions under conservative, bounded growth IAE scenarios are of the order of 1 GtCO₂e/y by 2035 and unacceptable in terms of the global CO₂ budget. Underthe unlimited growth scenarios put forward by McKinsey, which reflect the ambitions of the AI industry, emissions from AI data centres would be downright catastrophic, consuming the entire planetary carbon budget. In other words, AI would become the dominant factor driving planetary heating.</p>
+  </li>
+</ol>
+
+<h2 id="references">References</h2>
+
+<p><small>
+<span id="1">[1] <a href="https://actuaries.org.uk/emperors-new-climate-scenarios"><em>“The Emperor’s New Climate Scenarios – a warning for financial services”</em>, Institute and Faculty of Actuaries, June 2023</a></span><br />
+<span id="2">[2] <a href="https://www.unep.org/resources/emissions-gap-report-2024"><em>“Emissions Gap Report 2024”</em>, UN Environment Programme, 24 October 2024, retrieved 17 January 2025</a></span><br />
+<span id="3">[3] <a href="https://link.springer.com/article/10.1140/epjc/s10052-025-14650-8"><em>“Life cycle analysis for emissions of scientific computing centres,”</em>, M. Wadenstein, W. Vanderbauwhede, The European Physi- cal Journal C, vol. 85, no. 8, p. 913, 2025.</a></span><br />
+<span id="4">[4] <a href="https://www.sciencedirect. com/science/article/pii/S0883902625000278"><em>“The expectations game: The contingent value of hype as a rhetorical strategy in resource mobilization processes among AI startups,”</em>, J. Rady, D. Townsend, R. Hunt, and J. Simpson, Journal of Business Venturing, vol. 40, no. 4, p. 106499, 2025.</a></span><br />
+<span id="5">[5] <a href="https:// www.sciencedirect.com/science/article/pii/S0040162516300270"><em>“The hype cycle model: A review and future directions,”</em>, O. Dedehayir and M. Steinert, Technological Forecasting and Social Change, vol. 108, pp. 28–41, 2016.</a></span><br />
+<span id="6">[6] <a href="https://www.ft.com/content/63c3ceb2-5e30-44f4-bd39-cb40edafa4f8"><em>“AI set to fuel surge in new US gas power plants,”</em>, A. Chu and J. Smyth, The Financial Times, January 2025.</a></span><br />
+<span id="7">[7] <a href="https://www.datacenterdynamics.com/en/news/iea-global-coal-power-use-reaches-all-time-high-driven-by-increased-electricity-demand/"><em>“IEA: Global coal power use reaches all time high, driven by increased electricity demand,”</em>, Z. Skidmore, Data Centre Dynamics, December 2024.</a></span><br />
+<span id="8">[8] <a href="https://www.iea.org/reports/electricity-mid-year-update-2025/emissions-power-generation-co2-emissions-are-plateauing"><em>“Emissions: Power generation CO2 emissions are plateauing,”</em>, E. Çam, M. Casanovas, and J. Moloney, IEA,July 2025.</a></span><br />
+<span id="9">[9] <a href="https://www.iea.org/reports/energy-and-ai"><em>“Energy and AI,”</em>,International Energy Agency, Tech. Rep., 2025.</a></span><br />
+<span id="10">[10] <a href="https://www.datacenterdynamics.com/en/news/michael-dell-ai-to-drive-data-center-demand-up-100-fold-over-next-10-years/"><em>“Michael Dell: AI to drive data center demand up 100x over next 10 years,”</em>, N. Yadav, Data Centre Dynamics, March 2024.</a></span><br />
+<span id="11">[11] <a href="https://limited.systems/articles/the-insatiable-hunger-of-openai/"><em>“The insatiable hunger of (Open)AI,”</em>, W. Vanderbauwhede,  March 2024.</a></span><br />
+<span id="12">[12] <a href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/ai-power-expanding-data-center-capacity-to-meet-growing-demand"><em>“AI power: Expanding data center capacity to meet growing demand,”</em>, McKinsey &amp; Company,  October 2024.</a></span><br />
+</small></p>
+
+				<hr />
+				<footer class="page-footer">
+					
+
+<!--
+<div class="author-image">
+	<img src="https://limited.systems/images/" alt="Wim Vanderbauwhede">
+</div>
+-->
+<!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by <a href="http://www.dcs.gla.ac.uk/~wim" itemprop="author">Wim Vanderbauwhede</a></h3>
+	<p class="author-bio"></p>
+</div><!-- ./author-content -->
+
+                    <div class="inline-btn">
+    <a href="https://limited.systems/atom.xml"><i class="fa fa-rss"></i></a>
+</div><!-- /.follow-us -->
+
+					
+					<div class="page-meta">
+	<p>Updated <time datetime="2026-08-17T00:00:00Z" itemprop="dateModified">August 17, 2026</time>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="https://limited.systems/" >Wim Vanderbauwhede</a></li>
+		
+      
+			<li><a href="https://limited.systems/about/" >About</a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2026 <a href="https://limited.systems">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10807901;
+var sc_invisible=1;
+var sc_security="7dfdbc2d";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10807901/0/7dfdbc2d/1/"
+alt="web stats"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</footer>
+
+    </div>
+
+    <!-- <script src="https://limited.systems/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/main.js"></script> -->
+
+    
+
+  </body>
+
+</html>

@@ -7,10 +7,11 @@
     <meta name="keywords" content="coding, hacking, programming, raku">
     
 
-    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1/">
+    <link rel="canonical" href="https://limited.systems/articles/universal-interpreter-part-1/">
 
-    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
-    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link href="https://limited.systems/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://limited.systems/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link rel="icon" type="image/x-icon" href="https://limited.systems/images/favicon.ico">
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -34,26 +35,26 @@
     }
     </style> -->
 
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
+    <link rel="stylesheet" href="https://limited.systems/css/main.css">
+    <!-- <link rel="stylesheet" href="https://limited.systems/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://limited.systems/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+      <script src="https://limited.systems/js/vendor/html5shiv.min.js"></script>
+      <script src="https://limited.systems/js/vendor/respond.min.js"></script>
     <![endif]-->
     <!-- Include the jQuery library (local or CDN) -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
     <header id="masthead">
   <div class="inner-wrap">
-<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+<a href="https://limited.systems" class="site-title">&nbsp;</a>
     <nav role="navigation" class="menu top-menu">
         <ul class="menu-item">
 	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
@@ -62,7 +63,7 @@
 </ul>
 
     </nav>
-<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
+<!-- <form style="float: right;" action="https://limited.systems/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
@@ -85,13 +86,13 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-1_1600x600.avif" class="page-feature-image" alt="Encoding types as functions in Raku" itemprop="image">
+				<img src="https://limited.systems/images/universal-interpreter-part-1_1600x600.avif" class="page-feature-image" alt="Encoding types as functions in Raku" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
 		
 		<nav class="breadcrumbs">
-  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+  <a href="https://limited.systems">Home</a> <span class="divider">/</span> <a href="https://limited.systems/articles/">Articles</a> <span class="divider">/</span>
 </nav><!-- /.breadcrumbs -->
 		<div class="page-title">
 			<h1>Encoding types as functions in Raku</h1>
@@ -99,9 +100,9 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>This is the first part of an article in my series about functional programming in general and algebraic data types and function types in particular in <a href="https://raku.org/">Raku</a>. It builds on my earlier articles on <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">algebraic data types in Raku</a> and their use in the practical example of <a href="https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/">list-based parser combinators</a>. It also makes heavily use of <a href="https://wimvanderbauwhede.github.io/articles/function-types">function types</a>.</p>
+				<p>This is the first part of an article in my series about functional programming in general and algebraic data types and function types in particular in <a href="https://raku.org/">Raku</a>. It builds on my earlier articles on <a href="https://limited.systems/articles/roles-as-adts-in-raku/">algebraic data types in Raku</a> and their use in the practical example of <a href="https://limited.systems/articles/list-based-parser-combinators/">list-based parser combinators</a>. It also makes heavily use of <a href="https://limited.systems/articles/function-types">function types</a>.</p>
 
-<p>If you are not familiar with functional programming or with Raku, I suggest you read my introduction <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/">“Cleaner code with functional programming”</a>. If you are not familiar with algebraic data types or function types, you might want to read the other articles as well.</p>
+<p>If you are not familiar with functional programming or with Raku, I suggest you read my introduction <a href="https://limited.systems/articles/decluttering-with-functional-programming/">“Cleaner code with functional programming”</a>. If you are not familiar with algebraic data types or function types, you might want to read the other articles as well.</p>
 
 <p>In this article, I want to explain a technique called <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a> of algebraic data types. The link above is to Oleg Kiselyov’s explanation, which makes for interesting reading but is not required for what follows. Oleg says:</p>
 
@@ -109,14 +110,14 @@
 
 <p>Fortunately, to follow the explanation in this article, you don’t need to read either Böhm and Berarducci’s  original paper or Oleg’s explanation. For the purpose of this article, it is sufficient to say that the Böhm-Berarducci encoding is a way to encode an algebraic data type as a function type. This means that the data itself is also encoded as a function. As a result, the function encoding the data type becomes a “universal interpreter”. This makes it is easy to create various interpreters for algebraic data types.</p>
 
-<p>In this first part, I will explain a way to implement Böhm-Berarducci (BB) encoding using roles in Raku, with basic examples. In <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2">the second part</a> I will show how to use BB encoding to construct a ‘universal interpreter’ which makes it very easy to create specific interpreters for complex data structures.</p>
+<p>In this first part, I will explain a way to implement Böhm-Berarducci (BB) encoding using roles in Raku, with basic examples. In <a href="https://limited.systems/articles/universal-interpreter-part-2">the second part</a> I will show how to use BB encoding to construct a ‘universal interpreter’ which makes it very easy to create specific interpreters for complex data structures.</p>
 
 <h2 id="the-basic-idea-behind-the-böhm-berarducci-encoding">The basic idea behind the Böhm-Berarducci encoding</h2>
 
 <p>The basic idea behind the Böhm-Berarducci (BB) encoding is to create a type which represents a function with an argument for every alternative in a sum type.
 Every argument is itself a function which takes as arguments the arguments of each alternative product type, and returns a polymorphic type. Because the return type is polymorphic, we decide what it will be when we use the BB type. In this way a BB-encoded data structure is a generator for whatever type we like, in other words it is a universal interpreter.</p>
 
-<p>For example, if we define a sum type <code class="language-plaintext highlighter-rouge">S</code> with three alternatives <code class="language-plaintext highlighter-rouge">A1</code>, <code class="language-plaintext highlighter-rouge">A2</code> and <code class="language-plaintext highlighter-rouge">A3</code>, using the same notation as in the article on <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">algebraic data types in Raku</a>:</p>
+<p>For example, if we define a sum type <code class="language-plaintext highlighter-rouge">S</code> with three alternatives <code class="language-plaintext highlighter-rouge">A1</code>, <code class="language-plaintext highlighter-rouge">A2</code> and <code class="language-plaintext highlighter-rouge">A3</code>, using the same notation as in the article on <a href="https://limited.systems/articles/roles-as-adts-in-raku/">algebraic data types in Raku</a>:</p>
 
 <div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">S</span> <span class="o">=</span> <span class="kt">A1</span> <span class="kt">Int</span> <span class="o">|</span> <span class="kt">A2</span> <span class="kt">String</span> <span class="kt">Bool</span> <span class="o">|</span> <span class="kt">A3</span>
 </code></pre></div></div>
@@ -144,7 +145,7 @@ Because the constructor for <code class="language-plaintext highlighter-rouge">A
 
 <h3 id="opinionatedbool-an-enum-style-sum-type">OpinionatedBool: an enum-style sum type</h3>
 
-<p>In a <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">previous post</a> I showed how you can use Raku’s <em>role</em> feature to implement algebraic data types. I gave the example of 
+<p>In a <a href="https://limited.systems/articles/roles-as-adts-in-raku/">previous post</a> I showed how you can use Raku’s <em>role</em> feature to implement algebraic data types. I gave the example of 
 <code class="language-plaintext highlighter-rouge">OpinionatedBool</code>:</p>
 
 <div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datatype</span> <span class="kt">OpinionatedBool</span> <span class="o">=</span> <span class="kt">AbsolutelyTrue</span> <span class="o">|</span> <span class="kt">TotallyFalse</span>
@@ -239,7 +240,7 @@ my BoolBB \BBFalse = bbb false;
 my \false = sub (Any \t,Any \f --&gt; Any ) { f }
 </code></pre>
 
-<p>This is the same choice we made in <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">the article “Everything is a function”</a>. In fact, these are simply <em>selector</em> functions which select the first or second argument.</p>
+<p>This is the same choice we made in <a href="https://limited.systems/articles/everything-is-a-function/">the article “Everything is a function”</a>. In fact, these are simply <em>selector</em> functions which select the first or second argument.</p>
 
 <p>In practice, we often want to convert between BB types and their algebraic counterparts.</p>
 
@@ -315,7 +316,7 @@ my \blue = -&gt; \r,\g,\b { b }
 
 <p>However, the main reason for using BB types is to make it easier to perform computations on the data structure encoded in the type. Constant sum types like <code class="language-plaintext highlighter-rouge">Bool</code> and <code class="language-plaintext highlighter-rouge">RGB</code> don’t store data to compute on, except in the most trivial way, and are therefore not the main target of this encoding. I presented them only because they are the easiest ones to explain.</p>
 
-<p>The <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2">second part</a> of the article presents a worked example. But first, let’s look at a few more simple examples explaining more features of the BB approach.</p>
+<p>The <a href="https://limited.systems/articles/universal-interpreter-part-2">second part</a> of the article presents a worked example. But first, let’s look at a few more simple examples explaining more features of the BB approach.</p>
 
 <h3 id="the-maybe-type-a-sum-type-with-a-polymorphic-argument">The <code class="language-plaintext highlighter-rouge">Maybe</code> type: a sum type with a polymorphic argument</h3>
 
@@ -483,7 +484,7 @@ say "({fst bbp},{snd bbp})"; # =&gt; (42,forty-two)
 
 <p>What we have learned so far is how to create sum (alternative) and product (record) types in Raku using a formalism called Böhm-Berarducci (BB) encoding, which uses functions to create data structures. We use Raku’s roles to implement BB types, and I have illustrated this with three simple examples: a sum type with two alternative constructors that do not take arguments (a Boolean), a sum type with two alternative constructors where one of them takes an argument (the Maybe type) and a product type for a pair of two values.</p>
 
-<p>In <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2">the next part</a>, we will see how BB types make it easy tointerpreter create interpreters for complex data structures.</p>
+<p>In <a href="https://limited.systems/articles/universal-interpreter-part-2">the next part</a>, we will see how BB types make it easy tointerpreter create interpreters for complex data structures.</p>
 
 <p>The complete code for both articles is in <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/universal-interpreter.raku">universal-interpreter.raku</a>.</p>
 
@@ -493,7 +494,7 @@ say "({fst bbp},{snd bbp})"; # =&gt; (42,forty-two)
 
 <!--
 <div class="author-image">
-	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+	<img src="https://limited.systems/images/" alt="Wim Vanderbauwhede">
 </div>
 -->
 <!-- ./author-image -->
@@ -503,7 +504,7 @@ say "({fst bbp},{snd bbp})"; # =&gt; (42,forty-two)
 </div><!-- ./author-content -->
 
                     <div class="inline-btn">
-    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <a href="https://limited.systems/atom.xml"><i class="fa fa-rss"></i></a>
 </div><!-- /.follow-us -->
 
 					
@@ -526,14 +527,14 @@ say "({fst bbp},{snd bbp})"; # =&gt; (42,forty-two)
 		<ul class="menu-item">
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+			<li><a href="https://limited.systems/" >Wim Vanderbauwhede</a></li>
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+			<li><a href="https://limited.systems/about/" >About</a></li>
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2025 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2026 <a href="https://limited.systems">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -557,8 +558,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
+    <!-- <script src="https://limited.systems/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/main.js"></script> -->
 
     
 

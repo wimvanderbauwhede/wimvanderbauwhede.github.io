@@ -7,10 +7,11 @@
     <meta name="keywords" content="coding, hacking, programming, raku, haskell">
     
 
-    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/reconstructing-raku-junctions/">
+    <link rel="canonical" href="https://limited.systems/articles/reconstructing-raku-junctions/">
 
-    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
-    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link href="https://limited.systems/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://limited.systems/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link rel="icon" type="image/x-icon" href="https://limited.systems/images/favicon.ico">
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -34,26 +35,26 @@
     }
     </style> -->
 
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
+    <link rel="stylesheet" href="https://limited.systems/css/main.css">
+    <!-- <link rel="stylesheet" href="https://limited.systems/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://limited.systems/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+      <script src="https://limited.systems/js/vendor/html5shiv.min.js"></script>
+      <script src="https://limited.systems/js/vendor/respond.min.js"></script>
     <![endif]-->
     <!-- Include the jQuery library (local or CDN) -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
     <header id="masthead">
   <div class="inner-wrap">
-<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+<a href="https://limited.systems" class="site-title">&nbsp;</a>
     <nav role="navigation" class="menu top-menu">
         <ul class="menu-item">
 	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
@@ -62,7 +63,7 @@
 </ul>
 
     </nav>
-<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
+<!-- <form style="float: right;" action="https://limited.systems/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
@@ -85,13 +86,13 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/reconstructing-raku-junctions_1600x600.avif" class="page-feature-image" alt="Reconstructing Raku's Junctions" itemprop="image">
+				<img src="https://limited.systems/images/reconstructing-raku-junctions_1600x600.avif" class="page-feature-image" alt="Reconstructing Raku's Junctions" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
 		
 		<nav class="breadcrumbs">
-  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+  <a href="https://limited.systems">Home</a> <span class="divider">/</span> <a href="https://limited.systems/articles/">Articles</a> <span class="divider">/</span>
 </nav><!-- /.breadcrumbs -->
 		<div class="page-title">
 			<h1>Reconstructing Raku's Junctions</h1>
@@ -101,7 +102,7 @@
 			<div id="content" class="page-content" itemprop="articleBody">
 				<p>Junctions in Raku are cool but at first glance they do not follow the rules for static typing. I was curious about their formal typing semantics, so I deconstructed and then reconstructed junctions from a functional, static typing perspective.</p>
 
-<p>If you don’t know Raku or are unfamiliar with the functional style of programming, I suggest you read my introductory article <a href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming">“Cleaner code with functional programming”</a>. If you have not heard of algebraic data types before, I suggest my article <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku">“Roles as Algebraic Data Types in Raku”</a>.</p>
+<p>If you don’t know Raku or are unfamiliar with the functional style of programming, I suggest you read my introductory article <a href="https://limited.systems/articles/decluttering-with-functional-programming">“Cleaner code with functional programming”</a>. If you have not heard of algebraic data types before, I suggest my article <a href="https://limited.systems/articles/roles-as-adts-in-raku">“Roles as Algebraic Data Types in Raku”</a>.</p>
 
 <h2 id="junctions-in-raku">Junctions in Raku</h2>
 
@@ -217,7 +218,7 @@ I restrict this set of values to a single type for convenience and also because 
 
 <p>For convenience, we can also create custom comparison operators between <em>Junction a</em> and <em>a</em>:</p>
 
-<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">-- and similar for /-, &gt;, &lt;, &lt;=,&gt;=</span>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">-- and similar for /=, &gt;, &lt;, &lt;=,&gt;=</span>
     <span class="p">(</span><span class="err">￮</span><span class="o">==</span><span class="err">•</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
 </code></pre></div></div>
 
@@ -233,7 +234,7 @@ I restrict this set of values to a single type for convenience and also because 
 <div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">collapse</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Show</span> <span class="n">a</span><span class="p">,</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">Junction</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
 </code></pre></div></div>
 
-<p>This may seem like a strange function but it is necessary because of the behaviour of junctions. As we will see, the above semantics imply that junctions are greedy: if a single argument of a function is a junction, then all other arguments also become junctions, but all values in the junction are identical. I have discussed this in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">“The strange case of the greedy junction”</a>, but we can now formalise this behaviour.</p>
+<p>This may seem like a strange function but it is necessary because of the behaviour of junctions. As we will see, the above semantics imply that junctions are greedy: if a single argument of a function is a junction, then all other arguments also become junctions, but all values in the junction are identical. I have discussed this in <a href="https://limited.systems/articles/greedy-junctions">“The strange case of the greedy junction”</a>, but we can now formalise this behaviour.</p>
 
 <h3 id="revisiting-the-strange-case-of-the-greedy-junction">Revisiting the strange case of the greedy junction</h3>
 
@@ -243,7 +244,7 @@ I restrict this set of values to a single type for convenience and also because 
 
 <p>Let’s assume we apply this function (call it <code class="language-plaintext highlighter-rouge">p</code>) to <code class="language-plaintext highlighter-rouge">fst :: a-&gt;b-&gt;a</code>, using <code class="language-plaintext highlighter-rouge">p ￮• fst</code>, then we get <code class="language-plaintext highlighter-rouge">Junction a</code>. But if we apply it to <code class="language-plaintext highlighter-rouge">snd :: a-&gt;b-&gt;b</code>, using <code class="language-plaintext highlighter-rouge">p ￮• snd</code>, then we get <code class="language-plaintext highlighter-rouge">Junction b</code>. Recall that we applied the original function <code class="language-plaintext highlighter-rouge">f</code> to a <code class="language-plaintext highlighter-rouge">Junction a</code> and a non-Junction <code class="language-plaintext highlighter-rouge">b</code>. Yet whatever we do, we can’t recover the <code class="language-plaintext highlighter-rouge">b</code>. The result is always wrapped in a junction.</p>
 
-<p>This is the formal type-based analysis of why we can’t return a non-Junction value from a pair as explained in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">“The strange case of the greedy junction”</a>. And this is why we need the <code class="language-plaintext highlighter-rouge">collapse</code> function.</p>
+<p>This is the formal type-based analysis of why we can’t return a non-Junction value from a pair as explained in <a href="https://limited.systems/articles/greedy-junctions">“The strange case of the greedy junction”</a>. And this is why we need the <code class="language-plaintext highlighter-rouge">collapse</code> function.</p>
 
 <h2 id="reconstructing-junctions-part-2-raku-implementation">Reconstructing junctions part 2: Raku implementation</h2>
 
@@ -333,7 +334,7 @@ our sub none_(@vs) {
 }
 </code></pre>
 
-<p>And finally we have <code class="language-plaintext highlighter-rouge">collapse</code>, as defined in <a href="https://wimvanderbauwhede.github.io/articles/greedy-junctions">the article on greedy junctions</a>. <code class="language-plaintext highlighter-rouge">collapse</code> returns the value form a junction provided they are all the same:</p>
+<p>And finally we have <code class="language-plaintext highlighter-rouge">collapse</code>, as defined in <a href="https://limited.systems/articles/greedy-junctions">the article on greedy junctions</a>. <code class="language-plaintext highlighter-rouge">collapse</code> returns the value form a junction provided they are all the same:</p>
 
 <pre><code class="language-perl6">our sub collapse( \j ) {
     my \jt=j.junction-type; 
@@ -375,7 +376,7 @@ my Junction $rj = sq($j);
 
 <p>and similar for other Boolean contexts.</p>
 
-<p>If we look closer at <a href="https://wimvanderbauwhede.github.io/greedy-junctions">the pair example from the greedy junctions article</a>, then applying a junction to a function with multiple arguments</p>
+<p>If we look closer at <a href="https://limited.systems/greedy-junctions">the pair example from the greedy junctions article</a>, then applying a junction to a function with multiple arguments</p>
 
 <pre><code class="language-perl6">my Junction \p1j = pair R,(42^43);
 </code></pre>
@@ -408,7 +409,7 @@ my \p4r = ( sub (\x){ &amp;m.assuming(*,x) } ●○ all_ [33,44] ) ○○ any_ [
 
 <!--
 <div class="author-image">
-	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+	<img src="https://limited.systems/images/" alt="Wim Vanderbauwhede">
 </div>
 -->
 <!-- ./author-image -->
@@ -418,7 +419,7 @@ my \p4r = ( sub (\x){ &amp;m.assuming(*,x) } ●○ all_ [33,44] ) ○○ any_ [
 </div><!-- ./author-content -->
 
                     <div class="inline-btn">
-    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <a href="https://limited.systems/atom.xml"><i class="fa fa-rss"></i></a>
 </div><!-- /.follow-us -->
 
 					
@@ -441,14 +442,14 @@ my \p4r = ( sub (\x){ &amp;m.assuming(*,x) } ●○ all_ [33,44] ) ○○ any_ [
 		<ul class="menu-item">
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+			<li><a href="https://limited.systems/" >Wim Vanderbauwhede</a></li>
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+			<li><a href="https://limited.systems/about/" >About</a></li>
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2025 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2026 <a href="https://limited.systems">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -472,8 +473,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
+    <!-- <script src="https://limited.systems/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/main.js"></script> -->
 
     
 

@@ -7,10 +7,11 @@
     <meta name="keywords" content="coding, hacking, programming, raku, haku">
     
 
-    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/haku-in-raku/">
+    <link rel="canonical" href="https://limited.systems/articles/haku-in-raku/">
 
-    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
-    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link href="https://limited.systems/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://limited.systems/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link rel="icon" type="image/x-icon" href="https://limited.systems/images/favicon.ico">
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -34,26 +35,26 @@
     }
     </style> -->
 
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
+    <link rel="stylesheet" href="https://limited.systems/css/main.css">
+    <!-- <link rel="stylesheet" href="https://limited.systems/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://limited.systems/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+      <script src="https://limited.systems/js/vendor/html5shiv.min.js"></script>
+      <script src="https://limited.systems/js/vendor/respond.min.js"></script>
     <![endif]-->
     <!-- Include the jQuery library (local or CDN) -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
     <header id="masthead">
   <div class="inner-wrap">
-<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+<a href="https://limited.systems" class="site-title">&nbsp;</a>
     <nav role="navigation" class="menu top-menu">
         <ul class="menu-item">
 	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
@@ -62,7 +63,7 @@
 </ul>
 
     </nav>
-<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
+<!-- <form style="float: right;" action="https://limited.systems/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
@@ -85,13 +86,13 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/haku-in-raku_1600x600.avif" class="page-feature-image" alt="Haku: a Japanese programming language" itemprop="image">
+				<img src="https://limited.systems/images/haku-in-raku_1600x600.avif" class="page-feature-image" alt="Haku: a Japanese programming language" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
 		
 		<nav class="breadcrumbs">
-  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+  <a href="https://limited.systems">Home</a> <span class="divider">/</span> <a href="https://limited.systems/articles/">Articles</a> <span class="divider">/</span>
 </nav><!-- /.breadcrumbs -->
 		<div class="page-title">
 			<h1>Haku: a Japanese programming language</h1>
@@ -99,7 +100,7 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>Haku is a natural language functional programming language based on literary Japanese. This article is about the implementation of Haku in <a href="https://raku.org">Raku</a>. You don’t need to know Japanese or <a href="https://codeberg.org/wimvanderbauwhede/haku">have read the Haku documentation</a>. I you are not familiar with Raku, you might want to read my <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/#raku-intro">quick introduction</a>.</p>
+				<p>Haku is a natural language functional programming language based on literary Japanese. This article is about the implementation of Haku in <a href="https://raku.org">Raku</a>. You don’t need to know Japanese or <a href="https://codeberg.org/wimvanderbauwhede/haku">have read the Haku documentation</a>. I you are not familiar with Raku, you might want to read my <a href="https://limited.systems/articles/roles-as-adts-in-raku/#raku-intro">quick introduction</a>.</p>
 
 <p>I do assume familiarity with the concepts of parsing, syntax tree and code generation. I you find you lack background for what follows, I recommend Andrew Shitov’s series of posts <a href="https://andrewshitov.com/creating-a-compiler-with-raku/">Creating a Compiler with Raku
 </a> which takes a step-by-step approach.</p>
@@ -277,7 +278,7 @@ does Variables
 
 <h2 id="abstract-syntax-tree-using-roles">Abstract syntax tree using roles</h2>
 
-<p>I like to implement the abstract syntax tree (AST) as an algebraic data type, the way it is usually done in Haskell. In Raku, one way to do this is to use parametrised Roles <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">as I explained in an earlier post</a>. Most of the AST maps directly to the toplevel parser for each role in my grammar, for example the lambda expression:</p>
+<p>I like to implement the abstract syntax tree (AST) as an algebraic data type, the way it is usually done in Haskell. In Raku, one way to do this is to use parametrised Roles <a href="https://limited.systems/articles/roles-as-adts-in-raku/">as I explained in an earlier post</a>. Most of the AST maps directly to the toplevel parser for each role in my grammar, for example the lambda expression:</p>
 
 <pre><code class="language-perl6">role LambdaExpr[ @lambda-args, $expr] does HakuExpr {
     has Variable @.args = @lambda-args;
@@ -415,7 +416,7 @@ run the program.</p>
 
 <!--
 <div class="author-image">
-	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+	<img src="https://limited.systems/images/" alt="Wim Vanderbauwhede">
 </div>
 -->
 <!-- ./author-image -->
@@ -425,7 +426,7 @@ run the program.</p>
 </div><!-- ./author-content -->
 
                     <div class="inline-btn">
-    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <a href="https://limited.systems/atom.xml"><i class="fa fa-rss"></i></a>
 </div><!-- /.follow-us -->
 
 					
@@ -448,14 +449,14 @@ run the program.</p>
 		<ul class="menu-item">
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+			<li><a href="https://limited.systems/" >Wim Vanderbauwhede</a></li>
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+			<li><a href="https://limited.systems/about/" >About</a></li>
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2025 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2026 <a href="https://limited.systems">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -479,8 +480,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
+    <!-- <script src="https://limited.systems/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/main.js"></script> -->
 
     
 

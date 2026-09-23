@@ -7,10 +7,11 @@
     <meta name="keywords" content="coding, hacking, programming, raku">
     
 
-    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/decluttering-with-functional-programming/">
+    <link rel="canonical" href="https://limited.systems/articles/decluttering-with-functional-programming/">
 
-    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
-    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link href="https://limited.systems/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://limited.systems/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link rel="icon" type="image/x-icon" href="https://limited.systems/images/favicon.ico">
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -34,26 +35,26 @@
     }
     </style> -->
 
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
+    <link rel="stylesheet" href="https://limited.systems/css/main.css">
+    <!-- <link rel="stylesheet" href="https://limited.systems/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://limited.systems/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+      <script src="https://limited.systems/js/vendor/html5shiv.min.js"></script>
+      <script src="https://limited.systems/js/vendor/respond.min.js"></script>
     <![endif]-->
     <!-- Include the jQuery library (local or CDN) -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
     <header id="masthead">
   <div class="inner-wrap">
-<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+<a href="https://limited.systems" class="site-title">&nbsp;</a>
     <nav role="navigation" class="menu top-menu">
         <ul class="menu-item">
 	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
@@ -62,7 +63,7 @@
 </ul>
 
     </nav>
-<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
+<!-- <form style="float: right;" action="https://limited.systems/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
@@ -85,13 +86,13 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/decluttering-with-functional-programming_1600x600.avif" class="page-feature-image" alt="Cleaner code with functional programming" itemprop="image">
+				<img src="https://limited.systems/images/decluttering-with-functional-programming_1600x600.avif" class="page-feature-image" alt="Cleaner code with functional programming" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
 		
 		<nav class="breadcrumbs">
-  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+  <a href="https://limited.systems">Home</a> <span class="divider">/</span> <a href="https://limited.systems/articles/">Articles</a> <span class="divider">/</span>
 </nav><!-- /.breadcrumbs -->
 		<div class="page-title">
 			<h1>Cleaner code with functional programming</h1>
@@ -169,7 +170,7 @@ my \list3 = |(1 .. 10);  #=&gt; an array from a range because of the '|' flatten
 
 <h2 id="a-function-by-any-other-name--functions-as-values"><em>A function, by any other name</em> — functions as values</h2>
 
-<p>Functions are the essence of functional programming. As I explained in my article <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function">“Everything is a function”</a>, in a proper functional language, all constructs are built from functions.</p>
+<p>Functions are the essence of functional programming. As I explained in my article <a href="https://limited.systems/articles/everything-is-a-function">“Everything is a function”</a>, in a proper functional language, all constructs are built from functions.</p>
 
 <p>All modern programming languages have a notion of functions, procedures, subroutines or methods. They are an essential mechanism for code reuse.
 Typically, we think of a function as something that operates on some input values to produce one or more output values. The input values can be globally declared, attributes of a class or passed as arguments to the function. Similarly, the output values can be returned directly, to global variables, as class attributes or by modifying the input values.</p>
@@ -242,7 +243,7 @@ res_f("rumour"); #=&gt; says "False rumour!"
 
 <h2 id="functions-dont-need-a-name">Functions don’t need a name</h2>
 
-<p>Now, if we can assign functions to variables, they don’t really need a name themselves. So our functions can be anonymous. Most languages support anonymous functions. In functional languages they are usually called <a href="https://wimvanderbauwhede.github.io/articles/everything-is-a-function/">“lambda functions”</a>. In Raku, we have two ways to create anonymous functions:</p>
+<p>Now, if we can assign functions to variables, they don’t really need a name themselves. So our functions can be anonymous. Most languages support anonymous functions. In functional languages they are usually called <a href="https://limited.systems/articles/everything-is-a-function/">“lambda functions”</a>. In Raku, we have two ways to create anonymous functions:</p>
 
 <p>Using the <code class="language-plaintext highlighter-rouge">sub (...)</code> syntax:</p>
 
@@ -702,7 +703,7 @@ sub compose(&amp;f,&amp;g) {
 
 <p>In this article I have used Raku and Python examples to introduce three key functional programming techniques: functions that operate on functions, functions that return functions and function composition. I have shown how you to use the functions <em>map</em>, <em>reduce</em> (<em>fold</em>) and <em>grep</em> (<em>filter</em>) to operate on immutable lists. I have explained how yo(u can implement such functions with and without recursion, and what the advantage is of the recursive implementation. Here is the code from the article, <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/decluttering-with-functional-programming.raku">Raku</a> and <a href="https://github.com/wimvanderbauwhede/raku-examples/blob/master/decluttering-with-functional-programming.py">Python</a>.</p>
 
-<p>There is of course a lot more to functional programming and I have written <a href="https://wimvanderbauwhede.github.io/articles/">a few articles on more advanced topics</a>. The concepts introduced in this article should provide a good basis for understanding those more advanced topics. If you want to learn more about functional programming, you might consider <a href="https://www.futurelearn.com/courses/functional-programming-haskell">my free online course</a>.</p>
+<p>There is of course a lot more to functional programming and I have written <a href="https://limited.systems/articles/">a few articles on more advanced topics</a>. The concepts introduced in this article should provide a good basis for understanding those more advanced topics. If you want to learn more about functional programming, you might consider <a href="https://www.futurelearn.com/courses/functional-programming-haskell">my free online course</a>.</p>
 
 <!-- (reduce ->\x,\y {x o y}, -> \x {x+1},-> \x {x*2}, -> \x {2*x-1})(33) -->
 <!-- ([∘] fs)(x) -->
@@ -720,7 +721,7 @@ sub compose(&amp;f,&amp;g) {
 
 <!--
 <div class="author-image">
-	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+	<img src="https://limited.systems/images/" alt="Wim Vanderbauwhede">
 </div>
 -->
 <!-- ./author-image -->
@@ -730,7 +731,7 @@ sub compose(&amp;f,&amp;g) {
 </div><!-- ./author-content -->
 
                     <div class="inline-btn">
-    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <a href="https://limited.systems/atom.xml"><i class="fa fa-rss"></i></a>
 </div><!-- /.follow-us -->
 
 					
@@ -753,14 +754,14 @@ sub compose(&amp;f,&amp;g) {
 		<ul class="menu-item">
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+			<li><a href="https://limited.systems/" >Wim Vanderbauwhede</a></li>
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+			<li><a href="https://limited.systems/about/" >About</a></li>
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2025 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2026 <a href="https://limited.systems">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -784,8 +785,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
+    <!-- <script src="https://limited.systems/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/main.js"></script> -->
 
     
 

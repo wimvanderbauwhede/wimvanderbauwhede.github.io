@@ -7,10 +7,11 @@
     <meta name="keywords" content="coding, hacking, programming, raku">
     
 
-    <link rel="canonical" href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-2/">
+    <link rel="canonical" href="https://limited.systems/articles/universal-interpreter-part-2/">
 
-    <link href="https://wimvanderbauwhede.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
-    <link href="https://wimvanderbauwhede.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link href="https://limited.systems/atom.xml" type="application/atom+xml" rel="alternate" title="Wim Vanderbauwhede Atom Feed">
+    <link href="https://limited.systems/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link rel="icon" type="image/x-icon" href="https://limited.systems/images/favicon.ico">
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -34,26 +35,26 @@
     }
     </style> -->
 
-    <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/main.css">
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/css/bjqs.css"> -->
-    <!-- <link rel="stylesheet" href="https://wimvanderbauwhede.github.io/tipuesearch/tipuesearch.css"> -->
+    <link rel="stylesheet" href="https://limited.systems/css/main.css">
+    <!-- <link rel="stylesheet" href="https://limited.systems/css/bjqs.css"> -->
+    <!-- <link rel="stylesheet" href="https://limited.systems/tipuesearch/tipuesearch.css"> -->
     <!-- HTML5 Shiv and Media Query Support for IE -->
     <!--[if lt IE 9]>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/html5shiv.min.js"></script>
-      <script src="https://wimvanderbauwhede.github.io/js/vendor/respond.min.js"></script>
+      <script src="https://limited.systems/js/vendor/html5shiv.min.js"></script>
+      <script src="https://limited.systems/js/vendor/respond.min.js"></script>
     <![endif]-->
     <!-- Include the jQuery library (local or CDN) -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/jquery-1.7.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/jquery-1.7.1.min.js"></script> -->
 
     <!-- Include the plugin *after* the jQuery library -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/plugins/bjqs-1.3.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/plugins/bjqs-1.3.min.js"></script> -->
         
   </head>
 
   <body>
     <header id="masthead">
   <div class="inner-wrap">
-<a href="https://wimvanderbauwhede.github.io" class="site-title">&nbsp;</a>
+<a href="https://limited.systems" class="site-title">&nbsp;</a>
     <nav role="navigation" class="menu top-menu">
         <ul class="menu-item">
 	<li class="home"><a href="/">Wim Vanderbauwhede</a></li>
@@ -62,7 +63,7 @@
 </ul>
 
     </nav>
-<!-- <form style="float: right;" action="https://wimvanderbauwhede.github.io/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
+<!-- <form style="float: right;" action="https://limited.systems/search.html" ><input type="text" name="q" id="tipue_search_input" autocomplete="off" required></form> -->
   </div><!-- /.inner-wrap -->
 </header><!-- /.masthead -->
 
@@ -85,13 +86,13 @@
 		
 		<div class="page-feature">
 			<div class="page-image">
-				<img src="https://wimvanderbauwhede.github.io/images/universal-interpreter-part-2_1600x600.avif" class="page-feature-image" alt="A universal interpreter" itemprop="image">
+				<img src="https://limited.systems/images/universal-interpreter-part-2_1600x600.avif" class="page-feature-image" alt="A universal interpreter" itemprop="image">
 				
 			</div><!-- /.page-image -->
 		</div><!-- /.page-feature -->
 		
 		<nav class="breadcrumbs">
-  <a href="https://wimvanderbauwhede.github.io">Home</a> <span class="divider">/</span> <a href="https://wimvanderbauwhede.github.io/articles/">Articles</a> <span class="divider">/</span>
+  <a href="https://limited.systems">Home</a> <span class="divider">/</span> <a href="https://limited.systems/articles/">Articles</a> <span class="divider">/</span>
 </nav><!-- /.breadcrumbs -->
 		<div class="page-title">
 			<h1>A universal interpreter</h1>
@@ -99,13 +100,13 @@
 		<div class="inner-wrap">
 			<nav class="toc"></nav><!-- /.toc -->
 			<div id="content" class="page-content" itemprop="articleBody">
-				<p>In <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous article</a> I explained the basic idea behind a technique called <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a> of algebraic data types, and showed a way to implement this technique in <a href="https://raku.org/">Raku</a>. Unless you are already familiar with this formalism, I recommend you read that article first.</p>
+				<p>In <a href="https://limited.systems/articles/universal-interpreter-part-1">the previous article</a> I explained the basic idea behind a technique called <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a> of algebraic data types, and showed a way to implement this technique in <a href="https://raku.org/">Raku</a>. Unless you are already familiar with this formalism, I recommend you read that article first.</p>
 
 <p>In this article I want to illustrate how the Böhm-Berarducci (BB) encoding of a data structure based on algebraic data types can be considered as a universal interpreter. What this means is that it is easy to perform computations that turn the data structure into something else. As an example, I will demonstrate how to create an evaluator and pretty-printer for a parsed polynomial expression.</p>
 
 <h2 id="a-parse-tree-type">A parse tree type</h2>
 
-<p>Consider expressions of the form <code class="language-plaintext highlighter-rouge">a*x^2+b*x+c</code> or <code class="language-plaintext highlighter-rouge">x^3+1</code> or <code class="language-plaintext highlighter-rouge">x*y^2-x^2*y</code>. Let’s assume we have a parser for such an expression, for example built using <a href="https://wimvanderbauwhede.github.io/articles/list-based-parser-combinators/">parser combinators</a>. Let’s also assume that this parser returns the parsed data as an algebraic data type, defined in Haskell as:</p>
+<p>Consider expressions of the form <code class="language-plaintext highlighter-rouge">a*x^2+b*x+c</code> or <code class="language-plaintext highlighter-rouge">x^3+1</code> or <code class="language-plaintext highlighter-rouge">x*y^2-x^2*y</code>. Let’s assume we have a parser for such an expression, for example built using <a href="https://limited.systems/articles/list-based-parser-combinators/">parser combinators</a>. Let’s also assume that this parser returns the parsed data as an algebraic data type, defined in Haskell as:</p>
 
 <div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">Term</span> <span class="o">=</span> 
       <span class="kt">Var</span> <span class="kt">String</span>
@@ -139,7 +140,7 @@ role Mult [Array[Term] \ts] does Term {
 }
 </code></pre>
 
-<p>The additional complexity compared to the types discussed in <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous article</a> is that this type is recursive: the <code class="language-plaintext highlighter-rouge">Pow</code>, <code class="language-plaintext highlighter-rouge">Add</code> and <code class="language-plaintext highlighter-rouge">Mult</code> roles take parameters of type <code class="language-plaintext highlighter-rouge">Term</code>.</p>
+<p>The additional complexity compared to the types discussed in <a href="https://limited.systems/articles/universal-interpreter-part-1">the previous article</a> is that this type is recursive: the <code class="language-plaintext highlighter-rouge">Pow</code>, <code class="language-plaintext highlighter-rouge">Add</code> and <code class="language-plaintext highlighter-rouge">Mult</code> roles take parameters of type <code class="language-plaintext highlighter-rouge">Term</code>.</p>
 
 <p>Before we look at the BB encoding, let’s first write a pretty-printer for this type, using recursive <code class="language-plaintext highlighter-rouge">multi sub</code>s.</p>
 
@@ -479,7 +480,7 @@ my \qtermbb3 = MultBB(
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>In this article and <a href="https://wimvanderbauwhede.github.io/articles/universal-interpreter-part-1">the previous one</a> I have shown another way to implement algebraic data types in Raku. As with the approach discussed in <a href="https://wimvanderbauwhede.github.io/articles/roles-as-adts-in-raku/">‘Roles as Algebraic Data Types in Raku’</a>, I use a role to create the type. However, in this approach the entire data structure is encoded as a function using the <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a>. From a type theoretical perspective, both approaches are precisely equivalent. In terms of coding effort and performance, both approaches are comparable.</p>
+<p>In this article and <a href="https://limited.systems/articles/universal-interpreter-part-1">the previous one</a> I have shown another way to implement algebraic data types in Raku. As with the approach discussed in <a href="https://limited.systems/articles/roles-as-adts-in-raku/">‘Roles as Algebraic Data Types in Raku’</a>, I use a role to create the type. However, in this approach the entire data structure is encoded as a function using the <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Böhm-Berarducci encoding</a>. From a type theoretical perspective, both approaches are precisely equivalent. In terms of coding effort and performance, both approaches are comparable.</p>
 
 <p>The advantage of the BB approach is that because the data is encoded as a function, it becomes easier to create interpreters for the data type, and I have illustrated this with a pretty-printer and evaluator for a parsed expression. All interpreters for BB types have the same structure, which is why I call it a universal interpreter. The key feature is that these interpreters do not require any explicit recursion.</p>
 
@@ -529,7 +530,7 @@ say v.raku;
 
 <!--
 <div class="author-image">
-	<img src="https://wimvanderbauwhede.github.io/images/" alt="Wim Vanderbauwhede">
+	<img src="https://limited.systems/images/" alt="Wim Vanderbauwhede">
 </div>
 -->
 <!-- ./author-image -->
@@ -539,7 +540,7 @@ say v.raku;
 </div><!-- ./author-content -->
 
                     <div class="inline-btn">
-    <a href="https://wimvanderbauwhede.github.io/atom.xml"><i class="fa fa-rss"></i></a>
+    <a href="https://limited.systems/atom.xml"><i class="fa fa-rss"></i></a>
 </div><!-- /.follow-us -->
 
 					
@@ -562,14 +563,14 @@ say v.raku;
 		<ul class="menu-item">
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/" >Wim Vanderbauwhede</a></li>
+			<li><a href="https://limited.systems/" >Wim Vanderbauwhede</a></li>
 		
       
-			<li><a href="https://wimvanderbauwhede.github.io/about/" >About</a></li>
+			<li><a href="https://limited.systems/about/" >About</a></li>
 		
 		</ul>
 	</nav><!-- /.bottom-menu -->
-	<p class="copyright">&#169; 2025 <a href="https://wimvanderbauwhede.github.io">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
+	<p class="copyright">&#169; 2026 <a href="https://limited.systems">Wim Vanderbauwhede</a> <a rel="me" href="https://scholar.social/@wim_v12e">&nbsp;</a><br> <a href="http://jekyllrb.com">Jekyll</a> theme <a href="http://mmistakes.github.io/skinny-bones-jekyll/">Skinny Bones</a></p>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
@@ -593,8 +594,8 @@ alt="web stats"></a></div></noscript>
 
     </div>
 
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/vendor/jquery-1.9.1.min.js"></script> -->
-    <!-- <script src="https://wimvanderbauwhede.github.io/js/main.js"></script> -->
+    <!-- <script src="https://limited.systems/js/vendor/jquery-1.9.1.min.js"></script> -->
+    <!-- <script src="https://limited.systems/js/main.js"></script> -->
 
     
 
